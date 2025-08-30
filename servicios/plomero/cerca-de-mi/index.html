@@ -21,6 +21,20 @@
   
   <style>
     /* Estilos específicos para esta página */
+    /* No necesitamos estilos adicionales para services-grid, 
+       usaremos los estilos de .grid y .card del archivo principal */
+    
+    .service-image {
+      margin-bottom: 1.5rem;
+    }
+    
+    .service-image img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    
     .page-hero {
       background: var(--gradient-overlay), url('../../../images/hero-bg.jpg') center/cover;
       padding: var(--space-2xl) var(--space-md);
@@ -79,16 +93,42 @@
     
     .benefit-card {
       background: var(--bg-card);
-      padding: var(--space-md);
-      border-radius: var(--radius-md);
-      box-shadow: 0 2px 8px var(--shadow);
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 24px var(--shadow);
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
       text-align: center;
     }
     
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-brand);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .benefit-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 48px var(--shadow-lg);
+      border-color: var(--brand);
+    }
+    
     .benefit-card h3 {
-      color: var(--brand);
-      margin-bottom: var(--space-sm);
-      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+      font-weight: 700;
     }
     
     .zones-box {
@@ -231,21 +271,27 @@
       margin-top: var(--space-md);
     }
     
-    .btn-secondary {
+    .btn-call {
+      display: inline-block;
       background: white;
-      color: var(--brand);
-      padding: var(--space-sm) var(--space-md);
-      border-radius: var(--radius-full);
-      text-decoration: none;
+      color: #334155;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      padding: 16px 32px;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      text-align: center;
+      box-shadow: 0 2px 8px var(--shadow);
     }
     
-    .btn-secondary:hover {
+    .btn-call:hover {
+      background: #334155;
+      border-color: #334155;
+      color: #FFFFFF;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 16px var(--shadow);
     }
     
     .price-box {
@@ -274,28 +320,25 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
+  <!-- Navigation -->
+  <nav class="nav">
     <div class="container">
-      <nav class="nav">
-        <a href="../../../" class="logo">
-          <span class="logo-icon">🔧</span>
-          <span class="logo-text">Plomero Pro</span>
-        </a>
-        <button class="nav-toggle" aria-label="Toggle navigation">
+      <div class="nav-wrapper">
+        <a href="../../../" class="logo">🔧 Plomero Pro</a>
+        <button class="mobile-menu-btn" aria-label="Abrir menú">
           <span></span>
           <span></span>
           <span></span>
         </button>
         <ul class="nav-menu">
-          <li><a href="../../../">Inicio</a></li>
-          <li><a href="../../../#services">Servicios</a></li>
-          <li><a href="../../../#about">Nosotros</a></li>
-          <li><a href="../../../#contact" class="btn btn-primary btn-sm">Contacto</a></li>
+          <li><a href="../../../" class="nav-link">Inicio</a></li>
+          <li><a href="../../../#services" class="nav-link">Servicios</a></li>
+          <li><a href="../../../#about" class="nav-link">Nosotros</a></li>
+          <li><a href="../../../#contact" class="nav-link">Contacto</a></li>
         </ul>
-      </nav>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <main>
     <div class="container">
@@ -317,7 +360,7 @@
             </svg>
             WhatsApp: 667 712 3456
           </a>
-          <a href="tel:6677123456" class="btn-secondary">
+          <a href="tel:6677123456" class="btn-call">
             📞 Llamar: 667 712 3456
           </a>
         </div>
@@ -343,38 +386,52 @@
       </section>
 
       <!-- Servicios -->
-      <section class="content-section">
-        <h2>Servicios que cubrimos</h2>
-        <div class="services-grid">
-          <div class="service-card">
-            <span class="service-icon">💧</span>
-            <h3>Fugas de agua</h3>
-            <p>Detección y reparación en muros, techos y patios.</p>
-          </div>
-          <div class="service-card">
-            <span class="service-icon">🚿</span>
-            <h3>Destape de drenajes</h3>
-            <p>Manual y con equipo especializado.</p>
-          </div>
-          <div class="service-card">
-            <span class="service-icon">🚽</span>
-            <h3>Sanitarios y lavabos</h3>
-            <p>Instalación, cambios y reparaciones.</p>
-          </div>
-          <div class="service-card">
-            <span class="service-icon">🔥</span>
-            <h3>Boiler/Calentador</h3>
-            <p>Mantenimiento, reparación y encendido.</p>
-          </div>
-          <div class="service-card">
-            <span class="service-icon">🔧</span>
-            <h3>Baja presión</h3>
-            <p>Diagnóstico y corrección del problema.</p>
-          </div>
-          <div class="service-card">
-            <span class="service-icon">⚠️</span>
-            <h3>Fugas de gas</h3>
-            <p>Detección y pruebas de hermeticidad.</p>
+      <section class="section section-alt" id="services">
+        <div class="container">
+          <h2>Servicios que cubrimos</h2>
+          <div class="grid">
+            <div class="card">
+              <div class="service-card">
+                <img src="../../../img/plomerofregadero.png" alt="Reparación de fugas">
+              </div>
+              <h3>Reparación de fugas</h3>
+              <p>Fugas en muros, techos y patios. Detección profesional y reparación garantizada.</p>
+            </div>
+            <div class="card">
+              <div class="service-card">
+                <img src="../../../img/destapandodrenaje.png" alt="Destape de drenaje">
+              </div>
+              <h3>Destape de Drenajes y Coladeras</h3>
+              <p>Destape manual y con maquinaria especializada. Limpieza completa del sistema.</p>
+            </div>
+            <div class="card">
+              <div class="service-card">
+                <img src="../../../img/taza-de-baño.png" alt="Instalación y cambio de sanitarios">
+              </div>
+              <h3>Instalación y Cambio de Sanitarios</h3>
+              <p>Sanitarios, lavabos y mezcladoras. Instalación profesional con garantía.</p>
+            </div>
+            <div class="card">
+              <div class="service-card">
+                <img src="../../../img/arreglando-boiler.png" alt="Mantenimiento de boiler">
+              </div>
+              <h3>Mantenimiento de Boiler/Calentador</h3>
+              <p>Reparación y mantenimiento de sistemas de agua caliente. Diagnóstico completo.</p>
+            </div>
+            <div class="card">
+              <div class="service-card">
+                <img src="../../../img/reivicion-bajapresion.png" alt="Revisión y corrección de baja presión">
+              </div>
+              <h3>Revisión y Corrección de Baja Presión</h3>
+              <p>Diagnóstico de problemas de presión y soluciones efectivas.</p>
+            </div>
+            <div class="card">
+              <div class="service-card">
+                <img src="../../../img/tinaco.png" alt="Detección de Fugas">
+              </div>
+              <h3>Detección de Fugas (Agua/Gas)</h3>
+              <p>Pruebas de hermeticidad y detección con equipo especializado.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -495,7 +552,7 @@
             </svg>
             WhatsApp ahora
           </a>
-          <a href="tel:6677123456" class="btn-secondary">
+          <a href="tel:6677123456" class="btn-call">
             📞 Llamar ahora
           </a>
         </div>
@@ -584,7 +641,7 @@
 
   <script>
     // Mobile menu toggle
-    document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
       document.querySelector('.nav-menu').classList.toggle('active');
       this.classList.toggle('active');
     });
