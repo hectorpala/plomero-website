@@ -11,6 +11,11 @@
         <div class="container">
             <div class="nav-wrapper">
                 <a href="#" class="logo">Plomero Pro</a>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <ul class="nav-menu">
                     <li><a href="#inicio" class="nav-link">Inicio</a></li>
                     <li><a href="#servicios" class="nav-link">Servicios</a></li>
@@ -36,26 +41,32 @@
             <h2>Nuestros Servicios</h2>
             <div class="grid">
                 <div class="card hover-lift">
+                    <div class="service-icon">🔧</div>
                     <h3>Reparación de Fugas</h3>
                     <p>Detección y reparación profesional de fugas de agua en tuberías, grifos y sanitarios.</p>
                 </div>
                 <div class="card hover-lift">
+                    <div class="service-icon">🚿</div>
                     <h3>Instalación de Sanitarios</h3>
                     <p>Instalación completa de baños, lavabos, regaderas y accesorios de baño.</p>
                 </div>
                 <div class="card hover-lift">
+                    <div class="service-icon">🪠</div>
                     <h3>Destape de Drenajes</h3>
                     <p>Servicio especializado de destape y limpieza de drenajes y tuberías obstruidas.</p>
                 </div>
                 <div class="card hover-lift">
+                    <div class="service-icon">⚙️</div>
                     <h3>Mantenimiento Preventivo</h3>
                     <p>Programas de mantenimiento para prevenir problemas futuros en tu sistema de plomería.</p>
                 </div>
                 <div class="card hover-lift">
+                    <div class="service-icon">🚨</div>
                     <h3>Emergencias 24/7</h3>
                     <p>Servicio de emergencia disponible las 24 horas para problemas urgentes de plomería.</p>
                 </div>
                 <div class="card hover-lift">
+                    <div class="service-icon">🔥</div>
                     <h3>Instalación de Calentadores</h3>
                     <p>Instalación y mantenimiento de calentadores de agua y sistemas de agua caliente.</p>
                 </div>
@@ -93,19 +104,19 @@
                 <div class="contact-info">
                     <h3>Contáctanos</h3>
                     <p><strong>Teléfono:</strong> (555) 123-4567</p>
-                    <p><strong>WhatsApp:</strong> +52 555 123 4567</p>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/525551234567" target="_blank" class="whatsapp-link">+52 555 123 4567</a></p>
                     <p><strong>Email:</strong> info@plomeropro.com</p>
                     <p><strong>Horario:</strong> Lunes a Sábado 8:00 AM - 8:00 PM</p>
                     <p><strong>Emergencias:</strong> 24/7</p>
                 </div>
                 <div class="contact-form">
                     <h3>Solicita una Cotización</h3>
-                    <form>
-                        <input type="text" placeholder="Nombre" required>
-                        <input type="tel" placeholder="Teléfono" required>
-                        <input type="email" placeholder="Email" required>
-                        <textarea placeholder="Describe tu problema o servicio requerido" rows="4" required></textarea>
-                        <button type="submit" class="btn-primary">Enviar Solicitud</button>
+                    <form id="contact-form">
+                        <input type="text" name="nombre" placeholder="Nombre" required>
+                        <input type="tel" name="telefono" placeholder="Teléfono" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="mensaje" placeholder="Describe tu problema o servicio requerido" rows="4" required></textarea>
+                        <button type="submit" class="btn-primary">Enviar por WhatsApp</button>
                     </form>
                 </div>
             </div>
@@ -117,5 +128,43 @@
             <p>&copy; 2024 Plomero Pro. Todos los derechos reservados.</p>
         </div>
     </footer>
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
+            });
+        });
+        
+        // WhatsApp form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const nombre = formData.get('nombre');
+            const telefono = formData.get('telefono');
+            const email = formData.get('email');
+            const mensaje = formData.get('mensaje');
+            
+            const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n\n` +
+                                  `Nombre: ${nombre}\n` +
+                                  `Teléfono: ${telefono}\n` +
+                                  `Email: ${email}\n` +
+                                  `Mensaje: ${mensaje}`;
+            
+            const whatsappURL = `https://wa.me/525551234567?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappURL, '_blank');
+        });
+    </script>
 </body>
 </html>
