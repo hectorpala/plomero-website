@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Plomero cerca de mí en Culiacán, Sinaloa | Servicio a Domicilio 24/7</title>
+  <meta name="description" content="Plomero cerca de ti en Culiacán. Urgencias 24/7, diagnóstico rápido y precios claros. Atendemos Las Quintas, Tres Ríos, Chapultepec y más. Cotiza por WhatsApp.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://hectorpala.github.io/plomero-website/servicios/plomero/cerca-de-mi/">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Plomero cerca de mí en Culiacán, Sinaloa | Servicio a Domicilio 24/7">
+  <meta property="og:description" content="Plomero a domicilio en Culiacán. Urgencias 24/7, diagnóstico rápido y precios claros.">
+  <meta property="og:url" content="https://hectorpala.github.io/plomero-website/servicios/plomero/cerca-de-mi/">
+  <meta property="og:image" content="https://hectorpala.github.io/plomero-website/images/hero-bg.jpg">
+  
+  <!-- Tipografías -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../styles.css">
+  
+  <style>
+    /* Estilos específicos para esta página */
+    .page-hero {
+      background: var(--gradient-overlay), url('../../../images/hero-bg.jpg') center/cover;
+      padding: var(--space-2xl) var(--space-md);
+      text-align: center;
+      color: white;
+      border-radius: var(--radius-lg);
+      margin-top: var(--space-md);
+    }
+    
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: var(--space-sm);
+      color: white;
+    }
+    
+    .page-hero p {
+      font-size: 1.125rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto var(--space-md);
+    }
+    
+    .breadcrumbs {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-light);
+      padding: var(--space-sm) 0;
+    }
+    
+    .breadcrumbs a {
+      color: var(--brand);
+      text-decoration: none;
+    }
+    
+    .breadcrumbs a:hover {
+      text-decoration: underline;
+    }
+    
+    .content-section {
+      padding: var(--space-xl) 0;
+    }
+    
+    .content-section h2 {
+      font-size: 2rem;
+      margin-bottom: var(--space-md);
+      text-align: center;
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--grid-gutter);
+      margin-top: var(--space-lg);
+    }
+    
+    .benefit-card {
+      background: var(--bg-card);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      text-align: center;
+    }
+    
+    .benefit-card h3 {
+      color: var(--brand);
+      margin-bottom: var(--space-sm);
+      font-size: 1.25rem;
+    }
+    
+    .zones-box {
+      background: var(--bg-soft);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      border-left: 4px solid var(--brand);
+    }
+    
+    .process-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .process-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: var(--space-sm);
+      padding-left: 2rem;
+      position: relative;
+    }
+    
+    .process-list li::before {
+      content: counter(process);
+      counter-increment: process;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: var(--gradient-brand);
+      color: white;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.875rem;
+    }
+    
+    .process-list {
+      counter-reset: process;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--grid-gutter);
+      margin-top: var(--space-md);
+    }
+    
+    .testimonial {
+      background: white;
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 8px var(--shadow);
+      position: relative;
+    }
+    
+    .testimonial::before {
+      content: """;
+      position: absolute;
+      top: var(--space-sm);
+      left: var(--space-sm);
+      font-size: 3rem;
+      color: var(--brand);
+      opacity: 0.2;
+      font-family: serif;
+    }
+    
+    .testimonial p {
+      position: relative;
+      z-index: 1;
+      padding-left: var(--space-md);
+    }
+    
+    .faq-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background: white;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+      box-shadow: 0 2px 4px var(--shadow);
+      overflow: hidden;
+    }
+    
+    .faq-item summary {
+      padding: var(--space-sm) var(--space-md);
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.5rem;
+      color: var(--brand);
+      transition: transform 0.3s;
+    }
+    
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+    
+    .faq-item p {
+      padding: 0 var(--space-md) var(--space-md);
+      color: var(--text-light);
+    }
+    
+    .final-cta {
+      background: var(--gradient-brand);
+      color: white;
+      padding: var(--space-xl) var(--space-md);
+      border-radius: var(--radius-lg);
+      text-align: center;
+      margin-top: var(--space-2xl);
+    }
+    
+    .final-cta h2 {
+      color: white;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-md);
+    }
+    
+    .btn-secondary {
+      background: white;
+      color: var(--brand);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    
+    .price-box {
+      background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+      border: 2px solid var(--brand);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      margin: var(--space-md) 0;
+      text-align: center;
+    }
+    
+    .price-box strong {
+      color: var(--brand);
+      font-size: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .page-hero {
+        padding: var(--space-lg) var(--space-sm);
+      }
+      
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="../../../" class="logo">
+          <span class="logo-icon">🔧</span>
+          <span class="logo-text">Plomero Pro</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu">
+          <li><a href="../../../">Inicio</a></li>
+          <li><a href="../../../#services">Servicios</a></li>
+          <li><a href="../../../#about">Nosotros</a></li>
+          <li><a href="../../../#contact" class="btn btn-primary btn-sm">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs">
+        <a href="../../../">Inicio</a>
+        <span>›</span>
+        <span>Plomero cerca de mí</span>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="page-hero">
+        <h1>Plomero cerca de mí en Culiacán, Sinaloa</h1>
+        <p>¿Necesitas un plomero <strong>hoy</strong>? Llegamos a tu domicilio con garantía por escrito y precios claros antes de iniciar. Urgencias 24/7 y trabajos programados.</p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/526677123456?text=Hola,%20necesito%20un%20plomero%20en%20Culiac%C3%A1n" class="btn btn-whatsapp" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            WhatsApp: 667 712 3456
+          </a>
+          <a href="tel:6677123456" class="btn-secondary">
+            📞 Llamar: 667 712 3456
+          </a>
+        </div>
+      </section>
+
+      <!-- Beneficios -->
+      <section class="content-section">
+        <h2>¿Por qué elegirnos?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <h3>⚡ Llegamos hoy mismo</h3>
+            <p>Atención el mismo día en Culiacán. Respuesta rápida garantizada.</p>
+          </div>
+          <div class="benefit-card">
+            <h3>💰 Precios claros</h3>
+            <p>Diagnóstico y cotización sin sorpresas. Precio cerrado antes de iniciar.</p>
+          </div>
+          <div class="benefit-card">
+            <h3>✅ Garantía y factura</h3>
+            <p>Materiales certificados y garantía por escrito en todos los trabajos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Servicios -->
+      <section class="content-section">
+        <h2>Servicios que cubrimos</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <span class="service-icon">💧</span>
+            <h3>Fugas de agua</h3>
+            <p>Detección y reparación en muros, techos y patios.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🚿</span>
+            <h3>Destape de drenajes</h3>
+            <p>Manual y con equipo especializado.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🚽</span>
+            <h3>Sanitarios y lavabos</h3>
+            <p>Instalación, cambios y reparaciones.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🔥</span>
+            <h3>Boiler/Calentador</h3>
+            <p>Mantenimiento, reparación y encendido.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">🔧</span>
+            <h3>Baja presión</h3>
+            <p>Diagnóstico y corrección del problema.</p>
+          </div>
+          <div class="service-card">
+            <span class="service-icon">⚠️</span>
+            <h3>Fugas de gas</h3>
+            <p>Detección y pruebas de hermeticidad.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Urgencias -->
+      <section class="content-section">
+        <h2>🚨 Urgencias 24/7: ¿Cuándo llamarnos?</h2>
+        <div class="zones-box">
+          <ul style="padding-left: 1.5rem;">
+            <li>Drenaje totalmente tapado que causa inundación</li>
+            <li>Fuga visible de agua o fuerte olor a gas</li>
+            <li>Boiler que no enciende o falla repentina</li>
+            <li>Tubería rota con pérdida de agua</li>
+          </ul>
+          <p style="margin-top: 1rem;"><strong>💡 Tip:</strong> Si la fuga es grande, cierra la <strong>llave principal</strong> y contáctanos de inmediato.</p>
+        </div>
+      </section>
+
+      <!-- Zonas -->
+      <section class="content-section">
+        <h2>📍 Zonas y colonias que atendemos</h2>
+        <div class="zones-box">
+          <p><strong>Cobertura completa en Culiacán:</strong></p>
+          <p>Las Quintas, Tres Ríos, Chapultepec, La Campiña, Guadalupe, Barrancos, Stanza Toscana, Alturas del Sur, Terranova, Chulavista, Centro, Bachigualato, Las Vegas, Infonavit Humaya, Tierra Blanca, y alrededores.</p>
+          <p style="margin-top: 1rem;">¿Tu colonia no aparece? <a href="https://wa.me/526677123456" target="_blank" style="color: var(--brand);">Escríbenos</a> y confirmamos cobertura.</p>
+        </div>
+      </section>
+
+      <!-- Precios -->
+      <section class="content-section">
+        <h2>💰 Precios transparentes</h2>
+        <div class="price-box">
+          <p>Visita y diagnóstico desde</p>
+          <p><strong>$250 MXN</strong></p>
+          <p>dentro de Culiacán</p>
+        </div>
+        <div style="max-width: 600px; margin: 0 auto;">
+          <h3 style="margin-bottom: 1rem;">¿Qué incluye?</h3>
+          <ul style="text-align: left; padding-left: 1.5rem;">
+            <li>✅ Revisión completa del problema</li>
+            <li>✅ Diagnóstico profesional</li>
+            <li>✅ Cotización sin compromiso</li>
+            <li>✅ Limpieza del área de trabajo</li>
+          </ul>
+          <p style="margin-top: 1rem; text-align: center;">Compartimos <strong>precio cerrado</strong> antes de iniciar cualquier trabajo.</p>
+        </div>
+      </section>
+
+      <!-- Proceso -->
+      <section class="content-section">
+        <h2>Nuestro proceso de trabajo</h2>
+        <ol class="process-list">
+          <li><strong>Diagnóstico en sitio</strong> - Identificamos la causa real del problema</li>
+          <li><strong>Cotización clara</strong> - Precio fijo con opciones si aplica</li>
+          <li><strong>Reparación profesional</strong> - Materiales de calidad certificada</li>
+          <li><strong>Garantía por escrito</strong> - Seguimiento post-servicio vía WhatsApp</li>
+        </ol>
+      </section>
+
+      <!-- Testimonios -->
+      <section class="content-section">
+        <h2>Lo que dicen nuestros clientes</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial">
+            <p>Llegaron en 40 minutos y resolvieron el problema el mismo día. Excelente servicio y precio justo.</p>
+            <p style="text-align: right; color: var(--text-light); font-style: italic;">— Ana G., Las Quintas</p>
+          </div>
+          <div class="testimonial">
+            <p>Precio justo y dejaron todo limpio. Los recomiendo ampliamente para cualquier trabajo de plomería.</p>
+            <p style="text-align: right; color: var(--text-light); font-style: italic;">— Julio M., Tres Ríos</p>
+          </div>
+          <div class="testimonial">
+            <p>Profesionales y puntuales. Resolvieron una fuga complicada que otros no pudieron.</p>
+            <p style="text-align: right; color: var(--text-light); font-style: italic;">— María L., Chapultepec</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="content-section">
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq-container">
+          <details class="faq-item">
+            <summary>¿Cuánto tardan en llegar?</summary>
+            <p>En promedio llegamos en <strong>30-45 minutos</strong> dentro de Culiacán, dependiendo de la zona y el tráfico.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Atienden noches y fines de semana?</summary>
+            <p>Sí, contamos con <strong>servicio 24/7</strong> para emergencias. Los costos pueden variar en horarios nocturnos.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Qué formas de pago aceptan?</summary>
+            <p>Aceptamos efectivo, tarjeta de crédito/débito y transferencia bancaria. <strong>Facturamos</strong> todos nuestros servicios.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Tienen garantía en sus trabajos?</summary>
+            <p>Sí, todos nuestros trabajos tienen garantía por <strong>6 meses</strong> en mano de obra y según especificaciones del fabricante en materiales.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Cuánto cuesta un servicio típico?</summary>
+            <p>La visita y diagnóstico tiene un costo desde <strong>$250 MXN</strong>. El precio final depende del trabajo a realizar, siempre con cotización previa.</p>
+          </details>
+          <details class="faq-item">
+            <summary>¿Puedo agendar una cita?</summary>
+            <p>Por supuesto. Además de urgencias, agendamos visitas programadas. Contáctanos por WhatsApp para coordinar el mejor horario.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- CTA Final -->
+      <section class="final-cta">
+        <h2>¿Necesitas un plomero hoy?</h2>
+        <p>Escríbenos por WhatsApp o llámanos. Atención inmediata en toda <strong>Culiacán, Sinaloa</strong>.</p>
+        <div class="cta-buttons">
+          <a href="https://wa.me/526677123456?text=Hola,%20necesito%20un%20plomero%20cerca%20de%20m%C3%AD%20en%20Culiac%C3%A1n" class="btn btn-whatsapp" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            WhatsApp ahora
+          </a>
+          <a href="tel:6677123456" class="btn-secondary">
+            📞 Llamar ahora
+          </a>
+        </div>
+        <p style="margin-top: 2rem;">
+          <a href="../../../" style="color: white; opacity: 0.9;">← Volver al inicio</a>
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Plomero Pro</h3>
+          <p>Servicio profesional de plomería en Culiacán, Sinaloa. Disponibles 24/7 para emergencias.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="../../../#services">Reparación de fugas</a></li>
+            <li><a href="../../../#services">Destape de drenajes</a></li>
+            <li><a href="../../../#services">Instalaciones</a></li>
+            <li><a href="../../../#services">Mantenimiento</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contacto</h4>
+          <p>📞 667 712 3456</p>
+          <p>📱 WhatsApp 24/7</p>
+          <p>📍 Culiacán, Sinaloa</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Plomero Pro. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://hectorpala.github.io/plomero-website/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Plomero cerca de mí",
+            "item": "https://hectorpala.github.io/plomero-website/servicios/plomero/cerca-de-mi/"
+          }
+        ]
+      },
+      {
+        "@type": "LocalBusiness",
+        "name": "Plomero Pro Culiacán",
+        "description": "Servicio profesional de plomería en Culiacán, Sinaloa. Urgencias 24/7.",
+        "url": "https://hectorpala.github.io/plomero-website/",
+        "telephone": "+526677123456",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Culiacán",
+          "addressRegion": "Sinaloa",
+          "addressCountry": "MX"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "24.8090",
+          "longitude": "-107.3940"
+        },
+        "openingHours": "Mo-Su 00:00-24:00",
+        "priceRange": "$$"
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+      this.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
