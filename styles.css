@@ -239,6 +239,8 @@ p {
   text-align: center;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(227,100,20,0.3);
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .btn-primary:hover {
@@ -260,6 +262,8 @@ p {
   transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
   text-align: center;
   box-shadow: 0 2px 8px var(--shadow);
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .btn-secondary:hover {
@@ -501,6 +505,10 @@ p {
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
 }
 
 .whatsapp-link:hover {
@@ -784,6 +792,10 @@ p {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .nav-link:hover {
@@ -792,13 +804,46 @@ p {
     transform: translateX(8px);
   }
   
+  .section {
+    padding: 50px 0;
+  }
+  
+  .hero {
+    min-height: 70vh;
+    padding: 100px 16px 60px;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+  }
+  
+  .hero-subtitle {
+    margin-bottom: 2rem;
+  }
+  
   .grid {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: 1.5rem;
+  }
+  
+  .card {
+    padding: 2rem 1.5rem;
   }
   
   .contact-content {
     grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 16px;
+    font-size: 16px;
+    min-height: 44px;
+  }
+  
+  .contact-form textarea {
+    min-height: 120px;
   }
   
   .features {
@@ -810,8 +855,12 @@ p {
   }
   
   .benefits-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
+  }
+  
+  .benefit {
+    padding: 1rem;
   }
   
   .process-steps {
@@ -827,12 +876,15 @@ p {
   .cta-buttons {
     flex-direction: column;
     align-items: center;
+    gap: 0.75rem;
   }
   
   .cta-buttons .btn-primary,
   .cta-buttons .btn-secondary {
     width: 100%;
-    max-width: 300px;
+    max-width: 320px;
+    padding: 18px 24px;
+    font-size: 1.125rem;
   }
   
   .zones-content p {
@@ -847,9 +899,33 @@ p {
     font-size: 1.125rem;
   }
   
+  .emergency-btn {
+    width: 100%;
+    max-width: 320px;
+    padding: 20px 24px;
+    font-size: 1.125rem;
+  }
+  
   /* Mobile adjustments for service cards */
   .service-card {
-    height: 200px;
+    height: 180px;
+  }
+  
+  .final-cta {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .pricing-box {
+    padding: 2rem 1.5rem;
+  }
+  
+  .testimonial {
+    padding: 1.5rem;
+  }
+  
+  .faq-item {
+    padding: 1.25rem 1.5rem;
   }
 }
 
@@ -867,4 +943,70 @@ p {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Additional mobile optimizations for small devices */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .hero {
+    min-height: 60vh;
+    padding: 80px 16px 40px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-contact {
+    font-size: 1rem;
+  }
+  
+  .section {
+    padding: 40px 0;
+  }
+  
+  .card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .final-cta {
+    padding: 1rem;
+  }
+  
+  .cta-text {
+    font-size: 1.125rem;
+  }
+  
+  .service-card {
+    height: 160px;
+  }
+  
+  .mobile-menu-btn {
+    width: 24px;
+    height: 18px;
+  }
+  
+  .nav-menu {
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
+  
+  .nav-link {
+    font-size: 1.125rem;
+    padding: 0.75rem 1.5rem;
+  }
 }
