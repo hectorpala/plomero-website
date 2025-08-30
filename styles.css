@@ -542,7 +542,11 @@ p {
 .benefit-icon {
   font-size: 2rem;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 .benefit h3 {
   font-size: 1rem;
