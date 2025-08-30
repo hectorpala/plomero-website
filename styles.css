@@ -1014,3 +1014,47 @@ p {
     padding: 0.75rem 1.5rem;
   }
 }
+
+/* Sección SEO: fila de tarjetas */
+.seo-links { padding: 3rem 1rem; background: #fffaf5; }
+.seo-links h2 { 
+  text-align: center; 
+  margin: 0 0 1.5rem; 
+  font-family: 'Poppins', sans-serif; 
+  font-size: 1.75rem;
+}
+
+/* Grid responsivo */
+.seo-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;            /* móvil */
+}
+@media (min-width: 700px) { .seo-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px){ .seo-grid { grid-template-columns: repeat(5, 1fr); } }
+
+/* Tarjeta clicable */
+.seo-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+  padding: 1rem;
+  text-align: center;
+  background: #fff;
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.seo-card:hover { 
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 16px rgba(0,0,0,.12); 
+  border-color: #e67e22; 
+}
+.seo-card:focus-visible { outline: 3px solid #e67e22; outline-offset: 3px; }
