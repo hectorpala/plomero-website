@@ -1179,21 +1179,42 @@ p {
 }
 .seo-card:focus-visible { outline: 3px solid #e67e22; outline-offset: 3px; }
 
-/* Solución para imágenes móviles - forzar dimensiones y contenido */
-@media (max-width: 768px) {
-  .service-card {
-    height: auto !important;
-    min-height: 180px !important;
-    padding: 1rem !important;
-  }
-  
-  .service-card img {
-    width: 100% !important;
-    height: 140px !important;
-    object-fit: contain !important;
-    object-position: center !important;
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 0.5rem;
-  }
+/* Contenedor con proporción controlada y sin recortes */
+.service-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f3f4f6; /* color de fondo mientras carga */
+  /* Proporción por defecto (desktop, tu foto vertical 2:3) */
+  aspect-ratio: 2 / 3;
+}
+
+/* En móvil tu corte es horizontal (4:3) */
+@media (max-width:768px){
+  .service-card { aspect-ratio: 4 / 3; }
+}
+
+/* El <picture> y la imagen ocupan todo el contenedor */
+.service-card .media,
+.service-card .media-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mostrar siempre la imagen completa y centrada (sin recorte) */
+.service-card .media-img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* (Opcional) para tarjetas uniformes en rejilla */
+.card { display: flex; flex-direction: column; gap: .75rem; }
+.service-card .media-img { object-fit: cover; object-position: 50% 35%; }
+
+@media (max-width: 768px){
+  .card--boiler .service-card{ position:relative; width:100%; overflow:hidden; border-radius:12px; background:#f3f4f6; }
+  .card--boiler .service-card::before{ content:""; display:block; padding-top:75%; } /* 4:3 */
+  .card--boiler .service-card > picture{ position:absolute; inset:0; display:block; width:100%; height:100%; }
+  .card--boiler .service-card img{ width:100%; height:100%; object-fit:contain; object-position:center; display:block; }
 }
