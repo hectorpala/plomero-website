@@ -1199,8 +1199,8 @@ p {
   .card--img .service-card .media-box > img{
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover;           /* llena la caja (sin verse "chiquita") */
-    object-position: 50% 35%;    /* ajusta encuadre vertical si corta caras: 50% 20% */
+    object-fit: cover;        /* <— antes teníamos contain */
+    object-position: 50% 35%; /* ajusta el "encuadre" vertical si corta: 50% 20% o 50% 50% */
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
