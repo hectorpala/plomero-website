@@ -859,12 +859,13 @@ p {
   }
   
   .benefits-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
   .benefit {
-    padding: 1rem;
+    padding: 1.5rem;
+    text-align: center;
   }
   
   .process-steps {
@@ -912,7 +913,17 @@ p {
   
   /* Mobile adjustments for service cards */
   .service-card {
-    height: 180px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .service-card img {
+    max-height: 140px;
+    object-fit: contain;
+    width: auto;
   }
   
   .final-cta {
@@ -929,7 +940,37 @@ p {
   }
   
   .faq-item {
-    padding: 1.25rem 1.5rem;
+    padding: 0;
+    margin-bottom: 0.75rem;
+  }
+
+  .faq-item summary {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .faq-item p {
+    padding: 0 1.25rem 1.25rem;
+    line-height: 1.6;
+  }
+
+  /* Asegurar botones touch-friendly */
+  button, .btn, a[role="button"], .mobile-menu-btn {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  .mobile-menu-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .mobile-menu-btn span {
+    width: 24px;
+    height: 3px;
   }
 }
 
@@ -947,6 +988,46 @@ p {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* SEO section mobile improvements */
+.seo-links {
+  padding: var(--space-xl) 0;
+  background: var(--bg-soft);
+}
+
+.seo-links h2 {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .seo-links {
+    padding: var(--space-lg) 0;
+  }
+  
+  .seo-links h2 {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-md);
+  }
+  
+  .seo-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .seo-card {
+    padding: 1rem;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .seo-card span {
+    font-size: 1rem;
+  }
 }
 
 /* Additional mobile optimizations for small devices */
