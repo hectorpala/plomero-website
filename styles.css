@@ -1212,9 +1212,30 @@ p {
 .card { display: flex; flex-direction: column; gap: .75rem; }
 .service-card .media-img { object-fit: cover; object-position: 50% 35%; }
 
+/* --- FIX móvil SOLO para la card del boiler --- */
 @media (max-width: 768px){
-  .card--boiler .service-card{ position:relative; width:100%; overflow:hidden; border-radius:12px; background:#f3f4f6; }
-  .card--boiler .service-card::before{ content:""; display:block; padding-top:75%; } /* 4:3 */
-  .card--boiler .service-card > picture{ position:absolute; inset:0; display:block; width:100%; height:100%; }
-  .card--boiler .service-card img{ width:100%; height:100%; object-fit:contain; object-position:center; display:block; }
+  /* Caja con altura garantizada (padding-hack) */
+  .card--boiler .service-card{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f3f4f6;
+  }
+  .card--boiler .service-card::before{
+    content: "";
+    display: block;
+    padding-top: 75%; /* 4:3 para el corte mobile (400x300) */
+  }
+  /* Imagen ocupa toda la caja y siempre se ve */
+  .card--boiler .service-card img{
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;      /* sin recorte; usar 'cover' si prefieres llenar */
+    object-position: center;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
 }
+/* Desktop queda intacto */

@@ -109,11 +109,14 @@
                     <p>Sanitarios, lavabos y mezcladoras. Instalación profesional con garantía.</p>
                 </div>
                 <div class="card card--boiler">
-                    <div class="service-card media-boiler">
-                        <picture class="media">
-                            <source media="(max-width:768px)" srcset="img/arreglando-boiler-mobile.png" width="400" height="300">
-                            <img src="img/arreglando-boiler.png" alt="Mantenimiento de boiler" width="1024" height="1536" loading="lazy" decoding="async" class="media-img">
-                        </picture>
+                    <div class="service-card">
+                        <img
+                            src="img/arreglando-boiler.png"
+                            srcset="img/arreglando-boiler-mobile.png 600w, img/arreglando-boiler.png 1024w"
+                            sizes="(max-width:768px) 100vw, 420px"
+                            alt="Mantenimiento de boiler"
+                            loading="lazy" decoding="async"
+                            onerror="this.onerror=null; this.src='img/arreglando-boiler.png';">
                     </div>
                     <h3>Mantenimiento de Boiler/Calentador</h3>
                     <p>Reparación y mantenimiento de sistemas de agua caliente. Diagnóstico completo.</p>
