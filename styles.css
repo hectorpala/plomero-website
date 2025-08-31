@@ -1179,63 +1179,36 @@ p {
 }
 .seo-card:focus-visible { outline: 3px solid #e67e22; outline-offset: 3px; }
 
-/* Contenedor con proporción controlada y sin recortes */
-.service-card {
-  width: 100%;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #f3f4f6; /* color de fondo mientras carga */
-  /* Proporción por defecto (desktop, tu foto vertical 2:3) */
-  aspect-ratio: 2 / 3;
-}
-
-/* En móvil tu corte es horizontal (4:3) */
-@media (max-width:768px){
-  .service-card { aspect-ratio: 4 / 3; }
-}
-
-/* El <picture> y la imagen ocupan todo el contenedor */
-.service-card .media,
-.service-card .media-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* Mostrar siempre la imagen completa y centrada (sin recorte) */
-.service-card .media-img {
-  object-fit: contain;
-  object-position: center;
-}
-
-/* (Opcional) para tarjetas uniformes en rejilla */
-.card { display: flex; flex-direction: column; gap: .75rem; }
-.service-card .media-img { object-fit: cover; object-position: 50% 35%; }
-
-/* --- FIX móvil SOLO para la card del boiler --- */
+/* --- FIX móvil global para cards de servicios (sin tocar desktop) --- */
 @media (max-width: 768px){
-  /* Caja con altura garantizada (padding-hack) */
-  .card--boiler .service-card{
+  /* contenedor con altura estable (4:3) */
+  .card--img .service-card .media-box{
     position: relative;
     width: 100%;
     overflow: hidden;
     border-radius: 12px;
     background: #f3f4f6;
   }
-  .card--boiler .service-card::before{
+  .card--img .service-card .media-box::before{
     content: "";
     display: block;
-    padding-top: 75%; /* 4:3 para el corte mobile (400x300) */
+    padding-top: 75%; /* 4:3 */
   }
-  /* Imagen ocupa toda la caja y siempre se ve */
-  .card--boiler .service-card img{
+
+  /* la imagen SIEMPRE visible y rellenando la caja */
+  .card--img .service-card .media-box > img{
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: contain;      /* sin recorte; usar 'cover' si prefieres llenar */
-    object-position: center;
+    object-fit: cover;           /* llena la caja (sin verse "chiquita") */
+    object-position: 50% 35%;    /* ajusta encuadre vertical si corta caras: 50% 20% */
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
+
+  /* por si algún estilo heredado ocultaba imágenes */
+  .card img, .service-card img, .service-card picture { 
+    display: block !important;
+    visibility: visible !important;
+  }
 }
-/* Desktop queda intacto */
