@@ -828,6 +828,7 @@ p {
   .grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    place-items: center;
   }
   
   .card {
@@ -913,17 +914,34 @@ p {
   
   /* Mobile adjustments for service cards */
   .service-card {
-    height: 160px;
+    min-height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    text-align: center;
+    padding: 1rem 0.5rem;
   }
 
   .service-card img {
-    max-height: 140px;
+    max-height: 150px;
+    max-width: 85%;
     object-fit: contain;
     width: auto;
+    height: auto;
+    margin: 0 auto;
+  }
+  
+  /* Center card content on mobile */
+  .card {
+    text-align: center;
+  }
+  
+  .card h3 {
+    text-align: center;
+  }
+  
+  .card p {
+    text-align: center;
   }
   
   .final-cta {
@@ -976,18 +994,25 @@ p {
 
 .service-card {
   width: 100%;
-  height: 300px;
-  overflow: hidden;
+  min-height: 200px;
   border-radius: 12px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
 }
 
 .service-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 90%;
+  max-height: 250px;
+  object-fit: contain;
   display: block;
+  margin: 0 auto;
+  height: auto;
+  width: auto;
 }
 
 /* SEO section mobile improvements */
@@ -1077,7 +1102,21 @@ p {
   }
   
   .service-card {
-    height: 160px;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .service-card img {
+    max-height: 130px;
+    max-width: 80%;
+    object-fit: contain;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
   }
   
   .mobile-menu-btn {
@@ -1139,3 +1178,13 @@ p {
   border-color: #e67e22; 
 }
 .seo-card:focus-visible { outline: 3px solid #e67e22; outline-offset: 3px; }
+
+/* Imágenes optimizadas para móvil */
+@media (max-width: 768px) {
+  .service-card img[src$="arreglando-boiler.png"] { content: url("img/arreglando-boiler-mobile.png"); }
+  .service-card img[src$="destapandodrenaje.png"] { content: url("img/destapandodrenaje-mobile.png"); }
+  .service-card img[src$="plomerofregadero.png"] { content: url("img/plomerofregadero-mobile.png"); }
+  .service-card img[src$="reivicion-bajapresion.png"] { content: url("img/reivicion-bajapresion-mobile.png"); }
+  .service-card img[src$="taza-de-baño.png"] { content: url("img/taza-de-baño-mobile.png"); }
+  .service-card img[src$="tinaco.png"] { content: url("img/tinaco-mobile.png"); }
+}
