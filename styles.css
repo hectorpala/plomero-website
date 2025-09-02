@@ -1015,6 +1015,15 @@ p {
   width: auto;
 }
 
+/* Specific styling for reparacion-fugas image to make it larger on desktop */
+@media (min-width: 769px) {
+  .service-card img[src*="reparacion-fugas"] {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+  }
+}
+
 /* SEO section mobile improvements */
 .seo-links {
   padding: var(--space-xl) 0;
