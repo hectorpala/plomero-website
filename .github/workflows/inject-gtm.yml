@@ -1,0 +1,71 @@
+name: Inject GTM partial
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  inject:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure ripgrep is present
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+
+      - name: Inject GTM partial after <body> in all HTML files
+        shell: bash
+        run: |
+          set -euo pipefail
+          PARTIAL="partials/gtm.html"
+          test -f "$PARTIAL" || { echo "ERROR: $PARTIAL no existe"; exit 1; }
+
+          # Archivos HTML candidatos (excluye carpetas típicas y el propio parcial)
+          mapfile -t FILES < <(rg -l --glob '!node_modules/**' --glob '!dist/**' --glob '!build/**' --glob '!partials/**' --glob '!**/.git/**' '\.html$' || true)
+          echo "HTML detectados: ${#FILES[@]}"
+
+          for f in "${FILES[@]}"; do
+            # Si ya contiene GTM, no inyectar de nuevo (idempotente)
+            if rg -q 'googletagmanager\.com/(gtm\.js|ns\.html)' "$f"; then
+              echo "SKIP (ya tiene GTM): $f"
+              continue
+            fi
+
+            TMP="$(mktemp)"
+            awk -v p="$PARTIAL" '
+              BEGIN { IGNORECASE=1; injected=0 }
+              {
+                if (injected==0 && match($0, /<body[^>]*>/)) {
+                  print
+                  while ((getline line < p) > 0) print line
+                  close(p)
+                  injected=1
+                  next
+                }
+                print
+              }
+            ' "$f" > "$TMP" && mv "$TMP" "$f"
+            echo "INJECTED: $f"
+          done
+
+      - name: Verify injection in repo
+        run: |
+          echo "Archivos con GTM (repo):"
+          rg -n "googletagmanager\.com/(gtm\.js|ns\.html)" -S || true
+
+      - name: Commit changes
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "fix(gtm): auto-inject GTM-W75CRTX5 partial into HTML files [skip ci]"
+            git push
+          else
+            echo "Sin cambios que commitear."
+          fi
