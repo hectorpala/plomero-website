@@ -1,0 +1,28 @@
+<!-- mini footer nav -->
+<nav class="site-mini-nav" aria-label="Navegación del sitio" style="margin:40px 0 0">
+  <style>
+    .site-mini-nav ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:12px}
+    .site-mini-nav a{color:#1e40af;text-decoration:none;font:500 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto}
+    .site-mini-nav a:hover{text-decoration:underline}
+  </style>
+  <ul>
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/servicios/plomero/cerca-de-mi/">Cerca de mí</a></li>
+    <li><a href="/servicios/plomero/24-7/">Servicio 24/7</a></li>
+    <li><a href="/servicios/plomero/a-domicilio/">A domicilio</a></li>
+    <li><a href="/servicios/plomero/precios/">Precios</a></li>
+    <li><a href="/contacto/">Contacto</a></li>
+  </ul>
+</nav>
+<script>
+(function(){
+  // Tracking de clics del mini-menú
+  window.dataLayer=window.dataLayer||[];
+  document.querySelectorAll('.site-mini-nav a').forEach(function(a){
+    if(a.dataset.navBound==="1") return; a.dataset.navBound="1";
+    a.addEventListener('click', function(){
+      try{ dataLayer.push({event:'nav_click', nav_label:a.textContent.trim(), nav_href:a.getAttribute('href'), page:location.pathname}); }catch(e){}
+    });
+  });
+})();
+</script>
