@@ -6,4 +6,7 @@ node_modules/
 *.swp
 *.swo
 *~
-Thumbs.db
+Thumbs.dbclient_secret.json
+token.json
+*.pyc
+__pycache__/
