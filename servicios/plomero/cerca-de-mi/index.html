@@ -22,7 +22,7 @@
   if(window.requestIdleCallback){
     requestIdleCallback(()=>{
       var s=document.createElement('script');
-      s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM_ID';
+      s.async=true;s.src='https://www.googletagmanager.com/gtm.js?id=GTM-XXXXXXX';
       document.head.appendChild(s);
     });
   }
@@ -396,6 +396,11 @@
 <meta name="x-build" content="2025-09-05T17:52:24Z" />
 </head>
 <body>
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+
   <!-- Navigation -->
   <nav class="nav">
     <div class="container">
