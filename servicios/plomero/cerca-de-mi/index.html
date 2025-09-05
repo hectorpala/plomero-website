@@ -684,5 +684,36 @@
       this.classList.toggle('active');
     });
   </script>
+
+<!-- CTA fijo con tracking -->
+<style>
+  .cta-bar{position:fixed;right:16px;bottom:16px;display:flex;gap:10px;z-index:9999}
+  .cta-btn{font:600 15px/1.1 system-ui,-apple-system,Segoe UI,Roboto; padding:12px 14px;border-radius:12px;color:#fff;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+  .cta-wa{background:#25D366}
+  .cta-tel{background:#1E40AF}
+</style>
+<div class="cta-bar" aria-label="Contacto rápido">
+  <a id="cta-whatsapp" class="cta-btn cta-wa" href="#" rel="noopener">WhatsApp</a>
+  <a id="cta-llamar"  class="cta-btn cta-tel" href="#" rel="noopener">Llamar</a>
+</div>
+<script>
+(function(){
+  // Config
+  var WA="526670000000", TEL="+52 667 000 0000", PATH=location.pathname;
+  // Enlaces con UTM
+  var waHref="https://wa.me/"+WA+"?text="+encodeURIComponent("Hola, necesito un plomero en Culiacán")+
+             "&utm_source=site&utm_medium=cta&utm_campaign=whatsapp";
+  var telHref="tel:"+TEL.replace(/\s+/g,'');
+  // Pinta hrefs
+  var wa=document.getElementById("cta-whatsapp"); if(wa) wa.href=waHref;
+  var tl=document.getElementById("cta-llamar");   if(tl) tl.href=telHref;
+
+  // Tracking
+  window.dataLayer=window.dataLayer||[];
+  function pushEvt(type,label){try{window.dataLayer.push({event:"cta_click",cta_type:type,cta_label:label,page:PATH});}catch(e){}}
+  if(wa){ wa.addEventListener("click", function(){ pushEvt("whatsapp","cta_floating"); }); }
+  if(tl){ tl.addEventListener("click", function(){ pushEvt("llamar","cta_floating"); }); }
+})();
+</script>
 </body>
 </html>
