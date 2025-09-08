@@ -1,0 +1,91 @@
+name: Weekly SEO Check
+
+on:
+  schedule:
+    - cron: "0 15 * * 1"   # Lunes 15:00 UTC (~10:00 MX)
+  workflow_dispatch: {}
+  push:
+    branches: [ main, master ]
+
+jobs:
+  seo_audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ripgrep jq curl
+
+      - name: Define URLs
+        id: urls
+        run: |
+          echo 'URLS=/ /servicios/plomero/cerca-de-mi/ /servicios/plomero/24-7/ /servicios/plomero/a-domicilio/ /servicios/plomero/precios/ /contacto/' >> $GITHUB_OUTPUT
+
+      - name: Check sitemap HTTP 200
+        run: |
+          for s in https://plomeroculiacanpro.mx/sitemap.xml https://plomeroculiacanpro.mx/sitemaps/main_sitemap.xml; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$s")
+            echo "$s -> $code"
+            [ "$code" = "200" ] || (echo "❌ Sitemap not 200: $s" && exit 1)
+          done
+
+      - name: Crawl pages (public) & run checks
+        env:
+          BASE: https://plomeroculiacanpro.mx
+        run: |
+          FAIL=0
+          urls='${{ steps.urls.outputs.URLS }}'
+          for u in $urls; do
+            echo "== $u"
+            html="$(curl -sS "$BASE$u")" || FAIL=1
+
+            # 1) GTM: exactamente 1 gtm.js y 1 ns.html
+            js=$(printf "%s" "$html" | rg -c 'googletagmanager\.com/gtm\.js\?id=GTM-W75CRTX5')
+            ns=$(printf "%s" "$html" | rg -c 'googletagmanager\.com/ns\.html\?id=GTM-W75CRTX5')
+            echo "GTM gtm.js:$js ns.html:$ns"
+            [ "$js" -eq 1 ] && [ "$ns" -eq 1 ] || { echo "❌ GTM count mismatch in $u"; FAIL=1; }
+
+            # 2) Title length 50–60 (Home permite 50–65)
+            title=$(printf "%s" "$html" | rg -o '<title>.*?</title>' -N | sed -E 's|</?title>||g')
+            tlen=${#title}
+            echo "Title($tlen): $title"
+            if [ "$u" = "/" ]; then
+              [ $tlen -ge 50 ] && [ $tlen -le 65 ] || { echo "❌ Title length Home out of range in $u ($tlen)"; FAIL=1; }
+            else
+              [ $tlen -ge 50 ] && [ $tlen -le 60 ] || { echo "❌ Title length out of range in $u ($tlen)"; FAIL=1; }
+            fi
+
+            # 3) Meta description 120–155
+            desc=$(printf "%s" "$html" | rg -o '<meta name="description" content="[^"]*"' -N | sed -E 's/.*content="(.*)"/\1/')
+            dlen=${#desc}
+            echo "Desc($dlen): ${desc:0:80}..."
+            [ $dlen -ge 120 ] && [ $dlen -le 155 ] || { echo "❌ Description length out of range in $u ($dlen)"; FAIL=1; }
+
+            # 4) Canonical & og:url al dominio correcto
+            can=$(printf "%s" "$html" | rg -c '<link[^>]+rel="canonical"[^>]+https://plomeroculiacanpro.mx' -i)
+            ogu=$(printf "%s" "$html" | rg -c 'property="og:url"[^>]+https://plomeroculiacanpro.mx' -i)
+            echo "Canonical:$can og:url:$ogu"
+            [ "$can" -ge 1 ] || { echo "❌ Missing canonical in $u"; FAIL=1; }
+            [ "$ogu" -ge 1 ] || { echo "❌ Missing og:url in $u"; FAIL=1; }
+
+            # 5) JSON-LD: 1 bloque en cada página y @graph en Home+Servicios; Contacto puede no tener @graph
+            blocks=$(printf "%s" "$html" | rg -c '<script type="application/ld\+json">')
+            echo "JSON-LD blocks: $blocks"
+            [ "$blocks" -ge 1 ] || { echo "❌ No JSON-LD in $u"; FAIL=1; }
+
+            json=$(printf "%s" "$html" | rg -oP '(?s)(?<=<script type="application/ld\+json">).*(?=</script>)' | head -n1)
+            if [ -n "$json" ]; then
+              echo "$json" | jq -e . >/dev/null || { echo "❌ Invalid JSON-LD in $u"; FAIL=1; }
+              if [ "$u" = "/" ] || printf "%s" "$u" | rg -q '^/servicios/'; then
+                echo "$json" | jq -e 'has("@graph")' >/dev/null || { echo "❌ Missing @graph in $u"; FAIL=1; }
+              fi
+            fi
+          done
+          [ $FAIL -eq 0 ] || exit 1
+
+      - name: Summary
+        if: always()
+        run: echo "SEO weekly check finished."
