@@ -912,24 +912,7 @@ p {
     font-size: 1.125rem;
   }
   
-  /* Mobile adjustments for service cards */
-  .service-card {
-    min-height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 1rem 0.5rem;
-  }
-
-  .service-card img {
-    max-height: 150px;
-    max-width: 85%;
-    object-fit: contain;
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-  }
+  /* Mobile adjustments for service cards - uses global .service-card styles */
   
   /* Center card content on mobile */
   .card {
@@ -994,34 +977,29 @@ p {
 
 .service-card {
   width: 100%;
-  min-height: 200px;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
   margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1rem;
 }
 
-.service-card img {
-  max-width: 90%;
-  max-height: 250px;
-  object-fit: contain;
+.service-card .media-box {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Aspect ratio 4:3 */
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f3f4f6;
+}
+
+.service-card .media-box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
-  margin: 0 auto;
-  height: auto;
-  width: auto;
-}
-
-/* Specific styling for reparacion-fugas image to make it larger on desktop */
-@media (min-width: 769px) {
-  .service-card img[src*="reparacion-fugas"] {
-    max-width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-  }
 }
 
 /* SEO section mobile improvements */
@@ -1188,39 +1166,7 @@ p {
 }
 .seo-card:focus-visible { outline: 3px solid #e67e22; outline-offset: 3px; }
 
-/* --- FIX móvil global para cards de servicios (sin tocar desktop) --- */
-@media (max-width: 768px){
-  /* contenedor con altura estable (4:3) */
-  .card--img .service-card .media-box{
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 12px;
-    background: #f3f4f6;
-  }
-  .card--img .service-card .media-box::before{
-    content: "";
-    display: block;
-    padding-top: 75%; /* 4:3 */
-  }
-
-  /* la imagen SIEMPRE visible y rellenando la caja */
-  .card--img .service-card .media-box > img{
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;        /* <— antes teníamos contain */
-    object-position: 50% 35%; /* ajusta el "encuadre" vertical si corta: 50% 20% o 50% 50% */
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* por si algún estilo heredado ocultaba imágenes */
-  .card img, .service-card img, .service-card picture { 
-    display: block !important;
-    visibility: visible !important;
-  }
-}
+/* Estilos móviles ahora manejados por los estilos globales de .service-card */
 
 /* ===== SECCIÓN DE NOTICIAS ===== */
 .news-grid {
