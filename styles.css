@@ -239,9 +239,8 @@ p {
   overflow: hidden;
   background: linear-gradient(135deg, rgba(15,23,42,0.25) 0%, rgba(30,41,59,0.30) 100%),
               image-set(
-                url('img/hero-plumbing-800w.webp') 1x,
-                url('img/hero-plumbing-1200w.webp') 2x,
-                url('img/hero-plumbing-1920w.webp') 3x
+                url('assets/images/hero-plumbing-800w.webp') 1x,
+                url('assets/images/hero-plumbing-1200w.webp') 2x
               );
   background-size: cover;
   background-position: center;
