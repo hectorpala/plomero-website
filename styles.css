@@ -237,7 +237,7 @@ p {
   padding: 140px 16px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.90) 100%),
+  background: linear-gradient(135deg, rgba(15,23,42,0.45) 0%, rgba(30,41,59,0.55) 100%),
               image-set(
                 url('img/hero-plumbing-800w.webp') 1x,
                 url('img/hero-plumbing-1200w.webp') 2x,
@@ -252,7 +252,7 @@ p {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(15,23,42,0.3) 100%);
+  background: linear-gradient(to bottom, transparent 0%, rgba(15,23,42,0.2) 100%);
   opacity: 1;
 }
 
