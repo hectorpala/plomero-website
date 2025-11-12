@@ -1148,23 +1148,7 @@ p {
     font-size: 1.125rem;
   }
   
-  .service-card {
-    min-height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0.75rem 0.5rem;
-  }
-  
-  .service-card img {
-    max-height: 130px;
-    max-width: 80%;
-    object-fit: contain;
-    width: auto;
-    height: auto;
-    margin: 0 auto;
-  }
+  /* Service cards use global styles - no mobile override needed */
   
   .mobile-menu-btn {
     width: 24px;
