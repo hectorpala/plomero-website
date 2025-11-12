@@ -11,11 +11,10 @@
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="apple-touch-icon" href="/images/favicon.png">
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="styles.css">
     
     
@@ -148,13 +147,17 @@ if (window.requestIdleCallback) {
                 <div class="card card--img">
                     <div class="service-card">
                         <figure class="media-box">
-                            <img src="img/reparacion-fugas.png"
-                                 srcset="img/reparacion-fugas.png 600w, img/reparacion-fugas.png 1024w"
-                                 sizes="(max-width:768px) 100vw, 420px"
-                                 alt="Reparación de fugas"
-                                 width="1024" height="1024"
-                                 loading="lazy" decoding="async"
-                                 onerror="this.onerror=null; this.src='img/reparacion-fugas.png';">
+                            <picture>
+                                <source type="image/webp"
+                                        srcset="img/reparacion-fugas-420w.webp 420w, img/reparacion-fugas-800w.webp 800w"
+                                        sizes="(max-width:768px) 100vw, 420px">
+                                <img src="img/reparacion-fugas-420w.png"
+                                     srcset="img/reparacion-fugas-420w.png 420w, img/reparacion-fugas-800w.png 800w"
+                                     sizes="(max-width:768px) 100vw, 420px"
+                                     alt="Reparación de fugas"
+                                     width="420" height="420"
+                                     loading="lazy" decoding="async">
+                            </picture>
                         </figure>
                     </div>
                     <h3>Reparación de fugas</h3>
@@ -163,13 +166,17 @@ if (window.requestIdleCallback) {
                 <div class="card card--img">
                     <div class="service-card">
                         <figure class="media-box">
-                            <img src="img/destapandodrenaje.png"
-                                 srcset="img/destapandodrenaje.png 600w, img/destapandodrenaje.png 1024w"
-                                 sizes="(max-width:768px) 100vw, 420px"
-                                 alt="Destape de drenaje"
-                                 width="1024" height="1024"
-                                 loading="lazy" decoding="async"
-                                 onerror="this.onerror=null; this.src='img/destapandodrenaje.png';">
+                            <picture>
+                                <source type="image/webp"
+                                        srcset="img/destapandodrenaje-420w.webp 420w, img/destapandodrenaje-800w.webp 800w"
+                                        sizes="(max-width:768px) 100vw, 420px">
+                                <img src="img/destapandodrenaje-420w.png"
+                                     srcset="img/destapandodrenaje-420w.png 420w, img/destapandodrenaje-800w.png 800w"
+                                     sizes="(max-width:768px) 100vw, 420px"
+                                     alt="Destape de drenaje"
+                                     width="420" height="420"
+                                     loading="lazy" decoding="async">
+                            </picture>
                         </figure>
                     </div>
                     <h3>Destape de Drenajes y Coladeras</h3>
@@ -178,13 +185,17 @@ if (window.requestIdleCallback) {
                 <div class="card card--img">
                     <div class="service-card">
                         <figure class="media-box">
-                            <img src="img/taza-de-baño.png"
-                                 srcset="img/taza-de-baño.png 600w, img/taza-de-baño.png 1024w"
-                                 sizes="(max-width:768px) 100vw, 420px"
-                                 alt="Instalación y cambio de sanitarios"
-                                 width="1024" height="1024"
-                                 loading="lazy" decoding="async"
-                                 onerror="this.onerror=null; this.src='img/taza-de-baño.png';">
+                            <picture>
+                                <source type="image/webp"
+                                        srcset="img/taza-de-baño-420w.webp 420w, img/taza-de-baño-800w.webp 800w"
+                                        sizes="(max-width:768px) 100vw, 420px">
+                                <img src="img/taza-de-baño-420w.png"
+                                     srcset="img/taza-de-baño-420w.png 420w, img/taza-de-baño-800w.png 800w"
+                                     sizes="(max-width:768px) 100vw, 420px"
+                                     alt="Instalación y cambio de sanitarios"
+                                     width="420" height="420"
+                                     loading="lazy" decoding="async">
+                            </picture>
                         </figure>
                     </div>
                     <h3>Instalación y Cambio de Sanitarios</h3>
@@ -193,13 +204,17 @@ if (window.requestIdleCallback) {
                 <div class="card card--img">
                     <div class="service-card">
                         <figure class="media-box">
-                            <img src="img/arreglando-boiler.png"
-                                 srcset="img/arreglando-boiler.png 600w, img/arreglando-boiler.png 1024w"
-                                 sizes="(max-width:768px) 100vw, 420px"
-                                 alt="Mantenimiento de boiler"
-                                 width="1024" height="1024"
-                                 loading="lazy" decoding="async"
-                                 onerror="this.onerror=null; this.src='img/arreglando-boiler.png';">
+                            <picture>
+                                <source type="image/webp"
+                                        srcset="img/arreglando-boiler-420w.webp 420w, img/arreglando-boiler-800w.webp 800w"
+                                        sizes="(max-width:768px) 100vw, 420px">
+                                <img src="img/arreglando-boiler-420w.png"
+                                     srcset="img/arreglando-boiler-420w.png 420w, img/arreglando-boiler-800w.png 800w"
+                                     sizes="(max-width:768px) 100vw, 420px"
+                                     alt="Mantenimiento de boiler"
+                                     width="420" height="420"
+                                     loading="lazy" decoding="async">
+                            </picture>
                         </figure>
                     </div>
                     <h3>Mantenimiento de Boiler/Calentador</h3>
@@ -208,13 +223,17 @@ if (window.requestIdleCallback) {
                 <div class="card card--img">
                     <div class="service-card">
                         <figure class="media-box">
-                            <img src="img/reivicion-bajapresion.png"
-                                 srcset="img/reivicion-bajapresion.png 600w, img/reivicion-bajapresion.png 1024w"
-                                 sizes="(max-width:768px) 100vw, 420px"
-                                 alt="Revisión y corrección de baja presión"
-                                 width="1024" height="1024"
-                                 loading="lazy" decoding="async"
-                                 onerror="this.onerror=null; this.src='img/reivicion-bajapresion.png';">
+                            <picture>
+                                <source type="image/webp"
+                                        srcset="img/reivicion-bajapresion-420w.webp 420w, img/reivicion-bajapresion-800w.webp 800w"
+                                        sizes="(max-width:768px) 100vw, 420px">
+                                <img src="img/reivicion-bajapresion-420w.png"
+                                     srcset="img/reivicion-bajapresion-420w.png 420w, img/reivicion-bajapresion-800w.png 800w"
+                                     sizes="(max-width:768px) 100vw, 420px"
+                                     alt="Revisión y corrección de baja presión"
+                                     width="420" height="420"
+                                     loading="lazy" decoding="async">
+                            </picture>
                         </figure>
                     </div>
                     <h3>Revisión y Corrección de Baja Presión</h3>
@@ -223,13 +242,17 @@ if (window.requestIdleCallback) {
                 <div class="card card--img">
                     <div class="service-card">
                         <figure class="media-box">
-                            <img src="img/tinaco.png"
-                                 srcset="img/tinaco.png 600w, img/tinaco.png 1024w"
-                                 sizes="(max-width:768px) 100vw, 420px"
-                                 alt="Detección de Fugas"
-                                 width="1024" height="1024"
-                                 loading="lazy" decoding="async"
-                                 onerror="this.onerror=null; this.src='img/tinaco.png';">
+                            <picture>
+                                <source type="image/webp"
+                                        srcset="img/tinaco-420w.webp 420w, img/tinaco-800w.webp 800w"
+                                        sizes="(max-width:768px) 100vw, 420px">
+                                <img src="img/tinaco-420w.png"
+                                     srcset="img/tinaco-420w.png 420w, img/tinaco-800w.png 800w"
+                                     sizes="(max-width:768px) 100vw, 420px"
+                                     alt="Detección de Fugas"
+                                     width="420" height="420"
+                                     loading="lazy" decoding="async">
+                            </picture>
                         </figure>
                     </div>
                     <h3>Detección de Fugas (Agua/Gas)</h3>
