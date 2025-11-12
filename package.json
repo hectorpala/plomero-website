@@ -13,7 +13,12 @@
     "clean:ds-store": "find . -name '.DS_Store' -type f -delete && echo '✓ .DS_Store files deleted'",
     "clean:logs": "find . -name '*.log' -type f -delete && echo '✓ Log files deleted'",
     "clean:all": "npm run clean && git clean -fdX && echo '✓ All ignored files cleaned'",
-    "precommit": "npm run clean:ds-store"
+    "precommit": "npm run clean:ds-store",
+    "audit:media": "node scripts/automation/media-audit/audit-media.mjs",
+    "audit:media:simple": "node scripts/automation/media-audit/audit-media-simple.mjs",
+    "audit:frames": "node scripts/automation/media-audit/audit-frames.mjs",
+    "audit:frames:simple": "node scripts/automation/media-audit/audit-frames-simple.mjs",
+    "seo:submit-sitemap": "python3 scripts/automation/seo/submit_sitemap.py"
   },
   "repository": {
     "type": "git",

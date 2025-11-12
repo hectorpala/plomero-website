@@ -1062,15 +1062,324 @@ Todos los artículos del blog **DEBEN** seguir esta estructura exacta. NO usar J
 
 ---
 
+## Scripts y Automatización
+
+### Estructura de Scripts
+
+```
+scripts/
+├── generate-image.sh              # Generación de imágenes con IA
+└── automation/
+    ├── seo/
+    │   └── submit_sitemap.py      # Envío automático de sitemap a Google
+    └── media-audit/
+        ├── audit-media.mjs        # Auditoría completa de imágenes (con Puppeteer)
+        ├── audit-media-simple.mjs # Auditoría de imágenes (sin dependencias)
+        ├── audit-frames.mjs       # Análisis de contenedores de imagen
+        └── audit-frames-simple.mjs # Análisis de frames simplificado
+```
+
+---
+
+### 1. Generación de Imágenes
+
+**Archivo**: `scripts/generate-image.sh`
+**Lenguaje**: Bash
+**Líneas**: ~100
+
+**Propósito**:
+Script auxiliar para generar imágenes usando APIs de IA (DALL·E, Stable Diffusion, etc.)
+
+**Uso**:
+```bash
+./scripts/generate-image.sh "Professional plumber fixing leak" plumber-leak-repair
+```
+
+**Características**:
+- Carga variables de entorno desde `.env`
+- Validación de argumentos requeridos
+- Output con colores en terminal
+- Integración con APIs de imagen
+
+**Dependencias**:
+- `.env` con API keys
+- curl o herramienta HTTP
+
+---
+
+### 2. SEO - Envío de Sitemap
+
+**Archivo**: `scripts/automation/seo/submit_sitemap.py`
+**Lenguaje**: Python 3
+**Líneas**: 51
+
+**Propósito**:
+Envía automáticamente el sitemap.xml a Google Search Console usando la API oficial de Google.
+
+**Uso**:
+```bash
+python3 scripts/automation/seo/submit_sitemap.py
+```
+
+**Características**:
+- Autenticación OAuth2 con Google
+- Guarda token en `token.json` (reutilizable)
+- Envía sitemap principal: `https://plomeroculiacanpro.mx/sitemap.xml`
+- Maneja refresh automático de credenciales
+
+**Dependencias**:
+```bash
+pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client
+```
+
+**Archivos requeridos**:
+- `client_secret.json` - Credenciales OAuth de Google Cloud Console
+- `token.json` - Token generado automáticamente (gitignored)
+
+**Configuración**:
+1. Crear proyecto en Google Cloud Console
+2. Habilitar Search Console API
+3. Descargar credenciales OAuth como `client_secret.json`
+4. Ejecutar script (abrirá navegador para autorización primera vez)
+
+---
+
+### 3. Auditoría de Imágenes - Completa
+
+**Archivo**: `scripts/automation/media-audit/audit-media.mjs`
+**Lenguaje**: JavaScript (ES Modules)
+**Líneas**: 135
+
+**Propósito**:
+Audita todas las imágenes del sitio para detectar problemas de optimización.
+
+**Uso**:
+```bash
+node scripts/automation/media-audit/audit-media.mjs
+```
+
+**Análisis realizado**:
+- ✅ Formato de imagen (PNG, JPG, WebP)
+- ✅ Atributos `width` y `height` explícitos
+- ✅ Atributos `loading` y `decoding`
+- ✅ Uso de `<picture>` con srcset
+- ✅ Tamaño de imagen vs. viewport
+- ✅ Detección de imágenes decorativas sin `alt`
+
+**Output**:
+```
+📊 AUDITORÍA DE IMÁGENES - Plomero Culiacán Pro
+
+Página: /
+├── ✅ img/reparacion-fugas-800w.webp
+│   Format: WebP, Width: 800, Height: 800
+│   Loading: eager, Picture: Yes
+├── ⚠️  img/hero-plumbing-1920w.webp
+│   ⚠️  Imagen muy grande para viewport móvil
+└── ❌ img/logo.png
+    ❌ Formato PNG (debería ser WebP)
+    ❌ Faltan atributos width/height
+```
+
+**Dependencias**:
+```json
+"puppeteer": "^21.0.0"
+```
+
+---
+
+### 4. Auditoría de Imágenes - Simple
+
+**Archivo**: `scripts/automation/media-audit/audit-media-simple.mjs`
+**Lenguaje**: JavaScript (ES Modules)
+**Líneas**: 74
+
+**Propósito**:
+Versión ligera de auditoría de imágenes sin dependencias externas.
+
+**Uso**:
+```bash
+node scripts/automation/media-audit/audit-media-simple.mjs
+```
+
+**Ventajas**:
+- ✅ Sin Puppeteer (más rápido)
+- ✅ Usa solo módulos nativos de Node.js (https)
+- ✅ Análisis mediante regex del HTML
+- ✅ Ideal para CI/CD
+
+**Limitaciones**:
+- ❌ No ejecuta JavaScript del sitio
+- ❌ No puede medir dimensiones renderizadas
+- ❌ No detecta imágenes cargadas dinámicamente
+
+---
+
+### 5. Auditoría de Frames (Contenedores)
+
+**Archivo**: `scripts/automation/media-audit/audit-frames.mjs`
+**Lenguaje**: JavaScript (ES Modules)
+**Líneas**: 127
+
+**Propósito**:
+Mide todos los contenedores de imagen por página y viewport para identificar espacios sin contenido visual.
+
+**Uso**:
+```bash
+node scripts/automation/media-audit/audit-frames.mjs
+```
+
+**Análisis realizado**:
+- 📐 Dimensiones de contenedores (width × height)
+- 📱 Ratios de aspecto (16:9, 4:3, 1:1, etc.)
+- 🖼️  Detección de frames vacíos sin `<img>`
+- 📊 Análisis en 3 viewports: móvil (390px), tablet (768px), desktop (1366px)
+- 🎯 Identificación de contenedores por selector CSS
+
+**Selectores analizados**:
+```javascript
+const FRAME_SELECTORS = [
+  ".hero", ".hero-media", ".banner", ".section-media",
+  ".service-card", ".service-media",
+  ".card", ".card-media", ".card .media",
+  ".gallery", ".gallery-item", ".grid .card", "[data-media]"
+];
+```
+
+**Output**:
+```
+📊 AUDITORÍA DE CONTENEDORES - Mobile (390x844)
+
+Página: /
+├── .hero (1200×600) ratio 2:1
+│   ✅ Contiene imagen
+├── .service-card (300×200) ratio 3:2
+│   ❌ Frame vacío - considera agregar imagen
+└── .banner (800×400) ratio 2:1
+    ✅ Contiene imagen
+```
+
+**Dependencias**:
+```json
+"puppeteer": "^21.0.0"
+```
+
+---
+
+### 6. Auditoría de Frames - Simple
+
+**Archivo**: `scripts/automation/media-audit/audit-frames-simple.mjs`
+**Lenguaje**: JavaScript (ES Modules)
+**Líneas**: 165
+
+**Propósito**:
+Versión simplificada de auditoría de contenedores sin Puppeteer.
+
+**Uso**:
+```bash
+node scripts/automation/media-audit/audit-frames-simple.mjs
+```
+
+**Ventajas**:
+- ✅ Sin dependencias externas
+- ✅ Análisis estático del HTML
+- ✅ Rápido para CI/CD
+
+**Limitaciones**:
+- ❌ No puede medir dimensiones reales renderizadas
+- ❌ No analiza múltiples viewports
+- ❌ No ejecuta CSS ni JS
+
+---
+
+### Scripts NPM Disponibles
+
+Agregados en `package.json`:
+
+```json
+{
+  "scripts": {
+    "clean": "npm run clean:ds-store && npm run clean:logs",
+    "clean:ds-store": "find . -name '.DS_Store' -type f -delete && echo '✓ .DS_Store files deleted'",
+    "clean:logs": "find . -name '*.log' -type f -delete && echo '✓ Log files deleted'",
+    "clean:all": "npm run clean && git clean -fdX && echo '✓ All ignored files cleaned'",
+    "precommit": "npm run clean:ds-store",
+    "audit:media": "node scripts/automation/media-audit/audit-media.mjs",
+    "audit:media:simple": "node scripts/automation/media-audit/audit-media-simple.mjs",
+    "audit:frames": "node scripts/automation/media-audit/audit-frames.mjs",
+    "audit:frames:simple": "node scripts/automation/media-audit/audit-frames-simple.mjs",
+    "seo:submit-sitemap": "python3 scripts/automation/seo/submit_sitemap.py"
+  }
+}
+```
+
+**Uso recomendado**:
+
+```bash
+# Limpieza antes de commit
+npm run clean
+
+# Auditoría completa de imágenes
+npm run audit:media
+
+# Auditoría rápida (sin Puppeteer)
+npm run audit:media:simple
+
+# Analizar contenedores vacíos
+npm run audit:frames
+
+# Enviar sitemap a Google
+npm run seo:submit-sitemap
+```
+
+---
+
+### Configuración de Entorno
+
+**Archivo `.env` (gitignored)**:
+```bash
+# APIs de generación de imágenes
+OPENAI_API_KEY=sk-...
+STABILITY_API_KEY=sk-...
+
+# Google Search Console API
+# (No necesario, usa client_secret.json)
+```
+
+**Archivos en `.gitignore`**:
+```
+.env
+client_secret.json
+token.json
+*.log
+.DS_Store
+```
+
+---
+
 ## Contacto Técnico
 
 **Desarrollador**: Claude AI Assistant
 **Fecha de última actualización**: 12 de Noviembre, 2024
-**Versión de documentación**: 2.1
+**Versión de documentación**: 2.2
 
 ---
 
 ## Changelog
+
+### Versión 2.2 - 12 de Noviembre, 2024
+- ✅ **Reorganización de scripts y automatización**
+  - Creada estructura `scripts/automation/` con categorías
+  - Movidos 5 scripts sueltos a ubicaciones organizadas
+  - Documentación completa de cada script (propósito, uso, dependencias)
+  - Agregados 6 scripts NPM para automatización
+- ✅ **Consolidación de assets en `/assets/`**
+  - Unificadas 3 carpetas dispersas (img/, images/, fonts/) en estructura profesional
+  - Eliminados 8 archivos sin usar (-187 KB)
+  - Actualizadas 242 referencias en 22 HTML + CSS
+- ✅ **Mejoras en limpieza y mantenimiento**
+  - Mejorado .gitignore con categorías y formato profesional
+  - Scripts NPM de limpieza automática
 
 ### Versión 2.1 - 12 de Noviembre, 2024
 - ✅ **Documentación completa de artículos de blog**
