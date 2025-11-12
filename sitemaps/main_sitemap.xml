@@ -90,4 +90,22 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/</loc>
+    <lastmod>2024-11-11T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/</loc>
+    <lastmod>2024-11-10T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/</loc>
+    <lastmod>2024-11-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
