@@ -43,3 +43,6 @@ token.json
 # Build artifacts
 dist/
 build/
+
+# Claude Code
+.claude/settings.local.json
