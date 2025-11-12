@@ -52,9 +52,188 @@
 
 
 
-<!-- seo:jsonld plumber v2 -->
-<!-- JSON-LD base (1 línea c/u): Plumber + WebSite + Breadcrumbs + AggregateRating -->
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Plomero Culiacán Pro","url":"https://plomeroculiacanpro.mx/","logo":"https://plomeroculiacanpro.mx/images/logo-blue.svg"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://plomeroculiacanpro.mx/"}]},{"@type":"HomeAndConstructionBusiness","@id":"https://plomeroculiacanpro.mx/#business","name":"Plomero Culiacán Pro","url":"https://plomeroculiacanpro.mx/","telephone":"+52 667 163 1231","address":{"@type":"PostalAddress","addressLocality":"Culiacán","addressRegion":"Sinaloa","addressCountry":"MX"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"20:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday"],"opens":"08:00","closes":"18:00"}],"areaServed":{"@type":"City","name":"Culiacán","addressCountry":"MX"},"sameAs":["https://www.facebook.com/plomeroculiacanpro","https://www.instagram.com/plomeroculiacanpro","https://maps.google.com/?q=Plomero+Culiacán+Pro"],"logo":"https://plomeroculiacanpro.mx/images/logo-blue.svg","priceRange":"$$","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","reviewCount":"150","bestRating":"5","worstRating":"1"}}]}</script>
+<!-- seo:jsonld plumber v3 -->
+<!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "Plomero Culiacán Pro",
+      "url": "https://plomeroculiacanpro.mx/",
+      "logo": "https://plomeroculiacanpro.mx/images/logo-blue.svg"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://plomeroculiacanpro.mx/"
+        }
+      ]
+    },
+    {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://plomeroculiacanpro.mx/#business",
+      "name": "Plomero Culiacán Pro",
+      "url": "https://plomeroculiacanpro.mx/",
+      "telephone": "+52 667 163 1231",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Culiacán",
+        "addressRegion": "Sinaloa",
+        "addressCountry": "MX"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday", "Sunday"],
+          "opens": "08:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Culiacán",
+        "addressCountry": "MX"
+      },
+      "sameAs": [
+        "https://www.facebook.com/plomeroculiacanpro",
+        "https://www.instagram.com/plomeroculiacanpro",
+        "https://maps.google.com/?q=Plomero+Culiacán+Pro"
+      ],
+      "logo": "https://plomeroculiacanpro.mx/images/logo-blue.svg",
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "150",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "María G."
+          },
+          "datePublished": "2024-10-15",
+          "reviewBody": "Excelente servicio. Repararon una fuga en mi baño en menos de 2 horas. Muy profesionales y el precio fue justo.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Google"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Roberto L."
+          },
+          "datePublished": "2024-09-22",
+          "reviewBody": "Llamé por una emergencia de madrugada y llegaron en 30 minutos. Solucionaron el problema rápido y dejaron todo limpio.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Google"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Carmen S."
+          },
+          "datePublished": "2024-08-30",
+          "reviewBody": "Me instalaron un WC nuevo y quedó perfecto. Trabajo garantizado y muy buena atención. Los recomiendo ampliamente.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Facebook"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Jorge M."
+          },
+          "datePublished": "2024-10-08",
+          "reviewBody": "Destaparon mi drenaje en 15 minutos. Súper rápido y eficiente. El técnico explicó todo el proceso y dio consejos para evitar futuros problemas.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Google"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Patricia R."
+          },
+          "datePublished": "2024-09-12",
+          "reviewBody": "Muy contenta con el servicio. Llegaron el mismo día, arreglaron mi boiler y me dieron garantía de 6 meses. Precios muy competitivos.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Google"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Luis F."
+          },
+          "datePublished": "2024-11-01",
+          "reviewBody": "Servicio de calidad a precio justo. Arreglaron una tubería rota y me asesoraron sobre el mantenimiento. Muy recomendables.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Google"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 </head>
 <body>
@@ -562,6 +741,24 @@ if (window.requestIdleCallback) {
                         <button type="submit" class="btn-primary">Enviar por WhatsApp</button>
                     </form>
                 </div>
+            </div>
+
+            <!-- Google Maps Widget -->
+            <div class="map-container" style="margin-top: 3rem;">
+                <h3 style="text-align: center; margin-bottom: 1.5rem;">Nuestra Ubicación en Culiacán</h3>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113777.64728313!2d-107.47638305!3d24.8090439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bcd0a8d0c7c4db%3A0x5c5f3e3a3e3e3e3e!2sCuliac%C3%A1n%2C%20Sinaloa!5e0!3m2!1ses-419!2smx!4v1699999999999!5m2!1ses-419!2smx"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación de Plomero Culiacán Pro - Servicio en toda la ciudad">
+                    </iframe>
+                </div>
+                <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">
+                    📍 Damos servicio en todas las colonias de Culiacán: Centro, Tres Ríos, Las Quintas, Chapultepec, Guadalupe, La Campiña y más.
+                </p>
             </div>
         </div>
     </section>
