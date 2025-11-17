@@ -1,0 +1,329 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2025-01-17 12:00:00",
+  "containerVersion": {
+    "path": "accounts/6123456789/containers/123456789/versions/0",
+    "accountId": "6123456789",
+    "containerId": "123456789",
+    "containerVersionId": "0",
+    "name": "Tracking Tarjetas SEO + Scroll Depth",
+    "description": "Variables, activadores y etiquetas para tracking de tarjetas 'Más opciones de plomería' y scroll depth",
+    "container": {
+      "path": "accounts/6123456789/containers/123456789",
+      "accountId": "6123456789",
+      "containerId": "123456789",
+      "name": "Plomero Culiacán Pro",
+      "publicId": "GTM-W75CRTX5",
+      "usageContext": [
+        "WEB"
+      ]
+    },
+    "tag": [
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "tagId": "100",
+        "name": "GA4 - Event - Click SEO Card",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "click_seo_card"
+          },
+          {
+            "type": "LIST",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "card_name"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DL - Card Name}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "card_position"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DL - Card Position}}"
+                  }
+                ]
+              },
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "card_url"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DL - Card URL}}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "{{GA4 Measurement ID}}"
+          }
+        ],
+        "fingerprint": "1234567890",
+        "firingTriggerId": [
+          "200"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      },
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "tagId": "101",
+        "name": "GA4 - Event - Scroll Depth",
+        "type": "gaawe",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "eventName",
+            "value": "scroll_depth"
+          },
+          {
+            "type": "LIST",
+            "key": "eventParameters",
+            "list": [
+              {
+                "type": "MAP",
+                "map": [
+                  {
+                    "type": "TEMPLATE",
+                    "key": "name",
+                    "value": "scroll_percentage"
+                  },
+                  {
+                    "type": "TEMPLATE",
+                    "key": "value",
+                    "value": "{{DL - Scroll Percentage}}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "measurementId",
+            "value": "{{GA4 Measurement ID}}"
+          }
+        ],
+        "fingerprint": "1234567891",
+        "firingTriggerId": [
+          "201"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NOT_SET"
+        }
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "triggerId": "200",
+        "name": "Click - SEO Card",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "click_seo_card"
+              }
+            ]
+          }
+        ],
+        "filter": [],
+        "fingerprint": "1234567892"
+      },
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "triggerId": "201",
+        "name": "Scroll - Depth Milestone",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "scroll_depth"
+              }
+            ]
+          }
+        ],
+        "filter": [],
+        "fingerprint": "1234567893"
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "variableId": "300",
+        "name": "DL - Card Name",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "card_name"
+          }
+        ],
+        "fingerprint": "1234567894"
+      },
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "variableId": "301",
+        "name": "DL - Card Position",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "card_position"
+          }
+        ],
+        "fingerprint": "1234567895"
+      },
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "variableId": "302",
+        "name": "DL - Card URL",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "card_url"
+          }
+        ],
+        "fingerprint": "1234567896"
+      },
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "variableId": "303",
+        "name": "DL - Scroll Percentage",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          },
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "scroll_percentage"
+          }
+        ],
+        "fingerprint": "1234567897"
+      },
+      {
+        "accountId": "6123456789",
+        "containerId": "123456789",
+        "variableId": "304",
+        "name": "GA4 Measurement ID",
+        "type": "c",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "value",
+            "value": "G-XXXXXXXXXX"
+          }
+        ],
+        "fingerprint": "1234567898"
+      }
+    ],
+    "fingerprint": "1705489200000",
+    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6123456789/containers/123456789/versions/0?apiLink=version"
+  }
+}
