@@ -1457,12 +1457,186 @@ p {
   .blog-image img {
     height: 200px;
   }
-  
+
   .blog-content {
     padding: var(--space-sm);
   }
-  
+
   .blog-content h2 {
     font-size: 1.125rem;
   }
+}
+
+/* ============================================
+   Clases de utilidad para eliminar inline styles
+   ============================================ */
+
+/* Hero section utilities */
+.hero-contact a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.hero-guarantee {
+  font-size: 1rem;
+  margin-top: 0.75rem;
+  opacity: 0.95;
+}
+
+/* Benefits section container */
+.benefits-container {
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* Benefit highlights */
+.benefit-highlight {
+  margin-bottom: 0.5rem;
+}
+
+.benefit-highlight small {
+  color: #666;
+  font-weight: 600;
+}
+
+/* Benefit lists */
+.benefit-list {
+  margin-top: 0.75rem;
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+}
+
+/* Links in benefits */
+.benefit-link {
+  color: #0066cc;
+  font-weight: 600;
+}
+
+/* CTA text at end of benefits */
+.benefits-cta {
+  text-align: center;
+  margin-top: 2.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.benefits-cta a {
+  color: #0066cc;
+}
+
+.benefits-cta-subtitle {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Service card utilities */
+.service-list {
+  margin: 0.75rem 0;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+}
+
+.service-cta {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Services intro text */
+.services-intro {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: #444;
+}
+
+/* Blog section intro */
+.blog-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+/* GTM noscript iframe (keep inline for critical display:none) */
+/* iframe[src*="googletagmanager"] {} - handled inline */
+
+/* Testimonials section */
+.testimonials-header {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.testimonials-subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.testimonial-source {
+  color: #888;
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.testimonials-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.testimonials-cta p {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.btn-inline {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.btn-inline:last-child {
+  margin-right: 0;
+}
+
+/* Map section */
+.map-container {
+  margin-top: 3rem;
+}
+
+.map-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.map-embed {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.map-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-caption {
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Site mini nav */
+.site-mini-nav {
+  margin: 40px 0 0;
 }
