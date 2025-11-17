@@ -500,31 +500,51 @@ if (window.requestIdleCallback) {
         <h2 id="seo-links-title">Más opciones de plomería</h2>
 
         <div class="seo-grid">
-          <a class="seo-card" href="./servicios/plomero-cerca-de-mi/index.html">
+          <a class="seo-card"
+             href="./servicios/plomero-cerca-de-mi/index.html"
+             data-event="click_seo_card"
+             data-card-name="plomero_cerca_de_mi"
+             data-card-position="1">
             <h3>Plomero cerca de mí</h3>
             <p>Si buscas un plomero cerca de mí en Las Quintas, Tres Ríos o cualquier colonia de Culiacán, esta página te muestra tiempos de llegada estimados y cobertura por zona. Ideal para emergencias cuando necesitas respuesta rápida. Encuentra el servicio de plomería más cercano a tu ubicación con llegada en 30-60 minutos.</p>
             <span class="seo-card__cta">Conoce más sobre cobertura por zona →</span>
           </a>
 
-          <a class="seo-card" href="./servicios/emergencia-24-7/index.html">
+          <a class="seo-card"
+             href="./servicios/emergencia-24-7/index.html"
+             data-event="click_seo_card"
+             data-card-name="plomero_24_7"
+             data-card-position="2">
             <h3>Plomero 24/7</h3>
             <p>¿Urgencia en madrugada, domingo o día festivo? Nuestro servicio 24/7 en Chapultepec y toda Culiacán atiende fugas nocturnas, drenajes tapados y problemas de gas a cualquier hora. Encuentra aquí tarifas especiales para servicio nocturno y horarios extendidos con plomería de emergencia certificada disponible todos los días del año.</p>
             <span class="seo-card__cta">Ver horarios y tarifas de emergencia →</span>
           </a>
 
-          <a class="seo-card" href="./servicios/plomero-a-domicilio/index.html">
+          <a class="seo-card"
+             href="./servicios/plomero-a-domicilio/index.html"
+             data-event="click_seo_card"
+             data-card-name="plomero_a_domicilio"
+             data-card-position="3">
             <h3>Plomero a domicilio</h3>
             <p>Servicio a domicilio en Tres Ríos, Alturas del Sur y todas las colonias de Culiacán con diagnóstico gratuito. Esta página detalla qué incluye la visita, cuánto tarda el plomero en llegar y qué herramientas trae. Perfecto para reparaciones programadas, mantenimiento preventivo y trabajos que requieren cotización presencial antes de iniciar.</p>
             <span class="seo-card__cta">Detalles del servicio a domicilio →</span>
           </a>
 
-          <a class="seo-card" href="./servicios/plomero-precios/index.html">
+          <a class="seo-card"
+             href="./servicios/plomero-precios/index.html"
+             data-event="click_seo_card"
+             data-card-name="plomero_precios"
+             data-card-position="4">
             <h3>Precios de plomería</h3>
             <p>Consulta rangos de precios transparentes para reparación de fugas, destapes, instalaciones y mantenimiento de boiler en Culiacán. Tarifas actualizadas con desglose de mano de obra y materiales. Incluye costos promedio por colonia, formas de pago aceptadas y descuentos disponibles para clientes frecuentes o servicios múltiples programados.</p>
             <span class="seo-card__cta">Ver lista completa de precios →</span>
           </a>
 
-          <a class="seo-card" href="./servicios/plomero-colonias-culiacan/index.html">
+          <a class="seo-card"
+             href="./servicios/plomero-colonias-culiacan/index.html"
+             data-event="click_seo_card"
+             data-card-name="plomero_colonias"
+             data-card-position="5">
             <h3>Plomero en colonias</h3>
             <p>Descubre cobertura específica por colonia en Culiacán: Las Quintas, Stanza Toscana, Barrancos, La Campiña y más. Esta página muestra testimonios de clientes por zona, problemas comunes de plomería en cada área y tiempos de respuesta promedio. Encuentra información localizada para tu fraccionamiento con plomeros especializados en tu colonia.</p>
             <span class="seo-card__cta">Explorar servicios por colonia →</span>
@@ -995,6 +1015,55 @@ if (window.requestIdleCallback) {
     if(a.dataset.navBound==="1") return; a.dataset.navBound="1";
     a.addEventListener("click", function(){
       try{ dataLayer.push({event:"nav_click", nav_label:a.textContent.trim(), nav_href:a.getAttribute("href"), page:location.pathname}); }catch(e){}
+    });
+  });
+})();
+</script>
+
+<!-- Tracking de tarjetas SEO -->
+<script>
+(function() {
+  // Tracking de clics en tarjetas "Más opciones de plomería"
+  document.querySelectorAll('.seo-card[data-event="click_seo_card"]').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      var cardName = this.getAttribute('data-card-name');
+      var cardPosition = this.getAttribute('data-card-position');
+      var cardHref = this.getAttribute('href');
+
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'click_seo_card',
+          'card_name': cardName,
+          'card_position': cardPosition,
+          'card_url': cardHref,
+          'page_location': window.location.pathname
+        });
+      } catch(e) {
+        console.error('Error tracking seo card:', e);
+      }
+    });
+  });
+
+  // Tracking de scroll depth para medir engagement
+  var scrollDepths = [25, 50, 75, 90];
+  var scrollTracked = {};
+
+  window.addEventListener('scroll', function() {
+    var scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+    scrollDepths.forEach(function(depth) {
+      if (scrollPercent >= depth && !scrollTracked[depth]) {
+        scrollTracked[depth] = true;
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            'event': 'scroll_depth',
+            'scroll_percentage': depth,
+            'page_location': window.location.pathname
+          });
+        } catch(e) {}
+      }
     });
   });
 })();
