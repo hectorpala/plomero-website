@@ -247,6 +247,23 @@ p {
   background-repeat: no-repeat;
 }
 
+/* Hero Image Semantic (para rich snippets visuales) */
+.hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.85;
+}
+
 .hero::after {
   content: "";
   position: absolute;
