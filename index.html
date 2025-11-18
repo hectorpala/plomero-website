@@ -940,14 +940,22 @@ window.dataLayer = window.dataLayer || [];
                 </div>
                 <div class="contact-form">
                     <h3>Solicita una Cotización</h3>
-                    <!-- Progressive Enhancement: form works without JS via native action, JS enhances with tracking -->
-                    <form id="contact-form" action="https://wa.me/526671631231" method="get" target="_blank">
+                    <!-- Multi-layer lead capture: Netlify Forms + localStorage + WhatsApp -->
+                    <form id="contact-form" name="contacto-plomeria" method="POST" netlify netlify-honeypot="bot-field" action="/gracias">
+                        <!-- Honeypot anti-spam -->
+                        <input type="hidden" name="bot-field">
+                        <input type="hidden" name="form-name" value="contacto-plomeria">
+
                         <input type="text" name="nombre" placeholder="Nombre" required>
                         <input type="tel" name="telefono" placeholder="Teléfono" required>
                         <input type="email" name="email" placeholder="Email" required>
                         <textarea name="mensaje" placeholder="Describe tu problema o servicio requerido" rows="4" required></textarea>
-                        <input type="hidden" name="text" value="Hola! Solicito cotización de servicios de plomería">
-                        <button type="submit" class="btn-primary">Enviar por WhatsApp</button>
+
+                        <button type="submit" class="btn-primary">Enviar Cotización</button>
+
+                        <p class="form-note">
+                            <small>También te contactaremos por WhatsApp. Respuesta en menos de 30 minutos.</small>
+                        </p>
                     </form>
                     <noscript>
                         <p style="text-align: center; margin-top: 1rem; color: #666; font-size: 0.9rem;">
@@ -1000,8 +1008,8 @@ window.dataLayer = window.dataLayer || [];
             });
         });
         
-        // WhatsApp form submission with GA4 tracking
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
+        // Multi-layer lead capture: Netlify Forms + localStorage + GA4 + WhatsApp
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const formData = new FormData(this);
@@ -1010,43 +1018,74 @@ window.dataLayer = window.dataLayer || [];
             const email = formData.get('email');
             const mensaje = formData.get('mensaje');
 
-            const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n\n` +
-                                  `Nombre: ${nombre}\n` +
-                                  `Teléfono: ${telefono}\n` +
-                                  `Email: ${email}\n` +
-                                  `Mensaje: ${mensaje}`;
+            const leadData = {
+                timestamp: new Date().toISOString(),
+                nombre: nombre,
+                telefono: telefono,
+                email: email,
+                mensaje: mensaje,
+                source: 'homepage_form',
+                url: window.location.href
+            };
 
-            const whatsappURL = `https://wa.me/526671631231?text=${encodeURIComponent(whatsappMessage)}`;
-
-            // Track lead submission in GA4 via GTM dataLayer
+            // 1. Track lead in GA4 via GTM dataLayer (immediate)
             if (window.dataLayer) {
                 window.dataLayer.push({
                     'event': 'generate_lead',
                     'form_name': 'contact_form_homepage',
-                    'method': 'whatsapp',
+                    'method': 'netlify_forms',
                     'value': 1,
                     'currency': 'MXN'
                 });
             }
 
-            // Store lead data in localStorage for backup
+            // 2. Store in localStorage as backup (immediate)
             try {
-                const leadData = {
-                    timestamp: new Date().toISOString(),
-                    nombre: nombre,
-                    telefono: telefono,
-                    email: email,
-                    mensaje: mensaje,
-                    source: 'homepage_form'
-                };
                 const leads = JSON.parse(localStorage.getItem('plomero_leads') || '[]');
                 leads.push(leadData);
                 localStorage.setItem('plomero_leads', JSON.stringify(leads));
             } catch (e) {
-                console.error('Error storing lead:', e);
+                console.error('Error storing lead in localStorage:', e);
             }
 
-            window.open(whatsappURL, '_blank');
+            // 3. Submit to Netlify Forms (primary backend)
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                });
+
+                if (response.ok) {
+                    // Success: show thank you and open WhatsApp
+                    const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n\n` +
+                                          `Nombre: ${nombre}\n` +
+                                          `Teléfono: ${telefono}\n` +
+                                          `Email: ${email}\n` +
+                                          `Mensaje: ${mensaje}`;
+                    const whatsappURL = `https://wa.me/526671631231?text=${encodeURIComponent(whatsappMessage)}`;
+
+                    // Open WhatsApp in new tab
+                    window.open(whatsappURL, '_blank');
+
+                    // Redirect to thank you page
+                    window.location.href = '/gracias';
+                } else {
+                    throw new Error('Netlify form submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting to Netlify:', error);
+
+                // Fallback: open WhatsApp directly
+                alert('Formulario enviado. Te redirigiremos a WhatsApp.');
+                const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n\n` +
+                                      `Nombre: ${nombre}\n` +
+                                      `Teléfono: ${telefono}\n` +
+                                      `Email: ${email}\n` +
+                                      `Mensaje: ${mensaje}`;
+                const whatsappURL = `https://wa.me/526671631231?text=${encodeURIComponent(whatsappMessage)}`;
+                window.location.href = whatsappURL;
+            }
         });
     </script>
 

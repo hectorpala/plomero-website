@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracias por contactarnos | Plomero Culiacán Pro</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .thank-you-container {
+            max-width: 600px;
+            margin: 6rem auto 4rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .thank-you-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .thank-you-container h1 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+
+        .thank-you-container p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .next-steps {
+            background: #fffaf5;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .next-steps h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+
+        .next-steps ol {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+        }
+
+        .next-steps li {
+            margin-bottom: 0.75rem;
+            color: #555;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="thank-you-icon">✅</div>
+
+        <h1>¡Gracias por tu solicitud!</h1>
+
+        <p>
+            Hemos recibido tu cotización y te contactaremos por <strong>WhatsApp y correo electrónico</strong>
+            en los próximos <strong>30 minutos</strong>.
+        </p>
+
+        <div class="next-steps">
+            <h2>¿Qué sigue?</h2>
+            <ol>
+                <li>Revisaremos tu mensaje en menos de 30 minutos</li>
+                <li>Te contactaremos por WhatsApp y email</li>
+                <li>Te daremos una cotización detallada sin compromiso</li>
+                <li>Agendaremos tu servicio cuando tú prefieras</li>
+            </ol>
+        </div>
+
+        <p>
+            <strong>¿Es urgente?</strong> Llámanos directamente al
+            <a href="tel:6671631231" style="color: #1e40af; text-decoration: underline;">667 163 1231</a>
+        </p>
+
+        <div class="btn-group">
+            <a href="/" class="btn-secondary">Volver al Inicio</a>
+            <a href="https://wa.me/526671631231?text=Hola%2C%20acabo%20de%20enviar%20una%20cotización"
+               class="btn-primary btn-whatsapp" target="_blank" rel="noopener">
+               💬 Abrir WhatsApp
+            </a>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.9rem; color: #666;">
+            Tu información está segura y solo la usaremos para contactarte sobre tu cotización.
+        </p>
+    </div>
+
+    <!-- Track thank you page view -->
+    <script>
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                'event': 'form_submitted_success',
+                'form_name': 'contact_form_homepage'
+            });
+        }
+    </script>
+</body>
+</html>
