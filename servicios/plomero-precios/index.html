@@ -56,137 +56,152 @@
 <!-- JSON-LD base (1 línea c/u): Plumber + WebSite + Breadcrumbs -->
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
-    {
-      "@type":"WebSite",
-      "name":"Plomero Culiacán Pro",
-      "url":"https://plomeroculiacanpro.mx/",
-      "logo":"https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
-    },
-    {
-      "@type":"BreadcrumbList",
-      "itemListElement":[
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type":"ListItem",
-          "position":1,
-          "name":"Inicio",
-          "item":"https://plomeroculiacanpro.mx/"
+            "@type": "WebSite",
+            "name": "Plomero Culiacán Pro",
+            "url": "https://plomeroculiacanpro.mx/",
+            "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
         },
         {
-          "@type":"ListItem",
-          "position":2,
-          "name":"Precios",
-          "item":"https://plomeroculiacanpro.mx/servicios/plomero-precios/"
+            "@type": "HomeAndConstructionBusiness",
+            "@id": "https://plomeroculiacanpro.mx/#business",
+            "name": "Plomero Culiacán Pro",
+            "url": "https://plomeroculiacanpro.mx/servicios/plomero-precios/",
+            "telephone": "+52 667 163 1231",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Culiacán",
+                "addressRegion": "Sinaloa",
+                "addressCountry": "MX"
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                    ],
+                    "opens": "08:00",
+                    "closes": "20:00"
+                },
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Saturday",
+                        "Sunday"
+                    ],
+                    "opens": "08:00",
+                    "closes": "18:00"
+                }
+            ],
+            "areaServed": {
+                "@type": "City",
+                "name": "Culiacán",
+                "addressCountry": "MX"
+            },
+            "sameAs": [
+                "https://www.facebook.com/plomeroculiacanpro",
+                "https://www.instagram.com/plomeroculiacanpro",
+                "https://maps.google.com/?q=Plomero+Culiacán+Pro"
+            ],
+            "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
+            "priceRange": "$$"
+        },
+        {
+            "@type": "Service",
+            "serviceType": "Servicios de Plomería con Precios Transparentes",
+            "provider": {
+                "@type": "LocalBusiness",
+                "name": "Plomero Culiacán Pro",
+                "@id": "https://plomeroculiacanpro.mx",
+                "url": "https://plomeroculiacanpro.mx/servicios/plomero-precios/",
+                "telephone": "+526671631231",
+                "priceRange": "$$"
+            },
+            "areaServed": {
+                "@type": "City",
+                "name": "Culiacán",
+                "containedIn": {
+                    "@type": "State",
+                    "name": "Sinaloa"
+                }
+            },
+            "description": "Precios justos y transparentes de plomería en Culiacán. Cotización gratuita antes de iniciar. Sin sorpresas ni costos ocultos. Garantía de 12 meses incluida."
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "¿Cuánto cuesta un plomero en Culiacán?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Los precios varían según el servicio: reparación de fuga simple $600-$1,500, instalación de WC $800-$1,500, destape de drenaje $500-$1,200, bomba presurizadora instalada $3,500-$12,000, detección de fugas $800-$2,500. La cotización es GRATUITA y te damos el precio final antes de iniciar cualquier trabajo. El precio incluye mano de obra, materiales, herramientas y garantía de 12 meses. Sin cargos ocultos."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Cobran por dar la cotización?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No, la cotización es completamente GRATUITA. Vamos a tu domicilio, hacemos el diagnóstico completo del problema, te explicamos qué se necesita reparar y te damos el precio final. Solo pagas si decides aceptar el trabajo. No hay compromiso. En algunos casos hay costo de visita de $300 MXN que se descuenta completamente si aceptas el servicio, quedando la cotización gratis."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Qué incluyen sus precios de plomería?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Nuestros precios incluyen TODO lo necesario: diagnóstico completo del problema, mano de obra calificada (15+ años de experiencia), materiales y refacciones de calidad certificada, herramientas especializadas, limpieza completa del área de trabajo, garantía por escrito de 12 meses en mano de obra y materiales, soporte post-venta por WhatsApp. NO cobramos extras por traslado dentro de Culiacán. El precio que cotizamos es el precio final."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Por qué no publican precios exactos en el sitio web?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Cada trabajo de plomería es diferente y el precio depende de varios factores: tipo y complejidad de la reparación, materiales específicos necesarios, accesibilidad del problema (tubería visible o dentro de muro), urgencia del servicio (horario normal o emergencia nocturna). Preferimos ver tu problema en persona y darte un precio justo y preciso basado en TU situación específica. Esto evita sorpresas y asegura transparencia total."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Ofrecen formas de pago flexibles?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Sí, aceptamos múltiples formas de pago: efectivo (pago al completar el servicio), tarjeta de débito y crédito (con terminal móvil en tu domicilio), transferencia bancaria directa a nuestra cuenta. Para trabajos grandes podemos negociar pagos en partes (50% inicio, 50% al terminar). También emitimos facturas electrónicas para empresas y personas físicas con actividad empresarial. Pregunta por opciones de pago al solicitar tu cotización."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Inicio",
+                    "item": "https://plomeroculiacanpro.mx/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Servicios",
+                    "item": "https://plomeroculiacanpro.mx/#servicios"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Precios de Plomería",
+                    "item": "https://plomeroculiacanpro.mx/servicios/plomero-precios/"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "@type":"HomeAndConstructionBusiness",
-      "@id":"https://plomeroculiacanpro.mx/#business",
-      "name":"Plomero Culiacán Pro",
-      "url":"https://plomeroculiacanpro.mx/servicios/plomero-precios/",
-      "telephone":"+52 667 163 1231",
-      "address":{
-        "@type":"PostalAddress",
-        "addressLocality":"Culiacán",
-        "addressRegion":"Sinaloa",
-        "addressCountry":"MX"
-      },
-      "openingHoursSpecification":[
-        {
-          "@type":"OpeningHoursSpecification",
-          "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],
-          "opens":"08:00",
-          "closes":"20:00"
-        },
-        {
-          "@type":"OpeningHoursSpecification",
-          "dayOfWeek":["Saturday","Sunday"],
-          "opens":"08:00",
-          "closes":"18:00"
-        }
-      ],
-      "areaServed":{
-        "@type":"City",
-        "name":"Culiacán",
-        "addressCountry":"MX"
-      },
-      "sameAs":[
-        "https://www.facebook.com/plomeroculiacanpro",
-        "https://www.instagram.com/plomeroculiacanpro",
-        "https://maps.google.com/?q=Plomero+Culiacán+Pro"
-      ],
-      "logo":"https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
-      "priceRange":"$$"
-    },
-    {
-      "@type": "Service",
-      "serviceType": "Servicios de Plomería con Precios Transparentes",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Plomero Culiacán Pro",
-        "@id": "https://plomeroculiacanpro.mx",
-        "url": "https://plomeroculiacanpro.mx/servicios/plomero-precios/",
-        "telephone": "+526671631231",
-        "priceRange": "$$"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
-        }
-      },
-      "description": "Precios justos y transparentes de plomería en Culiacán. Cotización gratuita antes de iniciar. Sin sorpresas ni costos ocultos. Garantía de 12 meses incluida."
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta un plomero en Culiacán?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Los precios varían según el servicio: reparación de fuga simple $600-$1,500, instalación de WC $800-$1,500, destape de drenaje $500-$1,200, bomba presurizadora instalada $3,500-$12,000, detección de fugas $800-$2,500. La cotización es GRATUITA y te damos el precio final antes de iniciar cualquier trabajo. El precio incluye mano de obra, materiales, herramientas y garantía de 12 meses. Sin cargos ocultos."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cobran por dar la cotización?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No, la cotización es completamente GRATUITA. Vamos a tu domicilio, hacemos el diagnóstico completo del problema, te explicamos qué se necesita reparar y te damos el precio final. Solo pagas si decides aceptar el trabajo. No hay compromiso. En algunos casos hay costo de visita de $300 MXN que se descuenta completamente si aceptas el servicio, quedando la cotización gratis."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué incluyen sus precios de plomería?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nuestros precios incluyen TODO lo necesario: diagnóstico completo del problema, mano de obra calificada (15+ años de experiencia), materiales y refacciones de calidad certificada, herramientas especializadas, limpieza completa del área de trabajo, garantía por escrito de 12 meses en mano de obra y materiales, soporte post-venta por WhatsApp. NO cobramos extras por traslado dentro de Culiacán. El precio que cotizamos es el precio final."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Por qué no publican precios exactos en el sitio web?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cada trabajo de plomería es diferente y el precio depende de varios factores: tipo y complejidad de la reparación, materiales específicos necesarios, accesibilidad del problema (tubería visible o dentro de muro), urgencia del servicio (horario normal o emergencia nocturna). Preferimos ver tu problema en persona y darte un precio justo y preciso basado en TU situación específica. Esto evita sorpresas y asegura transparencia total."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Ofrecen formas de pago flexibles?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí, aceptamos múltiples formas de pago: efectivo (pago al completar el servicio), tarjeta de débito y crédito (con terminal móvil en tu domicilio), transferencia bancaria directa a nuestra cuenta. Para trabajos grandes podemos negociar pagos en partes (50% inicio, 50% al terminar). También emitimos facturas electrónicas para empresas y personas físicas con actividad empresarial. Pregunta por opciones de pago al solicitar tu cotización."
-          }
-        }
-      ]
-    }
-  ]
+    ]
 }
 </script>
 

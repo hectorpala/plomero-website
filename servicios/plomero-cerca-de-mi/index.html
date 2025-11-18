@@ -56,148 +56,154 @@
 <!-- JSON-LD base (1 línea c/u): Plumber + WebSite + Breadcrumbs -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "name": "Plomero Culiacán Pro",
-      "url": "https://plomeroculiacanpro.mx/",
-      "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Inicio",
-          "item": "https://plomeroculiacanpro.mx/"
+            "@type": "WebSite",
+            "name": "Plomero Culiacán Pro",
+            "url": "https://plomeroculiacanpro.mx/",
+            "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
         },
         {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Plomero cerca de mí",
-          "item": "https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/"
+            "@type": "HomeAndConstructionBusiness",
+            "@id": "https://plomeroculiacanpro.mx/#business",
+            "name": "Plomero Culiacán Pro",
+            "url": "https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/",
+            "telephone": "+52 667 163 1231",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Culiacán",
+                "addressRegion": "Sinaloa",
+                "addressCountry": "MX"
+            },
+            "openingHoursSpecification": [
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                    ],
+                    "opens": "08:00",
+                    "closes": "20:00"
+                },
+                {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Saturday",
+                        "Sunday"
+                    ],
+                    "opens": "08:00",
+                    "closes": "18:00"
+                }
+            ],
+            "areaServed": {
+                "@type": "City",
+                "name": "Culiacán",
+                "addressCountry": "MX"
+            },
+            "sameAs": [
+                "https://www.facebook.com/plomeroculiacanpro",
+                "https://www.instagram.com/plomeroculiacanpro",
+                "https://maps.google.com/?q=Plomero+Culiacán+Pro"
+            ],
+            "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
+            "priceRange": "$$"
+        },
+        {
+            "@type": "Service",
+            "serviceType": "Servicio de Plomería Local",
+            "provider": {
+                "@type": "LocalBusiness",
+                "name": "Plomero Culiacán Pro",
+                "@id": "https://plomeroculiacanpro.mx",
+                "url": "https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/",
+                "telephone": "+526671631231",
+                "priceRange": "$$"
+            },
+            "areaServed": {
+                "@type": "City",
+                "name": "Culiacán",
+                "containedIn": {
+                    "@type": "State",
+                    "name": "Sinaloa"
+                }
+            },
+            "description": "Servicio de plomería local en todas las colonias de Culiacán. Llegamos en 30 minutos a Las Quintas, Tres Ríos, Chapultepec, La Campiña y toda la ciudad."
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "¿En qué colonias de Culiacán dan servicio?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Damos servicio en toda la ciudad de Culiacán: Las Quintas, Tres Ríos, Chapultepec, Guadalupe, La Campiña, Stanza Toscana, Alturas del Sur, Centro, Infonavit Humaya, y todas las demás colonias. Nuestro tiempo de llegada es 30-60 minutos en la mayoría de las zonas. Contáctanos para confirmar cobertura en tu colonia específica."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Cómo puedo encontrar un plomero cerca de mi ubicación?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Simplemente contáctanos por WhatsApp al 667 163 1231 indicando tu colonia o dirección aproximada. Te confirmaremos inmediatamente si damos servicio en tu área y el tiempo estimado de llegada. Tenemos cobertura en toda la ciudad de Culiacán y zonas conurbadas, con técnicos estratégicamente ubicados para respuesta rápida."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Cuánto cobran por trasladarse a mi domicilio?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "El traslado dentro de Culiacán NO tiene costo adicional cuando contratas el servicio. Solo cobras la mano de obra y materiales de la reparación realizada. En zonas alejadas fuera de Culiacán puede aplicar cargo de traslado de $200-$500 según distancia, pero te lo informamos antes de agendar la visita."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Qué servicios de plomería ofrecen a domicilio?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Ofrecemos servicios completos de plomería a domicilio: reparación de fugas, destape de drenajes, instalación de sanitarios y lavabos, mantenimiento de boilers, corrección de baja presión, detección de fugas ocultas, instalación de tinacos, reparación de tuberías rotas, y atención de emergencias 24/7. Llegamos con herramientas y refacciones comunes."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "¿Tienen referencias o reseñas verificables?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Sí, tenemos más de 150 reseñas reales en Google y Facebook con calificación promedio de 4.8/5 estrellas. Nuestros clientes en Las Quintas, Tres Ríos y otras colonias de Culiacán respaldan la calidad de nuestro servicio. Puedes ver todas las reseñas verificadas en nuestros perfiles oficiales de Google y Facebook antes de contratar."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Inicio",
+                    "item": "https://plomeroculiacanpro.mx/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Servicios",
+                    "item": "https://plomeroculiacanpro.mx/#servicios"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "Plomero Cerca de Mí",
+                    "item": "https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/"
+                }
+            ]
         }
-      ]
-    },
-    {
-      "@type": "HomeAndConstructionBusiness",
-      "@id": "https://plomeroculiacanpro.mx/#business",
-      "name": "Plomero Culiacán Pro",
-      "url": "https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/",
-      "telephone": "+52 667 163 1231",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Culiacán",
-        "addressRegion": "Sinaloa",
-        "addressCountry": "MX"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:00",
-          "closes": "20:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Saturday",
-            "Sunday"
-          ],
-          "opens": "08:00",
-          "closes": "18:00"
-        }
-      ],
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "addressCountry": "MX"
-      },
-      "sameAs": [
-        "https://www.facebook.com/plomeroculiacanpro",
-        "https://www.instagram.com/plomeroculiacanpro",
-        "https://maps.google.com/?q=Plomero+Culiacán+Pro"
-      ],
-      "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
-      "priceRange": "$$"
-    },
-    {
-      "@type": "Service",
-      "serviceType": "Servicio de Plomería Local",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Plomero Culiacán Pro",
-        "@id": "https://plomeroculiacanpro.mx",
-        "url": "https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/",
-        "telephone": "+526671631231",
-        "priceRange": "$$"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
-        }
-      },
-      "description": "Servicio de plomería local en todas las colonias de Culiacán. Llegamos en 30 minutos a Las Quintas, Tres Ríos, Chapultepec, La Campiña y toda la ciudad."
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿En qué colonias de Culiacán dan servicio?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Damos servicio en toda la ciudad de Culiacán: Las Quintas, Tres Ríos, Chapultepec, Guadalupe, La Campiña, Stanza Toscana, Alturas del Sur, Centro, Infonavit Humaya, y todas las demás colonias. Nuestro tiempo de llegada es 30-60 minutos en la mayoría de las zonas. Contáctanos para confirmar cobertura en tu colonia específica."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cómo puedo encontrar un plomero cerca de mi ubicación?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Simplemente contáctanos por WhatsApp al 667 163 1231 indicando tu colonia o dirección aproximada. Te confirmaremos inmediatamente si damos servicio en tu área y el tiempo estimado de llegada. Tenemos cobertura en toda la ciudad de Culiacán y zonas conurbadas, con técnicos estratégicamente ubicados para respuesta rápida."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cobran por trasladarse a mi domicilio?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "El traslado dentro de Culiacán NO tiene costo adicional cuando contratas el servicio. Solo cobras la mano de obra y materiales de la reparación realizada. En zonas alejadas fuera de Culiacán puede aplicar cargo de traslado de $200-$500 según distancia, pero te lo informamos antes de agendar la visita."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué servicios de plomería ofrecen a domicilio?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Ofrecemos servicios completos de plomería a domicilio: reparación de fugas, destape de drenajes, instalación de sanitarios y lavabos, mantenimiento de boilers, corrección de baja presión, detección de fugas ocultas, instalación de tinacos, reparación de tuberías rotas, y atención de emergencias 24/7. Llegamos con herramientas y refacciones comunes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Tienen referencias o reseñas verificables?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí, tenemos más de 150 reseñas reales en Google y Facebook con calificación promedio de 4.8/5 estrellas. Nuestros clientes en Las Quintas, Tres Ríos y otras colonias de Culiacán respaldan la calidad de nuestro servicio. Puedes ver todas las reseñas verificadas en nuestros perfiles oficiales de Google y Facebook antes de contratar."
-          }
-        }
-      ]
-    }
-  ]
+    ]
 }
-    </script>
+</script>
 
 </head>
 <body>
