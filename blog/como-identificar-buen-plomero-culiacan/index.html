@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Cómo Identificar a un Buen Plomero en Culiacán? 10 Señales [2025]</title>
     <meta name="description" content="Aprende a identificar un buen plomero en Culiacán: 10 señales clave, qué preguntar antes de contratar, cómo verificar experiencia y evitar estafas. Guía completa 2025.">
+    <meta name="x-build" content="2025-11-18T02:00:00Z">
 
     <!-- Open Graph -->
     <meta property="og:title" content="¿Cómo Identificar a un Buen Plomero en Culiacán? 10 Señales">
@@ -14,6 +15,13 @@
 
     <link rel="canonical" href="https://plomeroculiacanpro.mx/blog/como-identificar-buen-plomero-culiacan/">
     <link rel="stylesheet" href="../../styles.css">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXX');</script>
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -282,27 +290,38 @@
     </style>
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="logo">
-                <a href="/">Plomero Culiacán Pro</a>
-            </div>
-            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <header class="header">
+        <nav class="nav container">
+            <a href="../../" class="nav-logo">Plomero Culiacán Pro</a>
+            <button class="nav-toggle" aria-label="Abrir menú">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <ul class="nav-links">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/servicios/plomero/cerca-de-mi/">Servicios</a></li>
-                <li><a href="/servicios/plomero-colonias-culiacan/">Colonias</a></li>
-                <li><a href="/blog/">Blog</a></li>
-                <li><a href="tel:+526871234567" class="cta-nav">Llamar Ahora</a></li>
+            <ul class="nav-menu">
+                <li><a href="../../">Inicio</a></li>
+                <li><a href="../../servicios/emergencia-24-7/">Emergencias 24/7</a></li>
+                <li><a href="../../servicios/plomero-precios/">Precios</a></li>
+                <li><a href="../../servicios/plomero-colonias-culiacan/">Colonias</a></li>
+                <li><a href="../">Blog</a></li>
+                <li><a href="../../contacto/">Contacto</a></li>
+                <li><a href="https://wa.me/526671631231" class="btn-primary btn-small">WhatsApp</a></li>
             </ul>
-        </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb container" style="padding: 1rem 1.5rem; margin-top: 80px;">
+        <a href="../../">Inicio</a> » <a href="../">Blog</a> » ¿Cómo Identificar a un Buen Plomero en Culiacán?
     </nav>
 
+    <!-- Article Header -->
     <article class="blog-article">
+        <div class="container" style="max-width: 800px;">
         <header class="article-header">
             <h1>¿Cómo Identificar a un Buen Plomero en Culiacán? 10 Señales Clave [2025]</h1>
             <div class="article-meta">
@@ -517,6 +536,7 @@
                 <li><a href="/servicios/plomero-colonias-culiacan/">Plomero por Colonia en Culiacán: Cobertura Total</a></li>
             </ul>
         </div>
+    </div>
     </article>
 
     <footer style="background: #1e293b; color: white; padding: 2rem 1rem; text-align: center; margin-top: 4rem;">
@@ -525,16 +545,30 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+    // Mobile menu toggle
+    (function(){
+      const navToggle = document.querySelector('.nav-toggle');
+      const navMenu = document.querySelector('.nav-menu');
 
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-                mobileMenuToggle.classList.toggle('active');
+      if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          navToggle.classList.toggle('active');
+        });
+      }
+
+      // GTM pageview tracking
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          try{
+            dataLayer.push({
+              event:'page_view',
+              page:location.pathname
             });
-        }
+          }catch(e){}
+        });
+      });
+    })();
     </script>
 </body>
 </html>
