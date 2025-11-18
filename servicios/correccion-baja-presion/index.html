@@ -43,47 +43,96 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Corrección de Baja Presión de Agua",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Plomero Culiacán Pro",
-        "image": "https://plomeroculiacanpro.mx/assets/images/correccion-baja-presion-bomba-800w.webp",
-        "@id": "https://plomeroculiacanpro.mx",
-        "url": "https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/",
-        "telephone": "+526671631231",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Culiacán",
-          "addressRegion": "Sinaloa",
-          "addressCountry": "MX"
+      "@graph": [
+        {
+          "@type": "Service",
+          "serviceType": "Corrección de Baja Presión de Agua",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Plomero Culiacán Pro",
+            "image": "https://plomeroculiacanpro.mx/assets/images/correccion-baja-presion-bomba-800w.webp",
+            "@id": "https://plomeroculiacanpro.mx",
+            "url": "https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/",
+            "telephone": "+526671631231",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Culiacán",
+              "addressRegion": "Sinaloa",
+              "addressCountry": "MX"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 24.8090556,
+              "longitude": -107.3940556
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            },
+            "sameAs": [
+              "https://www.facebook.com/plomeroculiacanpro",
+              "https://www.instagram.com/plomeroculiacanpro"
+            ]
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán",
+            "containedIn": {
+              "@type": "State",
+              "name": "Sinaloa"
+            }
+          },
+          "description": "Diagnóstico y corrección profesional de problemas de baja presión de agua: bombas presurizadoras, limpieza de tuberías, válvulas reguladoras."
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 24.8090556,
-          "longitude": -107.3940556
-        },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-          "opens": "00:00",
-          "closes": "23:59"
-        },
-        "sameAs": [
-          "https://www.facebook.com/plomeroculiacanpro",
-          "https://www.instagram.com/plomeroculiacanpro"
-        ]
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta instalar una bomba presurizadora en Culiacán?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El costo de una bomba presurizadora varía según el tipo: bomba básica para casa chica $3,500-$6,000 instalada, bomba para 2-3 pisos $6,000-$12,000, sistema hidroneumático completo $15,000-$35,000. El precio incluye la bomba, instalación profesional, válvula by-pass, conexiones certificadas y garantía de 12 meses en instalación."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda la instalación de una bomba de presión?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La instalación de una bomba presurizadora básica toma 2-4 horas en promedio. Incluye montaje de la bomba, instalación de by-pass, conexiones eléctricas, tubería de entrada/salida y pruebas de funcionamiento. Un sistema hidroneumático puede tomar 4-8 horas por su mayor complejidad. Realizamos la instalación el mismo día en la mayoría de casos."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué garantía ofrecen en bombas presurizadoras?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ofrecemos 12 meses de garantía en la instalación (mano de obra, tuberías, válvulas y conexiones). La bomba incluye garantía del fabricante de 12-24 meses según la marca: Grundfos, Altamira, Truper Industrial. La garantía cubre cualquier problema relacionado con la instalación o defectos de fabricación. Todo se entrega por escrito en tu ticket de servicio."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Una bomba presurizadora gasta mucha electricidad?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No, el consumo es moderado. Una bomba presurizadora moderna consume entre 100-400 watts y solo funciona cuando abres una llave (1-3 minutos en promedio). El gasto mensual estimado es $50-$150 pesos en electricidad, dependiendo del uso. El beneficio de tener buena presión de agua en toda la casa supera ampliamente este costo mínimo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué área de Culiacán cubren para instalación de bombas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Damos servicio de instalación de bombas presurizadoras en toda la ciudad de Culiacán y zona conurbada: Las Quintas, Tres Ríos, Chapultepec, La Campiña, Guadalupe, Centro, Barrancos, Stanza Toscana, Alturas del Sur y todas las colonias. Sin costo adicional de traslado dentro de Culiacán. Llegamos en 30-60 minutos con diagnóstico gratuito incluido si contratas el servicio."
+              }
+            }
+          ]
         }
-      },
-      "description": "Diagnóstico y corrección profesional de problemas de baja presión de agua: bombas presurizadoras, limpieza de tuberías, válvulas reguladoras."
+      ]
     }
     </script>
 

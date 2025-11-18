@@ -54,7 +54,141 @@
 
 <!-- seo:jsonld plumber v2 -->
 <!-- JSON-LD base (1 línea c/u): Plumber + WebSite + Breadcrumbs -->
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Plomero Culiacán Pro","url":"https://plomeroculiacanpro.mx/","logo":"https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://plomeroculiacanpro.mx/"},{"@type":"ListItem","position":2,"name":"Plomero en colonias","item":"https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/"}]},{"@type":"HomeAndConstructionBusiness","@id":"https://plomeroculiacanpro.mx/#business","name":"Plomero Culiacán Pro","url":"https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/","telephone":"+52 667 163 1231","address":{"@type":"PostalAddress","addressLocality":"Culiacán","addressRegion":"Sinaloa","addressCountry":"MX"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"20:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday","Sunday"],"opens":"08:00","closes":"18:00"}],"areaServed":{"@type":"City","name":"Culiacán","addressCountry":"MX"},"sameAs":["https://www.facebook.com/plomeroculiacanpro","https://www.instagram.com/plomeroculiacanpro","https://maps.google.com/?q=Plomero+Culiacán+Pro"],"logo":"https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg","priceRange":"$$"}]}</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebSite",
+      "name":"Plomero Culiacán Pro",
+      "url":"https://plomeroculiacanpro.mx/",
+      "logo":"https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
+    },
+    {
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {
+          "@type":"ListItem",
+          "position":1,
+          "name":"Inicio",
+          "item":"https://plomeroculiacanpro.mx/"
+        },
+        {
+          "@type":"ListItem",
+          "position":2,
+          "name":"Plomero en colonias",
+          "item":"https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/"
+        }
+      ]
+    },
+    {
+      "@type":"HomeAndConstructionBusiness",
+      "@id":"https://plomeroculiacanpro.mx/#business",
+      "name":"Plomero Culiacán Pro",
+      "url":"https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/",
+      "telephone":"+52 667 163 1231",
+      "address":{
+        "@type":"PostalAddress",
+        "addressLocality":"Culiacán",
+        "addressRegion":"Sinaloa",
+        "addressCountry":"MX"
+      },
+      "openingHoursSpecification":[
+        {
+          "@type":"OpeningHoursSpecification",
+          "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens":"08:00",
+          "closes":"20:00"
+        },
+        {
+          "@type":"OpeningHoursSpecification",
+          "dayOfWeek":["Saturday","Sunday"],
+          "opens":"08:00",
+          "closes":"18:00"
+        }
+      ],
+      "areaServed":{
+        "@type":"City",
+        "name":"Culiacán",
+        "addressCountry":"MX"
+      },
+      "sameAs":[
+        "https://www.facebook.com/plomeroculiacanpro",
+        "https://www.instagram.com/plomeroculiacanpro",
+        "https://maps.google.com/?q=Plomero+Culiacán+Pro"
+      ],
+      "logo":"https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
+      "priceRange":"$$"
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Plomería en Colonias de Culiacán",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Plomero Culiacán Pro",
+        "@id": "https://plomeroculiacanpro.mx",
+        "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/",
+        "telephone": "+526671631231",
+        "priceRange": "$$"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Culiacán",
+        "containedIn": {
+          "@type": "State",
+          "name": "Sinaloa"
+        }
+      },
+      "description": "Servicio de plomería en todas las colonias de Culiacán. Conocemos las particularidades de cada zona: sistemas antiguos del centro, fraccionamientos modernos, problemas de presión."
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿En qué colonias de Culiacán dan servicio de plomería?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Damos servicio en todas las colonias de Culiacán: Zona Norte (Las Quintas, Tres Ríos, Montebello, Villa Verde, Valle Alto, Guadalupe), Zona Centro (Chapultepec, Centro, Rosales, Miguel Alemán), Zona Sur (La Campiña, Barrancos, Stanza Toscana, Alturas del Sur, Terranova, Chulavista), Zona Este (Infonavit Humaya, Los Pinos, Alameda) y Zona Oeste (Pradera Dorada, Villa Universidad). Sin costo adicional de traslado."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Conocen las particularidades de cada colonia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, tenemos más de 15 años trabajando en Culiacán y conocemos las particularidades de cada zona: sistemas antiguos de drenaje en colonias del Centro que requieren técnicas especiales, fraccionamientos nuevos como Tres Ríos con instalaciones modernas, residencias en Las Quintas con sistemas de alta presión, problemas comunes de baja presión en zonas altas de La Campiña, y experiencia con accesos controlados en fraccionamientos cerrados."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo tardan en llegar a mi colonia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestro tiempo promedio de llegada es 30-60 minutos en toda la ciudad de Culiacán, sin importar la colonia o fraccionamiento. Conocemos bien las calles y rutas de cada zona, lo que nos permite llegar rápidamente. Te confirmamos el tiempo exacto de llegada al momento de contactarnos por WhatsApp. En colonias del norte como Las Quintas y Tres Ríos podemos llegar incluso más rápido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cobran extra por ir a ciertas colonias?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, NO cobramos costo adicional por traslado dentro de Culiacán, sin importar en qué colonia o fraccionamiento estés ubicado. El precio que cotizamos incluye la visita, diagnóstico, mano de obra, materiales y garantía. Solo pagas por el servicio de plomería realizado. En zonas muy alejadas fuera de Culiacán (más de 15km del centro) puede aplicar cargo mínimo de $200-$500, pero te lo informamos antes de agendar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Trabajan en fraccionamientos cerrados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, tenemos amplia experiencia trabajando en fraccionamientos cerrados de Culiacán como Las Quintas, Tres Ríos, Stanza Toscana, Villa Verde y otros. Conocemos los protocolos de acceso, casetas de vigilancia y normativas de cada fraccionamiento. Solo necesitamos que nos proporciones tu nombre completo, número de casa y autorices nuestro ingreso con la caseta. Llegamos identificados profesionalmente y respetamos las reglas de cada fraccionamiento."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 </head>
 <body>

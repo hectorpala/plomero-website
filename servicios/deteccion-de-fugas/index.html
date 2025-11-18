@@ -43,47 +43,96 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Detección de Fugas de Agua y Gas",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Plomero Culiacán Pro",
-        "image": "https://plomeroculiacanpro.mx/assets/images/deteccion-fugas-termica-800w.webp",
-        "@id": "https://plomeroculiacanpro.mx",
-        "url": "https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/",
-        "telephone": "+526671631231",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Culiacán",
-          "addressRegion": "Sinaloa",
-          "addressCountry": "MX"
+      "@graph": [
+        {
+          "@type": "Service",
+          "serviceType": "Detección de Fugas de Agua y Gas",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Plomero Culiacán Pro",
+            "image": "https://plomeroculiacanpro.mx/assets/images/deteccion-fugas-termica-800w.webp",
+            "@id": "https://plomeroculiacanpro.mx",
+            "url": "https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/",
+            "telephone": "+526671631231",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Culiacán",
+              "addressRegion": "Sinaloa",
+              "addressCountry": "MX"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 24.8090556,
+              "longitude": -107.3940556
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            },
+            "sameAs": [
+              "https://www.facebook.com/plomeroculiacanpro",
+              "https://www.instagram.com/plomeroculiacanpro"
+            ]
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán",
+            "containedIn": {
+              "@type": "State",
+              "name": "Sinaloa"
+            }
+          },
+          "description": "Detección profesional de fugas de agua y gas con equipo especializado: geófono acústico, cámara termográfica, detector electrónico de gas."
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 24.8090556,
-          "longitude": -107.3940556
-        },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-          "opens": "00:00",
-          "closes": "23:59"
-        },
-        "sameAs": [
-          "https://www.facebook.com/plomeroculiacanpro",
-          "https://www.instagram.com/plomeroculiacanpro"
-        ]
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta el servicio de detección de fugas en Culiacán?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El costo del servicio de detección varía según el equipo utilizado: detección básica con geófono $800-$1,500, detección con cámara termográfica $1,500-$2,500, detección de fugas de gas $600-$1,200. Si decides reparar la fuga con nosotros, el costo de la detección se descuenta del total de la reparación. Incluye diagnóstico completo, localización precisa y reporte detallado."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué tan precisa es la detección con equipo especializado?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nuestro equipo de detección es altamente preciso: geófono acústico con precisión de 10-30cm, cámara termográfica que muestra el área exacta con diferencia de temperatura, detector de gas que señala la concentración máxima de fuga. En el 90% de los casos encontramos la fuga en la primera visita sin necesidad de romper a ciegas. Solo accedemos al punto exacto después de localizarlo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda la detección de una fuga?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El tiempo de detección depende de la complejidad: detección básica en casa pequeña toma 30 minutos a 1 hora, casos complejos (casa grande, tubería profunda, múltiples puntos) pueden tomar 1.5-3 horas. Te damos un estimado al llegar según las características de tu propiedad. Incluye inspección visual, medición con equipo especializado y marcado del punto exacto de la fuga."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Tienen que romper para detectar la fuga?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No, la detección es completamente NO invasiva. Utilizamos tecnología especializada (geófono, termografía, detector de gas) que localiza fugas sin romper nada. Solo se realiza demolición controlada después de ubicar el punto exacto Y únicamente si autorizas la reparación. Primero detectamos, luego cotizamos la reparación, y solo entonces procedemos si aceptas. Esto ahorra tiempo, dinero y daños innecesarios."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué áreas de Culiacán cubren para detección de fugas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ofrecemos servicio de detección de fugas en toda la ciudad de Culiacán y zona conurbada: Las Quintas, Tres Ríos, Chapultepec, La Campiña, Guadalupe, Centro, Barrancos, Stanza Toscana, Alturas del Sur y todas las colonias. Contamos con equipo móvil especializado disponible 24/7 para emergencias. Sin costo adicional de traslado dentro de Culiacán. Tiempo de llegada promedio 30-60 minutos."
+              }
+            }
+          ]
         }
-      },
-      "description": "Detección profesional de fugas de agua y gas con equipo especializado: geófono acústico, cámara termográfica, detector electrónico de gas."
+      ]
     }
     </script>
 
