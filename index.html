@@ -1050,43 +1050,45 @@ window.dataLayer = window.dataLayer || [];
         });
     </script>
 
-<!-- CTA fijo con tracking -->
-<style>
-  .cta-bar{position:fixed;right:16px;bottom:16px;display:flex;gap:10px;z-index:9999}
-  .cta-btn{font:600 15px/1.1 system-ui,-apple-system,Segoe UI,Roboto; padding:12px 14px;border-radius:12px;color:#fff;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.15)}
-  .cta-wa{background:#25D366}
-  .cta-tel{background:#1E40AF}
-</style>
+<!-- CTA fijo con tracking (progressive enhancement: funciona sin JS) -->
 <div class="cta-bar" aria-label="Contacto rápido">
-  <a id="cta-whatsapp" class="cta-btn cta-wa" href="#" rel="noopener">💬 WhatsApp</a>
-  <a id="cta-llamar"  class="cta-btn cta-tel" href="#" rel="noopener">📞 Llamar</a>
+  <a id="cta-whatsapp" class="cta-btn cta-wa" href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20en%20Culiac%C3%A1n" target="_blank" rel="noopener">💬 WhatsApp</a>
+  <a id="cta-llamar" class="cta-btn cta-tel" href="tel:+526671631231">📞 Llamar</a>
 </div>
 <script>
 (function(){
-  // Config
-  var WA="526671631231", TEL="+52 667 163 1231", PATH=location.pathname;
-  // Enlaces con UTM
-  var waHref="https://wa.me/"+WA+"?text="+encodeURIComponent("Hola, necesito un plomero en Culiacán")+
-             "&utm_source=site&utm_medium=cta&utm_campaign=whatsapp";
-  var telHref="tel:"+TEL.replace(/\s+/g,'');
-  // Pinta hrefs
-  var wa=document.getElementById("cta-whatsapp"); if(wa) wa.href=waHref;
-  var tl=document.getElementById("cta-llamar");   if(tl) tl.href=telHref;
+  // Progressive Enhancement: hrefs ya funcionan, JS solo agrega tracking
+  var PATH = location.pathname;
+  var wa = document.getElementById("cta-whatsapp");
+  var tl = document.getElementById("cta-llamar");
 
-  // Tracking
-  window.dataLayer=window.dataLayer||[];
-  function pushEvt(type,label){try{window.dataLayer.push({event:"cta_click",cta_type:type,cta_label:label,page:PATH});}catch(e){}}
-  if(wa){ wa.addEventListener("click", function(){ pushEvt("whatsapp","cta_floating"); }); }
-  if(tl){ tl.addEventListener("click", function(){ pushEvt("llamar","cta_floating"); }); }
+  // Tracking de clics en GA4 via dataLayer
+  window.dataLayer = window.dataLayer || [];
+  function pushEvt(type, label) {
+    try {
+      window.dataLayer.push({
+        event: "cta_click",
+        cta_type: type,
+        cta_label: label,
+        page: PATH
+      });
+    } catch(e) {}
+  }
+
+  if (wa) {
+    wa.addEventListener("click", function() {
+      pushEvt("whatsapp", "cta_floating");
+    });
+  }
+  if (tl) {
+    tl.addEventListener("click", function() {
+      pushEvt("llamar", "cta_floating");
+    });
+  }
 })();
 </script>
 <!-- mini footer nav -->
 <nav class="site-mini-nav" aria-label="Navegación del sitio">
-  <style>
-    .site-mini-nav ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:12px}
-    .site-mini-nav a{color:#1e40af;text-decoration:none;font:500 14px/1.2 system-ui,-apple-system,Segoe UI,Roboto}
-    .site-mini-nav a:hover{text-decoration:underline}
-  </style>
   <ul>
     <li><a href="/">Inicio</a></li>
     <li><a href="/servicios/plomero-cerca-de-mi/">Cerca de mí</a></li>
