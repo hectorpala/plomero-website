@@ -43,47 +43,96 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Destape de Drenajes y Coladeras",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Plomero Culiacán Pro",
-        "image": "https://plomeroculiacanpro.mx/assets/images/destapandodrenaje-800w.webp",
-        "@id": "https://plomeroculiacanpro.mx",
-        "url": "https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/",
-        "telephone": "+526671631231",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Culiacán",
-          "addressRegion": "Sinaloa",
-          "addressCountry": "MX"
+      "@graph": [
+        {
+          "@type": "Service",
+          "serviceType": "Destape de Drenajes y Coladeras",
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Plomero Culiacán Pro",
+            "image": "https://plomeroculiacanpro.mx/assets/images/destapandodrenaje-800w.webp",
+            "@id": "https://plomeroculiacanpro.mx",
+            "url": "https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/",
+            "telephone": "+526671631231",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Culiacán",
+              "addressRegion": "Sinaloa",
+              "addressCountry": "MX"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 24.8090556,
+              "longitude": -107.3940556
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            },
+            "sameAs": [
+              "https://www.facebook.com/plomeroculiacanpro",
+              "https://www.instagram.com/plomeroculiacanpro"
+            ]
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán",
+            "containedIn": {
+              "@type": "State",
+              "name": "Sinaloa"
+            }
+          },
+          "description": "Destape profesional de drenajes y coladeras en Culiacán: manual y con maquinaria especializada. Limpieza completa del sistema."
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 24.8090556,
-          "longitude": -107.3940556
-        },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-          "opens": "00:00",
-          "closes": "23:59"
-        },
-        "sameAs": [
-          "https://www.facebook.com/plomeroculiacanpro",
-          "https://www.instagram.com/plomeroculiacanpro"
-        ]
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Culiacán",
-        "containedIn": {
-          "@type": "State",
-          "name": "Sinaloa"
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué métodos usan para destapar drenajes en Culiacán?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Utilizamos múltiples métodos profesionales: sonda rotativa motorizada para obstrucciones profundas, hidro-jet a alta presión para limpieza completa de tuberías, y cámaras de inspección para diagnosticar el problema exacto. Para drenajes de cocina usamos equipo manual especializado. Cada método se selecciona según el tipo y severidad de la obstrucción."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda el destape de un drenaje?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "La mayoría de destapes en Culiacán se completan en 30-90 minutos. Obstrucciones simples en lavabos o regaderas toman 15-30 minutos. Drenajes de cocina con grasa acumulada requieren 45-60 minutos. Obstrucciones severas en línea principal o con raíces pueden tomar 2-3 horas. Ofrecemos servicio de emergencia con llegada el mismo día."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta el destape de drenajes?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Los precios varían según el tipo de obstrucción: lavabo o regadera desde $600-$1,200, drenaje de cocina desde $800-$1,500, WC tapado desde $700-$1,400, y línea principal desde $1,500-$3,500. Incluimos diagnóstico gratuito y cotización clara por WhatsApp. El servicio incluye limpieza, eliminación de residuos y garantía."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Pueden eliminar raíces de árboles en las tuberías?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, eliminamos raíces de árboles que invaden tuberías de drenaje usando sonda rotativa con cabezal especial cortador de raíces. Primero inspeccionamos con cámara para localizar la invasión exacta, luego cortamos las raíces y limpiamos completamente la tubería. Recomendamos tratamiento preventivo cada 6-12 meses en áreas con vegetación cercana a las tuberías."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Atienden emergencias de drenajes tapados las 24 horas?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, atendemos emergencias de drenajes tapados 24/7 en Culiacán. Respondemos en 30-60 minutos en colonias como Tres Ríos, Las Quintas y Alturas del Sur. Contáctanos por WhatsApp al 667 163 1231 para atención inmediata. Trabajamos madrugadas, fines de semana y días festivos para resolver tu emergencia rápidamente."
+              }
+            }
+          ]
         }
-      },
-      "description": "Destape profesional de drenajes y coladeras en Culiacán: manual y con maquinaria especializada. Limpieza completa del sistema."
+      ]
     }
     </script>
 
