@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Cómo Identificar a un Buen Plomero en Culiacán? 10 Señales [2025]</title>
     <meta name="description" content="Aprende a identificar un buen plomero en Culiacán: 10 señales clave, qué preguntar antes de contratar, cómo verificar experiencia y evitar estafas. Guía completa 2025.">
-    <meta name="x-build" content="2025-11-18T03:20:00Z">
+    <meta name="x-build" content="2025-11-18T04:30:00Z">
 
     <!-- Favicons -->
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
@@ -36,24 +36,6 @@
     <meta name="twitter:title" content="¿Cómo Identificar a un Buen Plomero en Culiacán? 10 Señales">
     <meta name="twitter:description" content="Guía completa para contratar plomeros confiables en Culiacán: 10 señales, verificación de experiencia y red flags a evitar.">
     <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/plomero-servicio-800w.webp">
-
-    <!-- Google Tag Manager -->
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    (function() {
-      var loadGTM = function() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
-        document.head.appendChild(script);
-      };
-      if (window.requestIdleCallback) {
-        requestIdleCallback(loadGTM);
-      } else {
-        setTimeout(loadGTM, 1);
-      }
-    })();
-    </script>
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
@@ -328,6 +310,23 @@
     </style>
 </head>
 <body>
+    <!-- Google Tag Manager -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    (function() {
+      var loadGTM = function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+        document.head.appendChild(script);
+      };
+      if (window.requestIdleCallback) {
+        requestIdleCallback(loadGTM);
+      } else {
+        setTimeout(loadGTM, 1);
+      }
+    })();
+    </script>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -582,6 +581,12 @@
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Servicio profesional de plomería en Culiacán, Sinaloa</p>
     </footer>
 
+    <!-- CTA Flotante (WhatsApp + Llamar) -->
+    <div class="cta-bar" aria-label="Contacto rápido">
+      <a id="cta-whatsapp" class="cta-btn cta-wa" href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20en%20Culiac%C3%A1n" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a id="cta-llamar" class="cta-btn cta-tel" href="tel:+526671631231">📞 Llamar</a>
+    </div>
+
     <script>
     // Mobile menu toggle
     (function(){
@@ -604,6 +609,64 @@
               page:location.pathname
             });
           }catch(e){}
+        });
+      });
+    })();
+    </script>
+
+    <!-- CTA Flotante Tracking -->
+    <script>
+    (function(){
+      var PATH = location.pathname;
+      var wa = document.getElementById("cta-whatsapp");
+      var tl = document.getElementById("cta-llamar");
+
+      window.dataLayer = window.dataLayer || [];
+      function pushEvt(type, label) {
+        try {
+          window.dataLayer.push({
+            event: "cta_click",
+            cta_type: type,
+            cta_label: label,
+            page: PATH
+          });
+        } catch(e) {}
+      }
+
+      if (wa) {
+        wa.addEventListener("click", function() {
+          pushEvt("whatsapp", "cta_floating");
+        });
+      }
+      if (tl) {
+        tl.addEventListener("click", function() {
+          pushEvt("llamar", "cta_floating");
+        });
+      }
+    })();
+    </script>
+
+    <!-- Scroll Depth Tracking -->
+    <script>
+    (function() {
+      var scrollDepths = [25, 50, 75, 90];
+      var scrollTracked = {};
+
+      window.addEventListener('scroll', function() {
+        var scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+        scrollDepths.forEach(function(depth) {
+          if (scrollPercent >= depth && !scrollTracked[depth]) {
+            scrollTracked[depth] = true;
+            try {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                'event': 'scroll_depth',
+                'scroll_percentage': depth,
+                'page_location': window.location.pathname
+              });
+            } catch(e) {}
+          }
         });
       });
     })();
