@@ -940,6 +940,7 @@ window.dataLayer = window.dataLayer || [];
                 </div>
                 <div class="contact-form">
                     <h3>Solicita una Cotización</h3>
+                    <!-- Progressive Enhancement: form works without JS via native action, JS enhances with tracking -->
                     <form id="contact-form" action="https://wa.me/526671631231" method="get" target="_blank">
                         <input type="text" name="nombre" placeholder="Nombre" required>
                         <input type="tel" name="telefono" placeholder="Teléfono" required>
@@ -999,23 +1000,52 @@ window.dataLayer = window.dataLayer || [];
             });
         });
         
-        // WhatsApp form submission
+        // WhatsApp form submission with GA4 tracking
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const formData = new FormData(this);
             const nombre = formData.get('nombre');
             const telefono = formData.get('telefono');
             const email = formData.get('email');
             const mensaje = formData.get('mensaje');
-            
+
             const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n\n` +
                                   `Nombre: ${nombre}\n` +
                                   `Teléfono: ${telefono}\n` +
                                   `Email: ${email}\n` +
                                   `Mensaje: ${mensaje}`;
-            
+
             const whatsappURL = `https://wa.me/526671631231?text=${encodeURIComponent(whatsappMessage)}`;
+
+            // Track lead submission in GA4 via GTM dataLayer
+            if (window.dataLayer) {
+                window.dataLayer.push({
+                    'event': 'generate_lead',
+                    'form_name': 'contact_form_homepage',
+                    'method': 'whatsapp',
+                    'value': 1,
+                    'currency': 'MXN'
+                });
+            }
+
+            // Store lead data in localStorage for backup
+            try {
+                const leadData = {
+                    timestamp: new Date().toISOString(),
+                    nombre: nombre,
+                    telefono: telefono,
+                    email: email,
+                    mensaje: mensaje,
+                    source: 'homepage_form'
+                };
+                const leads = JSON.parse(localStorage.getItem('plomero_leads') || '[]');
+                leads.push(leadData);
+                localStorage.setItem('plomero_leads', JSON.stringify(leads));
+            } catch (e) {
+                console.error('Error storing lead:', e);
+            }
+
             window.open(whatsappURL, '_blank');
         });
     </script>
