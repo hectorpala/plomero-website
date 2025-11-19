@@ -7,6 +7,123 @@
     <meta name="description" content="Aprende a detectar fugas de agua en tu casa con métodos sencillos. Ahorra hasta 40% en tu recibo de agua detectando fugas a tiempo. Guía paso a paso.">
     <link rel="canonical" href="https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/">
     <link rel="stylesheet" href="../../styles.css">
+    <meta name="x-build" content="2025-11-19T08:30:00Z">
+
+    <!-- Hybrid Approach Styles -->
+    <style>
+        /* Hero Compact */
+        .hero-compact {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem 1rem;
+        }
+        .hero-rating {
+            display: inline-block;
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+        }
+
+        /* Benefits Grid */
+        .benefits-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .benefit-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* CTA Emergencias */
+        .cta-emergencias {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 1.5rem;
+            margin: 3rem auto;
+            border-radius: 8px;
+            max-width: 900px;
+        }
+
+        /* Testimonios */
+        .testimonios-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 2rem 1rem;
+            background: #f0fdf4;
+            border-radius: 12px;
+        }
+
+        /* Contact Form */
+        .contact-form-section {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem auto;
+            max-width: 900px;
+        }
+        .contact-form-section form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .contact-form-section input,
+        .contact-form-section textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .contact-form-section textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .contact-form-section button {
+            width: 100%;
+            background: #0284c7;
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .contact-form-section button:hover {
+            background: #0369a1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-compact h1 {
+                font-size: 1.75rem;
+            }
+            .benefits-compact {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.75rem;
+            }
+            .benefit-card {
+                padding: 1rem;
+            }
+        }
+    </style>
 
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
@@ -23,113 +140,167 @@
     <meta name="twitter:description" content="Aprende a detectar fugas de agua con métodos sencillos. Ahorra hasta 40% en tu recibo." />
     <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/fuga-tuberia-rota-800w.webp" />
 
-    <!-- HowTo Schema para Featured Snippets -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "Cómo Detectar Fugas de Agua en Casa",
-      "description": "Aprende a detectar fugas de agua en tu casa con métodos sencillos. Ahorra hasta 40% en tu recibo de agua detectando fugas a tiempo.",
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://plomeroculiacanpro.mx/assets/images/fuga-tuberia-rota-1200w.webp",
-        "height": "1200",
-        "width": "1200"
-      },
-      "totalTime": "PT30M",
-      "estimatedCost": {
-        "@type": "MonetaryAmount",
-        "currency": "MXN",
-        "value": "0"
-      },
-      "supply": [
+      "@graph": [
         {
-          "@type": "HowToSupply",
-          "name": "Colorante vegetal o tableta de color"
-        },
-        {
-          "@type": "HowToSupply",
-          "name": "Libreta y pluma para anotar lecturas"
-        }
-      ],
-      "tool": [
-        {
-          "@type": "HowToTool",
-          "name": "Medidor de agua de tu casa"
-        }
-      ],
-      "step": [
-        {
-          "@type": "HowToStep",
-          "name": "Prueba del medidor de agua",
-          "text": "Cierra todas las llaves de tu casa, anota la lectura del medidor, espera 30 minutos sin usar agua y revisa el medidor nuevamente. Si el medidor cambió aunque no usaste agua, tienes una fuga.",
-          "image": "https://plomeroculiacanpro.mx/assets/images/fuga-tuberia-rota-800w.webp",
-          "url": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/#metodo-1",
-          "itemListElement": [
+          "@type": "HowTo",
+          "name": "Cómo Detectar Fugas de Agua en Casa",
+          "description": "Aprende a detectar fugas de agua en tu casa con métodos sencillos. Ahorra hasta 40% en tu recibo de agua detectando fugas a tiempo.",
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://plomeroculiacanpro.mx/assets/images/fuga-tuberia-rota-1200w.webp",
+            "height": "1200",
+            "width": "1200"
+          },
+          "totalTime": "PT30M",
+          "estimatedCost": {
+            "@type": "MonetaryAmount",
+            "currency": "MXN",
+            "value": "0"
+          },
+          "supply": [
             {
-              "@type": "HowToDirection",
-              "text": "Cierra todas las llaves de tu casa (lavabos, regaderas, WC, lavadora, etc.)"
+              "@type": "HowToSupply",
+              "name": "Colorante vegetal o tableta de color"
             },
             {
-              "@type": "HowToDirection",
-              "text": "Anota la lectura del medidor antes de empezar"
+              "@type": "HowToSupply",
+              "name": "Libreta y pluma para anotar lecturas"
+            }
+          ],
+          "tool": [
+            {
+              "@type": "HowToTool",
+              "name": "Medidor de agua de tu casa"
+            }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Prueba del medidor de agua",
+              "text": "Cierra todas las llaves de tu casa, anota la lectura del medidor, espera 30 minutos sin usar agua y revisa el medidor nuevamente. Si el medidor cambió aunque no usaste agua, tienes una fuga.",
+              "image": "https://plomeroculiacanpro.mx/assets/images/fuga-tuberia-rota-800w.webp",
+              "url": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/#metodo-1",
+              "itemListElement": [
+                {
+                  "@type": "HowToDirection",
+                  "text": "Cierra todas las llaves de tu casa (lavabos, regaderas, WC, lavadora, etc.)"
+                },
+                {
+                  "@type": "HowToDirection",
+                  "text": "Anota la lectura del medidor antes de empezar"
+                },
+                {
+                  "@type": "HowToDirection",
+                  "text": "Espera 30 minutos sin usar agua"
+                },
+                {
+                  "@type": "HowToDirection",
+                  "text": "Revisa el medidor nuevamente. Si cambió, tienes una fuga."
+                }
+              ]
             },
             {
-              "@type": "HowToDirection",
-              "text": "Espera 30 minutos sin usar agua"
+              "@type": "HowToStep",
+              "name": "Prueba del WC con colorante",
+              "text": "Agrega 10 gotas de colorante vegetal al tanque del WC, espera 15 minutos sin jalar la cadena y revisa si apareció color en la taza. Si apareció color, el flapper necesita cambiarse.",
+              "image": "https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp",
+              "url": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/#metodo-2",
+              "itemListElement": [
+                {
+                  "@type": "HowToDirection",
+                  "text": "Agrega 10 gotas de colorante vegetal (o una tableta de color) al tanque del WC"
+                },
+                {
+                  "@type": "HowToDirection",
+                  "text": "Espera 15 minutos sin jalar la cadena"
+                },
+                {
+                  "@type": "HowToDirection",
+                  "text": "Revisa si apareció color en la taza del WC. Si apareció, el flapper está dejando pasar agua."
+                }
+              ]
             },
             {
-              "@type": "HowToDirection",
-              "text": "Revisa el medidor nuevamente. Si cambió, tienes una fuga."
+              "@type": "HowToStep",
+              "name": "Revisión visual de áreas comunes",
+              "text": "Revisa debajo de lavabos, base del WC, conexiones de regaderas en baños; debajo del fregadero en cocina; y llaves de jardín en exteriores. Busca manchas de agua, humedad o charcos.",
+              "image": "https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp",
+              "url": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/#metodo-3",
+              "itemListElement": [
+                {
+                  "@type": "HowToDirection",
+                  "text": "En baños: revisa debajo del lavabo, base del WC, conexiones de la regadera y sello de la tina"
+                },
+                {
+                  "@type": "HowToDirection",
+                  "text": "En cocina: revisa debajo del fregadero, conexión de la llave y manguera del lavavajillas"
+                },
+                {
+                  "@type": "HowToDirection",
+                  "text": "En exteriores: revisa llaves de jardín, zonas de pasto siempre mojadas y charcos sin razón aparente"
+                }
+              ]
             }
           ]
         },
         {
-          "@type": "HowToStep",
-          "name": "Prueba del WC con colorante",
-          "text": "Agrega 10 gotas de colorante vegetal al tanque del WC, espera 15 minutos sin jalar la cadena y revisa si apareció color en la taza. Si apareció color, el flapper necesita cambiarse.",
-          "image": "https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp",
-          "url": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/#metodo-2",
+          "@type": "BreadcrumbList",
           "itemListElement": [
             {
-              "@type": "HowToDirection",
-              "text": "Agrega 10 gotas de colorante vegetal (o una tableta de color) al tanque del WC"
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://plomeroculiacanpro.mx/"
             },
             {
-              "@type": "HowToDirection",
-              "text": "Espera 15 minutos sin jalar la cadena"
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://plomeroculiacanpro.mx/blog/"
             },
             {
-              "@type": "HowToDirection",
-              "text": "Revisa si apareció color en la taza del WC. Si apareció, el flapper está dejando pasar agua."
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Cómo Detectar Fugas de Agua en Casa: Guía Práctica 2024",
+              "item": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/"
             }
           ]
         },
         {
-          "@type": "HowToStep",
-          "name": "Revisión visual de áreas comunes",
-          "text": "Revisa debajo de lavabos, base del WC, conexiones de regaderas en baños; debajo del fregadero en cocina; y llaves de jardín en exteriores. Busca manchas de agua, humedad o charcos.",
-          "image": "https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp",
-          "url": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/#metodo-3",
-          "itemListElement": [
-            {
-              "@type": "HowToDirection",
-              "text": "En baños: revisa debajo del lavabo, base del WC, conexiones de la regadera y sello de la tina"
+          "@type": "Service",
+          "serviceType": "Detección de Fugas de Agua",
+          "provider": {
+            "@type": "HomeAndConstructionBusiness",
+            "name": "Plomero Culiacán Pro",
+            "telephone": "+52-667-163-1231",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Culiacán",
+              "addressRegion": "Sinaloa",
+              "addressCountry": "MX"
             },
-            {
-              "@type": "HowToDirection",
-              "text": "En cocina: revisa debajo del fregadero, conexión de la llave y manguera del lavavajillas"
-            },
-            {
-              "@type": "HowToDirection",
-              "text": "En exteriores: revisa llaves de jardín, zonas de pasto siempre mojadas y charcos sin razón aparente"
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.8",
+              "reviewCount": "150"
             }
-          ]
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "serviceUrl": "https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/"
+          }
         }
       ]
     }
     </script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://plomeroculiacanpro.mx/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://plomeroculiacanpro.mx/blog/"}, {"@type": "ListItem", "position": 3, "name": "Cómo Detectar Fugas de Agua en Casa: Guía Práctica 2024", "item": "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/"}]}</script>
 </head>
 <body>
     <nav class="nav">
@@ -151,6 +322,48 @@
             </div>
         </div>
     </nav>
+
+    <section class="hero-compact container" style="text-align: center; padding: 2rem 1rem; margin: 2rem auto;">
+        <div class="hero-rating" style="display: inline-block; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; margin-bottom: 1rem;">
+            ★★★★★ 4.8/5 (150+ reseñas en Culiacán)
+        </div>
+        <h1 style="font-size: 2rem; margin: 1rem 0; color: #1e293b;">Detección de Fugas de Agua en Culiacán</h1>
+        <p style="font-size: 1.1rem; color: #64748b; margin-bottom: 1.5rem;">Tecnología especializada para localizar fugas sin romper. Diagnóstico preciso en 30-60 minutos.</p>
+        <a href="https://wa.me/526671631231?text=Hola,%20necesito%20ayuda%20para%20detectar%20una%20fuga%20de%20agua"
+           class="cta-button"
+           style="display: inline-block; background: #25D366; color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 0.5rem;"
+           onclick="dataLayer.push({'event': 'cta_click', 'cta_location': 'hero', 'cta_text': 'Cotizar WhatsApp'});">
+            💬 Cotizar por WhatsApp
+        </a>
+        <div style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b;">
+            📞 <a href="tel:+526671631231" style="color: #0284c7; text-decoration: none;">667 163 1231</a> |
+            ✅ Garantía 6 meses |
+            📄 Factura disponible
+        </div>
+    </section>
+
+    <section class="benefits-compact container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem auto; padding: 0 1rem;">
+        <div class="benefit-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+            <h3 style="font-size: 1rem; margin: 0.5rem 0; color: #1e293b;">Llegada Rápida</h3>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0;">30-60 minutos en Culiacán</p>
+        </div>
+        <div class="benefit-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
+            <h3 style="font-size: 1rem; margin: 0.5rem 0; color: #1e293b;">Precio Claro</h3>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0;">Diagnóstico sin costo oculto</p>
+        </div>
+        <div class="benefit-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">✅</div>
+            <h3 style="font-size: 1rem; margin: 0.5rem 0; color: #1e293b;">Garantía Escrita</h3>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0;">6 meses en reparación</p>
+        </div>
+        <div class="benefit-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+            <h3 style="font-size: 1rem; margin: 0.5rem 0; color: #1e293b;">Factura SAT</h3>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0;">Comprobante fiscal disponible</p>
+        </div>
+    </section>
 
     <article class="blog-article">
         <div class="container">
@@ -274,6 +487,16 @@
                     <li>✅ Inspecciona el boiler y sus conexiones</li>
                 </ul>
 
+                <section class="cta-emergencias container" style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 1.5rem; margin: 3rem auto; border-radius: 8px;">
+                    <h3 style="color: #dc2626; margin: 0 0 0.5rem 0; font-size: 1.3rem;">🚨 ¿Fuga de emergencia en Culiacán?</h3>
+                    <p style="margin: 0.5rem 0; color: #1e293b;">Atención 24/7 en Las Quintas, Tres Ríos, Centro, Chapultepec y todas las colonias.</p>
+                    <a href="https://wa.me/526671631231?text=URGENTE:%20Tengo%20una%20fuga%20de%20agua"
+                       style="display: inline-block; background: #dc2626; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin-top: 1rem;"
+                       onclick="dataLayer.push({'event': 'cta_click', 'cta_location': 'emergencia', 'cta_text': 'WhatsApp Urgente'});">
+                        📱 WhatsApp Urgente
+                    </a>
+                </section>
+
                 <h2>Conclusión</h2>
                 <p>Detectar fugas a tiempo puede ahorrarte miles de pesos al año y prevenir daños estructurales graves. La prueba del medidor es el método más confiable y solo te toma 30 minutos.</p>
                 <p>Si encuentras una fuga oculta o no puedes localizar el origen del problema, es momento de llamar a un profesional con equipo de detección especializado.</p>
@@ -284,6 +507,60 @@
                     <a href="https://wa.me/526671631231?text=Hola,%20necesito%20detectar%20una%20fuga" class="btn-primary" target="_blank" rel="noopener">Contactar por WhatsApp</a>
                 </div>
             </div>
+
+            <section class="testimonios-section container" style="margin: 3rem auto; padding: 2rem 1rem; background: #f0fdf4; border-radius: 12px;">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #1e293b;">Lo que dicen nuestros clientes</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <p style="font-style: italic; color: #1e293b; margin-bottom: 1rem;">"Detectaron una fuga oculta en la losa sin romper. Excelente servicio y muy profesionales."</p>
+                        <p style="font-weight: 600; color: #059669; margin: 0;">— Roberto M., Las Quintas</p>
+                        <p style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0 0;">Detección de fugas</p>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <p style="font-style: italic; color: #1e293b; margin-bottom: 1rem;">"Llegaron rápido y localizaron la fuga en menos de 1 hora. Precio justo y trabajo garantizado."</p>
+                        <p style="font-weight: 600; color: #059669; margin: 0;">— Patricia S., Tres Ríos</p>
+                        <p style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0 0;">Reparación de fuga</p>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        <p style="font-style: italic; color: #1e293b; margin-bottom: 1rem;">"Tecnología de punta para detectar fugas. Evitaron romper toda la pared. Muy recomendables."</p>
+                        <p style="font-weight: 600; color: #059669; margin: 0;">— Carlos R., Chapultepec</p>
+                        <p style="font-size: 0.85rem; color: #64748b; margin: 0.25rem 0 0 0;">Detección especializada</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-form-section container" style="background: #f8fafc; padding: 2rem; border-radius: 12px; margin: 3rem auto;">
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: #1e293b;">¿Necesitas detectar una fuga?</h2>
+                <form name="contact-blog-fugas" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="max-width: 500px; margin: 0 auto;">
+                    <input type="hidden" name="form-name" value="contact-blog-fugas">
+                    <input type="hidden" name="bot-field">
+                    <input type="hidden" name="origen" value="blog-detectar-fugas">
+
+                    <div style="margin-bottom: 1rem;">
+                        <label for="nombre" style="display: block; margin-bottom: 0.5rem; color: #1e293b; font-weight: 500;">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem;">
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <label for="telefono" style="display: block; margin-bottom: 0.5rem; color: #1e293b; font-weight: 500;">Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem;">
+                    </div>
+
+                    <div style="margin-bottom: 1rem;">
+                        <label for="colonia" style="display: block; margin-bottom: 0.5rem; color: #1e293b; font-weight: 500;">Colonia:</label>
+                        <input type="text" id="colonia" name="colonia" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem;">
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="mensaje" style="display: block; margin-bottom: 0.5rem; color: #1e293b; font-weight: 500;">Describe tu problema:</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; resize: vertical;"></textarea>
+                    </div>
+
+                    <button type="submit" style="width: 100%; background: #0284c7; color: white; padding: 1rem; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: 600; cursor: pointer;">
+                        Enviar Solicitud
+                    </button>
+                </form>
+            </section>
 
             <footer class="article-footer">
                 <div class="article-navigation">
@@ -309,6 +586,15 @@
                 mobileMenuBtn.classList.toggle('active');
             });
         }
+    </script>
+    <script>
+    document.querySelector('form[name="contact-blog-fugas"]')?.addEventListener('submit', function(e) {
+        dataLayer.push({
+            'event': 'form_submit',
+            'form_name': 'contact-blog-fugas',
+            'form_location': 'blog_detectar_fugas'
+        });
+    });
     </script>
 </body>
 </html>
