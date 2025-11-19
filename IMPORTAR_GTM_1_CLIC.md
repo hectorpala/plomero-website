@@ -14,7 +14,7 @@
 4. Haz clic en tu flujo de datos web (plomeroculiacanpro.mx)
 5. **Copia el "ID de medición"** (formato: `G-XXXXXXXXXX`)
 
-**✅ ANOTA TU ID AQUÍ:** `G-___________________`
+**✅ ANOTA TU ID AQUÍ:** `G-__G-NSV2K9N2ZD_________________`
 
 ---
 
