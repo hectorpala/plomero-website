@@ -82,7 +82,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-19T17:00:00Z" />
+<meta name="x-build" content="2025-11-19T18:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -1528,5 +1528,356 @@ window.dataLayer = window.dataLayer || [];
   });
 })();
 </script>
+
+<!-- Exit-Intent Popup -->
+<div id="exit-intent-popup" class="exit-popup-overlay" style="display:none;">
+    <div class="exit-popup-modal">
+        <button class="exit-popup-close" aria-label="Cerrar">&times;</button>
+
+        <div class="exit-popup-content">
+            <div class="exit-popup-icon">🚨</div>
+            <h2 class="exit-popup-title">¡Espera! ¿Tienes una Emergencia?</h2>
+            <p class="exit-popup-subtitle"><strong>Plomero certificado en Culiacán</strong> disponible 24/7</p>
+
+            <div class="exit-popup-benefits">
+                <div class="exit-benefit">
+                    <span class="exit-benefit-icon">⚡</span>
+                    <span>Llegada en 30-60 min</span>
+                </div>
+                <div class="exit-benefit">
+                    <span class="exit-benefit-icon">✅</span>
+                    <span>Garantía escrita 6 meses</span>
+                </div>
+                <div class="exit-benefit">
+                    <span class="exit-benefit-icon">💰</span>
+                    <span>Precios claros, sin sorpresas</span>
+                </div>
+            </div>
+
+            <div class="exit-popup-rating">
+                <span class="exit-rating-stars">★★★★★</span>
+                <span class="exit-rating-text">4.8/5 (150+ clientes en Culiacán)</span>
+            </div>
+
+            <a href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20urgente%20en%20Culiacán"
+               class="exit-popup-cta"
+               target="_blank"
+               rel="noopener"
+               id="exit-popup-whatsapp">
+                📱 Contactar por WhatsApp Ahora
+            </a>
+
+            <p class="exit-popup-phone">
+                O llama al: <a href="tel:6671631231" id="exit-popup-phone">667-163-1231</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Exit-Intent Popup Styles */
+.exit-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+    backdrop-filter: blur(4px);
+}
+
+.exit-popup-modal {
+    background: white;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    margin: 20px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.4s ease-out;
+}
+
+.exit-popup-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #64748b;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.exit-popup-close:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.exit-popup-content {
+    padding: 2.5rem 2rem;
+    text-align: center;
+}
+
+.exit-popup-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.exit-popup-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.75rem;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+    font-weight: 800;
+}
+
+.exit-popup-subtitle {
+    font-size: 1.125rem;
+    color: #475569;
+    margin-bottom: 1.5rem;
+}
+
+.exit-popup-benefits {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.exit-benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.exit-benefit-icon {
+    font-size: 1.5rem;
+}
+
+.exit-benefit span:last-child {
+    font-size: 0.95rem;
+    color: #334155;
+    font-weight: 500;
+}
+
+.exit-popup-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+    background: #fef3c7;
+    border-radius: 8px;
+}
+
+.exit-rating-stars {
+    color: #f59e0b;
+    font-size: 1.25rem;
+    letter-spacing: 2px;
+}
+
+.exit-rating-text {
+    font-size: 0.9rem;
+    color: #92400e;
+    font-weight: 600;
+}
+
+.exit-popup-cta {
+    display: block;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white;
+    padding: 1.125rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s;
+}
+
+.exit-popup-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+    background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+}
+
+.exit-popup-phone {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin: 0;
+}
+
+.exit-popup-phone a {
+    color: #0066cc;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.exit-popup-phone a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@media (max-width: 640px) {
+    .exit-popup-modal {
+        width: 95%;
+        margin: 10px;
+    }
+
+    .exit-popup-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .exit-popup-title {
+        font-size: 1.5rem;
+    }
+
+    .exit-popup-subtitle {
+        font-size: 1rem;
+    }
+
+    .exit-popup-cta {
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+    }
+}
+</style>
+
+<script>
+(function() {
+    var popup = document.getElementById('exit-intent-popup');
+    var closeBtn = document.querySelector('.exit-popup-close');
+    var whatsappBtn = document.getElementById('exit-popup-whatsapp');
+    var phoneBtn = document.getElementById('exit-popup-phone');
+    var hasShown = localStorage.getItem('exitPopupShown');
+    var exitThreshold = 50; // pixels from top to trigger
+    var isExiting = false;
+
+    // Check if popup should be shown (only once per session)
+    if (hasShown) return;
+
+    // Detect exit intent (mouse leaving viewport towards top)
+    document.addEventListener('mouseleave', function(e) {
+        if (e.clientY <= exitThreshold && !isExiting) {
+            isExiting = true;
+            showPopup();
+        }
+    });
+
+    function showPopup() {
+        popup.style.display = 'flex';
+        localStorage.setItem('exitPopupShown', 'true');
+
+        // Track popup shown event
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'exit_intent_shown',
+                'page_location': window.location.pathname
+            });
+        } catch(e) {}
+    }
+
+    function hidePopup() {
+        popup.style.display = 'none';
+
+        // Track popup close event
+        try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'exit_intent_closed',
+                'page_location': window.location.pathname
+            });
+        } catch(e) {}
+    }
+
+    // Close popup on X button click
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            hidePopup();
+        });
+    }
+
+    // Close popup on overlay click
+    popup.addEventListener('click', function(e) {
+        if (e.target === popup) {
+            hidePopup();
+        }
+    });
+
+    // Close popup on ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.style.display === 'flex') {
+            hidePopup();
+        }
+    });
+
+    // Track WhatsApp CTA click
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function() {
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'exit_intent_whatsapp_click',
+                    'page_location': window.location.pathname
+                });
+            } catch(e) {}
+        });
+    }
+
+    // Track Phone CTA click
+    if (phoneBtn) {
+        phoneBtn.addEventListener('click', function() {
+            try {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'exit_intent_phone_click',
+                    'page_location': window.location.pathname
+                });
+            } catch(e) {}
+        });
+    }
+})();
+</script>
+
 </body>
 </html>
