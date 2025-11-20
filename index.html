@@ -15,7 +15,45 @@
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <link rel="preload" href="/assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
 
-    <link rel="stylesheet" href="styles.min.css">
+    <!-- Critical CSS Inline for LCP optimization -->
+    <style>
+        @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('assets/fonts/inter-400.woff2') format('woff2')}
+        @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;font-display:swap;src:url('assets/fonts/montserrat-700.woff2') format('woff2')}
+        :root{--brand:#E36414;--brand-light:#F97316;--text:#0F172A;--text-light:#475569;--bg:#FFFFFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--container-max-width:1200px;--container-gutter:24px}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
+        .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
+        h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
+        h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 0;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+        .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+        .logo{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text);text-decoration:none}
+        .nav-menu{display:flex;list-style:none;gap:2rem}
+        .nav-link{color:var(--text);font-weight:500;text-decoration:none}
+        .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,42,0.25) 0%,rgba(30,41,59,0.30) 100%),image-set(url('assets/images/hero-plumbing-800w.webp') 1x,url('assets/images/hero-plumbing-1200w.webp') 2x);background-size:cover;background-position:center}
+        .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(15,23,42,0.10) 100%)}
+        .hero-content{position:relative;z-index:1;max-width:900px;margin:0 auto}
+        .hero h1{color:#FFFFFF;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+        .hero-subtitle{font-size:clamp(1.125rem,2.5vw,1.375rem);color:#F1F5F9;margin-bottom:3rem;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.6;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+        .hero-rating{display:inline-flex;align-items:center;gap:0.5rem;margin:1rem 0 1.5rem;padding:0.75rem 1.25rem;background:rgba(255,255,255,0.95);border-radius:50px;box-shadow:0 4px 12px rgba(0,0,0,0.15);font-size:0.95rem}
+        .rating-stars{color:#FFA000;font-size:1.1rem;letter-spacing:2px}
+        .rating-score{font-weight:700;color:#1e40af;font-size:1.1rem}
+        .rating-count{color:#555;font-size:0.9rem}
+        .btn-primary{display:inline-block;background:var(--gradient-brand);color:white;border:none;border-radius:12px;padding:16px 32px;font-weight:600;font-size:1rem;text-decoration:none;cursor:pointer;box-shadow:0 4px 16px rgba(227,100,20,0.3);min-height:44px;min-width:44px}
+        .mobile-menu-btn{display:none;flex-direction:column;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0}
+        .mobile-menu-btn span{display:block;height:3px;width:100%;background:var(--text);border-radius:2px}
+        @media (max-width:768px){
+            .mobile-menu-btn{display:flex}
+            .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem}
+            .nav-menu.active{left:0}
+            .hero{min-height:70vh;padding:100px 16px 60px}
+            h1{font-size:2rem}
+        }
+    </style>
+
+    <!-- Load full CSS asynchronously -->
+    <link rel="preload" href="styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
     
     
     <!-- JSON-LD Structured Data -->
@@ -44,7 +82,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-19T12:00:00Z" />
+<meta name="x-build" content="2025-11-19T17:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
