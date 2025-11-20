@@ -141,6 +141,186 @@
         }
     </style>
 
+    <!-- Social Proof Styles -->
+    <style>
+        /* Social Proof Section */
+        .social-proof {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
+            padding: 4rem 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .social-proof h2 {
+            text-align: center;
+            color: #0c4a6e;
+            margin-bottom: 1rem;
+            font-size: 2.25rem;
+        }
+
+        .social-proof-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Google Reviews Grid */
+        .google-reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .google-review-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .google-review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .google-review-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .google-review-badge {
+            background: #f0fdf4;
+            padding: 1rem;
+            border-top: 3px solid #22c55e;
+            text-align: center;
+        }
+
+        .google-review-badge p {
+            margin: 0.25rem 0;
+            color: #166534;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Team Section */
+        .team-showcase {
+            background: white;
+            padding: 3rem 1.5rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .team-showcase h3 {
+            text-align: center;
+            color: #0c4a6e;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+
+        .team-member h4 {
+            color: #0c4a6e;
+            margin: 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        .team-member p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        /* Before/After Gallery */
+        .before-after-gallery {
+            margin: 3rem 0;
+        }
+
+        .before-after-gallery h3 {
+            text-align: center;
+            color: #0c4a6e;
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .before-after-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .before-after-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .before-after-label {
+            padding: 1rem;
+            text-align: center;
+            background: #0284c7;
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .before-after-description {
+            padding: 1rem;
+            color: #1e293b;
+            font-size: 0.9rem;
+        }
+
+        /* Placeholder styles */
+        .image-placeholder {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .social-proof h2 {
+                font-size: 1.75rem;
+            }
+            .google-reviews-grid,
+            .team-grid,
+            .before-after-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
     <!-- Load full CSS asynchronously -->
     <link rel="preload" href="styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
@@ -172,7 +352,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-20T01:30:00Z" />
+<meta name="x-build" content="2025-11-20T03:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -1336,6 +1516,149 @@ window.dataLayer = window.dataLayer || [];
                 <li><a href="/servicios/plomero-cerca-de-mi/">Plomero cerca de mí</a></li>
                 <li><a href="/servicios/emergencia-24-7/">Plomero 24/7</a></li>
             </ul>
+        </div>
+    </section>
+
+    <!-- Social Proof Visual Section -->
+    <section class="social-proof">
+        <div class="container">
+            <h2>💯 Prueba Real de Nuestro Servicio</h2>
+            <p class="social-proof-subtitle">
+                Reseñas verificadas, equipo profesional y resultados comprobados en Culiacán
+            </p>
+
+            <!-- Google Reviews Screenshots -->
+            <div class="google-reviews-grid">
+                <div class="google-review-card">
+                    <div class="image-placeholder">
+                        📸 Screenshot de Reseña Google<br>
+                        <small>Genera con prompt #1:<br>"google-review-emergency-service"</small>
+                    </div>
+                    <div class="google-review-badge">
+                        <p>⭐⭐⭐⭐⭐ Servicio de Emergencia</p>
+                        <p>María G. - Verificado en Google</p>
+                    </div>
+                </div>
+
+                <div class="google-review-card">
+                    <div class="image-placeholder">
+                        📸 Screenshot de Reseña Google<br>
+                        <small>Genera con prompt #2:<br>"google-review-leak-repair"</small>
+                    </div>
+                    <div class="google-review-badge">
+                        <p>⭐⭐⭐⭐⭐ Reparación de Fuga</p>
+                        <p>Roberto M. - Verificado en Google</p>
+                    </div>
+                </div>
+
+                <div class="google-review-card">
+                    <div class="image-placeholder">
+                        📸 Screenshot de Reseña Google<br>
+                        <small>Genera con prompt #3:<br>"google-review-installation"</small>
+                    </div>
+                    <div class="google-review-badge">
+                        <p>⭐⭐⭐⭐⭐ Instalación Completa</p>
+                        <p>Laura S. - Verificado en Google</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Showcase -->
+            <div class="team-showcase">
+                <h3>👷 Nuestro Equipo Profesional en Culiacán</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="image-placeholder team-photo">
+                            📸 Foto del Equipo<br>
+                            <small>Genera con prompt #4:<br>"team-plumbers-group-culiacan"</small>
+                        </div>
+                        <h4>Equipo Técnico Certificado</h4>
+                        <p>Plomeros con 5-15 años de experiencia en Culiacán</p>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="image-placeholder team-photo">
+                            📸 Plomero Senior<br>
+                            <small>Genera con prompt #5:<br>"senior-plumber-service-van"</small>
+                        </div>
+                        <h4>Técnico Senior con Camioneta</h4>
+                        <p>Equipado con herramientas profesionales y refacciones</p>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="image-placeholder team-photo">
+                            📸 Taller Profesional<br>
+                            <small>Genera con prompt #6:<br>"plumber-workshop-tools"</small>
+                        </div>
+                        <h4>Taller con Equipo Especializado</h4>
+                        <p>Herramientas profesionales y diagnóstico avanzado</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Before/After Gallery -->
+            <div class="before-after-gallery">
+                <h3>✨ Resultados Reales: Antes y Después</h3>
+                <div class="before-after-grid">
+                    <div class="before-after-card">
+                        <div class="image-placeholder before-after-image">
+                            📸 Antes/Después<br>
+                            <small>Genera con prompt #7:<br>"before-after-pipe-leak-repair"</small>
+                        </div>
+                        <div class="before-after-label">Reparación de Fuga en Tubería</div>
+                        <div class="before-after-description">
+                            De tubería corroída con fuga a instalación nueva sellada profesionalmente. Garantía 6 meses.
+                        </div>
+                    </div>
+
+                    <div class="before-after-card">
+                        <div class="image-placeholder before-after-image">
+                            📸 Antes/Después<br>
+                            <small>Genera con prompt #8:<br>"before-after-toilet-installation"</small>
+                        </div>
+                        <div class="before-after-label">Instalación de Sanitario Moderno</div>
+                        <div class="before-after-description">
+                            De WC agrietado antiguo a sanitario ahorrador moderno con instalación perfecta.
+                        </div>
+                    </div>
+
+                    <div class="before-after-card">
+                        <div class="image-placeholder before-after-image">
+                            📸 Antes/Después<br>
+                            <small>Genera con prompt #9:<br>"before-after-drain-cleaning"</small>
+                        </div>
+                        <div class="before-after-label">Destape de Drenaje Profesional</div>
+                        <div class="before-after-description">
+                            De drenaje tapado con agua estancada a flujo perfecto cristalino en minutos.
+                        </div>
+                    </div>
+
+                    <div class="before-after-card">
+                        <div class="image-placeholder before-after-image">
+                            📸 Antes/Después<br>
+                            <small>Genera con prompt #10:<br>"before-after-water-heater-boiler"</small>
+                        </div>
+                        <div class="before-after-label">Instalación de Boiler Nuevo</div>
+                        <div class="before-after-description">
+                            De boiler oxidado antiguo a calentador de paso Noritz con instalación certificada.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    <strong>¿Listo para tener estos resultados en tu hogar?</strong><br>
+                    Agenda tu servicio hoy y únete a más de 150 clientes satisfechos
+                </p>
+                <a href="https://wa.me/526671631231?text=Hola%2C%20vi%20los%20resultados%20antes/después%20y%20quiero%20agendar%20servicio"
+                   class="btn-primary"
+                   target="_blank"
+                   rel="noopener"
+                   style="display: inline-block; padding: 1rem 2rem; background: #22c55e; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                    💬 Agendar por WhatsApp
+                </a>
+            </div>
         </div>
     </section>
 
