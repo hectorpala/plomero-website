@@ -82,7 +82,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-19T18:00:00Z" />
+<meta name="x-build" content="2025-11-19T19:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -1788,15 +1788,39 @@ window.dataLayer = window.dataLayer || [];
     var whatsappBtn = document.getElementById('exit-popup-whatsapp');
     var phoneBtn = document.getElementById('exit-popup-phone');
     var hasShown = localStorage.getItem('exitPopupShown');
-    var exitThreshold = 50; // pixels from top to trigger
     var isExiting = false;
+    var mouseY = 0;
+    var timeOnPage = 0;
+    var minTimeBeforePopup = 5000; // 5 seconds minimum on page
 
     // Check if popup should be shown (only once per session)
     if (hasShown) return;
 
-    // Detect exit intent (mouse leaving viewport towards top)
-    document.addEventListener('mouseleave', function(e) {
-        if (e.clientY <= exitThreshold && !isExiting) {
+    // Track time on page
+    var pageLoadTime = Date.now();
+
+    // Track mouse position continuously
+    document.addEventListener('mousemove', function(e) {
+        mouseY = e.clientY;
+    });
+
+    // Detect exit intent - ONLY when mouse leaves through TOP of viewport
+    document.addEventListener('mouseout', function(e) {
+        // Ignore if already shown
+        if (isExiting) return;
+
+        // Get the element the mouse is leaving TO
+        var toElement = e.relatedTarget || e.toElement;
+
+        // Check if mouse is leaving the document (null = left viewport)
+        // AND mouse Y position is near top (< 10px)
+        // AND minimum time on page has passed
+        timeOnPage = Date.now() - pageLoadTime;
+
+        if (!toElement &&
+            mouseY < 10 &&
+            timeOnPage >= minTimeBeforePopup &&
+            !isExiting) {
             isExiting = true;
             showPopup();
         }
@@ -1811,7 +1835,8 @@ window.dataLayer = window.dataLayer || [];
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
                 'event': 'exit_intent_shown',
-                'page_location': window.location.pathname
+                'page_location': window.location.pathname,
+                'time_on_page': Math.round(timeOnPage / 1000) + 's'
             });
         } catch(e) {}
     }
