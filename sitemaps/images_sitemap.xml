@@ -2,158 +2,113 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Página Principal -->
+  <!-- Homepage Images -->
   <url>
     <loc>https://plomeroculiacanpro.mx/</loc>
     <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/hero-plumbing-1200w.webp</image:loc>
-      <image:caption>Plomero profesional certificado en Culiacán con herramientas especializadas para servicios de plomería</image:caption>
-      <image:title>Plomero Profesional Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/hero-plumbing-800w.webp</image:loc>
-      <image:caption>Plomero profesional certificado en Culiacán con herramientas especializadas</image:caption>
-      <image:title>Plomero Profesional Culiacán</image:title>
-    </image:image>
-    <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp</image:loc>
-      <image:caption>Servicio de plomería de emergencia 24/7 en Culiacán - Atención nocturna y fines de semana</image:caption>
-      <image:title>Plomero Emergencia 24/7 Culiacán</image:title>
+      <image:caption>Plomero profesional atendiendo emergencia 24/7 en Culiacán de noche con herramientas especializadas</image:caption>
+      <image:title>Servicio de Plomería 24 Horas Culiacán</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/emergencia-24-7-nocturna-800w.webp</image:loc>
-      <image:caption>Servicio de plomería de emergencia 24/7 en Culiacán</image:caption>
-      <image:title>Plomero Emergencia 24/7 Culiacán</image:title>
+      <image:loc>https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp</image:loc>
+      <image:caption>Plomero reparando fuga de agua en tubería con herramientas profesionales en Culiacán</image:caption>
+      <image:title>Reparación de Fugas de Agua</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://plomeroculiacanpro.mx/assets/images/destapandodrenaje-800w.webp</image:loc>
+      <image:caption>Plomero destapando drenaje con sonda rotativa profesional en Culiacán</image:caption>
+      <image:title>Destape de Drenajes Profesional</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp</image:loc>
+      <image:caption>Instalación profesional de sanitario ahorrador de agua en baño moderno Culiacán</image:caption>
+      <image:title>Instalación de Sanitarios</image:title>
     </image:image>
   </url>
 
-  <!-- Reparación de Fugas -->
+  <!-- Servicio: Reparación de Fugas -->
   <url>
     <loc>https://plomeroculiacanpro.mx/servicios/reparacion-de-fugas/</loc>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp</image:loc>
-      <image:caption>Reparación profesional de fugas de agua en Culiacán - Detección y reparación inmediata</image:caption>
-      <image:title>Reparación de Fugas Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-420w.webp</image:loc>
-      <image:caption>Reparación profesional de fugas de agua en Culiacán</image:caption>
-      <image:title>Reparación de Fugas Culiacán</image:title>
+      <image:caption>Técnico especializado reparando fuga de agua con selladores y herramientas profesionales</image:caption>
+      <image:title>Reparación de Fugas con Garantía</image:title>
     </image:image>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/fuga-tuberia-rota-1200w.webp</image:loc>
-      <image:caption>Fuga en tubería rota - Servicio de reparación urgente en Culiacán</image:caption>
-      <image:title>Tubería Rota Reparación Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/fuga-tuberia-rota-800w.webp</image:loc>
-      <image:caption>Fuga en tubería rota - Servicio de reparación urgente</image:caption>
-      <image:title>Tubería Rota Reparación Culiacán</image:title>
+      <image:caption>Fuga de agua en tubería rota requiriendo reparación urgente de plomería en Culiacán</image:caption>
+      <image:title>Fuga en Tubería - Servicio Urgente</image:title>
     </image:image>
   </url>
 
-  <!-- Detección de Fugas -->
-  <url>
-    <loc>https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/</loc>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/deteccion-fugas-termica-1200w.webp</image:loc>
-      <image:caption>Detección de fugas con cámara térmica en Culiacán - Tecnología especializada sin destrucción</image:caption>
-      <image:title>Detección Fugas Cámara Térmica Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/deteccion-fugas-termica-800w.webp</image:loc>
-      <image:caption>Detección de fugas con cámara térmica en Culiacán</image:caption>
-      <image:title>Detección Fugas Cámara Térmica Culiacán</image:title>
-    </image:image>
-  </url>
-
-  <!-- Destape de Drenajes -->
+  <!-- Servicio: Destape de Drenajes -->
   <url>
     <loc>https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/</loc>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/destapandodrenaje-800w.webp</image:loc>
-      <image:caption>Destape profesional de drenajes en Culiacán - Equipo especializado y garantía escrita</image:caption>
-      <image:title>Destape de Drenajes Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/destapandodrenaje-420w.webp</image:loc>
-      <image:caption>Destape profesional de drenajes en Culiacán</image:caption>
-      <image:title>Destape de Drenajes Culiacán</image:title>
+      <image:caption>Plomero profesional usando sonda rotativa para destapar drenaje obstruido</image:caption>
+      <image:title>Destape de Drenajes con Equipo Profesional</image:title>
     </image:image>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/inspeccion-camara-tuberia-1200w.webp</image:loc>
-      <image:caption>Inspección de tuberías con cámara especializada en Culiacán - Diagnóstico preciso</image:caption>
-      <image:title>Inspección con Cámara Tubería Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/inspeccion-camara-tuberia-800w.webp</image:loc>
-      <image:caption>Inspección de tuberías con cámara especializada en Culiacán</image:caption>
-      <image:title>Inspección con Cámara Tubería Culiacán</image:title>
+      <image:caption>Inspección de tubería con cámara para detectar obstrucciones y raíces</image:caption>
+      <image:title>Inspección con Cámara de Tuberías</image:title>
     </image:image>
   </url>
 
-  <!-- Instalación de Sanitarios -->
+  <!-- Servicio: Instalación de Sanitarios -->
   <url>
     <loc>https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/</loc>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp</image:loc>
-      <image:caption>Instalación y cambio de taza de baño en Culiacán - Servicio profesional con garantía</image:caption>
-      <image:title>Instalación Taza Baño Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/taza-de-baño-420w.webp</image:loc>
-      <image:caption>Instalación y cambio de taza de baño en Culiacán</image:caption>
-      <image:title>Instalación Taza Baño Culiacán</image:title>
+      <image:caption>Instalación profesional de sanitario ahorrrador con nivelación y sellado perfecto</image:caption>
+      <image:title>Instalación de Sanitarios Modernos</image:title>
     </image:image>
   </url>
 
-  <!-- Mantenimiento de Boiler -->
+  <!-- Servicio: Mantenimiento de Boiler -->
   <url>
     <loc>https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/</loc>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/arreglando-boiler-800w.webp</image:loc>
-      <image:caption>Mantenimiento y reparación de boiler en Culiacán - Servicio especializado Noritz, Calorex, Rheem</image:caption>
-      <image:title>Mantenimiento Boiler Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/arreglando-boiler-420w.webp</image:loc>
-      <image:caption>Mantenimiento y reparación de boiler en Culiacán</image:caption>
-      <image:title>Mantenimiento Boiler Culiacán</image:title>
+      <image:caption>Técnico realizando mantenimiento preventivo de boiler de paso marca Noritz</image:caption>
+      <image:title>Mantenimiento de Boiler Profesional</image:title>
     </image:image>
   </url>
 
-  <!-- Corrección Baja Presión -->
+  <!-- Servicio: Corrección de Baja Presión -->
   <url>
     <loc>https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/</loc>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/correccion-baja-presion-bomba-1200w.webp</image:loc>
-      <image:caption>Corrección de baja presión de agua con instalación de bomba en Culiacán</image:caption>
-      <image:title>Corrección Baja Presión Agua Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/correccion-baja-presion-bomba-800w.webp</image:loc>
-      <image:caption>Corrección de baja presión de agua en Culiacán</image:caption>
-      <image:title>Corrección Baja Presión Agua Culiacán</image:title>
+      <image:caption>Instalación de bomba presurizadora para corregir baja presión de agua en casa</image:caption>
+      <image:title>Corrección de Baja Presión con Bomba</image:title>
     </image:image>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/reivicion-bajapresion-800w.webp</image:loc>
-      <image:caption>Revisión y diagnóstico de baja presión de agua en Culiacán</image:caption>
-      <image:title>Revisión Baja Presión Culiacán</image:title>
+      <image:caption>Revisión de sistema hidráulico para diagnosticar causa de baja presión</image:caption>
+      <image:title>Diagnóstico de Baja Presión</image:title>
     </image:image>
+  </url>
+
+  <!-- Servicio: Detección de Fugas -->
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/</loc>
     <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/reivicion-bajapresion-420w.webp</image:loc>
-      <image:caption>Revisión y diagnóstico de baja presión de agua</image:caption>
-      <image:title>Revisión Baja Presión Culiacán</image:title>
+      <image:loc>https://plomeroculiacanpro.mx/assets/images/deteccion-fugas-termica-1200w.webp</image:loc>
+      <image:caption>Detección de fugas ocultas con cámara termográfica en muros y pisos</image:caption>
+      <image:title>Detección de Fugas con Termografía</image:title>
     </image:image>
+  </url>
+
+  <!-- Servicio: Emergencia 24/7 -->
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/emergencia-24-7/</loc>
     <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/tinaco-800w.webp</image:loc>
-      <image:caption>Instalación y mantenimiento de tinaco en Culiacán - Mejora de presión de agua</image:caption>
-      <image:title>Instalación Tinaco Culiacán</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/tinaco-420w.webp</image:loc>
-      <image:caption>Instalación y mantenimiento de tinaco en Culiacán</image:caption>
-      <image:title>Instalación Tinaco Culiacán</image:title>
+      <image:loc>https://plomeroculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp</image:loc>
+      <image:caption>Plomero de emergencia atendiendo llamado nocturno 24/7 en Culiacán</image:caption>
+      <image:title>Servicio de Emergencia 24 Horas</image:title>
     </image:image>
   </url>
 
@@ -162,13 +117,28 @@
     <loc>https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/</loc>
     <image:image>
       <image:loc>https://plomeroculiacanpro.mx/assets/images/problemas-comunes-1200w.webp</image:loc>
-      <image:caption>Problemas comunes de plomería en Culiacán - Guía completa de diagnóstico y soluciones</image:caption>
-      <image:title>Problemas Comunes Plomería Culiacán</image:title>
+      <image:caption>Plomero solucionando problemas comunes de plomería en residencia de Culiacán</image:caption>
+      <image:title>Problemas Comunes de Plomería en Culiacán</image:title>
     </image:image>
+  </url>
+
+  <!-- Blog: Instalación de Tinaco -->
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/</loc>
     <image:image>
-      <image:loc>https://plomeroculiacanpro.mx/assets/images/problemas-comunes-800w.webp</image:loc>
-      <image:caption>Problemas comunes de plomería en Culiacán</image:caption>
-      <image:title>Problemas Comunes Plomería Culiacán</image:title>
+      <image:loc>https://plomeroculiacanpro.mx/assets/images/tinaco-800w.webp</image:loc>
+      <image:caption>Instalación profesional de tinaco con base metálica y conexiones certificadas</image:caption>
+      <image:title>Instalación de Tinaco en Culiacán</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog: Hero Plumbing General -->
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/</loc>
+    <image:image>
+      <image:loc>https://plomeroculiacanpro.mx/assets/images/hero-plumbing-1200w.webp</image:loc>
+      <image:caption>Plomero profesional certificado en Culiacán realizando inspección de calidad con herramientas especializadas</image:caption>
+      <image:title>Plomería Profesional en Culiacán</image:title>
     </image:image>
   </url>
 
