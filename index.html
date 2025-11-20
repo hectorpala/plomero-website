@@ -82,7 +82,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-19T20:00:00Z" />
+<meta name="x-build" content="2025-11-19T21:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -1791,7 +1791,13 @@ window.dataLayer = window.dataLayer || [];
     var isExiting = false;
     var mouseY = 0;
     var timeOnPage = 0;
-    var minTimeBeforePopup = 2000; // 2 seconds minimum on page (reduced for easier testing)
+    var minTimeBeforePopup = 2000; // 2 seconds minimum on page (desktop)
+    var minTimeBeforePopupMobile = 10000; // 10 seconds minimum on page (mobile)
+
+    // Mobile detection and scroll tracking
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var lastScrollY = 0;
+    var scrollingUp = false;
 
     // Check if popup should be shown (only once per session)
     if (hasShown) {
@@ -1799,45 +1805,77 @@ window.dataLayer = window.dataLayer || [];
         return;
     }
 
-    console.log('[Exit-Intent] Sistema activado. Espera 2+ segundos y mueve mouse hacia arriba para activar.');
+    if (isMobile) {
+        console.log('[Exit-Intent] Modo MÓVIL activado. Espera 10+ segundos y haz scroll hacia arriba para activar.');
+    } else {
+        console.log('[Exit-Intent] Modo DESKTOP activado. Espera 2+ segundos y mueve mouse hacia arriba para activar.');
+    }
 
     // Track time on page
     var pageLoadTime = Date.now();
 
-    // Track mouse position continuously
-    document.addEventListener('mousemove', function(e) {
-        mouseY = e.clientY;
-    });
+    // DESKTOP: Track mouse position continuously
+    if (!isMobile) {
+        document.addEventListener('mousemove', function(e) {
+            mouseY = e.clientY;
+        });
 
-    // Detect exit intent - ONLY when mouse leaves through TOP of viewport
-    document.addEventListener('mouseout', function(e) {
-        // Ignore if already shown
-        if (isExiting) return;
+        // Detect exit intent - ONLY when mouse leaves through TOP of viewport
+        document.addEventListener('mouseout', function(e) {
+            // Ignore if already shown
+            if (isExiting) return;
 
-        // Get the element the mouse is leaving TO
-        var toElement = e.relatedTarget || e.toElement;
+            // Get the element the mouse is leaving TO
+            var toElement = e.relatedTarget || e.toElement;
 
-        // Check if mouse is leaving the document (null = left viewport)
-        // AND mouse Y position is near top (< 10px)
-        // AND minimum time on page has passed
-        timeOnPage = Date.now() - pageLoadTime;
+            // Check if mouse is leaving the document (null = left viewport)
+            // AND mouse Y position is near top (< 10px)
+            // AND minimum time on page has passed
+            timeOnPage = Date.now() - pageLoadTime;
 
-        // Debug logging
-        if (!toElement && mouseY < 10) {
-            console.log('[Exit-Intent] Detectado intento de salida. Tiempo en página:', Math.round(timeOnPage / 1000) + 's');
-        }
+            // Debug logging
+            if (!toElement && mouseY < 10) {
+                console.log('[Exit-Intent] Detectado intento de salida. Tiempo en página:', Math.round(timeOnPage / 1000) + 's');
+            }
 
-        if (!toElement &&
-            mouseY < 10 &&
-            timeOnPage >= minTimeBeforePopup &&
-            !isExiting) {
-            isExiting = true;
-            console.log('[Exit-Intent] ✅ Mostrando popup!');
-            showPopup();
-        } else if (!toElement && mouseY < 10 && timeOnPage < minTimeBeforePopup) {
-            console.log('[Exit-Intent] ⏱️  Muy pronto. Necesitas ' + Math.ceil((minTimeBeforePopup - timeOnPage) / 1000) + 's más.');
-        }
-    });
+            if (!toElement &&
+                mouseY < 10 &&
+                timeOnPage >= minTimeBeforePopup &&
+                !isExiting) {
+                isExiting = true;
+                console.log('[Exit-Intent] ✅ Mostrando popup (Desktop)!');
+                showPopup();
+            } else if (!toElement && mouseY < 10 && timeOnPage < minTimeBeforePopup) {
+                console.log('[Exit-Intent] ⏱️  Muy pronto. Necesitas ' + Math.ceil((minTimeBeforePopup - timeOnPage) / 1000) + 's más.');
+            }
+        });
+    }
+
+    // MOBILE: Detect scroll up (exit intent alternative)
+    if (isMobile) {
+        window.addEventListener('scroll', function() {
+            if (isExiting) return;
+
+            var currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+            scrollingUp = currentScrollY < lastScrollY;
+
+            timeOnPage = Date.now() - pageLoadTime;
+
+            // Trigger if: scrolling up + at top 20% of page + 10+ seconds on page
+            if (scrollingUp &&
+                currentScrollY < (document.documentElement.scrollHeight * 0.2) &&
+                timeOnPage >= minTimeBeforePopupMobile &&
+                !isExiting) {
+                isExiting = true;
+                console.log('[Exit-Intent] ✅ Mostrando popup (Mobile - scroll up)!');
+                showPopup();
+            } else if (scrollingUp && currentScrollY < (document.documentElement.scrollHeight * 0.2) && timeOnPage < minTimeBeforePopupMobile) {
+                console.log('[Exit-Intent Mobile] ⏱️  Necesitas ' + Math.ceil((minTimeBeforePopupMobile - timeOnPage) / 1000) + 's más.');
+            }
+
+            lastScrollY = currentScrollY;
+        });
+    }
 
     function showPopup() {
         popup.style.display = 'flex';
