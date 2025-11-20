@@ -10,7 +10,11 @@
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
     <link rel="apple-touch-icon" href="/assets/icons/favicon.png">
-    
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0066cc">
+
     <!-- Preconnect to external domains for faster resource loading -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -88,7 +92,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-20T00:30:00Z" />
+<meta name="x-build" content="2025-11-20T01:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -1959,6 +1963,21 @@ window.dataLayer = window.dataLayer || [];
         });
     }
 })();
+</script>
+
+<!-- Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('SW registered:', registration.scope);
+            })
+            .catch(err => {
+                console.log('SW registration failed:', err);
+            });
+    });
+}
 </script>
 
 </body>
