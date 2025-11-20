@@ -61,6 +61,86 @@
         }
     </style>
 
+    <!-- Form Validation Styles -->
+    <style>
+        /* Real-time validation states */
+        .form-field {
+            position: relative;
+            margin-bottom: 1.25rem;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        /* Valid state (green) */
+        .form-field.valid input,
+        .form-field.valid textarea {
+            border-color: #28a745;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2328a745'%3E%3Cpath d='M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.875rem center;
+            background-size: 20px 20px;
+            padding-right: 3rem;
+        }
+
+        /* Invalid state (red) */
+        .form-field.invalid input,
+        .form-field.invalid textarea {
+            border-color: #dc3545;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23dc3545'%3E%3Cpath d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.875rem center;
+            background-size: 20px 20px;
+            padding-right: 3rem;
+        }
+
+        /* Error message */
+        .error-message {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.375rem;
+            font-weight: 500;
+        }
+
+        .form-field.invalid .error-message {
+            display: block;
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            color: #28a745;
+            font-size: 0.875rem;
+            margin-top: 0.375rem;
+            font-weight: 500;
+        }
+
+        .form-field.valid .success-message {
+            display: block;
+        }
+
+        /* Disabled submit button */
+        #contact-form button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+
     <!-- Load full CSS asynchronously -->
     <link rel="preload" href="styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
@@ -92,7 +172,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-20T01:00:00Z" />
+<meta name="x-build" content="2025-11-20T01:30:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -1287,12 +1367,31 @@ window.dataLayer = window.dataLayer || [];
                         <input type="hidden" name="bot-field">
                         <input type="hidden" name="form-name" value="contacto-plomeria">
 
-                        <input type="text" name="nombre" placeholder="Nombre" required>
-                        <input type="tel" name="telefono" placeholder="Teléfono" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <textarea name="mensaje" placeholder="Describe tu problema o servicio requerido" rows="4" required></textarea>
+                        <div class="form-field">
+                            <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+                            <span class="error-message">Por favor ingresa tu nombre completo (mínimo 2 caracteres)</span>
+                            <span class="success-message">✓ Nombre válido</span>
+                        </div>
 
-                        <button type="submit" class="btn-primary">Enviar Cotización</button>
+                        <div class="form-field">
+                            <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (10 dígitos)" required pattern="[0-9]{10}">
+                            <span class="error-message">Ingresa un teléfono válido de 10 dígitos (ej: 6671234567)</span>
+                            <span class="success-message">✓ Teléfono válido</span>
+                        </div>
+
+                        <div class="form-field">
+                            <input type="email" id="email" name="email" placeholder="Email" required>
+                            <span class="error-message">Ingresa un email válido (ej: nombre@ejemplo.com)</span>
+                            <span class="success-message">✓ Email válido</span>
+                        </div>
+
+                        <div class="form-field">
+                            <textarea id="mensaje" name="mensaje" placeholder="Describe tu problema o servicio requerido" rows="4" required minlength="10"></textarea>
+                            <span class="error-message">Describe brevemente tu problema (mínimo 10 caracteres)</span>
+                            <span class="success-message">✓ Mensaje completo</span>
+                        </div>
+
+                        <button type="submit" class="btn-primary" disabled>Enviar Cotización</button>
 
                         <p class="form-note">
                             <small>También te contactaremos por WhatsApp. Respuesta en menos de 30 minutos.</small>
@@ -1335,12 +1434,12 @@ window.dataLayer = window.dataLayer || [];
         // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navMenu = document.querySelector('.nav-menu');
-        
+
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
         });
-        
+
         // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
@@ -1348,7 +1447,89 @@ window.dataLayer = window.dataLayer || [];
                 mobileMenuBtn.classList.remove('active');
             });
         });
-        
+
+        // Real-time form validation
+        (function() {
+            const form = document.getElementById('contact-form');
+            const nombreField = document.getElementById('nombre');
+            const telefonoField = document.getElementById('telefono');
+            const emailField = document.getElementById('email');
+            const mensajeField = document.getElementById('mensaje');
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            // Validation functions
+            const validators = {
+                nombre: (value) => value.trim().length >= 2,
+                telefono: (value) => /^[0-9]{10}$/.test(value.replace(/\s/g, '')),
+                email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+                mensaje: (value) => value.trim().length >= 10
+            };
+
+            // Validate single field
+            function validateField(field, validatorKey) {
+                const value = field.value;
+                const fieldWrapper = field.closest('.form-field');
+                const isValid = validators[validatorKey](value);
+
+                if (value.length === 0) {
+                    // Empty: neutral state
+                    fieldWrapper.classList.remove('valid', 'invalid');
+                } else if (isValid) {
+                    // Valid: green checkmark
+                    fieldWrapper.classList.remove('invalid');
+                    fieldWrapper.classList.add('valid');
+                } else {
+                    // Invalid: red X
+                    fieldWrapper.classList.remove('valid');
+                    fieldWrapper.classList.add('invalid');
+                }
+
+                updateSubmitButton();
+                return isValid;
+            }
+
+            // Check if form is completely valid
+            function isFormValid() {
+                return validators.nombre(nombreField.value) &&
+                       validators.telefono(telefonoField.value) &&
+                       validators.email(emailField.value) &&
+                       validators.mensaje(mensajeField.value);
+            }
+
+            // Enable/disable submit button based on form validity
+            function updateSubmitButton() {
+                if (isFormValid()) {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                } else {
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.6';
+                    submitBtn.style.cursor = 'not-allowed';
+                }
+            }
+
+            // Add real-time validation listeners
+            nombreField.addEventListener('input', () => validateField(nombreField, 'nombre'));
+            nombreField.addEventListener('blur', () => validateField(nombreField, 'nombre'));
+
+            telefonoField.addEventListener('input', () => {
+                // Only allow numbers
+                telefonoField.value = telefonoField.value.replace(/\D/g, '');
+                validateField(telefonoField, 'telefono');
+            });
+            telefonoField.addEventListener('blur', () => validateField(telefonoField, 'telefono'));
+
+            emailField.addEventListener('input', () => validateField(emailField, 'email'));
+            emailField.addEventListener('blur', () => validateField(emailField, 'email'));
+
+            mensajeField.addEventListener('input', () => validateField(mensajeField, 'mensaje'));
+            mensajeField.addEventListener('blur', () => validateField(mensajeField, 'mensaje'));
+
+            // Initial state: button disabled
+            updateSubmitButton();
+        })();
+
         // Multi-layer lead capture: Netlify Forms + localStorage + GA4 + WhatsApp
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
