@@ -468,6 +468,59 @@
             }
         }
     </style>
+
+    <style>
+    .breadcrumb {
+        background: #f8f9fa;
+        padding: 12px 0;
+        font-size: 14px;
+        border-bottom: 1px solid #e9ecef;
+    }
+    .breadcrumb-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    .breadcrumb-list {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap;
+    }
+    .breadcrumb-item {
+        display: flex;
+        align-items: center;
+    }
+    .breadcrumb-item a {
+        color: #0066cc;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .breadcrumb-item a:hover {
+        color: #004499;
+        text-decoration: underline;
+    }
+    .breadcrumb-item.active {
+        color: #6c757d;
+    }
+    .breadcrumb-separator {
+        margin: 0 8px;
+        color: #6c757d;
+        user-select: none;
+    }
+    @media (max-width: 768px) {
+        .breadcrumb {
+            font-size: 13px;
+            padding: 10px 0;
+        }
+        .breadcrumb-separator {
+            margin: 0 6px;
+        }
+    }
+    </style>
+
 </head>
 <body>
     <!-- Google Tag Manager -->
@@ -511,6 +564,19 @@
         </div>
     </nav>
 
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="breadcrumb">
+        <div class="breadcrumb-container">
+            <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="https://plomeroculiacanpro.mx/">Inicio</a></li>
+            <li class="breadcrumb-separator" aria-hidden="true">›</li>
+            <li class="breadcrumb-item"><a href="https://plomeroculiacanpro.mx/blog/">Blog</a></li>
+            <li class="breadcrumb-separator" aria-hidden="true">›</li>
+            <li class="breadcrumb-item active" aria-current="page">Cuánto Cuesta Plomería de Baño Completo en Culiacán</li>
+            </ol>
+        </div>
+    </nav>
     <header id="inicio" class="hero">
         <div class="container">
             <!-- Hero Image (above the fold para rich snippets visuales) -->
