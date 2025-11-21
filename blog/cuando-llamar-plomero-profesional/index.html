@@ -24,63 +24,86 @@
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                    {
-                        "@type": "ListItem",
-                        "position": 1,
-                        "name": "Inicio",
-                        "item": "https://plomeroculiacanpro.mx/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 2,
-                        "name": "Blog",
-                        "item": "https://plomeroculiacanpro.mx/blog/"
-                    },
-                    {
-                        "@type": "ListItem",
-                        "position": 3,
-                        "name": "¿Cuándo Llamar a un Plomero? DIY vs Profesional",
-                        "item": "https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/"
-                    }
-                ]
-            },
-            {
-                "@type": "Service",
-                "serviceType": "Servicios de Plomería Profesional",
-                "provider": {
-                    "@type": "HomeAndConstructionBusiness",
-                    "name": "Plomero Culiacán Pro",
-                    "telephone": "+52-667-163-1231",
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": "Culiacán",
-                        "addressRegion": "Sinaloa",
-                        "addressCountry": "MX"
-                    },
-                    "aggregateRating": {
-                        "@type": "AggregateRating",
-                        "ratingValue": "4.8",
-                        "reviewCount": "150"
-                    }
-                },
-                "areaServed": {
-                    "@type": "City",
-                    "name": "Culiacán"
-                },
-                "availableChannel": {
-                    "@type": "ServiceChannel",
-                    "serviceUrl": "https://plomeroculiacanpro.mx/"
-                }
-            }
-        ]
+      "@type": "Article",
+      "headline": "¿Cuándo Llamar a un Plomero? DIY vs Profesional",
+      "description": "Aprende cuándo puedes arreglar un problema de plomería tú mismo y cuándo necesitas un profesional. Ahorra dinero haciendo la elección correcta.",
+      "author": {
+        "@type": "Organization",
+        "name": "Plomero Culiacán Pro"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Plomero Culiacán Pro",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://plomeroculiacanpro.mx/assets/icons/icon-512.png"
+        }
+      },
+      "datePublished": "2025-11-21",
+      "dateModified": "2025-11-21",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://plomeroculiacanpro.mx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://plomeroculiacanpro.mx/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "¿Cuándo Llamar a un Plomero? DIY vs Profesional",
+          "item": "https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Servicios de Plomería Profesional",
+      "provider": {
+        "@type": "HomeAndConstructionBusiness",
+        "name": "Plomero Culiacán Pro",
+        "telephone": "+52-667-163-1231",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Culiacán",
+          "addressRegion": "Sinaloa",
+          "addressCountry": "MX"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "150"
+        }
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Culiacán"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://plomeroculiacanpro.mx/"
+      }
     }
-    </script>
+  ]
+}
+  </script>
 
     <!-- Hybrid Approach Styles -->
     <style>

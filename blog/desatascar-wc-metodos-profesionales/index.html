@@ -179,102 +179,125 @@
 
     <!-- HowTo Schema para Featured Snippets -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@type": "Article",
+      "headline": "Cómo Desatascar un WC: Métodos Profesionales vs Caseros [2024]",
+      "description": "Compara métodos caseros vs profesionales para desatascar un WC. Aprende cuándo usar destapa caños, bomba manual o llamar a un plomero. Guía completa 2024.",
+      "author": {
+        "@type": "Organization",
+        "name": "Plomero Culiacán Pro"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Plomero Culiacán Pro",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://plomeroculiacanpro.mx/assets/icons/icon-512.png"
+        }
+      },
+      "datePublished": "2025-11-21",
+      "dateModified": "2025-11-21",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "name": "Cómo Desatascar un WC con Bomba Manual",
+      "description": "Aprende a desatascar un WC tapado usando una bomba manual (destapador). Método casero efectivo en 70-80% de los casos.",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp",
+        "height": "800",
+        "width": "800"
+      },
+      "totalTime": "PT10M",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "MXN",
+        "value": "250"
+      },
+      "supply": [
         {
-          "@type": "HowTo",
-          "name": "Cómo Desatascar un WC con Bomba Manual",
-          "description": "Aprende a desatascar un WC tapado usando una bomba manual (destapador). Método casero efectivo en 70-80% de los casos.",
-          "image": {
-            "@type": "ImageObject",
-            "url": "https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp",
-            "height": "800",
-            "width": "800"
-          },
-          "totalTime": "PT10M",
-          "estimatedCost": {
-            "@type": "MonetaryAmount",
-            "currency": "MXN",
-            "value": "250"
-          },
-          "supply": [
-            {
-              "@type": "HowToSupply",
-              "name": "Agua (debe cubrir la goma del destapador)"
-            }
-          ],
-          "tool": [
-            {
-              "@type": "HowToTool",
-              "name": "Bomba manual (destapador de goma)"
-            }
-          ],
-          "step": [
-            {
-              "@type": "HowToStep",
-              "name": "Preparar el WC",
-              "text": "Asegúrate de que haya suficiente agua en la taza. El agua debe cubrir completamente la goma del destapador.",
-              "image": "https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp",
-              "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Posicionar el destapador",
-              "text": "Coloca el destapador cubriendo completamente el orificio de salida. Presiona hacia abajo firmemente para crear un sello hermético.",
-              "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Hacer movimientos de bombeo",
-              "text": "Haz movimientos de bombeo enérgicos hacia arriba y abajo 15-20 veces. Mantén el sello todo el tiempo.",
-              "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Crear succión inversa",
-              "text": "Retira bruscamente el destapador para crear succión inversa. Esto ayuda a desalojar la obstrucción.",
-              "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
-            },
-            {
-              "@type": "HowToStep",
-              "name": "Verificar y repetir si necesario",
-              "text": "Jala la cadena para verificar si el agua drena correctamente. Si no funciona, repite el proceso 2-3 veces más.",
-              "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
-            }
-          ]
+          "@type": "HowToSupply",
+          "name": "Agua (debe cubrir la goma del destapador)"
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Bomba manual (destapador de goma)"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Preparar el WC",
+          "text": "Asegúrate de que haya suficiente agua en la taza. El agua debe cubrir completamente la goma del destapador.",
+          "image": "https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp",
+          "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
         },
         {
-          "@type": "Service",
-          "serviceType": "Destape de WC y Sanitarios",
-          "provider": {
-            "@type": "HomeAndConstructionBusiness",
-            "name": "Plomero Culiacán Pro",
-            "telephone": "+52-667-163-1231",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Culiacán",
-              "addressRegion": "Sinaloa",
-              "addressCountry": "MX"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "reviewCount": "150"
-            }
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": "Culiacán"
-          },
-          "availableChannel": {
-            "@type": "ServiceChannel",
-            "serviceUrl": "https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/"
-          }
+          "@type": "HowToStep",
+          "name": "Posicionar el destapador",
+          "text": "Coloca el destapador cubriendo completamente el orificio de salida. Presiona hacia abajo firmemente para crear un sello hermético.",
+          "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Hacer movimientos de bombeo",
+          "text": "Haz movimientos de bombeo enérgicos hacia arriba y abajo 15-20 veces. Mantén el sello todo el tiempo.",
+          "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Crear succión inversa",
+          "text": "Retira bruscamente el destapador para crear succión inversa. Esto ayuda a desalojar la obstrucción.",
+          "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Verificar y repetir si necesario",
+          "text": "Jala la cadena para verificar si el agua drena correctamente. Si no funciona, repite el proceso 2-3 veces más.",
+          "url": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/#metodo-1"
         }
       ]
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Destape de WC y Sanitarios",
+      "provider": {
+        "@type": "HomeAndConstructionBusiness",
+        "name": "Plomero Culiacán Pro",
+        "telephone": "+52-667-163-1231",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Culiacán",
+          "addressRegion": "Sinaloa",
+          "addressCountry": "MX"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "150"
+        }
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Culiacán"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/"
+      }
     }
-    </script>
+  ]
+}
+  </script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://plomeroculiacanpro.mx/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://plomeroculiacanpro.mx/blog/"}, {"@type": "ListItem", "position": 3, "name": "Cómo Desatascar un WC: Métodos Profesionales vs Caseros [2024]", "item": "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/"}]}</script>
 </head>
 <body>
