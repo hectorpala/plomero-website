@@ -40,205 +40,37 @@
 
 <meta name="x-build" content="2025-11-17T22:30:00Z" />
 
-<!-- JSON-LD Schema -->
+<!-- JSON-LD Schema: Solo BreadcrumbList (sin LocalBusiness para evitar duplicación) -->
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@graph": [
-        {
-            "@type": "WebSite",
-            "name": "Plomero Culiacán Pro",
-            "url": "https://plomeroculiacanpro.mx/",
-            "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
-        },
-        {
-            "@type": "HomeAndConstructionBusiness",
-            "@id": "https://plomeroculiacanpro.mx/#business-las-quintas",
-            "name": "Plomero Culiacán Pro - Las Quintas",
-            "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/",
-            "telephone": "+52 667 163 1231",
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "Culiacán",
-                "addressRegion": "Sinaloa",
-                "addressCountry": "MX"
-            },
-            "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                "opens": "00:00",
-                "closes": "23:59"
-            },
-            "areaServed": {
-                "@type": "Place",
-                "name": "Las Quintas",
-                "containedInPlace": {
-                    "@type": "City",
-                    "name": "Culiacán",
-                    "containedInPlace": {
-                        "@type": "State",
-                        "name": "Sinaloa"
-                    }
-                }
-            },
-            "priceRange": "$$",
-            "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
-        },
-        {
-            "@type": "Service",
-            "@id": "https://plomeroculiacanpro.mx/#service-plomeria-las-quintas",
-            "serviceType": "Plomería Residencial Premium en Las Quintas",
-            "name": "Plomero Certificado en Las Quintas Culiacán",
-            "description": "Servicio especializado de plomería en Las Quintas. Experiencia con sistemas de alta presión, residencias con múltiples baños, instalaciones de lujo, hidroneumáticos y sistemas complejos. Atención 24/7 con llegada en 20-30 minutos.",
-            "provider": {
-                "@id": "https://plomeroculiacanpro.mx/#business-las-quintas"
-            },
-            "areaServed": {
-                "@type": "Place",
-                "name": "Las Quintas"
-            },
-            "image": {
-                "@type": "ImageObject",
-                "url": "https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp",
-                "width": "800",
-                "height": "800"
-            }
-        },
-        {
-            "@type": "LocalBusiness",
-            "@id": "https://plomeroculiacanpro.mx/#localbusiness-las-quintas",
-            "name": "Plomero Culiacán Pro - Las Quintas",
-            "description": "Servicio profesional de plomería en Las Quintas, Culiacán. Atención 24/7 con llegada rápida.",
-            "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/",
-            "telephone": "+526671631231",
-            "email": "contacto@plomeroculiacanpro.mx",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Blvd. Las Quintas",
-                "addressLocality": "Las Quintas",
-                "addressRegion": "Sinaloa",
-                "postalCode": "80000",
-                "addressCountry": "MX"
-            },
-            "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 24.8207,
-                "longitude": -107.4209
-            },
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "4.8",
-                "reviewCount": "150",
-                "bestRating": "5",
-                "worstRating": "1"
-            },
-            "priceRange": "$$",
-            "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                    "Sunday"
-                ],
-                "opens": "00:00",
-                "closes": "23:59"
-            },
-            "sameAs": [
-                "https://www.facebook.com/plomeroCuliacanPro",
-                "https://wa.me/526671631231"
-            ],
-            "areaServed": {
-                "@type": "Place",
-                "name": "Las Quintas",
-                "containedInPlace": {
-                    "@type": "City",
-                    "name": "Culiacán",
-                    "containedInPlace": {
-                        "@type": "State",
-                        "name": "Sinaloa"
-                    }
-                }
-            }
-        },
-        {
-            "@type":,
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "¿Cuánto tardan en llegar a Las Quintas?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Llegamos en 20-30 minutos a Las Quintas. Conocemos perfectamente la ubicación del fraccionamiento, los accesos por Blvd. Las Torres y los protocolos de la caseta de vigilancia. Te confirmamos el tiempo exacto por WhatsApp al 667 163 1231."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "¿Tienen experiencia con sistemas de alta presión en Las Quintas?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Sí, tenemos amplia experiencia en Las Quintas trabajando con sistemas de alta presión, hidroneumáticos, residencias de 2-3 pisos con múltiples baños, instalaciones de regaderas premium (lluvia, digital), grifería europea importada y sistemas de filtración de agua. Conocemos las marcas y sistemas comunes en el fraccionamiento."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "¿Conocen los protocolos de acceso a Las Quintas?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Sí, conocemos perfectamente los protocolos de acceso controlado de Las Quintas. Solo necesitamos que nos proporciones tu nombre completo, número de casa y autorices nuestro ingreso con la caseta. Llegamos en unidad rotulada, uniformados y con identificación profesional. Hemos trabajado en cientos de residencias del fraccionamiento."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "¿Qué servicios de plomería ofrecen en Las Quintas?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "En Las Quintas ofrecemos: reparación de fugas en tuberías ocultas, destape de drenajes con equipo especializado, reparación y mantenimiento de hidroneumáticos, instalación de grifería premium (Helvex, Grival, Moen), reparación de boilers de paso (Noritz, Rinnai), instalación de regaderas digitales, corrección de presión de agua, detección de fugas con geófono, mantenimiento preventivo y emergencias 24/7."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "¿Cobran extra por servicio en Las Quintas?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "No, NO cobramos costo adicional por traslado a Las Quintas. El precio que cotizamos incluye visita, diagnóstico, mano de obra, materiales de calidad premium (acordes al fraccionamiento) y garantía escrita de 6 meses. Precios transparentes desde el inicio. WhatsApp: 667 163 1231."
-                    }
-                }
-            ]
-        },
-        {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "Inicio",
-                    "item": "https://plomeroculiacanpro.mx/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "Servicios",
-                    "item": "https://plomeroculiacanpro.mx/#servicios"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 3,
-                    "name": "Plomero por Colonias",
-                    "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 4,
-                    "name": "Las Quintas",
-                    "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/"
-                }
-            ]
-        }
-    ]
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://plomeroculiacanpro.mx/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Servicios",
+      "item": "https://plomeroculiacanpro.mx/#servicios"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Plomero por Colonias",
+      "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "Las Quintas",
+      "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/"
+    }
+  ]
 }
 </script>
 
