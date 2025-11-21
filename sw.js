@@ -1,18 +1,21 @@
 // Service Worker para Plomero Culiacán Pro
-// Última actualización: 2025-11-20
+// Última actualización: 2025-11-21
 // Estrategia: Cache-First para assets, Network-First para HTML
 
-const CACHE_NAME = 'plomero-culiacan-v1';
-const RUNTIME_CACHE = 'plomero-runtime-v1';
+const CACHE_NAME = 'plomero-culiacan-v2';
+const RUNTIME_CACHE = 'plomero-runtime-v2';
 
 // Assets críticos para cachear en instalación
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/assets/css/styles.css',
+  '/styles.min.css',
+  '/assets/fonts/inter-400.woff2',
+  '/assets/fonts/montserrat-700.woff2',
   '/assets/icons/logo-blue.svg',
   '/assets/icons/icon-192.png',
   '/assets/icons/icon-512.png',
+  '/assets/images/hero-plomero-visita-1200w.webp',
   '/assets/images/emergencia-24-7-nocturna-1200w.webp',
   '/manifest.json'
 ];
