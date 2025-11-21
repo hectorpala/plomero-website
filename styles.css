@@ -253,6 +253,17 @@ p {
     background-position: 40% 30%;
     min-height: 75vh;
   }
+
+  /* Ocultar párrafo descriptivo en móvil */
+  .hero-subtitle {
+    display: none !important;
+  }
+
+  /* Mover rating badge arriba donde estaba el texto */
+  .hero-rating {
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
 }
 
 /* Hero Image Semantic (para rich snippets visuales) */
