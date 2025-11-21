@@ -243,8 +243,16 @@ p {
                 url('assets/images/hero-plomero-visita-1200w.webp') 2x
               );
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
+}
+
+/* Hero responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .hero {
+    background-position: 40% center;
+    min-height: 75vh;
+  }
 }
 
 /* Hero Image Semantic (para rich snippets visuales) */
@@ -260,8 +268,14 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .hero-image img {
+    object-position: 40% center;
+  }
 }
 
 .hero::after {
