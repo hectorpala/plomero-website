@@ -2168,7 +2168,7 @@ window.dataLayer = window.dataLayer || [];
 <!-- Exit-Intent Popup -->
 <div id="exit-intent-popup" class="exit-popup-overlay" style="display:none;">
     <div class="exit-popup-modal">
-        <button class="exit-popup-close" aria-label="Cerrar">&times;</button>
+        <button class="exit-popup-close" aria-label="Cerrar">✕ Cerrar</button>
 
         <div class="exit-popup-content">
             <div class="exit-popup-icon">🚨</div>
@@ -2242,23 +2242,32 @@ window.dataLayer = window.dataLayer || [];
     position: absolute;
     top: 12px;
     right: 12px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: #64748b;
+    background: #ef4444;
+    border: 2px solid #dc2626;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    padding: 8px 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    gap: 6px;
+    border-radius: 8px;
     transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+    z-index: 10;
 }
 
 .exit-popup-close:hover {
-    background: #f1f5f9;
-    color: #0f172a;
+    background: #dc2626;
+    border-color: #b91c1c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.exit-popup-close:active {
+    transform: translateY(0);
 }
 
 .exit-popup-content {
