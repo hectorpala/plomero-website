@@ -2,8 +2,8 @@
 // Última actualización: 2025-11-21
 // Estrategia: Cache-First para assets, Network-First para HTML
 
-const CACHE_NAME = 'plomero-culiacan-v2';
-const RUNTIME_CACHE = 'plomero-runtime-v2';
+const CACHE_NAME = 'plomero-culiacan-v7';
+const RUNTIME_CACHE = 'plomero-runtime-v7';
 
 // Assets críticos para cachear en instalación
 const PRECACHE_ASSETS = [
