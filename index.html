@@ -64,6 +64,10 @@
         .rating-score{font-weight:700;color:#1a73e8;font-size:1.05rem}
         .rating-divider{color:#dadce0;margin:0 0.25rem}
         .rating-count{color:#5f6368;font-size:0.9rem;font-weight:500}
+        .hero-features{display:flex;justify-content:center;gap:2rem;margin:2rem 0 2.5rem;flex-wrap:wrap}
+        .feature-item{display:flex;align-items:center;gap:0.5rem;color:#fff;font-size:0.95rem;font-weight:500}
+        .feature-icon{width:24px;height:24px;flex-shrink:0;color:#f97316}
+        @media (max-width:640px){.hero-features{gap:1rem;margin:1.5rem 0 2rem}.feature-item{font-size:0.85rem}.feature-icon{width:20px;height:20px}}
         .hero-contact{color:#ffffff;margin:1rem 0}
         .hero-contact a{color:#f97316;font-weight:700;text-decoration:none}
         .hero-contact a:hover{color:#fb923c}
@@ -1104,8 +1108,34 @@ window.dataLayer = window.dataLayer || [];
                 </div>
 
                 <p class="hero-subtitle fade-in">Plomero certificado en Culiacán · Emergencia 24/7 con desplazamiento incluido en Las Quintas, Tres Ríos y Centro. Llegada en 30-60 minutos con garantía escrita.</p>
-                <p class="hero-contact"><strong>📞 Llamadas:</strong> <a href="tel:6671631231">667 163 1231</a> · <strong>💬 WhatsApp:</strong> <a href="https://wa.me/526671631231">52 667 163 1231</a></p>
-                <p class="hero-guarantee">✅ Garantía escrita de 6 meses en todos los trabajos</p>
+
+                <!-- Feature List con Iconografía -->
+                <div class="hero-features fade-in">
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <span>Llegamos en 30-60 min</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>Garantía 6 meses</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        <span>Factura disponible</span>
+                    </div>
+                </div>
+
                 <a href="#contacto" class="btn-primary hover-lift">Solicitar Atención Inmediata</a>
             </div>
         </div>

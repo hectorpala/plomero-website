@@ -1659,7 +1659,46 @@ p {
   font-weight: 500;
 }
 
+/* Hero Features List */
+.hero-features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0 2.5rem;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.feature-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: #f97316;
+}
+
 @media (max-width: 640px) {
+  .hero-features {
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .feature-item {
+    font-size: 0.85rem;
+  }
+
+  .feature-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
   .hero-rating {
     flex-wrap: wrap;
     justify-content: center;
