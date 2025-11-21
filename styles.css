@@ -2128,3 +2128,102 @@ p {
   font-size: 0.85rem;
   line-height: 1.4;
 }
+
+/* ============================================
+   SERVICE CARDS REDESIGN - CLEAN & UNIFORM
+   ============================================ */
+
+/* Remove underlines and fix link colors in service cards */
+.card.card--img {
+  display: flex !important;
+  flex-direction: column !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+  overflow: hidden !important;
+}
+
+/* Remove orange border from first card */
+.card.card--img::before {
+  display: none !important;
+}
+
+/* Hover effect: lift card */
+.card.card--img:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+  border-color: #d1d5db !important;
+}
+
+/* Image container - FULL BLEED (no padding, touches edges) */
+.card.card--img .service-card {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.card.card--img .media-box {
+  border-radius: 20px 20px 0 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+/* Service card content */
+.card.card--img h3 {
+  color: #1e3a8a !important; /* Brand blue - dark navy */
+  font-weight: 700 !important;
+  font-size: 1.25rem !important;
+  margin: 1.5rem 1.5rem 1rem 1.5rem !important;
+  text-decoration: none !important;
+}
+
+.card.card--img > p {
+  color: #4b5563 !important; /* Gray 600 - NOT blue */
+  line-height: 1.6 !important;
+  margin: 0 1.5rem 1rem 1.5rem !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  /* Limit to 3 lines */
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Hide bullet lists */
+.card.card--img .service-list {
+  display: none !important;
+}
+
+/* Hide old CTA text */
+.card.card--img .service-cta strong {
+  display: none !important;
+}
+
+/* New CTA Button at bottom - aligned with mt-auto */
+.card.card--img .service-cta {
+  display: block !important;
+  margin: auto 1.5rem 1.5rem 1.5rem !important;
+  margin-top: auto !important;
+  padding: 0.75rem 1.25rem !important;
+  background: #f97316 !important; /* Orange */
+  color: #ffffff !important;
+  text-align: center !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  transition: background 0.2s ease !important;
+}
+
+.card.card--img:hover .service-cta {
+  background: #ea580c !important; /* Darker orange on hover */
+}
+
+/* Remove all underlines from nested elements */
+.card.card--img * {
+  text-decoration: none !important;
+}
