@@ -21,6 +21,40 @@ Este documento es **la norma** para publicar cualquier landing o artículo dentr
 ## 3. Plano obligatorio de la página
 Sigue la secuencia exacta. Cada bloque debe ir delimitado por `<section>` (o la etiqueta semántica indicada) y encabezado correcto (`h1` único, luego `h2` → `h3`).
 
+### 3.0 Header de Navegación (obligatorio)
+Todas las páginas deben incluir el header de navegación idéntico al de la homepage (`https://plomeroculiacanpro.mx/`):
+
+```html
+<nav class="nav">
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="/" class="logo">Plomero Culiacán Pro</a>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="/#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="/#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="/#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="/blog/" class="nav-link">Blog</a></li>
+                <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+```
+
+**Requisitos:**
+- Logo debe apuntar a la raíz `/` siempre
+- Enlaces de navegación deben usar `/#inicio`, `/#servicios`, `/#sobre-nosotros`, `/#contacto` (anclas a la homepage)
+- Enlace a Blog debe ser `/blog/` (absoluto)
+- Mobile menu button con 3 `<span>` para el ícono hamburguesa
+- Clases CSS: `.nav`, `.container`, `.nav-wrapper`, `.logo`, `.mobile-menu-btn`, `.nav-menu`, `.nav-link`
+- `aria-label="Menu"` en el botón móvil para accesibilidad
+- La estructura debe ser **idéntica** en todas las páginas del sitio
+
 ### 3.1 Head SEO (obligatorio)
 - `<title>` = `Servicio + en Culiacán | Beneficio directo`. Ej.: “Destape de drenajes en Culiacán | Llegada 30‑60 min”.
 - `<meta name="description">` con urgencia + cobertura + contacto (tel/WhatsApp).
