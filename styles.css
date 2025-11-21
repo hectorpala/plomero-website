@@ -259,13 +259,18 @@ p {
     display: none !important;
   }
 
-  /* Mover rating badge arriba donde estaba el texto */
+  /* Bajar rating badge para que no toque la cara */
   .hero-rating {
-    margin-top: -0.5rem;
+    margin-top: 3rem;
     margin-bottom: 2rem;
     background: rgba(255, 255, 255, 0.285) !important;
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
+  }
+
+  /* Ocultar botones de llamada y WhatsApp en móvil */
+  .hero-cta {
+    display: none !important;
   }
 }
 
