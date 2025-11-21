@@ -754,14 +754,15 @@ p {
   margin-bottom: 0.35rem;
 }
 
-/* WhatsApp CTA Box */
+/* WhatsApp CTA Box - Action Bar */
 .whatsapp-cta-box {
+  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-  margin-top: 3rem;
-  padding: 2.5rem;
+  margin-top: 2rem;
+  padding: 2rem 2.5rem;
   background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
