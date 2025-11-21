@@ -745,10 +745,45 @@ p {
 
 /* Testimonials section */
 .testimonials {
+  padding: 4rem 0;
+  background: #ffffff;
+}
+
+.testimonial-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+}
+
+.testimonial-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--brand);
+}
+
+.testimonial-card .stars {
+  color: #FFA000;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+}
+
+.testimonial-card p {
+  font-size: 1.125rem;
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.testimonial-card cite {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-style: normal;
 }
 
 .testimonial {
@@ -770,6 +805,24 @@ p {
   color: var(--text-light);
   font-size: 0.95rem;
   font-weight: 500;
+}
+
+/* Testimonials mobile - transparent background to show hero plumber */
+@media (max-width: 768px) {
+  .testimonials {
+    background: transparent;
+    padding: 2rem 0;
+  }
+
+  .testimonial-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .testimonial-grid {
+    gap: 1.5rem;
+  }
 }
 
 /* FAQ section */
