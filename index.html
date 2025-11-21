@@ -355,7 +355,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-20T10:35:00Z" />
+<meta name="x-build" content="2025-11-21T08:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -392,20 +392,20 @@
         "addressRegion": "Sinaloa",
         "addressCountry": "MX"
       },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "20:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Saturday", "Sunday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        }
-      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
       "areaServed": {
         "@type": "City",
         "name": "Culiacán",
