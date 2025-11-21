@@ -250,7 +250,7 @@ p {
 /* Hero responsive adjustments for mobile */
 @media (max-width: 768px) {
   .hero {
-    background-position: 40% center;
+    background-position: 40% 30%;
     min-height: 75vh;
   }
 }
@@ -274,7 +274,7 @@ p {
 
 @media (max-width: 768px) {
   .hero-image img {
-    object-position: 40% center;
+    object-position: 40% 30%;
   }
 }
 
