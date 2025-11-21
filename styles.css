@@ -269,7 +269,10 @@ p {
   }
 
   /* Ocultar botones de llamada y WhatsApp en móvil */
-  .hero-cta {
+  .hero-cta,
+  .hero-contact,
+  .hero-guarantee,
+  .hero .btn-primary {
     display: none !important;
   }
 }
