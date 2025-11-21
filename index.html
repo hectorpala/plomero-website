@@ -21,6 +21,14 @@
     <link rel="preconnect" href="https://wa.me">
     <link rel="dns-prefetch" href="https://wa.me">
 
+    <!-- Preload critical hero image for LCP optimization -->
+    <link rel="preload" as="image"
+          href="/assets/images/hero-plomero-visita-1200w.webp"
+          imagesrcset="/assets/images/hero-plomero-visita-800w.webp 800w,
+                       /assets/images/hero-plomero-visita-1200w.webp 1200w"
+          imagesizes="100vw"
+          fetchpriority="high">
+
     <!-- Preload critical fonts for LCP optimization -->
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <link rel="preload" href="/assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
@@ -40,10 +48,12 @@
         .logo{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:700;color:var(--text);text-decoration:none}
         .nav-menu{display:flex;list-style:none;gap:2rem}
         .nav-link{color:var(--text);font-weight:500;text-decoration:none}
-        .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(15,23,42,0.25) 0%,rgba(30,41,59,0.30) 100%),image-set(url('assets/images/hero-plomero-visita-800w.webp') 1x,url('assets/images/hero-plomero-visita-1200w.webp') 2x);background-size:cover;background-position:center center}
-        @media (max-width:768px){.hero{background-position:40% 35%;min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-content{margin-top:0!important;padding-top:0!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(255,255,255,0.285)!important;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}.hero-cta,.hero-contact,.hero-guarantee,.hero .btn-primary{display:none!important}}
-        .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,transparent 0%,rgba(15,23,42,0.10) 100%)}
-        .hero-content{position:relative;z-index:1;max-width:900px;margin:0 auto}
+        .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
+        .hero-background{position:absolute;inset:0;z-index:0}
+        .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
+        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0!important;padding-top:0!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(255,255,255,0.285)!important;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}.hero-cta,.hero-contact,.hero-guarantee,.hero .btn-primary{display:none!important}}
+        .hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(15,23,42,0.25) 0%,rgba(30,41,59,0.30) 100%);pointer-events:none}
+        .hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto}
         .hero h1{color:#FFFFFF;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
         .hero-subtitle{font-size:clamp(1.125rem,2.5vw,1.375rem);color:#F1F5F9;margin-bottom:3rem;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.6;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
         .hero-rating{display:inline-flex;align-items:center;gap:0.5rem;margin:1rem 0 1.5rem;padding:0.75rem 1.25rem;background:rgba(255,255,255,0.95);border-radius:50px;box-shadow:0 4px 12px rgba(0,0,0,0.15);font-size:0.95rem}
@@ -355,7 +365,7 @@
 <meta name="twitter:description" content="Plomero certificado en Culiacán · Emergencia 24/7 con llegada en 30-60 min · Cobertura Las Quintas, Tres Ríos, Centro · WhatsApp inmediato · Factura disponible" />
 <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
 
-<meta name="x-build" content="2025-11-21T09:00:00Z" />
+<meta name="x-build" content="2025-11-21T10:00:00Z" />
 
 <!-- seo:jsonld plumber v3 -->
 <!-- JSON-LD: Plumber + WebSite + Breadcrumbs + AggregateRating + Reviews individuales -->
@@ -1046,24 +1056,22 @@ window.dataLayer = window.dataLayer || [];
     </nav>
 
     <header id="inicio" class="hero">
-        <div class="container">
-            <!-- Hero Image (above the fold para rich snippets visuales) -->
-            <figure class="hero-image">
-                <picture>
-                    <source type="image/webp"
-                            srcset="/assets/images/hero-plomero-visita-800w.webp 800w, /assets/images/hero-plomero-visita-1200w.webp 1200w"
-                            sizes="(max-width: 768px) 100vw, 1200px">
-                    <img src="/assets/images/hero-plomero-visita-1200w.webp"
-                         srcset="/assets/images/hero-plomero-visita-800w.webp 800w, /assets/images/hero-plomero-visita-1200w.webp 1200w"
-                         sizes="(max-width: 768px) 100vw, 1200px"
-                         alt="Plomero profesional en Culiacán atendiendo emergencia 24 horas con herramientas especializadas"
-                         width="1200"
-                         height="800"
-                         fetchpriority="high"
-                         decoding="async">
-                </picture>
-            </figure>
+        <!-- Hero Background Image (LCP optimized with preload) -->
+        <picture class="hero-background">
+            <source type="image/webp"
+                    srcset="/assets/images/hero-plomero-visita-800w.webp 800w, /assets/images/hero-plomero-visita-1200w.webp 1200w"
+                    sizes="100vw">
+            <img src="/assets/images/hero-plomero-visita-1200w.webp"
+                 srcset="/assets/images/hero-plomero-visita-800w.webp 800w, /assets/images/hero-plomero-visita-1200w.webp 1200w"
+                 sizes="100vw"
+                 alt="Plomero profesional en Culiacán atendiendo emergencia 24 horas con herramientas especializadas"
+                 width="1200"
+                 height="800"
+                 fetchpriority="high"
+                 decoding="async">
+        </picture>
 
+        <div class="container">
             <div class="hero-content">
                 <h1 class="fade-in">Plomero en Culiacán – Emergencias 24/7</h1>
 
