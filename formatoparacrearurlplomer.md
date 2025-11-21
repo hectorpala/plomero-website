@@ -35,11 +35,11 @@ Todas las páginas deben incluir el header de navegación idéntico al de la hom
                 <span></span>
             </button>
             <ul class="nav-menu">
-                <li><a href="/#inicio" class="nav-link">Inicio</a></li>
-                <li><a href="/#servicios" class="nav-link">Servicios</a></li>
-                <li><a href="/#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
                 <li><a href="/blog/" class="nav-link">Blog</a></li>
-                <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
             </ul>
         </div>
     </div>
@@ -48,12 +48,12 @@ Todas las páginas deben incluir el header de navegación idéntico al de la hom
 
 **Requisitos:**
 - Logo debe apuntar a la raíz `/` siempre
-- Enlaces de navegación deben usar `/#inicio`, `/#servicios`, `/#sobre-nosotros`, `/#contacto` (anclas a la homepage)
+- Enlaces de navegación deben usar `#inicio`, `#servicios`, `#sobre-nosotros`, `#contacto` (anclas dentro de la página, que si no existen redirigen a homepage)
 - Enlace a Blog debe ser `/blog/` (absoluto)
 - Mobile menu button con 3 `<span>` para el ícono hamburguesa
 - Clases CSS: `.nav`, `.container`, `.nav-wrapper`, `.logo`, `.mobile-menu-btn`, `.nav-menu`, `.nav-link`
 - `aria-label="Menu"` en el botón móvil para accesibilidad
-- La estructura debe ser **idéntica** en todas las páginas del sitio
+- La estructura debe ser **idéntica** en todas las páginas del sitio (copiar exactamente de homepage)
 
 ### 3.1 Head SEO (obligatorio)
 - `<title>` = `Servicio + en Culiacán | Beneficio directo`. Ej.: “Destape de drenajes en Culiacán | Llegada 30‑60 min”.
