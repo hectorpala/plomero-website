@@ -810,13 +810,14 @@ p {
 /* Testimonials mobile - transparent background to show hero plumber */
 @media (max-width: 768px) {
   .testimonials {
-    background: transparent;
+    background: transparent !important;
     padding: 2rem 0;
   }
 
   .testimonial-card {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.85) !important;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 
