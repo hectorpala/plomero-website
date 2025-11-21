@@ -250,9 +250,9 @@ p {
 /* Hero responsive adjustments for mobile */
 @media (max-width: 768px) {
   .hero {
-    background-position: 40% 30%;
+    background-position: 40% 35%;
     min-height: 75vh;
-    padding-top: 90px !important;
+    padding-top: 85px !important;
     align-items: flex-start !important;
   }
 
@@ -273,9 +273,9 @@ p {
     display: none !important;
   }
 
-  /* Bajar rating badge para que no toque la cara */
+  /* Rating badge - abajo del cuello del plomero */
   .hero-rating {
-    margin-top: 3rem;
+    margin-top: 20rem;
     margin-bottom: 2rem;
     background: rgba(255, 255, 255, 0.285) !important;
     backdrop-filter: blur(3px);
