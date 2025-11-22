@@ -2096,6 +2096,8 @@ window.dataLayer = window.dataLayer || [];
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
+            // Prevent CLS: lock body scroll when menu is open
+            document.body.classList.toggle('menu-open');
         });
 
         // Close mobile menu when clicking a link
@@ -2103,6 +2105,7 @@ window.dataLayer = window.dataLayer || [];
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
+                document.body.classList.remove('menu-open');
             });
         });
 
