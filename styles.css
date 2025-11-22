@@ -200,13 +200,15 @@ p {
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #fff;
+  color: #f97316 !important;
   text-decoration: none;
   transition: color 0.2s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 .logo:hover {
-  color: var(--brand-light);
+  color: #ea580c !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
 }
 
 .nav-menu {
@@ -216,14 +218,16 @@ p {
 }
 
 .nav-link {
-  color: #fff;
+  color: #f97316 !important;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 .nav-link:hover {
-  color: var(--brand-light);
+  color: #ea580c !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
 }
 
 .hero {
@@ -236,7 +240,7 @@ p {
   padding: 140px 16px 2.5rem 16px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(15,23,42,0.25) 0%, rgba(30,41,59,0.30) 100%),
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 20%, rgba(0, 0, 0, 0) 50%),
               image-set(
                 url('assets/images/hero-plomero-visita-800w.webp') 1x,
                 url('assets/images/hero-plomero-visita-1200w.webp') 2x
@@ -1146,7 +1150,7 @@ p {
   .nav-link {
     font-size: 1.25rem;
     font-weight: 600;
-    color: var(--text);
+    color: #f97316 !important;
     padding: 1rem 2rem;
     border-radius: 12px;
     transition: all 0.3s ease;
@@ -1154,6 +1158,7 @@ p {
     letter-spacing: 0.5px;
     min-height: 44px;
     display: flex;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
     align-items: center;
     justify-content: center;
   }
@@ -1774,9 +1779,10 @@ p {
 
 /* Estado activo del enlace Blog en navegación */
 .nav-link.active {
-  color: var(--brand);
+  color: #f97316 !important;
   background-color: var(--bg-soft);
   border-radius: var(--radius-sm);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 @media (max-width: 768px) {
