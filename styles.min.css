@@ -276,23 +276,37 @@ p {
     line-height: 1.2 !important;
   }
 
-  /* Ocultar párrafo descriptivo en móvil */
+  /* Subtítulo compacto en móvil - SEO crítico */
   .hero-subtitle {
-    display: none !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
   /* Rating badge - abajo del cuello del plomero */
   .hero-rating {
     margin-top: 20rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     background: rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* Ocultar botones de llamada y WhatsApp en móvil */
+  /* Botón CTA visible en móvil - conversión crítica */
+  .hero .btn-primary {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 1rem !important;
+    padding: 0.875rem 1.5rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  /* Ocultar elementos secundarios en móvil */
   .hero-cta,
   .hero-contact,
-  .hero-guarantee,
-  .hero .btn-primary {
+  .hero-guarantee {
     display: none !important;
   }
 }

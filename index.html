@@ -397,9 +397,18 @@
   "@graph": [
     {
       "@type": "WebSite",
+      "@id": "https://plomeroculiacanpro.mx/#website",
       "name": "Plomero Culiacán Pro",
       "url": "https://plomeroculiacanpro.mx/",
-      "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg"
+      "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://plomeroculiacanpro.mx/blog/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     },
     {
       "@type": "BreadcrumbList",
