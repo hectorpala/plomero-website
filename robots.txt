@@ -4,9 +4,9 @@
 # Reglas para todos los bots
 User-agent: *
 Disallow: /gracias/
-Disallow: /*.json$
 Disallow: /admin/
 Disallow: /private/
+Allow: /manifest.json
 Allow: /assets/
 Allow: /sitemaps/
 Crawl-delay: 0
