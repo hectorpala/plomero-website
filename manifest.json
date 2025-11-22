@@ -12,9 +12,21 @@
   "dir": "ltr",
   "icons": [
     {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "/assets/icons/icon-192.webp",
       "sizes": "192x192",
       "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
@@ -42,8 +54,14 @@
       "url": "https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20urgente",
       "icons": [
         {
+          "src": "/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
           "src": "/assets/icons/icon-192.webp",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/webp"
         }
       ]
     },
@@ -54,8 +72,14 @@
       "url": "tel:+526671631231",
       "icons": [
         {
+          "src": "/assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
           "src": "/assets/icons/icon-192.webp",
-          "sizes": "192x192"
+          "sizes": "192x192",
+          "type": "image/webp"
         }
       ]
     }
