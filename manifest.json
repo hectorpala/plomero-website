@@ -12,16 +12,22 @@
   "dir": "ltr",
   "icons": [
     {
-      "src": "/assets/icons/icon-192.png",
+      "src": "/assets/icons/icon-192.webp",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-512.png",
+      "src": "/assets/icons/icon-512.webp",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-plomero-culiacan-pro.webp",
+      "sizes": "2816x1536",
+      "type": "image/webp",
+      "purpose": "any"
     }
   ],
   "categories": [
@@ -36,7 +42,7 @@
       "url": "https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20urgente",
       "icons": [
         {
-          "src": "/assets/icons/icon-192.png",
+          "src": "/assets/icons/icon-192.webp",
           "sizes": "192x192"
         }
       ]
@@ -48,7 +54,7 @@
       "url": "tel:+526671631231",
       "icons": [
         {
-          "src": "/assets/icons/icon-192.png",
+          "src": "/assets/icons/icon-192.webp",
           "sizes": "192x192"
         }
       ]

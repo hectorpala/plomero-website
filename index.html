@@ -54,10 +54,12 @@
         .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
         h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
         h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
-        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:16px 0}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
         .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
-        .logo{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;text-decoration:none;transition:color .2s ease}
-        .logo:hover{color:var(--brand-light)}
+        .logo{display:block;text-decoration:none;transition:opacity .2s ease}
+        .logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+        .logo:hover{opacity:0.9}
+        @media (max-width:768px){.logo img{height:62px;max-height:72px}}
         .nav-menu{display:flex;list-style:none;gap:2rem}
         .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
         .nav-link:hover{color:var(--brand-light)}
@@ -90,8 +92,8 @@
         .floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
         .floating-call{background:#0f4fa8;bottom:18px}
         .floating-whatsapp{background:#22c55e;bottom:78px}
-        .mobile-menu-btn{display:none;flex-direction:column;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0}
-        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px}
+        .mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
+        .mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px;margin:0}
         @media (max-width:768px){
             .mobile-menu-btn{display:flex}
             .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem}
@@ -407,7 +409,7 @@
       "@id": "https://plomeroculiacanpro.mx/#website",
       "name": "Plomero Culiacán Pro",
       "url": "https://plomeroculiacanpro.mx/",
-      "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
+      "logo": "https://plomeroculiacanpro.mx/logo-plomero-culiacan-pro.webp",
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -587,7 +589,7 @@
         "https://www.facebook.com/plomeroculiacanpro",
         "https://www.instagram.com/plomeroculiacanpro"
       ],
-      "logo": "https://plomeroculiacanpro.mx/assets/icons/logo-blue.svg",
+      "logo": "https://plomeroculiacanpro.mx/logo-plomero-culiacan-pro.webp",
       "image": {
         "@type": "ImageObject",
         "url": "https://plomeroculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp",
@@ -1092,7 +1094,9 @@ window.dataLayer = window.dataLayer || [];
     <nav class="nav">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="/" class="logo">Plomero Culiacán Pro</a>
+                <a href="/" class="logo">
+                    <img src="logo-plomero-culiacan-pro.png" alt="Plomero Culiacán Pro - Logo">
+                </a>
                 <button class="mobile-menu-btn" aria-label="Menu">
                     <span></span>
                     <span></span>
@@ -2108,7 +2112,10 @@ window.dataLayer = window.dataLayer || [];
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Plomero Pro. Todos los derechos reservados.</p>
+            <div class="footer-logo">
+                <img src="logo-plomero-culiacan-pro.png" alt="Plomero Culiacán Pro">
+            </div>
+            <p>&copy; 2024 Plomero Culiacán Pro. Todos los derechos reservados.</p>
         </div>
     </footer>
     <!-- Main JavaScript (defer for optimal performance) -->
