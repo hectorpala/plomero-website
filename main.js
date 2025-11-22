@@ -149,7 +149,7 @@
             leads.push(leadData);
             localStorage.setItem('plomero_leads', JSON.stringify(leads));
         } catch (e) {
-            console.error('Error storing lead in localStorage:', e);
+            // console.error('Error storing lead in localStorage:', e);
         }
 
         // 3. Submit to Netlify Forms (primary backend)
@@ -178,7 +178,7 @@
                 throw new Error('Netlify form submission failed');
             }
         } catch (error) {
-            console.error('Error submitting to Netlify:', error);
+            // console.error('Error submitting to Netlify:', error);
 
             // Fallback: open WhatsApp directly
             alert('Formulario enviado. Te redirigiremos a WhatsApp.');
@@ -255,7 +255,7 @@
           'page_location': window.location.pathname
         });
       } catch(e) {
-        console.error('Error tracking seo card:', e);
+        // console.error('Error tracking seo card:', e);
       }
     });
   });
@@ -305,14 +305,14 @@
 
     // Check if popup should be shown (only once per session)
     if (hasShown) {
-        console.log('[Exit-Intent] Ya se mostró anteriormente. Para re-probar: localStorage.removeItem("exitPopupShown")');
+        // console.log('[Exit-Intent] Ya se mostró anteriormente. Para re-probar: localStorage.removeItem("exitPopupShown")');
         return;
     }
 
     if (isMobile) {
-        console.log('[Exit-Intent] Modo MÓVIL activado. Espera 10+ segundos y haz scroll hacia arriba para activar.');
+        // console.log('[Exit-Intent] Modo MÓVIL activado. Espera 10+ segundos y haz scroll hacia arriba para activar.');
     } else {
-        console.log('[Exit-Intent] Modo DESKTOP activado. Espera 2+ segundos y mueve mouse hacia arriba para activar.');
+        // console.log('[Exit-Intent] Modo DESKTOP activado. Espera 2+ segundos y mueve mouse hacia arriba para activar.');
     }
 
     // Track time on page
@@ -339,7 +339,7 @@
 
             // Debug logging
             if (!toElement && mouseY < 10) {
-                console.log('[Exit-Intent] Detectado intento de salida. Tiempo en página:', Math.round(timeOnPage / 1000) + 's');
+                // console.log('[Exit-Intent] Detectado intento de salida. Tiempo en página:', Math.round(timeOnPage / 1000) + 's');
             }
 
             if (!toElement &&
@@ -347,10 +347,10 @@
                 timeOnPage >= minTimeBeforePopup &&
                 !isExiting) {
                 isExiting = true;
-                console.log('[Exit-Intent] ✅ Mostrando popup (Desktop)!');
+                // console.log('[Exit-Intent] ✅ Mostrando popup (Desktop)!');
                 showPopup();
             } else if (!toElement && mouseY < 10 && timeOnPage < minTimeBeforePopup) {
-                console.log('[Exit-Intent] ⏱️  Muy pronto. Necesitas ' + Math.ceil((minTimeBeforePopup - timeOnPage) / 1000) + 's más.');
+                // console.log('[Exit-Intent] ⏱️  Muy pronto. Necesitas ' + Math.ceil((minTimeBeforePopup - timeOnPage) / 1000) + 's más.');
             }
         });
     }
@@ -371,10 +371,10 @@
                 timeOnPage >= minTimeBeforePopupMobile &&
                 !isExiting) {
                 isExiting = true;
-                console.log('[Exit-Intent] ✅ Mostrando popup (Mobile - scroll up)!');
+                // console.log('[Exit-Intent] ✅ Mostrando popup (Mobile - scroll up)!');
                 showPopup();
             } else if (scrollingUp && currentScrollY < (document.documentElement.scrollHeight * 0.2) && timeOnPage < minTimeBeforePopupMobile) {
-                console.log('[Exit-Intent Mobile] ⏱️  Necesitas ' + Math.ceil((minTimeBeforePopupMobile - timeOnPage) / 1000) + 's más.');
+                // console.log('[Exit-Intent Mobile] ⏱️  Necesitas ' + Math.ceil((minTimeBeforePopupMobile - timeOnPage) / 1000) + 's más.');
             }
 
             lastScrollY = currentScrollY;
@@ -463,10 +463,10 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
             .then(registration => {
-                console.log('SW registered:', registration.scope);
+                // console.log('SW registered:', registration.scope);
             })
             .catch(err => {
-                console.log('SW registration failed:', err);
+                // console.log('SW registration failed:', err);
             });
     });
 }
