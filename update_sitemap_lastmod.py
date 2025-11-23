@@ -28,18 +28,34 @@ print(f"{'='*70}")
 
 contador = 0
 
-# Actualizar todas las URLs de colonias (que acabamos de modificar)
+# Lista de servicios actualizados hoy
+servicios_actualizados = [
+    'correccion-baja-presion',
+    'destape-de-drenajes',
+    'deteccion-de-fugas',
+    'emergencia-24-7',
+    'instalacion-de-sanitarios',
+    'mantenimiento-de-boiler',
+    'plomero-a-domicilio',
+    'plomero-cerca-de-mi',
+    'plomero-precios',
+    'reparacion-de-fugas'
+]
+
+# Actualizar URLs de servicios que acabamos de modificar
 for url in root.findall('ns:url', ns):
     loc = url.find('ns:loc', ns)
     lastmod = url.find('ns:lastmod', ns)
 
-    if loc is not None and 'plomero-colonias-culiacan' in loc.text:
-        if lastmod is not None:
-            lastmod.text = current_timestamp
-            contador += 1
-            # Extraer nombre de colonia de la URL
-            colonia = loc.text.split('/')[-2].replace('-', ' ').title()
-            print(f"✅ {colonia}: {current_timestamp}")
+    if loc is not None and lastmod is not None:
+        # Check si es un servicio actualizado
+        for servicio in servicios_actualizados:
+            if f'servicios/{servicio}/' in loc.text:
+                lastmod.text = current_timestamp
+                contador += 1
+                servicio_name = servicio.replace('-', ' ').title()
+                print(f"✅ {servicio_name}: {current_timestamp}")
+                break
 
 print(f"\n{'='*70}")
 print(f"📊 RESUMEN:")
