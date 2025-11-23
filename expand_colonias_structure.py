@@ -1,276 +1,81 @@
-<!DOCTYPE html>
-<html lang="es-MX">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plomero en Altamira Culiacán | Fraccionamiento Nuevo 24/7</title>
-    <meta name="description" content="Plomero certificado en Altamira, Culiacán. Fraccionamiento nuevo en crecimiento. Instalaciones garantizadas, construcción nueva, sistemas eficientes. Llegada en 35 min. WhatsApp: 667 163 1231">
-    <link rel="icon" href="../../../assets/icons/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="../../../assets/icons/favicon.png">
-    <link rel="apple-touch-icon" href="../../../assets/icons/favicon.png">
-    <link rel="preload" href="../../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="../../../styles.min.css">
-<link rel="canonical" href="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/altamira/" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/altamira/" />
-<meta property="og:title" content="Plomero en Altamira | Fraccionamiento Nuevo 24/7" />
-<meta property="og:description" content="Servicio especializado en Altamira. Fraccionamiento nuevo en crecimiento con instalaciones certificadas y sistemas eficientes." />
-<meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp" />
-<meta name="x-build" content="2025-11-18T00:45:00Z" />
-<!-- JSON-LD Schema: Solo BreadcrumbList (sin LocalBusiness para evitar duplicación) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Inicio",
-      "item": "https://plomeroculiacanpro.mx/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Servicios",
-      "item": "https://plomeroculiacanpro.mx/#servicios"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Plomero por Colonias",
-      "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "Altamira",
-      "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/altamira/"
-    }
-  ]
-}
+#!/usr/bin/env python3
+"""
+Expande todas las páginas de colonias con la estructura completa de Las Quintas.
+Mantiene schemas existentes, reemplaza contenido del body con estructura expandida.
+"""
 
-    <!-- FAQPage Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Cuánto tarda el plomero en llegar a Altamira?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Llegamos en 25-40 minutos a Altamira desde nuestra base en Culiacán. Conocemos perfectamente la zona, los accesos principales y estamos familiarizados con las características específicas del fraccionamiento. Atendemos emergencias 24/7 todos los días del año."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta el servicio de plomería en Altamira?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Los precios en Altamira generalmente van desde $800-$2,000 dependiendo del tipo de trabajo: visita diagnóstico desde $300, reparación de fugas $800-$1,500, destape de drenaje $600-$1,200, instalación de sanitarios $900-$2,000. El precio incluye diagnóstico, mano de obra, materiales y garantía de 6 meses. Cotizamos sin compromiso por WhatsApp al 667 163 1231."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Conocen los sistemas de plomería específicos de Altamira?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí, tenemos más de 10 años de experiencia trabajando en Altamira. Conocemos los tinaco estándar, boilers de depósito, grifería nacional y sistemas de 1-2 baños típicos de la zona. Esto nos permite hacer diagnósticos más rápidos y reparaciones más efectivas porque sabemos exactamente qué esperar."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Atienden emergencias de plomería en Altamira de madrugada?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí, nuestro servicio de emergencia 24/7 incluye atención en Altamira durante madrugadas, fines de semana y días festivos. Para emergencias urgentes (fugas grandes, inundaciones, drenajes colapsados) llamar directamente al 667 163 1231. Para consultas menos urgentes, escribir por WhatsApp y respondemos en minutos."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué garantía ofrecen en los trabajos realizados en Altamira?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Todos nuestros trabajos en Altamira incluyen garantía escrita de 6 meses en mano de obra y materiales. Esto cubre cualquier defecto relacionado con la reparación realizada. Usamos refacciones originales y técnicas profesionales certificadas. Si presenta algún problema dentro del período de garantía, regresamos sin costo adicional."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Dan factura electrónica por los servicios en Altamira?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí, emitimos factura electrónica (CFDI) para todos los servicios realizados en Altamira. Solo necesitamos tu RFC y razón social. La factura se envía por correo electrónico el mismo día o al día siguiente del servicio. Aceptamos pagos en efectivo, transferencia bancaria y tarjetas de crédito/débito."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Cuáles son los problemas de plomería más comunes en Altamira?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "En Altamira los problemas más frecuentes que atendemos son: fugas en tuberías ocultas (muros y pisos), drenajes tapados por acumulación de residuos, baja presión de agua, fallas en boilers y calentadores, fugas en llaves y mezcladoras, y problemas con tinaco o sistemas de bombeo. Cada zona tiene características particulares según la antigüedad de las construcciones."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Necesito estar presente durante el servicio en Altamira?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Idealmente sí, es recomendable que alguien esté presente durante el servicio en Altamira para autorizar el trabajo, mostrar el problema específico y recibir explicaciones sobre la reparación realizada. Sin embargo, si no es posible, podemos coordinar con personal de confianza, familiares o vecinos. Enviamos fotos y videos del trabajo por WhatsApp para mantener informado al propietario."
-          }
-        }
-      ]
-    }
-    </script>
-</script>
+import os
+import re
+from pathlib import Path
 
-    <style>
-    .breadcrumb {
-        background: #f8f9fa;
-        padding: 12px 0;
-        font-size: 14px;
-        border-bottom: 1px solid #e9ecef;
-    }
-    .breadcrumb-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    .breadcrumb-list {
-        display: flex;
-        align-items: center;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        flex-wrap: wrap;
-    }
-    .breadcrumb-item {
-        display: flex;
-        align-items: center;
-    }
-    .breadcrumb-item a {
-        color: #0066cc;
-        text-decoration: none;
-        transition: color 0.2s;
-    }
-    .breadcrumb-item a:hover {
-        color: #004499;
-        text-decoration: underline;
-    }
-    .breadcrumb-item.active {
-        color: #6c757d;
-    }
-    .breadcrumb-separator {
-        margin: 0 8px;
-        color: #6c757d;
-        user-select: none;
-    }
-    @media (max-width: 768px) {
-        .breadcrumb {
-            font-size: 13px;
-            padding: 10px 0;
-        }
-        .breadcrumb-separator {
-            margin: 0 6px;
-        }
-    }
-    </style>
+# Base directory
+base_dir = Path("servicios/plomero-colonias-culiacan")
 
+# Colonias premium (precios diferentes)
+colonias_premium = [
+    'las-quintas', 'tres-rios', 'country-tres-rios', 'campestre',
+    'colinas-de-san-miguel', 'lomas-del-boulevard', 'chapultepec'
+]
 
-    <!-- Service Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Servicios de Plomería Residencial",
-      "name": "Plomero en Altamira",
-      "description": "Servicio profesional de plomería en Altamira, Culiacán. Experiencia en sistemas residenciales, reparación de fugas, destape de drenajes e instalaciones. Atención 24/7 con llegada en 25-40 minutos. Garantía de 6 meses.",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Plomero Culiacán Pro",
-        "telephone": "+526671631231",
-        "priceRange": "$$",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Culiacán",
-          "addressRegion": "Sinaloa",
-          "addressCountry": "MX"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "150"
+# Características específicas por tipo de colonia
+def get_caracteristicas(slug, es_premium):
+    """Retorna características personalizadas según tipo de colonia"""
+    if es_premium:
+        return {
+            'tipo': 'Residencias Premium',
+            'icon': '🏡',
+            'descripcion': 'Cientos de trabajos en ' + slug.replace('-', ' ').title(),
+            'llegada': '20-30 Minutos',
+            'sistemas': 'Sistemas de Alta Presión',
+            'sistemas_desc': 'Hidroneumáticos y múltiples niveles',
+            'materiales': 'Materiales Premium',
+            'materiales_desc': 'Helvex, Grival, Moen, Noritz',
+            'garantia': 'Garantía Escrita 6 Meses',
+            'garantia_desc': 'Respaldamos nuestro trabajo'
         }
-      },
-      "areaServed": {
-        "@type": "Place",
-        "name": "Altamira, Culiacán, Sinaloa",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Culiacán",
-          "addressRegion": "Sinaloa",
-          "addressCountry": "MX"
+    else:
+        return {
+            'tipo': 'Zona Establecida',
+            'icon': '🏘️',
+            'descripcion': 'Experiencia en ' + slug.replace('-', ' ').title(),
+            'llegada': '25-35 Minutos',
+            'sistemas': 'Todos los Sistemas',
+            'sistemas_desc': 'Instalaciones tradicionales y modernas',
+            'materiales': 'Materiales de Calidad',
+            'materiales_desc': 'Helvex, Grival, marcas nacionales',
+            'garantia': 'Garantía 6 Meses',
+            'garantia_desc': 'Trabajo respaldado'
         }
-      },
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "MXN",
-        "price": "800",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "minPrice": "800",
-          "maxPrice": "2000",
-          "priceCurrency": "MXN"
-        },
-        "availability": "https://schema.org/InStock"
-      },
-      "availableChannel": {
-        "@type": "ServiceChannel",
-        "serviceUrl": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/altamira/",
-        "servicePhone": "+526671631231",
-        "availableLanguage": {
-          "@type": "Language",
-          "name": "Spanish"
-        }
-      },
-      "hoursAvailable": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "00:00",
-        "closes": "23:59"
-      },
-      "serviceOutput": [
-        "Reparación de fugas de agua",
-        "Destape de drenajes y tuberías",
-        "Instalación de sanitarios y llaves",
-        "Mantenimiento de boilers",
-        "Detección de fugas con equipo especializado",
-        "Corrección de baja presión de agua"
-      ]
-    }
-    </script></head>
-<body>
+
+def generate_expanded_body(slug, es_premium):
+    """Genera el contenido completo del body personalizado por colonia"""
+
+    name = slug.replace('-', ' ').title()
+    name_url = slug
+    caract = get_caracteristicas(slug, es_premium)
+
+    # Texto personalizado para el hero
+    if es_premium:
+        hero_subtitle = f"Servicio especializado en residencias premium de {name}. Más de 10 años trabajando en el fraccionamiento. Conocemos sistemas de alta presión, hidroneumáticos, instalaciones de lujo. Llegada en {caract['llegada'].lower()}. Atención 24/7."
+        precios_texto = "Los costos pueden ser mayores debido al uso de materiales premium y la complejidad de los sistemas en residencias de lujo."
+        why_text = "Acceso Controlado: Conocemos protocolos de la caseta, llegamos identificados profesionalmente."
+    else:
+        hero_subtitle = f"Servicio confiable de plomería en {name}, Culiacán. Conocemos la zona, sus accesos y características. Llegada en {caract['llegada'].lower()}. Atención 24/7 todos los días del año."
+        precios_texto = "El precio incluye diagnóstico, mano de obra, materiales y garantía de 6 meses."
+        why_text = "Conocemos la Zona: Calles, accesos, características específicas de cada sector."
+
+    body = f'''<body>
 <!-- Google Tag Manager -->
 <script>
 window.dataLayer = window.dataLayer || [];
-if (window.requestIdleCallback) {
-  requestIdleCallback(() => {
+if (window.requestIdleCallback) {{
+  requestIdleCallback(() => {{
     var script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
     document.head.appendChild(script);
-  });
-}
+  }});
+}}
 </script>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -303,8 +108,8 @@ if (window.requestIdleCallback) {
     <header id="inicio" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="fade-in">Plomero Certificado en Altamira Culiacán</h1>
-                <p class="hero-subtitle fade-in">Servicio confiable de plomería en Altamira, Culiacán. Conocemos la zona, sus accesos y características. Llegada en 25-35 minutos. Atención 24/7 todos los días del año.</p>
+                <h1 class="fade-in">Plomero Certificado en {name} Culiacán</h1>
+                <p class="hero-subtitle fade-in">{hero_subtitle}</p>
 
     <div style="background: #e8f4f8; padding: 20px; border-radius: 8px; margin: 24px 0; border-left: 4px solid #0066cc;">
         <p style="margin: 0; font-size: 15px; line-height: 1.6;">
@@ -316,39 +121,39 @@ if (window.requestIdleCallback) {
         </p>
     </div>
 <p class="hero-contact">WhatsApp: 52 667 163 1231 · Llamadas: 667 163 1231</p>
-                <a href="#contacto" class="btn-primary hover-lift">Solicitar Servicio en Altamira</a>
+                <a href="#contacto" class="btn-primary hover-lift">Solicitar Servicio en {name}</a>
             </div>
         </div>
     </header>
 
     <section class="section section-alt">
         <div class="container">
-            <h2>¿Por qué somos el plomero preferido de Altamira?</h2>
+            <h2>¿Por qué somos el plomero preferido de {name}?</h2>
             <div class="benefits-grid">
                 <div class="benefit">
-                    <div class="benefit-icon">🏘️</div>
-                    <h3>Zona Establecida</h3>
-                    <p>Experiencia en Altamira</p>
+                    <div class="benefit-icon">{caract['icon']}</div>
+                    <h3>{caract['tipo']}</h3>
+                    <p>{caract['descripcion']}</p>
                 </div>
                 <div class="benefit">
                     <div class="benefit-icon">⚡</div>
-                    <h3>Llegada en 25-35 Minutos</h3>
+                    <h3>Llegada en {caract['llegada']}</h3>
                     <p>Conocemos accesos y protocolos</p>
                 </div>
                 <div class="benefit">
                     <div class="benefit-icon">🔧</div>
-                    <h3>Todos los Sistemas</h3>
-                    <p>Instalaciones tradicionales y modernas</p>
+                    <h3>{caract['sistemas']}</h3>
+                    <p>{caract['sistemas_desc']}</p>
                 </div>
                 <div class="benefit">
                     <div class="benefit-icon">💎</div>
-                    <h3>Materiales de Calidad</h3>
-                    <p>Helvex, Grival, marcas nacionales</p>
+                    <h3>{caract['materiales']}</h3>
+                    <p>{caract['materiales_desc']}</p>
                 </div>
                 <div class="benefit">
                     <div class="benefit-icon">✅</div>
-                    <h3>Garantía 6 Meses</h3>
-                    <p>Trabajo respaldado</p>
+                    <h3>{caract['garantia']}</h3>
+                    <p>{caract['garantia_desc']}</p>
                 </div>
             </div>
         </div>
@@ -356,7 +161,7 @@ if (window.requestIdleCallback) {
 
     <section id="servicios" class="section">
         <div class="container">
-            <h2>Servicios Especializados en Altamira</h2>
+            <h2>Servicios Especializados en {name}</h2>
             <div class="grid">
                 <div class="card card--img">
                     <div class="service-card">
@@ -368,7 +173,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/reparacion-fugas-420w.png"
                                      srcset="../../../assets/images/reparacion-fugas-420w.png 420w, ../../../assets/images/reparacion-fugas-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Plomero reparando fuga en Altamira"
+                                     alt="Plomero reparando fuga en {name}"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -387,7 +192,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/arreglando-boiler-420w.png"
                                      srcset="../../../assets/images/arreglando-boiler-420w.png 420w, ../../../assets/images/arreglando-boiler-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Mantenimiento de boiler en Altamira"
+                                     alt="Mantenimiento de boiler en {name}"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -406,7 +211,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/taza-de-baño-420w.png"
                                      srcset="../../../assets/images/taza-de-baño-420w.png 420w, ../../../assets/images/taza-de-baño-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Instalación de grifería en Altamira"
+                                     alt="Instalación de grifería en {name}"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -425,7 +230,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/destapandodrenaje-420w.png"
                                      srcset="../../../assets/images/destapandodrenaje-420w.png 420w, ../../../assets/images/destapandodrenaje-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Destape de drenajes en Altamira"
+                                     alt="Destape de drenajes en {name}"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -444,7 +249,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/reivicion-bajapresion-420w.png"
                                      srcset="../../../assets/images/reivicion-bajapresion-420w.png 420w, ../../../assets/images/reivicion-bajapresion-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Corrección de presión en Altamira"
+                                     alt="Corrección de presión en {name}"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -463,13 +268,13 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/emergencia-24-7-nocturna-420w.png"
                                      srcset="../../../assets/images/emergencia-24-7-nocturna-420w.png 420w, ../../../assets/images/emergencia-24-7-nocturna-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Emergencias 24/7 en Altamira"
+                                     alt="Emergencias 24/7 en {name}"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
                     </div>
-                    <h3>Emergencias 24/7 en Altamira</h3>
+                    <h3>Emergencias 24/7 en {name}</h3>
                     <p>Atención inmediata fugas, inundaciones, drenajes tapados.</p>
                 </div>
             </div>
@@ -477,7 +282,7 @@ if (window.requestIdleCallback) {
     </section>
 
     <section class="seo-links" aria-labelledby="seo-links-title">
-      <h2 id="seo-links-title">Otros servicios en Altamira</h2>
+      <h2 id="seo-links-title">Otros servicios en {name}</h2>
       <div class="seo-grid">
         <a class="seo-card" href="../../reparacion-de-fugas/"><span>Reparación de Fugas</span></a>
         <a class="seo-card" href="../../destape-de-drenajes/"><span>Destape de Drenajes</span></a>
@@ -488,12 +293,12 @@ if (window.requestIdleCallback) {
 
     <section class="section section-alt">
         <div class="container">
-            <h2>Conocimiento Específico de Altamira</h2>
+            <h2>Conocimiento Específico de {name}</h2>
             <div class="pricing-content">
                 <div class="pricing-box">
-                    <h3>¿Por qué nos eligen en Altamira?</h3>
-                    <p><strong>✓ Conocemos la Zona: Calles, accesos, características específicas de cada sector.</strong></p>
-                    <p><strong>✓ Experiencia Local:</strong> Más de 10 años trabajando en Altamira y alrededores.</p>
+                    <h3>¿Por qué nos eligen en {name}?</h3>
+                    <p><strong>✓ {why_text}</strong></p>
+                    <p><strong>✓ Experiencia Local:</strong> Más de 10 años trabajando en {name} y alrededores.</p>
                     <p><strong>✓ Conocemos la Zona:</strong> Calles, accesos, características específicas del área.</p>
                     <p><strong>✓ Materiales de Calidad:</strong> Trabajamos con marcas reconocidas y confiables.</p>
                     <p><strong>✓ Detección Profesional:</strong> Equipos especializados para localizar fugas sin daños.</p>
@@ -508,29 +313,29 @@ if (window.requestIdleCallback) {
         <div class="container">
             <h2>Ubicación y Tiempo de Llegada</h2>
             <div class="emergency-content">
-                <p class="emergency-text">Altamira es una de las zonas donde más trabajamos. Conocemos perfectamente la ubicación, los accesos principales y las características del área.</p>
-                <p><strong>Tiempo promedio de llegada:</strong> 25-35 minutos desde cualquier punto de Culiacán.</p>
+                <p class="emergency-text">{name} es una de las zonas donde más trabajamos. Conocemos perfectamente la ubicación, los accesos principales y las características del área.</p>
+                <p><strong>Tiempo promedio de llegada:</strong> {caract['llegada'].lower()} desde cualquier punto de Culiacán.</p>
                 <p><strong>Disponibilidad:</strong> 24 horas, 7 días a la semana (incluyendo fines de semana y festivos).</p>
-                <a href="https://wa.me/526671631231?text=Hola,%20necesito%20un%20plomero%20en%20Altamira" target="_blank" class="btn-primary emergency-btn">WhatsApp: 52 667 163 1231</a>
+                <a href="https://wa.me/526671631231?text=Hola,%20necesito%20un%20plomero%20en%20{name.replace(' ', '%20')}" target="_blank" class="btn-primary emergency-btn">WhatsApp: 52 667 163 1231</a>
             </div>
         </div>
     </section>
 
     <section class="section section-alt">
         <div class="container">
-            <h2>Testimonios de Vecinos de Altamira</h2>
+            <h2>Testimonios de Vecinos de {name}</h2>
             <div class="testimonials">
                 <div class="testimonial">
-                    <p>"Excelente servicio. Llegaron rápido a Altamira y solucionaron la fuga. Muy profesionales y con buen precio."</p>
-                    <cite>— Cliente de Altamira</cite>
+                    <p>"Excelente servicio. Llegaron rápido a {name} y solucionaron la fuga. Muy profesionales y con buen precio."</p>
+                    <cite>— Cliente de {name}</cite>
                 </div>
                 <div class="testimonial">
-                    <p>"Ya los he contratado varias veces en Altamira. Siempre llegan a tiempo, trabajan limpio y dan garantía. Los recomiendo."</p>
-                    <cite>— Residente de Altamira</cite>
+                    <p>"Ya los he contratado varias veces en {name}. Siempre llegan a tiempo, trabajan limpio y dan garantía. Los recomiendo."</p>
+                    <cite>— Residente de {name}</cite>
                 </div>
                 <div class="testimonial">
                     <p>"Muy contentos con el trabajo. Arreglaron el drenaje que otros no pudieron. Conocen bien la zona y son honestos."</p>
-                    <cite>— Familia de Altamira</cite>
+                    <cite>— Familia de {name}</cite>
                 </div>
             </div>
         </div>
@@ -538,15 +343,15 @@ if (window.requestIdleCallback) {
 
     <section class="section">
         <div class="container">
-            <h2>Preguntas Frecuentes - Altamira</h2>
+            <h2>Preguntas Frecuentes - {name}</h2>
             <div class="faq">
                 <div class="faq-item">
-                    <h3>¿Cuánto cobran por servicio en Altamira?</h3>
-                    <p>Los precios son transparentes y justos. Reparación de fuga desde $600, destape desde $400, cambio de WC desde $800. El precio incluye diagnóstico, mano de obra, materiales y garantía de 6 meses. Te damos presupuesto exacto antes de iniciar.</p>
+                    <h3>¿Cuánto cobran por servicio en {name}?</h3>
+                    <p>Los precios son transparentes y justos. Reparación de fuga desde $600, destape desde $400, cambio de WC desde $800. {precios_texto} Te damos presupuesto exacto antes de iniciar.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>¿Cuánto tardan en llegar a Altamira?</h3>
-                    <p>Llegamos en 25-35 minutos a Altamira. Conocemos la zona y tenemos disponibilidad 24/7 todos los días del año.</p>
+                    <h3>¿Cuánto tardan en llegar a {name}?</h3>
+                    <p>Llegamos en {caract['llegada'].lower()} a {name}. Conocemos la zona y tenemos disponibilidad 24/7 todos los días del año.</p>
                 </div>
                 <div class="faq-item">
                     <h3>¿Traen refacciones o hay que comprarlas aparte?</h3>
@@ -554,7 +359,7 @@ if (window.requestIdleCallback) {
                 </div>
                 <div class="faq-item">
                     <h3>¿Dan garantía en los trabajos?</h3>
-                    <p>Sí, todos nuestros trabajos en Altamira incluyen garantía escrita de 6 meses en mano de obra y materiales. Si hay algún problema relacionado con la reparación, regresamos sin costo.</p>
+                    <p>Sí, todos nuestros trabajos en {name} incluyen garantía escrita de 6 meses en mano de obra y materiales. Si hay algún problema relacionado con la reparación, regresamos sin costo.</p>
                 </div>
                 <div class="faq-item">
                     <h3>¿Pueden detectar fugas sin romper?</h3>
@@ -566,7 +371,7 @@ if (window.requestIdleCallback) {
 
     <section class="section section-alt">
         <div class="container">
-            <h2>Cómo Solicitar Servicio en Altamira</h2>
+            <h2>Cómo Solicitar Servicio en {name}</h2>
             <div class="process-steps">
                 <div class="step">
                     <div class="step-number">1</div>
@@ -575,7 +380,7 @@ if (window.requestIdleCallback) {
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Dinos tu dirección en Altamira</h3>
+                    <h3>Dinos tu dirección en {name}</h3>
                     <p>Calle y número</p>
                 </div>
                 <div class="step">
@@ -585,7 +390,7 @@ if (window.requestIdleCallback) {
                 </div>
                 <div class="step">
                     <div class="step-number">4</div>
-                    <h3>Llegamos en 25-35 Minutos</h3>
+                    <h3>Llegamos en {caract['llegada']}</h3>
                     <p>Identificados y equipados</p>
                 </div>
             </div>
@@ -594,9 +399,9 @@ if (window.requestIdleCallback) {
 
     <section id="sobre-nosotros" class="section">
         <div class="container">
-            <h2>Plomeros Especializados en Altamira</h2>
+            <h2>Plomeros Especializados en {name}</h2>
             <div class="about-content">
-                <p>Llevamos más de 10 años trabajando en Altamira y somos el plomero preferido de cientos de residentes. Conocemos las particularidades de la zona y brindamos servicio profesional, rápido y con garantía.</p>
+                <p>Llevamos más de 10 años trabajando en {name} y somos el plomero preferido de cientos de residentes. Conocemos las particularidades de la zona y brindamos servicio profesional, rápido y con garantía.</p>
                 <p>Llegamos identificados profesionalmente, con unidad rotulada, herramientas especializadas y respeto absoluto a tu hogar. Trabajamos con protección de pisos, limpieza durante el servicio y garantía escrita de 6 meses.</p>
                 <div class="features">
                     <div class="feature">
@@ -604,7 +409,7 @@ if (window.requestIdleCallback) {
                         <p>De experiencia</p>
                     </div>
                     <div class="feature">
-                        <h3>25-35 Minutos</h3>
+                        <h3>{caract['llegada']}</h3>
                         <p>Tiempo de llegada</p>
                     </div>
                     <div class="feature">
@@ -630,12 +435,12 @@ if (window.requestIdleCallback) {
 
     <section id="contacto" class="section section-alt">
         <div class="container">
-            <h2>¿Necesitas Plomero en Altamira Ahora?</h2>
+            <h2>¿Necesitas Plomero en {name} Ahora?</h2>
             <div class="final-cta">
-                <p class="cta-text">Contáctanos por WhatsApp al <strong>667 163 1231</strong> y llegamos en 25-35 minutos a Altamira.</p>
+                <p class="cta-text">Contáctanos por WhatsApp al <strong>667 163 1231</strong> y llegamos en {caract['llegada'].lower()} a {name}.</p>
                 <p class="cta-subtitle">Servicio profesional, garantía escrita, materiales de calidad.</p>
                 <div class="cta-buttons">
-                    <a href="https://wa.me/526671631231?text=Hola,%20necesito%20un%20plomero%20en%20Altamira" target="_blank" class="btn-primary btn-whatsapp">WhatsApp: 52 667 163 1231</a>
+                    <a href="https://wa.me/526671631231?text=Hola,%20necesito%20un%20plomero%20en%20{name.replace(' ', '%20')}" target="_blank" class="btn-primary btn-whatsapp">WhatsApp: 52 667 163 1231</a>
                     <a href="tel:6671631231" class="btn-secondary">Llamar: 667 163 1231</a>
                 </div>
             </div>
@@ -646,29 +451,29 @@ if (window.requestIdleCallback) {
         <!-- Mapa Interactivo de la Zona -->
         <section style="margin: 40px 0; padding: 30px 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 12px;">
             <h2 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em; text-align: center;">
-                📍 Ubicación y Zona de Servicio en Altamira
+                📍 Ubicación y Zona de Servicio en {name}
             </h2>
 
             <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 50%; margin: 0 auto;">
                 <p style="color: #555; margin-bottom: 20px; line-height: 1.6;">
-                    Nuestro equipo de plomeros profesionales brinda servicio en toda la colonia <strong>Altamira</strong>
+                    Nuestro equipo de plomeros profesionales brinda servicio en toda la colonia <strong>{name}</strong>
                     y áreas circundantes. El mapa a continuación muestra nuestra zona de cobertura principal.
                 </p>
 
                 <!-- Google Maps Embed -->
                 <div style="position: relative; padding-bottom: 28%; height: 0; overflow: hidden; border-radius: 8px;">
-                    <iframe src="https://www.google.com/maps?q=Altamira,+Culiacán,+Sinaloa,+México&output=embed"
+                    <iframe src="https://www.google.com/maps?q={name.replace(' ', '+')},+Culiacán,+Sinaloa,+México&output=embed"
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
                         allowfullscreen=""
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"
-                        title="Mapa de Altamira, Culiacán">
+                        title="Mapa de {name}, Culiacán">
                     </iframe>
                 </div>
 
                 <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 4px;">
                     <p style="margin: 0; color: #2e7d32; font-weight: 600;">
-                        ⚡ Tiempo de llegada promedio a Altamira: 25-35 minutos
+                        ⚡ Tiempo de llegada promedio a {name}: {caract['llegada'].lower()}
                     </p>
                 </div>
 
@@ -691,7 +496,7 @@ if (window.requestIdleCallback) {
 
         <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Plomero Culiacán Pro. Servicio especializado en Altamira.</p>
+            <p>&copy; 2025 Plomero Culiacán Pro. Servicio especializado en {name}.</p>
         </div>
     </footer>
 
@@ -700,44 +505,125 @@ if (window.requestIdleCallback) {
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navMenu = document.querySelector('.nav-menu');
 
-        mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.addEventListener('click', () => {{
             navMenu.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
-        });
+        }});
 
         // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
+        document.querySelectorAll('.nav-link').forEach(link => {{
+            link.addEventListener('click', () => {{
                 navMenu.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
-            });
-        });
+            }});
+        }});
     </script>
 
 <!-- CTA fijo con tracking -->
 <style>
-  .cta-bar{position:fixed;right:16px;bottom:16px;display:flex;gap:10px;z-index:9999}
-  .cta-btn{font:600 15px/1.1 system-ui,-apple-system,Segoe UI,Roboto; padding:12px 14px;border-radius:12px;color:#fff;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.15)}
-  .cta-wa{background:#25D366}
-  .cta-tel{background:#1E40AF}
+  .cta-bar{{position:fixed;right:16px;bottom:16px;display:flex;gap:10px;z-index:9999}}
+  .cta-btn{{font:600 15px/1.1 system-ui,-apple-system,Segoe UI,Roboto; padding:12px 14px;border-radius:12px;color:#fff;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.15)}}
+  .cta-wa{{background:#25D366}}
+  .cta-tel{{background:#1E40AF}}
 </style>
 <div class="cta-bar" aria-label="Contacto rápido">
   <a id="cta-whatsapp" class="cta-btn cta-wa" href="#" rel="noopener">💬 WhatsApp</a>
   <a id="cta-llamar"  class="cta-btn cta-tel" href="#" rel="noopener">📞 Llamar</a>
 </div>
 <script>
-(function(){
+(function(){{
   var WA="526671631231", TEL="+52 667 163 1231", PATH=location.pathname;
-  var waMsg="Hola, necesito un plomero en Altamira, Culiacán";
+  var waMsg="Hola, necesito un plomero en {name}, Culiacán";
   var waHref="https://wa.me/"+WA+"?text="+encodeURIComponent(waMsg);
-  var telHref="tel:"+TEL.replace(/\s+/g,'');
+  var telHref="tel:"+TEL.replace(/\\s+/g,'');
   var wa=document.getElementById("cta-whatsapp"); if(wa) wa.href=waHref;
   var tl=document.getElementById("cta-llamar");   if(tl) tl.href=telHref;
   window.dataLayer=window.dataLayer||[];
-  function pushEvt(type,label){try{window.dataLayer.push({event:"cta_click",cta_type:type,cta_label:label,page:PATH,colonia:"altamira"});}catch(e){}}
-  if(wa){ wa.addEventListener("click", function(){ pushEvt("whatsapp","cta_floating_altamira"); }); }
-  if(tl){ tl.addEventListener("click", function(){ pushEvt("llamar","cta_floating_altamira"); }); }
-})();
+  function pushEvt(type,label){{try{{window.dataLayer.push({{event:"cta_click",cta_type:type,cta_label:label,page:PATH,colonia:"{name_url}"}});}}catch(e){{}}}}
+  if(wa){{ wa.addEventListener("click", function(){{ pushEvt("whatsapp","cta_floating_{name_url}"); }}); }}
+  if(tl){{ tl.addEventListener("click", function(){{ pushEvt("llamar","cta_floating_{name_url}"); }}); }}
+}})();
 </script>
 </body>
-</html>
+</html>'''
+
+    return body
+
+# Obtener todas las colonias
+colonias = [d for d in base_dir.iterdir() if d.is_dir()]
+
+print(f"🏗️  Expandiendo estructura completa en {len(colonias)} colonias\n")
+print(f"📋 Mantendremos los schemas existentes (BreadcrumbList, FAQPage, Service)")
+print(f"📄 Expandiremos todo el contenido del body con estructura completa\n")
+
+contador_exitosos = 0
+
+for colonia_dir in sorted(colonias):
+    index_file = colonia_dir / "index.html"
+
+    if not index_file.exists():
+        print(f"⚠️  {colonia_dir.name} - archivo index.html no encontrado")
+        continue
+
+    # Leer contenido actual
+    with open(index_file, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Extraer datos
+    colonia_slug = colonia_dir.name
+    colonia_name = colonia_slug.replace('-', ' ').title()
+    es_premium = colonia_slug in colonias_premium
+
+    # Extraer todo el HEAD (incluyendo schemas)
+    head_match = re.search(r'<head>(.*?)</head>', content, re.DOTALL)
+    if not head_match:
+        print(f"⚠️  {colonia_name} - No se pudo extraer el <head>")
+        continue
+
+    head_content = head_match.group(1)
+
+    # Generar nuevo body expandido
+    new_body = generate_expanded_body(colonia_slug, es_premium)
+
+    # Construir nuevo HTML completo
+    new_html = f'''<!DOCTYPE html>
+<html lang="es-MX">
+<head>{head_content}</head>
+{new_body}'''
+
+    # Escribir archivo actualizado
+    with open(index_file, 'w', encoding='utf-8') as f:
+        f.write(new_html)
+
+    tipo = "Premium" if es_premium else "Estándar"
+    print(f"✅ {colonia_name} ({tipo}) - Estructura expandida completa")
+    contador_exitosos += 1
+
+print(f"\n{'='*70}")
+print(f"📊 RESUMEN:")
+print(f"  ✅ Páginas expandidas: {contador_exitosos}")
+print(f"  📄 Total procesados: {len(colonias)}")
+print(f"{'='*70}")
+print(f"\n✨ ESTRUCTURA APLICADA:")
+print(f"  • Hero con descripción personalizada")
+print(f"  • Sección de beneficios (5 items)")
+print(f"  • Servicios con imágenes (6 servicios)")
+print(f"  • SEO links internos")
+print(f"  • Conocimiento específico de la zona")
+print(f"  • Ubicación y tiempo de llegada")
+print(f"  • Testimonios (3)")
+print(f"  • FAQs (5 preguntas)")
+print(f"  • Proceso de solicitud (4 pasos)")
+print(f"  • Sobre nosotros")
+print(f"  • Enlaces a otras colonias")
+print(f"  • CTA final")
+print(f"  • Mapa interactivo (50% ancho, 28% alto, centrado)")
+print(f"  • CTA flotante con tracking")
+print(f"\n💎 PERSONALIZACIÓN:")
+print(f"  • Premium: sistemas alta presión, materiales premium")
+print(f"  • Estándar: sistemas tradicionales, materiales calidad")
+print(f"  • Cada colonia con nombre, características únicas")
+print(f"\n📐 ESTRUCTURA:")
+print(f"  • Las Quintas: 713 líneas (referencia)")
+print(f"  • Otras colonias: ahora ~700 líneas cada una")
+print(f"  • Contenido 100% consistente y profesional")
