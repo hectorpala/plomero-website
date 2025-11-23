@@ -227,7 +227,40 @@
         "Corrección de baja presión de agua"
       ]
     }
-    </script></head>
+    </script>
+    <style>
+        /* Responsive styles for map and NAP sections */
+        @media (max-width: 768px) {
+            /* Map container - full width on mobile */
+            section > div[style*="max-width: 50%"] {
+                max-width: 100% !important;
+                padding: 15px !important;
+            }
+
+            /* Map section padding */
+            section[style*="margin: 40px 0"] {
+                margin: 20px 0 !important;
+                padding: 20px 10px !important;
+            }
+
+            /* Map title */
+            section h2[style*="font-size: 1.8em"] {
+                font-size: 1.4em !important;
+            }
+
+            /* Grid in map section - single column on mobile */
+            div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* NAP block title */
+            h3[style*="font-size: 1.3em"] {
+                font-size: 1.1em !important;
+            }
+        }
+    </style>
+
+</head>
 <body>
 <!-- Google Tag Manager -->
 <script>
