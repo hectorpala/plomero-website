@@ -1,0 +1,2236 @@
+{
+  "las-quintas": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "tres-rios",
+      "country-tres-rios",
+      "cumbres-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "campestre",
+      "isla-del-oeste",
+      "portales-del-rio",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "tres-rios": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "country-tres-rios",
+      "cumbres-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "campestre",
+      "isla-del-oeste",
+      "portales-del-rio",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "country-tres-rios": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "tres-rios",
+      "cumbres-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "campestre",
+      "isla-del-oeste",
+      "portales-del-rio",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "cumbres-tres-rios": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "tres-rios",
+      "country-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "campestre",
+      "isla-del-oeste",
+      "portales-del-rio",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "desarrollo-urbano-tres-rios": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "tres-rios",
+      "country-tres-rios",
+      "cumbres-tres-rios",
+      "campestre",
+      "isla-del-oeste",
+      "portales-del-rio",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "campestre": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "tres-rios",
+      "country-tres-rios",
+      "cumbres-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "isla-del-oeste",
+      "portales-del-rio",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "isla-del-oeste": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "tres-rios",
+      "country-tres-rios",
+      "cumbres-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "campestre",
+      "portales-del-rio",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "portales-del-rio": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "tres-rios",
+      "country-tres-rios",
+      "cumbres-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "campestre",
+      "isla-del-oeste",
+      "villas-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "villas-del-rio": {
+    "zona": "Norte Premium",
+    "enlaces_internos": [
+      "las-quintas",
+      "tres-rios",
+      "country-tres-rios",
+      "cumbres-tres-rios",
+      "desarrollo-urbano-tres-rios",
+      "campestre",
+      "isla-del-oeste",
+      "portales-del-rio"
+    ],
+    "keywords_zona": [
+      "zona residencial premium",
+      "norte de Culiacán",
+      "área exclusiva"
+    ]
+  },
+  "montebello": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "lomas-del-boulevard": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "real-del-valle": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "hacienda-del-valle": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "hacienda-los-huertos": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "jardines-del-valle": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "real-san-angel": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "san-angel": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "valle-alto",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "valle-alto": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "campestre-las-fuentes",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "campestre-las-fuentes": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-los-laureles"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "campestre-los-laureles": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "campestre-san-jorge": {
+    "zona": "Norte Residencial",
+    "enlaces_internos": [
+      "montebello",
+      "lomas-del-boulevard",
+      "real-del-valle",
+      "hacienda-del-valle",
+      "hacienda-los-huertos",
+      "jardines-del-valle",
+      "real-san-angel",
+      "san-angel",
+      "valle-alto",
+      "campestre-las-fuentes"
+    ],
+    "keywords_zona": [
+      "norte residencial",
+      "zona familiar",
+      "colonias tranquilas"
+    ]
+  },
+  "centro": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "guadalupe",
+      "chapultepec",
+      "zona-dorada",
+      "el-barrio",
+      "barrio-estacion",
+      "ferrocarrilera",
+      "recursos-hidraulicos"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "guadalupe": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "centro",
+      "chapultepec",
+      "zona-dorada",
+      "el-barrio",
+      "barrio-estacion",
+      "ferrocarrilera",
+      "recursos-hidraulicos"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "chapultepec": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "centro",
+      "guadalupe",
+      "zona-dorada",
+      "el-barrio",
+      "barrio-estacion",
+      "ferrocarrilera",
+      "recursos-hidraulicos"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "zona-dorada": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "centro",
+      "guadalupe",
+      "chapultepec",
+      "el-barrio",
+      "barrio-estacion",
+      "ferrocarrilera",
+      "recursos-hidraulicos"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "el-barrio": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "centro",
+      "guadalupe",
+      "chapultepec",
+      "zona-dorada",
+      "barrio-estacion",
+      "ferrocarrilera",
+      "recursos-hidraulicos"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "barrio-estacion": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "centro",
+      "guadalupe",
+      "chapultepec",
+      "zona-dorada",
+      "el-barrio",
+      "ferrocarrilera",
+      "recursos-hidraulicos"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "ferrocarrilera": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "centro",
+      "guadalupe",
+      "chapultepec",
+      "zona-dorada",
+      "el-barrio",
+      "barrio-estacion",
+      "recursos-hidraulicos"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "recursos-hidraulicos": {
+    "zona": "Centro",
+    "enlaces_internos": [
+      "centro",
+      "guadalupe",
+      "chapultepec",
+      "zona-dorada",
+      "el-barrio",
+      "barrio-estacion",
+      "ferrocarrilera"
+    ],
+    "keywords_zona": [
+      "centro de Culiacán",
+      "zona céntrica",
+      "corazón de la ciudad"
+    ]
+  },
+  "infonavit-humaya": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "bosques-del-humaya",
+      "jardines-de-humaya",
+      "humaya",
+      "colinas-del-humaya",
+      "bachigualato",
+      "altos-de-bachigualato",
+      "altamira"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "bosques-del-humaya": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "infonavit-humaya",
+      "jardines-de-humaya",
+      "humaya",
+      "colinas-del-humaya",
+      "bachigualato",
+      "altos-de-bachigualato",
+      "altamira"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "jardines-de-humaya": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "infonavit-humaya",
+      "bosques-del-humaya",
+      "humaya",
+      "colinas-del-humaya",
+      "bachigualato",
+      "altos-de-bachigualato",
+      "altamira"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "humaya": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "infonavit-humaya",
+      "bosques-del-humaya",
+      "jardines-de-humaya",
+      "colinas-del-humaya",
+      "bachigualato",
+      "altos-de-bachigualato",
+      "altamira"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "colinas-del-humaya": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "infonavit-humaya",
+      "bosques-del-humaya",
+      "jardines-de-humaya",
+      "humaya",
+      "bachigualato",
+      "altos-de-bachigualato",
+      "altamira"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "bachigualato": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "infonavit-humaya",
+      "bosques-del-humaya",
+      "jardines-de-humaya",
+      "humaya",
+      "colinas-del-humaya",
+      "altos-de-bachigualato",
+      "altamira"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "altos-de-bachigualato": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "infonavit-humaya",
+      "bosques-del-humaya",
+      "jardines-de-humaya",
+      "humaya",
+      "colinas-del-humaya",
+      "bachigualato",
+      "altamira"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "altamira": {
+    "zona": "Oriente",
+    "enlaces_internos": [
+      "infonavit-humaya",
+      "bosques-del-humaya",
+      "jardines-de-humaya",
+      "humaya",
+      "colinas-del-humaya",
+      "bachigualato",
+      "altos-de-bachigualato"
+    ],
+    "keywords_zona": [
+      "oriente de Culiacán",
+      "zona Humaya",
+      "sector oriente"
+    ]
+  },
+  "colinas-de-san-miguel": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "lomas-de-san-isidro": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "colinas-de-la-rivera": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "nuevo-culiacan": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "villa-universidad": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "villa-bonita": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "santa-fe": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "las-palmas",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "las-palmas": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "bicentenario",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "bicentenario": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "aurora",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "aurora": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "bellavista"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "bellavista": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "buena-vista": {
+    "zona": "Sur",
+    "enlaces_internos": [
+      "colinas-de-san-miguel",
+      "lomas-de-san-isidro",
+      "colinas-de-la-rivera",
+      "nuevo-culiacan",
+      "villa-universidad",
+      "villa-bonita",
+      "santa-fe",
+      "las-palmas",
+      "bicentenario",
+      "aurora"
+    ],
+    "keywords_zona": [
+      "sur de Culiacán",
+      "zona sur",
+      "colonias del sur"
+    ]
+  },
+  "barrancos": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "infonavit-barrancos",
+      "stase",
+      "tierra-blanca",
+      "el-vallado",
+      "palmito",
+      "libertad",
+      "alameda",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "infonavit-barrancos": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "stase",
+      "tierra-blanca",
+      "el-vallado",
+      "palmito",
+      "libertad",
+      "alameda",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "stase": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "infonavit-barrancos",
+      "tierra-blanca",
+      "el-vallado",
+      "palmito",
+      "libertad",
+      "alameda",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "tierra-blanca": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "infonavit-barrancos",
+      "stase",
+      "el-vallado",
+      "palmito",
+      "libertad",
+      "alameda",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "el-vallado": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "infonavit-barrancos",
+      "stase",
+      "tierra-blanca",
+      "palmito",
+      "libertad",
+      "alameda",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "palmito": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "infonavit-barrancos",
+      "stase",
+      "tierra-blanca",
+      "el-vallado",
+      "libertad",
+      "alameda",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "libertad": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "infonavit-barrancos",
+      "stase",
+      "tierra-blanca",
+      "el-vallado",
+      "palmito",
+      "alameda",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "alameda": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "infonavit-barrancos",
+      "stase",
+      "tierra-blanca",
+      "el-vallado",
+      "palmito",
+      "libertad",
+      "cedros"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "cedros": {
+    "zona": "Poniente",
+    "enlaces_internos": [
+      "barrancos",
+      "infonavit-barrancos",
+      "stase",
+      "tierra-blanca",
+      "el-vallado",
+      "palmito",
+      "libertad",
+      "alameda"
+    ],
+    "keywords_zona": [
+      "poniente de Culiacán",
+      "zona poniente",
+      "oeste de la ciudad"
+    ]
+  },
+  "benito-juarez": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez-norte",
+      "benito-juarez-sur",
+      "constituyentes",
+      "burocrata",
+      "cnop",
+      "constitucion-croc",
+      "aviacion",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "benito-juarez-norte": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-sur",
+      "constituyentes",
+      "burocrata",
+      "cnop",
+      "constitucion-croc",
+      "aviacion",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "benito-juarez-sur": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-norte",
+      "constituyentes",
+      "burocrata",
+      "cnop",
+      "constitucion-croc",
+      "aviacion",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "constituyentes": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-norte",
+      "benito-juarez-sur",
+      "burocrata",
+      "cnop",
+      "constitucion-croc",
+      "aviacion",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "burocrata": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-norte",
+      "benito-juarez-sur",
+      "constituyentes",
+      "cnop",
+      "constitucion-croc",
+      "aviacion",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "cnop": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-norte",
+      "benito-juarez-sur",
+      "constituyentes",
+      "burocrata",
+      "constitucion-croc",
+      "aviacion",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "constitucion-croc": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-norte",
+      "benito-juarez-sur",
+      "constituyentes",
+      "burocrata",
+      "cnop",
+      "aviacion",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "aviacion": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-norte",
+      "benito-juarez-sur",
+      "constituyentes",
+      "burocrata",
+      "cnop",
+      "constitucion-croc",
+      "aeropuerto"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "aeropuerto": {
+    "zona": "Popular Centro-Norte",
+    "enlaces_internos": [
+      "benito-juarez",
+      "benito-juarez-norte",
+      "benito-juarez-sur",
+      "constituyentes",
+      "burocrata",
+      "cnop",
+      "constitucion-croc",
+      "aviacion"
+    ],
+    "keywords_zona": [
+      "colonias populares",
+      "zona accesible",
+      "sector popular"
+    ]
+  },
+  "adolfo-lopez-mateos": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "felipe-angeles",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "emiliano-zapata": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "felipe-angeles",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "francisco-i-madero": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "antonio-rosales",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "felipe-angeles",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "antonio-rosales": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "felipe-angeles",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "el-mirador": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "felipe-angeles",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "adolfo-ruiz-cortines": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "el-mirador",
+      "buenos-aires",
+      "felipe-angeles",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "buenos-aires": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "felipe-angeles",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "felipe-angeles": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "jesus-garcia",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "jesus-garcia": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "felipe-angeles",
+      "jorge-almada"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "jorge-almada": {
+    "zona": "Popular Sur-Oriente",
+    "enlaces_internos": [
+      "adolfo-lopez-mateos",
+      "emiliano-zapata",
+      "francisco-i-madero",
+      "antonio-rosales",
+      "el-mirador",
+      "adolfo-ruiz-cortines",
+      "buenos-aires",
+      "felipe-angeles",
+      "jesus-garcia"
+    ],
+    "keywords_zona": [
+      "colonias tradicionales",
+      "zona popular sur",
+      "sector tradicional"
+    ]
+  },
+  "infonavit-canadas": {
+    "zona": "Infonavit Norte",
+    "enlaces_internos": [
+      "los-pinos",
+      "diez-de-mayo",
+      "ampliacion-los-angeles",
+      "ampliacion-el-barrio",
+      "ampliacion-union"
+    ],
+    "keywords_zona": [
+      "fraccionamientos Infonavit",
+      "zona Infonavit",
+      "vivienda popular"
+    ]
+  },
+  "los-pinos": {
+    "zona": "Infonavit Norte",
+    "enlaces_internos": [
+      "infonavit-canadas",
+      "diez-de-mayo",
+      "ampliacion-los-angeles",
+      "ampliacion-el-barrio",
+      "ampliacion-union"
+    ],
+    "keywords_zona": [
+      "fraccionamientos Infonavit",
+      "zona Infonavit",
+      "vivienda popular"
+    ]
+  },
+  "diez-de-mayo": {
+    "zona": "Infonavit Norte",
+    "enlaces_internos": [
+      "infonavit-canadas",
+      "los-pinos",
+      "ampliacion-los-angeles",
+      "ampliacion-el-barrio",
+      "ampliacion-union"
+    ],
+    "keywords_zona": [
+      "fraccionamientos Infonavit",
+      "zona Infonavit",
+      "vivienda popular"
+    ]
+  },
+  "ampliacion-los-angeles": {
+    "zona": "Infonavit Norte",
+    "enlaces_internos": [
+      "infonavit-canadas",
+      "los-pinos",
+      "diez-de-mayo",
+      "ampliacion-el-barrio",
+      "ampliacion-union"
+    ],
+    "keywords_zona": [
+      "fraccionamientos Infonavit",
+      "zona Infonavit",
+      "vivienda popular"
+    ]
+  },
+  "ampliacion-el-barrio": {
+    "zona": "Infonavit Norte",
+    "enlaces_internos": [
+      "infonavit-canadas",
+      "los-pinos",
+      "diez-de-mayo",
+      "ampliacion-los-angeles",
+      "ampliacion-union"
+    ],
+    "keywords_zona": [
+      "fraccionamientos Infonavit",
+      "zona Infonavit",
+      "vivienda popular"
+    ]
+  },
+  "ampliacion-union": {
+    "zona": "Infonavit Norte",
+    "enlaces_internos": [
+      "infonavit-canadas",
+      "los-pinos",
+      "diez-de-mayo",
+      "ampliacion-los-angeles",
+      "ampliacion-el-barrio"
+    ],
+    "keywords_zona": [
+      "fraccionamientos Infonavit",
+      "zona Infonavit",
+      "vivienda popular"
+    ]
+  },
+  "aquiles-serdan": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "domingo-rubi": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "agustina-ramirez": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "amado-nervo": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "antonio-toledo-corro": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "agrarista-mexicana": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "cinco-de-febrero": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "seis-de-enero": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "veintiuno-de-marzo": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veinte-de-noviembre",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "veinte-de-noviembre": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "cinco-de-mayo"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "cinco-de-mayo": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "dieciseis-de-septiembre": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "ejidal": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "demetrio-vallejo": {
+    "zona": "Tradicionales",
+    "enlaces_internos": [
+      "aquiles-serdan",
+      "domingo-rubi",
+      "agustina-ramirez",
+      "amado-nervo",
+      "antonio-toledo-corro",
+      "agrarista-mexicana",
+      "cinco-de-febrero",
+      "seis-de-enero",
+      "veintiuno-de-marzo",
+      "veinte-de-noviembre"
+    ],
+    "keywords_zona": [
+      "colonias históricas",
+      "barrios tradicionales",
+      "zona tradicional"
+    ]
+  },
+  "el-pipila": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-ranchito",
+      "el-real",
+      "emancipacion",
+      "estacion-obispo",
+      "diana-laura-riojas",
+      "centro-sinaloa",
+      "diez-de-abril"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "el-ranchito": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-pipila",
+      "el-real",
+      "emancipacion",
+      "estacion-obispo",
+      "diana-laura-riojas",
+      "centro-sinaloa",
+      "diez-de-abril"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "el-real": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-pipila",
+      "el-ranchito",
+      "emancipacion",
+      "estacion-obispo",
+      "diana-laura-riojas",
+      "centro-sinaloa",
+      "diez-de-abril"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "emancipacion": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-pipila",
+      "el-ranchito",
+      "el-real",
+      "estacion-obispo",
+      "diana-laura-riojas",
+      "centro-sinaloa",
+      "diez-de-abril"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "estacion-obispo": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-pipila",
+      "el-ranchito",
+      "el-real",
+      "emancipacion",
+      "diana-laura-riojas",
+      "centro-sinaloa",
+      "diez-de-abril"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "diana-laura-riojas": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-pipila",
+      "el-ranchito",
+      "el-real",
+      "emancipacion",
+      "estacion-obispo",
+      "centro-sinaloa",
+      "diez-de-abril"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "centro-sinaloa": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-pipila",
+      "el-ranchito",
+      "el-real",
+      "emancipacion",
+      "estacion-obispo",
+      "diana-laura-riojas",
+      "diez-de-abril"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "diez-de-abril": {
+    "zona": "Periféricas Norte",
+    "enlaces_internos": [
+      "el-pipila",
+      "el-ranchito",
+      "el-real",
+      "emancipacion",
+      "estacion-obispo",
+      "diana-laura-riojas",
+      "centro-sinaloa"
+    ],
+    "keywords_zona": [
+      "periferia norte",
+      "zonas en expansión",
+      "nueva urbanización"
+    ]
+  },
+  "doce-de-diciembre": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "dieciocho-de-marzo": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "cuatro-de-marzo": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "veintidos-de-diciembre": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "siete-gotas": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "ocho-de-febrero": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "nueve-de-marzo": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "arroyo-del-toro": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "campo-batan",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "campo-batan": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "canitas",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "canitas": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "carlos-solidario"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "carlos-solidario": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "aguaruto-centro": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "aguaruto-viejo": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "esthela-ortiz-de-toledo": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  },
+  "francisco-labastida-ochoa": {
+    "zona": "Periféricas Sur",
+    "enlaces_internos": [
+      "doce-de-diciembre",
+      "dieciocho-de-marzo",
+      "cuatro-de-marzo",
+      "veintidos-de-diciembre",
+      "siete-gotas",
+      "ocho-de-febrero",
+      "nueve-de-marzo",
+      "arroyo-del-toro",
+      "campo-batan",
+      "canitas"
+    ],
+    "keywords_zona": [
+      "periferia sur",
+      "zonas periféricas",
+      "expansión urbana"
+    ]
+  }
+}
