@@ -1,0 +1,64 @@
+=================================================================
+URLS PARA INDEXAR EN GOOGLE SEARCH CONSOLE
+Fecha: 23 Noviembre 2025
+Cambio: NAP + Mapas implementados en 40 páginas
+=================================================================
+
+PRIORIDAD ALTA (Indexar HOY - 17 URLs):
+-----------------------------------------------------------------
+
+# Servicios principales con NAP + Mapa:
+https://plomeroculiacanpro.mx/servicios/emergencia-24-7/
+https://plomeroculiacanpro.mx/servicios/reparacion-de-fugas/
+https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/
+https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/
+https://plomeroculiacanpro.mx/servicios/plomero-a-domicilio/
+https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/
+https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/
+https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/
+https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/
+https://plomeroculiacanpro.mx/servicios/plomero-precios/
+
+# Colonias premium con NAP + Mapa:
+https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/
+https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/tres-rios/
+https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/chapultepec/
+https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/campestre/
+https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/country-tres-rios/
+https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/lomas-del-boulevard/
+https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/colinas-de-san-miguel/
+
+=================================================================
+
+CÓMO NOTIFICAR A GOOGLE:
+=================================================================
+
+OPCIÓN 1: REENVIAR SITEMAP (RECOMENDADO - MÁS FÁCIL)
+-----------------------------------------------------------------
+1. Ve a: https://search.google.com/search-console
+2. Selecciona: plomeroculiacanpro.mx
+3. Menú lateral → Sitemaps
+4. Ver el sitemap actual: sitemaps/main_sitemap.xml
+5. Google lo revisará automáticamente en 1-3 días
+6. ✅ NO HACER NADA MÁS - Google indexará solo
+
+OPCIÓN 2: INDEXACIÓN MANUAL (10-15 URLs por día máximo)
+-----------------------------------------------------------------
+1. Google Search Console → Inspección de URL (barra superior)
+2. Pega URL completa → ENTER
+3. Click "SOLICITAR INDEXACIÓN"
+4. Espera 1-2 min
+5. Repite con siguiente URL
+6. LÍMITE: ~10-15 URLs por día
+
+=================================================================
+
+TIMELINE ESPERADO:
+=================================================================
+0-24h:   Google detecta sitemap actualizado
+1-3d:    Primeras URLs reindexadas  
+3-7d:    Mayoría indexadas con NAP + Mapas
+14-30d:  Primeros cambios en rankings
+30-60d:  Impacto completo en SEO local
+
+=================================================================
