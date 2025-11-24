@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://www.google.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <title>Plomero de Emergencia Culiacán | Atención Urgente 24/7</title>
+    <meta name="description" content="Plomero de emergencia en Culiacán. Atendemos urgencias de plomería YA: fugas, inundaciones, drenajes tapados. Llegada inmediata en 15-30 min. WhatsApp: 667 163 1231">
+
+    <link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
+
+    <link rel="preload" href="../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload"
+          as="image"
+          href="../assets/images/emergencia-24-7-nocturna-1200w.webp"
+          type="image/webp"
+          fetchpriority="high">
+
+    <!-- Critical CSS Inline for LCP optimization -->
+    <style>
+/* Critical CSS - Above the fold only */
+:root{--brand:#E36414;--brand-light:#F97316;--brand-dark:#C2410C;--whatsapp:#25D366;--emergency:#DC2626;--emergency-light:#EF4444;--text:#0F172A;--text-light:#475569;--bg:#FFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--gradient-emergency:linear-gradient(135deg,#EF4444 0%,#DC2626 100%);--space-sm:1rem;--space-md:2rem;--container-max-width:1200px;--radius-md:12px;--container-gutter:24px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;color:var(--text);background:var(--bg);overflow-x:hidden;padding-top:80px}
+.container{max-width:var(--container-max-width);margin:0 auto;padding:0 24px}
+/* Navigation Header */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
+.nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+.logo{display:block;text-decoration:none;transition:opacity .2s ease}
+.logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+.logo:hover{opacity:0.9}
+.nav-menu{display:flex;list-style:none;gap:2rem}
+.nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+.nav-link:hover{color:var(--brand-light)}
+.mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
+.mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px;margin:0}
+@media (max-width:768px){
+    .logo img{height:62px;max-height:72px}
+    .mobile-menu-btn{display:flex}
+    .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s ease}
+    .nav-menu.active{left:0}
+    .nav-link{color:var(--text)}
+}
+/* Floating CTAs */
+.floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
+.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
+.floating-call{background:#0f4fa8;bottom:18px}
+.floating-whatsapp{background:#22c55e;bottom:78px}
+.hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
+.hero-background{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
+.hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
+.hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+.hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1.5rem;line-height:1.2;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+.emergency-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(220,38,38,0.9);backdrop-filter:blur(8px);padding:10px 22px;border-radius:50px;font-size:0.95rem;font-weight:700;margin-bottom:1.5rem;border:1px solid rgba(255,255,255,0.3);color:#fff;animation:pulse-badge 2s ease-in-out infinite}
+@keyframes pulse-badge{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.7)}50%{box-shadow:0 0 0 8px rgba(220,38,38,0)}}
+.pulse-dot{width:12px;height:12px;background:#22c55e;border-radius:50%;animation:pulse-dot 1.5s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.7;transform:scale(1.2)}}
+.hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1rem 0 1.5rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:0.95rem;border:1px solid rgba(66,133,244,0.15)}
+.rating-stars{color:#FBBC04;font-size:1.15rem;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+.rating-score{font-weight:700;color:#1a73e8;font-size:1.05rem}
+.rating-divider{color:var(--text-light)}
+.hero-subtitle{font-size:1.2rem;color:#F1F5F9;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+.hero-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}
+.feature-item{display:flex;align-items:center;gap:8px;color:#fff;font-size:0.9rem;font-weight:500}
+.feature-item svg{flex-shrink:0;color:#f97316}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fba336 0%,#f97316 50%,#e36414 100%);color:#fff;padding:16px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.12s,box-shadow 0.12s,filter 0.12s;box-shadow:0 8px 20px rgba(227,100,20,0.35)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(227,100,20,0.45);filter:brightness(1.04)}
+.hero-contact{color:#fff;font-size:0.95rem;margin-top:1.5rem;opacity:0.95}
+@media(max-width:768px){.hero{min-height:75vh;padding-top:85px !important;align-items:flex-start !important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0 !important;padding:1.5rem 1.25rem !important;background:rgba(255,255,255,0.12) !important;backdrop-filter:blur(10px) !important}.hero h1{font-size:clamp(1.5rem,5vw,2rem) !important;margin-bottom:0.5rem !important}.hero-subtitle{display:none !important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(255,255,255,0.9) !important}.hero-contact{display:none !important}}
+</style>
+
+    <link rel="stylesheet" href="../styles.min.css">
+
+    <link rel="canonical" href="https://plomeroculiacanpro.mx/plomero-de-emergencia/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://plomeroculiacanpro.mx/plomero-de-emergencia/" />
+    <meta property="og:title" content="Plomero de Emergencia Culiacán | Atención Urgente 24/7" />
+    <meta property="og:description" content="Servicio de emergencia de plomería en Culiacán. Atención inmediata para fugas, inundaciones y drenajes tapados. Llegada en 15-30 min." />
+    <meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp" />
+
+    <meta name="x-build" content="2025-11-23T00:00:00Z" />
+
+    <!-- JSON-LD Schema: @graph with WebSite, BreadcrumbList, HomeAndConstructionBusiness, Service, FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://plomeroculiacanpro.mx/#website",
+          "url": "https://plomeroculiacanpro.mx/",
+          "name": "Plomero Culiacán Pro",
+          "description": "Servicio profesional de plomería en Culiacán, Sinaloa",
+          "publisher": {
+            "@id": "https://plomeroculiacanpro.mx/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://plomeroculiacanpro.mx/plomero-de-emergencia/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://plomeroculiacanpro.mx/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Plomero de Emergencia",
+              "item": "https://plomeroculiacanpro.mx/plomero-de-emergencia/"
+            }
+          ]
+        },
+        {
+          "@type": "HomeAndConstructionBusiness",
+          "@id": "https://plomeroculiacanpro.mx/#organization",
+          "name": "Plomero Culiacán Pro - Servicio de Emergencia",
+          "image": "https://plomeroculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp",
+          "url": "https://plomeroculiacanpro.mx/plomero-de-emergencia/",
+          "telephone": "+52-667-163-1231",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Servicio a Domicilio",
+            "addressLocality": "Culiacán",
+            "addressRegion": "Sinaloa",
+            "postalCode": "80000",
+            "addressCountry": "MX"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 24.8049,
+            "longitude": -107.3938
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "sameAs": [
+            "https://www.facebook.com/plomeroculiacanpro"
+          ],
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "150"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://plomeroculiacanpro.mx/plomero-de-emergencia/#service",
+          "serviceType": "Plomería de Emergencia",
+          "name": "Servicio de Plomero de Emergencia en Culiacán",
+          "description": "Atención urgente de emergencias de plomería 24/7: fugas graves, inundaciones, drenajes tapados, calentadores sin agua caliente. Llegada en 15-30 minutos.",
+          "provider": {
+            "@id": "https://plomeroculiacanpro.mx/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "servicePhone": {
+              "@type": "ContactPoint",
+              "telephone": "+52-667-163-1231",
+              "contactType": "Emergency Services"
+            }
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://plomeroculiacanpro.mx/plomero-de-emergencia/#faqpage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es una emergencia de plomería?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Una emergencia de plomería es cualquier problema que cause daños inmediatos o ponga en riesgo tu propiedad: fuga de agua activa que inunda, tubería rota con chorro de agua, drenaje colapsado que desborda, WC que se desborda continuamente, llave rota que no cierra, calentador con fuga de gas, o cualquier situación donde cada minuto causa más daño. Si el problema está causando destrucción AHORA, es una emergencia y requiere atención inmediata."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tardan en llegar en una emergencia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "En emergencias reales llegamos en 15-30 minutos dependiendo de tu ubicación exacta en Culiacán. Tenemos unidades móviles distribuidas estratégicamente en todas las zonas de la ciudad (Norte, Centro, Sur, Oriente, Poniente). Al contactarnos, nuestro sistema GPS identifica al técnico más cercano y lo despacha inmediatamente. Te confirmamos el tiempo estimado de llegada en cuanto asignes la emergencia."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cobran extra por emergencias nocturnas o de madrugada?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "NO. No cobramos sobrecargos por emergencias nocturnas, de madrugada, fines de semana o días festivos. El precio es el mismo si nos llamas a las 3 AM del domingo o a las 3 PM del martes. Creemos en tarifas transparentes y justas 24/7. Lo que pagas es por el servicio, no por la hora en que lo necesitas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué debo hacer mientras espero al plomero en una emergencia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "1) Si hay fuga: localiza y cierra la llave de paso principal del agua. 2) Si hay inundación: desconecta electricidad del área afectada por seguridad. 3) Coloca cubetas, toallas o trapos para contener el agua. 4) Toma fotos del problema para documentar. 5) Aleja muebles, electrónicos y objetos de valor del agua. 6) Mantén acceso libre a la propiedad y al problema. 7) Si no sabes dónde está la llave de paso, te guiamos por teléfono mientras el técnico va en camino."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Atienden emergencias los fines de semana y días festivos?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, absolutamente. Operamos 24 horas al día, 7 días a la semana, 365 días al año. Incluyendo: sábados, domingos, Navidad, Año Nuevo, Semana Santa, y cualquier día festivo. Las emergencias de plomería no respetan calendarios, por eso siempre tenemos técnicos de guardia listos para atenderte sin importar el día u hora."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Los plomeros llevan herramientas y repuestos para emergencias?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Todas nuestras unidades móviles están completamente equipadas 24/7 con: herramientas profesionales, equipos de detección, materiales y repuestos comunes (llaves, tuberías, empaques, válvulas, etc.). Esto nos permite resolver el 85% de las emergencias en la primera visita. Si se requiere una pieza especial, tenemos proveedores de emergencia que nos surten el mismo día."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo contactarlos en caso de emergencia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Para emergencias, la forma MÁS RÁPIDA es por WhatsApp al 667 163 1231. Tendrás respuesta en segundos. También puedes llamar directamente al mismo número. Al contactarnos: 1) Describe brevemente la emergencia, 2) Comparte tu ubicación exacta, 3) Te asignamos al técnico más cercano inmediatamente, 4) Te confirmamos nombre del técnico y tiempo de llegada, 5) El técnico va en camino mientras te damos instrucciones de qué hacer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dan garantía en reparaciones de emergencia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Todas nuestras reparaciones, incluso las realizadas de emergencia a las 3 AM, incluyen garantía escrita de 6-12 meses según el tipo de trabajo. La garantía cubre mano de obra y materiales utilizados. Te entregamos el comprobante de garantía al finalizar el servicio. Si algo falla dentro del período de garantía, regresamos sin costo adicional a corregirlo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué diferencia hay entre emergencia urgente y servicio normal?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Emergencia urgente: el problema está causando daños AHORA (fuga activa, inundación, WC desbordándose). Requiere atención inmediata en minutos. Servicio normal: problema que necesita reparación pero no causa daños inmediatos (llave que gotea, WC que corre, presión baja de agua). Puede agendarse para el mismo día o siguiente. Ambos tienen el mismo precio; la diferencia es solo el tiempo de respuesta."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta un servicio de emergencia de plomería?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El costo varía según el tipo de emergencia y trabajo requerido. La visita y diagnóstico son GRATIS. Una vez que el técnico evalúa el problema, te da un presupuesto claro ANTES de empezar. Solo pagas si apruebas el presupuesto. No hay cargos ocultos ni sorpresas. Ejemplos: fuga simple $800-1,500, destapado urgente $1,200-2,500, reparación de tubería rota $1,800-4,000. Te damos precio exacto en el momento según tu caso específico."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+    .breadcrumb {
+        background: #f8f9fa;
+        padding: 12px 0;
+        margin-bottom: 0;
+    }
+    .breadcrumb-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+    .breadcrumb-nav a {
+        color: var(--text-light);
+        text-decoration: none;
+    }
+    .breadcrumb-nav a:hover {
+        color: var(--brand);
+        text-decoration: underline;
+    }
+    .breadcrumb-separator {
+        color: var(--text-light);
+    }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Header (IDENTICAL to index.html) -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <img src="../logo-plomero-culiacan-pro.webp" alt="Plomero Culiacán Pro - Logo">
+                </a>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Inicio</a></li>
+                    <li><a href="/#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="/#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                    <li><a href="/blog/" class="nav-link">Blog</a></li>
+                    <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav" aria-label="breadcrumb">
+                <a href="/">Inicio</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Plomero de Emergencia</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section (EXACT structure from index.html) -->
+    <header id="inicio" class="hero">
+        <!-- Hero Background Image (LCP optimized with preload) -->
+        <picture class="hero-background">
+            <source type="image/webp"
+                    srcset="../assets/images/emergencia-24-7-nocturna-800w.webp 800w,
+                           ../assets/images/emergencia-24-7-nocturna-1200w.webp 1200w"
+                    sizes="100vw">
+            <img src="../assets/images/emergencia-24-7-nocturna-1200w.webp"
+                 srcset="../assets/images/emergencia-24-7-nocturna-800w.webp 800w,
+                        ../assets/images/emergencia-24-7-nocturna-1200w.webp 1200w"
+                 sizes="100vw"
+                 alt="Plomero de emergencia atendiendo urgencia de plomería en Culiacán de noche con equipo profesional"
+                 width="1200"
+                 height="800"
+                 fetchpriority="high"
+                 decoding="async">
+        </picture>
+
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">Plomero de Emergencia en Culiacán – Atención Urgente YA</h1>
+
+                <!-- Emergency Badge (MANDATORY) -->
+                <div class="emergency-badge fade-in">
+                    <span class="pulse-dot"></span>
+                    <span>🚨 DISPONIBLE AHORA - EMERGENCIAS 24/7</span>
+                </div>
+
+                <!-- Rating Badge (MANDATORY) -->
+                <div class="hero-rating fade-in">
+                    <svg class="google-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    <span class="rating-stars">★★★★★</span>
+                    <span class="rating-score">4.8/5</span>
+                    <span class="rating-divider">·</span>
+                    <span class="rating-count">Más de 150 vecinos de Culiacán satisfechos</span>
+                </div>
+
+                <!-- Subtitle (hidden on mobile) -->
+                <p class="hero-subtitle fade-in">
+                    Plomero certificado para emergencias urgentes · Llegada inmediata en 15-30 minutos · Sin sobrecargos nocturnos · Equipados para resolver YA
+                </p>
+
+                <!-- 3 Feature Items (MANDATORY) -->
+                <div class="hero-features fade-in">
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        <span>Llegamos en 15-30 min</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        <span>Garantía de 6 meses</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+                        <span>Factura SAT disponible</span>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="https://wa.me/526671631231?text=🚨%20EMERGENCIA%20URGENTE:%20Necesito%20un%20plomero%20YA.%20Tengo%20[describe%20brevemente%20tu%20emergencia]"
+                   class="btn-primary fade-in"
+                   target="_blank"
+                   rel="noopener"
+                   onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'hero_emergency'});">
+                    Solicitar Atención de Emergencia AHORA
+                </a>
+
+                <!-- Contact Info (hidden on mobile) -->
+                <p class="hero-contact fade-in">
+                    También puedes llamar al
+                    <a href="tel:+526671631231" style="color: #fff; font-weight: 700;">667 163 1231</a>
+                </p>
+
+                <!-- Guarantee Badge (hidden on mobile - adjusted for emergency theme) -->
+                <p class="hero-guarantee fade-in" style="color: #fff; font-size: 0.9rem; margin-top: 1rem; opacity: 0.95;">
+                    ✓ Atención inmediata 24/7 · Sin sobrecargos nocturnos · Equipados para cualquier emergencia
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Benefits Section -->
+        <section class="section section-alt">
+            <div class="container benefits-container">
+                <h2>¿Por qué elegirnos en emergencias?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Llegada en 15-30 min</h3>
+                            <p>Sistema GPS que despacha al técnico más cercano. Atención inmediata en Las Quintas, Tres Ríos, Centro y todas las colonias de Culiacán.</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Sin sobrecargos nocturnos</h3>
+                            <p>Mismo precio 24/7. NO cobramos extra por emergencias nocturnas, madrugada, fines de semana o días festivos.</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Garantía 6 meses</h3>
+                            <p>Incluso trabajos de emergencia a las 3 AM incluyen garantía escrita. Refacciones originales y técnicos certificados.</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Totalmente equipados</h3>
+                            <p>Camionetas con herramientas profesionales y materiales. Resolvemos el 85% de emergencias en la primera visita.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Services Section (minimum 4 cards with images) -->
+        <section id="servicios" style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center; color: var(--text);">
+                    Servicios de Emergencia Que Resolvemos
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Equipados y preparados para atender cualquier emergencia de plomería, día y noche
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <!-- Service Card 1: Fugas de Emergencia -->
+                    <a href="/reparacion-fugas/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/reparacion-fugas-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/reparacion-fugas-800w.webp"
+                                 alt="Plomero reparando fuga de emergencia en tubería rota en Culiacán con herramienta profesional"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--emergency); margin-bottom: 12px; font-size: 1.25rem;">🚨 Fugas de Agua Urgentes</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Tubería rota, llave que no cierra, fuga activa que inunda. Detenemos el desperdicio de agua y los daños inmediatamente.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Detección infrarroja de fugas ocultas</li>
+                                <li>✓ Reparación sin romper pisos ni paredes</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Service Card 2: Drenajes Tapados -->
+                    <a href="/destapado-drenaje/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/social-proof/before-after/before-after-drain-cleaning-1200w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/social-proof/before-after/before-after-drain-cleaning-1200w.webp"
+                                 alt="Plomero destapando drenaje de emergencia con sonda eléctrica en Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--emergency); margin-bottom: 12px; font-size: 1.25rem;">🚨 Drenajes Tapados y Desbordados</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                WC desbordándose, drenaje colapsado, inundación por obstrucción. Destapamos de inmediato con equipo industrial.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Sondas eléctricas de alta potencia</li>
+                                <li>✓ Hidro-lavado de tuberías a presión</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Service Card 3: Calentadores -->
+                    <a href="/instalacion-calentadores/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/social-proof/before-after/before-after-water-heater-boiler-1200w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/social-proof/before-after/before-after-water-heater-boiler-1200w.webp"
+                                 alt="Plomero reparando calentador de agua de emergencia en Culiacán de noche"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--emergency); margin-bottom: 12px; font-size: 1.25rem;">🚨 Calentadores Sin Agua Caliente</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Boiler que dejó de funcionar de madrugada, calentador con fuga de gas. Reparación o reemplazo urgente.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Diagnóstico nocturno inmediato</li>
+                                <li>✓ Reparación o instalación express</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Service Card 4: Inundaciones -->
+                    <a href="/reparacion-tuberias/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/reparacion-tuberias-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/reparacion-tuberias-800w.webp"
+                                 alt="Plomero controlando inundación de emergencia en propiedad de Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--emergency); margin-bottom: 12px; font-size: 1.25rem;">🚨 Control de Inundaciones</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Propiedad inundándose por tubería colapsada o drenaje desbordado. Detenemos el problema y evitamos más daños.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Control inmediato del agua</li>
+                                <li>✓ Reparación definitiva en el momento</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency CTA Section -->
+        <section style="padding: 50px 24px; background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);">
+            <div class="container" style="max-width: 800px; text-align: center;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text);">
+                    ⚠️ Si Tienes una Emergencia AHORA
+                </h2>
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.7;">
+                    No esperes a que el problema empeore. Cada minuto cuenta cuando hay fuga, inundación o drenaje desbordado. Contáctanos YA y llegamos en 15-30 minutos.
+                </p>
+                <a href="https://wa.me/526671631231?text=🚨%20EMERGENCIA%20URGENTE:%20Necesito%20un%20plomero%20inmediatamente.%20Mi%20problema:%20[describe%20qué%20está%20pasando]"
+                   class="btn-primary"
+                   style="background: var(--emergency); font-size: 1.15rem; padding: 18px 36px;"
+                   target="_blank"
+                   rel="noopener"
+                   onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'cta_emergency_middle'});">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    WhatsApp: Atención de Emergencia Inmediata
+                </a>
+                <p style="margin-top: 1.5rem; color: var(--text-light); font-size: 0.95rem;">
+                    📞 También puedes llamar: <a href="tel:+526671631231" style="color: var(--emergency); font-weight: 700; text-decoration: none;">667 163 1231</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- SEO Links / Interlinking Section (minimum 5 cards) -->
+        <section style="padding: 60px 24px; background: var(--bg-soft);">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 3rem; text-align: center; color: var(--text);">
+                    Otros Servicios Relacionados
+                </h2>
+
+                <div class="seo-links" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                    <!-- Link 1 -->
+                    <div class="seo-card" data-card-name="plomero-24-horas" data-card-position="1" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Plomero 24 Horas</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Servicio continuo día y noche, madrugadas, fines de semana y festivos sin sobrecargos.
+                        </p>
+                        <a href="/plomero-24-horas/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver servicio 24/7 →
+                        </a>
+                    </div>
+
+                    <!-- Link 2 -->
+                    <div class="seo-card" data-card-name="plomero-cerca-de-mi" data-card-position="2" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Plomero Cerca de Mi</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Encuentra el plomero más cercano a tu ubicación. Cobertura en todas las colonias de Culiacán.
+                        </p>
+                        <a href="/plomero-cerca-de-mi/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Encontrar plomero cercano →
+                        </a>
+                    </div>
+
+                    <!-- Link 3 -->
+                    <div class="seo-card" data-card-name="reparacion-fugas" data-card-position="3" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Reparación de Fugas</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Detección y reparación de fugas con tecnología infrarroja. Sin romper pisos ni paredes.
+                        </p>
+                        <a href="/reparacion-fugas/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Más sobre fugas →
+                        </a>
+                    </div>
+
+                    <!-- Link 4 -->
+                    <div class="seo-card" data-card-name="destapado-drenaje" data-card-position="4" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Destapado de Drenaje</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Destapamos WC, lavabos, regaderas y líneas principales con equipo profesional.
+                        </p>
+                        <a href="/destapado-drenaje/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Servicio de destapado →
+                        </a>
+                    </div>
+
+                    <!-- Link 5 -->
+                    <div class="seo-card" data-card-name="instalacion-calentadores" data-card-position="5" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Instalación de Calentadores</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Instalación y reparación de boilers de gas y eléctricos. Servicio certificado.
+                        </p>
+                        <a href="/instalacion-calentadores/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver calentadores →
+                        </a>
+                    </div>
+
+                    <!-- Link 6 -->
+                    <div class="seo-card" data-card-name="home" data-card-position="6" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Todos los Servicios</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Descubre la lista completa de servicios de plomería que ofrecemos en Culiacán.
+                        </p>
+                        <a href="/#servicios" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver todos los servicios →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Zones Section (minimum 8 colonies) -->
+        <section style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: var(--text);">
+                    Zonas de Cobertura en Emergencias
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Atendemos emergencias en todas las colonias de Culiacán con tiempo de llegada garantizado
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                    <!-- Zona Norte -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🌃 Zona Norte</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Las Quintas</li>
+                            <li>✓ Montebello</li>
+                            <li>✓ Valle Alto</li>
+                            <li>✓ Campestre</li>
+                            <li>✓ Bosques del Humaya</li>
+                            <li>✓ San Isidro</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--emergency); font-weight: 600;">
+                            ⚡ Emergencias: 15-20 min
+                        </p>
+                    </div>
+
+                    <!-- Zona Centro -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🌃 Zona Centro</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Centro Histórico</li>
+                            <li>✓ Guadalupe</li>
+                            <li>✓ Chapultepec</li>
+                            <li>✓ Recursos Hidráulicos</li>
+                            <li>✓ Insurgentes</li>
+                            <li>✓ Barrancos</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--emergency); font-weight: 600;">
+                            ⚡ Emergencias: 10-15 min
+                        </p>
+                    </div>
+
+                    <!-- Zona Sur -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🌃 Zona Sur</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Infonavit Humaya</li>
+                            <li>✓ Stase</li>
+                            <li>✓ Bachigualato</li>
+                            <li>✓ Aeropuerto</li>
+                            <li>✓ Valle Bonito</li>
+                            <li>✓ Solidaridad</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--emergency); font-weight: 600;">
+                            ⚡ Emergencias: 20-25 min
+                        </p>
+                    </div>
+
+                    <!-- Zona Oriente -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🌃 Zona Oriente</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Tres Ríos</li>
+                            <li>✓ Las Palmas</li>
+                            <li>✓ Diana Laura Riojas</li>
+                            <li>✓ Urbi Villa del Rey</li>
+                            <li>✓ López Mateos</li>
+                            <li>✓ Lomas de San Isidro</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--emergency); font-weight: 600;">
+                            ⚡ Emergencias: 15-25 min
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); padding: 30px; border-radius: 12px; text-align: center; border-left: 4px solid var(--brand);">
+                    <p style="font-size: 1.1rem; color: var(--text); font-weight: 600; margin-bottom: 8px;">
+                        📍 ¿Tu colonia no aparece en la lista?
+                    </p>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">
+                        No te preocupes. Cubrimos TODAS las colonias de Culiacán sin excepción. Contáctanos y confirmamos tiempo de llegada a tu ubicación específica.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section (minimum 3 testimonials) -->
+        <section style="padding: 60px 24px; background: var(--bg-soft);">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 3rem; text-align: center; color: var(--text);">
+                    Emergencias Resueltas - Lo Que Dicen Nuestros Clientes
+                </h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <!-- Testimonial 1 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "Fuga grave a las 2 AM, el agua salía a chorros. Llamé y en 18 minutos llegó el técnico. Reparó la tubería rota en menos de una hora. Me salvaron de una inundación total."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Laura S., Las Quintas</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            🕐 Emergencia atendida: 2:15 AM · Fuga en tubería principal
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "WC completamente tapado desbordándose el sábado en la noche. Llegaron en 22 minutos, lo destaparon con equipo profesional. Lo mejor: no cobraron extra por ser sábado."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Pedro M., Guadalupe</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            🕐 Emergencia atendida: Sábado 9:45 PM · Drenaje obstruido
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "Calentador sin agua caliente en plena madrugada con frío intenso. Contacté por WhatsApp, llegaron en 25 min y lo repararon. Servicio excelente, muy profesionales."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Ana R., Tres Ríos</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            🕐 Emergencia atendida: 4:30 AM · Boiler descompuesto
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "Drenaje principal colapsado inundando el patio. Respondieron en minutos, llegaron rapidísimo y lo resolvieron con hidrolavado. Muy eficientes en emergencias."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Roberto C., Montebello</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            🕐 Emergencia atendida: Domingo 11:00 AM · Línea principal tapada
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs Section (minimum 8 unique questions about emergencies) -->
+        <section class="faq" style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: var(--text);">
+                    Preguntas Frecuentes - Emergencias de Plomería
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Respuestas a las dudas más comunes sobre nuestro servicio de emergencias
+                </p>
+
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <!-- FAQ 1 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Qué es una emergencia de plomería?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Una emergencia de plomería es cualquier problema que cause daños inmediatos o ponga en riesgo tu propiedad: fuga de agua activa que inunda, tubería rota con chorro de agua, drenaje colapsado que desborda, WC que se desborda continuamente, llave rota que no cierra, calentador con fuga de gas, o cualquier situación donde cada minuto causa más daño. Si el problema está causando destrucción AHORA, es una emergencia y requiere atención inmediata.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 2 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cuánto tiempo tardan en llegar en una emergencia?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            En emergencias reales llegamos en <strong>15-30 minutos</strong> dependiendo de tu ubicación exacta en Culiacán. Tenemos unidades móviles distribuidas estratégicamente en todas las zonas de la ciudad (Norte, Centro, Sur, Oriente, Poniente). Al contactarnos, nuestro sistema GPS identifica al técnico más cercano y lo despacha inmediatamente. Te confirmamos el tiempo estimado de llegada en cuanto asignes la emergencia.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 3 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cobran extra por emergencias nocturnas o de madrugada?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            <strong>NO.</strong> No cobramos sobrecargos por emergencias nocturnas, de madrugada, fines de semana o días festivos. El precio es el mismo si nos llamas a las 3 AM del domingo o a las 3 PM del martes. Creemos en tarifas transparentes y justas 24/7. Lo que pagas es por el servicio, no por la hora en que lo necesitas.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 4 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Qué debo hacer mientras espero al plomero en una emergencia?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            <strong>1)</strong> Si hay fuga: localiza y cierra la llave de paso principal del agua. <strong>2)</strong> Si hay inundación: desconecta electricidad del área afectada por seguridad. <strong>3)</strong> Coloca cubetas, toallas o trapos para contener el agua. <strong>4)</strong> Toma fotos del problema para documentar. <strong>5)</strong> Aleja muebles, electrónicos y objetos de valor del agua. <strong>6)</strong> Mantén acceso libre a la propiedad y al problema. <strong>7)</strong> Si no sabes dónde está la llave de paso, te guiamos por teléfono mientras el técnico va en camino.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 5 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Atienden emergencias los fines de semana y días festivos?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Sí, absolutamente. Operamos <strong>24 horas al día, 7 días a la semana, 365 días al año</strong>. Incluyendo: sábados, domingos, Navidad, Año Nuevo, Semana Santa, y cualquier día festivo. Las emergencias de plomería no respetan calendarios, por eso siempre tenemos técnicos de guardia listos para atenderte sin importar el día u hora.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 6 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Los plomeros llevan herramientas y repuestos para emergencias?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Sí. Todas nuestras unidades móviles están completamente equipadas 24/7 con: herramientas profesionales, equipos de detección, materiales y repuestos comunes (llaves, tuberías, empaques, válvulas, etc.). Esto nos permite resolver el <strong>85% de las emergencias en la primera visita</strong>. Si se requiere una pieza especial, tenemos proveedores de emergencia que nos surten el mismo día.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 7 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cómo contactarlos en caso de emergencia?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Para emergencias, la forma MÁS RÁPIDA es por <strong>WhatsApp al 667 163 1231</strong>. Tendrás respuesta en segundos. También puedes llamar directamente al mismo número. Al contactarnos: <strong>1)</strong> Describe brevemente la emergencia, <strong>2)</strong> Comparte tu ubicación exacta, <strong>3)</strong> Te asignamos al técnico más cercano inmediatamente, <strong>4)</strong> Te confirmamos nombre del técnico y tiempo de llegada, <strong>5)</strong> El técnico va en camino mientras te damos instrucciones de qué hacer.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 8 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Dan garantía en reparaciones de emergencia?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Sí. Todas nuestras reparaciones, incluso las realizadas de emergencia a las 3 AM, incluyen <strong>garantía escrita de 6-12 meses</strong> según el tipo de trabajo. La garantía cubre mano de obra y materiales utilizados. Te entregamos el comprobante de garantía al finalizar el servicio. Si algo falla dentro del período de garantía, regresamos sin costo adicional a corregirlo.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 9 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Qué diferencia hay entre emergencia urgente y servicio normal?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            <strong>Emergencia urgente:</strong> el problema está causando daños AHORA (fuga activa, inundación, WC desbordándose). Requiere atención inmediata en minutos. <strong>Servicio normal:</strong> problema que necesita reparación pero no causa daños inmediatos (llave que gotea, WC que corre, presión baja de agua). Puede agendarse para el mismo día o siguiente. Ambos tienen el mismo precio; la diferencia es solo el tiempo de respuesta.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 10 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cuánto cuesta un servicio de emergencia de plomería?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            El costo varía según el tipo de emergencia y trabajo requerido. La visita y diagnóstico son <strong>GRATIS</strong>. Una vez que el técnico evalúa el problema, te da un presupuesto claro ANTES de empezar. Solo pagas si apruebas el presupuesto. No hay cargos ocultos ni sorpresas. <strong>Ejemplos:</strong> fuga simple $800-1,500, destapado urgente $1,200-2,500, reparación de tubería rota $1,800-4,000. Te damos precio exacto en el momento según tu caso específico.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section + Form + Map -->
+        <section id="contacto" style="padding: 60px 24px; background: var(--bg-soft);">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center; color: var(--text);">
+                    Contacto de Emergencia
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Si tienes una emergencia AHORA, no llenes el formulario. Contáctanos directamente por WhatsApp o teléfono para atención inmediata.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                    <!-- NAP Info -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 20px; font-size: 1.3rem;">🚨 Atención Urgente</h3>
+
+                        <div style="margin-bottom: 20px;">
+                            <p style="color: var(--text-light); font-weight: 600; margin-bottom: 5px; font-size: 0.9rem;">WhatsApp (MÁS RÁPIDO):</p>
+                            <a href="https://wa.me/526671631231?text=🚨%20EMERGENCIA:%20"
+                               style="color: var(--whatsapp); font-size: 1.15rem; font-weight: 700; text-decoration: none;"
+                               target="_blank"
+                               rel="noopener">
+                                667 163 1231
+                            </a>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <p style="color: var(--text-light); font-weight: 600; margin-bottom: 5px; font-size: 0.9rem;">Teléfono:</p>
+                            <a href="tel:+526671631231"
+                               style="color: var(--brand); font-size: 1.15rem; font-weight: 700; text-decoration: none;">
+                                667 163 1231
+                            </a>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <p style="color: var(--text-light); font-weight: 600; margin-bottom: 5px; font-size: 0.9rem;">Horario de Emergencias:</p>
+                            <p style="color: var(--text); font-weight: 700;">24 horas / 7 días</p>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Disponible madrugadas, fines de semana y festivos</p>
+                        </div>
+
+                        <div>
+                            <p style="color: var(--text-light); font-weight: 600; margin-bottom: 5px; font-size: 0.9rem;">Cobertura:</p>
+                            <p style="color: var(--text);">Todas las colonias de Culiacán, Sinaloa</p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.3rem;">Formulario de Contacto</h3>
+                        <p style="color: var(--text-light); margin-bottom: 20px; font-size: 0.9rem;">
+                            Para consultas no urgentes puedes llenar este formulario. Para emergencias usa WhatsApp o teléfono.
+                        </p>
+
+                        <form id="contact-form" style="display: flex; flex-direction: column; gap: 15px;">
+                            <input type="text"
+                                   name="nombre"
+                                   placeholder="Tu nombre"
+                                   required
+                                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;">
+
+                            <input type="tel"
+                                   name="telefono"
+                                   placeholder="Tu teléfono"
+                                   required
+                                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;">
+
+                            <input type="email"
+                                   name="email"
+                                   placeholder="Tu email (opcional)"
+                                   style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;">
+
+                            <textarea name="mensaje"
+                                      placeholder="Describe tu problema de plomería"
+                                      required
+                                      rows="4"
+                                      style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; resize: vertical;"></textarea>
+
+                            <button type="submit"
+                                    style="background: var(--brand); color: white; padding: 14px 24px; border: none; border-radius: 8px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s;">
+                                Enviar Mensaje
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Google Maps Iframe -->
+                <div style="margin-bottom: 30px;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116091.12846587394!2d-107.47539204999999!3d24.804850399999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86bcd0dd84c8f715%3A0x78b75c1a0e5bdd0!2sCuliac%C3%A1n%2C%20Sinaloa!5e0!3m2!1ses!2smx!4v1234567890"
+                            width="100%"
+                            height="350"
+                            style="border: 0; border-radius: 12px;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa de cobertura de servicio de plomería de emergencia en Culiacán"></iframe>
+                </div>
+
+                <!-- Colonies List -->
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <h3 style="color: var(--brand); margin-bottom: 20px; text-align: center;">Colonias que Atendemos en Emergencias</h3>
+                    <div style="columns: 3; column-gap: 30px; color: var(--text-light); line-height: 2;">
+                        <p>✓ Las Quintas</p>
+                        <p>✓ Montebello</p>
+                        <p>✓ Valle Alto</p>
+                        <p>✓ Guadalupe</p>
+                        <p>✓ Tres Ríos</p>
+                        <p>✓ Chapultepec</p>
+                        <p>✓ Campestre</p>
+                        <p>✓ Infonavit Humaya</p>
+                        <p>✓ Centro</p>
+                        <p>✓ Stase</p>
+                        <p>✓ Recursos Hidráulicos</p>
+                        <p>✓ + 110 colonias más</p>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px; color: var(--text-light); font-size: 0.95rem;">
+                        Cobertura completa en toda el área metropolitana de Culiacán
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: var(--text); color: white; padding: 50px 24px 30px;">
+        <div class="container" style="text-align: center;">
+            <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;">
+                Plomero Culiacán Pro - Servicio de Emergencia 24/7
+            </p>
+            <p style="opacity: 0.9; font-size: 1rem; margin-bottom: 10px;">
+                Servicio profesional de plomería de emergencia en Culiacán, Sinaloa
+            </p>
+            <p style="opacity: 0.8; font-size: 0.95rem; margin-bottom: 20px;">
+                🚨 Emergencias 24/7: <a href="tel:+526671631231" style="color: white; font-weight: 700;">667 163 1231</a> | WhatsApp: <a href="https://wa.me/526671631231" style="color: white; font-weight: 700;" target="_blank" rel="noopener">667 163 1231</a>
+            </p>
+
+            <!-- Mini Nav -->
+            <nav style="margin: 30px 0; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.2); border-bottom: 1px solid rgba(255,255,255,0.2);">
+                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; font-size: 0.9rem;">
+                    <a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Inicio</a>
+                    <a href="/#servicios" style="color: rgba(255,255,255,0.8); text-decoration: none;">Servicios</a>
+                    <a href="/plomero-24-horas/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Plomero 24 Horas</a>
+                    <a href="/plomero-cerca-de-mi/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Cerca de Ti</a>
+                    <a href="/blog/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Blog</a>
+                    <a href="/#contacto" style="color: rgba(255,255,255,0.8); text-decoration: none;">Contacto</a>
+                </div>
+            </nav>
+
+            <p style="opacity: 0.6; font-size: 0.85rem; margin-top: 20px;">
+                © 2025 Plomero Culiacán Pro. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Floating CTAs (WhatsApp + Phone) -->
+    <a href="https://wa.me/526671631231?text=🚨%20EMERGENCIA:%20Necesito%20un%20plomero%20urgente%20YA"
+       id="cta-whatsapp"
+       class="floating-btn floating-whatsapp"
+       target="_blank"
+       aria-label="WhatsApp Emergencia"
+       onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'floating_emergency'});">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a href="tel:+526671631231"
+       id="cta-llamar"
+       class="floating-btn floating-call"
+       aria-label="Llamar Emergencia"
+       onclick="gtag('event', 'click', {'event_category': 'phone', 'event_label': 'floating_call_emergency'});">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+    </a>
+
+    <!-- Main JavaScript (defer for optimal performance) -->
+    <script src="../main.js" defer></script>
+
+    <!-- Additional Scripts for Form and Tracking -->
+    <script>
+    // IIFE to avoid global variables
+    (function() {
+        'use strict';
+
+        // Contact Form Handler
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const nombre = this.nombre.value;
+                const telefono = this.telefono.value;
+                const mensaje = this.mensaje.value;
+
+                const whatsappMessage = `Hola, soy ${nombre}. ${mensaje}. Mi teléfono: ${telefono}`;
+                const whatsappURL = `https://wa.me/526671631231?text=${encodeURIComponent(whatsappMessage)}`;
+
+                // Track form submission
+                if (typeof gtag === 'function') {
+                    gtag('event', 'submit', {
+                        'event_category': 'form',
+                        'event_label': 'contact_form_emergency'
+                    });
+                }
+
+                window.open(whatsappURL, '_blank');
+                this.reset();
+            });
+        }
+
+        // SEO Card Click Tracking
+        const seoCards = document.querySelectorAll('.seo-card');
+        seoCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                const cardName = this.getAttribute('data-card-name');
+                const cardPosition = this.getAttribute('data-card-position');
+
+                if (typeof gtag === 'function') {
+                    gtag('event', 'click', {
+                        'event_category': 'seo_link',
+                        'event_label': cardName,
+                        'value': cardPosition
+                    });
+                }
+            });
+        });
+
+        // Scroll Depth Tracking
+        let scrollMarks = {25: false, 50: false, 75: false, 100: false};
+
+        window.addEventListener('scroll', function() {
+            const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+
+            Object.keys(scrollMarks).forEach(function(mark) {
+                if (scrollPercent >= mark && !scrollMarks[mark]) {
+                    scrollMarks[mark] = true;
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'scroll', {
+                            'event_category': 'engagement',
+                            'event_label': 'scroll_depth',
+                            'value': mark
+                        });
+                    }
+                }
+            });
+        });
+
+    })();
+    </script>
+
+    <!-- GTM DataLayer Push -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        'pageType': 'service_page',
+        'serviceCategory': 'emergency_plumbing',
+        'serviceName': 'Plomero de Emergencia',
+        'serviceArea': 'Culiacán'
+    });
+    </script>
+
+</body>
+</html>
