@@ -1,10 +1,52 @@
-# Agentes de Generación de Imágenes
+# Agentes Especializados - Plomero Culiacán Pro
 
-Este directorio contiene agentes especializados para generar imágenes profesionales para el sitio web de plomería.
+Este directorio contiene agentes especializados para optimizar y mejorar el sitio web de plomería.
 
 ## 📋 Agentes Disponibles
 
-### 1. `plumbing-image-prompts` (Recomendado para empezar)
+## 🎯 Agentes de SEO y Contenido
+
+### 1. `agente-seo` ⭐ NUEVO
+
+**Qué hace:**
+- Genera contenido SEO optimizado para páginas de colonias y servicios
+- Crea meta descriptions, H1s, FAQs únicos
+- Analiza contenido existente y sugiere mejoras
+- Asegura 0% contenido duplicado
+
+**Cuándo usar:**
+- Necesitas crear páginas nuevas de colonias
+- Quieres optimizar contenido existente
+- Necesitas FAQs únicas para múltiples páginas
+- Buscas mejorar rankings en Google
+
+**Cómo usar:**
+```
+User: "Genera contenido SEO para la colonia Las Quintas"
+→ Claude usa Task tool con agente-seo
+→ Analiza docs existentes (auditorías, análisis)
+→ Genera contenido único optimizado
+→ Incluye: H1, meta, hero, FAQs, contenido único
+→ Te da HTML listo para implementar
+
+User: "Necesito 10 páginas de colonias con contenido único"
+→ Agente genera 10 páginas completamente diferentes
+→ Sin contenido duplicado
+→ Keywords naturalmente integrados
+→ Schema markup sugerido
+```
+
+**Capacidades:**
+- ✅ Análisis de keywords y competencia
+- ✅ Contenido 100% único para cada colonia
+- ✅ FAQs optimizadas para schema markup
+- ✅ Meta descriptions que convierten
+- ✅ Enlaces internos estratégicos
+- ✅ Local SEO (referencias a Culiacán)
+
+## 🎨 Agentes de Generación de Imágenes
+
+### 2. `plumbing-image-prompts` (Recomendado para empezar)
 
 **Qué hace:**
 - Genera prompts profesionales optimizados para DALL·E, Midjourney, Stable Diffusion
@@ -26,7 +68,7 @@ User: "Necesito 10 imágenes para servicios de plomería"
 → Claude las optimiza a WebP
 ```
 
-### 2. `plumbing-image-generator` (Avanzado)
+### 3. `plumbing-image-generator` (Avanzado)
 
 **Qué hace:**
 - Workflow completo: prompt → generación → descarga → WebP → HTML
@@ -276,7 +318,15 @@ Claude:
 | Requiere API | No | Sí | Sí |
 | Mejor para | Empezar | Producción | Escala |
 
-## 🎯 Recomendación
+## 🎯 Recomendación de Uso
+
+### Para SEO y Contenido
+1. Usa `agente-seo` para todas las páginas nuevas
+2. Revisa contenido existente y optimiza con el agente
+3. Genera FAQs únicas para mejorar schema markup
+4. Costo: $0 (incluido en Claude Code)
+
+### Para Imágenes
 
 **Para empezar:**
 1. Usa `plumbing-image-prompts` (gratis, manual)

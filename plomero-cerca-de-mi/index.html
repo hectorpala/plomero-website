@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://www.google.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <title>Plomero Cerca de Mi en Culiacán | Llegamos en 30 Min 24/7</title>
+    <meta name="description" content="Encuentra el mejor plomero cerca de ti en Culiacán. Servicio rápido a todas las colonias. Llegada garantizada en 30 minutos. WhatsApp: 667 163 1231">
+
+    <link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
+
+    <link rel="preload" href="../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+
+    <!-- Critical CSS Inline for LCP optimization -->
+    <style>
+/* Critical CSS - Above the fold only */
+:root{--brand:#E36414;--brand-light:#F97316;--brand-dark:#C2410C;--whatsapp:#25D366;--text:#0F172A;--text-light:#475569;--bg:#FFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--space-sm:1rem;--space-md:2rem;--container-max-width:1200px;--radius-md:12px;--container-gutter:24px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;color:var(--text);background:var(--bg);overflow-x:hidden;padding-top:80px}
+.container{max-width:var(--container-max-width);margin:0 auto;padding:0 24px}
+/* Navigation Header */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
+.nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+.logo{display:block;text-decoration:none;transition:opacity .2s ease}
+.logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+.logo:hover{opacity:0.9}
+.nav-menu{display:flex;list-style:none;gap:2rem}
+.nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+.nav-link:hover{color:var(--brand-light)}
+.mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
+.mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px;margin:0}
+@media (max-width:768px){
+    .logo img{height:62px;max-height:72px}
+    .mobile-menu-btn{display:flex}
+    .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s ease}
+    .nav-menu.active{left:0}
+    .nav-link{color:var(--text)}
+}
+/* Floating CTAs */
+.floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
+.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
+.floating-call{background:#0f4fa8;bottom:18px}
+.floating-whatsapp{background:#22c55e;bottom:78px}
+.hero-colonia{background:var(--gradient-brand);padding:60px 20px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.hero-colonia::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(15,23,42,0.3) 0%,rgba(30,41,59,0.2) 100%);pointer-events:none}
+.hero-colonia h1{font-size:2.2rem;font-weight:800;margin-bottom:1rem;line-height:1.2;position:relative;z-index:1}
+.hero-colonia p{font-size:1.1rem;opacity:0.95;margin-bottom:1.5rem;position:relative;z-index:1}
+.btn-whatsapp{display:inline-flex;align-items:center;gap:0.5rem;background:var(--whatsapp);color:#fff;padding:14px 28px;border-radius:var(--radius-md);text-decoration:none;font-weight:600;font-size:1.05rem;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 12px rgba(37,211,102,0.3)}
+.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(37,211,102,0.4)}
+@media(min-width:768px){.hero-colonia{padding:80px 20px 60px}.hero-colonia h1{font-size:3rem}}
+</style>
+
+    <link rel="stylesheet" href="../styles.min.css">
+
+    <link rel="canonical" href="https://plomeroculiacanpro.mx/plomero-cerca-de-mi/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://plomeroculiacanpro.mx/plomero-cerca-de-mi/" />
+    <meta property="og:title" content="Plomero Cerca de Mi en Culiacán | Llegamos en 30 Min" />
+    <meta property="og:description" content="Encuentra el mejor plomero cerca de ti en Culiacán. Cobertura en todas las colonias, llegada rápida garantizada." />
+    <meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/hero-plumbing-1200w.webp" />
+
+    <meta name="x-build" content="2025-11-23T00:00:00Z" />
+
+    <!-- JSON-LD Schema: LocalBusiness + Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Plomero Cerca de Mi Culiacán - Plomero Culiacán Pro",
+      "image": "https://plomeroculiacanpro.mx/assets/images/logo-plomero-culiacan-pro.webp",
+      "@id": "https://plomeroculiacanpro.mx/plomero-cerca-de-mi/",
+      "url": "https://plomeroculiacanpro.mx/plomero-cerca-de-mi/",
+      "telephone": "+52-667-163-1231",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Culiacán",
+        "addressRegion": "Sinaloa",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.8049,
+        "longitude": -107.3938
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://www.facebook.com/plomeroculiacanpro"
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Culiacán"
+      }
+    }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://plomeroculiacanpro.mx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Plomero Cerca de Mi",
+          "item": "https://plomeroculiacanpro.mx/plomero-cerca-de-mi/"
+        }
+      ]
+    }
+    </script>
+
+    <!-- FAQPage Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo encontrar un plomero cerca de mi ubicación en Culiacán?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para encontrar un plomero cerca de ti en Culiacán, contáctanos por WhatsApp al 667 163 1231. Tenemos cobertura en todas las colonias de Culiacán con técnicos asignados por zona. Te garantizamos llegada en menos de 30 minutos. Solo compártenos tu ubicación y en minutos estaremos ahí."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo tarda en llegar el plomero a mi ubicación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Garantizamos llegada en 30 minutos o menos a cualquier colonia de Culiacán. Contamos con técnicos distribuidos estratégicamente en todas las zonas: Norte, Centro, Sur, Oriente y Poniente. Para emergencias urgentes, podemos llegar en 15-20 minutos dependiendo de tu ubicación exacta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué colonias cubren en Culiacán?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cubrimos todas las colonias de Culiacán sin excepción: Las Quintas, Montebello, Guadalupe, Infonavit Humaya, Campestre, Valle Alto, Chapultepec, Centro, y más de 120 colonias adicionales. Ninguna zona está fuera de nuestro alcance. Servicio garantizado 24/7 en toda el área metropolitana."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tienen servicio disponible los fines de semana y días festivos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, operamos 24 horas al día, 7 días a la semana, incluidos fines de semana y días festivos. No cobramos cargos extra por servicio nocturno, fines de semana o emergencias. El precio es el mismo cualquier día y hora que nos necesites."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo sé qué plomero está cerca de mi zona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Al contactarnos por WhatsApp, nuestro sistema automáticamente identifica al técnico más cercano a tu ubicación en tiempo real. Cada técnico tiene GPS activado, lo que nos permite enviarte al profesional que llegará más rápido. Te confirmamos el nombre del técnico y tiempo estimado de llegada antes de que salga."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué servicios de plomería ofrecen a domicilio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ofrecemos servicios completos de plomería: reparación de fugas, destapado de drenaje, instalación de calentadores, reparación de WC, cambio de tuberías, detección de fugas con equipo especializado, instalación de lavabos, llaves, regaderas, y todo tipo de trabajos de plomería residencial y comercial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cobran por la visita o diagnóstico?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La visita y diagnóstico son completamente GRATIS. Solo pagas si decides contratar el servicio. Si el problema requiere reparación, te damos un presupuesto claro antes de empezar. Si decides no proceder, no hay ningún cargo. Cero letra pequeña, cero sorpresas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Los plomeros llevan herramientas y materiales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, todos nuestros técnicos llevan camioneta equipada con herramientas profesionales y materiales comunes para reparaciones. En el 80% de los casos resolvemos el problema en la primera visita. Si se requiere alguna pieza especial, la conseguimos el mismo día y regresamos a completar el trabajo."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+    .breadcrumb {
+        background: #f8f9fa;
+        padding: 12px 0;
+        margin-bottom: 0;
+    }
+    .breadcrumb-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+    .breadcrumb-nav a {
+        color: var(--text-light);
+        text-decoration: none;
+    }
+    .breadcrumb-nav a:hover {
+        color: var(--brand);
+        text-decoration: underline;
+    }
+    .breadcrumb-separator {
+        color: var(--text-light);
+    }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Header (igual que index.html) -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="logo">
+                    <img src="../logo-plomero-culiacan-pro.webp" alt="Plomero Culiacán Pro - Logo">
+                </a>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link">Inicio</a></li>
+                    <li><a href="/#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="/#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                    <li><a href="/blog/" class="nav-link">Blog</a></li>
+                    <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav" aria-label="breadcrumb">
+                <a href="/">Inicio</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Plomero Cerca de Mi</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-colonia">
+        <div class="container">
+            <h1>Plomero Cerca de Ti en Culiacán</h1>
+            <p>Servicio Rápido a Todas las Colonias | Llegada Garantizada en 30 Minutos</p>
+            <a href="https://wa.me/5216671631231?text=Hola,%20necesito%20un%20plomero%20cerca%20de%20mi%20ubicación"
+               class="btn-whatsapp"
+               target="_blank"
+               rel="noopener"
+               onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'hero_cerca_de_mi'});">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Contactar por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 60px 24px;">
+
+        <!-- Coverage Map Section -->
+        <section style="margin-bottom: 60px;">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center; color: var(--text);">
+                Cobertura Total en Culiacán
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                <!-- Zona Norte -->
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.3rem;">Zona Norte</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✓ Las Quintas</li>
+                        <li>✓ Montebello</li>
+                        <li>✓ Valle Alto</li>
+                        <li>✓ Bosques del Humaya</li>
+                        <li>✓ Campestre</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
+                        Llegada en 15-20 min
+                    </p>
+                </div>
+
+                <!-- Zona Centro -->
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.3rem;">Zona Centro</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✓ Centro Histórico</li>
+                        <li>✓ Guadalupe</li>
+                        <li>✓ Chapultepec</li>
+                        <li>✓ Recursos Hidráulicos</li>
+                        <li>✓ Insurgentes</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
+                        Llegada en 10-15 min
+                    </p>
+                </div>
+
+                <!-- Zona Sur -->
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.3rem;">Zona Sur</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✓ Infonavit Humaya</li>
+                        <li>✓ Stase</li>
+                        <li>✓ Bachigualato</li>
+                        <li>✓ Aeropuerto</li>
+                        <li>✓ Valle Bonito</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
+                        Llegada en 20-25 min
+                    </p>
+                </div>
+
+                <!-- Zona Oriente -->
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.3rem;">Zona Oriente</h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✓ Tres Ríos</li>
+                        <li>✓ Las Palmas</li>
+                        <li>✓ Diana Laura Riojas</li>
+                        <li>✓ Urbi Villa del Rey</li>
+                        <li>✓ López Mateos</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
+                        Llegada en 15-25 min
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); padding: 30px; border-radius: 12px; border-left: 4px solid var(--brand); text-align: center;">
+                <p style="font-size: 1.2rem; font-weight: 600; color: var(--text); margin-bottom: 10px;">
+                    📍 ¿No ves tu colonia? No te preocupes
+                </p>
+                <p style="color: var(--text-light);">
+                    Cubrimos TODAS las colonias de Culiacán sin excepción. Contáctanos y llegamos a donde estés.
+                </p>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section style="margin-bottom: 60px;">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">
+                Servicios a Domicilio
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Reparación de Fugas -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow);">
+                    <img src="../assets/images/reparacion-fugas-800w.webp"
+                         alt="Reparación de fugas de agua"
+                         loading="lazy"
+                         style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 25px;">
+                        <h3 style="color: var(--brand); margin-bottom: 15px;">Reparación de Fugas</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px;">
+                            Detectamos y reparamos fugas de agua con equipo especializado. Evita desperdicios y recibos altos.
+                        </p>
+                        <ul style="color: var(--text-light); line-height: 1.8;">
+                            <li>✓ Detección con tecnología infrarroja</li>
+                            <li>✓ Reparación sin romper pisos</li>
+                            <li>✓ Garantía de 12 meses</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Destapado de Drenaje -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow);">
+                    <img src="../assets/images/social-proof/before-after/before-after-drain-cleaning-1200w.webp"
+                         alt="Destapado de drenaje"
+                         loading="lazy"
+                         style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 25px;">
+                        <h3 style="color: var(--brand); margin-bottom: 15px;">Destapado de Drenaje</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px;">
+                            Destapamos cualquier tipo de drenaje obstruido: WC, lavabos, regaderas, líneas principales.
+                        </p>
+                        <ul style="color: var(--text-light); line-height: 1.8;">
+                            <li>✓ Sondas eléctricas profesionales</li>
+                            <li>✓ Hidro-lavado de tuberías</li>
+                            <li>✓ Inspección con cámara</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Calentadores -->
+                <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow);">
+                    <img src="../assets/images/social-proof/before-after/before-after-water-heater-boiler-1200w.webp"
+                         alt="Instalación de calentadores"
+                         loading="lazy"
+                         style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 25px;">
+                        <h3 style="color: var(--brand); margin-bottom: 15px;">Calentadores de Agua</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px;">
+                            Instalación y reparación de boilers de gas y eléctricos. Todas las marcas.
+                        </p>
+                        <ul style="color: var(--text-light); line-height: 1.8;">
+                            <li>✓ Instalación certificada</li>
+                            <li>✓ Reparación y mantenimiento</li>
+                            <li>✓ Cambio de termostatos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section style="margin-bottom: 60px; background: var(--bg-soft); padding: 50px 30px; border-radius: 12px;">
+            <h2 style="font-size: 2rem; margin-bottom: 3rem; text-align: center;">
+                ¿Por Qué Elegirnos?
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">⚡</div>
+                    <h3 style="margin-bottom: 10px; color: var(--brand);">Llegada Rápida</h3>
+                    <p style="color: var(--text-light);">
+                        30 minutos o menos a cualquier colonia de Culiacán
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🔧</div>
+                    <h3 style="margin-bottom: 10px; color: var(--brand);">Equipados</h3>
+                    <p style="color: var(--text-light);">
+                        Camionetas con herramientas y materiales profesionales
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">✅</div>
+                    <h3 style="margin-bottom: 10px; color: var(--brand);">Garantía</h3>
+                    <p style="color: var(--text-light);">
+                        12 meses de garantía escrita en todos los trabajos
+                    </p>
+                </div>
+
+                <div style="text-align: center;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">💰</div>
+                    <h3 style="margin-bottom: 10px; color: var(--brand);">Sin Sorpresas</h3>
+                    <p style="color: var(--text-light);">
+                        Presupuesto claro antes de empezar, sin cargos ocultos
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section style="margin-bottom: 60px;">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem; text-align: center;">
+                Lo Que Dicen Nuestros Clientes
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                    <p style="color: var(--text); margin-bottom: 15px; font-style: italic;">
+                        "Excelente servicio. Llegaron en 20 minutos a mi casa en Las Quintas. Muy profesionales y el precio justo."
+                    </p>
+                    <p style="color: var(--text-light); font-weight: 600;">— María G., Las Quintas</p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                    <p style="color: var(--text); margin-bottom: 15px; font-style: italic;">
+                        "Súper rápidos. Tenía una fuga urgente en la madrugada y llegaron en menos de 30 min. 100% recomendados."
+                    </p>
+                    <p style="color: var(--text-light); font-weight: 600;">— Carlos R., Guadalupe</p>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                    <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                    <p style="color: var(--text); margin-bottom: 15px; font-style: italic;">
+                        "El mejor plomero que he contratado. Detectaron la fuga con equipo especial sin romper nada. Muy pro."
+                    </p>
+                    <p style="color: var(--text-light); font-weight: 600;">— Roberto M., Montebello</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <section style="background: var(--gradient-brand); color: white; padding: 60px 30px; border-radius: 12px; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">
+                ¿Necesitas un Plomero Ya?
+            </h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.95;">
+                Contáctanos ahora y llegamos en menos de 30 minutos a tu ubicación
+            </p>
+            <a href="https://wa.me/5216671631231?text=Hola,%20necesito%20un%20plomero%20cerca%20de%20mi%20ubicación%20urgente"
+               class="btn-whatsapp"
+               style="background: white; color: var(--brand); font-size: 1.2rem; padding: 18px 36px;"
+               target="_blank"
+               rel="noopener"
+               onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'cta_final'});">
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Llamar Ahora por WhatsApp
+            </a>
+            <p style="margin-top: 20px; font-size: 0.95rem; opacity: 0.9;">
+                📞 667 163 1231 | ⏰ 24/7 Disponible | 📍 Todas las Colonias
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Floating CTAs (WhatsApp + Llamar) -->
+    <a href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20cerca%20de%20mi%20ubicaci%C3%B3n"
+       id="cta-whatsapp"
+       class="floating-btn floating-whatsapp"
+       target="_blank"
+       aria-label="Contactar por WhatsApp">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+    <a href="tel:+526671631231"
+       id="cta-llamar"
+       class="floating-btn floating-call"
+       aria-label="Llamar ahora">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+    </a>
+
+    <!-- Footer -->
+    <footer style="background: var(--text); color: white; padding: 40px 24px; margin-top: 60px;">
+        <div class="container" style="text-align: center;">
+            <p style="margin-bottom: 15px;">
+                <strong>Plomero Culiacán Pro</strong> - Tu Plomero de Confianza Cerca de Ti
+            </p>
+            <p style="opacity: 0.8; font-size: 0.9rem;">
+                Servicio 24/7 en Todas las Colonias de Culiacán | WhatsApp: 667 163 1231
+            </p>
+            <p style="opacity: 0.6; font-size: 0.85rem; margin-top: 20px;">
+                © 2025 Plomero Culiacán Pro. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript (defer for optimal performance) -->
+    <script src="../main.js" defer></script>
+</body>
+</html>
