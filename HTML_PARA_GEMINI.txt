@@ -1,3 +1,8 @@
+================================================================================
+CÓDIGO HTML DE: las-quintas
+Página: https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/
+================================================================================
+
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
@@ -11,8 +16,8 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
 
-    <title>Plomero en Antonio Toledo Corro Culiacán | Servicio Premium 24/7</title>
-    <meta name="description" content="Plomero certificado en Antonio Toledo Corro, Culiacán. Experiencia en residencias premium, sistemas de alta presión, múltiples baños. Llegada en 20-30 min. WhatsApp: 667 163 1231">
+    <title>Plomero en Las Quintas Culiacán | Servicio Premium 24/7</title>
+    <meta name="description" content="Plomero certificado en Las Quintas, Culiacán. Experiencia en residencias premium, sistemas de alta presión, múltiples baños. Llegada en 20-30 min. WhatsApp: 667 163 1231">
 
     <!-- Favicons -->
     <link rel="icon" href="../../../assets/icons/favicon.ico" sizes="any">
@@ -44,14 +49,14 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
     <link rel="stylesheet" href="../../../styles.min.css">
 
 <!-- Canonical -->
-<link rel="canonical" href="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/antonio-toledo-corro/" />
+<link rel="canonical" href="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/antonio-toledo-corro/" />
-<meta property="og:title" content="Plomero en Antonio Toledo Corro Culiacán | Servicio Premium 24/7" />
-<meta property="og:description" content="Servicio especializado de plomería en Antonio Toledo Corro. Conocemos sistemas de alta presión, residencias con múltiples baños." />
-<meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/og-colonias/og-plomero-02.webp" />
+<meta property="og:url" content="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/" />
+<meta property="og:title" content="Plomero en Las Quintas Culiacán | Servicio Premium 24/7" />
+<meta property="og:description" content="Servicio especializado de plomería en Las Quintas. Conocemos sistemas de alta presión, residencias con múltiples baños." />
+<meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/og-colonias/og-plomero-05.webp" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="es_MX" />
@@ -59,10 +64,10 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/antonio-toledo-corro/" />
-<meta name="twitter:title" content="Plomero en Antonio Toledo Corro Culiacán | Servicio Premium 24/7" />
-<meta name="twitter:description" content="Servicio especializado de plomería en Antonio Toledo Corro. Conocemos sistemas de alta presión, residencias con múltiples baños." />
-<meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/og-colonias/og-plomero-02.webp" />
+<meta name="twitter:url" content="https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/" />
+<meta name="twitter:title" content="Plomero en Las Quintas Culiacán | Servicio Premium 24/7" />
+<meta name="twitter:description" content="Servicio especializado de plomería en Las Quintas. Conocemos sistemas de alta presión, residencias con múltiples baños." />
+<meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/og-colonias/og-plomero-05.webp" />
 
 <meta name="x-build" content="2025-11-17T22:30:00Z" />
 
@@ -93,13 +98,13 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
     {
       "@type": "ListItem",
       "position": 4,
-      "name": "Antonio Toledo Corro",
-      "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/antonio-toledo-corro/"
+      "name": "Las Quintas",
+      "item": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/"
     }
   ]
 }
 
-        <!-- FAQPage Schema Optimizado para Antonio Toledo Corro Culiacán -->
+        <!-- FAQPage Schema Optimizado para Las Quintas Culiacán -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -107,59 +112,59 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
       "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Por qué llamar a un plomero profesional en Antonio Toledo Corro Culiacán?",
+        "name": "¿Por qué elegir un plomero profesional certificado en Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "En Antonio Toledo Corro Culiacán, contratar un plomero profesional te ahorra tiempo y dinero. Nosotros llegamos rápido, arreglamos bien el problema desde la primera vez, y damos garantía por escrito. Llevamos más de 10 años trabajando en la zona, conocemos las casas y los problemas típicos. Trabajo limpio, rápido y bien hecho."
+          "text": "En Las Quintas Culiacán, las residencias requieren atención especializada y cuidado excepcional. Nuestros plomeros certificados cuentan con más de 10 años de experiencia trabajando en propiedades premium, garantizando trabajos de alta calidad que preservan el valor de tu inversión. Utilizamos materiales de primera calidad y técnicas avanzadas específicas para residencias de lujo."
         }
       },      {
         "@type": "Question",
-        "name": "¿Cuánto cobran en Antonio Toledo Corro Culiacán?",
+        "name": "¿Qué incluye el servicio de plomería premium en Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "En Antonio Toledo Corro Culiacán nuestros precios son: reparación de fuga desde $500, destape de drenaje desde $350, cambio de WC desde $700, reparar llave que gotea desde $300, mantenimiento de boiler desde $600. Antes de empezar te decimos cuánto va a costar para que decidas. Sin costos ocultos ni sorpresas."
+          "text": "Nuestro servicio premium incluye: evaluación detallada con reporte fotográfico, uso exclusivo de materiales de marcas reconocidas, limpieza total del área de trabajo, garantía extendida por escrito de 12 meses, seguimiento post-servicio, y atención prioritaria 24/7. Todo el personal usa uniforme y porta identificación oficial."
         }
       },      {
         "@type": "Question",
-        "name": "¿Cuánto tardan en llegar a Antonio Toledo Corro Culiacán?",
+        "name": "¿Cuánto tiempo tarda la llegada del plomero a Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A Antonio Toledo Corro Culiacán llegamos en 20-40 minutos aproximadamente. Tenemos camionetas dando servicio en la zona todo el día, por eso podemos llegar rápido. Si es emergencia (fuga grande, inundación, WC tapado), le damos prioridad. Llámanos o manda WhatsApp: 667 163 1231."
+          "text": "Para residencias en Las Quintas Culiacán, garantizamos llegada prioritaria entre 15-25 minutos en emergencias. Contamos con técnicos asignados específicamente para zonas premium, asegurando respuesta inmediata. Para servicios programados, ofrecemos ventanas de tiempo de 30 minutos con confirmación vía WhatsApp."
         }
       },      {
         "@type": "Question",
-        "name": "¿Dan garantía escrita en Antonio Toledo Corro Culiacán?",
+        "name": "¿Ofrecen garantía escrita en Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí, en Antonio Toledo Corro Culiacán todos los trabajos incluyen garantía escrita de 6 meses. Si algo sale mal con lo que reparamos, regresamos a arreglarlo sin cobrar extra. Te entregamos un papel firmado con la garantía el mismo día que terminamos. Así tienes respaldo de nuestro trabajo."
+          "text": "Sí, todos nuestros trabajos en Las Quintas Culiacán incluyen garantía escrita extendida de 12 meses que cubre mano de obra y materiales. Además, si utilizas piezas premium, la garantía puede extenderse hasta 24 meses. Entregamos certificado de garantía el mismo día del servicio con términos claros y sin letra pequeña."
         }
       },      {
         "@type": "Question",
-        "name": "¿Trabajan sábados y domingos en Antonio Toledo Corro Culiacán?",
+        "name": "¿Qué métodos de pago aceptan en Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí, trabajamos toda la semana en Antonio Toledo Corro Culiacán incluyendo sábados, domingos y días festivos. No cobramos extra por fin de semana. Sabemos que los problemas de plomería no esperan, por eso estamos disponibles 24/7 al mismo precio todos los días."
+          "text": "Aceptamos efectivo, transferencia bancaria, tarjetas de crédito y débito (Visa, Mastercard, American Express), y pagos a meses sin intereses con tarjetas participantes. Para residentes de Las Quintas Culiacán, ofrecemos facturación electrónica inmediata y opciones de pago diferido en trabajos mayores a $5,000 MXN."
         }
       },      {
         "@type": "Question",
-        "name": "¿Pueden destapar WC y drenajes en Antonio Toledo Corro Culiacán?",
+        "name": "¿Trabajan con sistemas de plomería europea en Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí, destapamos WC, lavabos, regaderas, drenajes y tuberías en Antonio Toledo Corro Culiacán. Usamos herramientas profesionales para destapar sin romper. En la mayoría de casos lo resolvemos el mismo día. Precio desde $350 dependiendo del trabajo. Si está muy tapado, tenemos equipo especial."
+          "text": "Sí, tenemos experiencia específica con sistemas de plomería europea (Grohe, Hansgrohe, Roca, Villeroy & Boch) comunes en Las Quintas Culiacán. Nuestros técnicos están capacitados en instalación y mantenimiento de griferías termostáticas, sistemas de hidromasaje, y tecnología de bajo consumo de agua premium."
         }
       },      {
         "@type": "Question",
-        "name": "¿Reparan fugas de agua en Antonio Toledo Corro Culiacán?",
+        "name": "¿Realizan inspecciones preventivas en Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí, reparamos todo tipo de fugas en Antonio Toledo Corro Culiacán: fugas en tubos, llaves que gotean, WC que tira agua, fugas en tinaco, boiler goteando, fugas en muro o piso. Primero ubicamos exactamente de dónde viene la fuga, luego te damos precio y reparamos. Desde $500 según el problema."
+          "text": "Ofrecemos servicio de inspección preventiva anual especializado para residencias en Las Quintas Culiacán. Incluye: revisión completa de instalación hidráulica, pruebas de presión, inspección de boiler, verificación de fugas ocultas con equipo especializado, y reporte técnico con recomendaciones. Precio especial para residentes: $1,500 MXN."
         }
       },      {
         "@type": "Question",
-        "name": "¿Arreglan boilers/calentadores en Antonio Toledo Corro Culiacán?",
+        "name": "¿Pueden atender emergencias nocturnas en Las Quintas Culiacán?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí, reparamos y damos mantenimiento a boilers en Antonio Toledo Corro Culiacán. Si tu boiler no calienta, gotea, hace ruido raro, o se apaga solo, podemos revisarlo y arreglarlo. También hacemos instalación de boiler nuevo si el tuyo ya no sirve. Mantenimiento desde $600, reparación desde $700."
+          "text": "Contamos con servicio de emergencias 24/7 exclusivo para Las Quintas Culiacán con técnico de guardia nocturna. Sin cargos extras por servicio nocturno o fines de semana. Atendemos fugas urgentes, problemas con boiler, y cualquier situación que requiera atención inmediata, llegando en menos de 20 minutos."
         }
       }
       ]
@@ -173,8 +178,8 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
       "@context": "https://schema.org",
       "@type": "Service",
       "serviceType": "Servicios de Plomería Residencial",
-      "name": "Plomero en Antonio Toledo Corro",
-      "description": "Servicio profesional de plomería en Antonio Toledo Corro, Culiacán. Especialistas en residencias premium con sistemas hidroneumáticos, boilers de paso y grifería importada. Atención 24/7 con llegada en 20-30 minutos. Garantía de 6 meses.",
+      "name": "Plomero en Las Quintas",
+      "description": "Servicio profesional de plomería en Las Quintas, Culiacán. Especialistas en residencias premium con sistemas hidroneumáticos, boilers de paso y grifería importada. Atención 24/7 con llegada en 20-30 minutos. Garantía de 6 meses.",
       "provider": {
         "@type": "LocalBusiness",
         "name": "Plomero Culiacán Pro",
@@ -194,7 +199,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
       },
       "areaServed": {
         "@type": "Place",
-        "name": "Antonio Toledo Corro, Culiacán, Sinaloa",
+        "name": "Las Quintas, Culiacán, Sinaloa",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Culiacán",
@@ -208,15 +213,15 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
         "price": "1000",
         "priceSpecification": {
           "@type": "PriceSpecification",
-          "minPrice": "800",
-          "maxPrice": "2000",
+          "minPrice": "1000",
+          "maxPrice": "2500",
           "priceCurrency": "MXN"
         },
         "availability": "https://schema.org/InStock"
       },
       "availableChannel": {
         "@type": "ServiceChannel",
-        "serviceUrl": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/antonio-toledo-corro/",
+        "serviceUrl": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/",
         "servicePhone": "+526671631231",
         "availableLanguage": {
           "@type": "Language",
@@ -254,8 +259,8 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
       "@type": "ImageObject",
       "contentUrl": "https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp",
       "url": "https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp",
-      "name": "Plomero profesional reparando fuga en Antonio Toledo Corro, Culiacán",
-      "description": "Técnico especializado en reparación de fugas de agua en Antonio Toledo Corro Culiacán. Servicio profesional con garantía y atención 24/7 en Culiacán, Sinaloa.",
+      "name": "Plomero profesional reparando fuga en Las Quintas, Culiacán",
+      "description": "Técnico especializado en reparación de fugas de agua en Las Quintas Culiacán. Servicio profesional con garantía y atención 24/7 en Culiacán, Sinaloa.",
       "width": "800",
       "height": "800",
       "thumbnail": {
@@ -283,14 +288,14 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
     {
       "@context": "https://schema.org",
       "@type": "Plumber",
-      "name": "Plomero Culiacán Pro - Servicio en Antonio Toledo Corro Culiacán",
+      "name": "Plomero Culiacán Pro - Servicio en Las Quintas Culiacán",
       "image": "https://plomeroculiacanpro.mx/assets/images/reparacion-fugas-800w.webp",
-      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/antonio-toledo-corro/",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/",
       "telephone": "+526671631231",
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Antonio Toledo Corro Culiacán",
+        "streetAddress": "Las Quintas Culiacán",
         "addressLocality": "Culiacán",
         "addressRegion": "Sinaloa",
         "postalCode": "80000",
@@ -326,7 +331,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
         "name": "Culiacán",
         "containsPlace": {
           "@type": "Neighborhood",
-          "name": "Antonio Toledo Corro Culiacán"
+          "name": "Las Quintas Culiacán"
         }
       },
       "hasOfferCatalog": {
@@ -338,7 +343,7 @@ body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-s
             "itemOffered": {
               "@type": "Service",
               "name": "Reparación de Fugas de Agua",
-              "description": "Detección y reparación de fugas en Antonio Toledo Corro Culiacán"
+              "description": "Detección y reparación de fugas en Las Quintas Culiacán"
             }
           },
           {
@@ -401,7 +406,7 @@ if (window.requestIdleCallback) {
         <div class="container">
             <div class="nav-wrapper">
                 <a href="../../../" class="logo">
-                    <img src="../../../logo-plomero-culiacan-pro.webp" alt="Plomero Culiacán Pro - Logo" title="Plomero certificado en Antonio Toledo Corro, Culiacán - Servicio 24/7" loading="lazy">
+                    <img src="../../../logo-plomero-culiacan-pro.webp" alt="Plomero Culiacán Pro - Logo" title="Plomero Culiacán Pro - Logo - Servicio profesional en Las Quintas, Culiacán" loading="lazy">
                 </a>
                 <button class="mobile-menu-btn" aria-label="Menu">
                     <span></span>
@@ -422,8 +427,8 @@ if (window.requestIdleCallback) {
     <header id="inicio" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="fade-in">Plomero Certificado en Antonio Toledo Corro Culiacán</h1>
-                <p class="hero-subtitle fade-in">Servicio especializado en residencias premium de Antonio Toledo Corro. Más de 10 años trabajando en el fraccionamiento. Conocemos sistemas de alta presión, hidroneumáticos, instalaciones de lujo. Llegada en 20-30 minutos. Atención 24/7.</p>
+                <h1 class="fade-in">Plomero Certificado en Las Quintas Culiacán</h1>
+                <p class="hero-subtitle fade-in">Servicio especializado en residencias premium de Las Quintas. Más de 10 años trabajando en el fraccionamiento. Conocemos sistemas de alta presión, hidroneumáticos, instalaciones de lujo. Llegada en 20-30 minutos. Atención 24/7.</p>
 
     <div style="background: #e8f4f8; padding: 20px; border-radius: 8px; margin: 24px 0; border-left: 4px solid #0066cc;">
         <p style="margin: 0; font-size: 15px; line-height: 1.6;">
@@ -435,19 +440,19 @@ if (window.requestIdleCallback) {
         </p>
     </div>
 <p class="hero-contact">WhatsApp: 52 667 163 1231 · Llamadas: 667 163 1231</p>
-                <a href="#contacto" class="btn-primary hover-lift">Solicitar Servicio en Antonio Toledo Corro</a>
+                <a href="#contacto" class="btn-primary hover-lift">Solicitar Servicio en Las Quintas</a>
             </div>
         </div>
     </header>
 
     <section class="section section-alt">
         <div class="container">
-            <h2>¿Por qué somos el plomero preferido de Antonio Toledo Corro?</h2>
+            <h2>¿Por qué somos el plomero preferido de Las Quintas?</h2>
             <div class="benefits-grid">
                 <div class="benefit">
                     <div class="benefit-icon">🏡</div>
                     <h3>Residencias Premium</h3>
-                    <p>Cientos de trabajos en Antonio Toledo Corro</p>
+                    <p>Cientos de trabajos en Las Quintas</p>
                 </div>
                 <div class="benefit">
                     <div class="benefit-icon">⚡</div>
@@ -475,7 +480,7 @@ if (window.requestIdleCallback) {
 
     <section id="servicios" class="section">
         <div class="container">
-            <h2>Servicios Especializados en Antonio Toledo Corro</h2>
+            <h2>Servicios Especializados en Las Quintas</h2>
             <div class="grid">
                 <div class="card card--img">
                     <div class="service-card">
@@ -487,7 +492,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/reparacion-fugas-420w.png"
                                      srcset="../../../assets/images/reparacion-fugas-420w.png 420w, ../../../assets/images/reparacion-fugas-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Plomero reparando fuga en Antonio Toledo Corro, Culiacán" title="Reparación profesional de fugas en Antonio Toledo Corro - Plomero certificado"
+                                     alt="Plomero reparando fuga en Las Quintas" title="Reparación profesional de fugas de agua en Las Quintas, Culiacán - Atención 24/7"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -506,7 +511,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/arreglando-boiler-420w.png"
                                      srcset="../../../assets/images/arreglando-boiler-420w.png 420w, ../../../assets/images/arreglando-boiler-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Técnico reparando boiler en Antonio Toledo Corro" title="Mantenimiento y reparación de boilers en Antonio Toledo Corro, Culiacán"
+                                     alt="Mantenimiento de boiler en Las Quintas" title="Instalación y reparación de boilers en Las Quintas, Culiacán - Garantía 12 meses"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -525,7 +530,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/taza-de-baño-420w.png"
                                      srcset="../../../assets/images/taza-de-baño-420w.png 420w, ../../../assets/images/taza-de-baño-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Instalación de grifería en Antonio Toledo Corro, Culiacán" title="Instalación de grifería y sanitarios en Antonio Toledo Corro - Trabajo garantizado"
+                                     alt="Instalación de grifería en Las Quintas" title="Instalación de grifería en Las Quintas - Servicio profesional en Las Quintas, Culiacán"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -544,7 +549,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/destapandodrenaje-420w.png"
                                      srcset="../../../assets/images/destapandodrenaje-420w.png 420w, ../../../assets/images/destapandodrenaje-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Destape de drenaje en Antonio Toledo Corro" title="Destape profesional de drenajes en Antonio Toledo Corro - Equipos especializados"
+                                     alt="Destape de drenajes en Las Quintas" title="Servicio de destapado de drenaje en Las Quintas, Culiacán - Plomero certificado"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -563,7 +568,7 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/reivicion-bajapresion-420w.png"
                                      srcset="../../../assets/images/reivicion-bajapresion-420w.png 420w, ../../../assets/images/reivicion-bajapresion-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Revisión de presión de agua en Antonio Toledo Corro" title="Corrección de baja presión de agua en Antonio Toledo Corro, Culiacán"
+                                     alt="Corrección de presión en Las Quintas" title="Corrección de presión en Las Quintas - Servicio profesional en Las Quintas, Culiacán"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
@@ -582,13 +587,13 @@ if (window.requestIdleCallback) {
                                 <img src="../../../assets/images/emergencia-24-7-nocturna-420w.png"
                                      srcset="../../../assets/images/emergencia-24-7-nocturna-420w.png 420w, ../../../assets/images/emergencia-24-7-nocturna-800w.png 800w"
                                      sizes="(max-width:768px) 100vw, 420px"
-                                     alt="Servicio de emergencia 24/7 en Antonio Toledo Corro, Culiacán" title="Servicio de emergencias 24/7 en Antonio Toledo Corro - Llegada inmediata"
+                                     alt="Emergencias 24/7 en Las Quintas" title="Emergencias 24/7 en Las Quintas - Servicio profesional en Las Quintas, Culiacán"
                                      width="420" height="420"
                                      loading="lazy" decoding="async">
                             </picture>
                         </figure>
                     </div>
-                    <h3>Emergencias 24/7 en Antonio Toledo Corro</h3>
+                    <h3>Emergencias 24/7 en Las Quintas</h3>
                     <p>Atención inmediata fugas, inundaciones, drenajes tapados.</p>
                 </div>
             </div>
@@ -596,7 +601,7 @@ if (window.requestIdleCallback) {
     </section>
 
     <section class="seo-links" aria-labelledby="seo-links-title">
-      <h2 id="seo-links-title">Otros servicios en Antonio Toledo Corro</h2>
+      <h2 id="seo-links-title">Otros servicios en Las Quintas</h2>
       <div class="seo-grid">
         <a class="seo-card" href="../../reparacion-de-fugas/"><span>Reparación de Fugas</span></a>
         <a class="seo-card" href="../../destape-de-drenajes/"><span>Destape de Drenajes</span></a>
@@ -607,12 +612,12 @@ if (window.requestIdleCallback) {
 
     <section class="section section-alt">
         <div class="container">
-            <h2>Conocimiento Específico de Antonio Toledo Corro</h2>
+            <h2>Conocimiento Específico de Las Quintas</h2>
             <div class="pricing-content">
                 <div class="pricing-box">
-                    <h3>¿Por qué nos eligen en Antonio Toledo Corro?</h3>
+                    <h3>¿Por qué nos eligen en Las Quintas?</h3>
                     <p><strong>✓ Acceso Controlado: Conocemos protocolos de la caseta, llegamos identificados profesionalmente.</strong></p>
-                    <p><strong>✓ Experiencia Local:</strong> Más de 10 años trabajando en Antonio Toledo Corro y alrededores.</p>
+                    <p><strong>✓ Experiencia Local:</strong> Más de 10 años trabajando en Las Quintas y alrededores.</p>
                     <p><strong>✓ Conocemos la Zona:</strong> Calles, accesos, características específicas del área.</p>
                     <p><strong>✓ Materiales de Calidad:</strong> Trabajamos con marcas reconocidas y confiables.</p>
                     <p><strong>✓ Detección Profesional:</strong> Equipos especializados para localizar fugas sin daños.</p>
@@ -627,7 +632,7 @@ if (window.requestIdleCallback) {
         <div class="container">
             <h2>Ubicación y Tiempo de Llegada</h2>
             <div class="emergency-content">
-                <p class="emergency-text">Antonio Toledo Corro es una de las zonas donde más trabajamos. Conocemos perfectamente la ubicación, los accesos principales y las características del área.</p>
+                <p class="emergency-text">Las Quintas es una de las zonas donde más trabajamos. Conocemos perfectamente la ubicación, los accesos principales y las características del área.</p>
                 <p><strong>Tiempo promedio de llegada:</strong> 20-30 minutos desde cualquier punto de Culiacán.</p>
                 <p><strong>Disponibilidad:</strong> 24 horas, 7 días a la semana (incluyendo fines de semana y festivos).</p>
                 <a href="https://wa.me/526671631231?text=Hola,%20necesito%20un%20plomero%20en%20Las%20Quintas" target="_blank" class="btn-primary emergency-btn">WhatsApp: 52 667 163 1231</a>
@@ -637,19 +642,19 @@ if (window.requestIdleCallback) {
 
     <section class="section section-alt">
         <div class="container">
-            <h2>Testimonios de Vecinos de Antonio Toledo Corro</h2>
+            <h2>Testimonios de Vecinos de Las Quintas</h2>
             <div class="testimonials">
                 <div class="testimonial">
-                    <p>"Excelente servicio. Llegaron rápido a Antonio Toledo Corro y solucionaron la fuga. Muy profesionales y con buen precio."</p>
-                    <cite>— Cliente de Antonio Toledo Corro</cite>
+                    <p>"Excelente servicio. Llegaron rápido a Las Quintas y solucionaron la fuga. Muy profesionales y con buen precio."</p>
+                    <cite>— Cliente de Las Quintas</cite>
                 </div>
                 <div class="testimonial">
-                    <p>"Ya los he contratado varias veces en Antonio Toledo Corro. Siempre llegan a tiempo, trabajan limpio y dan garantía. Los recomiendo."</p>
-                    <cite>— Residente de Antonio Toledo Corro</cite>
+                    <p>"Ya los he contratado varias veces en Las Quintas. Siempre llegan a tiempo, trabajan limpio y dan garantía. Los recomiendo."</p>
+                    <cite>— Residente de Las Quintas</cite>
                 </div>
                 <div class="testimonial">
                     <p>"Muy contentos con el trabajo. Arreglaron el drenaje que otros no pudieron. Conocen bien la zona y son honestos."</p>
-                    <cite>— Familia de Antonio Toledo Corro</cite>
+                    <cite>— Familia de Las Quintas</cite>
                 </div>
             </div>
         </div>
@@ -657,15 +662,15 @@ if (window.requestIdleCallback) {
 
     <section class="section">
         <div class="container">
-            <h2>Preguntas Frecuentes - Antonio Toledo Corro</h2>
+            <h2>Preguntas Frecuentes - Las Quintas</h2>
             <div class="faq">
                 <div class="faq-item">
-                    <h3>¿Cuánto cobran por servicio en Antonio Toledo Corro?</h3>
+                    <h3>¿Cuánto cobran por servicio en Las Quintas?</h3>
                     <p>Los precios son transparentes y justos. Reparación de fuga desde $600, destape desde $400, cambio de WC desde $800. Los costos pueden ser mayores debido al uso de materiales premium y la complejidad de los sistemas en residencias de lujo. Te damos presupuesto exacto antes de iniciar.</p>
                 </div>
                 <div class="faq-item">
-                    <h3>¿Cuánto tardan en llegar a Antonio Toledo Corro?</h3>
-                    <p>Llegamos en 20-30 minutos a Antonio Toledo Corro. Conocemos la zona y tenemos disponibilidad 24/7 todos los días del año.</p>
+                    <h3>¿Cuánto tardan en llegar a Las Quintas?</h3>
+                    <p>Llegamos en 20-30 minutos a Las Quintas. Conocemos la zona y tenemos disponibilidad 24/7 todos los días del año.</p>
                 </div>
                 <div class="faq-item">
                     <h3>¿Traen refacciones o hay que comprarlas aparte?</h3>
@@ -673,7 +678,7 @@ if (window.requestIdleCallback) {
                 </div>
                 <div class="faq-item">
                     <h3>¿Dan garantía en los trabajos?</h3>
-                    <p>Sí, todos nuestros trabajos en Antonio Toledo Corro incluyen garantía escrita de 6 meses en mano de obra y materiales. Si hay algún problema relacionado con la reparación, regresamos sin costo.</p>
+                    <p>Sí, todos nuestros trabajos en Las Quintas incluyen garantía escrita de 6 meses en mano de obra y materiales. Si hay algún problema relacionado con la reparación, regresamos sin costo.</p>
                 </div>
                 <div class="faq-item">
                     <h3>¿Pueden detectar fugas sin romper?</h3>
@@ -685,7 +690,7 @@ if (window.requestIdleCallback) {
 
     <section class="section section-alt">
         <div class="container">
-            <h2>Cómo Solicitar Servicio en Antonio Toledo Corro</h2>
+            <h2>Cómo Solicitar Servicio en Las Quintas</h2>
             <div class="process-steps">
                 <div class="step">
                     <div class="step-number">1</div>
@@ -694,7 +699,7 @@ if (window.requestIdleCallback) {
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Dinos tu dirección en Antonio Toledo Corro</h3>
+                    <h3>Dinos tu dirección en Las Quintas</h3>
                     <p>Calle y número</p>
                 </div>
                 <div class="step">
@@ -713,9 +718,9 @@ if (window.requestIdleCallback) {
 
     <section id="sobre-nosotros" class="section">
         <div class="container">
-            <h2>Plomeros Especializados en Antonio Toledo Corro</h2>
+            <h2>Plomeros Especializados en Las Quintas</h2>
             <div class="about-content">
-                <p>Llevamos más de 10 años trabajando en Antonio Toledo Corro y somos el plomero preferido de cientos de residentes. Conocemos las particularidades de la zona y brindamos servicio profesional, rápido y con garantía.</p>
+                <p>Llevamos más de 10 años trabajando en Las Quintas y somos el plomero preferido de cientos de residentes. Conocemos las particularidades de la zona y brindamos servicio profesional, rápido y con garantía.</p>
                 <p>Llegamos identificados profesionalmente, con unidad rotulada, herramientas especializadas y respeto absoluto a tu hogar. Trabajamos con protección de pisos, limpieza durante el servicio y garantía escrita de 6 meses.</p>
                 <div class="features">
                     <div class="feature">
@@ -735,49 +740,11 @@ if (window.requestIdleCallback) {
         </div>
     </section>
 
-
-    <!-- Contenido Único de Antonio Toledo Corro -->
-    <section class="local-context" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-         padding: 40px 0; margin: 0;">
-        <div class="container">
-            <h2 style="color: #0066cc; margin: 0 0 25px 0; font-size: 1.8em; text-align: center;">
-                🏘️ Servicio Especializado en Antonio Toledo Corro
-            </h2>
-            <div style="background: white; padding: 30px; border-radius: 12px; border-left: 4px solid #0066cc; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                <p style="color: #555; line-height: 1.8; margin-bottom: 20px; font-size: 1.05em;">
-                    En <strong>Antonio Toledo Corro</strong>, atendemos principalmente <strong>colonias tradicionales con infraestructura variada y necesidades diversas</strong>.
-                    Nuestro equipo conoce perfectamente las instalaciones típicas de esta zona.
-                </p>
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #2c3e50; margin: 0 0 12px 0; font-size: 1.2em;">
-                        ⚙️ Problemas Comunes en Antonio Toledo Corro
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin: 0;">
-                        Los problemas más frecuentes que atendemos incluyen: <strong>fugas en instalaciones antiguas, destape de drenajes, reparación de llaves y sanitarios</strong>.
-                    </p>
-                </div>
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #2c3e50; margin: 0 0 12px 0; font-size: 1.2em;">
-                        🔧 Servicios Especializados
-                    </h3>
-                    <p style="color: #666; line-height: 1.6; margin: 0;">
-                        Ofrecemos: <strong>renovación de instalaciones antiguas, reparaciones de emergencia, mantenimiento preventivo accesible</strong>.
-                    </p>
-                </div>
-                <div style="background: #e7f3ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <p style="color: #0066cc; font-weight: 600; margin: 0; font-size: 1.05em;">
-                        ✅ Servicio rápido y confiable adaptado a las características de la colonia
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section aria-label="Servicios relacionados">
         <div class="container">
             <h2>Otras Colonias Donde Trabajamos</h2>
             <ul>
-                <li><a href="../antonio-toledo-corro/">Plomero en Antonio Toledo Corro</a></li>
+                <li><a href="../las-quintas/">Plomero en Las Quintas</a></li>
                 <li><a href="../tres-rios/">Plomero en Tres Ríos</a></li>
                 <li><a href="../centro/">Plomero en Centro Culiacán</a></li>
                 <li><a href="../../plomero-colonias-culiacan/">Ver todas las colonias</a></li>
@@ -787,9 +754,9 @@ if (window.requestIdleCallback) {
 
     <section id="contacto" class="section section-alt">
         <div class="container">
-            <h2>¿Necesitas Plomero en Antonio Toledo Corro Ahora?</h2>
+            <h2>¿Necesitas Plomero en Las Quintas Ahora?</h2>
             <div class="final-cta">
-                <p class="cta-text">Contáctanos por WhatsApp al <strong>667 163 1231</strong> y llegamos en 20-30 minutos a Antonio Toledo Corro.</p>
+                <p class="cta-text">Contáctanos por WhatsApp al <strong>667 163 1231</strong> y llegamos en 20-30 minutos a Las Quintas.</p>
                 <p class="cta-subtitle">Servicio profesional, garantía escrita, materiales de calidad.</p>
                 <div class="cta-buttons">
                     <a href="https://wa.me/526671631231?text=Hola,%20necesito%20un%20plomero%20en%20Las%20Quintas" target="_blank" class="btn-primary btn-whatsapp">WhatsApp: 52 667 163 1231</a>
@@ -803,29 +770,29 @@ if (window.requestIdleCallback) {
         <!-- Mapa Interactivo de la Zona -->
         <section style="margin: 40px 0; padding: 30px 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 12px;">
             <h2 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em; text-align: center;">
-                📍 Ubicación y Zona de Servicio en Antonio Toledo Corro
+                📍 Ubicación y Zona de Servicio en Las Quintas
             </h2>
 
             <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 50%; margin: 0 auto;">
                 <p style="color: #555; margin-bottom: 20px; line-height: 1.6;">
-                    Nuestro equipo de plomeros profesionales brinda servicio en toda la colonia <strong>Antonio Toledo Corro</strong>
+                    Nuestro equipo de plomeros profesionales brinda servicio en toda la colonia <strong>Las Quintas</strong>
                     y áreas circundantes. El mapa a continuación muestra nuestra zona de cobertura principal.
                 </p>
 
                 <!-- Google Maps Embed -->
                 <div style="position: relative; padding-bottom: 56%; height: 0; overflow: hidden; border-radius: 8px;">
-                    <iframe src="https://www.google.com/maps?q=Antonio+Toledo+Corro,+Culiacán,+Sinaloa,+México&output=embed"
+                    <iframe src="https://www.google.com/maps?q=Las+Quintas,+Culiacán,+Sinaloa,+México&output=embed"
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
                         allowfullscreen=""
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"
-                        title="Mapa de Antonio Toledo Corro, Culiacán">
+                        title="Mapa de Las Quintas, Culiacán">
                     </iframe>
                 </div>
 
                 <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 4px;">
                     <p style="margin: 0; color: #2e7d32; font-weight: 600;">
-                        ⚡ Tiempo de llegada promedio a Antonio Toledo Corro: 20-30 minutos
+                        ⚡ Tiempo de llegada promedio a Las Quintas: 20-30 minutos
                     </p>
                 </div>
 
@@ -846,8 +813,7 @@ if (window.requestIdleCallback) {
             </div>
         </section>
 
-        <footer
-    <!-- Bloque NAP (Name, Address, Phone) para SEO Local -->
+        <footer class="footer"><!-- Bloque NAP (Name, Address, Phone) para SEO Local -->
     <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #0066cc;">
         <h3 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.3em;">
             📞 Información de Contacto
@@ -868,7 +834,7 @@ if (window.requestIdleCallback) {
             <div>
                 <p style="margin: 5px 0; color: #555;">
                     <strong>Servicio en:</strong><br>
-                    <span style="font-weight: 600; color: #2c3e50;">Antonio Toledo Corro, Culiacán, Sinaloa</span>
+                    <span style="font-weight: 600; color: #2c3e50;">Las Quintas, Culiacán, Sinaloa</span>
                 </p>
             </div>
             <div>
@@ -880,15 +846,13 @@ if (window.requestIdleCallback) {
         </div>
         <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
             <p style="margin: 0; color: #555; font-size: 0.95em;">
-                ✅ <strong>Servicio inmediato en Antonio Toledo Corro</strong> - Plomeros certificados disponibles 24 horas
+                ✅ <strong>Servicio inmediato en Las Quintas</strong> - Plomeros certificados disponibles 24 horas
             </p>
         </div>
     </div>
 
-
-        <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Plomero Culiacán Pro. Servicio especializado en Antonio Toledo Corro.</p>
+            <p>&copy; 2025 Plomero Culiacán Pro. Servicio especializado en Las Quintas.</p>
         </div>
     </footer>
 
@@ -925,15 +889,15 @@ if (window.requestIdleCallback) {
 <script>
 (function(){
   var WA="526671631231", TEL="+52 667 163 1231", PATH=location.pathname;
-  var waMsg="Hola, necesito un plomero en Antonio Toledo Corro, Culiacán";
+  var waMsg="Hola, necesito un plomero en Las Quintas, Culiacán";
   var waHref="https://wa.me/"+WA+"?text="+encodeURIComponent(waMsg);
   var telHref="tel:"+TEL.replace(/\s+/g,'');
   var wa=document.getElementById("cta-whatsapp"); if(wa) wa.href=waHref;
   var tl=document.getElementById("cta-llamar");   if(tl) tl.href=telHref;
   window.dataLayer=window.dataLayer||[];
-  function pushEvt(type,label){try{window.dataLayer.push({event:"cta_click",cta_type:type,cta_label:label,page:PATH,colonia:"antonio-toledo-corro"});}catch(e){}}
-  if(wa){ wa.addEventListener("click", function(){ pushEvt("whatsapp","cta_floating_antonio-toledo-corro"); }); }
-  if(tl){ tl.addEventListener("click", function(){ pushEvt("llamar","cta_floating_antonio-toledo-corro"); }); }
+  function pushEvt(type,label){try{window.dataLayer.push({event:"cta_click",cta_type:type,cta_label:label,page:PATH,colonia:"las-quintas"});}catch(e){}}
+  if(wa){ wa.addEventListener("click", function(){ pushEvt("whatsapp","cta_floating_las-quintas"); }); }
+  if(tl){ tl.addEventListener("click", function(){ pushEvt("llamar","cta_floating_las-quintas"); }); }
 })();
 </script>
 </body>
