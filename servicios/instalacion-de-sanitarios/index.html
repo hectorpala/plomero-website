@@ -3,117 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instalación de Sanitarios en Culiacán | WC, Lavabos y Mezcladoras</title>
-    <meta name="description" content="Instalación y cambio de sanitarios en Culiacán: WC, lavabos, mingitorios, mezcladoras. Instalación profesional con garantía, niveles perfectos y sin fugas. WhatsApp 667 163 1231.">
-    <link rel="canonical" href="https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/">
 
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://www.google.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+    <title>Instalación de Sanitarios Culiacán | WC y Excusados Profesionales</title>
+    <meta name="description" content="Instalación profesional de sanitarios y WC en Culiacán. Servicio certificado con garantía de 6 meses. Todas las marcas: ahorradores, tradicionales y modernos. WhatsApp: 667 163 1231">
+
+    <!-- Geolocalización para SEO Local -->
+    <meta http-equiv="content-language" content="es-MX">
+    <meta name="geo.region" content="MX-SIN">
+    <meta name="geo.placename" content="Culiacán">
+    <meta name="geo.position" content="24.7903;-107.3878">
+    <meta name="ICBM" content="24.7903, -107.3878">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#E36414">
+
+    <link rel="icon" href="../../assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../../assets/icons/favicon.png">
+
+    <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload"
+          as="image"
+          href="../../assets/images/instalacion-sanitarios-profesional-1200w.webp"
+          type="image/webp"
+          fetchpriority="high">
+
+    <!-- Critical CSS Inline for LCP optimization -->
+    <style>
+/* Critical CSS - Above the fold only */
+:root{--brand:#E36414;--brand-light:#F97316;--brand-dark:#C2410C;--whatsapp:#25D366;--emergency:#DC2626;--emergency-light:#EF4444;--text:#0F172A;--text-light:#475569;--bg:#FFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--gradient-emergency:linear-gradient(135deg,#EF4444 0%,#DC2626 100%);--space-sm:1rem;--space-md:2rem;--container-max-width:1200px;--radius-md:12px;--container-gutter:24px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;color:var(--text);background:var(--bg);overflow-x:hidden;padding-top:80px}
+.container{max-width:var(--container-max-width);margin:0 auto;padding:0 24px}
+/* Navigation Header */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
+.nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+.logo{display:block;text-decoration:none;transition:opacity .2s ease}
+.logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+.logo:hover{opacity:0.9}
+.nav-menu{display:flex;list-style:none;gap:2rem}
+.nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+.nav-link:hover{color:var(--brand-light)}
+.mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
+.mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px;margin:0}
+@media (max-width:768px){
+    .logo img{height:62px;max-height:72px}
+    .mobile-menu-btn{display:flex}
+    .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s ease}
+    .nav-menu.active{left:0}
+    .nav-link{color:var(--text)}
+}
+/* Floating CTAs */
+.floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
+.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
+.floating-call{background:#0f4fa8;bottom:18px}
+.floating-whatsapp{background:#22c55e;bottom:78px}
+.hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
+.hero-background{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
+.hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
+.hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+.hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1.5rem;line-height:1.2;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+.hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1rem 0 1.5rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:0.95rem;border:1px solid rgba(66,133,244,0.15)}
+.rating-stars{color:#FBBC04;font-size:1.15rem;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+.rating-score{font-weight:700;color:#1a73e8;font-size:1.05rem}
+.rating-divider{color:var(--text-light)}
+.hero-subtitle{font-size:1.2rem;color:#F1F5F9;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+.hero-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}
+.feature-item{display:flex;align-items:center;gap:8px;color:#fff;font-size:0.9rem;font-weight:500}
+.feature-item svg{flex-shrink:0;color:#f97316}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fba336 0%,#f97316 50%,#e36414 100%);color:#fff;padding:16px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.12s,box-shadow 0.12s,filter 0.12s;box-shadow:0 8px 20px rgba(227,100,20,0.35)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(227,100,20,0.45);filter:brightness(1.04)}
+.hero-contact{color:#fff;font-size:0.95rem;margin-top:1.5rem;opacity:0.95}
+@media(max-width:768px){.hero{min-height:75vh;padding-top:85px !important;align-items:flex-start !important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0 !important;padding:1.5rem 1.25rem !important;background:rgba(255,255,255,0.12) !important;backdrop-filter:blur(10px) !important}.hero h1{font-size:clamp(1.5rem,5vw,2rem) !important;margin-bottom:0.5rem !important}.hero-subtitle{display:none !important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(255,255,255,0.9) !important}.hero-contact{display:none !important}}
+</style>
 
     <link rel="stylesheet" href="../../styles.min.css">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/icons/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/icons/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/icons/favicon.png">
+    <link rel="canonical" href="https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/" />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/" />
-    <meta property="og:title" content="Instalación de Sanitarios en Culiacán | Plomero Culiacán Pro" />
-    <meta property="og:description" content="Instalación y cambio de sanitarios en Culiacán: WC, lavabos, mingitorios, mezcladoras. Instalación profesional con garantía y niveles perfectos." />
-    <meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp" />
-    <meta property="og:image:width" content="800" />
+    <meta property="og:title" content="Instalación de Sanitarios Culiacán | WC y Excusados Profesionales" />
+    <meta property="og:description" content="Instalación profesional de sanitarios y WC en Culiacán. Todas las marcas, garantía de 6 meses. Servicio certificado con precios justos." />
+    <meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/instalacion-sanitarios-profesional-1200w.webp" />
+    <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="800" />
+    <meta property="og:image:alt" content="Plomero instalando sanitario nuevo profesionalmente en Culiacán" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:site_name" content="Plomero Culiacán Pro" />
 
-    <!-- Twitter -->
+    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/" />
-    <meta name="twitter:title" content="Instalación de Sanitarios en Culiacán | Plomero Culiacán Pro" />
-    <meta name="twitter:description" content="Instalación y cambio de sanitarios en Culiacán: WC, lavabos, mingitorios, mezcladoras. Instalación profesional con garantía y niveles perfectos." />
-    <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp" />
+    <meta name="twitter:title" content="Instalación de Sanitarios Culiacán | WC y Excusados Profesionales" />
+    <meta name="twitter:description" content="Instalación profesional de sanitarios y WC en Culiacán. Todas las marcas, garantía de 6 meses." />
+    <meta name="twitter:image" content="https://plomeroculiacanpro.mx/assets/images/instalacion-sanitarios-profesional-1200w.webp" />
+    <meta name="twitter:image:alt" content="Plomero instalando sanitario nuevo profesionalmente en Culiacán" />
 
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","serviceType":"Instalación de Sanitarios","provider":{"@type":"LocalBusiness","name":"Plomero Culiacán Pro","image":"https://plomeroculiacanpro.mx/assets/images/taza-de-baño-800w.webp","@id":"https://plomeroculiacanpro.mx","url":"https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/","telephone":"+526671631231","priceRange":"$$","address":{"@type":"PostalAddress","addressLocality":"Culiacán","addressRegion":"Sinaloa","addressCountry":"MX"},"geo":{"@type":"GeoCoordinates","latitude":24.8090556,"longitude":-107.3940556},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"},"sameAs":["https://www.facebook.com/plomeroculiacanpro","https://www.instagram.com/plomeroculiacanpro"]},"areaServed":{"@type":"City","name":"Culiacán","containedIn":{"@type":"State","name":"Sinaloa"}},"description":"Instalación profesional de sanitarios en Culiacán: WC, lavabos, mingitorios y mezcladoras. Instalación con niveles perfectos, sin fugas y garantía."},{"@type":"Review","author":{"@type":"Person","name":"Fernando S."},"datePublished":"2025-11-13","reviewBody":"Instalaron un WC nuevo en mi baño. Quedó perfecto, bien nivelado y sin fugas. Se llevaron el WC viejo y dejaron todo limpio. Muy profesionales.","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"publisher":{"@type":"Organization","name":"Google"}},{"@type":"Review","author":{"@type":"Person","name":"Claudia M."},"datePublished":"2025-10-06","reviewBody":"Me ayudaron a elegir un WC ahorrador y lo instalaron el mismo día. Ahora mi recibo de agua bajó notablemente. Excelente servicio.","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"publisher":{"@type":"Organization","name":"Google"}},{"@type":"Review","author":{"@type":"Person","name":"Jorge L."},"datePublished":"2025-09-06","reviewBody":"Instalaron lavabo y monomando en mi baño nuevo. Quedó impecable, con niveles perfectos y ninguna fuga. 100% recomendados.","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"publisher":{"@type":"Organization","name":"Google"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto cuesta instalar un WC en Culiacán?","acceptedAnswer":{"@type":"Answer","text":"El costo de instalación de WC varía según la complejidad: solo instalación (traes tu WC) $800-$1,500 incluye retiro del viejo, brida nueva, anillo de cera, nivelación profesional y pruebas. Si la brida está rota o dañada, la reparación o cambio cuesta $500-$1,200 adicionales. El precio incluye mano de obra, materiales (brida, cera, tornillos inoxidables) y garantía de 12 meses por escrito."}},{"@type":"Question","name":"¿Cuánto tiempo tarda la instalación de un sanitario?","acceptedAnswer":{"@type":"Answer","text":"La instalación básica de un WC toma 1-2 horas en promedio. Incluye retiro del sanitario viejo, limpieza de base, verificación de brida y tubería, instalación con nivel láser, sellado con silicón sanitario y pruebas de hermeticidad. Lavabo con monomando toma 1.5-2 horas. Si hay que reparar brida rota o hacer modificaciones en tubería puede tardar 3-4 horas. Te avisamos el tiempo estimado antes de empezar."}},{"@type":"Question","name":"¿Qué garantía ofrecen en la instalación?","acceptedAnswer":{"@type":"Answer","text":"Ofrecemos garantía de 12 meses por escrito en toda la instalación, cubriendo mano de obra y materiales instalados (brida, anillo de cera, conexiones, empaques, tornillos). La garantía cubre fugas, problemas de nivelación o cualquier defecto relacionado con la instalación. No aplica si el sanitario se mueve o se modifica la instalación después de nuestro trabajo. Todo queda documentado en tu ticket de servicio."}},{"@type":"Question","name":"¿Puedo comprar mi propio sanitario o deben traerlo ustedes?","acceptedAnswer":{"@type":"Answer","text":"Sí, puedes comprar tu propio WC, lavabo o mezcladora en la tienda que prefieras y nosotros hacemos la instalación profesional. Muchos clientes compran en tiendas de descuento o en línea y contratan solo nuestra instalación. Solo verifica que el sanitario incluya todos los tornillos, empaques y accesorios necesarios. También podemos asesorarte sobre qué modelo comprar según tu presupuesto y necesidades antes de que compres."}},{"@type":"Question","name":"¿En qué colonias de Culiacán dan servicio de instalación?","acceptedAnswer":{"@type":"Answer","text":"Damos servicio de instalación de sanitarios en toda la ciudad de Culiacán y zona conurbada: Las Quintas, Tres Ríos, Chapultepec, La Campiña, Guadalupe, Centro, Barrancos, Stanza Toscana, Alturas del Sur, Villa Verde, Montebello y todas las colonias. Sin costo adicional de traslado dentro de Culiacán. Llegamos el mismo día en la mayoría de casos. Tiempo de llegada promedio 30-60 minutos después de agendar."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://plomeroculiacanpro.mx/"},{"@type":"ListItem","position":2,"name":"Servicios","item":"https://plomeroculiacanpro.mx/#servicios"},{"@type":"ListItem","position":3,"name":"Instalación de Sanitarios","item":"https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/"}]}]}</script>
+    <meta name="x-build" content="2025-11-23T00:00:00Z" />
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W75CRTX5');</script>
-    <!-- End Google Tag Manager -->
+    <!-- JSON-LD Schema: @graph with WebSite, BreadcrumbList, HomeAndConstructionBusiness, Service, FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://plomeroculiacanpro.mx/#website",
+          "url": "https://plomeroculiacanpro.mx/",
+          "name": "Plomero Culiacán Pro",
+          "description": "Servicio profesional de plomería en Culiacán, Sinaloa",
+          "publisher": {
+            "@id": "https://plomeroculiacanpro.mx/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://plomeroculiacanpro.mx/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Servicios",
+              "item": "https://plomeroculiacanpro.mx/#servicios"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Instalación de Sanitarios",
+              "item": "https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/"
+            }
+          ]
+        },
+        {
+          "@type": "HomeAndConstructionBusiness",
+          "@id": "https://plomeroculiacanpro.mx/#organization",
+          "name": "Plomero Culiacán Pro - Instalación de Sanitarios",
+          "image": "https://plomeroculiacanpro.mx/assets/images/instalacion-sanitarios-profesional-1200w.webp",
+          "url": "https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/",
+          "telephone": "+52-667-163-1231",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Servicio a Domicilio",
+            "addressLocality": "Culiacán",
+            "addressRegion": "Sinaloa",
+            "postalCode": "80000",
+            "addressCountry": "MX"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 24.8049,
+            "longitude": -107.3938
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "sameAs": [
+            "https://www.facebook.com/plomeroculiacanpro"
+          ],
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "150"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/#service",
+          "serviceType": "Instalación de Sanitarios y WC",
+          "name": "Instalación Profesional de Sanitarios en Culiacán",
+          "description": "Servicio certificado de instalación de sanitarios, WC, excusados y bidets en Culiacán. Instalamos todas las marcas: ahorradores de agua, tradicionales y modernos. Incluye garantía de 6 meses, materiales de calidad y mano de obra profesional.",
+          "provider": {
+            "@id": "https://plomeroculiacanpro.mx/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "servicePhone": {
+              "@type": "ContactPoint",
+              "telephone": "+52-667-163-1231",
+              "contactType": "Customer Service"
+            }
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/#faqpage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta instalar un sanitario en Culiacán?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El costo de instalación de un sanitario en Culiacán va desde $1,200 hasta $2,500 pesos, dependiendo del tipo de WC (tradicional, ahorrador o moderno) y la complejidad del trabajo. Este precio incluye: mano de obra profesional, materiales necesarios (cera, tornillos, conexiones), pruebas de funcionamiento y garantía de 6 meses. Si requieres cambio de brida, tubería o válvulas adicionales, el costo puede ser mayor. Te damos presupuesto exacto sin compromiso al evaluar tu caso específico."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda la instalación de un WC?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Una instalación estándar de sanitario tarda entre 1.5 a 3 horas. El tiempo varía según: 1) Si es instalación nueva o reemplazo (el reemplazo es más rápido), 2) Estado de la tubería existente (si requiere cambio de brida o conexiones), 3) Tipo de sanitario (los ahorradores son más rápidos, los modernos con tecnología pueden tomar más tiempo), 4) Complejidad del espacio. En casos simples donde solo se reemplaza el WC y la tubería está bien, puede completarse en 1.5 horas. Te confirmamos tiempo exacto al evaluar tu instalación."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué incluye el servicio de instalación de sanitarios?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nuestro servicio completo de instalación incluye: 1) Retiro del sanitario viejo (si aplica), 2) Inspección de tubería de desagüe y toma de agua, 3) Cambio o reparación de brida si está dañada, 4) Instalación del nuevo sanitario con cera de calidad, 5) Conexión de la válvula de llenado y toma de agua, 6) Nivelación perfecta del WC, 7) Pruebas de funcionamiento (descarga, llenado, detección de fugas), 8) Limpieza del área de trabajo, 9) Garantía escrita de 6 meses. Si tu sanitario lo requiere, también instalamos bidet o accesorios adicionales."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Instalan sanitarios ahorradores de agua?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, instalamos todo tipo de sanitarios ahorradores de agua (WC de bajo consumo). Estos modelos utilizan solo 4.8 litros por descarga (vs 13 litros de los tradicionales), ahorrando hasta 60% de agua. Instalamos marcas reconocidas como Helvex, Urrea, American Standard, Mansfield y más. Los sanitarios ahorradores son ideales para Culiacán donde el agua es costosa. Te asesoramos sobre qué modelo es mejor según tu presupuesto y necesidades. La instalación es la misma que un WC tradicional pero con conexiones optimizadas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo comprar mi propio sanitario o ustedes lo proporcionan?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ambas opciones funcionan perfectamente. Puedes: 1) COMPRAR TU SANITARIO: Si ya tienes uno o prefieres elegirlo tú mismo, solo hacemos la instalación. Te asesoramos por WhatsApp sobre qué modelo comprar y qué verificar (medidas, tipo de descarga, accesorios incluidos). 2) NOSOTROS LO PROPORCIONAMOS: Conseguimos sanitarios de calidad a precio mayorista. Te presentamos opciones según tu presupuesto y las instalamos el mismo día. Trabajamos con distribuidores autorizados de marcas reconocidas. En ambos casos, el trabajo tiene la misma garantía de 6 meses."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué marcas de sanitarios instalan?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Instalamos todas las marcas disponibles en el mercado mexicano sin excepción. Las más comunes que instalamos en Culiacán son: Helvex (excelente relación calidad-precio), Urrea (muy duraderos), American Standard (gama media-alta), Mansfield (ahorradores eficientes), Briggs (económicos), Corona (tradicionales confiables), TOTO (alta gama importados), Kohler (premium), Gerber, Moen y más. No importa si compraste tu sanitario en Home Depot, Coppel, Liverpool o distribuidor local: lo instalamos correctamente. También instalamos modelos importados o especiales con tecnología."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Dan garantía en la instalación de sanitarios?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, todas nuestras instalaciones incluyen garantía escrita de 6 meses en mano de obra y materiales que nosotros instalamos (cera, tornillos, conexiones, brida si la cambiamos). La garantía cubre: fugas en la base, problemas de nivelación, fallas en conexiones de agua, desperfectos por instalación incorrecta. Te entregamos comprobante con detalle del trabajo realizado. Si el sanitario mismo tiene defecto de fábrica, aplica la garantía del fabricante (que varía por marca). Durante los 6 meses, cualquier problema relacionado con la instalación lo corregimos SIN COSTO."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Pueden instalar un sanitario si la tubería está dañada?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. De hecho, siempre inspeccionamos la tubería ANTES de instalar el sanitario nuevo. Si encontramos: brida rota o corroída (muy común), tubería de desagüe agrietada, conexión de agua con fugas, o válvula de paso dañada, te informamos de inmediato y te damos presupuesto para corregirlo. No instalamos sobre tubería mala porque causaría problemas después. Reparamos o cambiamos lo necesario el mismo día para que tu sanitario nuevo funcione perfectamente por años. La mayoría de reparaciones de tubería se hacen en 30-60 minutos adicionales."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Hacen instalación de bidets o WC con funciones especiales?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, instalamos bidets independientes, bidets integrados al WC, y sanitarios con funciones especiales como: WC con bidet incorporado, sanitarios con asiento calefactor, WC con descarga dual (doble botón), sanitarios inteligentes japoneses, WC con sensor automático, y modelos suspendidos (de pared). Cada tipo tiene requerimientos específicos: los bidets necesitan toma de agua adicional, los inteligentes requieren conexión eléctrica, los suspendidos necesitan estructura de soporte especial. Evaluamos tu baño y te decimos si es viable instalar el modelo que quieres."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Atienden instalaciones de sanitarios de emergencia?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí, aunque la instalación de sanitarios normalmente se agenda, atendemos casos urgentes donde: el WC viejo se rompió completamente y no hay otro baño disponible, se necesita instalar sanitario nuevo en remodelación express, o reemplazo urgente por fuga severa en el WC actual. Para emergencias, podemos atender el mismo día o en 24 horas dependiendo de disponibilidad y si ya tienes el sanitario nuevo. Contáctanos por WhatsApp explicando tu urgencia y coordinamos la instalación lo antes posible. El precio es el mismo, sin sobrecargos por urgencia."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 
     <style>
     .breadcrumb {
         background: #f8f9fa;
         padding: 12px 0;
-        font-size: 14px;
-        border-bottom: 1px solid #e9ecef;
+        margin-bottom: 0;
     }
-    .breadcrumb-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    .breadcrumb-list {
+    .breadcrumb-nav {
         display: flex;
         align-items: center;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 0.9rem;
     }
-    .breadcrumb-item {
-        display: flex;
-        align-items: center;
-    }
-    .breadcrumb-item a {
-        color: #0066cc;
+    .breadcrumb-nav a {
+        color: var(--text-light);
         text-decoration: none;
-        transition: color 0.2s;
     }
-    .breadcrumb-item a:hover {
-        color: #004499;
+    .breadcrumb-nav a:hover {
+        color: var(--brand);
         text-decoration: underline;
     }
-    .breadcrumb-item.active {
-        color: #6c757d;
-    }
     .breadcrumb-separator {
-        margin: 0 8px;
-        color: #6c757d;
-        user-select: none;
-    }
-    @media (max-width: 768px) {
-        .breadcrumb {
-            font-size: 13px;
-            padding: 10px 0;
-        }
-        .breadcrumb-separator {
-            margin: 0 6px;
-        }
+        color: var(--text-light);
     }
     </style>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NSV2K9N2ZD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NSV2K9N2ZD');
+    </script>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
-          height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
 
+    <!-- Navigation Header (IDENTICAL to golden template) -->
     <nav class="nav">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="../../" class="logo">
+                <a href="/" class="logo">
                     <img src="../../logo-plomero-culiacan-pro.webp" alt="Plomero Culiacán Pro - Logo">
                 </a>
                 <button class="mobile-menu-btn" aria-label="Menu">
@@ -122,463 +359,730 @@
                     <span></span>
                 </button>
                 <ul class="nav-menu">
-                    <li><a href="../../#inicio" class="nav-link">Inicio</a></li>
-                    <li><a href="../../#servicios" class="nav-link">Servicios</a></li>
-                    <li><a href="../../#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
-                    <li><a href="../../blog/" class="nav-link">Blog</a></li>
-                    <li><a href="../../#contacto" class="nav-link">Contacto</a></li>
+                    <li><a href="/" class="nav-link">Inicio</a></li>
+                    <li><a href="/#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="/#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                    <li><a href="/blog/" class="nav-link">Blog</a></li>
+                    <li><a href="/#contacto" class="nav-link">Contacto</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-
     <!-- Breadcrumb Navigation -->
-    <nav class="breadcrumb" aria-label="breadcrumb">
-        <div class="breadcrumb-container">
-            <ol class="breadcrumb-list">
-            <li class="breadcrumb-item"><a href="https://plomeroculiacanpro.mx/">Inicio</a></li>
-            <li class="breadcrumb-separator" aria-hidden="true">›</li>
-            <li class="breadcrumb-item"><a href="https://plomeroculiacanpro.mx/#servicios">Servicios</a></li>
-            <li class="breadcrumb-separator" aria-hidden="true">›</li>
-            <li class="breadcrumb-item active" aria-current="page">Instalación de Sanitarios</li>
-            </ol>
+    <div class="breadcrumb">
+        <div class="container">
+            <nav class="breadcrumb-nav" aria-label="breadcrumb">
+                <a href="/">Inicio</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="/#servicios">Servicios</a>
+                <span class="breadcrumb-separator">›</span>
+                <span>Instalación de Sanitarios</span>
+            </nav>
         </div>
-    </nav>
+    </div>
+
+    <!-- Hero Section (EXACT structure from golden template) -->
     <header id="inicio" class="hero">
+        <!-- Hero Background Image (LCP optimized with preload) -->
+        <picture class="hero-background">
+            <source type="image/webp"
+                    srcset="../../assets/images/taza-de-baño-800w.webp 800w,
+                           ../../assets/images/taza-de-baño-800w.webp 1200w"
+                    sizes="100vw">
+            <img src="../../assets/images/taza-de-baño-800w.webp"
+                 srcset="../../assets/images/taza-de-baño-800w.webp 800w,
+                        ../../assets/images/taza-de-baño-800w.webp 1200w"
+                 sizes="100vw"
+                 alt="Plomero profesional instalando sanitario nuevo en baño moderno en Culiacán con herramientas especializadas"
+                 width="1200"
+                 height="800"
+                 fetchpriority="high"
+                 decoding="async">
+        </picture>
+
         <div class="container">
             <div class="hero-content">
-                <h1 class="fade-in">Instalación de Sanitarios en Culiacán</h1>
-                <p class="hero-subtitle fade-in">Instalación profesional de WC, lavabos, mingitorios y mezcladoras. Niveles perfectos, sin fugas y garantía de 12 meses.</p>
-                <p class="hero-contact">WhatsApp: 52 667 163 1231 · Llamadas: 667 163 1231</p>
-                <a href="https://wa.me/526671631231?text=Hola,%20necesito%20instalar%20un%20sanitario" class="btn-primary hover-lift" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+                <h1 class="fade-in">Instalación de Sanitarios en Culiacán – Servicio Profesional Certificado</h1>
+
+                <!-- Rating Badge (MANDATORY) -->
+                <div class="hero-rating fade-in">
+                    <svg class="google-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    <span class="rating-stars">★★★★★</span>
+                    <span class="rating-score">4.8/5</span>
+                    <span class="rating-divider">·</span>
+                    <span class="rating-count">Más de 150 vecinos de Culiacán satisfechos</span>
+                </div>
+
+                <!-- Subtitle (hidden on mobile) -->
+                <p class="hero-subtitle fade-in">
+                    Instalación profesional de WC, sanitarios y excusados · Todas las marcas y modelos · Garantía de 6 meses · Precios justos y transparentes
+                </p>
+
+                <!-- 3 Feature Items (MANDATORY) -->
+                <div class="hero-features fade-in">
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        <span>Instalación en 1.5-3 hrs</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        <span>Garantía de 6 meses</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+                        <span>Factura SAT disponible</span>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="https://wa.me/526671631231?text=Hola,%20necesito%20cotización%20para%20instalación%20de%20sanitario%20en%20Culiacán.%20¿Cuál%20es%20el%20costo?"
+                   class="btn-primary fade-in"
+                   target="_blank"
+                   rel="noopener"
+                   onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'hero_instalacion_sanitarios'});">
+                    Solicitar Cotización por WhatsApp
+                </a>
+
+                <!-- Contact Info (hidden on mobile) -->
+                <p class="hero-contact fade-in">
+                    También puedes llamar al
+                    <a href="tel:+526671631231" style="color: #fff; font-weight: 700;">667 163 1231</a>
+                </p>
+
+                <!-- Guarantee Badge (hidden on mobile) -->
+                <p class="hero-guarantee fade-in" style="color: #fff; font-size: 0.9rem; margin-top: 1rem; opacity: 0.95;">
+                    ✓ Instalamos todas las marcas · Servicio el mismo día · Materiales de calidad incluidos
+                </p>
             </div>
         </div>
     </header>
 
-    <section style="padding: 0; margin: 2rem 0;">
-        <div class="container">
-            <picture>
-                <source type="image/webp"
-                        srcset="../../assets/images/taza-de-baño-800w.webp 800w"
-                        sizes="(max-width: 768px) 100vw, 800px">
-                <img src="../../assets/images/taza-de-baño-800w.webp"
-                     alt="Instalación profesional de inodoro y sanitarios con acabados de calidad"
-                     width="800" height="800"
-                     loading="eager" decoding="async"
-                     style="width: 100%; height: auto; border-radius: 8px;">
-            </picture>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main>
 
-    <section class="section section-alt">
-        <div class="container">
-            <h2>¿Por qué contratar instalación profesional?</h2>
-            <div class="benefits-grid">
-                <div class="benefit">
-                    <div class="benefit-icon">📐</div>
-                    <h3>Niveles perfectos</h3>
-                    <p>Instalación con nivel láser para evitar que se acumule agua o drene mal</p>
-                </div>
-                <div class="benefit">
-                    <div class="benefit-icon">💧</div>
-                    <h3>Sin fugas garantizado</h3>
-                    <p>Sellado profesional y pruebas de hermeticidad antes de terminar</p>
-                </div>
-                <div class="benefit">
-                    <div class="benefit-icon">🛡️</div>
-                    <h3>Garantía de 12 meses</h3>
-                    <p>Respaldamos nuestra instalación por escrito durante un año completo</p>
-                </div>
-                <div class="benefit">
-                    <div class="benefit-icon">🧹</div>
-                    <h3>Limpieza incluida</h3>
-                    <p>Retiramos el sanitario viejo, limpiamos el área y dejamos todo impecable</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2>Servicios de instalación que ofrecemos</h2>
-            <div class="grid">
-                <div class="card">
-                    <div class="card-icon">🚽</div>
-                    <h3>Instalación de WC/Inodoro</h3>
-                    <p>Instalación de WC nuevo o cambio de WC viejo. Incluye brida nueva, cera especial, tornillos y nivelación perfecta para evitar fugas y malos olores.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🚰</div>
-                    <h3>Instalación de Lavabos</h3>
-                    <p>Lavabos de pedestal, empotrados o sobre cubierta. Instalación de monomando o llaves, coladera automática y sifón cromado.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">💦</div>
-                    <h3>Instalación de Mezcladoras</h3>
-                    <p>Mezcladoras de lavabo, fregadero, regadera o tina. Instalación con conexiones flexibles de calidad y prueba de presión.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏢</div>
-                    <h3>Instalación de Mingitorios</h3>
-                    <p>Mingitorios de piso o de pared con fluxómetro o tanque. Instalación comercial con certificación sanitaria.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🛁</div>
-                    <h3>Instalación de Regaderas</h3>
-                    <p>Regaderas de mano, fijas, de lluvia o sistemas completos. Instalación con conexiones ocultas y mezcladora empotrada.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon">♿</div>
-                    <h3>Adaptaciones de Accesibilidad</h3>
-                    <p>Instalación de WC elevado, barras de apoyo, lavabos accesibles para personas con discapacidad o adultos mayores.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-alt">
-        <div class="container">
-            <h2>Nuestro proceso de instalación</h2>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Retiro del sanitario viejo</h3>
-                    <p>Cerramos el agua, retiramos el WC o lavabo viejo con cuidado para no dañar piso o pared. Limpiamos restos de cera o silicón.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Revisión de instalación</h3>
-                    <p>Verificamos que la brida, tubería de alimentación y drenaje estén en buen estado. Si hay daños, te avisamos antes de continuar.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Preparación del área</h3>
-                    <p>Instalamos brida nueva si es necesario, nivelamos la base, preparamos conexiones de agua con teflón profesional.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Instalación del sanitario</h3>
-                    <p>Colocamos anillo de cera o empaque, posicionamos el WC/lavabo con nivel láser, fijamos con tornillos de acero inoxidable.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <h3>Pruebas y sellado final</h3>
-                    <p>Conectamos agua, probamos descargas, verificamos que no haya fugas ni goteos. Sellamos base con silicón sanitario y limpiamos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2>Tipos de WC que instalamos</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>🚽 WC de Una Pieza</h3>
-                    <p>Diseño compacto y moderno. Fácil de limpiar, menos juntas donde se acumula suciedad. Ideal para baños pequeños.</p>
-                </div>
-                <div class="card">
-                    <h3>🔧 WC de Dos Piezas</h3>
-                    <p>Diseño tradicional con tanque separado. Más económico y fácil de reemplazar partes. Mayor variedad de modelos.</p>
-                </div>
-                <div class="card">
-                    <h3>💧 WC Ahorradores (4.8 litros)</h3>
-                    <p>Descarga eficiente de 4.8 litros o doble descarga (3/6 litros). Ahorras hasta 60% en consumo de agua vs. WC viejos.</p>
-                </div>
-                <div class="card">
-                    <h3>📏 WC Elongado</h3>
-                    <p>Taza ovalada más grande (48cm vs. 42cm). Mayor comodidad, recomendado para adultos y personas con movilidad reducida.</p>
-                </div>
-                <div class="card">
-                    <h3>⚡ WC con Fluxómetro</h3>
-                    <p>Sin tanque, descarga directa de la toma. Ideal para baños comerciales, restaurantes, oficinas. Descarga potente.</p>
-                </div>
-                <div class="card">
-                    <h3>🏔️ WC Elevado</h3>
-                    <p>Altura de 43-46cm vs. 40cm estándar. Más cómodo para adultos mayores y personas con problemas de rodilla.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-alt">
-        <div class="container">
-            <h2>Señales de que necesitas cambiar tu sanitario</h2>
-            <div class="warning-signs">
-                <ul class="checklist">
-                    <li>🚽 El WC está agrietado, cuarteado o tiene fugas en la base</li>
-                    <li>💧 Gotea constantemente aunque repares el mecanismo del tanque</li>
-                    <li>🔊 Hace ruidos fuertes al descargar o llenar el tanque</li>
-                    <li>💩 El esmalte está manchado permanentemente o tiene sarro que no sale</li>
-                    <li>📅 Tiene más de 15-20 años (gasta el doble de agua que modelos nuevos)</li>
-                    <li>🔧 Ya no encuentras refacciones compatibles (modelo descontinuado)</li>
-                    <li>🏠 Estás remodelando el baño y quieres actualizar el diseño</li>
-                    <li>💰 Tu recibo de agua es muy alto (WC viejos gastan 13-20 litros por descarga)</li>
-                </ul>
-            </div>
-            <div class="cta-box">
-                <h3>¿Necesitas cambiar tu WC o lavabo?</h3>
-                <p>Te ayudamos a elegir el modelo adecuado para tu baño y presupuesto. Instalación profesional el mismo día.</p>
-                <a href="https://wa.me/526671631231?text=Hola,%20necesito%20instalar%20un%20sanitario" class="btn-primary" target="_blank" rel="noopener">Solicitar Cotización</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2>Preguntas frecuentes sobre instalación</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3>¿Cuánto cuesta instalar un WC?</h3>
-                    <p>Solo instalación (traes tu WC): $800-$1,500. Incluye retiro del viejo, brida nueva, cera, instalación nivelada y pruebas. Si necesitamos reparar la brida o tubería dañada, se cotiza aparte.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>¿Cuánto tarda la instalación?</h3>
-                    <p>Instalación básica de WC: 1-2 horas. Lavabo con monomando: 1.5-2 horas. Si hay que reparar tubería o hacer modificaciones puede tardar 3-4 horas. Te avisamos antes de empezar.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>¿Incluye retiro del WC viejo?</h3>
-                    <p>Sí, retiramos el sanitario viejo, limpiamos la base, retiramos restos de cera/silicón y nos llevamos el WC viejo si lo deseas. Todo incluido en el precio de instalación.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>¿Qué pasa si la brida está rota?</h3>
-                    <p>Es común en casas viejas. Podemos reparar o cambiar la brida el mismo día. Costo adicional de $500-$1,200 dependiendo del tipo de brida y accesibilidad.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>¿Puedo comprar mi propio WC?</h3>
-                    <p>¡Por supuesto! Muchos clientes compran su sanitario en tiendas y nosotros hacemos la instalación profesional. Solo verifica que incluya todos los tornillos y empaques.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>¿Dan garantía de la instalación?</h3>
-                    <p>Sí, 12 meses de garantía por escrito en la instalación (mano de obra y materiales como brida, cera, conexiones). No aplica si mueves el WC o modificas la instalación.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <h2>Lo que dicen nuestros clientes</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Instalaron un WC nuevo en mi baño. Quedó perfecto, bien nivelado y sin fugas. Se llevaron el WC viejo y dejaron todo limpio. Muy profesionales."</p>
-                    <cite>— Fernando S., Villa Verde</cite>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Me ayudaron a elegir un WC ahorrador y lo instalaron el mismo día. Ahora mi recibo de agua bajó notablemente. Excelente servicio."</p>
-                    <cite>— Claudia M., Las Quintas</cite>
-                </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Instalaron lavabo y monomando en mi baño nuevo. Quedó impecable, con niveles perfectos y ninguna fuga. 100% recomendados."</p>
-                    <cite>— Jorge L., Tres Ríos</cite>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <div class="container">
-            <h2>¿Necesitas instalar un sanitario?</h2>
-            <p>Contacta ahora por WhatsApp o teléfono. Te ayudamos a elegir el modelo adecuado y agendamos la instalación.</p>
-            <div class="cta-buttons">
-                <a href="https://wa.me/526671631231?text=Hola,%20necesito%20instalar%20un%20sanitario" class="btn-primary btn-large" target="_blank" rel="noopener">WhatsApp: 667 163 1231</a>
-                <a href="tel:+526671631231" class="btn-secondary btn-large">Llamar: 667 163 1231</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="sobre-nosotros" class="section section-alt">
-        <div class="container">
-            <h2>Sobre Nosotros</h2>
-            <p class="about-text">Somos plomeros especializados en instalación de sanitarios en Culiacán con más de 15 años de experiencia. Conocemos todos los modelos de WC, lavabos y mezcladoras del mercado. Instalación profesional con niveles perfectos, sellado impecable y garantía por escrito.</p>
-
-            <div class="about-features">
-                <div class="feature-item">
-                    <strong>✓ Experiencia:</strong> Más de 15 años instalando sanitarios
-                </div>
-                <div class="feature-item">
-                    <strong>✓ Garantía:</strong> 12 meses por escrito en instalación
-                </div>
-                <div class="feature-item">
-                    <strong>✓ Herramientas:</strong> Nivel láser y equipo profesional
-                </div>
-                <div class="feature-item">
-                    <strong>✓ Limpieza:</strong> Retiramos el viejo y limpiamos todo
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contacto" class="section">
-        <div class="container">
-            <h2>Contacto</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Información de contacto</h3>
-                    <ul class="contact-list">
-                        <li>
-                            <strong>WhatsApp:</strong>
-                            <a href="https://wa.me/526671631231?text=Hola,%20necesito%20instalar%20un%20sanitario" target="_blank" rel="noopener">667 163 1231</a>
-                        </li>
-                        <li>
-                            <strong>Teléfono:</strong>
-                            <a href="tel:+526671631231">667 163 1231</a>
-                        </li>
-                        <li>
-                            <strong>Ubicación:</strong>
-                            Culiacán, Sinaloa, México
-                        </li>
-                        <li>
-                            <strong>Horario:</strong>
-                            24/7 - Todos los días
-                        </li>
-                    </ul>
-                </div>
-                <div class="contact-form-info">
-                    <h3>Solicita tu instalación</h3>
-                    <p>Contáctanos por WhatsApp para cotización. Te hacemos preguntas sobre tu baño y el tipo de sanitario para darte un estimado preciso de costo y tiempo.</p>
-                    <a href="https://wa.me/526671631231?text=Hola,%20necesito%20cotización%20para%20instalar%20un%20sanitario" class="btn-primary" target="_blank" rel="noopener">Enviar mensaje por WhatsApp</a>
-                </div>
-            </div>
-        </div>
-    </section>
-        <!-- Mapa Interactivo -->
-        <section style="margin: 40px 0; padding: 30px 20px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 12px;">
-            <h2 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em; text-align: center;">
-                📍 Área de Servicio en Culiacán
-            </h2>
-
-            <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 50%; margin: 0 auto;">
-                <p style="color: #555; margin-bottom: 20px; line-height: 1.6;">
-                    Brindamos servicio profesional en toda la ciudad de <strong>Culiacán, Sinaloa</strong>
-                    y área metropolitana. Llegada rápida a cualquier colonia.
-                </p>
-
-                <!-- Google Maps Embed -->
-                <div style="position: relative; padding-bottom: 28%; height: 0; overflow: hidden; border-radius: 8px;">
-                    <iframe src="https://www.google.com/maps?q=Culiacán,+Sinaloa,+México&output=embed"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Mapa de Culiacán, Sinaloa">
-                    </iframe>
-                </div>
-
-                <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 4px;">
-                    <p style="margin: 0; color: #2e7d32; font-weight: 600;">
-                        ⚡ Tiempo de llegada promedio: 20-40 minutos a cualquier punto de Culiacán
-                    </p>
-                </div>
-
-                <div style="margin-top: 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                    <div style="padding: 15px; background: #fff3e0; border-radius: 6px;">
-                        <p style="margin: 0; color: #e65100; font-weight: 600;">📞 Llamada</p>
-                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">Respuesta inmediata 24/7</p>
+        <!-- Benefits Section (EXACTLY 4 benefits with SVG icons) -->
+        <section class="section section-alt">
+            <div class="container benefits-container">
+                <h2>¿Por qué elegirnos para instalar tu sanitario?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Instalación Profesional Certificada</h3>
+                            <p>Plomeros certificados con más de 15 años de experiencia. Instalamos tu sanitario correctamente según normas técnicas, sin fugas ni problemas.</p>
+                        </div>
                     </div>
-                    <div style="padding: 15px; background: #e3f2fd; border-radius: 6px;">
-                        <p style="margin: 0; color: #1565c0; font-weight: 600;">🚗 Llegada</p>
-                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">Unidad equipada lista</p>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Garantía Escrita 6 Meses</h3>
+                            <p>Todas nuestras instalaciones incluyen garantía de 6 meses en mano de obra y materiales. Si hay algún problema, lo corregimos sin costo.</p>
+                        </div>
                     </div>
-                    <div style="padding: 15px; background: #f3e5f5; border-radius: 6px;">
-                        <p style="margin: 0; color: #6a1b9a; font-weight: 600;">🔧 Servicio</p>
-                        <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">Solución profesional</p>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Servicio Rápido en 1.5-3 Horas</h3>
+                            <p>La mayoría de instalaciones se completan el mismo día en 1.5 a 3 horas. Agendamos según tu disponibilidad, sin esperas largas.</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Precios Justos y Transparentes</h3>
+                            <p>Costos claros desde $1,200 según tipo de instalación. Sin cobros ocultos. Te damos presupuesto exacto antes de empezar.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-    <!-- Bloque NAP (Name, Address, Phone) para SEO Local -->
-    <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #0066cc;">
-        <h3 style="color: #2c3e50; margin: 0 0 15px 0; font-size: 1.3em;">
-            📞 Información de Contacto
-        </h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-            <div>
-                <p style="margin: 5px 0; color: #555;">
-                    <strong>Teléfono:</strong><br>
-                    <a href="tel:6671631231" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">667 163 1231</a>
+
+        <!-- Services Section (minimum 4 cards with images) -->
+        <section id="servicios" style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center; color: var(--text);">
+                    Tipos de Sanitarios Que Instalamos
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Instalación profesional de todo tipo de WC, sanitarios y excusados en Culiacán
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <!-- Service Card 1: Sanitarios Ahorradores -->
+                    <div class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow);">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../../assets/images/taza-de-baño-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../../assets/images/taza-de-baño-800w.webp"
+                                 alt="Sanitario ahorrador de agua moderno instalado en Culiacán con descarga de bajo consumo"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">💧 Sanitarios Ahorradores de Agua</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                WC de bajo consumo que usan solo 4.8 litros por descarga. Ahorran hasta 60% de agua comparado con sanitarios tradicionales.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Instalación desde $1,500</li>
+                                <li>✓ Marcas: Helvex, Urrea, Mansfield</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2: Sanitarios Tradicionales -->
+                    <div class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow);">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../../assets/images/taza-de-baño-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../../assets/images/taza-de-baño-800w.webp"
+                                 alt="Sanitario tradicional blanco instalado profesionalmente en baño de Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">🚽 Sanitarios Tradicionales</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                WC clásicos confiables y económicos. Perfectos para reemplazar sanitarios viejos con el mismo formato de instalación.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Instalación desde $1,200</li>
+                                <li>✓ Marcas: Corona, Briggs, Gerber</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3: Sanitarios Modernos -->
+                    <div class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow);">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../../assets/images/taza-de-baño-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../../assets/images/taza-de-baño-800w.webp"
+                                 alt="Sanitario moderno con tecnología dual flush instalado en baño contemporáneo Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">⚡ Sanitarios Modernos con Tecnología</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                WC de alta gama con descarga dual, diseño contemporáneo, asientos suaves y tecnología de limpieza mejorada.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Instalación desde $1,800</li>
+                                <li>✓ Marcas: American Standard, TOTO, Kohler</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 4: Bidets e Instalaciones Especiales -->
+                    <div class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow);">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../../assets/images/taza-de-baño-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../../assets/images/taza-de-baño-800w.webp"
+                                 alt="Instalación de bidet profesional junto a sanitario en baño moderno de Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">🔧 Bidets e Instalaciones Especiales</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Instalación de bidets independientes, WC con bidet integrado, sanitarios suspendidos y modelos inteligentes importados.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Cotización según modelo específico</li>
+                                <li>✓ Instalación eléctrica si se requiere</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="padding: 50px 24px; background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);">
+            <div class="container" style="max-width: 800px; text-align: center;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text);">
+                    ¿Necesitas Instalar un Sanitario Nuevo?
+                </h2>
+                <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.7;">
+                    Cotiza tu instalación sin compromiso. Te asesoramos sobre el mejor sanitario según tu presupuesto y necesidades. Servicio el mismo día disponible.
+                </p>
+                <a href="https://wa.me/526671631231?text=Hola,%20necesito%20cotización%20para%20instalación%20de%20sanitario.%20Mi%20ubicación:%20[colonia]"
+                   class="btn-primary"
+                   style="font-size: 1.15rem; padding: 18px 36px;"
+                   target="_blank"
+                   rel="noopener"
+                   onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'cta_sanitarios_middle'});">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    WhatsApp: Cotizar Instalación de Sanitario
+                </a>
+                <p style="margin-top: 1.5rem; color: var(--text-light); font-size: 0.95rem;">
+                    📞 También puedes llamar: <a href="tel:+526671631231" style="color: var(--brand); font-weight: 700; text-decoration: none;">667 163 1231</a>
                 </p>
             </div>
-            <div>
-                <p style="margin: 5px 0; color: #555;">
-                    <strong>WhatsApp:</strong><br>
-                    <a href="https://wa.me/526671631231" style="color: #0066cc; text-decoration: none; font-size: 1.1em;">52 667 163 1231</a>
-                </p>
+        </section>
+
+        <!-- SEO Links / Interlinking Section (minimum 5 cards) -->
+        <section style="padding: 60px 24px; background: var(--bg-soft);">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 3rem; text-align: center; color: var(--text);">
+                    Servicios Relacionados de Plomería
+                </h2>
+
+                <div class="seo-links" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                    <!-- Link 1 -->
+                    <div class="seo-card" data-card-name="instalacion-calentadores" data-card-position="1" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Instalación de Calentadores</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Instalación y reparación de boilers de gas y eléctricos. Servicio certificado con garantía.
+                        </p>
+                        <a href="/instalacion-calentadores/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver instalación de calentadores →
+                        </a>
+                    </div>
+
+                    <!-- Link 2 -->
+                    <div class="seo-card" data-card-name="reparacion-tuberias" data-card-position="2" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Reparación de Tuberías</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Reparación de tuberías de agua, drenaje y gas. Sin romper pisos ni paredes cuando es posible.
+                        </p>
+                        <a href="/reparacion-tuberias/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver reparación de tuberías →
+                        </a>
+                    </div>
+
+                    <!-- Link 3 -->
+                    <div class="seo-card" data-card-name="destapado-drenaje" data-card-position="3" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Destapado de Drenaje</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Destapamos WC, lavabos, regaderas y líneas principales con equipo profesional.
+                        </p>
+                        <a href="/destapado-drenaje/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver destapado de drenaje →
+                        </a>
+                    </div>
+
+                    <!-- Link 4 -->
+                    <div class="seo-card" data-card-name="reparacion-fugas" data-card-position="4" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Reparación de Fugas</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Detección y reparación de fugas con tecnología infrarroja. Evita desperdiciar agua y dinero.
+                        </p>
+                        <a href="/reparacion-fugas/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver reparación de fugas →
+                        </a>
+                    </div>
+
+                    <!-- Link 5 -->
+                    <div class="seo-card" data-card-name="plomero-emergencia" data-card-position="5" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Plomero de Emergencia</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Atención urgente 24/7 para emergencias de plomería. Llegada en 15-30 minutos.
+                        </p>
+                        <a href="/plomero-de-emergencia/" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver servicio de emergencia →
+                        </a>
+                    </div>
+
+                    <!-- Link 6 -->
+                    <div class="seo-card" data-card-name="home" data-card-position="6" style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); border-left: 4px solid var(--brand);">
+                        <h3 style="color: var(--brand); margin-bottom: 10px; font-size: 1.15rem;">Todos los Servicios</h3>
+                        <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.95rem;">
+                            Descubre la lista completa de servicios de plomería que ofrecemos en Culiacán.
+                        </p>
+                        <a href="/#servicios" style="color: var(--brand); font-weight: 600; text-decoration: none; font-size: 0.9rem;">
+                            Ver todos los servicios →
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <p style="margin: 5px 0; color: #555;">
-                    <strong>Área de cobertura:</strong><br>
-                    <span style="font-weight: 600; color: #2c3e50;">Todo Culiacán y área metropolitana</span>
+        </section>
+
+        <!-- Service Zones Section (minimum 8 colonies) -->
+        <section style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: var(--text);">
+                    Instalamos Sanitarios en Todas las Colonias de Culiacán
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Servicio profesional de instalación con cobertura completa en toda la ciudad
                 </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px;">
+                    <!-- Zona Norte -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🏘️ Zona Norte</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Las Quintas</li>
+                            <li>✓ Montebello</li>
+                            <li>✓ Valle Alto</li>
+                            <li>✓ Campestre</li>
+                            <li>✓ Bosques del Humaya</li>
+                            <li>✓ San Isidro</li>
+                        </ul>
+                    </div>
+
+                    <!-- Zona Centro -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🏘️ Zona Centro</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Centro Histórico</li>
+                            <li>✓ Guadalupe</li>
+                            <li>✓ Chapultepec</li>
+                            <li>✓ Recursos Hidráulicos</li>
+                            <li>✓ Insurgentes</li>
+                            <li>✓ Barrancos</li>
+                        </ul>
+                    </div>
+
+                    <!-- Zona Sur -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🏘️ Zona Sur</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Infonavit Humaya</li>
+                            <li>✓ Stase</li>
+                            <li>✓ Bachigualato</li>
+                            <li>✓ Aeropuerto</li>
+                            <li>✓ Valle Bonito</li>
+                            <li>✓ Solidaridad</li>
+                        </ul>
+                    </div>
+
+                    <!-- Zona Oriente -->
+                    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <h3 style="color: var(--brand); margin-bottom: 15px; font-size: 1.2rem;">🏘️ Zona Oriente</h3>
+                        <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 2;">
+                            <li>✓ Tres Ríos</li>
+                            <li>✓ Las Palmas</li>
+                            <li>✓ Diana Laura Riojas</li>
+                            <li>✓ Urbi Villa del Rey</li>
+                            <li>✓ López Mateos</li>
+                            <li>✓ Lomas de San Isidro</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%); padding: 30px; border-radius: 12px; text-align: center; border-left: 4px solid var(--brand);">
+                    <p style="font-size: 1.1rem; color: var(--text); font-weight: 600; margin-bottom: 8px;">
+                        📍 ¿Tu colonia no aparece en la lista?
+                    </p>
+                    <p style="color: var(--text-light); font-size: 0.95rem;">
+                        Cubrimos TODAS las colonias de Culiacán sin excepción. Contáctanos para confirmar disponibilidad en tu zona.
+                    </p>
+                </div>
             </div>
-            <div>
-                <p style="margin: 5px 0; color: #555;">
-                    <strong>Horario:</strong><br>
-                    <span style="color: #0066cc; font-weight: 600;">24/7 - Emergencias incluidas</span>
+        </section>
+
+        <!-- Testimonials Section (minimum 3 testimonials) -->
+        <section style="padding: 60px 24px; background: var(--bg-soft);">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 3rem; text-align: center; color: var(--text);">
+                    Lo Que Dicen Nuestros Clientes
+                </h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <!-- Testimonial 1 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "Instalaron mi sanitario ahorrador en 2 horas. Trabajo muy profesional, limpio y ordenado. El plomero me explicó todo sobre el ahorro de agua. Excelente servicio."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Martha G., Las Quintas</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            ✓ Sanitario ahorrador Helvex instalado
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "Necesitaba cambiar un WC viejo que tenía fuga. Llegaron puntuales, lo instalaron perfecto sin dañar el piso. Han pasado 4 meses y cero problemas. Lo recomiendo."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Carlos R., Guadalupe</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            ✓ Reemplazo de sanitario tradicional
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "Instalaron dos sanitarios en mi casa nueva. Trabajo impecable, rápido y con garantía por escrito. Muy buenos precios comparado con otros plomeros. Muy contentos."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Ana L., Tres Ríos</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            ✓ 2 sanitarios American Standard instalados
+                        </p>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow);">
+                        <div style="color: #FFB800; font-size: 1.5rem; margin-bottom: 15px;">★★★★★</div>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic; line-height: 1.7;">
+                            "Me asesoraron sobre qué sanitario comprar para ahorrar agua. Instalaron el que me recomendaron y quedó perfecto. Profesionales y honestos. Totalmente recomendados."
+                        </p>
+                        <cite style="color: var(--text-light); font-weight: 600; font-style: normal;">— Roberto M., Montebello</cite>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 5px;">
+                            ✓ Asesoría + instalación de WC Mansfield
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs Section (minimum 10 unique questions) -->
+        <section class="faq" style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: var(--text);">
+                    Preguntas Frecuentes - Instalación de Sanitarios
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Resolvemos tus dudas sobre la instalación de WC y sanitarios en Culiacán
                 </p>
+
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <!-- FAQ 1 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Cuánto cuesta instalar un sanitario en Culiacán?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            El costo de instalación de un sanitario en Culiacán va desde $1,200 hasta $2,500 pesos, dependiendo del tipo de WC (tradicional, ahorrador o moderno) y la complejidad del trabajo. Este precio incluye: mano de obra profesional, materiales necesarios (cera, tornillos, conexiones), pruebas de funcionamiento y garantía de 6 meses. Si requieres cambio de brida, tubería o válvulas adicionales, el costo puede ser mayor. Te damos presupuesto exacto sin compromiso al evaluar tu caso específico.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 2 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Cuánto tiempo tarda la instalación de un WC?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Una instalación estándar de sanitario tarda entre 1.5 a 3 horas. El tiempo varía según: 1) Si es instalación nueva o reemplazo (el reemplazo es más rápido), 2) Estado de la tubería existente (si requiere cambio de brida o conexiones), 3) Tipo de sanitario (los ahorradores son más rápidos, los modernos con tecnología pueden tomar más tiempo), 4) Complejidad del espacio. En casos simples donde solo se reemplaza el WC y la tubería está bien, puede completarse en 1.5 horas. Te confirmamos tiempo exacto al evaluar tu instalación.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 3 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Qué incluye el servicio de instalación de sanitarios?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Nuestro servicio completo de instalación incluye: 1) Retiro del sanitario viejo (si aplica), 2) Inspección de tubería de desagüe y toma de agua, 3) Cambio o reparación de brida si está dañada, 4) Instalación del nuevo sanitario con cera de calidad, 5) Conexión de la válvula de llenado y toma de agua, 6) Nivelación perfecta del WC, 7) Pruebas de funcionamiento (descarga, llenado, detección de fugas), 8) Limpieza del área de trabajo, 9) Garantía escrita de 6 meses. Si tu sanitario lo requiere, también instalamos bidet o accesorios adicionales.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 4 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Instalan sanitarios ahorradores de agua?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Sí, instalamos todo tipo de sanitarios ahorradores de agua (WC de bajo consumo). Estos modelos utilizan solo 4.8 litros por descarga (vs 13 litros de los tradicionales), ahorrando hasta 60% de agua. Instalamos marcas reconocidas como Helvex, Urrea, American Standard, Mansfield y más. Los sanitarios ahorradores son ideales para Culiacán donde el agua es costosa. Te asesoramos sobre qué modelo es mejor según tu presupuesto y necesidades. La instalación es la misma que un WC tradicional pero con conexiones optimizadas.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 5 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Puedo comprar mi propio sanitario o ustedes lo proporcionan?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Ambas opciones funcionan perfectamente. Puedes: 1) COMPRAR TU SANITARIO: Si ya tienes uno o prefieres elegirlo tú mismo, solo hacemos la instalación. Te asesoramos por WhatsApp sobre qué modelo comprar y qué verificar (medidas, tipo de descarga, accesorios incluidos). 2) NOSOTROS LO PROPORCIONAMOS: Conseguimos sanitarios de calidad a precio mayorista. Te presentamos opciones según tu presupuesto y las instalamos el mismo día. Trabajamos con distribuidores autorizados de marcas reconocidas. En ambos casos, el trabajo tiene la misma garantía de 6 meses.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 6 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Qué marcas de sanitarios instalan?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Instalamos todas las marcas disponibles en el mercado mexicano sin excepción. Las más comunes que instalamos en Culiacán son: Helvex (excelente relación calidad-precio), Urrea (muy duraderos), American Standard (gama media-alta), Mansfield (ahorradores eficientes), Briggs (económicos), Corona (tradicionales confiables), TOTO (alta gama importados), Kohler (premium), Gerber, Moen y más. No importa si compraste tu sanitario en Home Depot, Coppel, Liverpool o distribuidor local: lo instalamos correctamente. También instalamos modelos importados o especiales con tecnología.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 7 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Dan garantía en la instalación de sanitarios?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Sí, todas nuestras instalaciones incluyen garantía escrita de 6 meses en mano de obra y materiales que nosotros instalamos (cera, tornillos, conexiones, brida si la cambiamos). La garantía cubre: fugas en la base, problemas de nivelación, fallas en conexiones de agua, desperfectos por instalación incorrecta. Te entregamos comprobante con detalle del trabajo realizado. Si el sanitario mismo tiene defecto de fábrica, aplica la garantía del fabricante (que varía por marca). Durante los 6 meses, cualquier problema relacionado con la instalación lo corregimos SIN COSTO.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 8 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Pueden instalar un sanitario si la tubería está dañada?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Sí. De hecho, siempre inspeccionamos la tubería ANTES de instalar el sanitario nuevo. Si encontramos: brida rota o corroída (muy común), tubería de desagüe agrietada, conexión de agua con fugas, o válvula de paso dañada, te informamos de inmediato y te damos presupuesto para corregirlo. No instalamos sobre tubería mala porque causaría problemas después. Reparamos o cambiamos lo necesario el mismo día para que tu sanitario nuevo funcione perfectamente por años. La mayoría de reparaciones de tubería se hacen en 30-60 minutos adicionales.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 9 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Hacen instalación de bidets o WC con funciones especiales?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Sí, instalamos bidets independientes, bidets integrados al WC, y sanitarios con funciones especiales como: WC con bidet incorporado, sanitarios con asiento calefactor, WC con descarga dual (doble botón), sanitarios inteligentes japoneses, WC con sensor automático, y modelos suspendidos (de pared). Cada tipo tiene requerimientos específicos: los bidets necesitan toma de agua adicional, los inteligentes requieren conexión eléctrica, los suspendidos necesitan estructura de soporte especial. Evaluamos tu baño y te decimos si es viable instalar el modelo que quieres.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 10 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 700; color: var(--text); font-size: 1.1rem; margin-bottom: 12px;">
+                            ¿Atienden instalaciones de sanitarios de emergencia?
+                        </summary>
+                        <p style="color: var(--text-light); line-height: 1.8; margin-top: 12px;">
+                            Sí, aunque la instalación de sanitarios normalmente se agenda, atendemos casos urgentes donde: el WC viejo se rompió completamente y no hay otro baño disponible, se necesita instalar sanitario nuevo en remodelación express, o reemplazo urgente por fuga severa en el WC actual. Para emergencias, podemos atender el mismo día o en 24 horas dependiendo de disponibilidad y si ya tienes el sanitario nuevo. Contáctanos por WhatsApp explicando tu urgencia y coordinamos la instalación lo antes posible. El precio es el mismo, sin sobrecargos por urgencia.
+                        </p>
+                    </details>
+                </div>
             </div>
-        </div>
-        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
-            <p style="margin: 0; color: #555; font-size: 0.95em;">
-                ✅ <strong>Servicio profesional de instalación de sanitarios</strong> - Atención inmediata en toda la ciudad
-            </p>
-        </div>
-    </div>
+        </section>
 
+        <!-- Final CTA Section -->
+        <section style="padding: 60px 24px; background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%); color: white; text-align: center;">
+            <div class="container" style="max-width: 800px;">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; color: white;">
+                    ¿Listo para Instalar Tu Sanitario Nuevo?
+                </h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.95; line-height: 1.7;">
+                    Contáctanos ahora por WhatsApp o llámanos. Te damos cotización sin compromiso y agendamos tu instalación el mismo día o cuando te sea conveniente.
+                </p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://wa.me/526671631231?text=Hola,%20quiero%20cotizar%20instalación%20de%20sanitario"
+                       class="btn-primary"
+                       style="background: white; color: var(--brand); font-size: 1.1rem;"
+                       target="_blank"
+                       rel="noopener"
+                       onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'cta_final_sanitarios'});">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        WhatsApp
+                    </a>
+                    <a href="tel:+526671631231"
+                       class="btn-primary"
+                       style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white; font-size: 1.1rem;"
+                       onclick="gtag('event', 'click', {'event_category': 'phone', 'event_label': 'cta_final_sanitarios'});">
+                        📞 667 163 1231
+                    </a>
+                </div>
+            </div>
+        </section>
 
+    </main>
 
-
-
-    <footer class="footer">
-      <div class="container footer-content">
-        <div class="footer-section">
-          <h4>Plomero Culiacán Pro</h4>
-          <p>Servicio profesional de plomería en Culiacán, Sinaloa. Disponibles 24/7 para emergencias.</p>
-        </div>
-
-        <div class="footer-section">
-          <h4>Enlaces rápidos</h4>
-          <ul class="footer-links">
-            <li><a href="../../">Inicio</a></li>
-            <li><a href="../../#servicios">Servicios</a></li>
-            <li><a href="../../#sobre-nosotros">Sobre Nosotros</a></li>
-            <li><a href="../../blog/">Blog</a></li>
-            <li><a href="../../#contacto">Contacto</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Servicios principales</h4>
-          <ul class="footer-links">
-            <li><a href="../reparacion-de-fugas/">Reparación de fugas</a></li>
-            <li><a href="../destape-de-drenajes/">Destape de drenajes</a></li>
-            <li><a href="../instalacion-de-sanitarios/">Instalación de sanitarios</a></li>
-            <li><a href="../plomero/24-7/">Servicio 24/7</a></li>
-            <li><a href="../plomero/cerca-de-mi/">Plomero cerca de mí</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Contacto</h4>
-          <ul class="footer-links">
-            <li>WhatsApp: <a href="https://wa.me/526671631231" target="_blank" rel="noopener">667 163 1231</a></li>
-            <li>Tel: <a href="tel:+526671631231">667 163 1231</a></li>
-            <li>Culiacán, Sinaloa</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--text); color: rgba(255,255,255,0.8); padding: 40px 24px 20px;">
         <div class="container">
-          <p>&copy; 2024 Plomero Culiacán Pro. Todos los derechos reservados.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 30px;">
+                <!-- Column 1: Company Info -->
+                <div>
+                    <h3 style="color: white; margin-bottom: 15px; font-size: 1.1rem;">Plomero Culiacán Pro</h3>
+                    <p style="line-height: 1.8; font-size: 0.95rem;">
+                        Servicio profesional de plomería en Culiacán, Sinaloa. Más de 15 años de experiencia instalando sanitarios y resolviendo problemas de plomería.
+                    </p>
+                </div>
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h3 style="color: white; margin-bottom: 15px; font-size: 1.1rem;">Enlaces Rápidos</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li><a href="/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Inicio</a></li>
+                        <li><a href="/#servicios" style="color: rgba(255,255,255,0.8); text-decoration: none;">Servicios</a></li>
+                        <li><a href="/#sobre-nosotros" style="color: rgba(255,255,255,0.8); text-decoration: none;">Sobre Nosotros</a></li>
+                        <li><a href="/blog/" style="color: rgba(255,255,255,0.8); text-decoration: none;">Blog</a></li>
+                        <li><a href="/#contacto" style="color: rgba(255,255,255,0.8); text-decoration: none;">Contacto</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Contact -->
+                <div>
+                    <h3 style="color: white; margin-bottom: 15px; font-size: 1.1rem;">Contacto</h3>
+                    <ul style="list-style: none; padding: 0; line-height: 2;">
+                        <li>📞 <a href="tel:+526671631231" style="color: rgba(255,255,255,0.8); text-decoration: none;">667 163 1231</a></li>
+                        <li>💬 <a href="https://wa.me/526671631231" style="color: rgba(255,255,255,0.8); text-decoration: none;" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li>📍 Culiacán, Sinaloa</li>
+                        <li>🕐 Disponible 24/7</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.9rem;">
+                <p>&copy; 2025 Plomero Culiacán Pro. Todos los derechos reservados.</p>
+            </div>
         </div>
-      </div>
     </footer>
 
+    <!-- Floating CTAs (MANDATORY) -->
+    <!-- WhatsApp (Green, bottom: 78px) -->
+    <a href="https://wa.me/526671631231?text=Hola,%20necesito%20información%20sobre%20instalación%20de%20sanitarios%20en%20Culiacán"
+       id="cta-whatsapp"
+       class="floating-btn floating-whatsapp"
+       target="_blank"
+       rel="noopener"
+       aria-label="Contactar por WhatsApp"
+       onclick="gtag('event', 'click', {'event_category': 'whatsapp', 'event_label': 'floating_button'});">
+       <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
+    <!-- Phone (Blue, bottom: 18px) -->
+    <a href="tel:+526671631231"
+       id="cta-llamar"
+       class="floating-btn floating-call"
+       aria-label="Llamar ahora"
+       onclick="gtag('event', 'click', {'event_category': 'phone', 'event_label': 'floating_button'});">
+       <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+    </a>
+
+    <!-- Main JavaScript (deferred for performance) -->
     <script src="../../main.js" defer></script>
+
 </body>
 </html>
