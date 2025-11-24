@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://www.google.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.google.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <title>Plomero a Domicilio Culiacán | Servicio 24/7 en Tu Casa</title>
+    <meta name="description" content="Plomero a domicilio en Culiacán. Llegamos a tu casa en 30-60 min con herramienta completa. Diagnóstico gratis, unidades equipadas, sin salir de casa. WhatsApp: 667 163 1231">
+
+    <link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
+
+    <link rel="preload" href="../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload"
+          as="image"
+          href="../assets/images/hero-plomero-visita-1200w.webp"
+          type="image/webp"
+          fetchpriority="high">
+
+    <!-- Critical CSS Inline for LCP optimization -->
+    <style>
+/* Critical CSS - Above the fold only */
+:root{--brand:#E36414;--brand-light:#F97316;--brand-dark:#C2410C;--whatsapp:#25D366;--emergency:#DC2626;--emergency-light:#EF4444;--text:#0F172A;--text-light:#475569;--bg:#FFF;--bg-soft:#F8FAFC;--border:#E2E8F0;--shadow:rgba(15,23,42,0.1);--gradient-brand:linear-gradient(135deg,#F97316 0%,#E36414 100%);--gradient-emergency:linear-gradient(135deg,#EF4444 0%,#DC2626 100%);--space-sm:1rem;--space-md:2rem;--container-max-width:1200px;--radius-md:12px;--container-gutter:24px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.6;color:var(--text);background:var(--bg);overflow-x:hidden;padding-top:80px}
+.container{max-width:var(--container-max-width);margin:0 auto;padding:0 24px}
+/* Navigation Header */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
+.nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+.logo{display:block;text-decoration:none;transition:opacity .2s ease}
+.logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+.logo:hover{opacity:0.9}
+.nav-menu{display:flex;list-style:none;gap:2rem}
+.nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
+.nav-link:hover{color:var(--brand-light)}
+.mobile-menu-btn{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;cursor:pointer;background:none;border:none;padding:0;gap:0}
+.mobile-menu-btn span{display:block;height:3px;width:100%;background:#fff;border-radius:2px;margin:0}
+@media (max-width:768px){
+    .logo img{height:62px;max-height:72px}
+    .mobile-menu-btn{display:flex}
+    .nav-menu{position:fixed;top:65px;left:-100%;width:100%;height:calc(100vh - 65px);background:rgba(255,255,255,0.98);flex-direction:column;padding:3rem 2rem;gap:2rem;transition:left 0.3s ease}
+    .nav-menu.active{left:0}
+    .nav-link{color:var(--text)}
+}
+/* Floating CTAs */
+.floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
+.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
+.floating-call{background:#0f4fa8;bottom:18px}
+.floating-whatsapp{background:#22c55e;bottom:78px}
+.hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
+.hero-background{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
+.hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
+.hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+.hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;margin-bottom:1.5rem;line-height:1.2;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+.hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1rem 0 1.5rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:0.95rem;border:1px solid rgba(66,133,244,0.15)}
+.rating-stars{color:#FBBC04;font-size:1.15rem;letter-spacing:1px;text-shadow:0 1px 2px rgba(0,0,0,0.1)}
+.rating-score{font-weight:700;color:#1a73e8;font-size:1.05rem}
+.rating-divider{color:var(--text-light)}
+.hero-subtitle{font-size:1.2rem;color:#F1F5F9;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+.hero-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem}
+.feature-item{display:flex;align-items:center;gap:8px;color:#fff;font-size:0.9rem;font-weight:500}
+.feature-item svg{flex-shrink:0;color:#f97316}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fba336 0%,#f97316 50%,#e36414 100%);color:#fff;padding:16px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:1.1rem;transition:transform 0.12s,box-shadow 0.12s,filter 0.12s;box-shadow:0 8px 20px rgba(227,100,20,0.35)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(227,100,20,0.45);filter:brightness(1.04)}
+.hero-contact{color:#fff;font-size:0.95rem;margin-top:1.5rem;opacity:0.95}
+@media(max-width:768px){.hero{min-height:75vh;padding-top:85px !important;align-items:flex-start !important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0 !important;padding:1.5rem 1.25rem !important;background:rgba(255,255,255,0.12) !important;backdrop-filter:blur(10px) !important}.hero h1{font-size:clamp(1.5rem,5vw,2rem) !important;margin-bottom:0.5rem !important}.hero-subtitle{display:none !important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(255,255,255,0.9) !important}.hero-contact{display:none !important}}
+</style>
+
+    <link rel="stylesheet" href="../styles.min.css">
+
+    <link rel="canonical" href="https://plomeroculiacanpro.mx/plomero-a-domicilio/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://plomeroculiacanpro.mx/plomero-a-domicilio/" />
+    <meta property="og:title" content="Plomero a Domicilio Culiacán | Servicio 24/7 en Tu Casa" />
+    <meta property="og:description" content="Servicio de plomería a domicilio en Culiacán. Llegamos con herramienta completa en 30-60 min. Sin salir de casa, diagnóstico gratis." />
+    <meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/hero-plomero-visita-1200w.webp" />
+
+    <meta name="x-build" content="2025-11-23T00:00:00Z" />
+
+    <!-- JSON-LD Schema: @graph with WebSite, BreadcrumbList, HomeAndConstructionBusiness, Service, FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://plomeroculiacanpro.mx/#website",
+          "url": "https://plomeroculiacanpro.mx/",
+          "name": "Plomero Culiacán Pro",
+          "description": "Servicio profesional de plomería en Culiacán, Sinaloa",
+          "publisher": {
+            "@id": "https://plomeroculiacanpro.mx/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://plomeroculiacanpro.mx/plomero-a-domicilio/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://plomeroculiacanpro.mx/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Plomero a Domicilio",
+              "item": "https://plomeroculiacanpro.mx/plomero-a-domicilio/"
+            }
+          ]
+        },
+        {
+          "@type": "HomeAndConstructionBusiness",
+          "@id": "https://plomeroculiacanpro.mx/#organization",
+          "name": "Plomero Culiacán Pro - Servicio a Domicilio",
+          "image": "https://plomeroculiacanpro.mx/assets/images/hero-plomero-visita-1200w.webp",
+          "url": "https://plomeroculiacanpro.mx/plomero-a-domicilio/",
+          "telephone": "+52-667-163-1231",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Servicio a Domicilio",
+            "addressLocality": "Culiacán",
+            "addressRegion": "Sinaloa",
+            "postalCode": "80000",
+            "addressCountry": "MX"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 24.8049,
+            "longitude": -107.3938
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "sameAs": [
+            "https://www.facebook.com/plomeroculiacanpro"
+          ],
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "reviewCount": "150"
+          }
+        },
+        {
+          "@type": "Service",
+          "@id": "https://plomeroculiacanpro.mx/plomero-a-domicilio/#service",
+          "serviceType": "Plomería a Domicilio",
+          "name": "Servicio de Plomero a Domicilio en Culiacán",
+          "description": "Servicio profesional de plomería a domicilio en Culiacán. Llegamos a tu casa en 30-60 minutos con unidades equipadas. Diagnóstico gratis, reparaciones en el momento, sin salir de casa.",
+          "provider": {
+            "@id": "https://plomeroculiacanpro.mx/#organization"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "Culiacán"
+          },
+          "availableChannel": {
+            "@type": "ServiceChannel",
+            "servicePhone": {
+              "@type": "ContactPoint",
+              "telephone": "+52-667-163-1231",
+              "contactType": "Customer Service"
+            }
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://plomeroculiacanpro.mx/plomero-a-domicilio/#faqpage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué incluye el servicio a domicilio de plomería?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nuestro servicio a domicilio incluye: llegada en 30-60 minutos, diagnóstico gratis sin compromiso, unidad equipada con herramientas profesionales y materiales comunes, reparación en el momento (85% de casos), presupuesto antes de iniciar trabajos mayores, garantía escrita de 6 meses, y factura electrónica disponible. NO necesitas salir de casa ni buscar estacionamiento."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta el servicio a domicilio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "El diagnóstico a domicilio es GRATIS. NO cobramos por la visita ni por el traslado. Solo pagas si decides contratar la reparación. Reparaciones menores desde $300-$800 MXN (cambio de empaques, llaves, etc.). Trabajos medianos $800-$2,500 (destapes, reparación de fugas). Trabajos mayores desde $2,500+ (instalaciones completas). Te damos presupuesto transparente antes de iniciar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué zonas de Culiacán cubren a domicilio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Atendemos TODA la ciudad de Culiacán y zona metropolitana: Zona Norte (Las Quintas, Tres Ríos, Villa Universidad), Centro (Guadalupe, Centro, Infonavit Humaya), Zona Sur (Alturas del Sur, Bachigualato, Juan Carrasco), Zona Oriente (Stase, Villa Verde, Los Pinos), Zona Poniente (Chapultepec, Recursos Hidráulicos). Más de 120 colonias con cobertura total."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Los plomeros llevan herramientas y materiales?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Nuestras unidades móviles están completamente equipadas con: herramientas profesionales (llaves, sondas, detectores), materiales y repuestos comunes (llaves, empaques, tuberías, válvulas, conexiones), equipo de detección (geófono, cámara térmica), y material de limpieza. Resolvemos el 85% de problemas en la primera visita. Si requieres piezas especiales, te cotizamos por separado."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cobran extra por venir a domicilio de noche o fin de semana?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "NO. No cobramos sobrecargos por horarios. El precio del servicio es el mismo si nos llamas a las 10 AM del lunes o a las 10 PM del domingo. Tampoco cobramos por el traslado, desplazamiento o la visita. Operamos 24/7 con tarifas transparentes y justas todo el día."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto tiempo tarda la reparación a domicilio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Depende del problema. Reparaciones menores: 30-60 minutos (cambio de empaques, llaves, fluxómetros). Destapes y fugas: 1-2 horas. Instalaciones y trabajos mayores: 2-4 horas o más. Te damos tiempo estimado después del diagnóstico. La mayoría de trabajos se completan el mismo día sin necesidad de regresar."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Qué problemas resuelven a domicilio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Atendemos: fugas de agua (grifos, tuberías, WC, calentadores), drenajes tapados (baños, cocinas, patios), instalación de sanitarios y muebles, reparación y mantenimiento de boilers, baja presión de agua, detección de fugas ocultas, cambio de llaves y mezcladoras, reparación de tuberías, instalación de calentadores, problemas de tinaco y cisterna, y más. Si no estás seguro, contáctanos y te asesoramos."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Ofrecen garantía en reparaciones a domicilio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. TODOS nuestros trabajos incluyen garantía escrita de 6 meses en mano de obra. Si usamos refacciones o materiales, estos también tienen garantía (según fabricante, generalmente 6-12 meses). Si el problema regresa dentro del periodo de garantía por falla en nuestro trabajo, regresamos SIN COSTO a corregirlo. La garantía la entregamos por escrito con fecha, descripción del trabajo, y firma."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo programo una visita a domicilio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Es muy fácil: 1) Contáctanos por WhatsApp al 667 163 1231 o llama directamente. 2) Describe brevemente tu problema y comparte tu ubicación. 3) Te asignamos al técnico más cercano y confirmamos hora de llegada. 4) El plomero llega, hace diagnóstico gratis y te explica el problema. 5) Te da presupuesto transparente. 6) Si aceptas, repara en el momento. Para emergencias, llegamos en 30-60 min. Para citas programadas, ajustamos a tu horario."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Puedo pagar con tarjeta en el servicio a domicilio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sí. Aceptamos múltiples formas de pago: efectivo, tarjeta de crédito/débito (terminal portátil), transferencia electrónica (SPEI/CoDi), y apps de pago. También emitimos factura electrónica (CFDI 4.0) al instante si la requieres. El pago se realiza al finalizar el trabajo, nunca pedimos anticipos para diagnósticos."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-wrapper">
+            <a href="/" class="logo" aria-label="Plomero Culiacán Pro - Inicio">
+                <img src="../assets/images/logo-plomero-culiacan.png" alt="Logo Plomero Culiacán Pro" width="86" height="86">
+            </a>
+
+            <button class="mobile-menu-btn" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">Inicio</a></li>
+                <li><a href="/#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="/#sobre-nosotros" class="nav-link">Nosotros</a></li>
+                <li><a href="/blog/" class="nav-link">Blog</a></li>
+                <li><a href="/#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="hero">
+        <!-- Hero Background Image (LCP optimized with preload) -->
+        <picture class="hero-background">
+            <source type="image/webp"
+                    srcset="../assets/images/hero-plomero-visita-800w.webp 800w,
+                           ../assets/images/hero-plomero-visita-1200w.webp 1200w"
+                    sizes="100vw">
+            <img src="../assets/images/hero-plomero-visita-1200w.webp"
+                 srcset="../assets/images/hero-plomero-visita-800w.webp 800w,
+                        ../assets/images/hero-plomero-visita-1200w.webp 1200w"
+                 sizes="100vw"
+                 alt="Plomero profesional llegando a domicilio en Culiacán con unidad equipada"
+                 width="1200"
+                 height="800"
+                 fetchpriority="high"
+                 decoding="async">
+        </picture>
+
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in">Plomero a Domicilio en Culiacán – Llegamos en 30-60 min</h1>
+
+                <!-- Rating Badge (MANDATORY) -->
+                <div class="hero-rating fade-in">
+                    <svg class="google-logo" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    <span class="rating-stars">★★★★★</span>
+                    <span class="rating-score">4.8/5</span>
+                    <span class="rating-divider">·</span>
+                    <span class="rating-count">Más de 150 clientes satisfechos en Culiacán</span>
+                </div>
+
+                <!-- Subtitle (hidden on mobile) -->
+                <p class="hero-subtitle fade-in">
+                    Plomero profesional a domicilio en Culiacán. Llegamos con unidad equipada y herramienta completa. Diagnóstico gratis, reparaciones en el momento. Sin salir de casa.
+                </p>
+
+                <!-- 3 Feature Items (MANDATORY) -->
+                <div class="hero-features fade-in">
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                        <span>Sin salir de casa</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                        <span>Unidades equipadas</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg class="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                        <span>Diagnóstico gratis</span>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20a%20domicilio%20urgente"
+                   class="btn-primary fade-in"
+                   target="_blank"
+                   rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Solicitar Visita a Domicilio
+                </a>
+
+                <!-- Contact Info (hidden on mobile) -->
+                <p class="hero-contact fade-in">
+                    También puedes llamar al
+                    <a href="tel:+526671631231">667 163 1231</a>
+                </p>
+
+                <!-- Guarantee Badge (hidden on mobile) -->
+                <p class="hero-guarantee fade-in">
+                    ✓ Diagnóstico gratis · Sin costo por traslado
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Benefits Section -->
+        <section class="section section-alt">
+            <div class="container benefits-container">
+                <h2>¿Por qué elegir servicio a domicilio?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Sin salir de casa</h3>
+                            <p>NO necesitas desplazarte, buscar estacionamiento ni perder tiempo en traslados. Nosotros vamos a ti con todo el equipo necesario. Comodidad total desde tu hogar.</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Llegada rápida 30-60 min</h3>
+                            <p>Sistema GPS que despacha al técnico más cercano a tu domicilio. Llegamos rápido a Las Quintas, Tres Ríos, Centro y todas las colonias de Culiacán.</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Unidades totalmente equipadas</h3>
+                            <p>Vehículos móviles con herramientas profesionales, equipos de detección y materiales de calidad. Listo para resolver tu problema sin demoras ni visitas adicionales.</p>
+                        </div>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <div class="benefit-content">
+                            <h3>Diagnóstico gratis sin compromiso</h3>
+                            <p>NO cobramos por la visita ni por el traslado. El técnico inspecciona, diagnostica y te da presupuesto transparente. Solo pagas si decides contratar la reparación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section (minimum 4 cards with images) -->
+        <section id="servicios" style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem; text-align: center; color: var(--text);">
+                    Servicios a Domicilio Que Ofrecemos
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Llevamos soluciones profesionales de plomería directamente a tu puerta
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <!-- Service Card 1: Reparación de Fugas -->
+                    <a href="/reparacion-fugas/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/reparacion-fugas-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/reparacion-fugas-800w.webp"
+                                 alt="Plomero a domicilio reparando fuga de agua en casa en Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">Reparación de Fugas a Domicilio</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Detectamos y reparamos fugas en grifos, tuberías, WC y calentadores sin que salgas de casa. Equipo profesional en tu domicilio.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Detección con geófono y termografía</li>
+                                <li>✓ Reparación inmediata en tu domicilio</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Service Card 2: Destape de Drenajes -->
+                    <a href="/destapado-drenaje/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/social-proof/before-after/before-after-drain-cleaning-1200w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/social-proof/before-after/before-after-drain-cleaning-1200w.webp"
+                                 alt="Plomero destapando drenaje a domicilio con sonda profesional en Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">Destape de Drenajes en Casa</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Llevamos equipo industrial a tu domicilio para destapar drenajes de baños, cocinas y patios. Sonda eléctrica y hidro-lavado.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Sondas eléctricas de alta potencia</li>
+                                <li>✓ Hidro-lavado a presión in-situ</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Service Card 3: Instalación de Sanitarios -->
+                    <a href="/instalacion-sanitarios/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/taza-de-baño-800w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/taza-de-baño-800w.webp"
+                                 alt="Instalación profesional de sanitario a domicilio en Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">Instalación de Sanitarios y Muebles</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Instalamos WC, lavabos, mezcladoras y accesorios completos en tu baño. Servicio profesional sin salir de casa.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Instalación completa con materiales de calidad</li>
+                                <li>✓ Cambio de muebles antiguos por nuevos</li>
+                            </ul>
+                        </div>
+                    </a>
+
+                    <!-- Service Card 4: Mantenimiento de Boiler -->
+                    <a href="/instalacion-calentadores/" class="card card--img" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s;">
+                        <picture>
+                            <source type="image/webp"
+                                    srcset="../assets/images/social-proof/before-after/before-after-water-heater-boiler-1200w.webp 800w"
+                                    sizes="(max-width: 768px) 100vw, 420px">
+                            <img src="../assets/images/social-proof/before-after/before-after-water-heater-boiler-1200w.webp"
+                                 alt="Reparación de boiler a domicilio en Culiacán"
+                                 width="800"
+                                 height="600"
+                                 loading="lazy"
+                                 decoding="async"
+                                 style="width: 100%; height: 220px; object-fit: cover;">
+                        </picture>
+                        <div style="padding: 25px;">
+                            <h3 style="color: var(--brand); margin-bottom: 12px; font-size: 1.25rem;">Reparación de Boilers en Casa</h3>
+                            <p style="color: var(--text-light); margin-bottom: 15px; line-height: 1.7;">
+                                Diagnosticamos y reparamos boilers sin agua caliente, piloto apagado o fugas de gas. Servicio express a domicilio.
+                            </p>
+                            <ul style="list-style: none; padding: 0; color: var(--text-light); line-height: 1.8;">
+                                <li>✓ Diagnóstico profesional in-situ</li>
+                                <li>✓ Reparación o reemplazo el mismo día</li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQs Section with Schema.org markup -->
+        <section class="faq" style="padding: 60px 24px;">
+            <div class="container">
+                <h2 style="font-size: 2rem; margin-bottom: 1.5rem; text-align: center; color: var(--text);">
+                    Preguntas Frecuentes - Servicio a Domicilio
+                </h2>
+                <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Respuestas a las dudas más comunes sobre nuestro servicio de plomería a domicilio
+                </p>
+
+                <div style="max-width: 900px; margin: 0 auto;">
+                    <!-- FAQ 1 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Qué incluye el servicio a domicilio de plomería?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Nuestro servicio a domicilio incluye: llegada en <strong>30-60 minutos</strong>, diagnóstico gratis sin compromiso, unidad equipada con herramientas profesionales y materiales comunes, reparación en el momento (85% de casos), presupuesto antes de iniciar trabajos mayores, garantía escrita de 6 meses, y factura electrónica disponible. NO necesitas salir de casa ni buscar estacionamiento.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 2 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cuánto cuesta el servicio a domicilio?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            El diagnóstico a domicilio es <strong>GRATIS</strong>. NO cobramos por la visita ni por el traslado. Solo pagas si decides contratar la reparación. Reparaciones menores desde $300-$800 MXN (cambio de empaques, llaves, etc.). Trabajos medianos $800-$2,500 (destapes, reparación de fugas). Trabajos mayores desde $2,500+ (instalaciones completas). Te damos presupuesto transparente antes de iniciar.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 3 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Qué zonas de Culiacán cubren a domicilio?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Atendemos <strong>TODA la ciudad de Culiacán</strong> y zona metropolitana: Zona Norte (Las Quintas, Tres Ríos, Villa Universidad), Centro (Guadalupe, Centro, Infonavit Humaya), Zona Sur (Alturas del Sur, Bachigualato, Juan Carrasco), Zona Oriente (Stase, Villa Verde, Los Pinos), Zona Poniente (Chapultepec, Recursos Hidráulicos). Más de 120 colonias con cobertura total.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 4 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Los plomeros llevan herramientas y materiales?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Sí. Nuestras unidades móviles están completamente equipadas con: herramientas profesionales (llaves, sondas, detectores), materiales y repuestos comunes (llaves, empaques, tuberías, válvulas, conexiones), equipo de detección (geófono, cámara térmica), y material de limpieza. Resolvemos el <strong>85% de problemas en la primera visita</strong>. Si requieres piezas especiales, te cotizamos por separado.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 5 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cobran extra por venir a domicilio de noche o fin de semana?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            <strong>NO.</strong> No cobramos sobrecargos por horarios. El precio del servicio es el mismo si nos llamas a las 10 AM del lunes o a las 10 PM del domingo. Tampoco cobramos por el traslado, desplazamiento o la visita. Operamos 24/7 con tarifas transparentes y justas todo el día.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 6 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cuánto tiempo tarda la reparación a domicilio?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Depende del problema. <strong>Reparaciones menores:</strong> 30-60 minutos (cambio de empaques, llaves, fluxómetros). <strong>Destapes y fugas:</strong> 1-2 horas. <strong>Instalaciones y trabajos mayores:</strong> 2-4 horas o más. Te damos tiempo estimado después del diagnóstico. La mayoría de trabajos se completan el mismo día sin necesidad de regresar.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 7 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Qué problemas resuelven a domicilio?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Atendemos: fugas de agua (grifos, tuberías, WC, calentadores), drenajes tapados (baños, cocinas, patios), instalación de sanitarios y muebles, reparación y mantenimiento de boilers, baja presión de agua, detección de fugas ocultas, cambio de llaves y mezcladoras, reparación de tuberías, instalación de calentadores, problemas de tinaco y cisterna, y más. Si no estás seguro, contáctanos y te asesoramos.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 8 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Ofrecen garantía en reparaciones a domicilio?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Sí. <strong>TODOS</strong> nuestros trabajos incluyen garantía escrita de 6 meses en mano de obra. Si usamos refacciones o materiales, estos también tienen garantía (según fabricante, generalmente 6-12 meses). Si el problema regresa dentro del periodo de garantía por falla en nuestro trabajo, regresamos SIN COSTO a corregirlo. La garantía la entregamos por escrito con fecha, descripción del trabajo, y firma.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 9 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Cómo programo una visita a domicilio?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Es muy fácil: <strong>1)</strong> Contáctanos por WhatsApp al 667 163 1231 o llama directamente. <strong>2)</strong> Describe brevemente tu problema y comparte tu ubicación. <strong>3)</strong> Te asignamos al técnico más cercano y confirmamos hora de llegada. <strong>4)</strong> El plomero llega, hace diagnóstico gratis y te explica el problema. <strong>5)</strong> Te da presupuesto transparente. <strong>6)</strong> Si aceptas, repara en el momento. Para emergencias, llegamos en 30-60 min. Para citas programadas, ajustamos a tu horario.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 10 -->
+                    <details style="background: white; padding: 25px; margin-bottom: 15px; border-radius: 12px; box-shadow: 0 2px 8px var(--shadow); cursor: pointer;">
+                        <summary style="font-weight: 600; font-size: 1.1rem; color: var(--brand); cursor: pointer; user-select: none;">
+                            ¿Puedo pagar con tarjeta en el servicio a domicilio?
+                        </summary>
+                        <p style="margin-top: 15px; color: var(--text-light); line-height: 1.8;">
+                            Sí. Aceptamos múltiples formas de pago: efectivo, tarjeta de crédito/débito (terminal portátil), transferencia electrónica (SPEI/CoDi), y apps de pago. También emitimos factura electrónica (CFDI 4.0) al instante si la requieres. El pago se realiza al finalizar el trabajo, nunca pedimos anticipos para diagnósticos.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="background: var(--gradient-brand); padding: 60px 24px; text-align: center; color: white;">
+            <div class="container">
+                <h2 style="color: white; margin-bottom: 1rem; font-size: 2rem;">
+                    ¿Listo para recibir a nuestro plomero en tu domicilio?
+                </h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Agenda tu visita ahora. Llegamos en 30-60 minutos con diagnóstico gratis y sin costo por traslado.
+                </p>
+                <a href="https://wa.me/526671631231?text=Hola%2C%20necesito%20agendar%20una%20visita%20a%20domicilio"
+                   class="btn-primary"
+                   target="_blank"
+                   rel="noopener"
+                   style="background: white; color: var(--brand); display: inline-flex;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Agendar Visita por WhatsApp
+                </a>
+                <p style="margin-top: 1rem; font-size: 0.95rem;">
+                    O llama al <a href="tel:+526671631231" style="color: white; font-weight: 700;">667 163 1231</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: var(--text); color: white; padding: 40px 24px; text-align: center;">
+        <div class="container">
+            <p style="margin-bottom: 1rem;">
+                <strong>Plomero Culiacán Pro - Servicio a Domicilio</strong>
+            </p>
+            <p style="margin-bottom: 1rem; color: #94a3b8;">
+                Servicio profesional de plomería en Culiacán, Sinaloa<br>
+                Atención 24/7 · Más de 120 colonias · Garantía escrita
+            </p>
+            <p style="margin-bottom: 1rem;">
+                <a href="tel:+526671631231" style="color: var(--brand-light); text-decoration: none; font-weight: 600;">
+                    667 163 1231
+                </a>
+            </p>
+            <p style="font-size: 0.875rem; color: #64748b;">
+                © 2025 Plomero Culiacán Pro. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Floating CTAs (WhatsApp + Phone) -->
+    <a href="https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20a%20domicilio%20urgente"
+       id="cta-whatsapp"
+       class="floating-btn floating-whatsapp"
+       target="_blank"
+       rel="noopener"
+       aria-label="Contactar por WhatsApp">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <a href="tel:+526671631231"
+       id="cta-llamar"
+       class="floating-btn floating-call"
+       aria-label="Llamar ahora">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="../main.js" defer></script>
+</body>
+</html>
