@@ -306,14 +306,14 @@ p {
     overflow: hidden !important;
   }
 
-  /* Rating badge - abajo del cuello del plomero */
+  /* Rating badge - visible inmediatamente */
   .hero-rating {
-    margin-top: 20rem;
+    margin-top: 1rem;
     margin-bottom: 1.5rem;
     background: rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* Botón CTA visible en móvil - conversión crítica */
+  /* MANTENER VISIBLES ELEMENTOS DE CONVERSIÓN EN MÓVIL */
   .hero .btn-primary {
     width: 100% !important;
     max-width: 100% !important;
@@ -322,11 +322,20 @@ p {
     margin-top: 0.5rem !important;
   }
 
-  /* Ocultar elementos secundarios en móvil */
-  .hero-cta,
+  .hero-features {
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .feature-item {
+    font-size: 0.85rem;
+  }
+
+  /* Mantener elementos de contacto visibles si existen */
   .hero-contact,
   .hero-guarantee {
-    display: none !important;
+    font-size: 0.9rem;
+    margin: 0.75rem 0;
   }
 }
 
