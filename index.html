@@ -39,6 +39,8 @@
     <!-- Preload critical fonts for LCP optimization -->
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <link rel="preload" href="/assets/fonts/inter-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/inter-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
 
     <!-- Critical CSS Inline for LCP optimization -->
@@ -66,9 +68,9 @@
         .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
         .hero-background{position:absolute;inset:0;z-index:0}
         .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
-        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}.hero-features{gap:1rem;margin:1.5rem 0}.feature-item{font-size:0.85rem}}
+        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;-webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}.hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}.hero-features{gap:1rem;margin:1.5rem 0}.feature-item{font-size:0.85rem}}
         .hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
-        .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
+        .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
         .hero h1{color:#FFFFFF;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
         .hero-subtitle{font-size:1.2rem;color:#F1F5F9;margin-bottom:3rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.55;text-shadow:0 1px 4px rgba(0,0,0,0.4)}
         .hero-rating{display:inline-flex;align-items:center;gap:0.75rem;margin:1rem 0 1.5rem;padding:0.85rem 1.5rem;background:rgba(255,255,255,0.98);border-radius:50px;box-shadow:0 4px 16px rgba(0,0,0,0.18),0 1px 3px rgba(0,0,0,0.08);font-size:0.95rem;border:1px solid rgba(66,133,244,0.15)}
@@ -368,12 +370,8 @@
     <!-- Load full CSS asynchronously -->
     <link rel="preload" href="styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="styles.min.css"></noscript>
-    
-    
+
     <!-- JSON-LD Structured Data -->
-    
-    
-    
 
 <!-- seo:head 2025-09-05T17:52:24Z -->
 <link rel="canonical" href="https://plomeroculiacanpro.mx/" />
@@ -1919,7 +1917,7 @@ window.dataLayer = window.dataLayer || [];
 
     <section aria-label="Servicios de Plomería en Culiacán">
         <div class="container">
-            <h2>Servicios de Plomería</h2>
+            <h2>Directorio de Servicios en Culiacán</h2>
             <ul>
                 <li><a href="/servicios/reparacion-de-fugas/">Reparación de fugas</a></li>
                 <li><a href="/servicios/destape-de-drenajes/">Destape de drenajes</a></li>
