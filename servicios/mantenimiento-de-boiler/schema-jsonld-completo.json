@@ -1,0 +1,195 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://plomeroculiacanpro.mx/#website",
+      "url": "https://plomeroculiacanpro.mx/",
+      "name": "Plomero Culiacán Pro",
+      "description": "Servicio profesional de plomería en Culiacán, Sinaloa",
+      "publisher": {
+        "@id": "https://plomeroculiacanpro.mx/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://plomeroculiacanpro.mx/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Servicios",
+          "item": "https://plomeroculiacanpro.mx/#servicios"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Mantenimiento de Boiler",
+          "item": "https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/"
+        }
+      ]
+    },
+    {
+      "@type": "HomeAndConstructionBusiness",
+      "@id": "https://plomeroculiacanpro.mx/#organization",
+      "name": "Plomero Culiacán Pro - Mantenimiento de Boilers",
+      "image": "https://plomeroculiacanpro.mx/assets/images/social-proof/before-after/before-after-water-heater-boiler-1200w.webp",
+      "url": "https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/",
+      "telephone": "+52-667-163-1231",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Servicio a Domicilio",
+        "addressLocality": "Culiacán",
+        "addressRegion": "Sinaloa",
+        "postalCode": "80000",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 24.8049,
+        "longitude": -107.3938
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://www.facebook.com/plomeroculiacanpro"
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Culiacán"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "150"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/#service",
+      "serviceType": "Mantenimiento de Boiler y Calentadores",
+      "name": "Servicio de Mantenimiento de Boiler en Culiacán",
+      "description": "Mantenimiento preventivo y correctivo de boilers y calentadores de agua en Culiacán. Incluye limpieza de tanque, revisión de termostato y válvulas, cambio de ánodo de magnesio, inspección de fugas de gas. Atendemos boilers de gas y eléctricos de todas las marcas con garantía de 6 meses.",
+      "provider": {
+        "@id": "https://plomeroculiacanpro.mx/#organization"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Culiacán"
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceRange": "$$",
+        "priceCurrency": "MXN",
+        "price": "1200",
+        "description": "Mantenimiento completo de boiler desde $1,200 pesos. Incluye diagnóstico gratuito, limpieza completa y garantía de 6 meses."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/#faqpage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cada cuánto debo hacerle mantenimiento a mi boiler?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lo recomendable es hacer mantenimiento preventivo cada 12 meses (una vez al año) para boilers de uso residencial normal. Si tu boiler trabaja muchas horas al día o el agua de tu zona tiene mucho sarro, es mejor cada 6-8 meses. El mantenimiento anual previene el 90% de fallas inesperadas, aumenta la eficiencia energética hasta en 20%, y extiende la vida útil del boiler de 8-10 años a 12-15 años. En Culiacán, donde el agua tiene alto contenido mineral, el mantenimiento anual es CRÍTICO para evitar acumulación de sarro que reduce la capacidad de calentamiento."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye el mantenimiento de boiler?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuestro servicio de mantenimiento completo incluye: 1) Diagnóstico inicial gratuito del estado general. 2) Limpieza profunda del tanque interior (eliminación de sarro y sedimentos). 3) Limpieza del quemador (boilers de gas) o resistencia (eléctricos). 4) Revisión y ajuste del termostato. 5) Inspección de válvulas de seguridad (temperatura y presión). 6) Cambio de ánodo de magnesio si está desgastado (protege contra corrosión). 7) Inspección de fugas de gas (boilers de gas) con agua jabonosa. 8) Revisión de conexiones eléctricas y cableado. 9) Prueba final de funcionamiento. 10) Reporte escrito con hallazgos y recomendaciones. Todo con garantía de 6 meses en mano de obra."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta el mantenimiento de boiler en Culiacán?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El costo del mantenimiento completo de boiler en Culiacán varía según el tipo y capacidad: Boiler de gas 38 litros: $1,200-1,500 pesos. Boiler de gas 120-150 litros: $1,800-2,200 pesos. Boiler eléctrico (cualquier capacidad): $1,000-1,400 pesos. El precio incluye mano de obra, limpieza completa, diagnóstico y garantía de 6 meses. Si se requiere reemplazo de piezas (ánodo de magnesio, termostato, válvula), se cotiza por separado con repuestos originales. El diagnóstico inicial es 100% GRATIS sin compromiso. Te damos presupuesto exacto ANTES de empezar el trabajo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa si no le hago mantenimiento a mi boiler?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sin mantenimiento regular, tu boiler enfrentará: 1) Acumulación de sarro que reduce hasta 40% la capacidad de calentar agua (tardarás más en tener agua caliente y gastarás más gas/luz). 2) Corrosión interna que puede perforar el tanque, causando fugas graves y reemplazo total ($8,000-15,000 pesos). 3) Obstrucción del quemador o resistencia que impide encendido. 4) Válvulas de seguridad bloqueadas que pueden causar sobrepresión peligrosa. 5) Vida útil reducida de 12-15 años a solo 5-7 años. 6) Consumo de energía hasta 30% mayor por ineficiencia. 7) Riesgo de fuga de gas en boilers de gas. En resumen: sin mantenimiento pagas más en gas/luz cada mes y terminas reemplazando el boiler años antes de lo necesario."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo saber si mi boiler necesita mantenimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Señales que indican que tu boiler NECESITA mantenimiento urgente: 1) Agua caliente dura menos o tarda más en salir caliente. 2) Ruidos extraños (silbidos, borbotones, golpeteos) al calentar. 3) Agua con color oxidado o olor metálico. 4) Manchas de corrosión externas o humedad en la base. 5) Llama del piloto amarilla en vez de azul (boilers de gas). 6) Aumentó tu consumo de gas o luz sin cambiar tus hábitos. 7) El boiler tiene más de 12 meses sin mantenimiento. 8) Fugas pequeñas en válvulas o conexiones. Si notas cualquiera de estas señales, agenda mantenimiento YA antes de que falle completamente y te quedes sin agua caliente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tiempo dura el mantenimiento de un boiler?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El tiempo del mantenimiento completo depende del estado del boiler: Mantenimiento preventivo normal (boiler en buen estado): 1.5-2 horas. Mantenimiento correctivo (boiler con mucho sarro): 2.5-3 horas. Incluye vaciado completo del tanque, limpieza profunda, inspección de todos los componentes, ajustes, pruebas finales y llenado. No intentamos apresurarnos porque un trabajo completo y bien hecho es lo que garantiza los resultados. Programamos la visita en el horario que mejor te convenga para minimizar interrupciones. La mayoría de clientes programan el mantenimiento en fin de semana por la mañana."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El mantenimiento incluye limpieza del tanque?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, la limpieza profunda del tanque es PARTE FUNDAMENTAL del mantenimiento completo. El proceso incluye: 1) Cierre de válvulas y vaciado total del boiler. 2) Apertura de la válvula de drenado y extracción de sedimentos acumulados en el fondo. 3) Enjuagues con agua limpia hasta eliminar todo el sarro y partículas. 4) Inspección visual del interior del tanque (con linterna) buscando corrosión o daños. 5) Limpieza de la entrada de agua fría donde se acumula mucho sarro. 6) Cierre y llenado con agua limpia. En Culiacán, donde el agua tiene alto contenido mineral, esta limpieza es CRÍTICA porque el sarro se acumula rápido y reduce dramáticamente la eficiencia del boiler."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Atienden boilers de todas las marcas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, damos mantenimiento a boilers y calentadores de TODAS las marcas comerciales en México: Calorex, Iusa, Rheem, Cinsa, Bosch, Titan, Helvex, Thermoflow, Ruud, A.O. Smith, Caloríficos, entre otras. También atendemos: Boilers de gas (tanque y de paso). Boilers eléctricos. Calentadores solares con respaldo de gas/eléctrico. Boilers de alta capacidad (hoteles, negocios). Nuestros técnicos están certificados en sistemas de gas LP y natural, además de sistemas eléctricos. Manejamos repuestos originales de las marcas principales y tenemos opciones genéricas de alta calidad cuando los originales están descontinuados."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué garantía tiene el servicio de mantenimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TODO nuestro servicio de mantenimiento incluye garantía escrita de 6 meses en mano de obra. Esto significa que si cualquier componente que revisamos, limpiamos o ajustamos falla dentro de los 6 meses siguientes, regresamos SIN COSTO a corregirlo. Si instalamos refacciones nuevas (ánodo, termostato, válvula), esas piezas tienen garantía del fabricante de 12 meses. Te entregamos comprobante de servicio con: fecha, trabajos realizados, técnico responsable, y términos de garantía por escrito. También te damos recomendaciones por escrito de cuándo hacer el siguiente mantenimiento y qué cuidados preventivos aplicar. Factura fiscal SAT disponible si la necesitas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo estar presente durante el mantenimiento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "¡Por supuesto! De hecho, te INVITAMOS a estar presente durante todo el servicio. Muchos clientes aprovechan para: 1) Aprender sobre el funcionamiento de su boiler. 2) Ver el estado real de los componentes (te mostramos el sarro extraído, el ánodo desgastado, etc.). 3) Hacer preguntas sobre cuidados preventivos. 4) Confirmar que el trabajo se hace completo y profesional. Nuestros técnicos te explican cada paso del proceso, te muestran hallazgos importantes (como corrosión o piezas desgastadas), y te dan recomendaciones para extender la vida de tu boiler. No tienes que estar TODO el tiempo si no quieres, pero te avisamos al inicio, durante hallazgos importantes, y al final para la prueba de funcionamiento."
+          }
+        }
+      ]
+    }
+  ]
+}
