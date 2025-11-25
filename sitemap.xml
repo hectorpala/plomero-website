@@ -19,28 +19,160 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://plomeroculiacanpro.mx/servicios/destapado-de-drenaje/</loc>
+    <loc>https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/</loc>
     <lastmod>2025-11-23T16:57:07-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://plomeroculiacanpro.mx/servicios/instalacion-de-calentadores/</loc>
+    <loc>https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/</loc>
     <lastmod>2025-11-23T16:57:07-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://plomeroculiacanpro.mx/servicios/reparacion-de-tinacos/</loc>
+    <loc>https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/</loc>
     <lastmod>2025-11-23T16:57:07-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/cambio-de-tuberias/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/emergencia-24-7/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/plomero-a-domicilio/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/plomero-precios/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/contacto/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://plomeroculiacanpro.mx/blog/</loc>
     <lastmod>2025-11-23T16:57:07-07:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/baja-presion-agua-causas-soluciones/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/como-identificar-buen-plomero-culiacan/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/cuanto-cobra-plomero-visita-culiacan/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/cuanto-cuesta-cambiar-taza-bano-culiacan/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/cuanto-cuesta-plomeria-bano-completo-culiacan/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/drenaje-tapado-senales-prevencion/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/mantenimiento-boiler-noritz-checklist/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/marcha-paz-culiacan-2025/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/</loc>
+    <lastmod>2025-11-23T16:57:07-07:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://plomeroculiacanpro.mx/plomero-24-horas/</loc>
