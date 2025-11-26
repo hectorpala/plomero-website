@@ -473,7 +473,7 @@ dataLayer.push({
 // Event: phone_click
 dataLayer.push({
   'event': 'phone_click',
-  'phone_number': '+526671631231',
+  'phone_number': '+526673922273',
   'click_location': 'sticky_footer'
 });
 

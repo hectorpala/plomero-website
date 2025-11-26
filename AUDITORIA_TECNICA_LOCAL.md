@@ -193,7 +193,7 @@ Basado en análisis previo con WebFetch y datos del sitemap:
 1. **WebSite** - Logo, nombre, URL
 2. **BreadcrumbList** - Navegación
 3. **HomeAndConstructionBusiness** - Negocio principal con:
-   - Teléfono: +52 667 163 1231
+   - Teléfono: +52 667 392 2273
    - Horarios: Lun-Vie 08:00-20:00
    - **AggregateRating:** 4.8/5 (150 reviews) ✅
    - openingHoursSpecification detallado

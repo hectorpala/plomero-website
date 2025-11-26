@@ -1,0 +1,313 @@
+{
+  "colonias_culiacan": [
+    {
+      "slug": "las-quintas",
+      "nombre": "Las Quintas",
+      "gps": {
+        "lat": 24.8207,
+        "lng": -107.4209
+      },
+      "calle_principal": "Blvd. Las Quintas",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/"
+    },
+    {
+      "slug": "tres-rios",
+      "nombre": "Tres Ríos",
+      "gps": {
+        "lat": 24.8039,
+        "lng": -107.4394
+      },
+      "calle_principal": "Blvd. Tres Ríos",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/tres-rios/"
+    },
+    {
+      "slug": "centro",
+      "nombre": "Centro",
+      "gps": {
+        "lat": 24.8093,
+        "lng": -107.394
+      },
+      "calle_principal": "Av. Álvaro Obregón",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/centro/"
+    },
+    {
+      "slug": "montebello",
+      "nombre": "Montebello",
+      "gps": {
+        "lat": 24.789,
+        "lng": -107.41
+      },
+      "calle_principal": "Blvd. Enrique Sánchez Alonso",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/montebello/"
+    },
+    {
+      "slug": "guadalupe",
+      "nombre": "Guadalupe",
+      "gps": {
+        "lat": 24.765,
+        "lng": -107.42
+      },
+      "calle_principal": "Av. Insurgentes",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/guadalupe/"
+    },
+    {
+      "slug": "chapultepec",
+      "nombre": "Chapultepec",
+      "gps": {
+        "lat": 24.795,
+        "lng": -107.385
+      },
+      "calle_principal": "Blvd. Francisco I. Madero",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/chapultepec/"
+    },
+    {
+      "slug": "isla-del-oeste",
+      "nombre": "Isla Del Oeste",
+      "gps": {
+        "lat": 24.775,
+        "lng": -107.445
+      },
+      "calle_principal": "Av. Isla del Oeste",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/isla-del-oeste/"
+    },
+    {
+      "slug": "country-tres-rios",
+      "nombre": "Country Tres Ríos",
+      "gps": {
+        "lat": 24.81,
+        "lng": -107.45
+      },
+      "calle_principal": "Blvd. Country Club",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/country-tres-rios/"
+    },
+    {
+      "slug": "hacienda-los-huertos",
+      "nombre": "Hacienda Los Huertos",
+      "gps": {
+        "lat": 24.77,
+        "lng": -107.37
+      },
+      "calle_principal": "Blvd. Hacienda Los Huertos",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/hacienda-los-huertos/"
+    },
+    {
+      "slug": "real-del-valle",
+      "nombre": "Real Del Valle",
+      "gps": {
+        "lat": 24.76,
+        "lng": -107.36
+      },
+      "calle_principal": "Av. Real del Valle",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/real-del-valle/"
+    },
+    {
+      "slug": "zona-dorada",
+      "nombre": "Zona Dorada",
+      "gps": {
+        "lat": 24.815,
+        "lng": -107.375
+      },
+      "calle_principal": "Av. Gabriel Leyva",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/zona-dorada/"
+    },
+    {
+      "slug": "campestre",
+      "nombre": "Campestre",
+      "gps": {
+        "lat": 24.78,
+        "lng": -107.395
+      },
+      "calle_principal": "Blvd. Campestre",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/campestre/"
+    },
+    {
+      "slug": "santa-fe",
+      "nombre": "Santa Fe",
+      "gps": {
+        "lat": 24.75,
+        "lng": -107.43
+      },
+      "calle_principal": "Av. Santa Fe",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/santa-fe/"
+    },
+    {
+      "slug": "las-palmas",
+      "nombre": "Las Palmas",
+      "gps": {
+        "lat": 24.745,
+        "lng": -107.415
+      },
+      "calle_principal": "Av. Las Palmas",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-palmas/"
+    },
+    {
+      "slug": "nuevo-culiacan",
+      "nombre": "Nuevo Culiacán",
+      "gps": {
+        "lat": 24.79,
+        "lng": -107.425
+      },
+      "calle_principal": "Av. Nuevo Culiacán",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/nuevo-culiacan/"
+    },
+    {
+      "slug": "infonavit-humaya",
+      "nombre": "Infonavit Humaya",
+      "gps": {
+        "lat": 24.83,
+        "lng": -107.41
+      },
+      "calle_principal": "Blvd. Emiliano Zapata",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/infonavit-humaya/"
+    },
+    {
+      "slug": "bachigualato",
+      "nombre": "Bachigualato",
+      "gps": {
+        "lat": 24.845,
+        "lng": -107.43
+      },
+      "calle_principal": "Carretera a Bachigualato",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/bachigualato/"
+    },
+    {
+      "slug": "lomas-del-boulevard",
+      "nombre": "Lomas Del Boulevard",
+      "gps": {
+        "lat": 24.785,
+        "lng": -107.435
+      },
+      "calle_principal": "Blvd. Las Torres",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/lomas-del-boulevard/"
+    },
+    {
+      "slug": "villa-universidad",
+      "nombre": "Villa Universidad",
+      "gps": {
+        "lat": 24.8,
+        "lng": -107.415
+      },
+      "calle_principal": "Blvd. Universitarios",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/villa-universidad/"
+    },
+    {
+      "slug": "colinas-de-san-miguel",
+      "nombre": "Colinas De San Miguel",
+      "gps": {
+        "lat": 24.755,
+        "lng": -107.39
+      },
+      "calle_principal": "Av. Colinas de San Miguel",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/colinas-de-san-miguel/"
+    },
+    {
+      "slug": "altamira",
+      "nombre": "Altamira",
+      "gps": {
+        "lat": 24.74,
+        "lng": -107.4
+      },
+      "calle_principal": "Av. Altamira",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/altamira/"
+    },
+    {
+      "slug": "cumbres-tres-rios",
+      "nombre": "Cumbres Tres Ríos",
+      "gps": {
+        "lat": 24.805,
+        "lng": -107.455
+      },
+      "calle_principal": "Blvd. Cumbres",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/cumbres-tres-rios/"
+    },
+    {
+      "slug": "bosques-del-humaya",
+      "nombre": "Bosques Del Humaya",
+      "gps": {
+        "lat": 24.82,
+        "lng": -107.46
+      },
+      "calle_principal": "Av. Bosques del Humaya",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/bosques-del-humaya/"
+    },
+    {
+      "slug": "hacienda-del-valle",
+      "nombre": "Hacienda Del Valle",
+      "gps": {
+        "lat": 24.765,
+        "lng": -107.355
+      },
+      "calle_principal": "Blvd. Hacienda del Valle",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/hacienda-del-valle/"
+    },
+    {
+      "slug": "portales-del-rio",
+      "nombre": "Portales Del Río",
+      "gps": {
+        "lat": 24.775,
+        "lng": -107.435
+      },
+      "calle_principal": "Av. Portales del Río",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/portales-del-rio/"
+    },
+    {
+      "slug": "colinas-de-la-rivera",
+      "nombre": "Colinas De La Rivera",
+      "gps": {
+        "lat": 24.75,
+        "lng": -107.38
+      },
+      "calle_principal": "Av. Colinas de la Rivera",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/colinas-de-la-rivera/"
+    },
+    {
+      "slug": "jardines-del-valle",
+      "nombre": "Jardines Del Valle",
+      "gps": {
+        "lat": 24.735,
+        "lng": -107.365
+      },
+      "calle_principal": "Av. Jardines del Valle",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/jardines-del-valle/"
+    },
+    {
+      "slug": "lomas-de-san-isidro",
+      "nombre": "Lomas De San Isidro",
+      "gps": {
+        "lat": 24.73,
+        "lng": -107.395
+      },
+      "calle_principal": "Av. Lomas de San Isidro",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/lomas-de-san-isidro/"
+    },
+    {
+      "slug": "real-san-angel",
+      "nombre": "Real San Ángel",
+      "gps": {
+        "lat": 24.725,
+        "lng": -107.375
+      },
+      "calle_principal": "Blvd. Real San Ángel",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/real-san-angel/"
+    },
+    {
+      "slug": "villa-bonita",
+      "nombre": "Villa Bonita",
+      "gps": {
+        "lat": 24.72,
+        "lng": -107.385
+      },
+      "calle_principal": "Av. Villa Bonita",
+      "url": "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/villa-bonita/"
+    }
+  ],
+  "metadata": {
+    "total_colonias": 30,
+    "ciudad": "Culiacán",
+    "estado": "Sinaloa",
+    "pais": "México",
+    "sitio_web": "https://plomeroculiacanpro.mx",
+    "fecha_creacion": "2025-11-26",
+    "descripcion": "Base de datos completa de colonias de Culiacán con coordenadas GPS para SEO local y schema markup LocalBusiness"
+  }
+}

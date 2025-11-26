@@ -167,7 +167,7 @@
                                       `Teléfono: ${telefono}\n` +
                                       `Email: ${email}\n` +
                                       `Mensaje: ${mensaje}`;
-                const whatsappURL = `https://wa.me/526671631231?text=${encodeURIComponent(whatsappMessage)}`;
+                const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
 
                 // Open WhatsApp in new tab
                 window.open(whatsappURL, '_blank');
@@ -187,7 +187,7 @@
                                   `Teléfono: ${telefono}\n` +
                                   `Email: ${email}\n` +
                                   `Mensaje: ${mensaje}`;
-            const whatsappURL = `https://wa.me/526671631231?text=${encodeURIComponent(whatsappMessage)}`;
+            const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
             window.location.href = whatsappURL;
         }
     });

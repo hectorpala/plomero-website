@@ -51,7 +51,7 @@
       "name": "WhatsApp Emergencias",
       "short_name": "WhatsApp",
       "description": "Contactar por WhatsApp para emergencias",
-      "url": "https://wa.me/526671631231?text=Hola%2C%20necesito%20un%20plomero%20urgente",
+      "url": "https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20urgente",
       "icons": [
         {
           "src": "/assets/icons/icon-192.png",
@@ -69,7 +69,7 @@
       "name": "Llamar",
       "short_name": "Teléfono",
       "description": "Llamar al plomero",
-      "url": "tel:+526671631231",
+      "url": "tel:+526673922273",
       "icons": [
         {
           "src": "/assets/icons/icon-192.png",

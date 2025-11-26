@@ -320,7 +320,7 @@ Todos los pares de colores cumplen con **WCAG 2.1 AA**:
         <div class="hero-content">
             <h1 class="fade-in">Plomero Profesional en Culiacán, Sinaloa</h1>
             <p class="hero-subtitle fade-in">Soluciones rápidas y confiables...</p>
-            <p class="hero-contact">WhatsApp: 52 667 163 1231 · Llamadas: 667 163 1231</p>
+            <p class="hero-contact">WhatsApp: 52 667 392 2273 · Llamadas: 667 392 2273</p>
             <a href="#contacto" class="btn-primary hover-lift">Solicitar Cotización</a>
         </div>
     </div>
@@ -387,7 +387,7 @@ Todos los pares de colores cumplen con **WCAG 2.1 AA**:
 <a href="/blog/" class="btn-secondary">Ver más artículos</a>
 
 <!-- Botón WhatsApp -->
-<a href="https://wa.me/526671631231" class="btn-whatsapp">WhatsApp: 52 667 163 1231</a>
+<a href="https://wa.me/526673922273" class="btn-whatsapp">WhatsApp: 52 667 392 2273</a>
 ```
 
 **Estilos**:
@@ -518,7 +518,7 @@ Todos los pares de colores cumplen con **WCAG 2.1 AA**:
   "@type": "HomeAndConstructionBusiness",
   "name": "Plomero Culiacán Pro",
   "url": "https://plomeroculiacanpro.mx/",
-  "telephone": "+52 667 163 1231",
+  "telephone": "+52 667 392 2273",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Culiacán",
@@ -690,8 +690,8 @@ Editar variables en `styles.css`:
 ### Actualizar Información de Contacto
 
 Buscar y reemplazar en todos los archivos:
-- Teléfono: `667 163 1231`
-- WhatsApp: `526671631231`
+- Teléfono: `667 392 2273`
+- WhatsApp: `526673922273`
 - Email: `info@plomeropro.com`
 
 ---
@@ -829,7 +829,7 @@ Todos los artículos del blog **DEBEN** seguir esta estructura exacta. NO usar J
                 <div class="article-cta">
                     <h3>¿Necesitas ayuda profesional?</h3>
                     <p>Descripción breve del servicio y valor agregado. Más de 15 años de experiencia en Culiacán.</p>
-                    <a href="https://wa.me/526671631231?text=Hola,%20necesito%20ayuda%20con..." class="btn-primary" target="_blank" rel="noopener">Contactar por WhatsApp</a>
+                    <a href="https://wa.me/526673922273?text=Hola,%20necesito%20ayuda%20con..." class="btn-primary" target="_blank" rel="noopener">Contactar por WhatsApp</a>
                 </div>
             </div>
 
