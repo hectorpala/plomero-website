@@ -18,8 +18,16 @@
 
     <!-- Favicons -->
     <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
-    <link rel="apple-touch-icon" href="/assets/icons/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/icon-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/icon-152.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/icon-144.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/icons/icon-128.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="/assets/icons/icon-96.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/icon-72.png">
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -60,16 +68,16 @@
         .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
         .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
         .logo{display:block;text-decoration:none;transition:opacity .2s ease}
-        .logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
+        .logo img{height:140px;width:auto;display:block;max-height:160px;mix-blend-mode:multiply}
         .logo:hover{opacity:0.9}
-        @media (max-width:768px){.logo img{height:62px;max-height:72px}}
+        @media (max-width:768px){.logo img{height:90px;max-height:100px}}
         .nav-menu{display:flex;list-style:none;gap:2rem}
         .nav-link{color:#fff;font-weight:500;text-decoration:none;transition:color .2s ease}
         .nav-link:hover{color:var(--brand-light)}
         .hero{min-height:85vh;display:grid;place-items:center;text-align:center;padding:140px 16px;position:relative;overflow:hidden}
         .hero-background{position:absolute;inset:0;z-index:0}
         .hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center}
-        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:20rem;margin-bottom:2rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.hero-cta,.hero-contact,.hero-guarantee,.hero .btn-primary{display:none!important}}
+        @media (max-width:768px){.hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}.hero-background img{object-position:40% 35%}.hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;background:rgba(255,255,255,0.12)!important;backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important}.hero h1{margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(1.5rem,5vw,2rem)!important;line-height:1.2!important}.hero-subtitle{display:none!important}.hero-rating{margin-top:1rem;margin-bottom:1.5rem;background:rgba(255,255,255,0.9)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.hero .btn-primary{width:100%!important;max-width:100%!important;font-size:1rem!important;padding:0.875rem 1.5rem!important}.hero-features{gap:1rem;margin:1.5rem 0}.feature-item{font-size:0.85rem}}
         .hero::after{content:"";position:absolute;top:-80px;left:0;right:0;height:100px;z-index:1;background:linear-gradient(180deg,rgba(10,18,36,0.75) 0%,rgba(10,18,36,0.5) 60%,transparent 100%);pointer-events:none}
         .hero-content{position:relative;z-index:2;max-width:900px;width:min(90vw,840px);margin:0 auto;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:3rem 2.5rem;border:1px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
         .hero h1{color:#FFFFFF;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
@@ -412,7 +420,13 @@
       "@id": "https://plomeroculiacanpro.mx/#website",
       "name": "Plomero Culiacán Pro",
       "url": "https://plomeroculiacanpro.mx/",
-      "logo": "https://plomeroculiacanpro.mx/logo-plomero-culiacan-pro.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://plomeroculiacanpro.mx/assets/images/logo-512.png",
+        "width": 512,
+        "height": 195,
+        "contentUrl": "https://plomeroculiacanpro.mx/assets/images/logo-512.png"
+      },
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
@@ -592,7 +606,13 @@
         "https://www.facebook.com/plomeroculiacanpro",
         "https://www.instagram.com/plomeroculiacanpro"
       ],
-      "logo": "https://plomeroculiacanpro.mx/logo-plomero-culiacan-pro.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://plomeroculiacanpro.mx/assets/images/logo-512.png",
+        "width": 512,
+        "height": 195,
+        "contentUrl": "https://plomeroculiacanpro.mx/assets/images/logo-512.png"
+      },
       "image": {
         "@type": "ImageObject",
         "url": "https://plomeroculiacanpro.mx/assets/images/emergencia-24-7-nocturna-1200w.webp",
@@ -1213,10 +1233,10 @@ window.dataLayer = window.dataLayer || [];
         <div class="container">
             <div class="nav-wrapper">
                 <a href="#inicio" class="logo">
-                    <img src="logo-plomero-culiacan-pro-optimized.webp"
+                    <img src="/assets/images/logo-512.webp"
                          alt="Plomero Culiacán Pro - Logo"
-                         width="400"
-                         height="152">
+                         width="512"
+                         height="195">
                 </a>
                 <button class="mobile-menu-btn" aria-label="Menu">
                     <span></span>
@@ -2236,7 +2256,7 @@ window.dataLayer = window.dataLayer || [];
     <footer class="footer">
         <div class="container">
             <div class="footer-logo">
-                <img src="logo-plomero-culiacan-pro.webp" alt="Plomero Culiacán Pro">
+                <img src="/assets/images/logo-512.webp" alt="Plomero Culiacán Pro - Servicio Profesional 24/7" width="512" height="195">
             </div>
             <p>&copy; 2024 Plomero Culiacán Pro. Todos los derechos reservados.</p>
         </div>
