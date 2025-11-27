@@ -41,6 +41,16 @@ El comando te pedirá la información necesaria paso a paso.
    - USAR SOLO el critical CSS de index.html
    - USAR SOLO styles.min.css para estilos adicionales
 
+3.1. **Logo (CRÍTICO):**
+   - Archivo: `logo-512.webp` (16KB)
+   - Dimensiones: width="512" height="195"
+   - **Ruta según ubicación:**
+     - Raíz (index.html): `/assets/images/logo-512.webp`
+     - Subdirectorio (blog/, landings/): `../assets/images/logo-512.webp`
+   - NUNCA usar: logo-plomero-culiacan-pro.webp (NO EXISTE)
+   - NUNCA usar: logo-2048.png (muy pesado)
+   - **Regla:** Usar ruta relativa (`../`) en subdirectorios para compatibilidad local
+
 4. **Cuando el usuario diga "rehaz esta página" o "corrige esta página":**
    - Preguntar: "¿Cuál es la URL o ruta del archivo a rehacer?"
    - Leer la página actual
