@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Plomería Culiacán: Guías, Precios y Consejos Profesionales 2025</title>
+    <meta name="description" content="Guías expertas de plomería en Culiacán: precios reales 2025, soluciones paso a paso y consejos profesionales. 13 artículos con info verificada para Las Quintas, Tres Ríos y toda la ciudad.">
+    <meta name="x-build" content="2025-11-19T16:00:00Z">
+
+    <!-- Favicons -->
+    <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+    <link rel="apple-touch-icon" href="/assets/icons/favicon.png">
+
+    <!-- Preloads críticos -->
+    <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" href="/assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+
+    <link rel="canonical" href="https://plomeroculiacanpro.mx/blog/">
+    <link rel="stylesheet" href="../styles.min.css">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Blog Plomería Culiacán - Guías y Precios 2025">
+    <meta property="og:description" content="Guías expertas de plomería: precios reales, soluciones profesionales y consejos verificados para Culiacán.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://plomeroculiacanpro.mx/blog/">
+    <meta property="og:image" content="https://plomeroculiacanpro.mx/assets/images/hero-plumbing-800w.webp">
+
+    <!-- JSON-LD Schemas -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Plomero Culiacán Pro",
+          "url": "https://plomeroculiacanpro.mx/"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Inicio",
+              "item": "https://plomeroculiacanpro.mx/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Blog",
+              "item": "https://plomeroculiacanpro.mx/blog/"
+            }
+          ]
+        },
+        {
+          "@type": "CollectionPage",
+          "name": "Blog Plomería Culiacán - Guías y Consejos Profesionales",
+          "description": "Artículos expertos sobre plomería en Culiacán: guías de precios, soluciones paso a paso y consejos profesionales verificados.",
+          "url": "https://plomeroculiacanpro.mx/blog/",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Plomero Culiacán Pro",
+            "telephone": "+52-667-392-2273",
+            "url": "https://plomeroculiacanpro.mx/",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Culiacán",
+              "addressRegion": "Sinaloa",
+              "addressCountry": "MX"
+            }
+          },
+          "inLanguage": "es-MX",
+          "about": {
+            "@type": "Thing",
+            "name": "Plomería",
+            "description": "Servicios de plomería residencial y comercial en Culiacán"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* Blog Hero Section */
+        .blog-hero {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: white;
+            padding: 4rem 1.5rem 3rem;
+            text-align: center;
+            margin-top: 80px;
+        }
+        .blog-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .blog-hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .blog-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .blog-stat {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        .blog-stat strong {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .blog-stat span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8fafc;
+            padding: 1rem 0;
+        }
+        .breadcrumb a {
+            color: #0284c7;
+            text-decoration: none;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Categories */
+        .categories-section {
+            padding: 3rem 0 1rem;
+        }
+        .category-title {
+            font-size: 1.75rem;
+            color: #0c4a6e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .category-subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        /* Blog Grid Improvements */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .blog-image {
+            margin: 0;
+            overflow: hidden;
+            height: 220px;
+        }
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
+        }
+        .blog-content {
+            padding: 1.5rem;
+        }
+        .blog-date {
+            display: block;
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+        .blog-content h2 {
+            font-size: 1.25rem;
+            margin: 0 0 0.75rem 0;
+            line-height: 1.3;
+        }
+        .blog-content h2 a {
+            color: #0c4a6e;
+            text-decoration: none;
+        }
+        .blog-content h2 a:hover {
+            color: #0284c7;
+        }
+        .blog-content p {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .read-more {
+            color: #0284c7;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .read-more:hover {
+            color: #0369a1;
+        }
+
+        /* Featured Badge */
+        .featured-badge {
+            background: #22c55e;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* CTA Emergency */
+        .blog-cta-emergency {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .blog-cta-emergency h3 {
+            color: #991b1b;
+            margin-top: 0;
+        }
+        .blog-cta-emergency a {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .blog-cta-emergency a:hover {
+            background: #b91c1c;
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero h1 {
+                font-size: 1.75rem;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- GTM Loader -->
+    <script>
+    (function() {
+      window.dataLayer = window.dataLayer || [];
+      var loadGTM = function() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+        document.head.appendChild(s);
+      };
+      if (window.requestIdleCallback) {
+        requestIdleCallback(loadGTM);
+      } else {
+        setTimeout(loadGTM, 1);
+      }
+    })();
+    </script>
+</head>
+<body>
+    <!-- GTM noscript -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../" class="logo">Plomero Culiacán Pro</a>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="../#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="../#servicios" class="nav-link">Servicios</a></li>
+                    <li><a href="../#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li>
+                    <li><a href="/blog/" class="nav-link active">Blog</a></li>
+                    <li><a href="../#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <h1>Blog de Plomería Culiacán</h1>
+        <p>Guías expertas, precios reales y soluciones verificadas para tus problemas de plomería. Información confiable para Las Quintas, Tres Ríos, Centro y toda la ciudad.</p>
+
+        <div class="blog-stats">
+            <div class="blog-stat">
+                <strong>13</strong>
+                <span>Artículos Expertos</span>
+            </div>
+            <div class="blog-stat">
+                <strong>2025</strong>
+                <span>Precios Actualizados</span>
+            </div>
+            <div class="blog-stat">
+                <strong>100%</strong>
+                <span>Verificado Local</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <div class="container">
+            <a href="../">Inicio</a> » <span>Blog</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Featured / Popular Articles -->
+        <section class="categories-section">
+            <h2 class="category-title">⭐ Artículos Destacados</h2>
+            <p class="category-subtitle">Los más útiles para resolver tus problemas de plomería</p>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/hero-plumbing-800w.webp" alt="Cómo identificar buen plomero" width="800" height="420" loading="eager">
+                    </figure>
+                    <div class="blog-content">
+                        <span class="featured-badge">Popular</span>
+                        <time datetime="2025-11-18" class="blog-date">18 de noviembre, 2025</time>
+                        <h2><a href="/blog/como-identificar-buen-plomero-culiacan/">¿Cómo Identificar a un Buen Plomero en Culiacán? 10 Señales</a></h2>
+                        <p>Aprende a identificar un plomero confiable en Culiacán: 10 señales clave, qué preguntar antes de contratar, cómo verificar experiencia y evitar estafas.</p>
+                        <a href="/blog/como-identificar-buen-plomero-culiacan/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/taza-de-baño-420w.webp" alt="Cuánto cuesta cambiar taza de baño" width="420" height="420" loading="eager">
+                    </figure>
+                    <div class="blog-content">
+                        <span class="featured-badge">Precios 2025</span>
+                        <time datetime="2025-11-18" class="blog-date">18 de noviembre, 2025</time>
+                        <h2><a href="/blog/cuanto-cuesta-cambiar-taza-bano-culiacan/">¿Cuánto Cuesta Cambiar una Taza de Baño en Culiacán?</a></h2>
+                        <p>Precio real en Culiacán 2025: $800-1,500 quitar y poner taza de baño completa. Incluye mano de obra, empaque, tornillos y consejos para ahorrar.</p>
+                        <a href="/blog/cuanto-cuesta-cambiar-taza-bano-culiacan/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/emergencia-24-7-nocturna-800w.webp" alt="Cuánto cobra plomero por visita" width="800" height="420" loading="eager">
+                    </figure>
+                    <div class="blog-content">
+                        <span class="featured-badge">Guía de Precios</span>
+                        <time datetime="2025-11-18" class="blog-date">18 de noviembre, 2025</time>
+                        <h2><a href="/blog/cuanto-cobra-plomero-visita-culiacan/">¿Cuánto Cobra un Plomero por Visita en Culiacán?</a></h2>
+                        <p>Guía completa de precios 2025: visita diagnóstico, servicios de emergencia, reparaciones comunes y consejos para evitar cobros excesivos en Culiacán.</p>
+                        <a href="/blog/cuanto-cobra-plomero-visita-culiacan/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Pricing Guides -->
+        <section class="categories-section">
+            <h2 class="category-title">💰 Guías de Precios</h2>
+            <p class="category-subtitle">Precios reales y verificados en Culiacán 2025</p>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/reparacion-fugas-420w.webp" alt="Precio baño completo" width="420" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-12" class="blog-date">12 de noviembre, 2024</time>
+                        <h2><a href="/blog/cuanto-cuesta-plomeria-bano-completo-culiacan/">¿Cuánto Cuesta la Plomería de un Baño Completo en Culiacán?</a></h2>
+                        <p>Presupuesto completo para baño nuevo: taza, regadera, lavabo, tubería y mano de obra. Precios 2025 en Culiacán con costos desglosados.</p>
+                        <a href="/blog/cuanto-cuesta-plomeria-bano-completo-culiacan/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Solutions & How-To Guides -->
+        <section class="categories-section">
+            <h2 class="category-title">🔧 Soluciones Paso a Paso</h2>
+            <p class="category-subtitle">Guías profesionales para resolver problemas comunes</p>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/reivicion-bajapresion-420w.webp" alt="Baja presión de agua" width="420" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-12" class="blog-date">12 de noviembre, 2024</time>
+                        <h2><a href="/blog/baja-presion-agua-causas-soluciones/">Baja Presión de Agua: 7 Causas y Soluciones</a></h2>
+                        <p>¿Baja presión en regadera o lavabo? Descubre las 7 causas principales y sus soluciones profesionales. Desde tinaco hasta bomba hidroneumática.</p>
+                        <a href="/blog/baja-presion-agua-causas-soluciones/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/reparacion-fugas-420w.webp" alt="Cómo detectar fugas" width="420" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-11" class="blog-date">11 de noviembre, 2024</time>
+                        <h2><a href="/blog/como-detectar-fugas-agua-casa/">Cómo Detectar Fugas de Agua en Casa</a></h2>
+                        <p>Aprende a detectar fugas de agua con métodos sencillos que puedes hacer tú mismo. Ahorra hasta 40% en tu recibo de agua detectando fugas a tiempo.</p>
+                        <a href="/blog/como-detectar-fugas-agua-casa/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/taza-de-baño-420w.webp" alt="Desatascar WC" width="420" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-10" class="blog-date">10 de noviembre, 2024</time>
+                        <h2><a href="/blog/desatascar-wc-metodos-profesionales/">Cómo Desatascar un WC: Métodos Profesionales</a></h2>
+                        <p>Compara métodos caseros vs profesionales para desatascar un WC. Cuándo usar destapa caños, bomba manual o llamar a un plomero.</p>
+                        <a href="/blog/desatascar-wc-metodos-profesionales/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/destapandodrenaje-420w.webp" alt="Drenaje tapado" width="420" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-08" class="blog-date">8 de noviembre, 2024</time>
+                        <h2><a href="/blog/drenaje-tapado-senales-prevencion/">Drenaje Tapado: Señales de Alerta y Prevención</a></h2>
+                        <p>Identifica las señales de un drenaje tapado antes de que sea una emergencia. Consejos de prevención específicos para Culiacán.</p>
+                        <a href="/blog/drenaje-tapado-senales-prevencion/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/problemas-comunes-800w.webp" alt="Problemas comunes plomería" width="800" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-09" class="blog-date">9 de noviembre, 2024</time>
+                        <h2><a href="/blog/problemas-comunes-plomeria-culiacan/">Problemas Comunes de Plomería en Culiacán</a></h2>
+                        <p>Los 10 problemas de plomería más frecuentes en Culiacán: fugas, baja presión, drenajes tapados y más. Con soluciones profesionales.</p>
+                        <a href="/blog/problemas-comunes-plomeria-culiacan/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/hero-plumbing-800w.webp" alt="Cuándo llamar plomero" width="800" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-11" class="blog-date">11 de noviembre, 2024</time>
+                        <h2><a href="/blog/cuando-llamar-plomero-profesional/">¿Cuándo Llamar a un Plomero Profesional?</a></h2>
+                        <p>Aprende cuándo puedes reparar tú mismo y cuándo necesitas un profesional. 10 señales de que debes llamar a un plomero urgente en Culiacán.</p>
+                        <a href="/blog/cuando-llamar-plomero-profesional/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Maintenance & Installation Guides -->
+        <section class="categories-section">
+            <h2 class="category-title">🛠️ Mantenimiento e Instalación</h2>
+            <p class="category-subtitle">Guías de compra y mantenimiento preventivo</p>
+
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/arreglando-boiler-420w.webp" alt="Mantenimiento boiler Noritz" width="420" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-12" class="blog-date">12 de noviembre, 2024</time>
+                        <h2><a href="/blog/mantenimiento-boiler-noritz-checklist/">Checklist de Mantenimiento para Boiler Noritz</a></h2>
+                        <p>Guía completa de mantenimiento preventivo para boilers Noritz. Extiende la vida útil de tu equipo y evita reparaciones costosas.</p>
+                        <a href="/blog/mantenimiento-boiler-noritz-checklist/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <figure class="blog-image">
+                        <img src="/assets/images/tinaco-420w.webp" alt="Instalación tinaco" width="420" height="420" loading="lazy">
+                    </figure>
+                    <div class="blog-content">
+                        <time datetime="2024-11-09" class="blog-date">9 de noviembre, 2024</time>
+                        <h2><a href="/blog/instalacion-tinaco-guia-compra/">Instalación de Tinaco: Guía de Compra 2024</a></h2>
+                        <p>Todo lo que debes saber antes de comprar e instalar un tinaco: capacidad ideal, materiales, marcas recomendadas y costos en Culiacán.</p>
+                        <a href="/blog/instalacion-tinaco-guia-compra/" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Emergency CTA -->
+        <div class="blog-cta-emergency">
+            <h3>🚨 ¿Necesitas un Plomero Profesional Ahora?</h3>
+            <p><strong>Atención 24/7 en Culiacán.</strong> Llegada en 30-60 minutos a Las Quintas, Tres Ríos, Centro y toda la ciudad. Garantía escrita, factura disponible y más de 150 clientes satisfechos.</p>
+            <a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20urgente%20en%20Culiacán" target="_blank" rel="noopener">📞 WhatsApp 24/7</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #991b1b;">Tel: 667-392-2273 • Sin cargos ocultos • Presupuesto gratuito</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Plomero Culiacán Pro</h3>
+                    <p>Servicio profesional de plomería en Culiacán, Sinaloa. Atención 24/7 para emergencias.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="../#servicios">Servicios</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="../#contacto">Contacto</a></li>
+                        <li><a href="../servicios/plomero-precios/">Precios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p>WhatsApp: 52 667 392 2273</p>
+                    <p>Teléfono: 667 392 2273</p>
+                    <p>Culiacán, Sinaloa</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Plomero Culiacán Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js" defer></script>
+</body>
+</html>
