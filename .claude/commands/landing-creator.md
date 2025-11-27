@@ -20,6 +20,37 @@ El comando te pedirá la información necesaria paso a paso.
 
 ## Instrucciones para Claude
 
+### REGLAS CRÍTICAS - Leer primero
+
+1. **Si rehaces una página existente que ya tiene hero:**
+   - REMOVER el hero existente completamente
+   - USAR SOLO la estructura del landing-creator
+   - NO combinar estilos antiguos con nuevos
+   - La página debe quedar 100% como index.html
+
+2. **Estructura final debe contener ÚNICAMENTE:**
+   - Hero con imagen de fondo (estilo index.html)
+   - Secciones de beneficios (.benefits-grid)
+   - Sección de servicios/artículos (.grid con .card)
+   - Sección FAQs
+   - Footer idéntico a index.html
+   - Botones flotantes (WhatsApp + Tel)
+
+3. **Estilos custom antiguos:**
+   - ELIMINAR todos los `<style>` custom de la página antigua
+   - USAR SOLO el critical CSS de index.html
+   - USAR SOLO styles.min.css para estilos adicionales
+
+4. **Cuando el usuario diga "rehaz esta página" o "corrige esta página":**
+   - Preguntar: "¿Cuál es la URL o ruta del archivo a rehacer?"
+   - Leer la página actual
+   - Extraer SOLO el contenido (textos, FAQs)
+   - ELIMINAR toda la estructura antigua
+   - CREAR página nueva con estructura de index.html
+   - REUTILIZAR el contenido extraído
+
+### Proceso Interactivo
+
 Cuando el usuario ejecute `/landing-creator`, sigue este proceso interactivo:
 
 ### Paso 1: Solicitar información básica
@@ -437,6 +468,19 @@ Generar archivo `<slug>/index.html` con:
 3. **SIEMPRE crear backup** - Antes de sobrescribir archivos
 4. **SIEMPRE validar imágenes** - Verificar que existan las rutas proporcionadas
 5. **SIEMPRE generar schemas completos** - WebSite, Service, FAQPage, BreadcrumbList
+6. **AL REHACER páginas existentes:**
+   - ELIMINAR hero custom antiguo (linear-gradient, estilos inline)
+   - ELIMINAR todos los estilos custom (`<style>` inline)
+   - USAR SOLO estructura de index.html
+   - CREAR backup automático antes de sobrescribir
+   - REUTILIZAR contenido (textos, FAQs) pero NO estructura
+7. **Estructura final SOLO debe tener:**
+   - Hero con imagen de fondo (.hero-background)
+   - Benefits grid (.benefits-grid)
+   - Grid + Cards (.grid + .card)
+   - FAQs (.faq + .faq-item)
+   - Footer idéntico a index.html
+   - Botones flotantes (.cta-bar)
 
 ## Validaciones
 
@@ -604,6 +648,120 @@ plomero-culiacan-pro/
     └── index.html                 ← Se genera con este comando
 ```
 
+## Flujo para Rehacer Páginas Existentes
+
+### Cuando el usuario dice "rehaz esta página" o "corrige [URL/ruta]"
+
+1. **Detectar intención de rehacer:**
+   ```
+   Usuario: "rehaz /blog/index.html"
+   Usuario: "corrige la página de blog"
+   Usuario: "esta página está distinta, vamos a usar landing-creator"
+   ```
+
+2. **Confirmar ruta y leer contenido actual:**
+   ```
+   ✅ Entiendo que quieres rehacer: /blog/index.html
+
+   📖 Leyendo contenido actual...
+   ```
+
+3. **Extraer contenido útil (NO estructura):**
+   - H1 y subtítulos
+   - Descripción meta
+   - Textos de beneficios/secciones
+   - FAQs existentes
+   - Imágenes referenciadas
+
+4. **Crear backup automático:**
+   ```bash
+   cp /blog/index.html /blog/index.html.backup-$(date +%Y%m%d)
+   ```
+
+5. **Generar página nueva con estructura de index.html:**
+   - ELIMINAR hero custom antiguo
+   - ELIMINAR estilos inline custom
+   - USAR hero con imagen de fondo (como index.html)
+   - USAR benefits-grid (como index.html)
+   - USAR grid + card (como index.html)
+   - REUTILIZAR contenido extraído
+
+6. **Confirmar cambios:**
+   ```
+   ✅ Página rehecha con estilo idéntico a homepage
+
+   📋 Cambios realizados:
+     ❌ ELIMINADO: Hero custom con estilos inline
+     ❌ ELIMINADO: 275 líneas de CSS custom
+     ✅ AGREGADO: Hero con imagen de fondo
+     ✅ AGREGADO: Benefits grid (4 categorías)
+     ✅ AGREGADO: Critical CSS inline
+     ✅ MANTENIDO: Todo el contenido (textos, FAQs)
+
+   📁 Backup guardado en: /blog/index.html.backup-20251127
+
+   ¿Quieres publicar con /deploy-quick? (s/n)
+   ```
+
+### Ejemplo de flujo completo - Rehacer página
+
+```
+Usuario: "esta página está distinta, vamos a usar el @.claude/commands/landing-creator.md para hacerla como nos gusta"
+
+Claude:
+✅ Entiendo que quieres rehacer esta página con el estilo de la homepage.
+
+¿Cuál es la ruta del archivo? (ejemplo: /blog/index.html)
+
+Usuario: /blog/index.html
+
+Claude:
+📖 Leyendo /blog/index.html...
+
+He extraído el contenido:
+  • H1: "Blog de Plomería Culiacán"
+  • Subtítulo: "Guías expertas, precios reales..."
+  • 4 categorías detectadas
+  • 6 artículos destacados
+  • 6 FAQs
+
+Voy a rehacer la página con:
+  ❌ ELIMINAR: Hero custom con linear-gradient
+  ❌ ELIMINAR: Estilos .blog-hero, .blog-card, etc.
+  ✅ USAR: Hero con imagen de fondo (como homepage)
+  ✅ USAR: Benefits grid para categorías
+  ✅ USAR: Grid + cards para artículos
+
+¿Confirmas que quieres proceder? (s/n)
+
+Usuario: si
+
+Claude:
+📦 Creando backup...
+✅ Backup: /blog/index.html.backup-20251127
+
+🔨 Rehaciendo página...
+  [1/5] Copiando critical CSS de index.html
+  [2/5] Creando hero con imagen de fondo
+  [3/5] Convirtiendo categorías → benefits-grid
+  [4/5] Convirtiendo artículos → grid + cards
+  [5/5] Agregando footer + CTAs flotantes
+
+✅ Página rehecha exitosamente
+
+📊 Resumen de cambios:
+  • Antes: 569 líneas (estilos custom + estructura custom)
+  • Después: 527 líneas (critical CSS + estructura homepage)
+  • Reducción: -42 líneas (-7.4%)
+  • Estilos: 100% unificados con homepage
+
+📁 Archivos:
+  • Original backup: /blog/index.html.backup-20251127
+  • Nueva versión: /blog/index.html
+
+¿Quieres publicar con /deploy-quick? (s/n)
+```
+
 ## Notas finales
 
 - El estilo es 100% idéntico a index.html (copiar, no modificar)
@@ -611,3 +769,5 @@ plomero-culiacan-pro/
 - Responsive automático (mismo CSS que homepage)
 - SEO completo automático (schemas, meta tags, OG, canonical)
 - El usuario solo necesita: textos + fotos
+- **Al rehacer páginas: ELIMINAR hero custom, USAR hero con imagen de fondo**
+- **Siempre crear backup antes de sobrescribir**
