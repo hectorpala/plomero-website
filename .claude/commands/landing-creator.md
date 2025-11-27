@@ -201,11 +201,67 @@ Cada página DEBE incluir el bloque COMPLETO de Critical CSS de index.html (lín
 - Solución: Agregado bloque completo de 45 líneas
 - Resultado: ✅ Hero centrado correctamente en mobile y desktop
 
+**⚠️ REGLA #0.4 - VERIFICACIÓN MÓVIL Y ESCRITORIO (CRÍTICO):**
+
+🚨 **TODAS las adecuaciones DEBEN funcionar perfectamente en AMBAS versiones:**
+
+✅ **VERIFICACIÓN OBLIGATORIA después de CADA cambio:**
+1. **Versión Desktop (1920px, 1440px, 1280px):**
+   - Hero centrado perfectamente
+   - Imágenes con dimensiones correctas
+   - Textos legibles
+   - Botones flotantes visibles (derecha inferior)
+   - Espaciado correcto entre secciones
+
+2. **Versión Móvil (375px, 390px, 428px):**
+   - Hero responsive con `align-items:flex-start!important`
+   - `.hero-content` con backdrop-filter y padding reducido
+   - Textos legibles sin scroll horizontal
+   - Botones flotantes NO obstruyen contenido
+   - Menú hamburguesa funcional
+   - Imágenes responsive (srcset correcto)
+
+**❌ ERRORES COMUNES:**
+- Solo probar en desktop y olvidar mobile
+- Hero se ve bien en desktop pero roto en mobile
+- Botones flotantes tapan contenido en móvil
+- Imágenes muy grandes que rompen layout en 375px
+- Textos que requieren zoom en mobile
+
+**✅ PROCEDIMIENTO DE VERIFICACIÓN:**
+1. Hacer cambio en código
+2. Abrir en Safari (desktop): verificar layout 1440px
+3. Abrir DevTools → Responsive Design Mode
+4. Probar en iPhone SE (375px), iPhone 14 Pro (390px), iPhone 14 Pro Max (428px)
+5. **SI HAY UN ERROR en cualquier versión:** corregir ANTES de continuar
+6. Solo marcar como "terminado" cuando AMBAS versiones funcionen
+
+**Comando para abrir y verificar:**
+```bash
+# Abrir página local
+open "ruta/index.html"
+
+# Verificar en Safari:
+# 1. Desktop: Ver en tamaño completo
+# 2. Mobile: Cmd+Opt+I → Responsive Design → iPhone 14 Pro (390px)
+```
+
+**Consecuencias de NO verificar ambas versiones:**
+- ❌ Usuarios móvil (60%+ del tráfico) ven página rota
+- ❌ Hero desalineado en mobile pero OK en desktop
+- ❌ Botones flotantes invisibles en alguna versión
+- ❌ Textos cortados o con scroll horizontal
+- ❌ SEO penalizado por Google (mobile-first indexing)
+
+**REGLA DE ORO:**
+> **"Si no funciona PERFECTAMENTE en MÓVIL Y ESCRITORIO, NO está terminado."**
+
 1. **Si rehaces una página existente que ya tiene hero:**
    - REMOVER el hero existente completamente
    - USAR SOLO la estructura del landing-creator
    - NO combinar estilos antiguos con nuevos
    - La página debe quedar 100% como index.html
+   - **VERIFICAR resultado en MÓVIL Y ESCRITORIO**
 
 2. **Estructura final debe contener ÚNICAMENTE:**
    - Hero con imagen de fondo (estilo index.html)
@@ -679,6 +735,8 @@ Generar archivo `<slug>/index.html` con:
    - Footer idéntico a index.html
    - Botones flotantes (.cta-bar)
 8. **VERIFICACIÓN FINAL antes de entregar:**
+
+   **🔍 CHECKLIST TÉCNICO:**
    - ✅ **Critical CSS completo** incluido de index.html (líneas 9-66) - fonts, variables, base, nav, hero, buttons, mobile responsive
    - ✅ Hero usa `<picture class="hero-background">` (NO `<div>`)
    - ✅ Tiene `<source type="image/webp">` con srcset
@@ -692,6 +750,53 @@ Generar archivo `<slug>/index.html` con:
    - ✅ Botones flotantes usan SVG icons (NO emojis 💬 📞)
    - ✅ Botones usan clases `.floating-btn`, `.floating-whatsapp`, `.floating-call`
    - ✅ Colores correctos: WhatsApp #22c55e, Tel #0f4fa8
+
+   **📱 VERIFICACIÓN VISUAL OBLIGATORIA (CRÍTICO):**
+
+   🚨 **ANTES de hacer commit, DEBES probar en AMBAS versiones:**
+
+   **Desktop (1440px):**
+   - ✅ Hero centrado con imagen de fondo visible
+   - ✅ Título h1 centrado horizontalmente
+   - ✅ Botones flotantes visibles en esquina derecha inferior
+   - ✅ Todas las secciones alineadas correctamente
+   - ✅ Footer completo visible
+   - ✅ Imágenes cargando correctamente
+
+   **Mobile (390px - iPhone 14 Pro):**
+   - ✅ Hero responsive: `align-items:flex-start!important`
+   - ✅ `.hero-content` con fondo glassmorphic (backdrop-filter)
+   - ✅ Título h1 legible sin zoom (1.5rem-2rem)
+   - ✅ Botones flotantes NO tapan contenido
+   - ✅ Menú hamburguesa funcional
+   - ✅ Sin scroll horizontal
+   - ✅ Imágenes responsive (srcset 800w cargando en mobile)
+   - ✅ Todos los textos legibles sin hacer zoom
+
+   **Cómo verificar:**
+   ```bash
+   # 1. Abrir página
+   open "ruta/index.html"
+
+   # 2. Verificar desktop (Safari en ventana completa)
+   # 3. Verificar mobile:
+   #    - Cmd+Opt+I (DevTools)
+   #    - Responsive Design Mode
+   #    - Seleccionar "iPhone 14 Pro" (390x844)
+   #    - Scrollear toda la página verificando cada sección
+   ```
+
+   **❌ NO HACER COMMIT si:**
+   - Página se ve rota en mobile
+   - Hero desalineado en cualquier versión
+   - Botones flotantes invisibles
+   - Scroll horizontal en mobile
+   - Imágenes muy grandes en mobile
+
+   **✅ SOLO HACER COMMIT cuando:**
+   - Desktop ✅ Perfecto
+   - Mobile ✅ Perfecto
+   - Ambas versiones probadas ✅
 
 ## Validaciones
 
@@ -982,3 +1087,6 @@ Claude:
 - El usuario solo necesita: textos + fotos
 - **Al rehacer páginas: ELIMINAR hero custom, USAR hero con imagen de fondo**
 - **Siempre crear backup antes de sobrescribir**
+- 🚨 **CRÍTICO: SIEMPRE verificar resultado en MÓVIL Y ESCRITORIO antes de commit**
+- 🚨 **NO hacer commit hasta que AMBAS versiones se vean perfectas**
+- 🚨 **60%+ usuarios son móvil - mobile DEBE funcionar perfecto**

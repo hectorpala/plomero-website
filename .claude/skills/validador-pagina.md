@@ -191,6 +191,7 @@ Esperar respuesta del usuario.
 2. Después de corregir todos, volver a validar
 3. Mostrar resultado de la segunda validación
 4. **Abrir página localmente** usando Bash tool con comando `open` para que el usuario vea los cambios en Safari
+5. **VERIFICAR VISUALMENTE en MÓVIL Y ESCRITORIO** (Paso 6)
 
 **Si usuario responde "n" o "no":**
 
@@ -214,6 +215,81 @@ Página abierta en Safari para que veas el resultado.
 
 Si usuario dice "s":
 - Usar comando de git para hacer commit
+
+---
+
+### Paso 6: Verificación Visual en Móvil y Escritorio (CRÍTICO)
+
+🚨 **SIEMPRE realizar esta verificación después de abrir la página:**
+
+Después de abrir la página con `open`, INSTRUIR al usuario:
+
+```
+📱 VERIFICACIÓN OBLIGATORIA - Móvil y Escritorio
+
+La página se abrió en Safari. ANTES de hacer commit, verifica visualmente:
+
+✅ DESKTOP (Ventana completa en Safari):
+   - Hero centrado con imagen de fondo visible
+   - Título h1 centrado horizontalmente
+   - Botones flotantes en esquina derecha inferior
+   - Todas las secciones alineadas
+   - Sin elementos rotos
+
+✅ MOBILE (iPhone 14 Pro - 390px):
+   1. Presiona Cmd+Opt+I (DevTools)
+   2. Click en icono móvil (o Cmd+Shift+M)
+   3. Selecciona "iPhone 14 Pro" (390x844)
+   4. Scrollea toda la página verificando:
+      - Hero responsive (texto arriba, imagen fondo)
+      - Título legible sin zoom
+      - Botones flotantes visibles
+      - Sin scroll horizontal
+      - Imágenes responsive
+
+¿Se ve PERFECTO en ambas versiones (desktop + mobile)? (s/n)
+```
+
+**Si usuario responde "s":**
+- Proceder a preguntar si quiere hacer commit
+
+**Si usuario responde "n":**
+- Preguntar: "¿Qué está mal? (desktop/mobile/ambos)"
+- Según respuesta, ofrecer corregir el problema específico
+- Volver a validar después de corrección
+- Repetir verificación visual
+
+**Si NO hay errores (0) desde el inicio:**
+
+1. **Abrir página localmente** usando Bash tool
+2. Mostrar mensaje con verificación visual:
+
+```
+✅ Página 100% conforme con las reglas de landing-creator.md
+
+Página abierta en Safari para verificación visual.
+
+📱 VERIFICACIÓN OBLIGATORIA - Móvil y Escritorio
+
+Antes de hacer commit, verifica visualmente en Safari:
+
+✅ DESKTOP: Hero centrado, botones flotantes visibles
+✅ MOBILE (Cmd+Opt+I → iPhone 14 Pro):
+   - Hero responsive
+   - Sin scroll horizontal
+   - Botones flotantes visibles
+
+¿Se ve PERFECTO en ambas versiones? (s/n)
+```
+
+Si usuario dice "s":
+- Preguntar: "¿Quieres hacer commit ahora? (s/n)"
+- Si dice "s": hacer commit
+
+Si usuario dice "n":
+- Preguntar qué está mal
+- Corregir
+- Repetir verificación
 
 ---
 
@@ -289,3 +365,6 @@ Yo: [git add + commit]
 - NUNCA invento errores que no existen
 - SIEMPRE ofrezco corrección automática si hay errores
 - SIEMPRE abro la página en Safari después de validar (con o sin correcciones) para que el usuario vea el resultado
+- 🚨 **SIEMPRE instruyo al usuario a verificar MÓVIL Y ESCRITORIO antes de commit**
+- 🚨 **NO permito commit hasta que ambas versiones se vean perfectas**
+- 🚨 **Si usuario reporta problema en mobile/desktop, corrijo y vuelvo a validar**
