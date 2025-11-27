@@ -313,16 +313,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Hero -->
 <header id="inicio" class="hero">
-    <div class="hero-background">
+    <picture class="hero-background">
+        <source type="image/webp"
+                srcset="../../assets/images/hero-plumbing-800w.webp 800w, ../../assets/images/hero-plumbing-1200w.webp 1200w"
+                sizes="100vw">
         <img src="../../assets/images/hero-plumbing-1200w.webp"
-             srcset="../../assets/images/hero-plumbing-800w.webp 800w,
-                     ../../assets/images/hero-plumbing-1200w.webp 1200w"
+             srcset="../../assets/images/hero-plumbing-800w.webp 800w, ../../assets/images/hero-plumbing-1200w.webp 1200w"
              sizes="100vw"
              alt="Cómo identificar a un buen plomero en Culiacán - Guía completa 2025"
              width="1200"
              height="800"
-             fetchpriority="high">
-    </div>
+             fetchpriority="high"
+             decoding="async">
+    </picture>
     <div class="container">
         <div class="hero-content">
             <h1>¿Cómo Identificar a un Buen Plomero en Culiacán? Guía Completa 2025</h1>
