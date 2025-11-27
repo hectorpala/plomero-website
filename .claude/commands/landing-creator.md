@@ -22,6 +22,34 @@ El comando te pedirá la información necesaria paso a paso.
 
 ### REGLAS CRÍTICAS - Leer primero
 
+**⚠️ REGLA #0 - PROHIBIDO AGREGAR ELEMENTOS CUSTOM:**
+
+Esta es la regla MÁS IMPORTANTE. NUNCA, bajo ninguna circunstancia:
+
+- ❌ **PROHIBIDO:** Crear clases CSS que NO existan en index.html
+- ❌ **PROHIBIDO:** Agregar `.highlight-box`, `.warning-box`, `.info-box`, `.note-box` o cualquier caja con color de fondo
+- ❌ **PROHIBIDO:** Crear elementos amarillos, rojos, azules, verdes con bordes de colores
+- ❌ **PROHIBIDO:** Inventar nuevos estilos más allá de los que están en index.html
+- ❌ **PROHIBIDO:** Agregar divs decorativos con fondos de colores (#fef3c7, #fee2e2, etc.)
+
+✅ **SOLO PERMITIDO:** Usar clases que YA EXISTEN en index.html:
+  - `.hero`, `.hero-background`, `.hero-content`
+  - `.section`, `.section-alt`
+  - `.benefits-grid`, `.benefit-card`
+  - `.grid`, `.card`
+  - `.faq`, `.faq-item`
+  - `.footer`
+  - `.cta-bar`, `.cta-btn`
+  - `.btn-primary`, `.btn-secondary`
+
+Si necesitas resaltar contenido, usa SOLO:
+  - Párrafos con `<strong>` o `<em>`
+  - Listas `<ul>` o `<ol>` sin estilos custom
+  - Encabezados `<h2>`, `<h3>` que ya tienen estilos en index.html
+
+**Fuente de verdad:** https://plomeroculiacanpro.mx/ (index.html)
+**Clona ESTRICTAMENTE** - No agregues, no inventes, no mejores.
+
 1. **Si rehaces una página existente que ya tiene hero:**
    - REMOVER el hero existente completamente
    - USAR SOLO la estructura del landing-creator
@@ -475,9 +503,11 @@ Generar archivo `<slug>/index.html` con:
 
 1. **NUNCA modificar estilos** - Copiar exactamente de index.html
 2. **NUNCA inventar contenido** - Usar solo lo que el usuario proporciona
-3. **SIEMPRE crear backup** - Antes de sobrescribir archivos
-4. **SIEMPRE validar imágenes** - Verificar que existan las rutas proporcionadas
-5. **SIEMPRE generar schemas completos** - WebSite, Service, FAQPage, BreadcrumbList
+3. **NUNCA crear clases CSS custom** - SOLO usar clases de index.html (ver REGLA #0 arriba)
+4. **NUNCA agregar cajas de colores** - Prohibido .highlight-box, .warning-box, .info-box, etc.
+5. **SIEMPRE crear backup** - Antes de sobrescribir archivos
+6. **SIEMPRE validar imágenes** - Verificar que existan las rutas proporcionadas
+7. **SIEMPRE generar schemas completos** - WebSite, Service, FAQPage, BreadcrumbList
 6. **AL REHACER páginas existentes:**
    - ELIMINAR hero custom antiguo (linear-gradient, estilos inline)
    - ELIMINAR todos los estilos custom (`<style>` inline)
