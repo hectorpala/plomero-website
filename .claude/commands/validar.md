@@ -76,7 +76,28 @@ Busca en el `<body>` de la página nueva:
 
 **Reportar línea exacta si encuentra alguna.**
 
-### 6. Validar Estructura General
+### 6. Validar Barra WhatsApp CTA (OBLIGATORIO)
+
+Busca en el `<body>` dentro de la sección `.benefits-grid`:
+
+**✅ DEBE CUMPLIR:**
+- [ ] Tiene `<div class="whatsapp-cta-box">` presente
+- [ ] Contiene heading `<h3>` con texto exacto: "¿Tienes dudas? Respondemos en 10 minutos"
+- [ ] Tiene botón con clase `whatsapp-cta-button` y texto "Abrir Chat"
+- [ ] Link apunta a: `https://wa.me/526673922273?text=...`
+- [ ] Está ubicado dentro de `.benefits-grid` (después de los 4 benefits)
+- [ ] Usa SVG para iconos (NO emojis)
+
+**❌ ERROR COMÚN:**
+- Falta completamente el elemento `.whatsapp-cta-box`
+- Texto del heading incorrecto o abreviado
+- Botón no dice "Abrir Chat"
+- Link no apunta a WhatsApp correcto (526673922273)
+- Ubicado fuera de `.benefits-grid`
+
+**Reportar línea exacta si falta o está incorrecto.**
+
+### 7. Validar Estructura General
 
 **✅ DEBE TENER (comparar con index.html):**
 - [ ] `<nav class="nav">` idéntico
@@ -85,19 +106,20 @@ Busca en el `<body>` de la página nueva:
 - [ ] Mismo `<script>` de `main.js`
 - [ ] Paths correctos (absolutos `/` en raíz, relativos `../../` en subdirectorios)
 
-### 7. Formato del Reporte
+### 8. Formato del Reporte
 
 Presenta el resultado en este formato:
 
 ```markdown
 ## 🔍 Validación de [nombre-página]
 
-### ✅ APROBADAS (X/6)
+### ✅ APROBADAS (X/7)
 
 - ✅ Hero estructura correcta
 - ✅ Botones flotantes con SVG
 - ✅ Sin clases CSS custom
 - ✅ Sin cajas de colores en HTML
+- ✅ Barra WhatsApp CTA presente
 - ✅ Estructura general correcta
 - ✅ Paths correctos
 
@@ -144,11 +166,12 @@ Claude: [Genera reporte]
 
 ## 🔍 Validación de articulo-nuevo
 
-### ✅ APROBADAS (4/6)
+### ✅ APROBADAS (5/7)
 - ✅ Estructura general correcta
 - ✅ Paths correctos
 - ✅ Sin cajas de colores en HTML
 - ✅ Hero estructura correcta
+- ✅ Barra WhatsApp CTA presente
 
 ### ❌ ERRORES DETECTADOS (2)
 

@@ -33,7 +33,7 @@ Una vez que el usuario proporcione la ruta, leer en paralelo:
 
 ### Paso 3: Validar según reglas críticas
 
-Verificar las 7 áreas siguientes (basadas en @.claude/commands/validar.md y landing-creator.md):
+Verificar las 8 áreas siguientes (basadas en @.claude/commands/validar.md y landing-creator.md):
 
 #### 3.1 Hero - Estructura (CRÍTICO)
 
@@ -139,6 +139,27 @@ Buscar en el `<style>` del `<head>`:
 
 **Si falta CSS crítico:** Anotar que falta bloque completo de index.html.
 
+#### 3.8 Barra WhatsApp CTA (OBLIGATORIO)
+
+Buscar en el `<body>` dentro de la sección `.benefits-grid`:
+
+**✅ DEBE cumplir:**
+- Tiene `<div class="whatsapp-cta-box">` presente
+- Contiene heading: "¿Tienes dudas? Respondemos en 10 minutos"
+- Tiene botón con clase `whatsapp-cta-button` y texto "Abrir Chat"
+- Link apunta a: `https://wa.me/526673922273?text=...`
+- Está ubicado dentro de `.benefits-grid` (después de los 4 benefits)
+- Usa SVG para iconos (NO emojis)
+
+**❌ ERROR COMÚN:**
+- Falta completamente el elemento `.whatsapp-cta-box`
+- Texto del heading incorrecto o abreviado
+- Botón no dice "Abrir Chat"
+- Link no apunta a WhatsApp correcto
+- Ubicado fuera de `.benefits-grid`
+
+**Si falta o está mal:** Anotar línea exacta y qué falta/está incorrecto.
+
 ### Paso 4: Generar Reporte
 
 Presentar resultado en este formato:
@@ -146,7 +167,7 @@ Presentar resultado en este formato:
 ```markdown
 ## 🔍 Validación de [nombre-página]
 
-### ✅ APROBADAS (X/7)
+### ✅ APROBADAS (X/8)
 
 - ✅ Hero estructura correcta
 - ✅ Hero CSS correcto
@@ -155,6 +176,7 @@ Presentar resultado en este formato:
 - ✅ Sin clases CSS custom prohibidas
 - ✅ Sin cajas de colores en HTML
 - ✅ Critical CSS completo incluido
+- ✅ Barra WhatsApp CTA presente
 
 ---
 
@@ -341,7 +363,7 @@ Yo: [Corrijo error 1 con Edit]
     [Valido de nuevo]
 
     ✅ Errores corregidos
-    ✅ Validación: 7/7 aprobadas
+    ✅ Validación: 8/8 aprobadas
 
     [Abro página con: open "plomero-urgente/index.html"]
 
