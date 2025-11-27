@@ -399,7 +399,7 @@ Domingos y festivos: Emergencias únicamente
 #### Mantener Classes Existentes
 
 **NO cambiar:**
-- `.hero`, `.hero-content`, `.hero-background`
+- `.hero`, `.hero-content`, `.hero-background` ← **IMPORTANTE:** `.hero-background` DEBE ser un `<picture>` (NO `<div>`)
 - `.section`, `.section-alt`
 - `.container`
 - `.grid`, `.card`
@@ -432,9 +432,11 @@ Domingos y festivos: Emergencias únicamente
 #### Imágenes
 
 **Usar imágenes existentes:**
-- `hero-plumbing-800w.webp`, `hero-plumbing-1200w.webp`
+- `hero-plomero-visita-800w.webp`, `hero-plomero-visita-1200w.webp` ← **Imagen principal del hero** (igual que index.html)
 - `reparacion-fugas-420w.webp`, `reparacion-fugas-800w.webp`
 - `emergencia-24-7-nocturna-800w.webp`
+
+**NOTA:** NUNCA usar `hero-plumbing-*.webp` - esa imagen está obsoleta. Usar SIEMPRE `hero-plomero-visita-*.webp` para el hero.
 - `taza-de-baño-420w.webp`
 - `destapandodrenaje-420w.webp`
 - `tinaco-420w.webp`
