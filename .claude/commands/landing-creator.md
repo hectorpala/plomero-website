@@ -86,6 +86,36 @@ El hero DEBE usar EXACTAMENTE esta estructura (index.html línea 1145):
 - USAR: `hero-plomero-visita-800w.webp` y `hero-plomero-visita-1200w.webp` (igual que index.html)
 - NO USAR: hero-plumbing-*.webp u otras imágenes a menos que el usuario las especifique
 
+**⚠️ REGLA #0.2 - BOTONES FLOTANTES (CRÍTICO):**
+
+Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura (index.html línea 1356-1373):
+
+```html
+<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20urgente"
+   id="cta-whatsapp"
+   class="floating-btn floating-whatsapp"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Contactar por WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="tel:+526673922273"
+   id="cta-llamar"
+   class="floating-btn floating-call"
+   aria-label="Llamar ahora"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></a>
+```
+
+**CSS de botones flotantes (index.html línea 54-57):**
+```css
+.floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}
+.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}
+.floating-call{background:#0f4fa8;bottom:18px}
+.floating-whatsapp{background:#22c55e;bottom:78px}
+```
+
+❌ **ERRORES COMUNES A EVITAR:**
+- ❌ NO usar emojis (💬 📞) - DEBE usar SVG icons completos
+- ❌ NO usar `<div class="cta-bar">` - Botones van directos sin contenedor
+- ❌ NO usar clases `.cta-btn`, `.cta-wa`, `.cta-tel` - DEBE usar `.floating-btn`, `.floating-whatsapp`, `.floating-call`
+- ❌ NO usar colores incorrectos - WhatsApp: #22c55e (NO #25D366), Tel: #0f4fa8 (NO #0066cc)
+
 1. **Si rehaces una página existente que ya tiene hero:**
    - REMOVER el hero existente completamente
    - USAR SOLO la estructura del landing-creator
@@ -492,18 +522,19 @@ Generar archivo `<slug>/index.html` con:
   <!-- ... -->
 </footer>
 
-<!-- COPIAR CTA fijo (WhatsApp + Llamar) EXACTO de index.html -->
-<!-- CTA fijo con tracking -->
-<style>
-  .cta-bar{position:fixed;right:16px;bottom:16px;display:flex;gap:10px;z-index:9999}
-  <!-- ... copiar todo el estilo ... -->
-</style>
-<div class="cta-bar">
-  <a id="cta-whatsapp" class="cta-btn cta-wa" href="#">💬 WhatsApp</a>
-  <a id="cta-llamar" class="cta-btn cta-tel" href="#">📞 Llamar</a>
-</div>
+<!-- COPIAR Botones Flotantes EXACTO de index.html -->
+<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20urgente"
+   id="cta-whatsapp"
+   class="floating-btn floating-whatsapp"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Contactar por WhatsApp"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a><a href="tel:+526673922273"
+   id="cta-llamar"
+   class="floating-btn floating-call"
+   aria-label="Llamar ahora"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg></a>
+
 <script>
-  <!-- Copiar script de tracking exacto -->
+  <!-- Copiar script de tracking exacto de index.html -->
 </script>
 
 </body>
@@ -569,6 +600,9 @@ Generar archivo `<slug>/index.html` con:
    - ✅ CSS incluye `content-visibility:auto` en `.hero-background img`
    - ✅ Imagen hero es `hero-plomero-visita-*` (a menos que usuario especifique otra)
    - ✅ NO hay clases custom (.highlight-box, .warning-box, etc.)
+   - ✅ Botones flotantes usan SVG icons (NO emojis 💬 📞)
+   - ✅ Botones usan clases `.floating-btn`, `.floating-whatsapp`, `.floating-call`
+   - ✅ Colores correctos: WhatsApp #22c55e, Tel #0f4fa8
 
 ## Validaciones
 
