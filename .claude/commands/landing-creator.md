@@ -50,6 +50,42 @@ Si necesitas resaltar contenido, usa SOLO:
 **Fuente de verdad:** https://plomeroculiacanpro.mx/ (index.html)
 **Clona ESTRICTAMENTE** - No agregues, no inventes, no mejores.
 
+**⚠️ REGLA #0.1 - ESTRUCTURA HERO (CRÍTICO):**
+
+El hero DEBE usar EXACTAMENTE esta estructura (index.html línea 1145):
+
+```html
+<header id="inicio" class="hero">
+    <picture class="hero-background">
+        <source type="image/webp"
+                srcset="/assets/images/NOMBRE-800w.webp 800w, /assets/images/NOMBRE-1200w.webp 1200w"
+                sizes="100vw">
+        <img src="/assets/images/NOMBRE-1200w.webp"
+             srcset="/assets/images/NOMBRE-800w.webp 800w, /assets/images/NOMBRE-1200w.webp 1200w"
+             sizes="100vw"
+             alt="..."
+             width="1200"
+             height="800"
+             fetchpriority="high"
+             decoding="async">
+    </picture>
+    <div class="container">
+        <div class="hero-content">...</div>
+    </div>
+</header>
+```
+
+❌ **ERRORES COMUNES A EVITAR:**
+- ❌ NO usar `<div class="hero-background">` - DEBE ser `<picture class="hero-background">`
+- ❌ NO omitir el elemento `<source type="image/webp">`
+- ❌ NO omitir `decoding="async"` en el `<img>`
+- ❌ NO usar imágenes diferentes a las de index.html sin verificar
+- ❌ NO omitir `content-visibility:auto` en el CSS de `.hero-background img`
+
+**Imagen hero por defecto:**
+- USAR: `hero-plomero-visita-800w.webp` y `hero-plomero-visita-1200w.webp` (igual que index.html)
+- NO USAR: hero-plumbing-*.webp u otras imágenes a menos que el usuario las especifique
+
 1. **Si rehaces una página existente que ya tiene hero:**
    - REMOVER el hero existente completamente
    - USAR SOLO la estructura del landing-creator
@@ -352,14 +388,19 @@ Generar archivo `<slug>/index.html` con:
 
 <!-- Hero -->
 <header id="inicio" class="hero">
-  <div class="hero-background">
-    <picture>
-      <source srcset="/assets/images/<hero-800w>.webp 800w,
-                      /assets/images/<hero-1200w>.webp 1200w"
-              sizes="100vw">
-      <img src="/assets/images/<hero-1200w>.webp" alt="<alt-text>" loading="eager">
-    </picture>
-  </div>
+  <picture class="hero-background">
+    <source type="image/webp"
+            srcset="/assets/images/<hero-800w>.webp 800w, /assets/images/<hero-1200w>.webp 1200w"
+            sizes="100vw">
+    <img src="/assets/images/<hero-1200w>.webp"
+         srcset="/assets/images/<hero-800w>.webp 800w, /assets/images/<hero-1200w>.webp 1200w"
+         sizes="100vw"
+         alt="<alt-text>"
+         width="1200"
+         height="800"
+         fetchpriority="high"
+         decoding="async">
+  </picture>
   <div class="container">
     <div class="hero-content">
       <h1><h1-text></h1>
@@ -515,12 +556,19 @@ Generar archivo `<slug>/index.html` con:
    - CREAR backup automático antes de sobrescribir
    - REUTILIZAR contenido (textos, FAQs) pero NO estructura
 7. **Estructura final SOLO debe tener:**
-   - Hero con imagen de fondo (.hero-background)
+   - Hero con `<picture class="hero-background">` (NO `<div>`)
    - Benefits grid (.benefits-grid)
    - Grid + Cards (.grid + .card)
    - FAQs (.faq + .faq-item)
    - Footer idéntico a index.html
    - Botones flotantes (.cta-bar)
+8. **VERIFICACIÓN FINAL antes de entregar:**
+   - ✅ Hero usa `<picture class="hero-background">` (NO `<div>`)
+   - ✅ Tiene `<source type="image/webp">` con srcset
+   - ✅ `<img>` tiene `decoding="async"` y `fetchpriority="high"`
+   - ✅ CSS incluye `content-visibility:auto` en `.hero-background img`
+   - ✅ Imagen hero es `hero-plomero-visita-*` (a menos que usuario especifique otra)
+   - ✅ NO hay clases custom (.highlight-box, .warning-box, etc.)
 
 ## Validaciones
 
