@@ -256,6 +256,73 @@ open "ruta/index.html"
 **REGLA DE ORO:**
 > **"Si no funciona PERFECTAMENTE en MÓVIL Y ESCRITORIO, NO está terminado."**
 
+**⚠️ REGLA #0.5 - OPTIMIZACIÓN SEO OBLIGATORIA (CRÍTICO):**
+
+🚨 **TODAS las landing pages DEBEN incluir estas 4 optimizaciones SEO:**
+
+**1. Title Tag Optimizado:**
+- ✅ Longitud: 50-60 caracteres (óptimo), máximo 70
+- ✅ Formato: `[Keyword Principal] | Plomero Culiacán Pro`
+- ✅ Keyword al inicio del title
+- ❌ NO exceder 70 caracteres (Google corta el resto)
+
+**2. Meta Description Optimizada:**
+- ✅ Longitud: 120-155 caracteres (óptimo), máximo 160
+- ✅ Incluir keyword principal + call-to-action
+- ✅ Incluir beneficio clave + contacto (WhatsApp/Tel)
+- ❌ NO exceder 160 caracteres (Google corta el resto)
+
+**3. Breadcrumb HTML Navegable (OBLIGATORIO):**
+- ✅ DEBE aparecer VISUALMENTE en la página (NO solo en schema)
+- ✅ Ubicación: Entre `</nav>` y `<header class="hero">`
+- ✅ Estructura inline con estilos simples
+- ✅ Enlaces funcionales a Inicio y secciones padre
+
+**Ejemplo de breadcrumb HTML:**
+```html
+<!-- Breadcrumb -->
+<nav class="breadcrumb" aria-label="breadcrumb" style="background:#f8f9fa;padding:12px 0;font-size:14px;border-bottom:1px solid #e9ecef">
+    <div class="container">
+        <ol style="list-style:none;display:flex;gap:0.5rem;margin:0;padding:0;flex-wrap:wrap">
+            <li><a href="https://plomeroculiacanpro.mx/" style="color:#0066cc;text-decoration:none">Inicio</a></li>
+            <li style="color:#6c757d">›</li>
+            <li><a href="https://plomeroculiacanpro.mx/#servicios" style="color:#0066cc;text-decoration:none">Servicios</a></li>
+            <li style="color:#6c757d">›</li>
+            <li style="color:#6c757d" aria-current="page">[Nombre Servicio]</li>
+        </ol>
+    </div>
+</nav>
+```
+
+**4. Logo Footer con Dimensiones (OBLIGATORIO):**
+- ✅ DEBE incluir atributos `width="512" height="195"`
+- ✅ Reduce CLS (Cumulative Layout Shift)
+- ✅ Mejora Core Web Vitals de Google
+
+**Ejemplo:**
+```html
+<img src="../../logo-plomero-culiacan-pro.webp"
+     alt="Plomero Culiacán Pro"
+     width="512"
+     height="195">
+```
+
+**Consecuencias de NO incluir estas optimizaciones:**
+- ❌ Penalización en rankings de Google
+- ❌ CTR bajo en resultados de búsqueda (title/description cortados)
+- ❌ Usuarios no encuentran navegación clara
+- ❌ Core Web Vitals bajos (CLS por logo sin dimensiones)
+- ❌ Menor visibilidad en búsquedas
+
+**✅ VALIDACIÓN SEO antes de commit:**
+```bash
+# Verificar longitud de title y description:
+# Title: contar caracteres (debe ser 50-60, máx 70)
+# Description: contar caracteres (debe ser 120-155, máx 160)
+# Breadcrumb: buscar <nav class="breadcrumb"> en HTML
+# Logo footer: buscar width="512" height="195"
+```
+
 1. **Si rehaces una página existente que ya tiene hero:**
    - REMOVER el hero existente completamente
    - USAR SOLO la estructura del landing-creator
@@ -424,8 +491,8 @@ Generar archivo `<slug>/index.html` con:
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><keyword> | Plomero Culiacán Pro</title>
-<meta name="description" content="<meta description>">
+<title><keyword optimizado 50-60 chars> | Plomero Culiacán Pro</title>
+<meta name="description" content="<meta description 120-155 caracteres>">
 <meta name="keywords" content="<keyword>, plomero culiacan, <variaciones>">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
@@ -557,6 +624,19 @@ Generar archivo `<slug>/index.html` con:
   </div>
 </nav>
 
+<!-- Breadcrumb (OBLIGATORIO para SEO) -->
+<nav class="breadcrumb" aria-label="breadcrumb" style="background:#f8f9fa;padding:12px 0;font-size:14px;border-bottom:1px solid #e9ecef">
+    <div class="container">
+        <ol style="list-style:none;display:flex;gap:0.5rem;margin:0;padding:0;flex-wrap:wrap">
+            <li><a href="https://plomeroculiacanpro.mx/" style="color:#0066cc;text-decoration:none">Inicio</a></li>
+            <li style="color:#6c757d">›</li>
+            <li><a href="https://plomeroculiacanpro.mx/#servicios" style="color:#0066cc;text-decoration:none">Servicios</a></li>
+            <li style="color:#6c757d">›</li>
+            <li style="color:#6c757d" aria-current="page"><nombre-servicio></li>
+        </ol>
+    </div>
+</nav>
+
 <!-- Hero -->
 <header id="inicio" class="hero">
   <picture class="hero-background">
@@ -659,8 +739,19 @@ Generar archivo `<slug>/index.html` con:
 </section>
 
 <!-- COPIAR Footer EXACTO de index.html -->
+<!-- IMPORTANTE: Logo footer DEBE incluir width="512" height="195" -->
 <footer class="footer">
-  <!-- ... -->
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <img src="../../logo-plomero-culiacan-pro.webp"
+             alt="Plomero Culiacán Pro"
+             width="512"
+             height="195">
+        <!-- ... resto del footer ... -->
+      </div>
+    </div>
+  </div>
 </footer>
 
 <!-- COPIAR Botones Flotantes EXACTO de index.html -->
@@ -750,6 +841,14 @@ Generar archivo `<slug>/index.html` con:
    - ✅ Botones flotantes usan SVG icons (NO emojis 💬 📞)
    - ✅ Botones usan clases `.floating-btn`, `.floating-whatsapp`, `.floating-call`
    - ✅ Colores correctos: WhatsApp #22c55e, Tel #0f4fa8
+
+   **🎯 CHECKLIST SEO OBLIGATORIO (REGLA #0.5):**
+   - ✅ Title optimizado: 50-60 caracteres (máx 70)
+   - ✅ Meta description optimizada: 120-155 caracteres (máx 160)
+   - ✅ Breadcrumb HTML visible presente (después de </nav>, antes de hero)
+   - ✅ Logo footer con width="512" height="195"
+   - ✅ Keyword principal al inicio del title
+   - ✅ Breadcrumb con enlaces funcionales a Inicio y Servicios
 
    **📱 VERIFICACIÓN VISUAL OBLIGATORIA (CRÍTICO):**
 
