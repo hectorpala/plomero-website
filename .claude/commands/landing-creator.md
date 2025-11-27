@@ -116,6 +116,91 @@ Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura
 - ❌ NO usar clases `.cta-btn`, `.cta-wa`, `.cta-tel` - DEBE usar `.floating-btn`, `.floating-whatsapp`, `.floating-call`
 - ❌ NO usar colores incorrectos - WhatsApp: #22c55e (NO #25D366), Tel: #0f4fa8 (NO #0066cc)
 
+**⚠️ REGLA #0.3 - CRITICAL CSS COMPLETO (CRÍTICO):**
+
+Cada página DEBE incluir el bloque COMPLETO de Critical CSS de index.html (líneas 9-66). NO es suficiente copiar solo CSS individual de componentes.
+
+**✅ DEBE incluir TODO el Critical CSS:**
+```css
+<style>
+    /* Fonts (Inter + Montserrat) */
+    @font-face{font-family:'Inter';font-style:normal;font-weight:400;...}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:500;...}
+    @font-face{font-family:'Inter';font-style:normal;font-weight:600;...}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:700;...}
+    @font-face{font-family:'Montserrat';font-style:normal;font-weight:800;...}
+
+    /* CSS Variables */
+    :root{--brand:#E36414;--brand-light:#F97316;...}
+
+    /* Base styles */
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Inter',...;padding-top:80px}
+    .container{max-width:var(--container-max-width);margin:0 auto;...}
+    h1,h2,h3{font-family:'Montserrat',sans-serif;...}
+
+    /* Nav */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;...}
+    .logo{...}
+    .logo img{height:140px;...}
+
+    /* Hero (CRÍTICO para centrado) */
+    .hero{min-height:85vh;display:grid;place-items:center;text-align:center;...}
+    .hero-background{position:absolute;inset:0;z-index:0;...}
+    .hero-background img{width:100%;height:100%;object-fit:cover;content-visibility:auto}
+    .hero-content{position:relative;z-index:2;max-width:900px;margin:0 auto;...}
+
+    /* Buttons */
+    .btn-primary{display:inline-block;background:linear-gradient(...);...}
+
+    /* Floating buttons */
+    .floating-btn{position:fixed;right:18px;...}
+    .floating-call{background:#0f4fa8;bottom:18px}
+    .floating-whatsapp{background:#22c55e;bottom:78px}
+
+    /* Mobile responsive (CRÍTICO) */
+    @media (max-width:768px){
+        .logo img{height:90px;...}
+        .hero{min-height:75vh;padding-top:85px!important;align-items:flex-start!important}
+        .hero-background img{object-position:40% 35%}
+        .hero-content{margin-top:0!important;padding:1.5rem 1.25rem!important;...}
+        .hero h1{font-size:clamp(1.5rem,5vw,2rem)!important;...}
+        ...
+    }
+</style>
+```
+
+❌ **ERROR COMÚN (causa problemas de alineación):**
+```css
+/* ❌ INCORRECTO - Solo copiar CSS de botones flotantes */
+<style>
+    .floating-btn{position:fixed;...}
+    .floating-call{background:#0f4fa8;...}
+    .floating-whatsapp{background:#22c55e;...}
+</style>
+```
+
+**Consecuencias de Critical CSS incompleto:**
+- ❌ Hero desalineado (título muy a la derecha o muy arriba)
+- ❌ Fuentes web no cargan (se ve fuente del sistema)
+- ❌ Variables CSS no definidas (colores rotos)
+- ❌ Layout roto en mobile
+- ❌ Nav mal posicionado
+- ❌ Botones flotantes invisibles o mal estilizados
+
+**Solución:**
+1. Abrir `index.html`
+2. Copiar TODO el bloque `<style>` de las líneas 9-66
+3. Pegar en el `<head>` de la nueva página (después de los preloads)
+4. NO modificar, NO eliminar líneas
+
+**Caso de uso real:**
+- Página: `servicios/instalacion-de-sanitarios/index.html`
+- Problema: Hero título desalineado a la derecha
+- Causa: Solo tenía 4 líneas de CSS (botones flotantes)
+- Solución: Agregado bloque completo de 45 líneas
+- Resultado: ✅ Hero centrado correctamente en mobile y desktop
+
 1. **Si rehaces una página existente que ya tiene hero:**
    - REMOVER el hero existente completamente
    - USAR SOLO la estructura del landing-creator
@@ -594,10 +679,14 @@ Generar archivo `<slug>/index.html` con:
    - Footer idéntico a index.html
    - Botones flotantes (.cta-bar)
 8. **VERIFICACIÓN FINAL antes de entregar:**
+   - ✅ **Critical CSS completo** incluido de index.html (líneas 9-66) - fonts, variables, base, nav, hero, buttons, mobile responsive
    - ✅ Hero usa `<picture class="hero-background">` (NO `<div>`)
    - ✅ Tiene `<source type="image/webp">` con srcset
    - ✅ `<img>` tiene `decoding="async"` y `fetchpriority="high"`
    - ✅ CSS incluye `content-visibility:auto` en `.hero-background img`
+   - ✅ CSS incluye `display:grid;place-items:center` en `.hero` (centrado correcto)
+   - ✅ CSS incluye `margin:0 auto` en `.hero-content` (centrado horizontal)
+   - ✅ CSS incluye media queries completas para mobile (responsive)
    - ✅ Imagen hero es `hero-plomero-visita-*` (a menos que usuario especifique otra)
    - ✅ NO hay clases custom (.highlight-box, .warning-box, etc.)
    - ✅ Botones flotantes usan SVG icons (NO emojis 💬 📞)

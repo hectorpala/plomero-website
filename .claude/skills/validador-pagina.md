@@ -33,7 +33,7 @@ Una vez que el usuario proporcione la ruta, leer en paralelo:
 
 ### Paso 3: Validar según reglas críticas
 
-Verificar las 6 áreas siguientes (basadas en @.claude/commands/validar.md):
+Verificar las 7 áreas siguientes (basadas en @.claude/commands/validar.md y landing-creator.md):
 
 #### 3.1 Hero - Estructura (CRÍTICO)
 
@@ -109,6 +109,36 @@ Buscar en el `<body>`:
 
 **Si encuentra alguna:** Anotar línea exacta.
 
+#### 3.7 Critical CSS Completo (CRÍTICO)
+
+Buscar en el `<style>` del `<head>`:
+
+**✅ DEBE incluir TODO (mínimo 40+ líneas):**
+- `@font-face` para Inter (400, 500, 600)
+- `@font-face` para Montserrat (700, 800)
+- `:root` con variables CSS
+- Reset CSS (`*{margin:0;padding:0;...}`)
+- `body` con font-family, padding-top
+- `.container` con max-width, margin
+- `.nav` con position:fixed
+- `.logo` y `.logo img`
+- `.hero{display:grid;place-items:center;text-align:center;...}`
+- `.hero-background` con position:absolute
+- `.hero-background img` con object-fit, content-visibility
+- `.hero-content{margin:0 auto;...}`
+- `.btn-primary` con gradient
+- `.floating-btn`, `.floating-call`, `.floating-whatsapp`
+- `@media (max-width:768px)` con responsive completo
+
+**❌ ERROR COMÚN:**
+- Solo 3-10 líneas de CSS (incompleto)
+- Falta `@font-face` (fuentes no cargan)
+- Falta `:root` (variables no definidas)
+- Falta `.hero{display:grid;place-items:center}` (desalineación)
+- Falta `@media` queries (roto en mobile)
+
+**Si falta CSS crítico:** Anotar que falta bloque completo de index.html.
+
 ### Paso 4: Generar Reporte
 
 Presentar resultado en este formato:
@@ -116,7 +146,7 @@ Presentar resultado en este formato:
 ```markdown
 ## 🔍 Validación de [nombre-página]
 
-### ✅ APROBADAS (X/6)
+### ✅ APROBADAS (X/7)
 
 - ✅ Hero estructura correcta
 - ✅ Hero CSS correcto
@@ -124,6 +154,7 @@ Presentar resultado en este formato:
 - ✅ Botones flotantes CSS correcto
 - ✅ Sin clases CSS custom prohibidas
 - ✅ Sin cajas de colores en HTML
+- ✅ Critical CSS completo incluido
 
 ---
 
@@ -159,6 +190,7 @@ Esperar respuesta del usuario.
 1. Usar herramienta Edit para corregir cada error
 2. Después de corregir todos, volver a validar
 3. Mostrar resultado de la segunda validación
+4. **Abrir página localmente** usando Bash tool con comando `open` para que el usuario vea los cambios en Safari
 
 **Si usuario responde "n" o "no":**
 
@@ -169,8 +201,13 @@ Puedes corregirlos manualmente o pedirme "corrige" cuando estés listo.
 
 **Si NO hay errores (0):**
 
+1. **Abrir página localmente** usando Bash tool con comando `open` para que el usuario vea la página validada
+2. Mostrar mensaje:
+
 ```
 ✅ Página 100% conforme con las reglas de landing-creator.md
+
+Página abierta en Safari para que veas el resultado.
 
 ¿Quieres hacer commit ahora? (s/n)
 ```
@@ -228,7 +265,11 @@ Yo: [Corrijo error 1 con Edit]
     [Valido de nuevo]
 
     ✅ Errores corregidos
-    ✅ Validación: 6/6 aprobadas
+    ✅ Validación: 7/7 aprobadas
+
+    [Abro página con: open "plomero-urgente/index.html"]
+
+    Página abierta en Safari para que veas los cambios.
 
     ¿Quieres hacer commit ahora? (s/n)
 
@@ -247,3 +288,4 @@ Yo: [git add + commit]
 - SIEMPRE doy números de línea exactos
 - NUNCA invento errores que no existen
 - SIEMPRE ofrezco corrección automática si hay errores
+- SIEMPRE abro la página en Safari después de validar (con o sin correcciones) para que el usuario vea el resultado
