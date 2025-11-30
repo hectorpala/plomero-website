@@ -1,0 +1,41 @@
+{
+  "slug": "plomero-a-domicilio",
+  "service_name": "Plomero a Domicilio",
+  "seo": {
+    "title": "Plomero a Domicilio en Culiacán | Vamos a Tu Casa",
+    "description": "🔧 Plomero a domicilio en Culiacán. Servicio profesional en tu casa sin salir. Diagnóstico gratis. Precios desde $350. ¡Llama: 667 392 2273!",
+    "keywords": "plomero a domicilio culiacan, plomero que vaya a casa culiacan, servicio plomeria domicilio, plomero visita domicilio culiacan, plomero en casa culiacan"
+  },
+  "content": {
+    "h1": "Plomero a Domicilio en Culiacán | Vamos Directo a Tu Casa",
+    "subtitle": "Servicio de plomería profesional a domicilio en Culiacán. Llevamos herramientas, refacciones y experiencia directo a tu hogar. Sin filas, sin esperas, sin salir de casa. Diagnóstico incluido en la visita.",
+    "whatsapp_text": "plomero a domicilio",
+    "breadcrumb": "Plomero a Domicilio",
+    "service_type": "Servicio de Plomería a Domicilio"
+  },
+  "schema": {
+    "description": "Servicio profesional de plomería a domicilio en Culiacán. Atención personalizada en tu hogar con todas las herramientas y refacciones necesarias. Sin costos ocultos."
+  },
+  "images": {
+    "hero_base": "plomero-a-domicilio-culiacan",
+    "og": "plomero-a-domicilio-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Servicio en la comodidad de tu hogar",
+      "description": "No tienes que salir ni cargar nada. Llegamos a tu casa con todo el equipo necesario: herramientas especializadas, refacciones comunes y materiales de primera. Tú solo nos abres la puerta."
+    },
+    {
+      "title": "Diagnóstico incluido en la visita",
+      "description": "La revisión inicial está incluida. Evaluamos el problema, te explicamos qué tiene y te damos precio antes de empezar. Sin sorpresas ni cobros por 'ver qué tiene'. Transparencia total."
+    },
+    {
+      "title": "Horarios flexibles para ti",
+      "description": "Nos adaptamos a tu agenda. Servicio disponible de lunes a domingo, incluyendo horarios nocturnos para emergencias. Tú eliges cuándo te visitamos sin afectar tus actividades."
+    },
+    {
+      "title": "Garantía en todos los trabajos",
+      "description": "Cada reparación incluye garantía por escrito. Si algo falla, regresamos sin costo adicional. Usamos materiales de calidad y técnicas profesionales para que la solución sea definitiva."
+    }
+  ]
+}
