@@ -1,0 +1,41 @@
+{
+  "slug": "plomero-de-emergencia",
+  "service_name": "Plomero de Emergencia",
+  "seo": {
+    "title": "Plomero de Emergencia en Culiacán | Llegamos en 30 Min",
+    "description": "🚨 Plomero de emergencia en Culiacán. Atendemos fugas graves, inundaciones y sin agua. Llegamos en 30 min. Servicio 24/7. ¡Llama: 667 392 2273!",
+    "keywords": "plomero emergencia culiacan, plomero urgente culiacan, emergencia plomeria culiacan, fuga de agua emergencia, inundacion plomero culiacan"
+  },
+  "content": {
+    "h1": "Plomero de Emergencia en Culiacán | Respuesta Inmediata 24/7",
+    "subtitle": "Servicio de emergencia para fugas graves, inundaciones, tuberías rotas y cortes de agua. Llegamos en 30 minutos o menos a cualquier colonia de Culiacán. Técnicos equipados para resolver la crisis hoy mismo.",
+    "whatsapp_text": "plomero de emergencia",
+    "breadcrumb": "Plomero de Emergencia",
+    "service_type": "Servicio de Plomería de Emergencia"
+  },
+  "schema": {
+    "description": "Servicio de plomería de emergencia en Culiacán disponible 24/7. Atención inmediata para fugas graves, inundaciones, tuberías rotas y cortes de agua con llegada en 30 minutos."
+  },
+  "images": {
+    "hero_base": "plomero-de-emergencia-culiacan",
+    "og": "plomero-de-emergencia-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Llegada en 30 minutos o menos",
+      "description": "En emergencias cada minuto cuenta. Nuestros técnicos están distribuidos en Culiacán para llegar rápido a Las Quintas, Tres Ríos, Centro, Chapultepec y todas las colonias. Traemos todo el equipo necesario."
+    },
+    {
+      "title": "Atención 24 horas, 7 días",
+      "description": "Las emergencias no esperan. Atendemos madrugadas, fines de semana y días festivos sin costo extra por horario. Siempre hay un plomero disponible para tu emergencia."
+    },
+    {
+      "title": "Equipo para emergencias graves",
+      "description": "Bombas de achique para inundaciones, equipo de detección de fugas, herramientas para tuberías rotas y materiales para reparación inmediata. Resolvemos la crisis en la primera visita."
+    },
+    {
+      "title": "Precio cerrado antes de empezar",
+      "description": "Aunque sea emergencia, te damos precio fijo antes de iniciar. Sin sorpresas ni aprovecharnos de tu urgencia. Precio justo y transparente incluso en madrugada."
+    }
+  ]
+}
