@@ -1,0 +1,41 @@
+{
+  "slug": "plomero-economico",
+  "service_name": "Plomero Económico",
+  "seo": {
+    "title": "Plomero Económico Culiacán | Precios Justos Sin Sorpresas",
+    "description": "💰 Plomero económico en Culiacán. Precios accesibles sin sacrificar calidad. Cotización gratis antes de empezar. Sin cobros ocultos. ¡Llama: 667 392 2273!",
+    "keywords": "plomero economico culiacan, plomero barato culiacan, plomero precio justo culiacan, plomeria economica culiacan, plomero accesible culiacan"
+  },
+  "content": {
+    "h1": "Plomero Económico en Culiacán | Calidad a Precio Justo",
+    "subtitle": "Servicio de plomería profesional a precios accesibles. No somos los más baratos, somos los más honestos. Cotización exacta antes de empezar, sin sorpresas al final. Trabajo garantizado.",
+    "whatsapp_text": "plomero económico",
+    "breadcrumb": "Plomero Económico",
+    "service_type": "Servicio de Plomería Económica"
+  },
+  "schema": {
+    "description": "Servicio de plomería económica en Culiacán con precios justos y transparentes. Cotización gratuita, sin cobros ocultos y trabajo garantizado por escrito."
+  },
+  "images": {
+    "hero_base": "plomero-economico-culiacan",
+    "og": "plomero-economico-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Cotización gratis y sin compromiso",
+      "description": "Te decimos el precio exacto antes de tocar una tuerca. Sin letra chica, sin 'extras' sorpresa. Si el precio no te convence, no hay problema - la visita de diagnóstico no te cuesta nada."
+    },
+    {
+      "title": "Precios por escrito",
+      "description": "Recibes presupuesto detallado en papel o WhatsApp. Mano de obra, materiales y tiempo estimado. El precio que acordamos es el precio que pagas. Punto."
+    },
+    {
+      "title": "Calidad sin pagar de más",
+      "description": "Económico no significa mediocre. Usamos materiales de marca, herramienta profesional y técnicas correctas. La diferencia es que no inflamos precios - cobramos lo justo por trabajo bien hecho."
+    },
+    {
+      "title": "Opciones para tu presupuesto",
+      "description": "Te damos alternativas: reparar vs reemplazar, marca económica vs premium. Tú decides según tu bolsillo. Nunca te presionamos a gastar más de lo necesario."
+    }
+  ]
+}
