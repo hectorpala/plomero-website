@@ -1,0 +1,41 @@
+{
+  "slug": "plomero-24-horas",
+  "service_name": "Plomero 24 Horas",
+  "seo": {
+    "title": "Plomero 24 Horas Culiacán | Emergencias Día y Noche",
+    "description": "🔧 Plomero 24 horas en Culiacán. Atendemos emergencias de día y noche. Llegamos en 30 min. ¡Llama: 667 392 2273!",
+    "keywords": "plomero 24 horas culiacan, plomero emergencia culiacan, plomero urgente culiacan, plomero noche culiacan, plomero madrugada culiacan, plomeria emergencia culiacan"
+  },
+  "content": {
+    "h1": "Plomero 24 Horas en Culiacán | Emergencias Día y Noche",
+    "subtitle": "Servicio de plomería disponible las 24 horas, los 7 días de la semana en Culiacán. Atendemos emergencias de madrugada, fines de semana y días festivos. Llegada en 30 minutos o menos. Sin cobros extra por horario nocturno.",
+    "whatsapp_text": "plomero 24 horas",
+    "breadcrumb": "Plomero 24 Horas",
+    "service_type": "Servicio de Plomería 24 Horas"
+  },
+  "schema": {
+    "description": "Servicio de plomería disponible las 24 horas del día, los 7 días de la semana en Culiacán. Atendemos emergencias de fugas, destapes, calentadores y más. Respuesta rápida garantizada con llegada en 30 minutos o menos."
+  },
+  "images": {
+    "hero_base": "plomero-24-horas-culiacan",
+    "og": "plomero-24-horas-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Respuesta en 30 minutos o menos",
+      "description": "Llegamos a tu domicilio en máximo 30 minutos. Tenemos plomeros distribuidos en Las Quintas, Tres Ríos, Chapultepec y Centro. Atendemos emergencias de madrugada sin demoras. Tu urgencia es nuestra prioridad."
+    },
+    {
+      "title": "Sin cobros extra por horario nocturno",
+      "description": "Mismo precio de día y de noche. No cobramos recargos por atender fines de semana, días festivos o madrugadas. Cotización transparente antes de iniciar. Sin sorpresas en la factura final."
+    },
+    {
+      "title": "Disponibles 365 días del año",
+      "description": "Operamos los 365 días incluyendo Navidad, Año Nuevo y días festivos. Línea directa siempre atendida por personal capacitado. No usamos contestadoras. Respuesta humana en cada llamada."
+    },
+    {
+      "title": "Equipo completo para emergencias",
+      "description": "Llegamos con herramienta profesional y refacciones comunes. Resolvemos la mayoría de emergencias en una sola visita: fugas, destapes, calentadores, bombas. Sin necesidad de regresar otro día."
+    }
+  ]
+}
