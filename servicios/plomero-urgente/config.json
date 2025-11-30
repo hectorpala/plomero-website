@@ -1,0 +1,41 @@
+{
+  "slug": "plomero-urgente",
+  "service_name": "Plomero Urgente",
+  "seo": {
+    "title": "Plomero Urgente Culiacán | Llegamos en 20 Min ¡Llama Ya!",
+    "description": "🚨 Plomero urgente en Culiacán. Respuesta inmediata para fugas, destapes y reparaciones urgentes. Servicio express 24/7. Sin cargos extra. ¡Llama: 667 392 2273!",
+    "keywords": "plomero urgente culiacan, plomero rapido culiacan, plomero inmediato culiacan, urgencia plomeria culiacan, plomero express culiacan"
+  },
+  "content": {
+    "h1": "Plomero Urgente en Culiacán | Respuesta Express en 20 Min",
+    "subtitle": "¿Necesitas un plomero YA? Servicio urgente con llegada en 20 minutos a cualquier colonia de Culiacán. Resolvemos fugas, destapes y averías el mismo día. Sin esperas, sin citas a futuro.",
+    "whatsapp_text": "plomero urgente",
+    "breadcrumb": "Plomero Urgente",
+    "service_type": "Servicio de Plomería Urgente"
+  },
+  "schema": {
+    "description": "Servicio de plomería urgente en Culiacán con respuesta express en 20 minutos. Atendemos fugas, destapes, reparaciones y averías de plomería con disponibilidad inmediata 24/7."
+  },
+  "images": {
+    "hero_base": "plomero-urgente-culiacan",
+    "og": "plomero-urgente-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Llegamos en 20 minutos",
+      "description": "Servicio express real. Nuestros plomeros están en ruta constantemente por Culiacán: Centro, Tres Ríos, Las Quintas, Chapultepec, Humaya. Cuando llamas, el más cercano va directo a tu domicilio."
+    },
+    {
+      "title": "Disponibilidad inmediata",
+      "description": "Nada de 'le agendamos para mañana'. Atendemos HOY, en este momento. Servicio urgente significa que salimos en cuanto cuelgas. Madrugada, domingo o día festivo - siempre hay alguien disponible."
+    },
+    {
+      "title": "Resolvemos en una visita",
+      "description": "Llegamos equipados para resolver, no para 'ver qué tiene'. Herramientas profesionales, refacciones comunes y experiencia para diagnosticar rápido y reparar de inmediato. Sin segundas visitas."
+    },
+    {
+      "title": "Mismo precio urgente o normal",
+      "description": "No cobramos extra por ser urgente. El precio es el mismo si llamas a las 3pm o a las 3am. Sin aprovecharnos de tu necesidad. Cotización clara antes de empezar cualquier trabajo."
+    }
+  ]
+}
