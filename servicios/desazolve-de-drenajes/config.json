@@ -1,0 +1,41 @@
+{
+  "slug": "desazolve-de-drenajes",
+  "service_name": "Desazolve de Drenajes",
+  "seo": {
+    "title": "Desazolve de Drenajes Culiacán | Destape Garantizado Hoy",
+    "description": "🚿 Desazolve de drenajes en Culiacán. Destapamos caños, fregaderos, WC y drenajes principales. Equipo profesional. Garantía por escrito. ¡Llama: 667 392 2273!",
+    "keywords": "desazolve drenajes culiacan, destape drenajes culiacan, desazolve caños culiacan, limpieza drenajes culiacan, drenaje tapado culiacan"
+  },
+  "content": {
+    "h1": "Desazolve de Drenajes en Culiacán | Destape Garantizado",
+    "subtitle": "¿Drenaje tapado? Lo destapamos hoy mismo con equipo profesional. Sonda eléctrica, hidrolavadora y cámara de inspección. Sin romper pisos ni paredes. Garantía de flujo libre.",
+    "whatsapp_text": "desazolve de drenajes",
+    "breadcrumb": "Desazolve de Drenajes",
+    "service_type": "Servicio de Desazolve de Drenajes"
+  },
+  "schema": {
+    "description": "Servicio profesional de desazolve de drenajes en Culiacán. Destape de caños, fregaderos, sanitarios y drenajes principales con equipo especializado y garantía por escrito."
+  },
+  "images": {
+    "hero_base": "desazolve-de-drenajes-culiacan",
+    "og": "desazolve-de-drenajes-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Equipo profesional de desazolve",
+      "description": "Sonda eléctrica para obstrucciones difíciles, hidrolavadora de alta presión para grasa acumulada, y cámara de inspección para ver exactamente dónde está el problema. No adivinamos, diagnosticamos."
+    },
+    {
+      "title": "Sin romper pisos ni paredes",
+      "description": "Nuestro equipo llega al problema sin demoler. La sonda flexible navega por las tuberías y la cámara nos muestra el camino. Solo intervenimos donde es necesario - tu casa queda intacta."
+    },
+    {
+      "title": "Destape garantizado o no pagas",
+      "description": "Si no destapamos, no cobras. Así de simple. Tenemos el equipo y la experiencia para resolver cualquier obstrucción: raíces, grasa, objetos atascados, acumulación de sarro."
+    },
+    {
+      "title": "Mantenimiento preventivo incluido",
+      "description": "Después del desazolve, te explicamos qué causó el problema y cómo evitarlo. Ofrecemos planes de mantenimiento para que tus drenajes fluyan libres todo el año."
+    }
+  ]
+}
