@@ -1,0 +1,41 @@
+{
+  "slug": "plomero-cerca-de-mi",
+  "service_name": "Plomero Cerca de Mi",
+  "seo": {
+    "title": "Plomero Cerca de Mi en Culiacán | Llegamos en 30 Min",
+    "description": "🔧 Plomero cerca de ti en Culiacán. Cobertura en Las Quintas, Tres Ríos, Centro y más. Llegamos en 30 min. ¡Llama: 667 392 2273!",
+    "keywords": "plomero cerca de mi culiacan, plomero en mi zona culiacan, plomero a domicilio culiacan, plomero las quintas, plomero tres rios, plomero centro culiacan"
+  },
+  "content": {
+    "h1": "Plomero Cerca de Mi en Culiacán | Llegamos a Tu Zona",
+    "subtitle": "Plomeros locales en todas las colonias de Culiacán. Cobertura en Las Quintas, Tres Ríos, Chapultepec, Centro, Montebello y más. Llegada garantizada en 30 minutos o menos. Conocemos tu zona.",
+    "whatsapp_text": "plomero cerca de mi",
+    "breadcrumb": "Plomero Cerca de Mi",
+    "service_type": "Servicio de Plomería Local"
+  },
+  "schema": {
+    "description": "Servicio de plomería local en Culiacán con cobertura en todas las colonias. Plomeros distribuidos en Las Quintas, Tres Ríos, Chapultepec, Centro y Montebello para atención inmediata."
+  },
+  "images": {
+    "hero_base": "plomero-cerca-de-mi-culiacan",
+    "og": "plomero-cerca-de-mi-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Plomeros en tu colonia",
+      "description": "Tenemos técnicos distribuidos en Las Quintas, Tres Ríos, Chapultepec, Centro y Montebello. Siempre hay un plomero cerca de ti listo para atenderte. Conocemos las instalaciones típicas de cada zona."
+    },
+    {
+      "title": "Llegada en 30 minutos o menos",
+      "description": "Por estar cerca de ti, llegamos más rápido. Tiempo promedio de llegada: 20-30 minutos en cualquier colonia de Culiacán. Sin costos extra por desplazamiento dentro de la ciudad."
+    },
+    {
+      "title": "Conocemos tu zona",
+      "description": "Años de experiencia en Culiacán nos permiten conocer los problemas comunes de cada colonia: presión baja en zonas altas, drenajes antiguos en el Centro, instalaciones nuevas en fraccionamientos."
+    },
+    {
+      "title": "Servicio local, precios justos",
+      "description": "Somos plomeros de Culiacán, no franquicia. Precios locales sin intermediarios. Cotización por WhatsApp antes de ir. Factura disponible para empresas y particulares."
+    }
+  ]
+}
