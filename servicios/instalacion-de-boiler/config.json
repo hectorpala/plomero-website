@@ -1,0 +1,41 @@
+{
+  "slug": "instalacion-de-boiler",
+  "service_name": "Instalación de Boiler",
+  "seo": {
+    "title": "Instalación de Boiler Culiacán | Calentador Gas y Eléctrico",
+    "description": "🔥 Instalación de boiler en Culiacán. Calentadores de gas, eléctricos y solares. Instalación segura con garantía. Precio desde $1,500. ¡Llama: 667 392 2273!",
+    "keywords": "instalacion boiler culiacan, instalacion calentador culiacan, poner boiler culiacan, instalar calentador de agua culiacan, boiler gas culiacan"
+  },
+  "content": {
+    "h1": "Instalación de Boiler en Culiacán | Gas, Eléctrico y Solar",
+    "subtitle": "Instalamos tu calentador de agua el mismo día. Boilers de paso, de depósito, eléctricos y solares. Conexión segura de gas, líneas de agua y ventilación. Garantía en instalación y funcionamiento.",
+    "whatsapp_text": "instalación de boiler",
+    "breadcrumb": "Instalación de Boiler",
+    "service_type": "Servicio de Instalación de Boiler"
+  },
+  "schema": {
+    "description": "Servicio profesional de instalación de boiler y calentadores de agua en Culiacán. Instalamos calentadores de gas, eléctricos y solares con conexiones seguras y garantía por escrito."
+  },
+  "images": {
+    "hero_base": "instalacion-de-boiler-culiacan",
+    "og": "instalacion-de-boiler-culiacan-800w.webp"
+  },
+  "benefits": [
+    {
+      "title": "Instalación el mismo día",
+      "description": "¿Compraste tu boiler y necesitas instalarlo hoy? Llegamos con todo el material: mangueras, conexiones, cinta teflón, abrazaderas. Tu calentador funcionando en 2-3 horas máximo."
+    },
+    {
+      "title": "Conexión segura de gas",
+      "description": "Lo más importante es tu seguridad. Usamos manguera certificada, verificamos que no haya fugas con detector y espuma, y ajustamos la presión correcta. Cero riesgos de fuga de gas."
+    },
+    {
+      "title": "Todos los tipos de boiler",
+      "description": "Instalamos cualquier marca y tipo: Calorex, Cinsa, Rheem, Bosch. De paso o de depósito. Gas LP, gas natural o eléctrico. También calentadores solares con respaldo."
+    },
+    {
+      "title": "Garantía en instalación",
+      "description": "Si algo falla por la instalación, regresamos sin costo. Garantía de 6 meses en mano de obra. Además te enseñamos a usar correctamente tu boiler para que dure más años."
+    }
+  ]
+}
