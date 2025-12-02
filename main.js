@@ -296,7 +296,7 @@
     var mouseY = 0;
     var timeOnPage = 0;
     var minTimeBeforePopup = 2000; // 2 seconds minimum on page (desktop)
-    var minTimeBeforePopupMobile = 10000; // 10 seconds minimum on page (mobile)
+    var minTimeBeforePopupMobile = 7000; // 7 seconds minimum on page (mobile)
 
     // Mobile detection and scroll tracking
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
