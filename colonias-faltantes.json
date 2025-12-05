@@ -1,0 +1,3185 @@
+{
+  "total": 530,
+  "colonias": [
+    {
+      "nombre": "Centro Sinaloa",
+      "slug": "centro-sinaloa",
+      "cp": "80000",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Arboledas",
+      "slug": "arboledas",
+      "cp": "80010",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Ignacio Allende",
+      "slug": "ignacio-allende",
+      "cp": "80010",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Vicente Lombardo Toledano",
+      "slug": "vicente-lombardo-toledano",
+      "cp": "80010",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Sabinos Tres Ríos",
+      "slug": "los-sabinos-tres-rios",
+      "cp": "80010",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Fresnos",
+      "slug": "fresnos",
+      "cp": "80010",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Espacios Marsella",
+      "slug": "espacios-marsella",
+      "cp": "80010",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Obrero Campesino",
+      "slug": "obrero-campesino",
+      "cp": "80013",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Agrarista Mexicana",
+      "slug": "agrarista-mexicana",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Buena Vista",
+      "slug": "buena-vista",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Rosario Uzarraga",
+      "slug": "rosario-uzarraga",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Zona Dorada II",
+      "slug": "zona-dorada-ii",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valle del Agua",
+      "slug": "valle-del-agua",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Amorada",
+      "slug": "amorada",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Sfera Residencial",
+      "slug": "sfera-residencial",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Portabelo",
+      "slug": "portabelo",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Albaterra",
+      "slug": "albaterra",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Benevento Residencial",
+      "slug": "benevento-residencial",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas Verdes",
+      "slug": "lomas-verdes",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Gran Vía",
+      "slug": "gran-via",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Vía San José",
+      "slug": "via-san-jose",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas de Tamazula",
+      "slug": "lomas-de-tamazula",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Acanto",
+      "slug": "acanto",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Ampliación los Ángeles",
+      "slug": "ampliacion-los-angeles",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Portabelo III",
+      "slug": "portabelo-iii",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Provenza",
+      "slug": "provenza",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Palmanova",
+      "slug": "palmanova",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Jardín Real",
+      "slug": "jardin-real",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Águilas",
+      "slug": "las-aguilas",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Palos Altos",
+      "slug": "palos-altos",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Nueva Galaxia",
+      "slug": "nueva-galaxia",
+      "cp": "80014",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Floresta",
+      "slug": "floresta",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Glorias",
+      "slug": "las-glorias",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Maralago",
+      "slug": "maralago",
+      "cp": "80014",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas de San Jerónimo",
+      "slug": "lomas-de-san-jeronimo",
+      "cp": "80015",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Ruben Jaramillo",
+      "slug": "ruben-jaramillo",
+      "cp": "80015",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villa Del Sol",
+      "slug": "villa-del-sol",
+      "cp": "80015",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Lomas Del Magisterio",
+      "slug": "lomas-del-magisterio",
+      "cp": "80015",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Grecia",
+      "slug": "grecia",
+      "cp": "80015",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Residencial Hacienda",
+      "slug": "residencial-hacienda",
+      "cp": "80015",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "16 de Septiembre",
+      "slug": "16-de-septiembre",
+      "cp": "80016",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Juan de Dios Bátiz",
+      "slug": "juan-de-dios-batiz",
+      "cp": "80016",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Lomas Del Pedregal",
+      "slug": "lomas-del-pedregal",
+      "cp": "80016",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas del Sol",
+      "slug": "lomas-del-sol",
+      "cp": "80016",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas del Sol Duplex",
+      "slug": "lomas-del-sol-duplex",
+      "cp": "80016",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Interlomas",
+      "slug": "interlomas",
+      "cp": "80016",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Jesús Valdez Aldana",
+      "slug": "jesus-valdez-aldana",
+      "cp": "80017",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Montesierra",
+      "slug": "montesierra",
+      "cp": "80017",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Cucas",
+      "slug": "las-cucas",
+      "cp": "80018",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Lirios del Río",
+      "slug": "lirios-del-rio",
+      "cp": "80018",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Bosques Del Álamo",
+      "slug": "bosques-del-alamo",
+      "cp": "80018",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Ciruelos",
+      "slug": "los-ciruelos",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Hacienda Alameda",
+      "slug": "hacienda-alameda",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Loma de Rodriguera",
+      "slug": "loma-de-rodriguera",
+      "cp": "80019",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Mezcales",
+      "slug": "los-mezcales",
+      "cp": "80019",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Hacienda los Huertos Sección Bosques de la Colina",
+      "slug": "hacienda-los-huertos-seccion-bosques-de-la-colina",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Cerezas",
+      "slug": "las-cerezas",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Mont Alto",
+      "slug": "mont-alto",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Bicentenario",
+      "slug": "bicentenario",
+      "cp": "80019",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Las Amapas",
+      "slug": "las-amapas",
+      "cp": "80019",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Alameda",
+      "slug": "alameda",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Mezcales Residencial",
+      "slug": "los-mezcales-residencial",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Cerezas II",
+      "slug": "las-cerezas-ii",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Huertos",
+      "slug": "los-huertos",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Cantaluna",
+      "slug": "cantaluna",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Girasoles",
+      "slug": "girasoles",
+      "cp": "80019",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Jardines de La Sierra",
+      "slug": "jardines-de-la-sierra",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Paseo Alameda",
+      "slug": "paseo-alameda",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Hacienda Arboledas",
+      "slug": "hacienda-arboledas",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rotarismo",
+      "slug": "rotarismo",
+      "cp": "80019",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "San Fermín",
+      "slug": "san-fermin",
+      "cp": "80019",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "FOVISSSTE Diamante",
+      "slug": "fovissste-diamante",
+      "cp": "80020",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "STASE",
+      "slug": "stase",
+      "cp": "80020",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "STASE III",
+      "slug": "stase-iii",
+      "cp": "80020",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privada La Rivera",
+      "slug": "privada-la-rivera",
+      "cp": "80020",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Bonanza",
+      "slug": "bonanza",
+      "cp": "80020",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Pueblo Bonito",
+      "slug": "pueblo-bonito",
+      "cp": "80020",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa del Pedregal",
+      "slug": "villa-del-pedregal",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Brisas de Humaya",
+      "slug": "brisas-de-humaya",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Olivos",
+      "slug": "los-olivos",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Nueva Vizcaya",
+      "slug": "nueva-vizcaya",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "STASE II",
+      "slug": "stase-ii",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Colinas de la Rivera Segunda Sección",
+      "slug": "colinas-de-la-rivera-segunda-seccion",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Jardines del Rey",
+      "slug": "jardines-del-rey",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Riberas del Humaya",
+      "slug": "riberas-del-humaya",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Jardines Del Pedregal",
+      "slug": "jardines-del-pedregal",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Canarias",
+      "slug": "las-canarias",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas del Humaya",
+      "slug": "villas-del-humaya",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Alegranza",
+      "slug": "alegranza",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Ribera Residencial",
+      "slug": "la-ribera-residencial",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Humaya del Super",
+      "slug": "humaya-del-super",
+      "cp": "80025",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "ISSSTESIN",
+      "slug": "issstesin",
+      "cp": "80026",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Campestre Los Laureles",
+      "slug": "campestre-los-laureles",
+      "cp": "80027",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Lago Tres Ríos",
+      "slug": "lago-tres-rios",
+      "cp": "80027",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Altamira Sección Altana",
+      "slug": "altamira-seccion-altana",
+      "cp": "80027",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Altamira Sección Barceló",
+      "slug": "altamira-seccion-barcelo",
+      "cp": "80027",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Almendros",
+      "slug": "los-almendros",
+      "cp": "80027",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Agustina Ramírez",
+      "slug": "agustina-ramirez",
+      "cp": "80028",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Sauces",
+      "slug": "los-sauces",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Elena",
+      "slug": "santa-elena",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Tulipanes",
+      "slug": "tulipanes",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa Fontana",
+      "slug": "villa-fontana",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Portafe",
+      "slug": "portafe",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Balcones Del Humaya",
+      "slug": "balcones-del-humaya",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Puerta",
+      "slug": "la-puerta",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Campestre las Fuentes",
+      "slug": "campestre-las-fuentes",
+      "cp": "80028",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Cascada",
+      "slug": "la-cascada",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas Verdes",
+      "slug": "lomas-verdes",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón Real",
+      "slug": "rincon-real",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privada La Rinconada",
+      "slug": "privada-la-rinconada",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas de Culiacán",
+      "slug": "villas-de-culiacan",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Campestre Tres Ríos",
+      "slug": "campestre-tres-rios",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Portanova",
+      "slug": "portanova",
+      "cp": "80028",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Fincas del Humaya",
+      "slug": "fincas-del-humaya",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Colinas del Humaya",
+      "slug": "colinas-del-humaya",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "10 de Abril",
+      "slug": "10-de-abril",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "FOVISSSTE Humaya",
+      "slug": "fovissste-humaya",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Pedregal del Humaya",
+      "slug": "pedregal-del-humaya",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Real de Santa Fe",
+      "slug": "real-de-santa-fe",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Cimas del Humaya",
+      "slug": "cimas-del-humaya",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Joel Ramírez",
+      "slug": "joel-ramirez",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Cibeles",
+      "slug": "cibeles",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Heraclio Bernal",
+      "slug": "heraclio-bernal",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Montserrat",
+      "slug": "montserrat",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Fincas de las Colinas",
+      "slug": "fincas-de-las-colinas",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas Del Humaya",
+      "slug": "lomas-del-humaya",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Sección Cumbres",
+      "slug": "seccion-cumbres",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Jardines de Santa Fe",
+      "slug": "jardines-de-santa-fe",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Fe Real",
+      "slug": "santa-fe-real",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Campestre San Jorge",
+      "slug": "campestre-san-jorge",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Cumbre Real",
+      "slug": "cumbre-real",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Cerritos",
+      "slug": "los-cerritos",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Santa Rosa",
+      "slug": "santa-rosa",
+      "cp": "80029",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Bosque Encinos",
+      "slug": "bosque-encinos",
+      "cp": "80029",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Vistanova",
+      "slug": "vistanova",
+      "cp": "80030",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Jolla",
+      "slug": "la-jolla",
+      "cp": "80030",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Parque Alameda",
+      "slug": "parque-alameda",
+      "cp": "80030",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Comunicadores",
+      "slug": "comunicadores",
+      "cp": "80034",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Olivos",
+      "slug": "los-olivos",
+      "cp": "80034",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Cisnes",
+      "slug": "los-cisnes",
+      "cp": "80034",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón Alameda",
+      "slug": "rincon-alameda",
+      "cp": "80034",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "FOVISSSTE Abelardo de La Torre",
+      "slug": "fovissste-abelardo-de-la-torre",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Margarita",
+      "slug": "santa-margarita",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Chapultepec Del Rio",
+      "slug": "chapultepec-del-rio",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Paseo Del Rio",
+      "slug": "paseo-del-rio",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privada Del Real",
+      "slug": "privada-del-real",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Riberas de Tamazula",
+      "slug": "riberas-de-tamazula",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Teresa",
+      "slug": "santa-teresa",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Real de Chapultepec",
+      "slug": "real-de-chapultepec",
+      "cp": "80040",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Hermanos Flores Magón",
+      "slug": "hermanos-flores-magon",
+      "cp": "80050",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Juntas de Humaya",
+      "slug": "juntas-de-humaya",
+      "cp": "80050",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villas Del Rio",
+      "slug": "villas-del-rio",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Rioja",
+      "slug": "la-rioja",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Culiacán Tres Ríos",
+      "slug": "culiacan-tres-rios",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas de Bacurimí Sección Acacia",
+      "slug": "villas-de-bacurimi-seccion-acacia",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas de Bacurimí Sección Britania",
+      "slug": "villas-de-bacurimi-seccion-britania",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Country del Río",
+      "slug": "country-del-rio",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Bosques del Río",
+      "slug": "bosques-del-rio",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valle Del Rio",
+      "slug": "valle-del-rio",
+      "cp": "80050",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villas Del Rio Elite",
+      "slug": "villas-del-rio-elite",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Enrique Félix Castro",
+      "slug": "enrique-felix-castro",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Avellaneda",
+      "slug": "avellaneda",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Prados de Occidente",
+      "slug": "prados-de-occidente",
+      "cp": "80050",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "4 de Marzo",
+      "slug": "4-de-marzo",
+      "cp": "80054",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Horizontes",
+      "slug": "horizontes",
+      "cp": "80054",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Montecarlo Residencial",
+      "slug": "montecarlo-residencial",
+      "cp": "80054",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Misiones",
+      "slug": "misiones",
+      "cp": "80054",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Del Humaya",
+      "slug": "del-humaya",
+      "cp": "80054",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Universidad 94 II",
+      "slug": "universidad-94-ii",
+      "cp": "80055",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Pradera Dorada",
+      "slug": "pradera-dorada",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón Del Humaya",
+      "slug": "rincon-del-humaya",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "INFONAVIT Solidaridad",
+      "slug": "infonavit-solidaridad",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Universidad 94",
+      "slug": "universidad-94",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Stanza Castilla",
+      "slug": "stanza-castilla",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Conquista del Rey",
+      "slug": "conquista-del-rey",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Granada",
+      "slug": "granada",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Bosques del Rey",
+      "slug": "bosques-del-rey",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Montereal",
+      "slug": "montereal",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Florencio",
+      "slug": "san-florencio",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa del Prado",
+      "slug": "villa-del-prado",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Arcadia Residencial",
+      "slug": "arcadia-residencial",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas Santa Anita",
+      "slug": "villas-santa-anita",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas San Antonio",
+      "slug": "villas-san-antonio",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas Victoria",
+      "slug": "villas-victoria",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "INFONAVIT FTS",
+      "slug": "infonavit-fts",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Praderas Del Rey",
+      "slug": "praderas-del-rey",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rancho Contento",
+      "slug": "rancho-contento",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Aynes",
+      "slug": "santa-aynes",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valle Dorado",
+      "slug": "valle-dorado",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Acueducto",
+      "slug": "acueducto",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Pedregal de San Ángel",
+      "slug": "pedregal-de-san-angel",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Azaleas Residencial",
+      "slug": "azaleas-residencial",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón Colonial",
+      "slug": "rincon-colonial",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Prados de La Conquista",
+      "slug": "prados-de-la-conquista",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valencia",
+      "slug": "valencia",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Diamante",
+      "slug": "diamante",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Pradera Dorada II",
+      "slug": "pradera-dorada-ii",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "9 de Marzo",
+      "slug": "9-de-marzo",
+      "cp": "80058",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Altos Bacurimi",
+      "slug": "altos-bacurimi",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa del Cedro",
+      "slug": "villa-del-cedro",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Bonaterra",
+      "slug": "bonaterra",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Portalegre",
+      "slug": "portalegre",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Urbivilla del Prado",
+      "slug": "urbivilla-del-prado",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Acueducto III",
+      "slug": "acueducto-iii",
+      "cp": "80058",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "CANACO",
+      "slug": "canaco",
+      "cp": "80059",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barcelona Sección Villa Barcelona",
+      "slug": "barcelona-seccion-villa-barcelona",
+      "cp": "80059",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barcelona Sección Villa Barcelona Etapa II",
+      "slug": "barcelona-seccion-villa-barcelona-etapa-ii",
+      "cp": "80059",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barcelona Sección Villa Barcelona Etapa III",
+      "slug": "barcelona-seccion-villa-barcelona-etapa-iii",
+      "cp": "80059",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Alcalá del Rey",
+      "slug": "alcala-del-rey",
+      "cp": "80059",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Espacios Barcelona",
+      "slug": "espacios-barcelona",
+      "cp": "80059",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Praderas del Humaya",
+      "slug": "praderas-del-humaya",
+      "cp": "80059",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Aurora",
+      "slug": "aurora",
+      "cp": "80060",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Periodista",
+      "slug": "periodista",
+      "cp": "80060",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Sabinos",
+      "slug": "los-sabinos",
+      "cp": "80063",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Viñedos",
+      "slug": "vinedos",
+      "cp": "80063",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Amapas",
+      "slug": "amapas",
+      "cp": "80063",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Quinta Americana",
+      "slug": "quinta-americana",
+      "cp": "80063",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Limita de Itaje",
+      "slug": "la-limita-de-itaje",
+      "cp": "80064",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Massara",
+      "slug": "massara",
+      "cp": "80064",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Mónaco",
+      "slug": "monaco",
+      "cp": "80064",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Colinas de la Campiña",
+      "slug": "colinas-de-la-campina",
+      "cp": "80064",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Colinas del Tamazula",
+      "slug": "colinas-del-tamazula",
+      "cp": "80064",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Haciendas del Río",
+      "slug": "haciendas-del-rio",
+      "cp": "80064",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Verona",
+      "slug": "verona",
+      "cp": "80064",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Pontevedra",
+      "slug": "pontevedra",
+      "cp": "80065",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Banús 360 Tenerife",
+      "slug": "banus-360-tenerife",
+      "cp": "80065",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Músala Isla Bonita",
+      "slug": "musala-isla-bonita",
+      "cp": "80065",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Banús 360 Salduero",
+      "slug": "banus-360-salduero",
+      "cp": "80065",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Banús 360 Coruña",
+      "slug": "banus-360-coruna",
+      "cp": "80065",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "INFONAVIT El Barrio",
+      "slug": "infonavit-el-barrio",
+      "cp": "80080",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Genaro Estrada",
+      "slug": "genaro-estrada",
+      "cp": "80080",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Punto Oriente",
+      "slug": "punto-oriente",
+      "cp": "80080",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Vegas",
+      "slug": "las-vegas",
+      "cp": "80090",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Álamos",
+      "slug": "los-alamos",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Portales Del Country",
+      "slug": "portales-del-country",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Jardines Tres Ríos",
+      "slug": "jardines-tres-rios",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privanzas Natura",
+      "slug": "privanzas-natura",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Country Álamos",
+      "slug": "country-alamos",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Ángel",
+      "slug": "san-angel",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Puerta de Hierro",
+      "slug": "puerta-de-hierro",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Patios 1",
+      "slug": "los-patios-1",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Moras",
+      "slug": "las-moras",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Dunas",
+      "slug": "las-dunas",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Condesa",
+      "slug": "condesa",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Real del Álamo",
+      "slug": "real-del-alamo",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Residencial San José",
+      "slug": "residencial-san-jose",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Misión del Álamo",
+      "slug": "mision-del-alamo",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privanzas",
+      "slug": "privanzas",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Paloma",
+      "slug": "la-paloma",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Magnolias Residencial",
+      "slug": "magnolias-residencial",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Inés",
+      "slug": "santa-ines",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Patios 2",
+      "slug": "los-patios-2",
+      "cp": "80100",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Real Del Country",
+      "slug": "real-del-country",
+      "cp": "80104",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Floresta Tres Ríos",
+      "slug": "floresta-tres-rios",
+      "cp": "80104",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Tabachines",
+      "slug": "tabachines",
+      "cp": "80104",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Palermo",
+      "slug": "palermo",
+      "cp": "80104",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Vallado Viejo",
+      "slug": "vallado-viejo",
+      "cp": "80105",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Bloom",
+      "slug": "bloom",
+      "cp": "80106",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Cantera",
+      "slug": "la-cantera",
+      "cp": "80106",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Country Courts",
+      "slug": "country-courts",
+      "cp": "80107",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Aeropuerto",
+      "slug": "aeropuerto",
+      "cp": "80130",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Altos de Bachigualato",
+      "slug": "altos-de-bachigualato",
+      "cp": "80130",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Helechos",
+      "slug": "los-helechos",
+      "cp": "80130",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa Andalucía",
+      "slug": "villa-andalucia",
+      "cp": "80130",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Nuevo Bachigualato",
+      "slug": "nuevo-bachigualato",
+      "cp": "80135",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "San Javier",
+      "slug": "san-javier",
+      "cp": "80135",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Santa Rocio",
+      "slug": "santa-rocio",
+      "cp": "80135",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Joyas del Valle",
+      "slug": "joyas-del-valle",
+      "cp": "80135",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Campo Bello",
+      "slug": "campo-bello",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas de Cortés",
+      "slug": "villas-de-cortes",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Paraíso",
+      "slug": "paraiso",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Diego",
+      "slug": "san-diego",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Mañanitas",
+      "slug": "las-mananitas",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Luis Residencial",
+      "slug": "san-luis-residencial",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villas Del Manantial",
+      "slug": "villas-del-manantial",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Danubio",
+      "slug": "danubio",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Terrazas",
+      "slug": "las-terrazas",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valle Bonito",
+      "slug": "valle-bonito",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Alondras",
+      "slug": "las-alondras",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Paseos del Valle",
+      "slug": "paseos-del-valle",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Luis Residencial II",
+      "slug": "san-luis-residencial-ii",
+      "cp": "80140",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Quinta Real",
+      "slug": "quinta-real",
+      "cp": "80143",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privadas la Estancia",
+      "slug": "privadas-la-estancia",
+      "cp": "80143",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Bárbara",
+      "slug": "santa-barbara",
+      "cp": "80143",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valles Del Sol",
+      "slug": "valles-del-sol",
+      "cp": "80143",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Real San Sebastián",
+      "slug": "real-san-sebastian",
+      "cp": "80143",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Torres Aeropuerto",
+      "slug": "torres-aeropuerto",
+      "cp": "80144",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Stanza Solare",
+      "slug": "stanza-solare",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Roma Residencial",
+      "slug": "roma-residencial",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Hacienda de La Mora",
+      "slug": "hacienda-de-la-mora",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privada Real del Valle",
+      "slug": "privada-real-del-valle",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Versalles",
+      "slug": "versalles",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valles Españoles",
+      "slug": "valles-espanoles",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Torre Dorada",
+      "slug": "torre-dorada",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Residencial Santa Sofía",
+      "slug": "residencial-santa-sofia",
+      "cp": "80145",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Palmillas Residencial",
+      "slug": "palmillas-residencial",
+      "cp": "80150",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón Las Palmas",
+      "slug": "rincon-las-palmas",
+      "cp": "80150",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Palma Dorada",
+      "slug": "palma-dorada",
+      "cp": "80150",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón San Rafael",
+      "slug": "rincon-san-rafael",
+      "cp": "80150",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón del Valle",
+      "slug": "rincon-del-valle",
+      "cp": "80155",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Fuentes Del Valle",
+      "slug": "fuentes-del-valle",
+      "cp": "80155",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Hacienda Molino de Flores",
+      "slug": "hacienda-molino-de-flores",
+      "cp": "80155",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa Contenta",
+      "slug": "villa-contenta",
+      "cp": "80159",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa Serena",
+      "slug": "villa-serena",
+      "cp": "80159",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Industrial El Palmito",
+      "slug": "industrial-el-palmito",
+      "cp": "80160",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Salvador Alvarado",
+      "slug": "salvador-alvarado",
+      "cp": "80160",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Virreyes SC",
+      "slug": "virreyes-sc",
+      "cp": "80170",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "ISSSTE Insurgentes",
+      "slug": "issste-insurgentes",
+      "cp": "80170",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Balcones de San Miguel",
+      "slug": "balcones-de-san-miguel",
+      "cp": "80176",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Colinas Del Parque",
+      "slug": "colinas-del-parque",
+      "cp": "80176",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Colina del Rey",
+      "slug": "colina-del-rey",
+      "cp": "80177",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Privada Del Rey",
+      "slug": "privada-del-rey",
+      "cp": "80177",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Misión San Fernando",
+      "slug": "mision-san-fernando",
+      "cp": "80177",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Cúspide",
+      "slug": "la-cuspide",
+      "cp": "80177",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Altezza",
+      "slug": "altezza",
+      "cp": "80177",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Cañadas",
+      "slug": "canadas",
+      "cp": "80178",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Palomas",
+      "slug": "las-palomas",
+      "cp": "80178",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Carlos",
+      "slug": "san-carlos",
+      "cp": "80178",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Victoria",
+      "slug": "victoria",
+      "cp": "80178",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "INFONAVIT Cañadas",
+      "slug": "infonavit-canadas",
+      "cp": "80179",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas del Bosque",
+      "slug": "lomas-del-bosque",
+      "cp": "80179",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Ventana",
+      "slug": "la-ventana",
+      "cp": "80179",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Gustavo Díaz Ordaz",
+      "slug": "gustavo-diaz-ordaz",
+      "cp": "80180",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Loma Bonita",
+      "slug": "loma-bonita",
+      "cp": "80180",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Paseo de los Arcos",
+      "slug": "paseo-de-los-arcos",
+      "cp": "80180",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "PEMEX",
+      "slug": "pemex",
+      "cp": "80180",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Paseos del Rey",
+      "slug": "paseos-del-rey",
+      "cp": "80180",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Girasoles",
+      "slug": "los-girasoles",
+      "cp": "80180",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Portales",
+      "slug": "los-portales",
+      "cp": "80180",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Clara",
+      "slug": "santa-clara",
+      "cp": "80180",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Parque Industrial Nueva Estación",
+      "slug": "parque-industrial-nueva-estacion",
+      "cp": "80180",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Balcones Del Valle",
+      "slug": "balcones-del-valle",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "INFONAVIT Barrancos II",
+      "slug": "infonavit-barrancos-ii",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "INFONAVIT Barrancos III",
+      "slug": "infonavit-barrancos-iii",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "INFONAVIT Barrancos IV",
+      "slug": "infonavit-barrancos-iv",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Casas Lindas",
+      "slug": "casas-lindas",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Agustin",
+      "slug": "san-agustin",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Vinoramas",
+      "slug": "vinoramas",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Mont Blanc",
+      "slug": "mont-blanc",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Dos Puntas",
+      "slug": "dos-puntas",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Belcantto",
+      "slug": "belcantto",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Centenario",
+      "slug": "centenario",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Del Camino",
+      "slug": "del-camino",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Cipriano",
+      "slug": "san-cipriano",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Sebastián",
+      "slug": "san-sebastian",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Santa Susana",
+      "slug": "santa-susana",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa Dorada",
+      "slug": "villa-dorada",
+      "cp": "80184",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Rincón Santa Rosa",
+      "slug": "rincon-santa-rosa",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Casa Blanca",
+      "slug": "casa-blanca",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa del Roble",
+      "slug": "villa-del-roble",
+      "cp": "80184",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Miravalle",
+      "slug": "miravalle",
+      "cp": "80189",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa Colonial",
+      "slug": "villa-colonial",
+      "cp": "80189",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "El Olivar",
+      "slug": "el-olivar",
+      "cp": "80189",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Azucena",
+      "slug": "azucena",
+      "cp": "80189",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Josefa Ortiz de Domínguez",
+      "slug": "josefa-ortiz-de-dominguez",
+      "cp": "80190",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Adolfo Ruiz Cortinez",
+      "slug": "adolfo-ruiz-cortinez",
+      "cp": "80190",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Domingo Rubí",
+      "slug": "domingo-rubi",
+      "cp": "80194",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Ferrocarrilera",
+      "slug": "ferrocarrilera",
+      "cp": "80194",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Antonio Nakayama",
+      "slug": "antonio-nakayama",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Plutarco Elias Calles",
+      "slug": "plutarco-elias-calles",
+      "cp": "80194",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Finisterra",
+      "slug": "finisterra",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Real Del Parque",
+      "slug": "real-del-parque",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Urbi Villa del Sol",
+      "slug": "urbi-villa-del-sol",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Capistrano Residencial",
+      "slug": "capistrano-residencial",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas Paraíso",
+      "slug": "lomas-paraiso",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Prados Residencial",
+      "slug": "prados-residencial",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Valle de Amapa",
+      "slug": "valle-de-amapa",
+      "cp": "80194",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Esthela Ortiz de Toledo",
+      "slug": "esthela-ortiz-de-toledo",
+      "cp": "80197",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Felipe Ángeles",
+      "slug": "felipe-angeles",
+      "cp": "80197",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Valle de Encino",
+      "slug": "valle-de-encino",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Parque Andares",
+      "slug": "parque-andares",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Perisur II",
+      "slug": "perisur-ii",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Prados Del Sol",
+      "slug": "prados-del-sol",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón Del Parque",
+      "slug": "rincon-del-parque",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Progreso",
+      "slug": "progreso",
+      "cp": "80197",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Valle Real",
+      "slug": "valle-real",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas de San Isidro Sección Paseo Azteca",
+      "slug": "lomas-de-san-isidro-seccion-paseo-azteca",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Esmeralda Life",
+      "slug": "esmeralda-life",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Colinas del Bosque",
+      "slug": "colinas-del-bosque",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Ibérica",
+      "slug": "iberica",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Perisur",
+      "slug": "perisur",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Lomas de San Isidro Sección Cumbres del Sur",
+      "slug": "lomas-de-san-isidro-seccion-cumbres-del-sur",
+      "cp": "80197",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Amado Nervo",
+      "slug": "amado-nervo",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Buenos Aires",
+      "slug": "buenos-aires",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Francisco I. Madero",
+      "slug": "francisco-i-madero",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Francisco Labastida Ochoa",
+      "slug": "francisco-labastida-ochoa",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "22 de Diciembre",
+      "slug": "22-de-diciembre",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Barrio San José",
+      "slug": "barrio-san-jose",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio San Francisco",
+      "slug": "barrio-san-francisco",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Primavera Sección Parque Industrial",
+      "slug": "la-primavera-seccion-parque-industrial",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio San Pablo",
+      "slug": "barrio-san-pablo",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio San Juan",
+      "slug": "barrio-san-juan",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio San Eugenio",
+      "slug": "barrio-san-eugenio",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio San Miguel",
+      "slug": "barrio-san-miguel",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Diana Laura Riojas de Colosio",
+      "slug": "diana-laura-riojas-de-colosio",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Francisco Alarcon Fregoso",
+      "slug": "francisco-alarcon-fregoso",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Renato Vega Alvarado",
+      "slug": "renato-vega-alvarado",
+      "cp": "80199",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Primavera",
+      "slug": "la-primavera",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio San Agustín",
+      "slug": "barrio-san-agustin",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Nativa",
+      "slug": "nativa",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio de San Luis",
+      "slug": "barrio-de-san-luis",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Barrio de San Anselmo",
+      "slug": "barrio-de-san-anselmo",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Real de Minas",
+      "slug": "real-de-minas",
+      "cp": "80199",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Jorge Almada",
+      "slug": "jorge-almada",
+      "cp": "80200",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Montebello Sección Dalí",
+      "slug": "montebello-seccion-dali",
+      "cp": "80227",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Antonio Rosales",
+      "slug": "antonio-rosales",
+      "cp": "80230",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "5 de Mayo",
+      "slug": "5-de-mayo",
+      "cp": "80230",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Melchor Ocampo",
+      "slug": "melchor-ocampo",
+      "cp": "80230",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Guadalupe Victoria",
+      "slug": "guadalupe-victoria",
+      "cp": "80240",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "San Juan",
+      "slug": "san-juan",
+      "cp": "80240",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Banjercito",
+      "slug": "banjercito",
+      "cp": "80246",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Florida",
+      "slug": "florida",
+      "cp": "80246",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Laureles Pinos",
+      "slug": "laureles-pinos",
+      "cp": "80246",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Laureles",
+      "slug": "laureles",
+      "cp": "80246",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Coloradas",
+      "slug": "las-coloradas",
+      "cp": "80246",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "7 Gotas",
+      "slug": "7-gotas",
+      "cp": "80247",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Portareal",
+      "slug": "portareal",
+      "cp": "80247",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Torralba",
+      "slug": "torralba",
+      "cp": "80247",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Villa Del Real",
+      "slug": "villa-del-real",
+      "cp": "80247",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "San Valentino",
+      "slug": "san-valentino",
+      "cp": "80247",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Camino Real",
+      "slug": "camino-real",
+      "cp": "80247",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Florenza",
+      "slug": "florenza",
+      "cp": "80247",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Rincón Feliz",
+      "slug": "rincon-feliz",
+      "cp": "80248",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Servidor Publico Municipal",
+      "slug": "servidor-publico-municipal",
+      "cp": "80248",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Campesina El Barrio",
+      "slug": "campesina-el-barrio",
+      "cp": "80249",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Constitución CROC",
+      "slug": "constitucion-croc",
+      "cp": "80249",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "El Pipila",
+      "slug": "el-pipila",
+      "cp": "80249",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Amistad",
+      "slug": "la-amistad",
+      "cp": "80249",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Arroyo del Toro",
+      "slug": "arroyo-del-toro",
+      "cp": "80249",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Ampliación El Barrio",
+      "slug": "ampliacion-el-barrio",
+      "cp": "80249",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Lomas de Guadalupe",
+      "slug": "lomas-de-guadalupe",
+      "cp": "80250",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Sinaloa",
+      "slug": "sinaloa",
+      "cp": "80260",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "10 de Mayo",
+      "slug": "10-de-mayo",
+      "cp": "80270",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Margarita",
+      "slug": "margarita",
+      "cp": "80270",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "República Mexicana",
+      "slug": "republica-mexicana",
+      "cp": "80279",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Mezquitillo",
+      "slug": "mezquitillo",
+      "cp": "80280",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Renato Vega Amador",
+      "slug": "renato-vega-amador",
+      "cp": "80280",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Estrella Nueva Galicia",
+      "slug": "estrella-nueva-galicia",
+      "cp": "80280",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "La Cascada",
+      "slug": "la-cascada",
+      "cp": "80280",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Simón Bolívar",
+      "slug": "simon-bolivar",
+      "cp": "80290",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Providencia",
+      "slug": "providencia",
+      "cp": "80290",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Unión Antorchista",
+      "slug": "union-antorchista",
+      "cp": "80294",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Córcega",
+      "slug": "corcega",
+      "cp": "80294",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Vistas del Lago",
+      "slug": "vistas-del-lago",
+      "cp": "80294",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Vistas del Lago la Primavera",
+      "slug": "vistas-del-lago-la-primavera",
+      "cp": "80294",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Mi Ranchito",
+      "slug": "mi-ranchito",
+      "cp": "80294",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Barrio San Alberto",
+      "slug": "barrio-san-alberto",
+      "cp": "80294",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Córcega Elite",
+      "slug": "corcega-elite",
+      "cp": "80294",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Latitud Sur",
+      "slug": "latitud-sur",
+      "cp": "80294",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "El Ranchito",
+      "slug": "el-ranchito",
+      "cp": "80294",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Jesús Manuel Camez Valdez",
+      "slug": "jesus-manuel-camez-valdez",
+      "cp": "80294",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Costa del Sol",
+      "slug": "costa-del-sol",
+      "cp": "80294",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Las Ilusiones",
+      "slug": "las-ilusiones",
+      "cp": "80295",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Miguel de La Madrid",
+      "slug": "miguel-de-la-madrid",
+      "cp": "80295",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Nueva Galicia",
+      "slug": "nueva-galicia",
+      "cp": "80295",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Senderos",
+      "slug": "senderos",
+      "cp": "80295",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Umbrales",
+      "slug": "umbrales",
+      "cp": "80295",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Altaria",
+      "slug": "altaria",
+      "cp": "80295",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "12 de Diciembre",
+      "slug": "12-de-diciembre",
+      "cp": "80296",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Costera",
+      "slug": "la-costera",
+      "cp": "80296",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "8 de Febrero",
+      "slug": "8-de-febrero",
+      "cp": "80296",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Gran Sur",
+      "slug": "gran-sur",
+      "cp": "80296",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Prados Del Sur",
+      "slug": "prados-del-sur",
+      "cp": "80296",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Nuevo México",
+      "slug": "nuevo-mexico",
+      "cp": "80297",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Huizaches",
+      "slug": "huizaches",
+      "cp": "80298",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Cantabria",
+      "slug": "cantabria",
+      "cp": "80301",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Hacienda Santa Clara",
+      "slug": "hacienda-santa-clara",
+      "cp": "80301",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Latitud Norte",
+      "slug": "latitud-norte",
+      "cp": "80301",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "El Álamo Campestre",
+      "slug": "el-alamo-campestre",
+      "cp": "80301",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Huertos del Pedregal",
+      "slug": "huertos-del-pedregal",
+      "cp": "80301",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Aguaruto Centro",
+      "slug": "aguaruto-centro",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Álamos",
+      "slug": "los-alamos",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villarreal (Las Coloradas)",
+      "slug": "villarreal-las-coloradas",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Alto de la Victoria",
+      "slug": "alto-de-la-victoria",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Demetrio Vallejo",
+      "slug": "demetrio-vallejo",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Agustina Ramírez",
+      "slug": "agustina-ramirez",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villegas",
+      "slug": "villegas",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Jardines de San Bartolome",
+      "slug": "jardines-de-san-bartolome",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Nueva",
+      "slug": "nueva",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Compuerta",
+      "slug": "la-compuerta",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Rosita",
+      "slug": "rosita",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Aguaruto Viejo",
+      "slug": "aguaruto-viejo",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Ceiba",
+      "slug": "la-ceiba",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Presidentes de México",
+      "slug": "presidentes-de-mexico",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Campo Batán",
+      "slug": "campo-batan",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Las Amapas",
+      "slug": "las-amapas",
+      "cp": "80308",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Colinas de San Antonio",
+      "slug": "colinas-de-san-antonio",
+      "cp": "80309",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Los Agaves",
+      "slug": "los-agaves",
+      "cp": "80384",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Carlos Solidario",
+      "slug": "carlos-solidario",
+      "cp": "80393",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Piggy Back",
+      "slug": "piggy-back",
+      "cp": "80393",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Ampliación Unión (Nueva)",
+      "slug": "ampliacion-union-nueva",
+      "cp": "80400",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Quilá Centro",
+      "slug": "quila-centro",
+      "cp": "80400",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Santa María",
+      "slug": "santa-maria",
+      "cp": "80402",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Alto de Quilá (San Francisco)",
+      "slug": "alto-de-quila-san-francisco",
+      "cp": "80402",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Unión",
+      "slug": "union",
+      "cp": "80403",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Ejidal",
+      "slug": "ejidal",
+      "cp": "80405",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Cedros",
+      "slug": "cedros",
+      "cp": "80408",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Bellavista",
+      "slug": "bellavista",
+      "cp": "80408",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "La Candelaria",
+      "slug": "la-candelaria",
+      "cp": "80408",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Aviación",
+      "slug": "aviacion",
+      "cp": "80409",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "San Marcos",
+      "slug": "san-marcos",
+      "cp": "80430",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Benito Juárez Norte",
+      "slug": "benito-juarez-norte",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Benito Juárez Sur",
+      "slug": "benito-juarez-sur",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "18 de Marzo",
+      "slug": "18-de-marzo",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Cañitas",
+      "slug": "canitas",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Nuevas Cañitas",
+      "slug": "nuevas-canitas",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Constituyentes",
+      "slug": "constituyentes",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Juan de Dios Bátiz",
+      "slug": "juan-de-dios-batiz",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Las Carpas",
+      "slug": "las-carpas",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villa Rica",
+      "slug": "villa-rica",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "San Ángel",
+      "slug": "san-angel",
+      "cp": "80430",
+      "tipo": "Fraccionamiento"
+    },
+    {
+      "nombre": "Sinaloa",
+      "slug": "sinaloa",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Las Piedritas",
+      "slug": "las-piedritas",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "INFONAVIT Alondras",
+      "slug": "infonavit-alondras",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Solidaridad Campesina",
+      "slug": "solidaridad-campesina",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "INFONAVIT Prados del Sol",
+      "slug": "infonavit-prados-del-sol",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "El Real",
+      "slug": "el-real",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Magisterial",
+      "slug": "magisterial",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "INFONAVIT 88",
+      "slug": "infonavit-88",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "General Zapata",
+      "slug": "general-zapata",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "S.T.A.S.A.C.",
+      "slug": "stasac",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Ignacio Zaragoza",
+      "slug": "ignacio-zaragoza",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Veracruz",
+      "slug": "veracruz",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Ingenio",
+      "slug": "ingenio",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Barrio Estación",
+      "slug": "barrio-estacion",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Los Chinitos",
+      "slug": "los-chinitos",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Renato Vega Amador",
+      "slug": "renato-vega-amador",
+      "cp": "80430",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Villa Arredondo",
+      "slug": "villa-arredondo",
+      "cp": "80437",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Estación Obispo",
+      "slug": "estacion-obispo",
+      "cp": "80485",
+      "tipo": "Colonia"
+    },
+    {
+      "nombre": "Emancipación",
+      "slug": "emancipacion",
+      "cp": "80490",
+      "tipo": "Colonia"
+    }
+  ]
+}
