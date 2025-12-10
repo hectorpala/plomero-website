@@ -6,6 +6,8 @@
 (function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('.nav-menu');
+    if (!mobileMenuBtn || !navMenu) return;
+
     let scrollY = 0;
 
     function openMenu() {
@@ -17,11 +19,12 @@
     }
 
     function closeMenu() {
+        const savedScrollY = scrollY;
         document.body.classList.remove('menu-open');
         document.body.style.top = '';
-        window.scrollTo(0, scrollY);
         navMenu.classList.remove('active');
         mobileMenuBtn.classList.remove('active');
+        window.scrollTo(0, savedScrollY);
     }
 
     mobileMenuBtn.addEventListener('click', () => {
@@ -403,9 +406,23 @@
         });
     }
 
+    // Elements to make inert when popup is open (accessibility)
+    var mainContent = document.querySelector('main');
+    var footer = document.querySelector('footer');
+    var floatingBtns = document.querySelectorAll('.floating-btn');
+
+    function setBackgroundInert(inert) {
+        if (mainContent) mainContent.inert = inert;
+        if (footer) footer.inert = inert;
+        floatingBtns.forEach(function(btn) { btn.inert = inert; });
+    }
+
     function showPopup() {
         // Save current focus to restore later
         previousActiveElement = document.activeElement;
+
+        // Block background content for screen readers
+        setBackgroundInert(true);
 
         popup.style.display = 'flex';
         localStorage.setItem('exitPopupShown', 'true');
@@ -428,6 +445,9 @@
 
     function hidePopup() {
         popup.style.display = 'none';
+
+        // Restore background content accessibility
+        setBackgroundInert(false);
 
         // Restore focus to previously focused element
         if (previousActiveElement && previousActiveElement.focus) {
