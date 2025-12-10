@@ -306,6 +306,14 @@
     var whatsappBtn = document.getElementById('exit-popup-whatsapp');
     var phoneBtn = document.getElementById('exit-popup-phone');
     var hasShown = localStorage.getItem('exitPopupShown');
+    var previousActiveElement = null; // For restoring focus on close
+
+    // Get all focusable elements in popup for focus trap
+    var focusableElements = popup.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    var firstFocusable = focusableElements[0];
+    var lastFocusable = focusableElements[focusableElements.length - 1];
     var isExiting = false;
     var mouseY = 0;
     var timeOnPage = 0;
@@ -396,8 +404,16 @@
     }
 
     function showPopup() {
+        // Save current focus to restore later
+        previousActiveElement = document.activeElement;
+
         popup.style.display = 'flex';
         localStorage.setItem('exitPopupShown', 'true');
+
+        // Move focus to first focusable element (close button)
+        if (firstFocusable) {
+            firstFocusable.focus();
+        }
 
         // Track popup shown event
         try {
@@ -412,6 +428,11 @@
 
     function hidePopup() {
         popup.style.display = 'none';
+
+        // Restore focus to previously focused element
+        if (previousActiveElement && previousActiveElement.focus) {
+            previousActiveElement.focus();
+        }
 
         // Track popup close event
         try {
@@ -438,10 +459,31 @@
         }
     });
 
-    // Close popup on ESC key
+    // Close popup on ESC key + Focus trap on Tab
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && popup.style.display === 'flex') {
+        if (popup.style.display !== 'flex') return;
+
+        // ESC to close
+        if (e.key === 'Escape') {
             hidePopup();
+            return;
+        }
+
+        // Focus trap: Tab key cycles within popup
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                // Shift+Tab: if on first element, go to last
+                if (document.activeElement === firstFocusable) {
+                    e.preventDefault();
+                    lastFocusable.focus();
+                }
+            } else {
+                // Tab: if on last element, go to first
+                if (document.activeElement === lastFocusable) {
+                    e.preventDefault();
+                    firstFocusable.focus();
+                }
+            }
         }
     });
 
