@@ -16,6 +16,8 @@
         document.body.classList.add('menu-open');
         navMenu.classList.add('active');
         mobileMenuBtn.classList.add('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileMenuBtn.setAttribute('aria-label', 'Cerrar menú de navegación');
     }
 
     function closeMenu() {
@@ -24,6 +26,8 @@
         document.body.style.top = '';
         navMenu.classList.remove('active');
         mobileMenuBtn.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
         window.scrollTo(0, savedScrollY);
     }
 

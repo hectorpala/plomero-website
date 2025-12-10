@@ -17,12 +17,12 @@
         .container{max-width:var(--container-max-width);margin:0 auto;padding:0 var(--container-gutter)}
         h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
         h1{font-size:clamp(2.5rem,5vw,4rem);margin-bottom:1.5rem}
-        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:22px 0}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:none;padding:16px 0}
         .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
         .logo{display:block;text-decoration:none;transition:opacity .2s ease;contain:layout}
-        .logo img{height:140px;width:auto;display:block;max-height:160px;mix-blend-mode:multiply;aspect-ratio:512/195}
+        .logo img{height:86px;width:auto;display:block;max-height:100px;mix-blend-mode:multiply}
         .logo:hover{opacity:0.9}
-        @media (max-width:768px){.logo img{height:90px;max-height:100px}}
+        @media (max-width:768px){.logo img{height:62px;max-height:72px}}
         .nav-menu{display:flex;list-style:none;gap:2rem}
         .nav-link{color:#f97316;font-weight:500;text-decoration:none;transition:color .2s ease;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
         .nav-link:hover{color:#ea580c;text-shadow:0 2px 6px rgba(0,0,0,0.4)}
@@ -1217,17 +1217,15 @@ window.dataLayer = window.dataLayer || [];
     window.addEventListener(e, onInteraction, {passive: true, capture: true});
   });
 
-  // Fallback: cargar GTM 2s después de load si no hay interacción
-  window.addEventListener('load', function() {
-    setTimeout(loadGTM, 2000);
-  });
+  // Fallback: cargar GTM inmediatamente en load si no hubo interacción
+  window.addEventListener('load', loadGTM);
 })();
 </script><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W75CRTX5"
      height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript><nav class="nav"><div class="container"><div class="nav-wrapper"><a href="#inicio" class="logo"><img src="/assets/images/logo-512.webp"
             alt="Plomero Culiacán Pro - Logo"
             width="512"
-            height="195"></a><button class="mobile-menu-btn" aria-label="Menu"><span></span><span></span><span></span></button><ul class="nav-menu"><li><a href="#inicio" class="nav-link">Inicio</a></li><li><a href="#servicios" class="nav-link">Servicios</a></li><li><a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li><li><a href="/blog/" class="nav-link">Blog</a></li><li><a href="#contacto" class="nav-link">Contacto</a></li></ul></div></div></nav><header id="inicio" class="hero"><picture class="hero-background"><source type="image/webp"
+            height="195"></a><button class="mobile-menu-btn" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav-menu"><span></span><span></span><span></span></button><ul class="nav-menu" id="nav-menu"><li><a href="#inicio" class="nav-link">Inicio</a></li><li><a href="#servicios" class="nav-link">Servicios</a></li><li><a href="#sobre-nosotros" class="nav-link">Sobre Nosotros</a></li><li><a href="/blog/" class="nav-link">Blog</a></li><li><a href="#contacto" class="nav-link">Contacto</a></li></ul></div></div></nav><header id="inicio" class="hero"><picture class="hero-background"><source type="image/webp"
           srcset="/assets/images/hero-plomero-visita-800w.webp 800w, /assets/images/hero-plomero-visita-1200w.webp 1200w"
           sizes="100vw"><img src="/assets/images/hero-plomero-visita-1200w.webp"
         srcset="/assets/images/hero-plomero-visita-800w.webp 800w, /assets/images/hero-plomero-visita-1200w.webp 1200w"
