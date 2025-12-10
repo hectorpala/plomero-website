@@ -237,3 +237,123 @@ body.quote-sheet-open{
   position:fixed;
   width:100%;
 }
+
+/* ============================================
+   BUTTON VARIANTS & MOBILE IMPROVEMENTS
+   ============================================ */
+
+/* btn-primary--light: para fondos claros/blancos */
+.btn-primary--light{
+  display:inline-block;
+  background:#fff;
+  color:#e36414;
+  border:2px solid #e36414;
+  border-radius:12px;
+  padding:14px 28px;
+  font-weight:600;
+  font-size:1rem;
+  text-decoration:none;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 2px 8px rgba(227,100,20,0.15);
+  transition:all 0.2s ease;
+  min-height:48px;
+  min-width:48px;
+}
+.btn-primary--light:hover{
+  background:#fef3e2;
+  border-color:#c2410c;
+  color:#c2410c;
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(227,100,20,0.25);
+}
+.btn-primary--light:focus-visible{
+  outline:3px solid #f97316;
+  outline-offset:2px;
+}
+.btn-primary--light:active{
+  transform:scale(0.98);
+  box-shadow:inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Mejoras estados hover/focus/active para TODOS los botones */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-whatsapp:focus-visible{
+  outline:3px solid #f97316;
+  outline-offset:2px;
+}
+.btn-primary:active,
+.btn-secondary:active,
+.btn-whatsapp:active{
+  transform:scale(0.97);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* CTA flotante: mejor spacing para no tapar contenido */
+.cta-bar{
+  bottom:max(16px, env(safe-area-inset-bottom, 16px));
+  right:16px;
+}
+
+/* Quote trigger: posición que no tape hero */
+.quote-trigger-btn{
+  bottom:max(90px, calc(env(safe-area-inset-bottom, 16px) + 74px));
+}
+
+/* Exit Intent Popup: mejor contraste en botones */
+.exit-popup-btn{
+  min-height:52px;
+  font-weight:700;
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);
+  transition:all 0.2s ease;
+}
+.exit-popup-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+}
+.exit-popup-btn:active{
+  transform:scale(0.98);
+}
+
+/* Mobile: limitar ancho de botones en testimonios/reseñas */
+@media (max-width:768px){
+  .testimonials-cta .btn-primary,
+  .testimonials-cta .btn-secondary,
+  .testimonial-card .btn-primary,
+  .final-cta .btn-primary,
+  .final-cta .btn-secondary{
+    max-width:280px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  /* Hero: más padding-top para evitar colisión con header fijo */
+  .hero{
+    padding-top:calc(var(--nav-h) + 100px) !important;
+  }
+
+  /* CTA flotantes: asegurar que no tapen H1 */
+  .cta-bar{
+    bottom:max(12px, env(safe-area-inset-bottom, 12px));
+    right:12px;
+    gap:8px;
+  }
+  .cta-btn{
+    padding:10px 12px;
+    font-size:14px;
+  }
+
+  /* Quote trigger más arriba en mobile para no tapar CTA bar */
+  .quote-trigger-btn{
+    bottom:max(75px, calc(env(safe-area-inset-bottom, 12px) + 63px));
+  }
+
+  /* Feedback táctil más visible */
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-primary--light:active{
+    background-color:rgba(0,0,0,0.05);
+    transform:scale(0.96);
+  }
+}
