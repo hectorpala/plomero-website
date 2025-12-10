@@ -755,3 +755,48 @@ if ('serviceWorker' in navigator) {
         });
     }
 })();
+
+// Hide floating buttons in critical sections (contact form, footer)
+(function() {
+    var floatingBtns = document.querySelectorAll('.floating-btn');
+    var quoteTrigger = document.getElementById('quote-trigger');
+    if (!floatingBtns.length) return;
+
+    // Sections where floating buttons should hide
+    var criticalSections = document.querySelectorAll('#contacto, .footer, .contact-form, .map-embed');
+    if (!criticalSections.length) return;
+
+    var observer = new IntersectionObserver(function(entries) {
+        var anyVisible = entries.some(function(entry) {
+            return entry.isIntersecting && entry.intersectionRatio > 0.3;
+        });
+
+        floatingBtns.forEach(function(btn) {
+            if (anyVisible) {
+                btn.style.opacity = '0';
+                btn.style.pointerEvents = 'none';
+            } else if (!document.body.classList.contains('menu-open')) {
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            }
+        });
+
+        // Also hide quote trigger in critical sections
+        if (quoteTrigger) {
+            if (anyVisible) {
+                quoteTrigger.style.opacity = '0';
+                quoteTrigger.style.pointerEvents = 'none';
+            } else if (!document.body.classList.contains('quote-sheet-open')) {
+                quoteTrigger.style.opacity = '1';
+                quoteTrigger.style.pointerEvents = 'auto';
+            }
+        }
+    }, {
+        threshold: [0, 0.3, 0.5],
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    criticalSections.forEach(function(section) {
+        observer.observe(section);
+    });
+})();
