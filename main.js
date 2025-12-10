@@ -2,25 +2,39 @@
 // Loaded with defer for optimal performance
 // Last updated: 2025-11-21
 
-// Mobile menu toggle
+// Mobile menu toggle with scroll position preservation
 (function() {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('.nav-menu');
+    let scrollY = 0;
+
+    function openMenu() {
+        scrollY = window.scrollY;
+        document.body.style.top = '-' + scrollY + 'px';
+        document.body.classList.add('menu-open');
+        navMenu.classList.add('active');
+        mobileMenuBtn.classList.add('active');
+    }
+
+    function closeMenu() {
+        document.body.classList.remove('menu-open');
+        document.body.style.top = '';
+        window.scrollTo(0, scrollY);
+        navMenu.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+    }
 
     mobileMenuBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileMenuBtn.classList.toggle('active');
-        // Prevent CLS: lock body scroll when menu is open
-        document.body.classList.toggle('menu-open');
+        if (document.body.classList.contains('menu-open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
     });
 
     // Close mobile menu when clicking a link
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-            document.body.classList.remove('menu-open');
-        });
+        link.addEventListener('click', closeMenu);
     });
 })();
 
