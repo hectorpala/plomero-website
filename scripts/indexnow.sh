@@ -52,7 +52,7 @@ fi
 
 if [ "$1" = "sitemap" ]; then
     echo -e "${YELLOW}Extrayendo URLs del sitemap...${NC}"
-    urls=($(curl -s "https://${HOST}/sitemaps/main_sitemap.xml" | grep -oP '(?<=<loc>)[^<]+'))
+    urls=($(curl -s "https://${HOST}/sitemaps/main_sitemap.xml" | sed -n 's/.*<loc>\([^<]*\)<\/loc>.*/\1/p'))
     echo "Encontradas ${#urls[@]} URLs"
     notify_batch "${urls[@]}"
 else
