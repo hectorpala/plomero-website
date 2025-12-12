@@ -24,33 +24,47 @@ jobs:
         run: |
           echo "🔍 Verificando ${{ env.SITE_URL }}..."
 
-          # Reintentar hasta 3 veces
+          # Usar User-Agent de navegador real para evitar bloqueos
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
+
+          # Reintentar hasta 3 veces con diferentes métodos
           for i in 1 2 3; do
-            HTTP_STATUS=$(curl -sL -o /dev/null -w "%{http_code}" ${{ env.SITE_URL }} --max-time 30 --retry 2 || echo "000")
-            if [ "$HTTP_STATUS" != "000" ]; then
+            HTTP_STATUS=$(curl -sL -o /dev/null -w "%{http_code}" "${{ env.SITE_URL }}" \
+              --max-time 30 \
+              --retry 2 \
+              --retry-delay 3 \
+              -H "User-Agent: $UA" \
+              -H "Accept: text/html" \
+              --compressed \
+              2>/dev/null || echo "000")
+
+            if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "301" ] || [ "$HTTP_STATUS" = "302" ]; then
               break
             fi
-            echo "Intento $i fallido, reintentando..."
+            echo "Intento $i: status $HTTP_STATUS, reintentando..."
             sleep 5
           done
 
-          RESPONSE_TIME=$(curl -sL -o /dev/null -w "%{time_total}" ${{ env.SITE_URL }} --max-time 30 || echo "0")
+          RESPONSE_TIME=$(curl -sL -o /dev/null -w "%{time_total}" "${{ env.SITE_URL }}" \
+            --max-time 30 -H "User-Agent: $UA" 2>/dev/null || echo "0")
 
           echo "status=$HTTP_STATUS" >> $GITHUB_OUTPUT
           echo "response_time=$RESPONSE_TIME" >> $GITHUB_OUTPUT
 
-          if [ "$HTTP_STATUS" != "200" ]; then
-            echo "❌ El sitio respondió con status $HTTP_STATUS"
-            echo "site_ok=false" >> $GITHUB_OUTPUT
-          else
+          if [ "$HTTP_STATUS" = "200" ]; then
             echo "✅ Sitio OK - Status $HTTP_STATUS - Tiempo: ${RESPONSE_TIME}s"
             echo "site_ok=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ El sitio respondió con status $HTTP_STATUS"
+            echo "site_ok=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Verificar páginas importantes
         id: pages
         continue-on-error: true
         run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
+
           PAGES=(
             "/"
             "/servicios/reparacion-de-fugas/"
@@ -60,7 +74,8 @@ jobs:
 
           ERRORS=""
           for page in "${PAGES[@]}"; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ env.SITE_URL }}${page}" --max-time 15)
+            STATUS=$(curl -sL -o /dev/null -w "%{http_code}" "${{ env.SITE_URL }}${page}" \
+              --max-time 15 -H "User-Agent: $UA" 2>/dev/null || echo "000")
             if [ "$STATUS" != "200" ]; then
               ERRORS="${ERRORS}❌ ${page} -> Status ${STATUS}\n"
             else
