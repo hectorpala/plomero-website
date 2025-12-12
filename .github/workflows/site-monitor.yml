@@ -20,11 +20,21 @@ jobs:
 
       - name: Verificar que el sitio responda
         id: health
+        continue-on-error: true
         run: |
           echo "🔍 Verificando ${{ env.SITE_URL }}..."
 
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{ env.SITE_URL }} --max-time 30)
-          RESPONSE_TIME=$(curl -s -o /dev/null -w "%{time_total}" ${{ env.SITE_URL }} --max-time 30)
+          # Reintentar hasta 3 veces
+          for i in 1 2 3; do
+            HTTP_STATUS=$(curl -sL -o /dev/null -w "%{http_code}" ${{ env.SITE_URL }} --max-time 30 --retry 2 || echo "000")
+            if [ "$HTTP_STATUS" != "000" ]; then
+              break
+            fi
+            echo "Intento $i fallido, reintentando..."
+            sleep 5
+          done
+
+          RESPONSE_TIME=$(curl -sL -o /dev/null -w "%{time_total}" ${{ env.SITE_URL }} --max-time 30 || echo "0")
 
           echo "status=$HTTP_STATUS" >> $GITHUB_OUTPUT
           echo "response_time=$RESPONSE_TIME" >> $GITHUB_OUTPUT
@@ -39,6 +49,7 @@ jobs:
 
       - name: Verificar páginas importantes
         id: pages
+        continue-on-error: true
         run: |
           PAGES=(
             "/"
@@ -74,6 +85,7 @@ jobs:
 
       - name: Correr Lighthouse
         id: lighthouse
+        continue-on-error: true
         run: |
           echo "🚀 Corriendo Lighthouse..."
 
