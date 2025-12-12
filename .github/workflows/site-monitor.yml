@@ -1,0 +1,171 @@
+name: Monitor del Sitio
+
+on:
+  schedule:
+    # Corre cada 6 horas
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Permite correr manualmente
+
+env:
+  SITE_URL: https://plomeroculiacanpro.mx
+  SITE_NAME: Plomero Culiacán Pro
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verificar que el sitio responda
+        id: health
+        run: |
+          echo "🔍 Verificando ${{ env.SITE_URL }}..."
+
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{ env.SITE_URL }} --max-time 30)
+          RESPONSE_TIME=$(curl -s -o /dev/null -w "%{time_total}" ${{ env.SITE_URL }} --max-time 30)
+
+          echo "status=$HTTP_STATUS" >> $GITHUB_OUTPUT
+          echo "response_time=$RESPONSE_TIME" >> $GITHUB_OUTPUT
+
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "❌ El sitio respondió con status $HTTP_STATUS"
+            echo "site_ok=false" >> $GITHUB_OUTPUT
+          else
+            echo "✅ Sitio OK - Status $HTTP_STATUS - Tiempo: ${RESPONSE_TIME}s"
+            echo "site_ok=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Verificar páginas importantes
+        id: pages
+        run: |
+          PAGES=(
+            "/"
+            "/servicios/reparacion-de-fugas/"
+            "/servicios/plomero-colonias-culiacan/las-quintas/"
+            "/blog/"
+          )
+
+          ERRORS=""
+          for page in "${PAGES[@]}"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${{ env.SITE_URL }}${page}" --max-time 15)
+            if [ "$STATUS" != "200" ]; then
+              ERRORS="${ERRORS}❌ ${page} -> Status ${STATUS}\n"
+            else
+              echo "✅ ${page} -> OK"
+            fi
+          done
+
+          if [ -n "$ERRORS" ]; then
+            echo "pages_ok=false" >> $GITHUB_OUTPUT
+            echo -e "errors<<EOF\n${ERRORS}EOF" >> $GITHUB_OUTPUT
+          else
+            echo "pages_ok=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar Lighthouse
+        run: npm install -g lighthouse
+
+      - name: Correr Lighthouse
+        id: lighthouse
+        run: |
+          echo "🚀 Corriendo Lighthouse..."
+
+          lighthouse ${{ env.SITE_URL }} \
+            --output=json \
+            --output-path=./lighthouse-report.json \
+            --chrome-flags="--headless --no-sandbox" \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --quiet
+
+          # Extraer scores
+          PERF=$(jq '.categories.performance.score * 100 | floor' lighthouse-report.json)
+          ACCESS=$(jq '.categories.accessibility.score * 100 | floor' lighthouse-report.json)
+          BP=$(jq '.categories["best-practices"].score * 100 | floor' lighthouse-report.json)
+          SEO=$(jq '.categories.seo.score * 100 | floor' lighthouse-report.json)
+
+          echo "performance=$PERF" >> $GITHUB_OUTPUT
+          echo "accessibility=$ACCESS" >> $GITHUB_OUTPUT
+          echo "best_practices=$BP" >> $GITHUB_OUTPUT
+          echo "seo=$SEO" >> $GITHUB_OUTPUT
+
+          echo "📊 Resultados:"
+          echo "   Performance: $PERF"
+          echo "   Accessibility: $ACCESS"
+          echo "   Best Practices: $BP"
+          echo "   SEO: $SEO"
+
+          # Alerta si performance < 50
+          if [ "$PERF" -lt 50 ]; then
+            echo "perf_warning=true" >> $GITHUB_OUTPUT
+          else
+            echo "perf_warning=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Crear Issue si hay problemas
+        if: steps.health.outputs.site_ok == 'false' || steps.pages.outputs.pages_ok == 'false' || steps.lighthouse.outputs.perf_warning == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const siteOk = '${{ steps.health.outputs.site_ok }}' === 'true';
+            const pagesOk = '${{ steps.pages.outputs.pages_ok }}' === 'true';
+            const perfWarning = '${{ steps.lighthouse.outputs.perf_warning }}' === 'true';
+
+            let title = '🚨 Alerta: ';
+            let body = '## Reporte de Monitoreo\n\n';
+            body += `**Fecha:** ${new Date().toLocaleString('es-MX', {timeZone: 'America/Mazatlan'})}\n\n`;
+
+            if (!siteOk) {
+              title += 'Sitio caído ';
+              body += '### ❌ Estado del Sitio\n';
+              body += `- Status HTTP: ${{ steps.health.outputs.status }}\n`;
+              body += `- Tiempo de respuesta: ${{ steps.health.outputs.response_time }}s\n\n`;
+            }
+
+            if (!pagesOk) {
+              title += 'Páginas con error ';
+              body += '### ❌ Páginas con Error\n';
+              body += '${{ steps.pages.outputs.errors }}\n\n';
+            }
+
+            if (perfWarning) {
+              title += 'Performance baja';
+              body += '### ⚠️ Performance Baja\n';
+            }
+
+            body += '### 📊 Lighthouse Scores\n';
+            body += `| Métrica | Score |\n`;
+            body += `|---------|-------|\n`;
+            body += `| Performance | ${{ steps.lighthouse.outputs.performance }} |\n`;
+            body += `| Accessibility | ${{ steps.lighthouse.outputs.accessibility }} |\n`;
+            body += `| Best Practices | ${{ steps.lighthouse.outputs.best_practices }} |\n`;
+            body += `| SEO | ${{ steps.lighthouse.outputs.seo }} |\n\n`;
+
+            body += '---\n';
+            body += '_Generado automáticamente por el Monitor del Sitio_';
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['bug', 'monitor-automatico']
+            });
+
+      - name: Resumen
+        run: |
+          echo "## 📊 Resumen del Monitoreo" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Estado |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Sitio Online | ${{ steps.health.outputs.site_ok == 'true' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Páginas OK | ${{ steps.pages.outputs.pages_ok == 'true' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Performance | ${{ steps.lighthouse.outputs.performance }}% |" >> $GITHUB_STEP_SUMMARY
+          echo "| Accessibility | ${{ steps.lighthouse.outputs.accessibility }}% |" >> $GITHUB_STEP_SUMMARY
+          echo "| SEO | ${{ steps.lighthouse.outputs.seo }}% |" >> $GITHUB_STEP_SUMMARY
