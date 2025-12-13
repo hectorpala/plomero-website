@@ -9,7 +9,6 @@ Disallow: /private/
 Allow: /manifest.json
 Allow: /assets/
 Allow: /sitemaps/
-Crawl-delay: 0
 
 # Reglas específicas para Googlebot
 User-agent: Googlebot
