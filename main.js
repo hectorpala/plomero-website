@@ -281,27 +281,39 @@
     });
   });
 
-  // Tracking de scroll depth para medir engagement
+  // Tracking de scroll depth para medir engagement - optimizado con rAF throttle
   var scrollDepths = [25, 50, 75, 90];
   var scrollTracked = {};
+  var scrollTicking = false;
+  var cachedScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+  // Actualizar cache solo en resize
+  window.addEventListener('resize', function() {
+    cachedScrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  }, { passive: true });
 
   window.addEventListener('scroll', function() {
-    var scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
-
-    scrollDepths.forEach(function(depth) {
-      if (scrollPercent >= depth && !scrollTracked[depth]) {
-        scrollTracked[depth] = true;
-        try {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            'event': 'scroll_depth',
-            'scroll_percentage': depth,
-            'page_location': window.location.pathname
-          });
-        } catch(e) {}
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(function() {
+      var scrollPercent = Math.round((window.scrollY / cachedScrollableHeight) * 100);
+      for (var i = 0; i < scrollDepths.length; i++) {
+        var depth = scrollDepths[i];
+        if (scrollPercent >= depth && !scrollTracked[depth]) {
+          scrollTracked[depth] = true;
+          try {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              'event': 'scroll_depth',
+              'scroll_percentage': depth,
+              'page_location': window.location.pathname
+            });
+          } catch(e) {}
+        }
       }
+      scrollTicking = false;
     });
-  });
+  }, { passive: true });
 })();
 
 // Exit-Intent Popup - diferido con requestIdleCallback para no bloquear render
@@ -384,30 +396,36 @@
         });
     }
 
-    // MOBILE: Detect scroll up (exit intent alternative)
+    // MOBILE: Detect scroll up (exit intent alternative) - optimizado con rAF throttle
     if (isMobile) {
+        var exitDocHeight = document.documentElement.scrollHeight;
+        var exitTicking = false;
+
+        // Actualizar cache en resize/orientationchange
+        function updateExitDocHeight() {
+            exitDocHeight = document.documentElement.scrollHeight;
+        }
+        window.addEventListener('resize', updateExitDocHeight, { passive: true });
+        window.addEventListener('orientationchange', updateExitDocHeight, { passive: true });
+
         window.addEventListener('scroll', function() {
-            if (isExiting) return;
+            if (isExiting || exitTicking) return;
+            exitTicking = true;
+            requestAnimationFrame(function() {
+                var currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+                scrollingUp = currentScrollY < lastScrollY;
+                timeOnPage = Date.now() - pageLoadTime;
+                var threshold = exitDocHeight * 0.2;
 
-            var currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
-            scrollingUp = currentScrollY < lastScrollY;
-
-            timeOnPage = Date.now() - pageLoadTime;
-
-            // Trigger if: scrolling up + at top 20% of page + 10+ seconds on page
-            if (scrollingUp &&
-                currentScrollY < (document.documentElement.scrollHeight * 0.2) &&
-                timeOnPage >= minTimeBeforePopupMobile &&
-                !isExiting) {
-                isExiting = true;
-                // console.log('[Exit-Intent] ✅ Mostrando popup (Mobile - scroll up)!');
-                showPopup();
-            } else if (scrollingUp && currentScrollY < (document.documentElement.scrollHeight * 0.2) && timeOnPage < minTimeBeforePopupMobile) {
-                // console.log('[Exit-Intent Mobile] ⏱️  Necesitas ' + Math.ceil((minTimeBeforePopupMobile - timeOnPage) / 1000) + 's más.');
-            }
-
-            lastScrollY = currentScrollY;
-        });
+                // Trigger if: scrolling up + at top 20% of page + 7+ seconds on page
+                if (scrollingUp && currentScrollY < threshold && timeOnPage >= minTimeBeforePopupMobile && !isExiting) {
+                    isExiting = true;
+                    showPopup();
+                }
+                lastScrollY = currentScrollY;
+                exitTicking = false;
+            });
+        }, { passive: true });
     }
 
     // Elements to make inert when popup is open (accessibility)
@@ -756,41 +774,49 @@ if ('serviceWorker' in navigator) {
     }
 })();
 
-// Hide floating buttons in critical sections - diferido con requestIdleCallback
+// Hide floating buttons in critical sections - optimizado sin reflows
 (typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
     var floatingBtns = document.querySelectorAll('.floating-btn');
     var quoteTrigger = document.getElementById('quote-trigger');
     if (!floatingBtns.length) return;
 
-    // Sections where floating buttons should hide
     var criticalSections = document.querySelectorAll('#contacto, .footer, .contact-form, .map-embed');
     if (!criticalSections.length) return;
 
+    // Flags para evitar lecturas de classList en cada callback
+    var isHidden = false;
+    var menuOpen = false;
+    var sheetOpen = false;
+
+    // Observar cambios de clase en body una sola vez
+    var bodyObserver = new MutationObserver(function(mutations) {
+        menuOpen = document.body.classList.contains('menu-open');
+        sheetOpen = document.body.classList.contains('quote-sheet-open');
+    });
+    bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    function updateVisibility(shouldHide) {
+        if (shouldHide === isHidden) return; // No cambio, evitar reflow
+        isHidden = shouldHide;
+        var opacity = shouldHide ? '0' : '1';
+        var pointer = shouldHide ? 'none' : 'auto';
+        for (var i = 0; i < floatingBtns.length; i++) {
+            floatingBtns[i].style.cssText = 'opacity:' + opacity + ';pointer-events:' + pointer;
+        }
+        if (quoteTrigger && !sheetOpen) {
+            quoteTrigger.style.cssText = 'opacity:' + opacity + ';pointer-events:' + pointer;
+        }
+    }
+
     var observer = new IntersectionObserver(function(entries) {
-        var anyVisible = entries.some(function(entry) {
-            return entry.isIntersecting && entry.intersectionRatio > 0.3;
-        });
-
-        floatingBtns.forEach(function(btn) {
-            if (anyVisible) {
-                btn.style.opacity = '0';
-                btn.style.pointerEvents = 'none';
-            } else if (!document.body.classList.contains('menu-open')) {
-                btn.style.opacity = '1';
-                btn.style.pointerEvents = 'auto';
-            }
-        });
-
-        // Also hide quote trigger in critical sections
-        if (quoteTrigger) {
-            if (anyVisible) {
-                quoteTrigger.style.opacity = '0';
-                quoteTrigger.style.pointerEvents = 'none';
-            } else if (!document.body.classList.contains('quote-sheet-open')) {
-                quoteTrigger.style.opacity = '1';
-                quoteTrigger.style.pointerEvents = 'auto';
+        var anyVisible = false;
+        for (var i = 0; i < entries.length; i++) {
+            if (entries[i].isIntersecting && entries[i].intersectionRatio > 0.3) {
+                anyVisible = true;
+                break;
             }
         }
+        if (!menuOpen) updateVisibility(anyVisible);
     }, {
         threshold: [0, 0.3, 0.5],
         rootMargin: '0px 0px -100px 0px'
