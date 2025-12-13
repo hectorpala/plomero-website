@@ -257,8 +257,8 @@
   });
 })();
 
-// Tracking de tarjetas SEO
-(function() {
+// Tracking de tarjetas SEO - diferido con requestIdleCallback
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
   // Tracking de clics en tarjetas "Más opciones de plomería"
   document.querySelectorAll('.seo-card[data-event="click_seo_card"]').forEach(function(card) {
     card.addEventListener('click', function(e) {
@@ -304,8 +304,8 @@
   });
 })();
 
-// Exit-Intent Popup
-(function() {
+// Exit-Intent Popup - diferido con requestIdleCallback para no bloquear render
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
     var popup = document.getElementById('exit-intent-popup');
     if (!popup) return; // Exit if popup doesn't exist
 
@@ -551,8 +551,8 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Bottom Sheet Cotización Móvil
-(function() {
+// Bottom Sheet Cotización Móvil - diferido con requestIdleCallback
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
     var trigger = document.getElementById('quote-trigger');
     var overlay = document.getElementById('quote-overlay');
     var sheet = document.getElementById('quote-sheet');
@@ -756,8 +756,8 @@ if ('serviceWorker' in navigator) {
     }
 })();
 
-// Hide floating buttons in critical sections (contact form, footer)
-(function() {
+// Hide floating buttons in critical sections - diferido con requestIdleCallback
+(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
     var floatingBtns = document.querySelectorAll('.floating-btn');
     var quoteTrigger = document.getElementById('quote-trigger');
     if (!floatingBtns.length) return;
