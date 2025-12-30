@@ -316,143 +316,31 @@
   }, { passive: true });
 })();
 
-// Exit-Intent Popup - diferido con requestIdleCallback para no bloquear render
+// Exit-Intent Popup - versión simplificada (móvil: 30s timer + back button)
 (typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
     var popup = document.getElementById('exit-intent-popup');
-    if (!popup) return; // Exit if popup doesn't exist
+    if (!popup) return;
 
     var closeBtn = document.querySelector('.exit-popup-close');
     var whatsappBtn = document.getElementById('exit-popup-whatsapp');
     var phoneBtn = document.getElementById('exit-popup-phone');
-    var hasShown = localStorage.getItem('exitPopupShown');
-    var previousActiveElement = null; // For restoring focus on close
+    var popupShown = false;
+    var POPUP_DELAY = 30000; // 30 segundos para móvil
+    var SESSION_KEY = 'exitPopupShown';
 
-    // Get all focusable elements in popup for focus trap
-    var focusableElements = popup.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    var firstFocusable = focusableElements[0];
-    var lastFocusable = focusableElements[focusableElements.length - 1];
-    var isExiting = false;
-    var mouseY = 0;
-    var timeOnPage = 0;
-    var minTimeBeforePopup = 2000; // 2 seconds minimum on page (desktop)
-    var minTimeBeforePopupMobile = 7000; // 7 seconds minimum on page (mobile)
+    // Ya se mostró en esta sesión? Salir
+    if (sessionStorage.getItem(SESSION_KEY)) return;
 
-    // Mobile detection and scroll tracking
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    var lastScrollY = 0;
-    var scrollingUp = false;
-
-    // Check if popup should be shown (only once per session)
-    if (hasShown) {
-        // console.log('[Exit-Intent] Ya se mostró anteriormente. Para re-probar: localStorage.removeItem("exitPopupShown")');
-        return;
-    }
-
-    if (isMobile) {
-        // console.log('[Exit-Intent] Modo MÓVIL activado. Espera 10+ segundos y haz scroll hacia arriba para activar.');
-    } else {
-        // console.log('[Exit-Intent] Modo DESKTOP activado. Espera 2+ segundos y mueve mouse hacia arriba para activar.');
-    }
-
-    // Track time on page
-    var pageLoadTime = Date.now();
-
-    // DESKTOP: Track mouse position continuously
-    if (!isMobile) {
-        document.addEventListener('mousemove', function(e) {
-            mouseY = e.clientY;
-        });
-
-        // Detect exit intent - ONLY when mouse leaves through TOP of viewport
-        document.addEventListener('mouseout', function(e) {
-            // Ignore if already shown
-            if (isExiting) return;
-
-            // Get the element the mouse is leaving TO
-            var toElement = e.relatedTarget || e.toElement;
-
-            // Check if mouse is leaving the document (null = left viewport)
-            // AND mouse Y position is near top (< 10px)
-            // AND minimum time on page has passed
-            timeOnPage = Date.now() - pageLoadTime;
-
-            // Debug logging
-            if (!toElement && mouseY < 10) {
-                // console.log('[Exit-Intent] Detectado intento de salida. Tiempo en página:', Math.round(timeOnPage / 1000) + 's');
-            }
-
-            if (!toElement &&
-                mouseY < 10 &&
-                timeOnPage >= minTimeBeforePopup &&
-                !isExiting) {
-                isExiting = true;
-                // console.log('[Exit-Intent] ✅ Mostrando popup (Desktop)!');
-                showPopup();
-            } else if (!toElement && mouseY < 10 && timeOnPage < minTimeBeforePopup) {
-                // console.log('[Exit-Intent] ⏱️  Muy pronto. Necesitas ' + Math.ceil((minTimeBeforePopup - timeOnPage) / 1000) + 's más.');
-            }
-        });
-    }
-
-    // MOBILE: Detect scroll up (exit intent alternative) - optimizado con rAF throttle
-    if (isMobile) {
-        var exitDocHeight = document.documentElement.scrollHeight;
-        var exitTicking = false;
-
-        // Actualizar cache en resize/orientationchange
-        function updateExitDocHeight() {
-            exitDocHeight = document.documentElement.scrollHeight;
-        }
-        window.addEventListener('resize', updateExitDocHeight, { passive: true });
-        window.addEventListener('orientationchange', updateExitDocHeight, { passive: true });
-
-        window.addEventListener('scroll', function() {
-            if (isExiting || exitTicking) return;
-            exitTicking = true;
-            requestAnimationFrame(function() {
-                var currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
-                scrollingUp = currentScrollY < lastScrollY;
-                timeOnPage = Date.now() - pageLoadTime;
-                var threshold = exitDocHeight * 0.2;
-
-                // Trigger if: scrolling up + at top 20% of page + 7+ seconds on page
-                if (scrollingUp && currentScrollY < threshold && timeOnPage >= minTimeBeforePopupMobile && !isExiting) {
-                    isExiting = true;
-                    showPopup();
-                }
-                lastScrollY = currentScrollY;
-                exitTicking = false;
-            });
-        }, { passive: true });
-    }
-
-    // Elements to make inert when popup is open (accessibility)
-    var mainContent = document.querySelector('main');
-    var footer = document.querySelector('footer');
-    var floatingBtns = document.querySelectorAll('.floating-btn');
-
-    function setBackgroundInert(inert) {
-        if (mainContent) mainContent.inert = inert;
-        if (footer) footer.inert = inert;
-        floatingBtns.forEach(function(btn) { btn.inert = inert; });
+    function isMobile() {
+        return window.innerWidth <= 768 || 'ontouchstart' in window;
     }
 
     function showPopup() {
-        // Save current focus to restore later
-        previousActiveElement = document.activeElement;
-
-        // Block background content for screen readers
-        setBackgroundInert(true);
-
+        if (popupShown) return;
+        popupShown = true;
+        sessionStorage.setItem(SESSION_KEY, 'true');
         popup.style.display = 'flex';
-        localStorage.setItem('exitPopupShown', 'true');
-
-        // Move focus to first focusable element (close button)
-        if (firstFocusable) {
-            firstFocusable.focus();
-        }
+        document.body.style.overflow = 'hidden';
 
         // Track popup shown event
         try {
@@ -460,21 +348,14 @@
             window.dataLayer.push({
                 'event': 'exit_intent_shown',
                 'page_location': window.location.pathname,
-                'time_on_page': Math.round(timeOnPage / 1000) + 's'
+                'trigger': isMobile() ? 'mobile_timer' : 'desktop_mouseleave'
             });
         } catch(e) {}
     }
 
     function hidePopup() {
         popup.style.display = 'none';
-
-        // Restore background content accessibility
-        setBackgroundInert(false);
-
-        // Restore focus to previously focused element
-        if (previousActiveElement && previousActiveElement.focus) {
-            previousActiveElement.focus();
-        }
+        document.body.style.overflow = '';
 
         // Track popup close event
         try {
@@ -484,6 +365,27 @@
                 'page_location': window.location.pathname
             });
         } catch(e) {}
+    }
+
+    // DESKTOP: Mouse leave detection
+    if (!isMobile()) {
+        document.addEventListener('mouseleave', function(e) {
+            if (e.clientY < 10) showPopup();
+        });
+    }
+
+    // MOBILE: Timer de 30 segundos + detección de botón back
+    if (isMobile()) {
+        setTimeout(showPopup, POPUP_DELAY);
+
+        // Detectar botón back
+        history.pushState(null, '', location.href);
+        window.addEventListener('popstate', function() {
+            if (!popupShown) {
+                showPopup();
+                history.pushState(null, '', location.href);
+            }
+        });
     }
 
     // Close popup on X button click
@@ -501,31 +403,10 @@
         }
     });
 
-    // Close popup on ESC key + Focus trap on Tab
+    // Close popup on ESC key
     document.addEventListener('keydown', function(e) {
-        if (popup.style.display !== 'flex') return;
-
-        // ESC to close
-        if (e.key === 'Escape') {
+        if (popup.style.display === 'flex' && e.key === 'Escape') {
             hidePopup();
-            return;
-        }
-
-        // Focus trap: Tab key cycles within popup
-        if (e.key === 'Tab') {
-            if (e.shiftKey) {
-                // Shift+Tab: if on first element, go to last
-                if (document.activeElement === firstFocusable) {
-                    e.preventDefault();
-                    lastFocusable.focus();
-                }
-            } else {
-                // Tab: if on last element, go to first
-                if (document.activeElement === lastFocusable) {
-                    e.preventDefault();
-                    firstFocusable.focus();
-                }
-            }
         }
     });
 
@@ -554,7 +435,7 @@
             } catch(e) {}
         });
     }
-})();
+}, 2500);
 
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
