@@ -707,3 +707,120 @@ if ('serviceWorker' in navigator) {
         observer.observe(section);
     });
 })();
+
+
+// ===== TRACKING EVENTS - AGREGADOS 1 JUNIO 2026 =====
+
+// EVENTO A: Global tracking para enlaces tel: y wa.me
+(function() {
+      document.addEventListener('click', function(e) {
+              var link = e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+              if (!link) return;
+              var href = link.getAttribute('href');
+              var tipo = href.startsWith('tel:') ? 'phone' : 'whatsapp';
+              var numero = href.replace(/[^\d]/g, '');
+              try {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                                    'event': 'contact_link_click',
+                                    'contact_type': tipo,
+                                    'phone_number': numero,
+                                    'page_location': window.location.pathname,
+                                    'link_text': link.textContent.trim().substring(0, 50),
+                                    'link_location': link.getBoundingClientRect().y > window.innerHeight/2 ? 'below_fold' : 'above_fold'
+                        });
+              } catch(e) {}
+      }, true);
+})();
+
+// EVENTO B: Time on Page tracking (30s, 60s, 120s, 300s)
+(function() {
+      var timeOnPageSegments = [30, 60, 120, 300];
+      var timeTracked = {};
+      var startTime = Date.now();
+      setInterval(function() {
+              var currentTime = Math.floor((Date.now() - startTime) / 1000);
+              for (var i = 0; i < timeOnPageSegments.length; i++) {
+                        var segment = timeOnPageSegments[i];
+                        if (currentTime >= segment && !timeTracked[segment]) {
+                                    timeTracked[segment] = true;
+                                    try {
+                                                  window.dataLayer = window.dataLayer || [];
+                                                  window.dataLayer.push({
+                                                                  'event': 'page_time_milestone',
+                                                                  'time_seconds': segment,
+                                                                  'page_location': window.location.pathname
+                                                  });
+                                    } catch(e) {}
+                        }
+              }
+      }, 1000);
+})();
+
+// EVENTO C: Internal navigation links tracking
+(function() {
+      var mainNavLinks = document.querySelectorAll('a[href^="/servicios/"], a[href^="/blog/"], a[href^="/plomero-colonias/"]');
+      mainNavLinks.forEach(function(link) {
+              link.addEventListener('click', function(e) {
+                        var href = this.getAttribute('href');
+                        var text = this.textContent.trim().substring(0, 100);
+                        var pageType = 'internal_link';
+                        if (href.includes('/servicios/')) pageType = 'service_page';
+                        if (href.includes('/blog/')) pageType = 'blog_page';
+                        if (href.includes('/plomero-colonias/')) pageType = 'colony_page';
+                        try {
+                                    window.dataLayer = window.dataLayer || [];
+                                    window.dataLayer.push({
+                                                  'event': 'internal_link_click',
+                                                  'link_text': text,
+                                                  'link_url': href,
+                                                  'page_type': pageType,
+                                                  'page_location': window.location.pathname
+                                    });
+                        } catch(e) {}
+              });
+      });
+})();
+
+// EVENTO D: Page type detection (servicios, blog, colonias)
+(function() {
+      var pathname = window.location.pathname;
+      if (pathname.includes('/servicios/')) {
+              var serviceMatch = pathname.match(/servicios\/([^\/]+)/);
+              var serviceName = serviceMatch ? serviceMatch[1].replace(/-/g, ' ') : 'unknown';
+              try {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                                    'event': 'view_service_page',
+                                    'service_name': serviceName,
+                                    'page_location': pathname
+                        });
+              } catch(e) {}
+      }
+      if (pathname.includes('/plomero-colonias-culiacan/')) {
+              var colonyMatch = pathname.match(/plomero-colonias-culiacan\/([^\/]+)/);
+              var colonyName = colonyMatch ? colonyMatch[1].replace(/-/g, ' ') : 'unknown';
+              try {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                                    'event': 'view_colony_page',
+                                    'colony_name': colonyName,
+                                    'page_location': pathname
+                        });
+              } catch(e) {}
+      }
+      if (pathname.includes('/blog/')) {
+              var postMatch = pathname.match(/blog\/([^\/]+)/);
+              var postTitle = postMatch ? postMatch[1].replace(/-/g, ' ') : 'unknown';
+              try {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                                    'event': 'view_blog_post',
+                                    'post_title': postTitle,
+                                    'page_location': pathname
+                        });
+              } catch(e) {}
+      }
+})();
+
+// ===== FIN DE TRACKING EVENTS =====
