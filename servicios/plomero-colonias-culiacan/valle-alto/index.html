@@ -9,24 +9,25 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.7;color:var(--text);background-color:var(--bg-soft);padding-top:80px}
 .container{max-width:1200px;margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);line-height:1.2}
+h1,h2,h3{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--text);letter-spacing:-0.025em;line-height:1.2}
 h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
 .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;padding:16px 0}
 .nav-wrapper{display:flex;align-items:center;justify-content:space-between}
+.logo{display:block;text-decoration:none;contain:layout}
 .logo img{height:70px;width:auto}
 .nav-menu{display:flex;list-style:none;gap:2rem}
 .nav-link{color:#0066cc;font-weight:500;text-decoration:none;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
 .hero{min-height:80vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 16px 60px}
 .hero-background{position:absolute;inset:0;z-index:0}
-.hero-background img{width:100%;height:100%;object-fit:cover}
+.hero-background img{width:100%;height:100%;object-fit:cover;object-position:center center;content-visibility:visible}
 .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:1}
-.hero-content{position:relative;z-index:2;max-width:600px;background:rgba(0,0,0,0.35);border-radius:24px;padding:2rem}
+.hero-content{position:relative;z-index:2;max-width:600px;background:rgba(0,0,0,0.5);border-radius:24px;padding:2rem;border:1px solid rgba(255,255,255,0.15)}
 .hero-subtitle{color:#f1f5f9;margin-bottom:1rem}
-.hero-rating{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;background:#fff;border-radius:50px;font-size:0.9rem;margin:1rem 0}
+.hero-rating{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;background:rgba(255,255,255,0.98);border-radius:50px;font-size:0.9rem;margin:1rem 0}
 .rating-stars{color:#FBBF24}
-.hero-eta-badge{display:flex;align-items:center;justify-content:center;gap:0.5rem;background:rgba(255,255,255,0.15);border-radius:999px;padding:0.5rem 1rem;margin-bottom:1rem;font-size:0.85rem;color:#fff}
+.hero-eta-badge{display:flex;align-items:center;justify-content:center;gap:0.5rem;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:0.5rem 1rem;margin-bottom:1rem;font-size:0.85rem;color:#fff}
 .eta-dot{width:8px;height:8px;background:#22c55e;border-radius:50%}
-.btn-primary{display:inline-block;background:linear-gradient(135deg,#1a73e8 0%,#0066cc 100%);color:#fff;border-radius:14px;padding:16px 32px;font-weight:700;text-decoration:none;margin-top:1rem}
+.btn-primary{display:inline-block;background:linear-gradient(135deg,#1a73e8 0%,#0066cc 100%);color:#fff;border-radius:14px;padding:16px 32px;font-weight:700;text-decoration:none;margin-top:1rem;box-shadow:0 10px 24px rgba(0,102,204,0.28)}
 .section{padding:4rem 0}.section-alt{background:#fff}
 .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.5rem;margin-top:2rem}
 .benefit{text-align:center;padding:1rem}
@@ -44,10 +45,11 @@ h1{font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem}
 .footer a{color:#94a3b8}
 .mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:4px}
 .mobile-menu-btn span{display:block;width:24px;height:3px;background:var(--brand)}
-@media(max-width:768px){.mobile-menu-btn{display:flex}.nav-menu{display:none}.hero h1,.hero-subtitle,.btn-primary{animation:none!important;opacity:1!important}}
-.floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.15);z-index:60;text-decoration:none}
-.floating-call{background:#0066cc;bottom:18px}
-.floating-whatsapp{background:#22c55e;bottom:80px}
+@media(max-width:768px){.mobile-menu-btn{display:flex}.nav-menu{display:none}.hero h1,.hero-subtitle,.btn-primary,.hero-content,.hero-rating,.fade-in{animation:none!important;opacity:1!important;transform:none!important}.hero-content{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 8px rgba(0,0,0,0.15)!important}}
+@media(max-width:480px){.hero h1,.hero-subtitle,.btn-primary,.fade-in{animation:none!important;opacity:1!important;transform:none!important}}
+.floating-btn{position:fixed;right:max(18px,env(safe-area-inset-right,18px));width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 10px 28px rgba(0,0,0,0.16);z-index:90;text-decoration:none}
+.floating-call{background:#0066cc;bottom:max(18px,env(safe-area-inset-bottom,18px))}
+.floating-whatsapp{background:#22c55e;bottom:calc(max(18px,env(safe-area-inset-bottom,18px)) + 60px)}
 </style>
 <link rel="stylesheet" href="../../../styles.7f293647.css">
 </head>
