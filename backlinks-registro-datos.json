@@ -1,0 +1,40 @@
+{
+  "negocio": {
+    "nombre": "Plomero Culiacán Pro",
+    "sitio_web": "https://plomeroculiacanpro.mx",
+    "email": "info@plomeropro.com",
+    "telefono": "667 392 2273",
+    "telefono_internacional": "+52 667 392 2273",
+    "whatsapp": "526673922273"
+  },
+  "ubicacion": {
+    "pais": "México",
+    "estado": "Sinaloa",
+    "ciudad": "Culiacán",
+    "codigo_postal": "80000"
+  },
+  "horarios": {
+    "texto": "Lunes a Sábado 8:00 AM - 8:00 PM. Emergencias 24/7"
+  },
+  "categoria": "Plomería",
+  "servicios": [
+    "Reparación de fugas de agua",
+    "Destape de drenajes",
+    "Instalación de calentadores",
+    "Mantenimiento de boilers",
+    "Reparación de tinacos",
+    "Plomería de emergencia 24/7"
+  ],
+  "descripcion_corta": "Plomero profesional en Culiacán. Reparación de fugas, destape de drenajes, instalación de boilers. Emergencias 24/7.",
+  "descripcion_media": "Servicio profesional de plomería en Culiacán, Sinaloa. Atendemos reparación de fugas, destape de drenajes, instalación de boilers y calentadores. Cobertura en 642 colonias de Culiacán. Emergencias 24/7. Más de 15 años de experiencia.",
+  "directorios": [
+    {"nombre": "Yelp México", "url": "https://biz.yelp.com.mx/claim"},
+    {"nombre": "Páginas Amarillas", "url": "https://www.paginasamarillas.com.mx/registro-de-empresas"},
+    {"nombre": "Sección Amarilla", "url": "https://www.seccionamarilla.com.mx/registra-tu-negocio"},
+    {"nombre": "Hotfrog", "url": "https://www.hotfrog.com.mx/add-business"},
+    {"nombre": "Cylex", "url": "https://www.cylex.com.mx/add-company.html"},
+    {"nombre": "Habitissimo", "url": "https://www.habitissimo.com.mx/profesionales"},
+    {"nombre": "Foursquare", "url": "https://business.foursquare.com/"}
+  ],
+  "logo": "https://plomeroculiacanpro.mx/assets/images/logo-512.png"
+}

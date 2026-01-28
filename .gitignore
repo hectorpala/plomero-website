@@ -48,3 +48,6 @@ build/
 .claude/settings.local.json
 *.backup
 *.original
+
+# Local Netlify folder
+.netlify
