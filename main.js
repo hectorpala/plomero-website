@@ -653,7 +653,7 @@ if ('serviceWorker' in navigator) {
             this.value = this.value.replace(/\D/g, '');
         });
     }
-})();
+});
 
 // Hide floating buttons in critical sections - optimizado sin reflows
 (typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
@@ -706,7 +706,7 @@ if ('serviceWorker' in navigator) {
     criticalSections.forEach(function(section) {
         observer.observe(section);
     });
-})();
+});
 
 
 // ===== TRACKING EVENTS - AGREGADOS 1 JUNIO 2026 =====
