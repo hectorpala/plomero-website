@@ -45,6 +45,46 @@
     });
 })();
 
+// Nav scroll – fondo solido al hacer scroll
+(function() {
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+
+    var ticking = false;
+
+    function updateNav() {
+        if (window.scrollY > 50) {
+            nav.classList.add('nav-scrolled');
+        } else {
+            nav.classList.remove('nav-scrolled');
+        }
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateNav);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    updateNav();
+})();
+
+// Urgency indicator - mensaje dinamico segun hora del dia
+(function() {
+    var el = document.getElementById('urgency-text');
+    if (!el) return;
+
+    var h = new Date().getHours();
+
+    if (h >= 7 && h < 22) {
+        el.textContent = 'Disponible ahora \u2013 respuesta en ~5 min';
+    } else {
+        el.textContent = 'Servicio nocturno activo';
+    }
+})();
+
 // Real-time form validation
 (function() {
     const form = document.getElementById('contact-form');
@@ -316,7 +356,7 @@
   }, { passive: true });
 })();
 
-// Exit-Intent Popup - versión simplificada (móvil: 30s timer + back button)
+// Exit-Intent Popup - versión simplificada (móvil: back button)
 (typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
     var popup = document.getElementById('exit-intent-popup');
     if (!popup) return;
@@ -325,7 +365,6 @@
     var whatsappBtn = document.getElementById('exit-popup-whatsapp');
     var phoneBtn = document.getElementById('exit-popup-phone');
     var popupShown = false;
-    var POPUP_DELAY = 30000; // 30 segundos para móvil
     var SESSION_KEY = 'exitPopupShown';
 
     // Ya se mostró en esta sesión? Salir
@@ -348,7 +387,7 @@
             window.dataLayer.push({
                 'event': 'exit_intent_shown',
                 'page_location': window.location.pathname,
-                'trigger': isMobile() ? 'mobile_timer' : 'desktop_mouseleave'
+                'trigger': isMobile() ? 'mobile_back' : 'desktop_mouseleave'
             });
         } catch(e) {}
     }
@@ -374,11 +413,8 @@
         });
     }
 
-    // MOBILE: Timer de 30 segundos + detección de botón back
+    // MOBILE: Detectar botón back
     if (isMobile()) {
-        setTimeout(showPopup, POPUP_DELAY);
-
-        // Detectar botón back
         history.pushState(null, '', location.href);
         window.addEventListener('popstate', function() {
             if (!popupShown) {
