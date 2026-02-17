@@ -2308,7 +2308,7 @@ p {
 
 /* Stats bar */
 .stats-bar {
-  background: var(--brand);
+  background: var(--brand-dark);
   padding: 1.5rem 0;
 }
 
