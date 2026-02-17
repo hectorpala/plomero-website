@@ -240,7 +240,7 @@ p {
 }
 
 .nav-link {
-  color: #f97316 !important;
+  color: #C2410C !important;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease;
@@ -248,7 +248,7 @@ p {
 }
 
 .nav-link:hover {
-  color: #ea580c !important;
+  color: #9A3412 !important;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
 }
 
@@ -1201,7 +1201,7 @@ p {
   .nav-link {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #f97316 !important;
+    color: #C2410C !important;
     padding: 1rem 2rem;
     border-radius: 12px;
     transition: all 0.3s ease;
@@ -1830,7 +1830,7 @@ p {
 
 /* Estado activo del enlace Blog en navegación */
 .nav-link.active {
-  color: #f97316 !important;
+  color: #C2410C !important;
   background-color: var(--bg-soft);
   border-radius: var(--radius-sm);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
@@ -2335,7 +2335,7 @@ p {
 
 .stat-label {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.85);
+  color: #fff;
   font-weight: 500;
 }
 
@@ -2377,6 +2377,11 @@ p {
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; box-shadow: 0 0 6px #22c55e; }
   50% { opacity: 0.5; box-shadow: 0 0 12px #22c55e; }
+}
+
+/* Urgency text - WCAG AA contrast fix */
+#urgency-text {
+  color: var(--brand-dark);
 }
 
 /* Hero phone link - hidden by default, shown on mobile */
@@ -2605,7 +2610,7 @@ p {
   .hero-phone-link {
     display: block;
     margin-top: 0.75rem;
-    color: var(--brand);
+    color: var(--brand-dark);
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
