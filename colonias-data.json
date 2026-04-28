@@ -1,0 +1,443 @@
+[
+  {
+    "slug": "burocrata",
+    "nombre": "Burocrática",
+    "cp": "80030",
+    "calle_principal": "Av. Insurgentes",
+    "landmark": "Unidad habitacional FOVISSSTE / ISSSTE",
+    "era_key": "infonavit",
+    "nota": "Colonia de trabajadores del gobierno federal, desarrollada bajo esquema FOVISSSTE durante el auge del sector público en Sinaloa."
+  },
+  {
+    "slug": "morelos",
+    "nombre": "Morelos",
+    "cp": "80170",
+    "calle_principal": "Calle Guadalupe Victoria",
+    "landmark": "Estadio General Ángel Flores (cercanías)",
+    "era_key": "pre1960",
+    "nota": "Barrio histórico con nomenclatura de héroes de la independencia."
+  },
+  {
+    "slug": "insurgentes",
+    "nombre": "Insurgentes",
+    "cp": "80393",
+    "calle_principal": "Av. Insurgentes",
+    "landmark": "Unidad ISSSTE Insurgentes",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "miguel-aleman",
+    "nombre": "Miguel Alemán",
+    "cp": "80200",
+    "calle_principal": "Blvd. Emiliano Zapata",
+    "landmark": "Estadio General Ángel Flores / Jardín Botánico Culiacán",
+    "era_key": "1960s-1975",
+    "nota": "Lleva el nombre del presidente Miguel Alemán (1946-1952), lo que sitúa su fundación en esa época."
+  },
+  {
+    "slug": "san-carlos",
+    "nombre": "San Carlos",
+    "cp": "80178",
+    "calle_principal": "las calles principales",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial de desarrollo reciente en Culiacán."
+  },
+  {
+    "slug": "san-miguel",
+    "nombre": "San Miguel",
+    "cp": "80228",
+    "calle_principal": "Blvd. Colinas de San Miguel",
+    "landmark": "Parroquia San Miguel Arcángel",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de nivel medio-alto en el sector norte de Culiacán."
+  },
+  {
+    "slug": "las-flores",
+    "nombre": "Las Flores",
+    "cp": "80104",
+    "calle_principal": "Blvd. Las Flores",
+    "landmark": "Mercado de Las Flores (más de 50 años)",
+    "era_key": "1960s-1975",
+    "nota": "El Mercado de Las Flores es el landmark más reconocido del área; fue reubicado en 1968-1971 y opera desde hace más de 50 años."
+  },
+  {
+    "slug": "nuevo-culiacan",
+    "nombre": "Nuevo Culiacán",
+    "cp": "80170",
+    "calle_principal": "Calle del Aire",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "1960s-1975",
+    "nota": ""
+  },
+  {
+    "slug": "benito-juarez",
+    "nombre": "Benito Juárez",
+    "cp": "80210",
+    "calle_principal": "Calle Constitución / Calle Francisco Villa",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "1960s-1975",
+    "nota": "Colonia de aprox. 32 ha con 2,900 habitantes y 210 establecimientos comerciales activos."
+  },
+  {
+    "slug": "obrera",
+    "nombre": "Obrera",
+    "cp": "80013",
+    "calle_principal": "Calle Josefa Ortiz de Domínguez",
+    "landmark": "Universidad Autónoma de Sinaloa (UAS) / Estadio Banorte",
+    "era_key": "pre1960",
+    "nota": "Barrio obrero clásico de las primeras expansiones industriales de Culiacán."
+  },
+  {
+    "slug": "libertad",
+    "nombre": "Libertad",
+    "cp": "80180",
+    "calle_principal": "Av. Constituyente Ciro C. Ceballos",
+    "landmark": "comercios de la Av. Constituyentes",
+    "era_key": "pre1960",
+    "nota": "Colonia de aprox. 81 ha con 5,810 habitantes; zona residencial consolidada del poniente de Culiacán."
+  },
+  {
+    "slug": "popular",
+    "nombre": "Popular",
+    "cp": "80120",
+    "calle_principal": "Av. de las Palmas",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "pre1960",
+    "nota": "Una de las colonias más antiguas y densas del sector norte-centro de Culiacán; desarrollo popular de mediados del siglo XX."
+  },
+  {
+    "slug": "gabriel-leyva",
+    "nombre": "Gabriel Leyva",
+    "cp": "80030",
+    "calle_principal": "Blvd. Gabriel Leyva Solano",
+    "landmark": "Plaza Forum Culiacán / Estadio Banorte",
+    "era_key": "1960s-1975",
+    "nota": "La colonia lleva el nombre del general revolucionario sinaloense Gabriel Leyva Solano."
+  },
+  {
+    "slug": "jorge-almada",
+    "nombre": "Jorge Almada",
+    "cp": "80200",
+    "calle_principal": "Calle Juan José Ríos",
+    "landmark": "Delegación de Vialidad y Transporte",
+    "era_key": "1960s-1975",
+    "nota": "Colonia de aprox. 79 ha con 2,170 habitantes en 699 hogares; sector poniente de Culiacán."
+  },
+  {
+    "slug": "lazaro-cardenas",
+    "nombre": "Lázaro Cárdenas",
+    "cp": "80290",
+    "calle_principal": "Calle Lázaro Cárdenas",
+    "landmark": "Centro de salud comunitario de la colonia",
+    "era_key": "residencial-70-90",
+    "nota": "Fundada en torno a 1975; celebró 50 años de historia en 2025. Cubre aprox. 1 km² con 200 manzanas y 4,000 casas."
+  },
+  {
+    "slug": "cuauhtemoc",
+    "nombre": "Cuauhtémoc",
+    "cp": "80027",
+    "calle_principal": "Blvd. Álvaro Obregón",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "1960s-1975",
+    "nota": "Fraccionamiento ubicado en el área norponiente del centro de Culiacán."
+  },
+  {
+    "slug": "emiliano-zapata",
+    "nombre": "Emiliano Zapata",
+    "cp": "80260",
+    "calle_principal": "Blvd. Emiliano Zapata",
+    "landmark": "Mercado de la colonia",
+    "era_key": "1960s-1975",
+    "nota": "Colonia de aprox. 140 ha ubicada a 4.4 km al poniente del centro de Culiacán; alta actividad comercial con aprox. 1,000 locales."
+  },
+  {
+    "slug": "juan-de-dios-batiz",
+    "nombre": "Juan de Dios Bátiz",
+    "cp": "80430",
+    "calle_principal": "Blvd. Juan de Dios Bátiz",
+    "landmark": "Instituto Politécnico Nacional unidad Sinaloa",
+    "era_key": "residencial-70-90",
+    "nota": "Lleva el nombre del político y educador sinaloense Juan de Dios Bátiz Paredes, fundador del IPN."
+  },
+  {
+    "slug": "almada",
+    "nombre": "Almada",
+    "cp": "80200",
+    "calle_principal": "Calle Nicolás Bravo / Calle Aguilar Barraza",
+    "landmark": "Zona histórica del centro de Culiacán",
+    "era_key": "pre1960",
+    "nota": "Una de las colonias más antiguas; los primeros lotes se vendieron en 1932, vinculados a la familia Almada y el desarrollo agrícola de la región."
+  },
+  {
+    "slug": "independencia",
+    "nombre": "Independencia",
+    "cp": "80190",
+    "calle_principal": "Av. Independencia",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "1960s-1975",
+    "nota": ""
+  },
+  {
+    "slug": "humaya",
+    "nombre": "Humaya",
+    "cp": "80020",
+    "calle_principal": "Blvd. Emilio Barragán",
+    "landmark": "Jardines del Humaya (cementerio icónico)",
+    "era_key": "1960s-1975",
+    "nota": "El nombre proviene de los indios Humaya (nación Tebaca) documentados desde 1621. Los Jardines del Humaya, inaugurados en 1969, son el landmark más reconocido a nivel nacional."
+  },
+  {
+    "slug": "altamira",
+    "nombre": "Altamira",
+    "cp": "80027",
+    "calle_principal": "Blvd. Francisco Zarco",
+    "landmark": "plaza comercial local",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento de desarrollo medio-alto al norte de Culiacán; incluye secciones Barceló y Altana bajo el mismo código postal."
+  },
+  {
+    "slug": "bugambilias",
+    "nombre": "Bugambilias",
+    "cp": "80145",
+    "calle_principal": "Avenida de las Higueras",
+    "landmark": "Iglesia de Nuestra Señora de Guadalupe Bugambilias",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "las-palmas",
+    "nombre": "Las Palmas",
+    "cp": "80159",
+    "calle_principal": "Blvd. Las Palmas",
+    "landmark": "Parque Las Palmas",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "valle-alto",
+    "nombre": "Valle Alto",
+    "cp": "80050",
+    "calle_principal": "Blvd. Valle Alto",
+    "landmark": "Parroquia José María Escrivá de Balaguer",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "loma-linda",
+    "nombre": "Loma Linda",
+    "cp": "80177",
+    "calle_principal": "Av. Loma Linda",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "san-isidro",
+    "nombre": "San Isidro",
+    "cp": "80491",
+    "calle_principal": "Calle San Isidro",
+    "landmark": "Parroquia San Isidro Labrador",
+    "era_key": "residencial-70-90",
+    "nota": "Colonia de crecimiento popular en el área periférica de Culiacán."
+  },
+  {
+    "slug": "san-antonio",
+    "nombre": "San Antonio",
+    "cp": "80309",
+    "calle_principal": "las calles principales de San Antonio",
+    "landmark": "Parroquia San Antonio de Padua",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "colinas-de-san-miguel",
+    "nombre": "Colinas de San Miguel",
+    "cp": "80228",
+    "calle_principal": "Blvd. Colinas de San Miguel",
+    "landmark": "Parroquia San Miguel Arcángel",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial de desarrollo más reciente en el sector norte de Culiacán."
+  },
+  {
+    "slug": "aurora",
+    "nombre": "Aurora",
+    "cp": "80060",
+    "calle_principal": "Blvd. Zapata",
+    "landmark": "Parque de la colonia Aurora",
+    "era_key": "1960s-1975",
+    "nota": "Una de las colonias más antiguas del área urbana de Culiacán Rosales."
+  },
+  {
+    "slug": "infonavit-barrancos",
+    "nombre": "Infonavit Barrancos",
+    "cp": "80189",
+    "calle_principal": "Av. General Benjamín Hill",
+    "landmark": "Iglesia Nuestra Señora de la Soledad",
+    "era_key": "infonavit",
+    "nota": "Fraccionamiento de interés social con aprox. 12,800 habitantes. Existe también Infonavit Barrancos II (CP 80184)."
+  },
+  {
+    "slug": "fovissste-humaya",
+    "nombre": "FOVISSSTE Humaya",
+    "cp": "80029",
+    "calle_principal": "Calle DIF / Magisterio Nacional",
+    "landmark": "Estadio Banorte / Plaza Forum Culiacán",
+    "era_key": "infonavit",
+    "nota": "Fraccionamiento habitacional para trabajadores del estado con aprox. 1,710 habitantes en 488 viviendas."
+  },
+  {
+    "slug": "lomas-del-humaya",
+    "nombre": "Lomas del Humaya",
+    "cp": "80029",
+    "calle_principal": "las calles principales",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia residencial en zona norte de Culiacán, área Humaya."
+  },
+  {
+    "slug": "praderas-del-humaya",
+    "nombre": "Praderas del Humaya",
+    "cp": "80059",
+    "calle_principal": "las calles principales",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento en zona Humaya con varias etapas de desarrollo."
+  },
+  {
+    "slug": "solidaridad",
+    "nombre": "Solidaridad",
+    "cp": "80015",
+    "calle_principal": "Calz. de las Américas",
+    "landmark": "Escuela Primaria Solidaridad",
+    "era_key": "moderno-90-2010",
+    "nota": ""
+  },
+  {
+    "slug": "lomas-de-guadalupe",
+    "nombre": "Lomas de Guadalupe",
+    "cp": "80250",
+    "calle_principal": "Calle Juan de Dios Bátiz",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de aprox. 18 ha con 1,000 habitantes; zona oriente de Culiacán a 10 min del centro."
+  },
+  {
+    "slug": "nueva-galicia",
+    "nombre": "Nueva Galicia",
+    "cp": "80295",
+    "calle_principal": "Blvd. de las Torres",
+    "landmark": "Instituto Comercial Nueva Galicia / Mercado de Abastos",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de aprox. 27 ha con 3,370 habitantes y 875 viviendas, cerca del Parque Culiacán 87."
+  },
+  {
+    "slug": "santa-fe",
+    "nombre": "Santa Fe",
+    "cp": "80029",
+    "calle_principal": "las calles principales",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento en zona norte de Culiacán, área Humaya."
+  },
+  {
+    "slug": "san-rafael",
+    "nombre": "San Rafael",
+    "cp": "80150",
+    "calle_principal": "las calles principales de San Rafael",
+    "landmark": "Parroquia San Rafael",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "floresta",
+    "nombre": "Floresta",
+    "cp": "80014",
+    "calle_principal": "Calle Lago Aral",
+    "landmark": "Escuela Primaria Prof. Enrique Romero Jiménez",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento residencial ubicado aprox. 6.7 km al sureste del centro de Culiacán."
+  },
+  {
+    "slug": "la-primavera",
+    "nombre": "La Primavera",
+    "cp": "80199",
+    "calle_principal": "Blvd. La Primavera",
+    "landmark": "Corporativo Coppel / Corporativo Sukarne",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento privado en el sector sur de Culiacán con aprox. 1,440 habitantes y alta plusvalía."
+  },
+  {
+    "slug": "santa-clara",
+    "nombre": "Santa Clara",
+    "cp": "80180",
+    "calle_principal": "las calles principales",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento en el municipio de Culiacán."
+  },
+  {
+    "slug": "los-pinos",
+    "nombre": "Los Pinos",
+    "cp": "80128",
+    "calle_principal": "las calles principales",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "las-americas",
+    "nombre": "Las Américas",
+    "cp": "80016",
+    "calle_principal": "Calzada de las Américas",
+    "landmark": "CADI Las Américas (Escuela Primaria/Preescolar) sobre Av. Josefa Ortiz de Domínguez",
+    "era_key": "residencial-70-90",
+    "nota": "Colonia urbana consolidada, cercana a Plaza Forum Culiacán y Estadio Banorte."
+  },
+  {
+    "slug": "laureles",
+    "nombre": "Laureles",
+    "cp": "80246",
+    "calle_principal": "Blvd. Laureles",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento Laureles Pinos de aprox. 240 hectáreas."
+  },
+  {
+    "slug": "pradera-dorada",
+    "nombre": "Pradera Dorada",
+    "cp": "80058",
+    "calle_principal": "Avenida de la Voluntad",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento con varias etapas: Pradera Dorada, Pradera Dorada II y Pradera Dorada 3a Etapa."
+  },
+  {
+    "slug": "los-alamos",
+    "nombre": "Los Álamos",
+    "cp": "80100",
+    "calle_principal": "Blvd. Pedro Infante",
+    "landmark": "Parque Los Álamos",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento residencial aprox. 22.9 km al noreste del centro municipal."
+  },
+  {
+    "slug": "fresnos",
+    "nombre": "Los Fresnos",
+    "cp": "80010",
+    "calle_principal": "las calles principales",
+    "landmark": "los puntos de referencia de la zona",
+    "era_key": "residencial-70-90",
+    "nota": ""
+  },
+  {
+    "slug": "rincon-del-humaya",
+    "nombre": "Rincón del Humaya",
+    "cp": "80058",
+    "calle_principal": "las calles principales",
+    "landmark": "Río Humaya",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de aprox. 12 ha con 956 habitantes y 267 hogares. El nombre deriva del río Humaya (náhuatl: río grande o caudaloso)."
+  }
+]
