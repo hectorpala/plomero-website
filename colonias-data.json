@@ -3,91 +3,91 @@
     "slug": "burocrata",
     "nombre": "Burocrática",
     "cp": "80030",
-    "calle_principal": "Av. Insurgentes",
-    "landmark": "Unidad habitacional FOVISSSTE / ISSSTE",
-    "era_key": "infonavit",
-    "nota": "Colonia de trabajadores del gobierno federal, desarrollada bajo esquema FOVISSSTE durante el auge del sector público en Sinaloa."
+    "calle_principal": "Av. de las Américas",
+    "landmark": "Jardín Botánico y Zoológico de Culiacán (Av. de las Américas 2131)",
+    "era_key": "residencial-70-90",
+    "nota": "La colonia alberga el Jardín Botánico y Zoológico de Culiacán. En 2024 el municipio anunció regeneración de calles internas incluyendo Salubridad y Estatuto Jurídico."
   },
   {
     "slug": "morelos",
     "nombre": "Morelos",
     "cp": "80170",
-    "calle_principal": "Calle Guadalupe Victoria",
-    "landmark": "Estadio General Ángel Flores (cercanías)",
+    "calle_principal": "Av. Juan de Dios Bátiz",
+    "landmark": "zona contigua a Nuevo Culiacán y San Carlos",
     "era_key": "pre1960",
-    "nota": "Barrio histórico con nomenclatura de héroes de la independencia."
+    "nota": "Colonia de 28 ha con aprox. 2,760 habitantes y 773 viviendas. Sus calles llevan nombres de ríos (Río Tehuantepec, Río Lerma) y bahías (Bahía de Acapulco, Bahía de San Ignacio)."
   },
   {
     "slug": "insurgentes",
     "nombre": "Insurgentes",
     "cp": "80393",
-    "calle_principal": "Av. Insurgentes",
-    "landmark": "Unidad ISSSTE Insurgentes",
+    "calle_principal": "Blvd. Lázaro Cárdenas",
+    "landmark": "Escuela primaria de la SEP",
     "era_key": "residencial-70-90",
-    "nota": ""
+    "nota": "En octubre de 2024, Insurgentes fue una de las más de 90 colonias de Culiacán que amanecieron sin agua por falla en la planta potabilizadora Juan de Dios Bátiz; JAPAC distribuyó agua en pipas."
   },
   {
     "slug": "miguel-aleman",
     "nombre": "Miguel Alemán",
     "cp": "80200",
     "calle_principal": "Blvd. Emiliano Zapata",
-    "landmark": "Estadio General Ángel Flores / Jardín Botánico Culiacán",
-    "era_key": "1960s-1975",
-    "nota": "Lleva el nombre del presidente Miguel Alemán (1946-1952), lo que sitúa su fundación en esa época."
+    "landmark": "Escuela Primaria Sócrates (Calle Dr. Ruperto L. Paliza)",
+    "era_key": "pre1960",
+    "nota": "Colonia de 58 ha con 2,880 habitantes y aprox. 580 establecimientos comerciales. Lleva el nombre del presidente Miguel Alemán (1946-1952), que sitúa su fundación en esa época."
   },
   {
     "slug": "san-carlos",
     "nombre": "San Carlos",
     "cp": "80178",
-    "calle_principal": "las calles principales",
-    "landmark": "los puntos de referencia de la zona",
-    "era_key": "moderno-90-2010",
-    "nota": "Fraccionamiento residencial de desarrollo reciente en Culiacán."
+    "calle_principal": "Blvd. Guillermo Ibarra",
+    "landmark": "colindante con Colonia Morelos y Nuevo Culiacán",
+    "era_key": "residencial-70-90",
+    "nota": "Clasificado como fraccionamiento en el catálogo SEPOMEX; su CP 80178 es compartido con colonias del sector poniente de Culiacán."
   },
   {
     "slug": "san-miguel",
     "nombre": "San Miguel",
     "cp": "80228",
-    "calle_principal": "Blvd. Colinas de San Miguel",
-    "landmark": "Parroquia San Miguel Arcángel",
+    "calle_principal": "Blvd. Rotarismo",
+    "landmark": "Cerro del Vigía (hito natural dentro del fraccionamiento)",
     "era_key": "moderno-90-2010",
-    "nota": "Fraccionamiento de nivel medio-alto en el sector norte de Culiacán."
+    "nota": "El fraccionamiento toma su nombre de la fundación original de Culiacán el 29 de septiembre de 1531 bajo el nombre de Villa de San Miguel. Abarca 74 ha con 1,420 habitantes en 367 viviendas."
   },
   {
     "slug": "las-flores",
     "nombre": "Las Flores",
     "cp": "80104",
-    "calle_principal": "Blvd. Las Flores",
-    "landmark": "Mercado de Las Flores (más de 50 años)",
+    "calle_principal": "Blvd. de las Torres",
+    "landmark": "Country Club de Culiacán (fundado en 1966, campo de golf Las Iguanas)",
     "era_key": "1960s-1975",
-    "nota": "El Mercado de Las Flores es el landmark más reconocido del área; fue reubicado en 1968-1971 y opera desde hace más de 50 años."
+    "nota": "La colonia abarca aprox. 35 ha con 503 habitantes; el Country Club de Culiacán, fundado en 1966, es el principal punto de referencia de la zona."
   },
   {
     "slug": "nuevo-culiacan",
     "nombre": "Nuevo Culiacán",
     "cp": "80170",
-    "calle_principal": "Calle del Aire",
-    "landmark": "los puntos de referencia de la zona",
+    "calle_principal": "Bahía de Acapulco / Av. Juan de Dios Bátiz",
+    "landmark": "colindante con Morelos, San Carlos y Los Pinos",
     "era_key": "1960s-1975",
-    "nota": ""
+    "nota": "Sus calles siguen una nomenclatura temática de bahías (Bahía de Acapulco, Bahía de Altamira, Bahía de Altata) y ríos (Río Aguanaval, Río Ameca, Río Lerma), patrón típico de fraccionamientos planificados de los años 60."
   },
   {
     "slug": "benito-juarez",
     "nombre": "Benito Juárez",
     "cp": "80210",
-    "calle_principal": "Calle Constitución / Calle Francisco Villa",
+    "calle_principal": "Av. Constitución / Av. Francisco Villa",
     "landmark": "los puntos de referencia de la zona",
-    "era_key": "1960s-1975",
-    "nota": "Colonia de aprox. 32 ha con 2,900 habitantes y 210 establecimientos comerciales activos."
+    "era_key": "pre1960",
+    "nota": "Colonia de 32 ha con aprox. 2,900 habitantes. En 2024 el gobierno estatal entregó obras de pavimentación en Benito Juárez financiadas con recursos del estado de Sinaloa."
   },
   {
     "slug": "obrera",
     "nombre": "Obrera",
     "cp": "80013",
-    "calle_principal": "Calle Josefa Ortiz de Domínguez",
-    "landmark": "Universidad Autónoma de Sinaloa (UAS) / Estadio Banorte",
+    "calle_principal": "Blvd. Universitarios / Calle Josefa Ortiz de Domínguez",
+    "landmark": "zona universitaria de Culiacán (colindante con Universitaria y Riberas de Tamazula)",
     "era_key": "pre1960",
-    "nota": "Barrio obrero clásico de las primeras expansiones industriales de Culiacán."
+    "nota": "Una de las colonias más antiguas de Culiacán, surgida en los años 40 sobre terrenos ejidales durante el boom demográfico que llevó a la ciudad de 22,025 habitantes en 1940 a casi 50,000 en 1950. El nombre oficial SEPOMEX es Obrero Campesino."
   },
   {
     "slug": "libertad",
