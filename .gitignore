@@ -19,6 +19,11 @@ package-lock.json
 
 # Logs
 *.log
+site-check/logs/
+
+# Temp files
+*.tmp
+.tmp
 
 # Environment
 .env
@@ -35,6 +40,8 @@ package-lock.json
 # Python
 *.pyc
 __pycache__/
+venv/
+*.db
 
 # Google APIs
 client_secret.json
@@ -44,10 +51,13 @@ token.json
 dist/
 build/
 
+# Backup files
+*.backup
+*.backup-*
+*.original
+
 # Claude Code
 .claude/settings.local.json
-*.backup
-*.original
 
 # Local Netlify folder
 .netlify
