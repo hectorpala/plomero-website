@@ -273,37 +273,37 @@
     "slug": "infonavit-barrancos",
     "nombre": "Infonavit Barrancos",
     "cp": "80189",
-    "calle_principal": "Av. General Benjamín Hill",
-    "landmark": "Iglesia Nuestra Señora de la Soledad",
+    "calle_principal": "Calle General Pablo Macías Valenzuela",
+    "landmark": "Plaza Barrancos y Parque Casa Blanca",
     "era_key": "infonavit",
-    "nota": "Fraccionamiento de interés social con aprox. 12,800 habitantes. Existe también Infonavit Barrancos II (CP 80184)."
+    "nota": "Una de las colonias más pobladas de Sinaloa con 12,800 habitantes en 83 hectáreas. Vecinos han reportado semanas completas sin servicio de agua potable por parte de JAPAC sin respuesta oportuna."
   },
   {
     "slug": "fovissste-humaya",
     "nombre": "FOVISSSTE Humaya",
     "cp": "80029",
-    "calle_principal": "Calle DIF / Magisterio Nacional",
-    "landmark": "Estadio Banorte / Plaza Forum Culiacán",
+    "calle_principal": "Calle Magisterio Nacional",
+    "landmark": "Escuela Primaria zona Humaya — calles internas con nombres de piedras preciosas (Ópalo, Turquesa, Zafiro)",
     "era_key": "infonavit",
-    "nota": "Fraccionamiento habitacional para trabajadores del estado con aprox. 1,710 habitantes en 488 viviendas."
+    "nota": "Desarrollo habitacional construido exclusivamente para trabajadores del Estado afiliados al ISSSTE; su trazo interno utiliza nombres de piedras preciosas para identificar las calles."
   },
   {
     "slug": "lomas-del-humaya",
     "nombre": "Lomas del Humaya",
     "cp": "80029",
-    "calle_principal": "las calles principales",
-    "landmark": "los puntos de referencia de la zona",
+    "calle_principal": "Boulevard Constelación",
+    "landmark": "Iglesia San Juan (zona Humaya)",
     "era_key": "moderno-90-2010",
-    "nota": "Colonia residencial en zona norte de Culiacán, área Humaya."
+    "nota": "Colonia residencial en la periferia nororiente de Culiacán; forma parte del corredor de crecimiento urbano sobre el río Humaya."
   },
   {
     "slug": "praderas-del-humaya",
     "nombre": "Praderas del Humaya",
     "cp": "80059",
-    "calle_principal": "las calles principales",
-    "landmark": "los puntos de referencia de la zona",
+    "calle_principal": "Calle Ley Humaya",
+    "landmark": "área verde y parque interior del fraccionamiento",
     "era_key": "moderno-90-2010",
-    "nota": "Fraccionamiento en zona Humaya con varias etapas de desarrollo."
+    "nota": "Fraccionamiento de interés social desarrollado en la etapa de expansión urbana de Culiacán hacia el nororiente."
   },
   {
     "slug": "solidaridad",
@@ -312,43 +312,52 @@
     "calle_principal": "Calz. de las Américas",
     "landmark": "Escuela Primaria Solidaridad",
     "era_key": "moderno-90-2010",
-    "nota": ""
+    "nota": "Su nombre refleja el programa federal Solidaridad (PRONASOL) de la administración Salinas de Gortari."
   },
   {
     "slug": "lomas-de-guadalupe",
     "nombre": "Lomas de Guadalupe",
     "cp": "80250",
-    "calle_principal": "Calle Juan de Dios Bátiz",
-    "landmark": "los puntos de referencia de la zona",
+    "calle_principal": "Boulevard Lomas de Guadalupe",
+    "landmark": "Escuela Primaria Josué R. Díaz",
     "era_key": "moderno-90-2010",
-    "nota": "Fraccionamiento de aprox. 18 ha con 1,000 habitantes; zona oriente de Culiacán a 10 min del centro."
+    "nota": "Fraccionamiento ubicado en zona sur-poniente de Culiacán; ha sido afectado recurrentemente por cortes de agua derivados de fallas en la infraestructura hidráulica de la ciudad."
   },
   {
     "slug": "nueva-galicia",
     "nombre": "Nueva Galicia",
     "cp": "80295",
-    "calle_principal": "Blvd. de las Torres",
-    "landmark": "Instituto Comercial Nueva Galicia / Mercado de Abastos",
+    "calle_principal": "Boulevard de las Torres",
+    "landmark": "Instituto Comercial Nueva Galicia — calles con nombres de misiones franciscanas",
     "era_key": "moderno-90-2010",
-    "nota": "Fraccionamiento de aprox. 27 ha con 3,370 habitantes y 875 viviendas, cerca del Parque Culiacán 87."
+    "nota": "Fraccionamiento con 3,370 habitantes cuyo trazo vial usa nombres de misiones franciscanas (Misión de San Miguel Arcángel, Misión de San Gabriel Arcángel). Perfil socioeconómico C."
   },
   {
     "slug": "santa-fe",
     "nombre": "Santa Fe",
     "cp": "80029",
-    "calle_principal": "las calles principales",
-    "landmark": "los puntos de referencia de la zona",
+    "calle_principal": "Boulevard Santa Fe",
+    "landmark": "Edificio Santa Fe / área comercial interna del fraccionamiento",
     "era_key": "moderno-90-2010",
-    "nota": "Fraccionamiento en zona norte de Culiacán, área Humaya."
+    "nota": "Uno de los fraccionamientos más poblados de Sinaloa con aprox. 9,250 habitantes en 89 hectáreas; comparte CP 80029 con FOVISSSTE Humaya y Lomas del Humaya."
   },
   {
     "slug": "san-rafael",
     "nombre": "San Rafael",
     "cp": "80150",
-    "calle_principal": "las calles principales de San Rafael",
-    "landmark": "Parroquia San Rafael",
-    "era_key": "residencial-70-90",
-    "nota": ""
+    "calle_principal": "Boulevard Emiliano Zapata",
+    "landmark": "Parroquia San Rafael (primera piedra 1947, concluida 1957)",
+    "era_key": "pre1960",
+    "nota": "Una de las colonias más antiguas de Culiacán; la Parroquia San Rafael es su referencia histórica más visible, con construcción iniciada en 1947 y terminada en 1957."
+  },
+  {
+    "slug": "villa-del-real",
+    "nombre": "Villa del Real",
+    "cp": "80247",
+    "calle_principal": "Boulevard Villa del Real",
+    "landmark": "parques internos del fraccionamiento",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de vivienda social con aprox. 5,850 habitantes en 43 hectáreas; desarrollado para atender la demanda de vivienda popular en el nororiente de Culiacán."
   },
   {
     "slug": "floresta",
