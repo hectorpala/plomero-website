@@ -1348,5 +1348,455 @@
     "landmark": "Escuelas, templos y centros comerciales en radio de 1 km (zona Humaya)",
     "era_key": "moderno-90-2010",
     "nota": "Colonia de baja densidad (aproximadamente 483 habitantes en 240 hectáreas) con vocación residencial tranquila; el promedio de escolaridad alto (12 años) indica un perfil de clase media consolidada de los años 90."
+  },
+  {
+    "slug": "campestre-san-jorge",
+    "nombre": "Campestre San Jorge",
+    "cp": "80029",
+    "calle_principal": "Avenida Los Mochis",
+    "landmark": "Parque 87 y Supermercado Ley cercanos; próximo a Estadio Dorado",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento autorizado formalmente por el Ayuntamiento de Culiacán en diciembre de 2006, consolidándose como desarrollo habitacional al nororiente de la ciudad con acceso rápido al Estadio Dorado."
+  },
+  {
+    "slug": "campestre-tres-rios",
+    "nombre": "Campestre Tres Ríos",
+    "cp": "80028",
+    "calle_principal": "Boulevard Alfonso Zaragoza Maytorena",
+    "landmark": "Forum Mall Culiacán (el centro comercial más grande de la ciudad) y Hospital de Especialidades Tres Ríos",
+    "era_key": "moderno-90-2010",
+    "nota": "Colinda con el Desarrollo Urbano Tres Ríos, el nuevo distrito central de negocios de Culiacán que concentra torres corporativas y el mayor mall del estado de Sinaloa."
+  },
+  {
+    "slug": "campo-batan",
+    "nombre": "Campo Batán",
+    "cp": "80308",
+    "calle_principal": "Boulevard Emiliano Zapata",
+    "landmark": "Campo Agrícola El Batán; zona de Aguaruto sobre Río Culiacán",
+    "era_key": "pre1960",
+    "nota": "Asentamiento periurbano de origen agrícola ligado al campo de cultivo El Batán en la sindicatura de Aguaruto; la economía local se sustentó históricamente en la agricultura de riego."
+  },
+  {
+    "slug": "campo-bello",
+    "nombre": "Campo Bello",
+    "cp": "80140",
+    "calle_principal": "Avenida Bonampak",
+    "landmark": "Parque Campo Bello rehabilitado; proximidad al Aeropuerto Internacional de Culiacán",
+    "era_key": "infonavit",
+    "nota": "Fraccionamiento ubicado al sureste de Culiacán en las inmediaciones del aeropuerto; su parque fue sujeto de rehabilitación municipal con alumbrado LED y equipamiento deportivo."
+  },
+  {
+    "slug": "canaco",
+    "nombre": "CANACO",
+    "cp": "80059",
+    "calle_principal": "Boulevard Francisco Labastida Ochoa (acceso noreste)",
+    "landmark": "Instalaciones originales de la Cámara Nacional de Comercio de Culiacán (CANACO Culiacán)",
+    "era_key": "residencial-70-90",
+    "nota": "El fraccionamiento toma su nombre de la Cámara Nacional de Comercio de Culiacán; abarca unas 17 hectáreas con alrededor de 632 unidades habitacionales en la zona noreste de la ciudad."
+  },
+  {
+    "slug": "canadas",
+    "nombre": "Cañadas",
+    "cp": "80178",
+    "calle_principal": "Boulevard Rolando Arjona",
+    "landmark": "INFONAVIT Cañadas (fraccionamiento contiguo CP 80179); Unidad Deportiva Las Palomas cercana",
+    "era_key": "infonavit",
+    "nota": "Fraccionamiento del poniente de Culiacán desarrollado en paralelo con su sección INFONAVIT; el Boulevard Rolando Arjona fue ampliado y modernizado como vía estructurante del sector."
+  },
+  {
+    "slug": "canitas",
+    "nombre": "Cañitas",
+    "cp": "80430",
+    "calle_principal": "Calle Benito Juárez (zona norte municipal)",
+    "landmark": "Colonia Nuevas Cañitas colindante; acceso por carretera periférica norte",
+    "era_key": "1960s-1975",
+    "nota": null
+  },
+  {
+    "slug": "cantabria",
+    "nombre": "Cantabria",
+    "cp": "80301",
+    "calle_principal": "Boulevard Cantabria",
+    "landmark": "Semiprivada Stanza Cantabria; proximidad a Boulevard Universo en zona sur",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento al sur de Culiacán cuyo boulevard interno lleva el nombre de la propia colonia; las calles internas rinden homenaje a regiones españolas como Alfoz de Lloredo, reflejo de un urbanismo temático de finales de los 90."
+  },
+  {
+    "slug": "cantaluna",
+    "nombre": "Cantaluna",
+    "cp": "80019",
+    "calle_principal": "Avenida Álvaro Obregón (zona centro-norte)",
+    "landmark": "Zona habitacional cercana al Centro Histórico de Culiacán Rosales",
+    "era_key": "residencial-70-90",
+    "nota": null
+  },
+  {
+    "slug": "capistrano-residencial",
+    "nombre": "Capistrano Residencial",
+    "cp": "80194",
+    "calle_principal": "Avenida Misión Bucareli",
+    "landmark": "Plaza San Isidro (3 min) y Bodega Aurrera Capistrano; zona noreste de Culiacán",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial de unas 82 hectáreas al noreste de la ciudad, desarrollado en la primera década del siglo XXI dentro del corredor de crecimiento urbano hacia el noreste de Culiacán Rosales."
+  },
+  {
+    "slug": "carlos-solidario",
+    "nombre": "Carlos Solidario",
+    "cp": "80186",
+    "calle_principal": "Calle Carlos Solidario / Prolongación Insurgentes",
+    "landmark": "Sector norponiente, próximo a Canal de Riego Los Dorados",
+    "era_key": "infonavit",
+    "nota": "Colonia de interés social desarrollada en los años 80, con vivienda tipo serie de block y losa plana; su nombre hace referencia al programa de solidaridad social federal de esa época."
+  },
+  {
+    "slug": "casa-blanca",
+    "nombre": "Casa Blanca",
+    "cp": "80184",
+    "calle_principal": "Avenida Casa Blanca / Blvd. Barrancos",
+    "landmark": "Plaza España y Plaza Barrancos, Soriana Híper Barrancos",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial desarrollado a finales de los años 90 en el sector suroriente de Culiacán, adyacente a la zona de fraccionamientos INFONAVIT Barrancos; cuenta con traza vial reticular y áreas verdes internas."
+  },
+  {
+    "slug": "casas-lindas",
+    "nombre": "Casas Lindas",
+    "cp": "80184",
+    "calle_principal": "Calle Juan de Dios Bátiz / Acceso Casas Lindas",
+    "landmark": "Colindante con Colonia Juan de Dios Bátiz y fraccionamientos INFONAVIT Barrancos",
+    "era_key": "moderno-90-2010",
+    "nota": null
+  },
+  {
+    "slug": "cedros",
+    "nombre": "Cedros",
+    "cp": "80408",
+    "calle_principal": "Calle Los Cedros / Blvd. Rolando Arjona Amábilis",
+    "landmark": "Escuelas primarias y secundarias del sector; proximidad a Blvd. Rotarismo",
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia del sector norponiente de Culiacán con trazado en calles cerradas que le dan carácter semiprivado; considerada zona de alta plusvalía con fuerte demanda de vivienda en el norte de la ciudad."
+  },
+  {
+    "slug": "centenario",
+    "nombre": "Centenario",
+    "cp": "80184",
+    "calle_principal": "Blvd. Centenario / Calle Centenario",
+    "landmark": "Centro Sinaloa de las Artes (antiguo edificio universitario rescatado en 2009)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial situado aproximadamente 5 km al sureste del centro urbano de Culiacán; el nombre evoca el centenario de la independencia y el edificio del Centro Sinaloa de las Artes fue la sede de la universidad más antigua del noroeste de México."
+  },
+  {
+    "slug": "centro",
+    "nombre": "Centro",
+    "cp": "80000",
+    "calle_principal": "Avenida Álvaro Obregón",
+    "landmark": "Basílica Catedral de Nuestra Señora del Rosario y Plazuela Álvaro Obregón",
+    "era_key": "pre1960",
+    "nota": "Centro histórico de Culiacán con trama urbana colonial; la Catedral fue construida entre 1842 y 1885, y la Plazuela Álvaro Obregón alberga el cañón del héroe Antonio Rosales, símbolo de la Batalla de San Pedro de 1864."
+  },
+  {
+    "slug": "centro-sinaloa",
+    "nombre": "Centro Sinaloa",
+    "cp": "80000",
+    "calle_principal": "Blvd. Gabriel Leyva Solano / Calle Constitución",
+    "landmark": "Mercado Garmendia y zona comercial del centro ampliado de Culiacán",
+    "era_key": "1960s-1975",
+    "nota": "Colonia tradicional que forma parte del área central de Culiacán, desarrollada como extensión residencial del centro histórico durante la expansión urbana de los años 60-70."
+  },
+  {
+    "slug": "chapultepec",
+    "nombre": "Chapultepec",
+    "cp": "80040",
+    "calle_principal": "Blvd. Jesús Rodolfo Acedo / Calle El Pino",
+    "landmark": "Jardín Botánico de Culiacán y Zoológico Municipal, Hospital General",
+    "era_key": "residencial-70-90",
+    "nota": "Colonia fundada en 1950 por Edificaciones Dávila Valencia como desarrollo residencial privado; desde su origen fue concebida como 'el Culiacán del futuro' y hoy es una de las zonas de mayor plusvalía y arraigo de clase media-alta en la ciudad."
+  },
+  {
+    "slug": "chapultepec-del-rio",
+    "nombre": "Chapultepec del Río",
+    "cp": "80040",
+    "calle_principal": "Blvd. Jesús Rodolfo Acedo / Paseo del Río",
+    "landmark": "Malecón del Río Humaya / Paseo del Río Culiacán",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento desarrollado en la ribera del Río Humaya como extensión moderna de la Colonia Chapultepec; comparte código postal con la colonia madre pero tiene traza más reciente orientada hacia el boulevard fluvial."
+  },
+  {
+    "slug": "chulavista",
+    "nombre": "Chulavista",
+    "cp": "80194",
+    "calle_principal": "Blvd. Enrique Sánchez Alonso / Calle Domingo Rubí",
+    "landmark": "Ruta de transporte urbano Chulavista; colindancia con Rincón del Parque",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de 28 hectáreas con aproximadamente 5,160 habitantes en 1,350 unidades habitacionales; desarrollado en el sector poniente de Culiacán como parte de la expansión residencial de los años 90-2000."
+  },
+  {
+    "slug": "cibeles",
+    "nombre": "Cibeles",
+    "cp": "80029",
+    "calle_principal": "Vialidad Sacramento",
+    "landmark": "Puente Grupo Cementos Chihuahua sobre Vialidad Sacramento",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento privado en la zona norte de Culiacán, colindante con Lomas Verdes; comparte código postal 80029 con varios fraccionamientos del sector Humaya."
+  },
+  {
+    "slug": "cimas-del-humaya",
+    "nombre": "Cimas del Humaya",
+    "cp": "80029",
+    "calle_principal": "Calle Quinta",
+    "landmark": "Jardines del Humaya (panteón monumental), referencia icónica del sector norte",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento en el sector Humaya norte; en 2013 el Ayuntamiento de Culiacán ejecutó pavimentación en sus calles internas como parte de los programas de obra pública municipal."
+  },
+  {
+    "slug": "cnop",
+    "nombre": "CNOP",
+    "cp": "80297",
+    "calle_principal": "Boulevard Minas (Guillermo Prieto)",
+    "landmark": "Unidad DIF CNOP / Centro de Desarrollo Comunitario CNOP",
+    "era_key": "infonavit",
+    "nota": "Colonia popular nombrada por la Confederación Nacional de Organizaciones Populares; su traza urbana y vivienda tipo corresponden a los programas habitacionales del PRI de los años 1970-1980, con aproximadamente 549 viviendas en 24 hectáreas."
+  },
+  {
+    "slug": "colina-del-rey",
+    "nombre": "Colina del Rey",
+    "cp": "80177",
+    "calle_principal": "Avenida México 68 (Boulevard Lomas del Boulevard)",
+    "landmark": "Plaza Galerías San Miguel / Secundaria Técnica No. 72",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento residencial ubicado en el sector sur-poniente de Culiacán, a escasos dos bloques de Avenida México 68; su ubicación elevada y traza corresponden a los fraccionamientos de clase media-alta de los años 80."
+  },
+  {
+    "slug": "colinas-de-la-campina",
+    "nombre": "Colinas de la Campiña",
+    "cp": "80064",
+    "calle_principal": "Avenida Los Sauces",
+    "landmark": "Fraccionamiento La Campiña (desarrollo vecino de referencia)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento urbano en la zona sur-poniente de Culiacán; comparte entorno con el fraccionamiento homónimo que alberga cerca de 3,940 habitantes en 1,110 hogares."
+  },
+  {
+    "slug": "colinas-de-la-rivera",
+    "nombre": "Colinas de la Rivera",
+    "cp": "80025",
+    "calle_principal": "Boulevard Jardín de las Orquídeas",
+    "landmark": "Estadio Dorados de Sinaloa (inaugurado 2003, 21,000 localidades)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial en la zona norte de Culiacán, sector Humaya, colindante con Balcones del Humaya. El Estadio Dorados a metros del fraccionamiento es su referencia urbana más reconocida."
+  },
+  {
+    "slug": "colinas-de-la-rivera-segunda-seccion",
+    "nombre": "Colinas de la Rivera Segunda Sección",
+    "cp": "80025",
+    "calle_principal": "Boulevard Jardín de las Orquídeas",
+    "landmark": "Estadio Dorados de Sinaloa / Villa Fontana (colindante)",
+    "era_key": "moderno-90-2010",
+    "nota": "Segunda etapa del fraccionamiento Colinas de la Rivera; la primera sección constó de 474 viviendas unifamiliares en lotes de 7×17 metros, con calles de asfalto y banquetas de concreto."
+  },
+  {
+    "slug": "colinas-de-san-antonio",
+    "nombre": "Colinas de San Antonio",
+    "cp": "80309",
+    "calle_principal": "Carretera Internacional México 15 (salida norte)",
+    "landmark": "Acceso norte de Culiacán sobre carretera México 15",
+    "era_key": "moderno-90-2010",
+    "nota": "Desarrollo campestre-habitacional en la periferia norte de Culiacán; los lotes son de gran superficie (1,100–1,470 m²), orientados a uso campestre y residencial de baja densidad."
+  },
+  {
+    "slug": "colinas-del-bosque",
+    "nombre": "Colinas del Bosque",
+    "cp": "80197",
+    "calle_principal": "Boulevard Las Torres",
+    "landmark": "Plaza San Isidro (sector Barrancos, frente al fraccionamiento)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento ubicado al sur de Culiacán en el sector Barrancos; sus calles internas llevan nombres florales (Circuito de las Amapolas, Circuito de los Lirios, Calle de los Crisantemos), rasgo típico de los desarrollos residenciales de los años 90."
+  },
+  {
+    "slug": "colinas-del-humaya",
+    "nombre": "Colinas del Humaya",
+    "cp": "80029",
+    "calle_principal": "Boulevard Vialidad Humaya",
+    "landmark": "Jardines del Humaya (panteón monumental, referencia regional del sector norte)",
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia residencial en el sector norte de Culiacán, adyacente a universidades como Tec de Monterrey y hospitales privados. Comparte código postal 80029 con varios fraccionamientos del corredor Humaya."
+  },
+  {
+    "slug": "colinas-del-parque",
+    "nombre": "Colinas del Parque",
+    "cp": "80176",
+    "calle_principal": "Blvd. Colinas del Parque / Calle Montebello",
+    "landmark": "Galerías San Miguel y Estadio de los Tomateros (menos de 5 min al noroeste)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial ubicado en la zona norte-poniente de Culiacán, desarrollado a partir de los años 2000 con acceso cercano a Álvaro Obregón Sur y La Lomita."
+  },
+  {
+    "slug": "colinas-del-sol",
+    "nombre": "Colinas del Sol",
+    "cp": "80194",
+    "calle_principal": "Avenida Colinas del Sol",
+    "landmark": "Zona norte de Culiacán, próximo a Colinas de San Miguel y Fincas de las Colinas",
+    "era_key": "moderno-90-2010",
+    "nota": null
+  },
+  {
+    "slug": "colinas-del-tamazula",
+    "nombre": "Colinas del Tamazula",
+    "cp": "80064",
+    "calle_principal": "Acceso vía Avenida Tamazula / corredor Lomas de Tamazula",
+    "landmark": "Río Tamazula y fraccionamiento Riberas de Tamazula (colindante)",
+    "era_key": "moderno-90-2010",
+    "nota": "Pequeño fraccionamiento urbano contiguo al corredor del Río Tamazula en la zona oriente de Culiacán; comparte infraestructura vial con Riberas de Tamazula y Lomas de Tamazula."
+  },
+  {
+    "slug": "comunicadores",
+    "nombre": "Comunicadores",
+    "cp": "80034",
+    "calle_principal": "Avenida General Ignacio López Rayón",
+    "landmark": "Fraccionamiento Los Cisnes (mismo CP 80034, colindante)",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento cuyo nombre evoca a los trabajadores de medios de comunicación; ubicado en la zona noroeste de Culiacán, comparte código postal 80034 con Los Cisnes."
+  },
+  {
+    "slug": "condesa",
+    "nombre": "Condesa",
+    "cp": "80100",
+    "calle_principal": "Vialidad del Congreso",
+    "landmark": "Congreso del Estado de Sinaloa (referencia directa en la dirección postal)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial privado colindante con el Palacio Legislativo del Congreso del Estado; desarrollado en los 90s con acceso cercano a Plaza Ceiba, Costco y campus Tec de Monterrey Culiacán."
+  },
+  {
+    "slug": "conquista-del-rey",
+    "nombre": "Conquista del Rey",
+    "cp": "80058",
+    "calle_principal": "Boulevard de los Azahares / Boulevard La Nueva España",
+    "landmark": "Fraccionamiento La Conquista (contiguo, mismo CP) y Prados de la Conquista",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial en la zona noreste de Culiacán, parte del corredor de desarrollos 'La Conquista'; comparte código postal 80058 con La Conquista y Bosques del Rey."
+  },
+  {
+    "slug": "constitucion-croc",
+    "nombre": "Constitución CROC",
+    "cp": "80249",
+    "calle_principal": "Avenida Constitución",
+    "landmark": "Delegación local de la CROC Sinaloa y escuelas primarias de la zona obrera",
+    "era_key": "infonavit",
+    "nota": "Colonia de origen sindical promovida por la Confederación Revolucionaria de Obreros y Campesinos (CROC, fundada 1952); su traza y tipología de vivienda tipo serie corresponde al modelo de colonias obreras de los años 70s-80s."
+  },
+  {
+    "slug": "constituyentes",
+    "nombre": "Constituyentes",
+    "cp": "80430",
+    "calle_principal": "Avenida Álvaro Obregón / Calle Donato Guerra Norte",
+    "landmark": "Jardín de Niños federal en la colonia y zona centro-sur de Culiacán",
+    "era_key": "1960s-1975",
+    "nota": "Colonia popular del centro-sur de Culiacán que rinde homenaje al Congreso Constituyente de 1917; el código postal 80430 agrupa colonias históricas del casco urbano como Benito Juárez Sur y Solidaridad."
+  },
+  {
+    "slug": "corcega",
+    "nombre": "Córcega",
+    "cp": "80294",
+    "calle_principal": "Avenida Córcega / Calle Costa Jónica",
+    "landmark": "Fraccionamiento Stanza Córcega (acceso controlado) y Costa del Sol (mismo CP, contiguo)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento temático de los 90s inspirado en la isla mediterránea homónima; sus calles llevan nombres de costas mediterráneas (Sicilianas, Costa Jónica, Costa Alvinia), con vivienda residencial de acceso controlado."
+  },
+  {
+    "slug": "corcega-elite",
+    "nombre": "Córcega Elite",
+    "cp": "80294",
+    "calle_principal": "Avenida Córcega (sección Elite)",
+    "landmark": "Acceso privado dentro del conjunto Córcega, colindante con Costa del Sol",
+    "era_key": "moderno-90-2010",
+    "nota": "Subsección residencial de mayor plusvalía dentro del desarrollo Córcega; comparte CP 80294 con Córcega y Costa del Sol, ofreciendo viviendas de mayores dimensiones con amenidades de acceso restringido."
+  },
+  {
+    "slug": "costa-del-sol",
+    "nombre": "Costa del Sol",
+    "cp": "80294",
+    "calle_principal": "Avenida Costa del Alba",
+    "landmark": "Zona periférica sur de Culiacán, cerca del libramiento carretero",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de carácter residencial medio-alto ubicado en la periferia sur de Culiacán; su código postal 80294 también agrupa colonias vecinas como La Primavera y El Trébol."
+  },
+  {
+    "slug": "costa-rica",
+    "nombre": "Costa Rica",
+    "cp": "80430",
+    "calle_principal": "Boulevard Emiliano Zapata",
+    "landmark": "Sindicatura de Costa Rica, segunda ciudad en población del municipio de Culiacán, a 25 km al suroeste",
+    "era_key": "1960s-1975",
+    "nota": "Elevada a rango de sindicatura el 9 de octubre de 1946; con una extensión de 450 km² es el segundo asentamiento más poblado del municipio de Culiacán."
+  },
+  {
+    "slug": "country-alamos",
+    "nombre": "Country Álamos",
+    "cp": "80100",
+    "calle_principal": "Boulevard Alfonso G. Calderón Velarde",
+    "landmark": "Plaza Ceiba y Costco cercanos; colinda con el Country Club de Culiacán y campo de golf",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento residencial de clase media-alta con acceso controlado y vigilancia 24 horas; forma parte del corredor Country al norponiente de Culiacán junto con San Ángel y Portales del Country."
+  },
+  {
+    "slug": "country-courts",
+    "nombre": "Country Courts",
+    "cp": "80107",
+    "calle_principal": "Boulevard Pedro Infante (altura 2911)",
+    "landmark": "Desarrollo Urbano Tres Ríos; edificio corporativo inteligente Country Courts sobre Blvd. Pedro Infante",
+    "era_key": "moderno-90-2010",
+    "nota": "Complejo de uso mixto (corporativo y residencial) con arquitectura contemporánea; se ubica en el nuevo distrito central de negocios de Culiacán, dentro del Desarrollo Urbano Tres Ríos."
+  },
+  {
+    "slug": "country-del-rio",
+    "nombre": "Country del Río",
+    "cp": "80050",
+    "calle_principal": "Avenida Villas del Río",
+    "landmark": "Riberas del río Culiacán; corredor de fraccionamientos de alto nivel con acceso a malecón",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento residencial de clase media-alta asentado sobre la ribera del río Culiacán; convive en el mismo código postal con Culiacán Tres Ríos I, Villas del Río y Bosques del Río."
+  },
+  {
+    "slug": "country-tres-rios",
+    "nombre": "Country Tres Ríos",
+    "cp": "80107",
+    "calle_principal": "Boulevard Alfonso G. Calderón Velarde 2191 Poniente",
+    "landmark": "Estadio Dorados de Sinaloa, Zoológico de Culiacán y Plaza Forum Culiacán en las inmediaciones",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial de alto nivel inserto en el Desarrollo Urbano Tres Ríos, creado en 1991 por el gobierno estatal para controlar las avenidas de los ríos Humaya, Tamazula y Culiacán."
+  },
+  {
+    "slug": "culiacan-tres-rios",
+    "nombre": "Culiacán Tres Ríos",
+    "cp": "80050",
+    "calle_principal": "Boulevard Pedro Infante / Avenida Tres Ríos",
+    "landmark": "Parque Tres Ríos (confluencia ríos Humaya y Tamazula), Torre Tres Ríos y Plaza Cuatro Ríos",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento dentro del Desarrollo Urbano Tres Ríos, creado en 1991 por decreto del gobernador Francisco Labastida Ochoa para controlar inundaciones en la confluencia de tres ríos; hoy es el principal distrito corporativo y comercial de la ciudad."
+  },
+  {
+    "slug": "culiacancito",
+    "nombre": "Culiacancito",
+    "cp": "80300",
+    "calle_principal": "Carretera Culiacán-Imala / Calle Principal",
+    "landmark": "Estación Rosales (ferroviaria histórica) y campos agrícolas irrigados del valle",
+    "era_key": "pre1960",
+    "nota": "Su nombre deriva del náhuatl Colhuacanzinco ('pequeño Culiacán'); se cree que en sus cercanías existió el asentamiento indígena Huey Colhuacan, visitado en 1621. Es sindicatura con vocación agrícola-ganadera."
+  },
+  {
+    "slug": "cumbre-real",
+    "nombre": "Cumbre Real",
+    "cp": "80029",
+    "calle_principal": "Boulevard Pedro Infante / Periférico Culiacán",
+    "landmark": "Parque Las Riberas y corredor Desarrollo Urbano Tres Ríos al poniente",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial cerrado próximo al Desarrollo Urbano Tres Ríos; comparte código postal 80029 con Sección Cumbres, reflejando la expansión residencial de clase media-alta sobre el corredor norte del río Humaya durante los 2000s."
+  },
+  {
+    "slug": "cumbres-tres-rios",
+    "nombre": "Cumbres Tres Ríos",
+    "cp": "80029",
+    "calle_principal": "Boulevard Pedro Infante / Acceso Cumbres",
+    "landmark": "Parque Las Riberas y zona de torres corporativas del Desarrollo Urbano Tres Ríos",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial privado integrado al corredor Tres Ríos; su posición sobre el río Humaya lo convierte en zona de instalaciones hidráulicas domésticas modernas con estándares contemporáneos."
   }
 ]
