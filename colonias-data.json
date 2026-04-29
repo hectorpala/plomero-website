@@ -448,5 +448,455 @@
     "landmark": "Río Humaya",
     "era_key": "moderno-90-2010",
     "nota": "Fraccionamiento de aprox. 12 ha con 956 habitantes y 267 hogares. El nombre deriva del río Humaya (náhuatl: río grande o caudaloso)."
+  },
+  {
+    "slug": "10-de-abril",
+    "nombre": "10 de Abril",
+    "cp": "80029",
+    "calle_principal": null,
+    "landmark": "Secretaría de Educación Pública (SEP Sinaloa)",
+    "era_key": "1960s-1975",
+    "nota": "Colonia de aproximadamente 34 hectáreas con alrededor de 797 habitantes; una de las colonias populares del centro-poniente de Culiacán Rosales consolidada en los años de expansión urbana."
+  },
+  {
+    "slug": "10-de-mayo",
+    "nombre": "10 de Mayo",
+    "cp": "80270",
+    "calle_principal": "Avenida Patria",
+    "landmark": "Escuela Primaria Teófilo Álvarez Borboa",
+    "era_key": "infonavit",
+    "nota": "Colonia de 35 ha ubicada 3.37 km al suroeste del centro de Culiacán Rosales; cuenta con la Escuela Primaria Teófilo Álvarez Borboa sobre Avenida Patria."
+  },
+  {
+    "slug": "12-de-diciembre",
+    "nombre": "12 de Diciembre",
+    "cp": "80296",
+    "calle_principal": "Paseo de los Himalayas",
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia en la zona sur de Culiacán Rosales, colindante con fraccionamientos como Prados del Sur y Valle Alto."
+  },
+  {
+    "slug": "16-de-septiembre",
+    "nombre": "16 de Septiembre",
+    "cp": "80016",
+    "calle_principal": null,
+    "landmark": "Secretaría de Educación Pública y Cultura (SEPYC)",
+    "era_key": "pre1960",
+    "nota": "Una de las colonias más antiguas del municipio. En 2024 el ayuntamiento comprometió la pavimentación de todas sus calles con inversión de más de 9 millones de pesos."
+  },
+  {
+    "slug": "18-de-marzo",
+    "nombre": "18 de Marzo",
+    "cp": "80430",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "infonavit",
+    "nota": "Su nombre conmemora el 18 de marzo de 1938, fecha de la expropiación petrolera en México. Colonia popular en la periferia norte de Culiacán."
+  },
+  {
+    "slug": "20-de-noviembre",
+    "nombre": "20 de Noviembre",
+    "cp": "80308",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "1960s-1975",
+    "nota": "Colonia en la sindicatura de Aguaruto, al oriente de Culiacán; ha registrado cortes de agua recurrentes por mantenimiento de la línea principal de 30 pulgadas en Av. Revolución e Hidalgo."
+  },
+  {
+    "slug": "21-de-marzo",
+    "nombre": "21 de Marzo",
+    "cp": "80280",
+    "calle_principal": "Calle General Viviano Dávalos",
+    "landmark": "Centro de Barrio 21 de Marzo",
+    "era_key": "infonavit",
+    "nota": "Fundada el 21 de marzo de 1974; una de las colonias más pobladas de Culiacán con aprox. 8,690 habitantes en 140 hectáreas y cerca de 1,000 establecimientos comerciales."
+  },
+  {
+    "slug": "22-de-diciembre",
+    "nombre": "22 de Diciembre",
+    "cp": "80199",
+    "calle_principal": "Avenida Álvaro Obregón",
+    "landmark": "DIF Culiacán",
+    "era_key": "residencial-70-90",
+    "nota": "Colonia de 12 ha con alrededor de 1,130 habitantes; limita con Calzada de las Torres."
+  },
+  {
+    "slug": "4-de-marzo",
+    "nombre": "4 de Marzo",
+    "cp": "80054",
+    "calle_principal": "Boulevard Nuevo Horizontes",
+    "landmark": null,
+    "era_key": "1960s-1975",
+    "nota": "Colonia de 23 ha con aproximadamente 2,430 habitantes. El Boulevard Nuevo Horizontes es su vía principal, en la zona norponiente de Culiacán Rosales."
+  },
+  {
+    "slug": "5-de-febrero",
+    "nombre": "5 de Febrero",
+    "cp": "80247",
+    "calle_principal": "Avenida Tierra y Libertad",
+    "landmark": "Unidad DIF Bienestar 5 de Febrero",
+    "era_key": "infonavit",
+    "nota": "Fundada en 1987; celebró su 38 aniversario en febrero de 2025. En 2023 el municipio pavimentó sus calles principales incluyendo Av. Tierra y Libertad y Av. Juan de la Cabada."
+  },
+  {
+    "slug": "5-de-mayo",
+    "nombre": "5 de Mayo",
+    "cp": "80230",
+    "calle_principal": "Calle Heroico Colegio Militar",
+    "landmark": null,
+    "era_key": "1960s-1975",
+    "nota": "Colonia popular de aprox. 37 ha con alrededor de 4,730 habitantes y 1,250 viviendas."
+  },
+  {
+    "slug": "6-de-enero",
+    "nombre": "6 de Enero",
+    "cp": "80010",
+    "calle_principal": "Álvaro Obregón",
+    "landmark": null,
+    "era_key": "pre1960",
+    "nota": "Una de las colonias más antiguas del área urbana original de Culiacán, con aprox. 3,750 habitantes y 160 establecimientos comerciales."
+  },
+  {
+    "slug": "7-gotas",
+    "nombre": "7 Gotas",
+    "cp": "80247",
+    "calle_principal": null,
+    "landmark": "Cerro de las Siete Gotas (con petroglifos prehispánicos)",
+    "era_key": "1960s-1975",
+    "nota": "La colonia toma su nombre del Cerro de las Siete Gotas, cueva natural que filtra agua en gotas sobre una poza; el cerro contiene vestigios prehispánicos anteriores a la fundación de Culiacán en 1531."
+  },
+  {
+    "slug": "8-de-febrero",
+    "nombre": "8 de Febrero",
+    "cp": "80296",
+    "calle_principal": "21 de Marzo",
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia de 16 ha con 1,710 habitantes en 383 hogares; celebró su 32 aniversario el 8 de febrero de 2023, lo que ubica su fundación en 1991."
+  },
+  {
+    "slug": "9-de-marzo",
+    "nombre": "9 de Marzo",
+    "cp": "80058",
+    "calle_principal": "Boulevard Lola Beltrán",
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia en la zona noreste de Culiacán Rosales, colindante con los fraccionamientos Acueducto y Bacurimi."
+  },
+  {
+    "slug": "acanto",
+    "nombre": "Acanto",
+    "cp": "80014",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial moderno en Culiacán, documentado como Conjunto Habitacional Acanto."
+  },
+  {
+    "slug": "acueducto",
+    "nombre": "Acueducto",
+    "cp": "80058",
+    "calle_principal": "Calle Acueducto de la Aurora",
+    "landmark": null,
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento de aprox. 35 ha con 2,310 habitantes en 680 viviendas y 62 establecimientos comerciales."
+  },
+  {
+    "slug": "acueducto-iii",
+    "nombre": "Acueducto III",
+    "cp": "80058",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento contiguo a Acueducto y 9 de Marzo en el noreste de Culiacán."
+  },
+  {
+    "slug": "adolfo-lopez-mateos",
+    "nombre": "Adolfo López Mateos",
+    "cp": "80190",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "infonavit",
+    "nota": "Fundada en 1987; celebró su 39 aniversario en marzo de 2026. Con 110 ha y 9,660 habitantes en 2,420 viviendas es una de las colonias más pobladas de Culiacán."
+  },
+  {
+    "slug": "adolfo-ruiz-cortinez",
+    "nombre": "Adolfo Ruiz Cortínez",
+    "cp": "80450",
+    "calle_principal": "Álvaro Obregón",
+    "landmark": null,
+    "era_key": "1960s-1975",
+    "nota": "Colonia de 13 ha con 1,310 habitantes, ubicada a 20 km al noreste del centro; lleva el nombre del presidente mexicano que gobernó de 1952 a 1958."
+  },
+  {
+    "slug": "aeropuerto",
+    "nombre": "Aeropuerto",
+    "cp": "80130",
+    "calle_principal": "Boulevard Aeropuerto",
+    "landmark": "Aeropuerto Internacional Federal de Bachigualato",
+    "era_key": "1960s-1975",
+    "nota": "La colonia surgió a partir de la expansión urbana generada por la inauguración del aeropuerto regional en los años 1960, que aceleró la infraestructura de distribución de la ciudad."
+  },
+  {
+    "slug": "agrarista-mexicana",
+    "nombre": "Agrarista Mexicana",
+    "cp": "80014",
+    "calle_principal": "Calle Diego Valadez Ríos",
+    "landmark": "Estadio Banorte (colonia adyacente)",
+    "era_key": "infonavit",
+    "nota": "La colonia abarca aprox. 7 ha con 533 habitantes en 139 hogares y densidad de 674 personas por km²."
+  },
+  {
+    "slug": "aguaruto-centro",
+    "nombre": "Aguaruto Centro",
+    "cp": "80308",
+    "calle_principal": "Avenida López Mateos",
+    "landmark": "Templo de San Bartolomé",
+    "era_key": "pre1960",
+    "nota": "El poblado de Aguaruto se desarrolló alrededor del Templo de San Bartolomé y el Camino Real; con el tendido del Ferrocarril Occidental de México en 1895 creció hacia la Plazuela Benito Juárez."
+  },
+  {
+    "slug": "aguaruto-viejo",
+    "nombre": "Aguaruto Viejo",
+    "cp": "80308",
+    "calle_principal": "Calle Río Tamazula",
+    "landmark": "Plazuela Benito Juárez",
+    "era_key": "pre1960",
+    "nota": "La historia de Aguaruto se remonta a aprox. 1300 d.C., cuando grupos indígenas cahita se asentaron en estos valles; el nombre deriva del vocablo cahita Ahuasuto (cornezuelo), arbusto propio de la región."
+  },
+  {
+    "slug": "agustina-ramirez",
+    "nombre": "Agustina Ramírez",
+    "cp": "80028",
+    "calle_principal": "Boulevard Diamante",
+    "landmark": null,
+    "era_key": "infonavit",
+    "nota": "La colonia abarca aprox. 28 ha con 2,340 habitantes en 596 hogares en la zona poniente de Culiacán Rosales."
+  },
+  {
+    "slug": "alameda",
+    "nombre": "Alameda",
+    "cp": "80019",
+    "calle_principal": "Boulevard Universitarios",
+    "landmark": "Universidad Tecnológica de Culiacán",
+    "era_key": "residencial-70-90",
+    "nota": "En 2023 el Ayuntamiento de Culiacán atendió a vecinos del Fracc. Alameda con un plan de rehabilitación de espacios públicos y pavimentación de más de 150 calles."
+  },
+  {
+    "slug": "albaterra",
+    "nombre": "Albaterra",
+    "cp": "80014",
+    "calle_principal": null,
+    "landmark": "Plaza FORUM Culiacán (colonia cercana)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial desarrollado por Stanza Residencial, con acceso rápido al Nuevo Malecón y el corredor turístico en la zona sur de Culiacán."
+  },
+  {
+    "slug": "alcala-del-rey",
+    "nombre": "Alcalá del Rey",
+    "cp": "80059",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento privado con acceso controlado 24/7 y barda perimetral electrificada, desarrollado por Inmobiliaria JEMA en la zona norte de Culiacán."
+  },
+  {
+    "slug": "alegranza",
+    "nombre": "Alegranza",
+    "cp": "80025",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": null
+  },
+  {
+    "slug": "altamira-seccion-altana",
+    "nombre": "Altamira Sección Altana",
+    "cp": "80027",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento del conjunto Altamira en Culiacán; comparte CP 80027 con el Fraccionamiento Altamira principal, lo que indica un desarrollo por etapas dentro del mismo polígono urbano."
+  },
+  {
+    "slug": "altamira-seccion-barcelo",
+    "nombre": "Altamira Sección Barceló",
+    "cp": "80027",
+    "calle_principal": "Boulevard Tamboril",
+    "landmark": "Plaza Sendero (referencia comercial de la zona norte)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial privado en la zona norte de Culiacán, cercano a Plaza Sendero y Plaza Carolinas; parte del complejo Altamira desarrollado a partir de la década de 2000."
+  },
+  {
+    "slug": "altaria",
+    "nombre": "Altaria",
+    "cp": "80295",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial en Culiacán Rosales zona sur (CP 80295), orientado al segmento de clase media-alta con casas de varios niveles y cocheras."
+  },
+  {
+    "slug": "altezza",
+    "nombre": "Altezza",
+    "cp": "80177",
+    "calle_principal": "Avenida Cerro de los Frayles",
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial cerrado con seguridad 24/7 y CCTV; las propiedades se ubican sobre Avenida Cerro de los Frayles con acceso controlado al club house."
+  },
+  {
+    "slug": "alto-de-la-victoria",
+    "nombre": "Alto de la Victoria",
+    "cp": "80308",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia urbana en Culiacán Rosales con procesos de regularización de terrenos típicos de asentamientos surgidos en las últimas décadas."
+  },
+  {
+    "slug": "alto-de-quila-san-francisco",
+    "nombre": "Alto de Quila San Francisco",
+    "cp": "80402",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "pre1960",
+    "nota": "Localidad en la sindicatura de Quilá, a 51 km de la capital. El nombre Quilá proviene del náhuatl quilápa (río verde); la sindicatura integra 17 comisarías en 346 km² dentro del Valle de San Lorenzo."
+  },
+  {
+    "slug": "altos-bacurimi",
+    "nombre": "Altos Bacurimi",
+    "cp": "80058",
+    "calle_principal": "Avenida Mora",
+    "landmark": null,
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento en la zona de Bacurimi; la colonia Bacurimi abarca 130 ha con aprox. 4,610 personas en 1,340 viviendas y edad promedio de 21 años."
+  },
+  {
+    "slug": "altos-de-bachigualato",
+    "nombre": "Altos de Bachigualato",
+    "cp": "80130",
+    "calle_principal": "Boulevard Emiliano Zapata",
+    "landmark": "Walmart en Aeropuerto 9996 (zona colindante)",
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia de 270 ha con 2,370 habitantes en 790 unidades. Bachigualato tenía categoría de alcaldía en 1852. Se ubica a 5 km al este del centro, próxima al aeropuerto internacional."
+  },
+  {
+    "slug": "alturas-del-sur",
+    "nombre": "Alturas del Sur",
+    "cp": "80295",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de más de 6,000 viviendas en 9 etapas, desarrollado por Arcis Vivienda a partir de 2009 en la zona sur de Culiacán."
+  },
+  {
+    "slug": "amado-nervo",
+    "nombre": "Amado Nervo",
+    "cp": "80199",
+    "calle_principal": "Calle Pedro Infante",
+    "landmark": "Escuela de la SEPyC",
+    "era_key": "1960s-1975",
+    "nota": "Colonia con casi 50 años de historia. En abril de 2026 el municipio invirtió más de 34 millones de pesos para pavimentar 6 calles: Jorge Negrete, Lucha Villa, Pedro Infante, María Victoria, Cerro Guapo y Juventino Rosas."
+  },
+  {
+    "slug": "amapas",
+    "nombre": "Amapas",
+    "cp": "80063",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento desarrollado con apoyo de FONHAPO y el municipio, con inversión de 31.7 millones de pesos. Reconocido a nivel nacional como uno de los mejores proyectos de desarrollo urbano sustentable."
+  },
+  {
+    "slug": "amorada",
+    "nombre": "Amorada",
+    "cp": "80014",
+    "calle_principal": "Boulevard Jesús Kumate Rodríguez",
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento habitacional en la zona noroeste de Culiacán, desarrollado a partir de la década de 1990."
+  },
+  {
+    "slug": "ampliacion-el-barrio",
+    "nombre": "Ampliación El Barrio",
+    "cp": "80249",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "1960s-1975",
+    "nota": "Extensión de la histórica Colonia El Barrio, una de las primeras colonias populares de Culiacán que emergió sobre terrenos ejidales en la periferia del núcleo urbano original."
+  },
+  {
+    "slug": "ampliacion-los-angeles",
+    "nombre": "Ampliación Los Ángeles",
+    "cp": "80014",
+    "calle_principal": "Boulevard Jesús Kumate Rodríguez",
+    "landmark": null,
+    "era_key": "infonavit",
+    "nota": "Colonia contigua al Fraccionamiento Los Ángeles, con aproximadamente 5,450 habitantes en 1,520 viviendas, desarrollada como extensión del fraccionamiento original."
+  },
+  {
+    "slug": "ampliacion-union-nueva",
+    "nombre": "Ampliación Unión Nueva",
+    "cp": "80400",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "1960s-1975",
+    "nota": null
+  },
+  {
+    "slug": "antonio-nakayama",
+    "nombre": "Antonio Nakayama",
+    "cp": "80194",
+    "calle_principal": "Calzada de las Torres",
+    "landmark": "Escuela Secundaria Antonio Nakayama",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento de 51 ha con 6,260 habitantes. Lleva el nombre del historiador sinaloense Antonio Nakayama Félix (1920-1989), cronista oficial de Culiacán y autor de numerosas obras sobre la historia de Sinaloa."
+  },
+  {
+    "slug": "antonio-rosales",
+    "nombre": "Antonio Rosales",
+    "cp": "80230",
+    "calle_principal": "Avenida Navolato",
+    "landmark": "Escuela Primaria General Antonio Rosales (Calle San Pedro 1)",
+    "era_key": "1960s-1975",
+    "nota": "Colonia de 40 ha con 2,650 habitantes, nombrada en honor al militar sinaloense Antonio Rosales Flores, héroe de la Batalla de San Pedro el 22 de diciembre de 1864 contra las fuerzas imperialistas francesas."
+  },
+  {
+    "slug": "antonio-toledo-corro",
+    "nombre": "Antonio Toledo Corro",
+    "cp": "80296",
+    "calle_principal": null,
+    "landmark": null,
+    "era_key": "infonavit",
+    "nota": "Colonia de 81 ha con 8,630 habitantes en 1,990 viviendas, nombrada en honor al gobernador de Sinaloa Antonio Toledo Corro (1981-1986)."
+  },
+  {
+    "slug": "aquiles-serdan",
+    "nombre": "Aquiles Serdán",
+    "cp": "80190",
+    "calle_principal": "Avenida Aquiles Serdán",
+    "landmark": "Iglesia San Juan de Los Lagos",
+    "era_key": "1960s-1975",
+    "nota": "Colonia ubicada a 3 km al sur del centro de Culiacán Rosales. La Avenida Aquiles Serdán es una de las principales arterias viales reconocidas por el Ayuntamiento de Culiacán."
+  },
+  {
+    "slug": "arboledas",
+    "nombre": "Arboledas",
+    "cp": "80010",
+    "calle_principal": "Boulevard Las Torres",
+    "landmark": null,
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento residencial de 4 ha con 394 habitantes en 102 unidades y escolaridad promedio de 14 años."
+  },
+  {
+    "slug": "arcadia-residencial",
+    "nombre": "Arcadia Residencial",
+    "cp": "80058",
+    "calle_principal": "Boulevard Universo",
+    "landmark": null,
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento privado desarrollado por PAYCO Desarrollos en el sector La Conquista de Culiacán, sobre Boulevard Universo y Avenida del Sauce, con modelos residenciales y amenidades completas."
   }
 ]

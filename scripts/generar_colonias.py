@@ -286,14 +286,20 @@ def build_main_section(colonia: dict, era_data: dict) -> str:
                         cp=cp, era_label=era_label, antiguedad=antiguedad)
 
     # Intro párrafo 1
-    intro_p1 = (
-        f'<strong>{nombre}</strong> es una colonia de Culiacán {era_label}, '
-        f'con viviendas de {antiguedad} de antigüedad. '
-        f'Ubicada sobre {calle}, tiene como referencia '
-        f'{landmark} y forma parte del tejido urbano consolidado de la ciudad.'
-    )
     if nota:
-        intro_p1 += f' {nota}'
+        intro_p1 = (
+            f'<strong>{nombre}</strong> es una colonia de Culiacán {era_label}, '
+            f'con viviendas de {antiguedad} de antigüedad, '
+            f'ubicada sobre {calle}. '
+            f'{nota}'
+        )
+    else:
+        intro_p1 = (
+            f'<strong>{nombre}</strong> es una colonia de Culiacán {era_label}, '
+            f'con viviendas de {antiguedad} de antigüedad. '
+            f'Ubicada sobre {calle}, tiene como referencia '
+            f'{landmark} y forma parte del tejido urbano consolidado de la ciudad.'
+        )
 
     # Intro párrafo 2
     intro_p2 = fmt(era_data["intro_p2"])
