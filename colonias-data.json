@@ -898,5 +898,455 @@
     "landmark": null,
     "era_key": "moderno-90-2010",
     "nota": "Fraccionamiento privado desarrollado por PAYCO Desarrollos en el sector La Conquista de Culiacán, sobre Boulevard Universo y Avenida del Sauce, con modelos residenciales y amenidades completas."
+  },
+  {
+    "slug": "arroyo-del-toro",
+    "nombre": "Arroyo del Toro",
+    "cp": "80249",
+    "calle_principal": "Carretera a Sanalona",
+    "landmark": "Arroyo del Toro (cauce natural), acceso oriente rumbo a presa Sanalona",
+    "era_key": "pre1960",
+    "nota": "Localidad rural-periurbana en la sindicatura de Sanalona, al oriente del municipio de Culiacán. Conocida históricamente como Rancho el Toro, cambió su denominación oficial en 2014."
+  },
+  {
+    "slug": "avellaneda",
+    "nombre": "Avellaneda",
+    "cp": "80050",
+    "calle_principal": "Avenida Valle Alto / Raúl Cervantes Ahumada",
+    "landmark": "Canal Bacurimí (drén Bacurimí), sector Valle Alto poniente",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial privado en el sector Valle Alto norponiente, colindante con el drén Bacurimí. Zona de alta plusvalía y crecimiento acelerado desde finales de los 90."
+  },
+  {
+    "slug": "aviacion",
+    "nombre": "Aviación",
+    "cp": "80409",
+    "calle_principal": "Calzada de las Torres",
+    "landmark": "Zona delegacional de Quilá; colindante con colonias San Sebastián y Del Camino",
+    "era_key": "1960s-1975",
+    "nota": "Colonia adscrita administrativamente a la sindicatura de Quilá, aunque conurbada con la mancha urbana de Culiacán. Su nombre hace referencia a la cercanía histórica con instalaciones aeronáuticas de la ciudad."
+  },
+  {
+    "slug": "azaleas-residencial",
+    "nombre": "Azaleas Residencial",
+    "cp": "80058",
+    "calle_principal": "Boulevard Paseo del Río / Diego Valadez Ríos",
+    "landmark": "Fraccionamiento La Ribera Residencial (colindante), zona Paseo del Río",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial privado de baja densidad, ubicado en la zona norte de Culiacán cerca del bulevar Paseo del Río. Desarrollo enfocado en vivienda de nivel medio-alto."
+  },
+  {
+    "slug": "azucena",
+    "nombre": "Azucena",
+    "cp": "80189",
+    "calle_principal": "Avenida 12 de Octubre / Calle Azucena",
+    "landmark": "Escuela Primaria Teófilo Álvarez Borboa",
+    "era_key": "infonavit",
+    "nota": "Fraccionamiento de vivienda de interés social en la zona sur-oriente de Culiacán, compartiendo código postal con INFONAVIT Barrancos, uno de los fraccionamientos más poblados de Sinaloa."
+  },
+  {
+    "slug": "bachigualato",
+    "nombre": "Bachigualato",
+    "cp": "80140",
+    "calle_principal": "Calzada Aeropuerto / Carretera a Navolato km 4.5",
+    "landmark": "Aeropuerto Internacional Federal de Bachigualato (CUL)",
+    "era_key": "pre1960",
+    "nota": "Barrio histórico cuyo ejido fue creado por decreto presidencial de Lázaro Cárdenas en 1937. El Aeropuerto Internacional de Culiacán lleva su nombre; fue parada obligada de diligencias rumbo al puerto de Altata desde el siglo XIX."
+  },
+  {
+    "slug": "balcones-de-san-miguel",
+    "nombre": "Balcones de San Miguel",
+    "cp": "80176",
+    "calle_principal": "Privada San Javier / Boulevard Colinas de San Miguel",
+    "landmark": "Fraccionamiento Colinas de San Miguel (colindante); zona elevada con vistas panorámicas",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial privado en la zona de lomas del norponiente de Culiacán, adyacente a Colinas de San Miguel. Las propiedades se caracterizan por terrazas y vistas panorámicas hacia el valle."
+  },
+  {
+    "slug": "balcones-del-humaya",
+    "nombre": "Balcones del Humaya",
+    "cp": "80028",
+    "calle_principal": "Avenida del Humaya / acceso al sector Humaya norte",
+    "landmark": "Parque Balcones del Humaya; Panteón Jardines del Humaya (referencia zonal)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial en el sector norte de Culiacán, en la ribera del río Humaya. La zona del Humaya alberga los célebres Jardines del Humaya, panteón reconocido internacionalmente por sus mausoleos."
+  },
+  {
+    "slug": "balcones-del-valle",
+    "nombre": "Balcones del Valle",
+    "cp": "80184",
+    "calle_principal": "Avenida Varsovia / Calle Berlín",
+    "landmark": "Parroquia San Pablo Apóstol (Av. Varsovia No. 5678 Sur)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento de clase media en la zona poniente-norte de Culiacán, con nomenclatura de capitales europeas (Varsovia, Berlín, París, Londres). La Parroquia San Pablo Apóstol es el principal punto de referencia zonal."
+  },
+  {
+    "slug": "banjercito",
+    "nombre": "Banjercito",
+    "cp": "80246",
+    "calle_principal": "Av. Carlos Linneo / acceso desde sector Chapultepec",
+    "landmark": "Instalaciones del sector norponiente de Culiacán, a aprox. 5.5 km del centro",
+    "era_key": "infonavit",
+    "nota": "Fraccionamiento de origen militar-habitacional en el sector norponiente de Culiacán. Su nombre proviene del Banco Nacional del Ejército (Banjercito) que operó instalaciones en la zona."
+  },
+  {
+    "slug": "banus-360-coruna",
+    "nombre": "Banus 360 Coruña",
+    "cp": "80065",
+    "calle_principal": "Boulevard Enrique Sánchez Alonso",
+    "landmark": "Parque Riberas del Humaya (acceso directo desde el desarrollo)",
+    "era_key": "moderno-90-2010",
+    "nota": "Banus 360 es un desarrollo de torres de departamentos con acceso controlado, elevadores y amenidades tipo resort (alberca, bar, asadores), ubicado junto al Paseo del Río en la zona poniente de Culiacán."
+  },
+  {
+    "slug": "banus-360-salduero",
+    "nombre": "Banus 360 Salduero",
+    "cp": "80065",
+    "calle_principal": "Boulevard Enrique Sánchez Alonso",
+    "landmark": "Parque Riberas del Humaya",
+    "era_key": "moderno-90-2010",
+    "nota": "Privada interna del fraccionamiento Banus 360 en la zona poniente de Culiacán, comparte infraestructura y amenidades con las secciones Coruña y Tenerife del mismo desarrollo."
+  },
+  {
+    "slug": "banus-360-tenerife",
+    "nombre": "Banus 360 Tenerife",
+    "cp": "80065",
+    "calle_principal": "Boulevard Enrique Sánchez Alonso",
+    "landmark": "Parque Riberas del Humaya / Walmart zona poniente",
+    "era_key": "moderno-90-2010",
+    "nota": "La sección Tenerife de Banus 360 incluye plantas bajas con patio privado y áreas comunes con alberca; el desarrollo se distingue por estar a metros del Parque Riberas del Humaya en la zona poniente de Culiacán."
+  },
+  {
+    "slug": "barcelona-seccion-villa-barcelona",
+    "nombre": "Barcelona Sección Villa Barcelona",
+    "cp": "80059",
+    "calle_principal": "Boulevard Elbert",
+    "landmark": "Plaza Sendero Culiacán (a corta distancia) / Parque interno del fraccionamiento",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial privado ubicado en la zona norte de Culiacán sobre Boulevard Elbert; cuenta con acceso controlado 24 horas, áreas verdes y cancha deportiva."
+  },
+  {
+    "slug": "barcelona-seccion-villa-barcelona-etapa-ii",
+    "nombre": "Barcelona Sección Villa Barcelona Etapa II",
+    "cp": "80059",
+    "calle_principal": "Boulevard Elbert",
+    "landmark": "Plaza Sendero Culiacán",
+    "era_key": "moderno-90-2010",
+    "nota": "Segunda etapa del fraccionamiento Villa Barcelona en la zona norte de Culiacán; comparte CP y vialidad principal con la primera etapa, con lotes y viviendas de clase media-alta y acceso controlado."
+  },
+  {
+    "slug": "barcelona-seccion-villa-barcelona-etapa-iii",
+    "nombre": "Barcelona Sección Villa Barcelona Etapa III",
+    "cp": "80059",
+    "calle_principal": "Boulevard Elbert",
+    "landmark": "Plaza Sendero Culiacán / Parque Villa Barcelona",
+    "era_key": "moderno-90-2010",
+    "nota": "Tercera etapa del desarrollo Villa Barcelona; la zona norte de Culiacán donde se ubica ha crecido significativamente desde los 2000s con múltiples fraccionamientos privados y acceso a servicios comerciales y educativos."
+  },
+  {
+    "slug": "barrancos",
+    "nombre": "Barrancos",
+    "cp": "80189",
+    "calle_principal": "Avenida General Benjamín Hill",
+    "landmark": "Escuela Primaria Solidaridad / Sucursal Maxilana Barrancos",
+    "era_key": "infonavit",
+    "nota": "Colonia de vivienda popular en el noreste de Culiacán, contigua al INFONAVIT Barrancos, uno de los fraccionamientos de interés social más grandes de Sinaloa con aproximadamente 12,800 habitantes en 83 hectáreas."
+  },
+  {
+    "slug": "barrio-de-san-anselmo",
+    "nombre": "Barrio de San Anselmo",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Casa Club La Primavera con alberca y canchas de pádel",
+    "era_key": "moderno-90-2010",
+    "nota": "Barrio San Anselmo es una sección interna (coto privado) del exclusivo fraccionamiento La Primavera, uno de los desarrollos residenciales más prestigiosos de Culiacán, iniciado en 1993 por Enrique Coppel en torno a un lago artificial."
+  },
+  {
+    "slug": "barrio-de-san-luis",
+    "nombre": "Barrio de San Luis",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Casa Club La Primavera",
+    "era_key": "moderno-90-2010",
+    "nota": "Sección residencial del fraccionamiento La Primavera; comparte CP 80199 con otras secciones del mismo desarrollo y no debe confundirse con el histórico Barrio de San Luis en el centro de Culiacán."
+  },
+  {
+    "slug": "barrio-estacion",
+    "nombre": "Barrio Estación",
+    "cp": "80430",
+    "calle_principal": "Calle Ferrocarrilera / Calzada Álvaro Obregón (zona oriente)",
+    "landmark": "Antigua zona del patio ferroviario de Ferrocarriles Nacionales de México",
+    "era_key": "pre1960",
+    "nota": "Una de las colonias más antiguas de Culiacán, surgida en torno al antiguo patio ferroviario del Ferrocarril de Sinaloa inaugurado en 1882; el tren 'Tacuarinero' entre Altata y Culiacán dejó de operar en 1975, pero el barrio conserva traza urbana y casas de construcción antigua."
+  },
+  {
+    "slug": "barrio-san-agustin",
+    "nombre": "Barrio San Agustín",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Club Casa de La Primavera con alberca y canchas de pádel",
+    "era_key": "moderno-90-2010",
+    "nota": "Es uno de los barrios (cotos) dentro del fraccionamiento privado La Primavera, desarrollo exclusivo iniciado en 1993 por Enrique Coppel en torno a un lago artificial; los primeros tres barrios se entregaron alrededor del año 2000."
+  },
+  {
+    "slug": "barrio-san-alberto",
+    "nombre": "Barrio San Alberto",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Casa Club Barrio San Alberto con alberca semiolímpica, canchas de pádel y tenis",
+    "era_key": "moderno-90-2010",
+    "nota": "Considerado uno de los barrios más exclusivos de La Primavera; sus propiedades se cotizan entre 8 y 9.5 millones de pesos, reflejo del nivel socioeconómico alto de la zona."
+  },
+  {
+    "slug": "barrio-san-eugenio",
+    "nombre": "Barrio San Eugenio",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Lago artificial y dique de La Primavera",
+    "era_key": "moderno-90-2010",
+    "nota": "Coto privado dentro de La Primavera con acceso controlado; comparte la infraestructura del dique y lago artificial que caracteriza a todo el megadesarrollo, único en el noroeste de México."
+  },
+  {
+    "slug": "barrio-san-francisco",
+    "nombre": "Barrio San Francisco",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Área verde y parque lineal del canal en La Primavera",
+    "era_key": "moderno-90-2010",
+    "nota": "Barrio-coto privado dentro del megadesarrollo La Primavera, que abarca 290 hectáreas con vigilancia 24/7; reconocido por la seguridad y la alta plusvalía de sus propiedades."
+  },
+  {
+    "slug": "barrio-san-jose",
+    "nombre": "Barrio San José",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Alberca privada y cancha deportiva del coto",
+    "era_key": "moderno-90-2010",
+    "nota": "Forma parte del conjunto de cotos exclusivos de La Primavera, cuyo desarrollo fue autorizado por el Ayuntamiento de Culiacán en diciembre de 1997 y por el Gobierno del Estado en diciembre de 1998."
+  },
+  {
+    "slug": "barrio-san-juan",
+    "nombre": "Barrio San Juan",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Canchas de pádel y gimnasio de La Primavera",
+    "era_key": "moderno-90-2010",
+    "nota": "Coto privado dentro de La Primavera; existe también una localidad rural homónima en el municipio de Culiacán, distinta a este fraccionamiento residencial de clase alta."
+  },
+  {
+    "slug": "barrio-san-miguel",
+    "nombre": "Barrio San Miguel",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Casa Club La Primavera con parque de skateboard",
+    "era_key": "moderno-90-2010",
+    "nota": "El nombre evoca la identidad fundacional de Culiacán, cuyo nombre original era Villa de San Miguel de Culiacán (1531); en La Primavera, este coto es uno de los residenciales de clase alta con mayor demanda de la ciudad."
+  },
+  {
+    "slug": "barrio-san-pablo",
+    "nombre": "Barrio San Pablo",
+    "cp": "80199",
+    "calle_principal": "Avenida Manuel J. Clouthier (acceso principal a La Primavera)",
+    "landmark": "Lago artificial y área natural de La Primavera",
+    "era_key": "moderno-90-2010",
+    "nota": "Barrio-coto de acceso controlado dentro de La Primavera, megadesarrollo concebido como ciudad satélite de Culiacán planificada integralmente, rodeada de naturaleza y el dique más emblemático de la ciudad."
+  },
+  {
+    "slug": "belcantto",
+    "nombre": "Belcantto",
+    "cp": "80184",
+    "calle_principal": "Carretera Benito Juárez km 7.4 (La Costerita)",
+    "landmark": "Casa Club Belcantto con alberca, canchas deportivas y gimnasio privado",
+    "era_key": "moderno-90-2010",
+    "nota": "Desarrollo residencial de Stanza Homes en el sector sur de Culiacán, con doble acceso controlado; comparte código postal con Balcones del Valle, lo que refleja la diversidad de la zona sur de la ciudad."
+  },
+  {
+    "slug": "bellavista",
+    "nombre": "Bellavista",
+    "cp": "80408",
+    "calle_principal": "Boulevard Lola Beltrán",
+    "landmark": "Escuela Primaria Bellavista",
+    "era_key": "1960s-1975",
+    "nota": "Colonia ubicada aproximadamente 7 km al oeste del centro de Culiacán Rosales, con cerca de 2,321 habitantes; su posición sobre carretera federal y densidad poblacional media indican desarrollo de la expansión occidental de los años 60-70."
+  },
+  {
+    "slug": "benevento-residencial",
+    "nombre": "Benevento Residencial",
+    "cp": "80014",
+    "calle_principal": "Blvd. Alfonso G. Calderón (acceso principal al fraccionamiento)",
+    "landmark": "Hospital General de Culiacán (nuevo) y Ciudad de la Educación, ambos a 7 minutos",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento privado de acceso controlado desarrollado por Benevento Lifetime Homes en la zona norte de crecimiento acelerado; cuenta con amenidades tipo resort (alberca, club terraza, áreas verdes)."
+  },
+  {
+    "slug": "benito-juarez-norte",
+    "nombre": "Benito Juárez Norte",
+    "cp": "80430",
+    "calle_principal": "Calzada Heroico Colegio Militar",
+    "landmark": "Plaza comercial en esquina Calzada Heroico Colegio Militar y Calle Juan José Ríos",
+    "era_key": "1960s-1975",
+    "nota": "Colonia histórica de clase trabajadora que forma parte del crecimiento urbano de Culiacán de mediados del siglo XX; comparte código postal con Benito Juárez Sur, indicando continuidad territorial entre ambas secciones."
+  },
+  {
+    "slug": "benito-juarez-sur",
+    "nombre": "Benito Juárez Sur",
+    "cp": "80430",
+    "calle_principal": "Calle Constitución",
+    "landmark": "Calle Constitución esquina con Calzada Heroico Colegio Militar",
+    "era_key": "1960s-1975",
+    "nota": "Sección sur de la colonia Benito Juárez; junto con su contraparte norte conforman una de las colonias populares más extensas del centro-sur de Culiacán, con infraestructura de décadas de antigüedad y alta densidad habitacional."
+  },
+  {
+    "slug": "bicentenario",
+    "nombre": "Bicentenario",
+    "cp": "80019",
+    "calle_principal": "Avenida Bicentenario",
+    "landmark": "Zona norte periférica de Culiacán, vías principales hacia Navolato",
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia periférica fundada alrededor de 2008-2010 en la zona norte de Culiacán; durante 15 años su calle principal fue terracería y fue pavimentada apenas recientemente, reflejando rezago en infraestructura urbana básica."
+  },
+  {
+    "slug": "bloom",
+    "nombre": "Bloom",
+    "cp": "80106",
+    "calle_principal": "Blvd. Alfonso G. Calderón",
+    "landmark": "Plaza La Ceiba (a pocos metros del fraccionamiento)",
+    "era_key": "moderno-90-2010",
+    "nota": "Desarrollo moderno de Impulsa Inmuebles con dos productos: casas en fraccionamiento horizontal y departamentos en torre vertical (Bloom Vertical Residences), ambos sobre el corredor comercial del Blvd. Alfonso G. Calderón."
+  },
+  {
+    "slug": "bonanza",
+    "nombre": "Bonanza",
+    "cp": "80020",
+    "calle_principal": "Boulevard Rotarismo",
+    "landmark": "Desarrollo Tres Ríos (zona comercial y residencial adyacente)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial ubicado en la zona Tres Ríos de Culiacán; en el mismo perímetro se desarrolló Bonanza Lofts como producto de segunda generación, consolidando la zona como corredor residencial-comercial moderno."
+  },
+  {
+    "slug": "bonaterra",
+    "nombre": "Bonaterra",
+    "cp": "80058",
+    "calle_principal": "Boulevard Conquistadores",
+    "landmark": "Hospital Ángeles Culiacán (referencia de salud privada de la zona norponiente)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial de clase media-alta en la zona norponiente de Culiacán, contiguo al corredor del Blvd. Conquistadores; colonias vecinas incluyen Praderas del Humaya y La Conquista."
+  },
+  {
+    "slug": "bosque-encinos",
+    "nombre": "Bosque Encinos",
+    "cp": "80029",
+    "calle_principal": "Calle Álvaro Obregón (acceso a la zona)",
+    "landmark": "Fraccionamientos Santa Fe Real y Colinas del Humaya (dentro del mismo CP 80029)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial enclavado en la zona de los cerros al poniente de Culiacán; comparte código postal con más de 15 asentamientos del área de Santa Fe y Humaya, una de las zonas de mayor plusvalía del municipio."
+  },
+  {
+    "slug": "bosques-del-alamo",
+    "nombre": "Bosques del Álamo",
+    "cp": "80018",
+    "calle_principal": "Calle De los Eucaliptos",
+    "landmark": "Parque lineal del Río Humaya (fraccionamiento colindante con la ribera norte del Humaya)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial al norte de Culiacán con nomenclatura de árboles (Eucaliptos, Álamos); ubicado en la ribera norte del río Humaya en una zona de crecimiento residencial privado acelerado."
+  },
+  {
+    "slug": "bosques-del-humaya",
+    "nombre": "Bosques del Humaya",
+    "cp": "80025",
+    "calle_principal": "Boulevard Jardín de las Orquídeas",
+    "landmark": "Jardines del Humaya (panteón de renombre internacional, en Calzada Heroico Colegio Militar)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial en la margen del Río Humaya; cercano al famoso Panteón Jardines del Humaya, conocido internacionalmente por sus extravagantes mausoleos, convirtiendo la zona del Humaya en una de las más reconocidas de Culiacán."
+  },
+  {
+    "slug": "bosques-del-rey",
+    "nombre": "Bosques del Rey",
+    "cp": "80058",
+    "calle_principal": "Boulevard del Universo",
+    "landmark": "Plaza Bosques del Rey (3 niveles, 23 locales)",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento privado desarrollado por Inmobiliaria JEMA, con acceso controlado, alberca común y área social techada; actualmente en expansión con la etapa Bosque Magnolia."
+  },
+  {
+    "slug": "bosques-del-rio",
+    "nombre": "Bosques del Río",
+    "cp": "80050",
+    "calle_principal": "Boulevard Alfonso G. Calderón (zona Tres Ríos)",
+    "landmark": "Parque Fluvial Tres Ríos (desarrollo urbano contiguo)",
+    "era_key": "moderno-90-2010",
+    "nota": "Forma parte del corredor residencial sobre el río Tamazula que comparte código postal con Country del Río I-IV, Villas del Río y Stanza Toscana, todos iniciados en los años 90 en zona Tres Ríos."
+  },
+  {
+    "slug": "brisas-de-humaya",
+    "nombre": "Brisas de Humaya",
+    "cp": "80025",
+    "calle_principal": "Boulevard Salvador Alvarado",
+    "landmark": "Parque Infonavit Humaya (frente a escuela primaria)",
+    "era_key": "infonavit",
+    "nota": "Fraccionamiento de vivienda social sobre la zona norte de Culiacán, contiguo al conjunto Infonavit Humaya; comparte código postal con Los Olivos, Bosques del Humaya y Jardines del Rey."
+  },
+  {
+    "slug": "buena-vista",
+    "nombre": "Buena Vista",
+    "cp": "80014",
+    "calle_principal": "Avenida Dr. Ruperto Paliza",
+    "landmark": "Buena Vista Sinaloa I.A.P. (institución oftalmológica de asistencia privada, fundada 1996)",
+    "era_key": "1960s-1975",
+    "nota": "Colonia urbana antigua ubicada al noroeste del centro de Culiacán, a una cuadra de Avenida Obregón; cubre unas 72 hectáreas con aproximadamente 1,550 habitantes en viviendas de construcción consolidada."
+  },
+  {
+    "slug": "buenos-aires",
+    "nombre": "Buenos Aires",
+    "cp": "80199",
+    "calle_principal": "Avenida Cerro del Capule",
+    "landmark": "Parque 87 (entre la colonia y Avenida Álvaro Obregón)",
+    "era_key": "1960s-1975",
+    "nota": "Colonia ubicada en el sur de Culiacán con calles nombradas en alusión a cerros y accidentes geográficos; es una de las más pobladas del municipio con cerca de 7,400 habitantes en 120 hectáreas."
+  },
+  {
+    "slug": "camino-real",
+    "nombre": "Camino Real",
+    "cp": "80247",
+    "calle_principal": "Boulevard Emiliano Zapata",
+    "landmark": "COBAES 24 Gral. Emiliano Zapata / Secundaria Técnica No. 79",
+    "era_key": "moderno-90-2010",
+    "nota": "Fraccionamiento residencial de clase media ubicado al suroeste de Culiacán, con buena infraestructura educativa de nivel medio y medio superior en sus inmediaciones."
+  },
+  {
+    "slug": "campesina-el-barrio",
+    "nombre": "Campesina (El Barrio)",
+    "cp": "80249",
+    "calle_principal": "Calle Mariano Azuela",
+    "landmark": "Zona de uso mixto con tiendas de abarrotes y pequeño comercio local",
+    "era_key": "pre1960",
+    "nota": "Colonia popular de origen agrario ubicada al oeste del centro urbano de Culiacán; su trama de calles numeradas (Calle Primera, Tercera, Quinta) refleja un asentamiento de trabajadores rurales de mediados del siglo XX."
+  },
+  {
+    "slug": "campestre",
+    "nombre": "Campestre",
+    "cp": "80015",
+    "calle_principal": "Boulevard de las Américas",
+    "landmark": "Country Club de Culiacán Las Iguanas (campo de golf, fundado 1966)",
+    "era_key": "residencial-70-90",
+    "nota": "Fraccionamiento residencial de clase media-alta desarrollado junto al Country Club de Culiacán desde finales de los 60s; el campo de golf Las Iguanas, famoso por sus iguanas gigantes residentes, es el landmark más distintivo de la zona."
+  },
+  {
+    "slug": "campestre-las-fuentes",
+    "nombre": "Campestre Las Fuentes",
+    "cp": "80015",
+    "calle_principal": "Boulevard de las Américas",
+    "landmark": "Country Club de Culiacán (referencia de la zona Campestre)",
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia derivada del corredor Campestre en la zona norte-poniente de Culiacán; comparte código postal con el Fraccionamiento Campestre principal, en una de las zonas residenciales más consolidadas de la ciudad."
+  },
+  {
+    "slug": "campestre-los-laureles",
+    "nombre": "Campestre Los Laureles",
+    "cp": "80027",
+    "calle_principal": "Boulevard Emiliano Zapata (zona Humaya norte)",
+    "landmark": "Escuelas, templos y centros comerciales en radio de 1 km (zona Humaya)",
+    "era_key": "moderno-90-2010",
+    "nota": "Colonia de baja densidad (aproximadamente 483 habitantes en 240 hectáreas) con vocación residencial tranquila; el promedio de escolaridad alto (12 años) indica un perfil de clase media consolidada de los años 90."
   }
 ]
