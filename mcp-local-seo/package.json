@@ -1,0 +1,11 @@
+{
+  "name": "mcp-local-seo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MCP server for local SEO - Google Search Console + Places API",
+  "main": "index.js",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "googleapis": "^144.0.0"
+  }
+}

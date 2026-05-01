@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "local-seo": {
+      "command": "node",
+      "args": ["mcp-local-seo/index.js"],
+      "cwd": "/Users/hectorpc/Documents/Hector Palazuelos/Google My Business/plomero culiacan pro"
+    }
+  }
+}
