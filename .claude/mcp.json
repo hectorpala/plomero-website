@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "local-seo": {
-      "command": "node",
-      "args": ["mcp-local-seo/index.js"],
+      "command": "/usr/local/bin/node",
+      "args": ["/Users/hectorpc/Documents/Hector Palazuelos/Google My Business/plomero culiacan pro/mcp-local-seo/index.js"],
       "cwd": "/Users/hectorpc/Documents/Hector Palazuelos/Google My Business/plomero culiacan pro"
     }
   }
