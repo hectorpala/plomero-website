@@ -23,7 +23,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const CLIENT_SECRET_FILE = join(__dirname, 'client_secret.json');
 const TOKEN_FILE = join(__dirname, 'gsc-token.json');
 
-const SCOPES = ['https://www.googleapis.com/auth/webmasters.readonly'];
+const SCOPES = [
+  'https://www.googleapis.com/auth/webmasters',          // lectura + escritura GSC
+  'https://www.googleapis.com/auth/webmasters.readonly', // retrocompatibilidad
+];
 
 async function main() {
   if (!existsSync(CLIENT_SECRET_FILE)) {

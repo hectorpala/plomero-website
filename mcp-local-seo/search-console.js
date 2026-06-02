@@ -222,3 +222,40 @@ export async function findOpportunities({ minPosition = 5, maxPosition = 20, min
     return { error: `Error al consultar Search Console: ${err.message}` };
   }
 }
+
+export async function submitSitemap({ sitemapUrl = 'https://plomeroculiacanpro.mx/sitemaps/main_sitemap.xml' } = {}) {
+  const auth = await getAuthClient();
+  if (auth.error) return auth;
+  try {
+    const wm = google.webmasters({ version: 'v3', auth });
+    await wm.sitemaps.submit({ siteUrl: SITE_URL, feedpath: sitemapUrl });
+    return { ok: true, message: `Sitemap enviado: ${sitemapUrl}` };
+  } catch (err) {
+    return { error: `Error al enviar sitemap: ${err.message}` };
+  }
+}
+
+export async function requestIndexing({ urls }) {
+  const auth = await getAuthClient();
+  if (auth.error) return auth;
+  const sc = google.searchconsole({ version: 'v1', auth });
+  const results = [];
+  for (const url of urls) {
+    try {
+      const res = await sc.urlInspection.index.inspect({
+        requestBody: { inspectionUrl: url, siteUrl: SITE_URL, languageCode: 'es' }
+      });
+      const r = res.data?.inspectionResult?.indexStatusResult;
+      results.push({
+        url,
+        verdict: r?.verdict || 'UNKNOWN',
+        coverageState: r?.coverageState || 'desconocido',
+        lastCrawl: r?.lastCrawlTime?.substring(0, 10) || 'nunca'
+      });
+    } catch (err) {
+      results.push({ url, error: err.message });
+    }
+    await new Promise(r => setTimeout(r, 600));
+  }
+  return { results };
+}
