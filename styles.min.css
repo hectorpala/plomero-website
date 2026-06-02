@@ -651,7 +651,12 @@ p {
 }
 
 .hero h1 {
-  animation: fadeInUp 0.8s ease-out;
+  animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(40px); }
+  to { transform: translateY(0); }
 }
 
 .hero .btn-primary {
