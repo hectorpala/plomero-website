@@ -15,6 +15,7 @@
     <!-- Preloads críticos -->
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <link rel="preload" href="/assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+    <link rel="preload" as="image" href="/assets/images/destapandodrenaje-800w.webp" fetchpriority="high">
 
     <link rel="canonical" href="https://plomeroculiacanpro.mx/blog/drenaje-tapado-senales-prevencion/">
     <link rel="stylesheet" href="../../styles.min.css">
@@ -395,21 +396,30 @@
 
 </head>
 <body>
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager (diferido) -->
     <script>
     window.dataLayer = window.dataLayer || [];
     (function() {
+      var gtmLoaded = false;
+      var clarityLoaded = false;
       var loadGTM = function() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
-        document.head.appendChild(script);
+        if (gtmLoaded) return; gtmLoaded = true;
+        var s = document.createElement('script'); s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+        document.head.appendChild(s);
       };
-      if (window.requestIdleCallback) {
-        requestIdleCallback(loadGTM);
-      } else {
-        setTimeout(loadGTM, 1);
-      }
+      var loadClarity = function() {
+        if (clarityLoaded) return; clarityLoaded = true;
+        (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window,document,'clarity','script','ukonwm7t1p');
+      };
+      var events = ['scroll','click','touchstart','keydown'];
+      var onInt = function() { loadGTM(); events.forEach(function(e){ window.removeEventListener(e,onInt,{passive:true,capture:true}); }); };
+      events.forEach(function(e){ window.addEventListener(e,onInt,{passive:true,capture:true}); });
+      setTimeout(loadGTM, 12000);
+      window.addEventListener('load', function(){ setTimeout(loadClarity, 7000); });
     })();
     </script>
     <!-- Google Tag Manager (noscript) -->
@@ -457,12 +467,12 @@
             <figure class="hero-image">
                 <picture>
                     <source type="image/webp"
-                            srcset="/assets/images/emergencia-24-7-nocturna-800w.webp 800w, /assets/images/emergencia-24-7-nocturna-1200w.webp 1200w"
-                            sizes="(max-width: 768px) 100vw, 1200px">
-                    <img src="/assets/images/emergencia-24-7-nocturna-1200w.webp"
-                         srcset="/assets/images/emergencia-24-7-nocturna-800w.webp 800w, /assets/images/emergencia-24-7-nocturna-1200w.webp 1200w"
-                         sizes="(max-width: 768px) 100vw, 1200px"
-                         alt="Plomero profesional en Culiacán atendiendo emergencia 24 horas con herramientas especializadas"
+                            srcset="/assets/images/destapandodrenaje-800w.webp 800w"
+                            sizes="(max-width: 768px) 100vw, 800px">
+                    <img src="/assets/images/destapandodrenaje-800w.webp"
+                         srcset="/assets/images/destapandodrenaje-800w.webp 800w"
+                         sizes="(max-width: 768px) 100vw, 800px"
+                         alt="Plomero destapando drenaje profesionalmente en Culiacán"
                          width="1200"
                          height="800"
                          fetchpriority="high"
@@ -471,7 +481,7 @@
             </figure>
 
             <div class="hero-content">
-                <h1 class="fade-in">Drenaje Tapado: 8 Señales de Alerta y Cómo Prevenirlo [2026]</h1>
+                <h1>Drenaje Tapado: 8 Señales de Alerta y Cómo Prevenirlo [2026]</h1>
 
                 <!-- Rating Badge Visible -->
                 <div class="hero-rating fade-in">
