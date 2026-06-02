@@ -132,12 +132,52 @@
     }
     </script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W75CRTX5');</script>
+    <script>
+window.dataLayer = window.dataLayer || [];
+(function() {
+  var gtmLoaded = false;
+  var clarityLoaded = false;
+
+  var loadGTM = function() {
+    if (gtmLoaded) return;
+    gtmLoaded = true;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+    document.head.appendChild(script);
+  };
+
+  var loadClarity = function() {
+    if (clarityLoaded) return;
+    clarityLoaded = true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ukonwm7t1p");
+  };
+
+  // Cargar GTM en primera interacción (captura sesiones cortas)
+  var interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
+  var onInteraction = function() {
+    loadGTM();
+    interactionEvents.forEach(function(e) {
+      window.removeEventListener(e, onInteraction, {passive: true, capture: true});
+    });
+  };
+  interactionEvents.forEach(function(e) {
+    window.addEventListener(e, onInteraction, {passive: true, capture: true});
+  });
+
+  // Fallback: cargar GTM solo después de 12s (prioriza LCP)
+  setTimeout(loadGTM, 12000);
+
+  // Clarity: cargar 7s después del load (no afecta LCP)
+  window.addEventListener('load', function() {
+    setTimeout(loadClarity, 7000);
+  });
+})();
+</script>
 
     <style>
     .breadcrumb { background: #f8f9fa; padding: 12px 0; font-size: 14px; border-bottom: 1px solid #e9ecef; }

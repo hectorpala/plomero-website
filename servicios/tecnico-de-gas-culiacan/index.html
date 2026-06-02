@@ -44,13 +44,52 @@
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","serviceType":"Tecnico de Gas - Instalacion, Fugas y Reparacion","provider":{"@type":"LocalBusiness","name":"Plomero Culiacan Pro","image":"https://plomeroculiacanpro.mx/assets/images/arreglando-boiler-800w.webp","@id":"https://plomeroculiacanpro.mx","url":"https://plomeroculiacanpro.mx/servicios/tecnico-de-gas-culiacan/","telephone":"+526673922273","priceRange":"$$","address":{"@type":"PostalAddress","addressLocality":"Culiacan","addressRegion":"Sinaloa","addressCountry":"MX"},"geo":{"@type":"GeoCoordinates","latitude":24.8090556,"longitude":-107.3940556},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"},"sameAs":["https://www.facebook.com/plomeroculiacanpro","https://www.instagram.com/plomeroculiacanpro"]},"areaServed":{"@type":"City","name":"Culiacan","containedIn":{"@type":"State","name":"Sinaloa"}},"description":"Tecnico de gas certificado en Culiacan: instalacion de lineas de gas LP y natural, deteccion de fugas, reparacion de estufas y calentadores de gas, certificacion de instalaciones.","hasOfferCatalog":{"@type":"OfferCatalog","name":"Servicios de Gas","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Instalacion de linea de gas"},"priceSpecification":{"@type":"PriceSpecification","priceCurrency":"MXN","minPrice":"2500","maxPrice":"8000"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Deteccion y reparacion de fugas de gas"},"priceSpecification":{"@type":"PriceSpecification","priceCurrency":"MXN","minPrice":"800","maxPrice":"3000"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Conexion de estufa de gas"},"priceSpecification":{"@type":"PriceSpecification","priceCurrency":"MXN","minPrice":"500","maxPrice":"1500"}}]}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Cuanto cobra un tecnico de gas en Culiacan?","acceptedAnswer":{"@type":"Answer","text":"El costo depende del servicio: conexion de estufa desde $500, instalacion de linea de gas desde $2,500, deteccion de fugas desde $800, revision general desde $600. Diagnostico incluido en todos los servicios."}},{"@type":"Question","name":"Como detectar una fuga de gas en casa?","acceptedAnswer":{"@type":"Answer","text":"Senales de fuga de gas: olor a gas (huevo podrido), silbido cerca de conexiones, burbujas al aplicar agua jabonosa en tuberias. Si detectas una fuga, ventila la casa, no enciendas nada electrico y llama a un tecnico de gas inmediatamente."}},{"@type":"Question","name":"Que incluye la instalacion de gas para una estufa?","acceptedAnswer":{"@type":"Answer","text":"La instalacion incluye: tuberia de cobre tipo L, conexiones de laton, valvula de paso, regulador de presion, prueba de hermeticidad con nitrogeno y verificacion de presion. Usamos materiales certificados que cumplen con la norma NOM-002-SECRE."}},{"@type":"Question","name":"Instalan gas LP y gas natural?","acceptedAnswer":{"@type":"Answer","text":"Si, trabajamos con ambos tipos: gas LP (tanque estacionario o cilindro) y gas natural (red de Naturgy). Cada tipo requiere reguladores y presiones diferentes. Nuestros tecnicos estan capacitados para ambas instalaciones."}},{"@type":"Question","name":"Es seguro reparar una fuga de gas uno mismo?","acceptedAnswer":{"@type":"Answer","text":"No, las fugas de gas deben ser reparadas por un tecnico certificado. El gas LP y natural son altamente inflamables. Una reparacion mal hecha puede provocar explosiones o intoxicacion por monoxido de carbono. Llama a un profesional."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://plomeroculiacanpro.mx/"},{"@type":"ListItem","position":2,"name":"Servicios","item":"https://plomeroculiacanpro.mx/#servicios"},{"@type":"ListItem","position":3,"name":"Tecnico de Gas Culiacan","item":"https://plomeroculiacanpro.mx/servicios/tecnico-de-gas-culiacan/"}]}]}</script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-W75CRTX5');</script>
-    <!-- End Google Tag Manager -->
+    <script>
+window.dataLayer = window.dataLayer || [];
+(function() {
+  var gtmLoaded = false;
+  var clarityLoaded = false;
+
+  var loadGTM = function() {
+    if (gtmLoaded) return;
+    gtmLoaded = true;
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+    document.head.appendChild(script);
+  };
+
+  var loadClarity = function() {
+    if (clarityLoaded) return;
+    clarityLoaded = true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "ukonwm7t1p");
+  };
+
+  // Cargar GTM en primera interacción (captura sesiones cortas)
+  var interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
+  var onInteraction = function() {
+    loadGTM();
+    interactionEvents.forEach(function(e) {
+      window.removeEventListener(e, onInteraction, {passive: true, capture: true});
+    });
+  };
+  interactionEvents.forEach(function(e) {
+    window.addEventListener(e, onInteraction, {passive: true, capture: true});
+  });
+
+  // Fallback: cargar GTM solo después de 12s (prioriza LCP)
+  setTimeout(loadGTM, 12000);
+
+  // Clarity: cargar 7s después del load (no afecta LCP)
+  window.addEventListener('load', function() {
+    setTimeout(loadClarity, 7000);
+  });
+})();
+</script>
 
     <style>
     .breadcrumb {
