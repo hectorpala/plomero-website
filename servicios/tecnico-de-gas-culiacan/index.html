@@ -14,7 +14,7 @@
     <!-- Preload critical fonts -->
     <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <link rel="preload" href="../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
-    <link rel="preload" as="image" href="../../logo-plomero-culiacan-pro.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="../../assets/images/arreglando-boiler-800w.webp" fetchpriority="high">
 
     <link rel="stylesheet" href="../../styles.min.css">
 
@@ -208,6 +208,22 @@
             </div>
         </div>
     </header>
+
+    <section style="padding: 0; margin: 2rem 0;">
+        <div class="container">
+            <picture>
+                <source type="image/webp"
+                        srcset="../../assets/images/arreglando-boiler-420w.webp 420w,
+                                ../../assets/images/arreglando-boiler-800w.webp 800w"
+                        sizes="(max-width: 480px) 420px, 800px">
+                <img src="../../assets/images/arreglando-boiler-800w.webp"
+                     alt="Técnico de gas en Culiacán revisando calentador de paso — instalación y reparación certificada"
+                     width="800" height="800"
+                     loading="eager" decoding="async" fetchpriority="high"
+                     style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 8px;">
+            </picture>
+        </div>
+    </section>
 
     <section class="section section-alt">
         <div class="container">
