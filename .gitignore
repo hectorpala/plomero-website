@@ -46,6 +46,8 @@ venv/
 # Google APIs
 client_secret.json
 token.json
+mcp-local-seo/gsc-token.json
+mcp-local-seo/cache-*.json
 
 # Build artifacts
 dist/
