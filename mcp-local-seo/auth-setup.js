@@ -26,6 +26,7 @@ const TOKEN_FILE = join(__dirname, 'gsc-token.json');
 const SCOPES = [
   'https://www.googleapis.com/auth/webmasters',          // lectura + escritura GSC
   'https://www.googleapis.com/auth/webmasters.readonly', // retrocompatibilidad
+  'https://www.googleapis.com/auth/indexing',            // Indexing API (solicitar crawl)
 ];
 
 async function main() {

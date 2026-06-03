@@ -259,3 +259,25 @@ export async function requestIndexing({ urls }) {
   }
   return { results };
 }
+
+export async function indexUrls({ urls }) {
+  const auth = await getAuthClient();
+  if (auth.error) return auth;
+
+  const results = [];
+  for (const url of urls) {
+    try {
+      const res = await auth.request({
+        url: 'https://indexing.googleapis.com/v3/urlNotifications:publish',
+        method: 'POST',
+        data: { url, type: 'URL_UPDATED' },
+      });
+      results.push({ url, status: '✅ Solicitud enviada', httpStatus: res.status });
+    } catch (err) {
+      const msg = err.response?.data?.error?.message || err.message;
+      results.push({ url, status: '❌ Error', error: msg });
+    }
+    await new Promise(r => setTimeout(r, 500));
+  }
+  return { results };
+}
