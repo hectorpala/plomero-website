@@ -97,6 +97,13 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# index.min.html es artefacto de build, no debe servirse como página
+[[redirects]]
+  from = "/index.min.html"
+  to = "/"
+  status = 301
+  force = true
+
 # 404 page
 [[redirects]]
   from = "/*"

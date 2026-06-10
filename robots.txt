@@ -43,3 +43,4 @@ Disallow: /
 Sitemap: https://plomeroculiacanpro.mx/sitemap.xml
 Sitemap: https://plomeroculiacanpro.mx/sitemaps/main_sitemap.xml
 Sitemap: https://plomeroculiacanpro.mx/sitemaps/images_sitemap.xml
+Sitemap: https://plomeroculiacanpro.mx/sitemaps/priority_sitemap.xml
