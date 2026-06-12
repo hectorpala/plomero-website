@@ -20,7 +20,7 @@
     <link rel="preload" href="../../assets/fonts/montserrat-800.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <link rel="preload" as="image" href="../../assets/images/emergencia-24-7-nocturna-800w.webp" fetchpriority="high">
 
-    <link rel="stylesheet" href="../../styles.min.css?v=20260612">
+    <link rel="stylesheet" href="../../styles.min.css?v=20260612b">
 
 
     <!-- JSON-LD Structured Data -->
@@ -704,7 +704,7 @@ if (window.requestIdleCallback) {
             <div class="news-grid">
                 <article class="news-card card">
                     <figure class="news-image">
-                        <img src="../../blog/info_culiacan.webp" alt="Marcha por la paz en Culiacán" loading="lazy">
+                        <img src="../../blog/info_culiacan.webp" width="673" height="373" alt="Marcha por la paz en Culiacán" loading="lazy">
                     </figure>
                     <div class="news-content">
                         <time datetime="2025-09-07" class="news-date">7 de septiembre, 2025</time>
@@ -753,10 +753,10 @@ if (window.requestIdleCallback) {
                 <div class="contact-form">
                     <h3>Solicita Atención Urgente</h3>
                     <form id="contact-form">
-                        <input type="text" name="nombre" placeholder="Nombre" required>
-                        <input type="tel" name="telefono" placeholder="Teléfono" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <textarea name="mensaje" placeholder="Describe tu emergencia y ubicación en Culiacán" rows="4" required></textarea>
+                        <input type="text" name="nombre" aria-label="Nombre completo" placeholder="Nombre" required>
+                        <input type="tel" name="telefono" aria-label="Teléfono (10 dígitos)" placeholder="Teléfono" required>
+                        <input type="email" name="email" aria-label="Email" placeholder="Email" required>
+                        <textarea name="mensaje" aria-label="Describe tu problema o servicio requerido" placeholder="Describe tu emergencia y ubicación en Culiacán" rows="4" required></textarea>
                         <button type="submit" class="btn-primary">Enviar por WhatsApp</button>
                     </form>
                 </div>

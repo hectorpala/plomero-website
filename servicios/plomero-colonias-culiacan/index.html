@@ -18,7 +18,7 @@
     <link rel="preload" href="../../assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../../assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 
-    <link rel="stylesheet" href="../../styles.min.css?v=20260612">
+    <link rel="stylesheet" href="../../styles.min.css?v=20260612b">
 
 
     <!-- JSON-LD Structured Data -->
@@ -963,10 +963,10 @@ if (window.requestIdleCallback) {
                 <div class="contact-form">
                     <h3>Solicita una Cotización</h3>
                     <form id="contact-form">
-                        <input type="text" name="nombre" placeholder="Nombre" required>
-                        <input type="tel" name="telefono" placeholder="Teléfono" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <textarea name="mensaje" placeholder="Describe tu problema y dinos en qué colonia estás" rows="4" required></textarea>
+                        <input type="text" name="nombre" aria-label="Nombre completo" placeholder="Nombre" required>
+                        <input type="tel" name="telefono" aria-label="Teléfono (10 dígitos)" placeholder="Teléfono" required>
+                        <input type="email" name="email" aria-label="Email" placeholder="Email" required>
+                        <textarea name="mensaje" aria-label="Describe tu problema o servicio requerido" placeholder="Describe tu problema y dinos en qué colonia estás" rows="4" required></textarea>
                         <button type="submit" class="btn-primary">Enviar por WhatsApp</button>
                     </form>
                 </div>

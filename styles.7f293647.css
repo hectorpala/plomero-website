@@ -5,3 +5,5 @@
 .breadcrumb-item a{display:inline-block;padding:10px 6px;margin:-8px -2px}
 
 .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.footer-links a{display:inline-block;padding:8px 0;margin:-4px 0}

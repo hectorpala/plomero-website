@@ -2666,3 +2666,17 @@ p {
 /* mant-altos 2026-06-12: paridad imágenes social proof (movil-003) + scroll de tablas (movil-001/002) */
 .google-review-image,.before-after-image{max-width:100%;height:auto;display:block;border-radius:12px}
 .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* Tap target breadcrumbs (~44px) — paridad con styles.min.css y styles.7f293647.css */
+.breadcrumb-item a {
+    display: inline-block;
+    padding: 10px 6px;
+    margin: -8px -2px;
+}
+
+/* Tap target enlaces del footer (~44px) sin cambiar el aspecto */
+.footer-links a {
+    display: inline-block;
+    padding: 8px 0;
+    margin: -4px 0;
+}
