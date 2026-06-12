@@ -2680,3 +2680,18 @@ p {
     padding: 8px 0;
     margin: -4px 0;
 }
+
+/* Tap target enlaces de texto tel:/wa.me (~44px) sin cambiar el aspecto (movil-201) */
+p a[href^="tel:"]:not([class*="btn"]),
+p a[href*="wa.me"]:not([class*="btn"]),
+li a[href^="tel:"]:not([class*="btn"]),
+li a[href*="wa.me"]:not([class*="btn"]) {
+    display: inline-block;
+    padding: 12px 6px;
+    margin: -10px -4px;
+}
+/* hero-phone-link: solo area tactil; NO tocar display (display:none en desktop) */
+.hero-phone-link {
+    padding: 12px 6px;
+    margin: -10px -4px;
+}
