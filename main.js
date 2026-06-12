@@ -169,7 +169,7 @@ const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n
 `Teléfono: ${telefono}\n` +
 `Email: ${email}\n` +
 `Mensaje: ${mensaje}`;
-const whatsappURL = `https:
+const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
 window.open(whatsappURL, '_blank');
 window.location.href = '/gracias';
 } else {
@@ -182,7 +182,7 @@ const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n
 `Teléfono: ${telefono}\n` +
 `Email: ${email}\n` +
 `Mensaje: ${mensaje}`;
-const whatsappURL = `https:
+const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
 window.location.href = whatsappURL;
 }
 });
@@ -489,7 +489,7 @@ msg += 'Servicio: ' + selectedService + '\n';
 if (mensaje) {
 msg += 'Detalle: ' + mensaje + '\n';
 }
-var whatsappURL = 'https:
+var whatsappURL = 'https://wa.me/526673922273?text=' + encodeURIComponent(msg);
 try {
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({

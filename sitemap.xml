@@ -8,4 +8,8 @@
     <loc>https://plomeroculiacanpro.mx/sitemaps/images_sitemap.xml</loc>
     <lastmod>2026-06-02T00:00:00+00:00</lastmod>
   </sitemap>
+  <sitemap>
+    <loc>https://plomeroculiacanpro.mx/sitemaps/priority_sitemap.xml</loc>
+    <lastmod>2026-06-11T00:00:00+00:00</lastmod>
+  </sitemap>
 </sitemapindex>

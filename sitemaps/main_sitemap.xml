@@ -469,12 +469,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://plomeroculiacanpro.mx/blog/marcha-paz-culiacan-2025/</loc>
-    <lastmod>2026-02-11T12:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -501,6 +495,30 @@
   <url>
     <loc>https://plomeroculiacanpro.mx/servicios/tecnico-de-gas-culiacan/</loc>
     <lastmod>2026-06-02T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/cambio-de-tuberias/</loc>
+    <lastmod>2026-06-11T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/instalacion-de-cisternas/</loc>
+    <lastmod>2026-06-11T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/reparacion-de-llaves-y-mezcladoras/</loc>
+    <lastmod>2026-06-11T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://plomeroculiacanpro.mx/servicios/plomeria-comercial/</loc>
+    <lastmod>2026-06-11T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
