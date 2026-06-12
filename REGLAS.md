@@ -1,0 +1,26 @@
+# REGLAS APRENDIDAS — Plomero Culiacán
+
+Reglas duras extraídas del historial de commits. Cada línea documenta un error real ya cometido para que un agente NO lo repita.
+
+- [2026-06-11] JS/MINIFICACIÓN: tras minificar main.js, verificar que las URLs `wa.me` no queden truncadas — una URL cortada genera un SyntaxError fatal que mata menú móvil, formularios y tracking en TODO el sitio — por qué (commit f8c72299). Severidad: alta.
+- [2026-06-11] CACHÉ: al cambiar CSS, versionar la URL (`?v=AAAAMMDD`) Y subir la versión del service worker (sw.js) — los CSS se sirven con Cache-Control immutable 1 año y el SW los precachea cache-first, así que sin versionar los visitantes recurrentes nunca reciben el fix — por qué (commit a03a6b2b). Severidad: alta.
+- [2026-06-11] MÓVIL: las tablas (precios, etc.) deben tener scroll horizontal contenido vía CSS `@media 768px`; sin eso la columna derecha se sale del viewport en /, /precios/ y posts del blog — por qué (commit f44ef39f). Severidad: alta.
+- [2026-06-11] MÓVIL: toda imagen debe llevar `max-width:100%` (ej. .google-review-image, .before-after-image) — sin regla CSS renderizan a 1200px y desbordan en móvil — por qué (commit f44ef39f). Severidad: media.
+- [2026-06-11] MÓVIL: no usar grids con columnas fijas inline (ej. benefits-grid 2 columnas) — desbordan a 375px; usar `auto-fit minmax(260px,1fr)` — por qué (commit f44ef39f). Severidad: media.
+- [2026-06-11] MÓVIL/A11Y: los tap targets deben medir ~44px (breadcrumbs tenían 32x22px); ampliar área táctil con padding + margen negativo sin cambiar el aspecto visual — por qué (commit f44ef39f). Severidad: media.
+- [2026-06-11] CSS/PARIDAD: aplicar cada fix de estilos en los TRES archivos (styles.css, styles.min.css y styles.7f293647.css servido) — una regla añadida solo en uno (.footer-logo img) deja el sitio inconsistente — por qué (commit f44ef39f). Severidad: media.
+- [2026-06-05] MÓVIL: los grid items que deben encogerse llevan `min-width:0`, no `auto` — con min-width:auto las columnas no se encogen y empujan contenido (.stats-grid) fuera de pantalla en ≤360px — por qué (commit bdf53978). Severidad: media.
+- [2026-06-11] SEO: nunca crear cientos de páginas casi idénticas (colonias eran plantillas 80-86% iguales); consolidar en pocas páginas de zona con 301 — son doorways invisibles para Google y peso muerto de rastreo — por qué (commit 320950bc). Severidad: alta.
+- [2026-06-11] SEO: cada página local debe tener coordenadas GPS reales y únicas, no la coordenada genérica del centro repetida — la geo duplicada es señal de doorway — por qué (commit 0a865c93). Severidad: media.
+- [2026-06-09] SEO/SCHEMA: NO poner aggregateRating/review auto-servidos en blog ni páginas sin negocio real — viola la política self-serving reviews de Google; mantener reviews solo en páginas de negocio — por qué (commit 08a95902). Severidad: alta.
+- [2026-06-08] SEO: verificar que `og:image` y `twitter:image` apunten a un archivo que EXISTE — apuntaban a archivos inexistentes en varias páginas — por qué (commits 590d3e4a, f8c72299, 26cf9939). Severidad: media.
+- [2026-06-11] ENLACES: al consolidar/eliminar páginas, revisar y reparar rutas de imagen inválidas (`../../../`) y enlaces internos rotos generados por el cambio de profundidad — por qué (commits 8a747e6e, f8c72299). Severidad: alta.
+- [2026-06-11] IMÁGENES: no referenciar PNG inexistentes; usar los WebP que sí existen en el repo — había 18 rutas a PNG inexistentes — por qué (commit f8c72299). Severidad: media.
+- [2026-06-11] CONTENIDO: el email de contacto correcto es `info@plomeroculiacanpro.mx`, NO `info@plomeropro.com` — estaba mal en 14 páginas — por qué (commit f8c72299). Severidad: media.
+- [2026-06-11] SEO/ENLACES: al borrar o consolidar páginas, verificar CERO enlaces internos a las páginas borradas y actualizar sitemap (404, home, hubs, meta-refresh) — por qué (commits 320950bc, 8a747e6e). Severidad: alta.
+- [2026-06-11] SEO: las páginas off-topic (ej. marcha-paz) van con noindex y fuera del sitemap — no diluir el sitio temático con contenido ajeno — por qué (commits f8c72299, 26cf9939). Severidad: baja.
+- [2026-06-09] REDIRECTS: todo redirect debe apuntar a un destino que existe — uno apuntaba a `/2026/` inexistente y se corrigió a `/2025/` — por qué (commit 26cf9939). Severidad: media.
+- [2026-06-03] RENDIMIENTO/CLS: las imágenes (sobre todo el logo) deben declarar `width` y `height` para prevenir CLS — faltaban en 22 páginas — por qué (commit bd9ccadf). Severidad: media.
+- [2026-06-03] PWA: el `theme_color`/`theme-color` debe ser el color de marca (#F97316), no un placeholder (#0066cc), y debe existir en cada página — por qué (commits bd9ccadf, fdc89c6c). Severidad: baja.
+- [2026-05-20] RENDIMIENTO: optimizar imágenes pesadas a WebP antes de servirlas — el logo pasó de 101KB a 6KB (-94%) — por qué (commit 0346f9eb). Severidad: media.
+- [2026-06-03] SEO: cada página indexable nueva debe quedar incluida en el sitemap (incluyendo priority_sitemap.xml) — faltaban páginas indexables — por qué (commits e7899c86, f8c72299). Severidad: media.
