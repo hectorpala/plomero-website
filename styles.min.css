@@ -595,9 +595,10 @@ p {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  outline: none;
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(227,100,20,0.1);
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 2px;
+  border-color: var(--brand-dark);
+  box-shadow: 0 0 0 3px rgba(227,100,20,0.3);
 }
 
 .footer {
@@ -2676,3 +2677,7 @@ p {
 .hero .hero-image{position:relative!important;inset:auto!important;display:block!important;width:calc(100% - 0px)!important;max-width:400px!important;height:150px!important;margin:0 auto .75rem!important;border-radius:16px!important;overflow:hidden!important;box-shadow:0 2px 12px rgba(0,0,0,.10)!important;z-index:1!important}
 .hero .hero-image img,.hero .hero-image picture{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 30%!important;display:block!important}
 }
+
+/* mant-altos 2026-06-12: paridad imágenes social proof (movil-003) + scroll de tablas (movil-001/002) */
+.google-review-image,.before-after-image{max-width:100%;height:auto;display:block;border-radius:12px}
+.table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
