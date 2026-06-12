@@ -2671,3 +2671,8 @@ p {
 @media(max-width:768px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 .breadcrumb-item a{display:inline-block;padding:10px 6px;margin:-8px -2px}
 .footer-logo img{max-width:200px;height:auto;margin:0 auto;display:block}
+/* Hero móvil con foto-card (paridad con home/colonias) */
+@media(max-width:768px){
+.hero .hero-image{position:relative!important;inset:auto!important;display:block!important;width:calc(100% - 0px)!important;max-width:400px!important;height:150px!important;margin:0 auto .75rem!important;border-radius:16px!important;overflow:hidden!important;box-shadow:0 2px 12px rgba(0,0,0,.10)!important;z-index:1!important}
+.hero .hero-image img,.hero .hero-image picture{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 30%!important;display:block!important}
+}
