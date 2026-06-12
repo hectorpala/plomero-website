@@ -1,0 +1,39 @@
+---
+name: mantener-sitio
+description: Pipeline de mantenimiento autónomo del sitio — health check, revisión, arreglo, verificación y aprendizaje. Invocar con /mantener-sitio.
+---
+
+# Pipeline de mantenimiento autónomo
+
+Ejecuta este ciclo en orden. Muestra EVIDENCIA en cada fase, no solo afirmaciones.
+
+## FASE 0 — Memoria
+1. Lee REGLAS.md (errores que NO debes repetir), ESTADO.md (estado anterior) y las últimas líneas de HISTORIAL.jsonl.
+
+## FASE 0.5 — Health Check (ANTES de tocar nada)
+2. Levanta un servidor local estático (ej: `python3 -m http.server 8080` en background) sobre la raíz del sitio.
+3. Comprueba que la home y 2-3 páginas clave (/precios/, /contacto/) responden 200 con `curl -sI`. Si algo está roto YA, anótalo como hallazgo de severidad alta.
+
+## FASE 1 — Revisión (en paralelo)
+4. Lanza los 5 subagentes revisores con la herramienta Task, en paralelo (un solo mensaje, varias llamadas): revisor-seo, revisor-movil, revisor-a11y, revisor-perf, revisor-links.
+5. Junta todos sus hallazgos JSON en una sola lista.
+
+## FASE 2 — Deduplicar contra memoria
+6. Para cada hallazgo, genera una firma (archivo + categoria + descripción corta). Búscala en HISTORIAL.jsonl:
+   - Si NUNCA se vio: es nuevo.
+   - Si ya se vio y se marcó arreglado pero reaparece: márcalo como REGRESIÓN (prioridad alta) — significa que falta una regla.
+   - Si ya se vio y sigue pendiente: no lo repitas, solo cuéntalo.
+7. Añade los hallazgos nuevos y regresiones a HISTORIAL.jsonl (una línea JSON por hallazgo, con fecha de hoy).
+
+## FASE 3 — Arreglar (solo severidad alta y media)
+8. Arregla los hallazgos de severidad alta y media, UNO POR UNO, con cambios MÍNIMOS, respetando TODAS las reglas de REGLAS.md (ej: versionar CSS + subir SW, aplicar fix en los 3 archivos CSS, etc.). No arregles severidad baja en modo automático.
+
+## FASE 4 — Verificar (escéptico, con el sitio corriendo)
+9. Por cada arreglo, vuelve a comprobar en el sitio corriendo que el problema YA NO está. Asume que NO se arregló salvo prueba clara. Si sigue roto, vuelve a intentar (máximo 2 veces) y si no, márcalo como pendiente.
+
+## FASE 5 — Aprender
+10. Si algún error fue una REGRESIÓN o reveló un patrón nuevo, añade/actualiza una regla en REGLAS.md (formato: "- [FECHA] CATEGORÍA: regla — por qué. Severidad: X"). CONSOLIDA, no dupliques. Solo crea regla de un error ya verificado.
+11. Actualiza ESTADO.md con: fecha de esta corrida, qué se arregló, qué quedó pendiente.
+
+## FASE 6 — Reporte (NO publicar)
+12. Apaga el servidor local. Muéstrame un resumen: hallazgos encontrados / arreglados / pendientes / regresiones / reglas nuevas. NO hagas git commit ni push todavía — eso lo decide otro paso.
