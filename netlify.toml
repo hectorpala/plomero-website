@@ -104,6 +104,25 @@
   status = 301
   force = true
 
+# Consolidación SEO: cluster de emergencia unificado en /servicios/emergencia-24-7/
+[[redirects]]
+  from = "/servicios/plomero-urgente/*"
+  to = "/servicios/emergencia-24-7/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/servicios/plomero-24-horas/*"
+  to = "/servicios/emergencia-24-7/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/servicios/plomero-de-emergencia/*"
+  to = "/servicios/emergencia-24-7/"
+  status = 301
+  force = true
+
 # 404 page
 [[redirects]]
   from = "/*"
