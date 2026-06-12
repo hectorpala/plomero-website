@@ -2666,3 +2666,8 @@ p {
     transform: none !important;
   }
 }
+
+/* === QA móvil 2026-06-11 === */
+@media(max-width:768px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+.breadcrumb-item a{display:inline-block;padding:10px 6px;margin:-8px -2px}
+.footer-logo img{max-width:200px;height:auto;margin:0 auto;display:block}
