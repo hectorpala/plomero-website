@@ -19,7 +19,7 @@ from pathlib import Path
 from datetime import datetime
 
 # ── Rutas ─────────────────────────────────────────────────────────────────────
-BASE_DIR = Path("/Users/hectorpc/Documents/Hector Palazuelos/Google My Business/plomero culiacan pro")
+BASE_DIR = Path(__file__).resolve().parents[1]
 COLONIAS_DIR = BASE_DIR / "servicios" / "plomero-colonias-culiacan"
 JSON_PATH = BASE_DIR / "colonias-completas-culiacan.json"
 BACKUP_DIR = BASE_DIR / "scripts" / "backups_inject_zona"

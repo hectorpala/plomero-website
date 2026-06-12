@@ -15,7 +15,7 @@ Ejecuta este ciclo en orden. Muestra EVIDENCIA en cada fase, no solo afirmacione
 3. Comprueba que la home y 2-3 páginas clave (/precios/, /contacto/) responden 200 con `curl -sI`. Si algo está roto YA, anótalo como hallazgo de severidad alta.
 
 ## FASE 1 — Revisión (en paralelo)
-4. Lanza los 5 subagentes revisores con la herramienta Task, en paralelo (un solo mensaje, varias llamadas): revisor-seo, revisor-movil, revisor-a11y, revisor-perf, revisor-links.
+4. Lanza los 6 subagentes revisores con la herramienta Task, en paralelo (un solo mensaje, varias llamadas): revisor-seo, revisor-movil, revisor-a11y, revisor-perf, revisor-links, revisor-gsc.
 5. Junta todos sus hallazgos JSON en una sola lista.
 
 ## FASE 2 — Deduplicar contra memoria
@@ -26,14 +26,20 @@ Ejecuta este ciclo en orden. Muestra EVIDENCIA en cada fase, no solo afirmacione
 7. Añade los hallazgos nuevos y regresiones a HISTORIAL.jsonl (una línea JSON por hallazgo, con fecha de hoy).
 
 ## FASE 3 — Arreglar (solo severidad alta y media)
-8. Arregla los hallazgos de severidad alta y media, UNO POR UNO, con cambios MÍNIMOS, respetando TODAS las reglas de REGLAS.md (ej: versionar CSS + subir SW, aplicar fix en los 3 archivos CSS, etc.). No arregles severidad baja en modo automático.
+8. Arregla SOLO hallazgos mecánicos de severidad alta y media, UNO POR UNO, con cambios MÍNIMOS, respetando TODAS las reglas de REGLAS.md (ej: versionar CSS + subir SW, aplicar fix en los 3 archivos CSS, etc.). No arregles severidad baja en modo automático.
+9. NUNCA hagas en automático: consolidar/fusionar/borrar/reescribir páginas; cambios de contenido, copy o precios; decisiones de estrategia SEO; borrar o editar tests; cualquier cambio que borre más de 5 archivos completos. Anótalo como pendiente humano.
 
 ## FASE 4 — Verificar (escéptico, con el sitio corriendo)
-9. Por cada arreglo, vuelve a comprobar en el sitio corriendo que el problema YA NO está. Asume que NO se arregló salvo prueba clara. Si sigue roto, vuelve a intentar (máximo 2 veces) y si no, márcalo como pendiente.
+10. Por cada arreglo, vuelve a comprobar en el sitio corriendo que el problema YA NO está. Asume que NO se arregló salvo prueba clara. Si sigue roto, vuelve a intentar (máximo 2 veces) y si no, revierte ese arreglo y márcalo como pendiente.
 
-## FASE 5 — Aprender
-10. Si algún error fue una REGRESIÓN o reveló un patrón nuevo, añade/actualiza una regla en REGLAS.md (formato: "- [FECHA] CATEGORÍA: regla — por qué. Severidad: X"). CONSOLIDA, no dupliques. Solo crea regla de un error ya verificado.
-11. Actualiza ESTADO.md con: fecha de esta corrida, qué se arregló, qué quedó pendiente.
+## FASE 5 — Gate de publicación
+11. Auto-revisa el diff contra main: confirma que nada quedó fuera de alcance, que HTML/JSON-LD siguen válidos, y que no se tocaron tests ni contenido estratégico.
+12. Solo publica si se cumplen TODOS los candados: auto-revisión limpia, diff de máximo 200 archivos y cero borrados estructurales inesperados. Si cualquier candado falla, NO hagas merge ni push; deja la rama, escribe en ESTADO.md por qué se detuvo y termina.
+13. Si todo pasa: merge a main con mensaje `fix: mantenimiento auto YYYY-MM-DD — N hallazgos`, push, y borra la rama fusionada.
 
-## FASE 6 — Reporte (NO publicar)
-12. Apaga el servidor local. Muéstrame un resumen: hallazgos encontrados / arreglados / pendientes / regresiones / reglas nuevas. NO hagas git commit ni push todavía — eso lo decide otro paso.
+## FASE 6 — Aprender
+14. Si algún error fue una REGRESIÓN o reveló un patrón nuevo, añade/actualiza una regla en REGLAS.md (formato: "- [FECHA] CATEGORÍA: regla — por qué. Severidad: X"). CONSOLIDA, no dupliques. Solo crea regla de un error ya verificado.
+15. Actualiza ESTADO.md con: fecha de esta corrida, qué se arregló, qué quedó pendiente y si se publicó o no.
+
+## FASE 7 — Reporte
+16. Apaga el servidor local y escribe .pipeline/ultima-corrida.md. Muéstrame un resumen: hallazgos encontrados / arreglados / pendientes / regresiones / reglas nuevas / publicado o detenido.

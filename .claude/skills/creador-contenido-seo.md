@@ -6,7 +6,7 @@ Generar landing pages o artículos de blog listos para publicar con el mismo for
 ## Información del Proyecto
 
 ### Rutas
-- **Proyecto:** `/Users/hectorpc/Documents/Hector Palazuelos/Google My Business/plomero culiacan pro`
+- **Proyecto:** `/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán`
 - **Homepage:** `index.html`
 - **Servicios:** `servicios/`
 - **Blog:** `blog/`

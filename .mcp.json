@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "local-seo": {
+      "command": "/usr/local/bin/node",
+      "args": ["/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/mcp-local-seo/index.js"],
+      "cwd": "/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán"
+    }
+  }
+}
