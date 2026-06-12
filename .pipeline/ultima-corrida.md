@@ -1,35 +1,34 @@
-# Última corrida — 2026-06-12 (tarde) — PRUEBA SUPERVISADA
+# Última corrida — 2026-06-12 noche (AUTÓNOMA)
 
-**Rama:** `auto/mantenimiento-20260612` · **Commit:** 5ad90987 · **Publicado:** NO (frenado por instrucción humana, no por candados)
+**Rama:** auto/mantenimiento-20260612-noche → merge 6688d219 a main → push OK → rama borrada.
+**Publicado: SÍ.** Candados 3/3: auto-revisión limpia, 106 archivos ≤ 200, 0 borrados.
 
-## Qué se arregló (12 grupos, 35 hallazgos, todos verificados con el sitio corriendo)
+## Qué se arregló (8 hallazgos mecánicos, todos verificados con el sitio corriendo)
 
-| # | Hallazgo | Sev. | Fix |
-|---|----------|------|-----|
-| links-101..105 | 110 candidatos srcset 800w relativos → 404 en 5 páginas de servicios | alta | `/` antepuesto; 0 restantes; imagen 200 |
-| links-106..110 | og:image/twitter:image a webp inexistentes (5 páginas) | media | repuntadas a webp existentes (200 verificado) |
-| links-111..120,122 | 11 CTA `#contacto` muertos en blog | media | `→ /#contacto` |
-| a11y-105/106 | 48 inputs sin aria-label (8 servicios + 4 posts) | alta | aria-label patrón del home |
-| a11y-107 | outline:none inline anulaba el foco arreglado hoy (4 posts) | media | outline 2px #C2410C |
-| perf-101/102 | 5 imágenes sin width/height (CLS), incl. logo /precios/ | alta/media | dimensiones intrínsecas |
-| perf-103 | 6 logos de footer sin lazy | media | loading=lazy decoding=async |
-| movil-101+ | 6 tablas sin .table-wrapper | media | envueltas; balance div OK |
-| movil-109 | **REGRESIÓN**: regla breadcrumb faltaba en styles.css (paridad) | media | copiada; 1/1/1 |
-| movil-110 | .footer-links tap targets ~20px | media | regla en 3 CSS + `?v=20260612b` (102 págs) + sw v23 |
+| ID | Qué | Verificación |
+|----|-----|--------------|
+| seo-201 (=links-202) | JSON-LD de plomero-economico con URLs sin `/servicios/` (404) | grep 0 malas, JSON-LD 4/4 válido, curl 200 |
+| seo-202 (=links-201) | og:url + breadcrumb de desazolve sin `/servicios/` (404) | 3/3 URLs correctas servidas |
+| perf-201 | hero de tecnico-de-gas declaraba 1200x800, imagen real 800x800 (CLS) | sips + HTML servido |
+| perf-202/203/204 | 2-3 `fetchpriority=high` por página en 3 servicios; bajo-el-fold a `loading=lazy` | conteo de high servido = preloads+hero exacto |
+| perf-205 | preload de emergencia-24-7 sin imagesrcset (doble descarga en desktop) | atributo servido |
+| movil-201 | CTAs de texto tel:/wa.me con tap target 17-27px | regla en los 3 CSS (paridad 1/1/1), Chrome headless: 44-52px a 375px, 0 overflow en 10 páginas, .hero-phone-link sigue oculto en desktop, botones excluidos |
 
-## Qué quedó pendiente para humano (no mecánico)
+Bump CSS `?v=20260612c` (102 páginas) + sw.js CACHE_NAME v24 (regla de caché cumplida).
 
-- **a11y-101/102 (alta):** contraste de los CTA WhatsApp (1.98:1) — cambiar color de marca es decisión de negocio.
-- **seo-104/105/106:** aggregateRating self-serving en 15 páginas de negocio + valores inconsistentes — decisión SEO.
-- **seo-107/108:** geo duplicada/genérica en 7 colonias — ligado al pendiente estratégico seo-002.
-- **seo-109:** 4 páginas de servicio 77-84% idénticas — consolidar/reescribir prohibido en auto.
-- **perf-104/106/108:** re-minificar min.css, borrar ~6MB sin referencias, recomprimir íconos/heros — regeneración/borrado de assets.
-- **a11y-109, html-001** y 16 bajas registradas en HISTORIAL.
+## Qué quedó pendiente para humano (nuevos)
 
-## Candados del paso 8 (evaluados de verdad)
+1. **gsc-201 (ALTA):** /precios/ jamás indexada — canibalizada por /servicios/plomero-precios/ (sí indexada, title casi igual). Decidir consolidación (301 o canonical).
+2. **gsc-202 (ALTA):** hub /servicios/ "Google no reconoce esta URL" — solo 2 enlaces internos; la home usa el ancla #servicios. Añadir enlace real en nav/footer.
+3. **gsc-203 (1 minuto):** reenviar sitemap.xml y sitemaps/main_sitemap.xml en GSC (copia de Google del 06-03/06-04, anterior a la consolidación).
+4. **gsc-204:** titles/metas con CTR 0 pese a ~430 impresiones (drenaje-tapado) y pos 1.9 (desatascar-wc) — copy.
+5. **a11y-201:** verde "Disponibles ahora" 2.0:1; recomendado #15803d (~4.7:1) en inline de index.html + 3 CSS.
 
-1. Auto-revisión sin problemas de correctitud: ✅ (JSON-LD 0 inválidos en 102 HTML; único desbalance div es preexistente en main; tests y contenido intactos)
-2. Diff ≤ 200 archivos: ✅ 106 archivos
-3. Sin borrados estructurales: ✅ 0 archivos borrados
+Bajas registradas sin tocar: seo-203/204 (og:url a la home), seo-205 (typo año, página noindex), movil-202 (link Términos 65x19), perf-206 (dims de logo).
 
-**Veredicto: HABRÍA PUBLICADO (3/3). Se detuvo solo por la excepción de prueba supervisada.**
+## Notas
+
+- 0 regresiones de la corrida de la tarde (los 6 revisores verificaron los fixes previos).
+- El hook de indexación del push agotó la cuota diaria (consumida por la corrida de la tarde): 2 enviadas, 98 con error de cuota. Se renueva mañana; no afecta el deploy.
+- Aprendizaje clave: una regla CSS añadida al final casi anula el `display:none` de `.hero-phone-link` en desktop (misma especificidad, orden gana). Cazado antes de publicar; regla nueva CSS/CASCADA en REGLAS.md.
+- GSC rendimiento 28d: 336 clics (+26%), 23,801 impresiones (+23%) — al alza, sin caídas.
