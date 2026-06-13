@@ -270,8 +270,8 @@ window.dataLayer.push({
 scrollTicking = false;
 });
 }, { passive: true });
-})();
-(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
+});
+setTimeout(function() {
 var popup = document.getElementById('exit-intent-popup');
 if (!popup) return;
 var closeBtn = document.querySelector('.exit-popup-close');
