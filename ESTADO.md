@@ -4,36 +4,48 @@
 {
   "ultima_corrida": {
     "fecha": "2026-06-12",
-    "rama": "auto/mantenimiento-20260612-1720",
+    "rama": "auto/mantenimiento-20260612-2001",
     "modo": "AUTONOMO",
     "revisores": 6,
-    "hallazgos_brutos": 22,
-    "hallazgos_unicos_nuevos": 19,
-    "arreglados": 19,
-    "verificados": 19,
-    "regresiones": "3 (seo-206/207 og:url=home, movil-203 paridad CSS)",
-    "pendientes_humano_nuevos": 5,
-    "bajas_no_tocadas": 3,
+    "hallazgos_brutos": 16,
+    "hallazgos_unicos_nuevos": 13,
+    "arreglados": 3,
+    "verificados": 3,
+    "regresiones": "0",
+    "pendientes_humano_nuevos": "10 (gsc-210..214, perf-401/402, a11y-301, movil-301, infra-002)",
+    "bajas_no_tocadas": "4 (seo-304 desazolve breadcrumb 2 niveles, seo-305 typo anio marcha-paz, movil-301, a11y-301)",
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_200_archivos": "18 <= 200",
+      "diff_max_200_archivos": "3 <= 200",
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "publicado": true,
-      "merge": "2bcea0df",
-      "push": "7efbf5bb..2bcea0df main -> main",
-      "nota_indexacion": "INDEXACION NO EJECUTADA: el hook pre-push tiene ruta hardcodeada obsoleta (/Users/openclaw/Documents/Mis Apps/...) tras la mudanza a ~/Sitios Web; dijo 'Sin paginas HTML que indexar'. El push si se completo. Ver infra-001."
+      "merge": "eee3c396",
+      "push": "fcb190a1..eee3c396 main -> main",
+      "nota_indexacion": "INDEXACION OK (infra-001 ya resuelto): el hook detecto 17 URLs (incluidas las 3 paginas editadas) pero la cuota diaria de Google sigue agotada -> las 17 quedaron encoladas en pending-index.json para reintento automatico (job launchd diario). 0 URLs perdidas. NOTA infra-002: el push pelado fallo porque el hook llama 'node' sin ruta y node no esta en el PATH por defecto; se reintento con PATH=/usr/local/bin:$PATH git push y funciono."
     },
-    "detalle_arreglos": "perf-301..314 (14 imgs bajo-el-fold eager->lazy, hero/logo intactos); seo-206/207 (og:url->canonical); seo-208 (twitter:image en /contacto/); movil-203 (paridad bloque fallback tablas en styles.css, sin bump=asset servido sin cambio); movil-204 (table-wrapper en tecnico-de-gas); links-204 (#contacto->/#contacto en marcha-paz)"
+    "detalle_arreglos": "seo-301/302/303: BreadcrumbList JSON-LD truncado a 1 item (Inicio->home) en 3 paginas de servicio indexables; el ultimo item no coincidia con el canonical. Anadidos niveles 2 (Servicios) y 3 (la pagina, item==canonical) igual que el patron del resto de servicios. JSON-LD revalidado (parse OK), pos3==canonical y HTTP 200 en las 3."
   },
   "corrida_previa": {
     "fecha": "2026-06-12",
-    "rama": "auto/mantenimiento-20260612-noche",
-    "merge": "6688d219",
-    "arreglados": 8,
-    "nota": "primera corrida autonoma que publico"
+    "rama": "auto/mantenimiento-20260612-1720",
+    "merge": "2bcea0df",
+    "arreglados": 19,
+    "nota": "perf-301..314 eager->lazy; seo-206/207; movil-203/204; links-204"
   },
   "pendientes": [
+    {"id": "infra-002", "categoria": "infra", "descripcion": "El hook .git/hooks/pre-push llama 'node' sin ruta absoluta; con 'git push' pelado node no esta en el PATH por defecto -> exit 127 -> ABORTA el push. Workaround usado: PATH=/usr/local/bin:$PATH git push. Endurecer el hook (ruta absoluta de node o env).", "severidad": "baja", "razon": "cambiar el hook de git toca infra; workaround conocido funciona"},
+    {"id": "gsc-210", "categoria": "gsc", "descripcion": "Cluster 'bano/WC tapado': /blog/desatascar-wc-metodos-profesionales/ ~130 impr 'como destapar un bano' pos 7.1 + ~30 variantes, CTR ~0.8%. Reescribir title/meta para captar 'bano/inodoro tapado' (no solo 'WC').", "severidad": "media", "razon": "copy/posicionamiento"},
+    {"id": "gsc-211", "categoria": "gsc", "descripcion": "/servicios/correccion-baja-presion/: TODO su volumen real viene de 'bombas de agua' (Culiacan 17 impr, Sinaloa 13 impr, reparacion/taller) con CTR 0; intencion = reparar/vender bomba, no presion. Amplia gsc-207.", "severidad": "media", "razon": "estrategia de oferta/contenido"},
+    {"id": "gsc-212", "categoria": "gsc", "descripcion": "Cluster 'drenaje tapado': /blog/drenaje-tapado-senales-prevencion/ ~440 impr top10 (pos 3-8.5) con 0 clics; snippet debil. Reescribir title/meta con la frase exacta.", "severidad": "media", "razon": "copy/snippet"},
+    {"id": "gsc-213", "categoria": "gsc", "descripcion": "'deteccion de fugas' fragmentado: misma intencion en pos 4.3 a 56 en queries casi identicas; posible canibalizacion entre /servicios/deteccion-de-fugas/ y blog. Definir URL canonica y consolidar enlazado.", "severidad": "media", "razon": "arquitectura de contenido"},
+    {"id": "gsc-214", "categoria": "gsc", "descripcion": "Trafico off-target (queries en aleman, marcas ajenas Calorex/Bosch, ciudades ajenas) infla impresiones y deprime el CTR agregado. Observacion: no malinterpretar el CTR bajo agregado como problema de snippet.", "severidad": "baja", "razon": "informativo, sin accion de codigo"},
+    {"id": "a11y-301", "categoria": "a11y", "descripcion": "Footer abre con <h4> tras un <h2> (salto h2->h4) en 18 paginas (servicios/*, contacto, precios); la otra variante de footer ya usa h3. Cambiar las 4 cabeceras del footer de h4 a h3.", "severidad": "baja", "razon": "baja; mecanico pero fuera de alcance auto (solo alta/media); 18 archivos"},
+    {"id": "movil-301", "categoria": "movil", "descripcion": "2a tabla (Desglose de Inversion) en /blog/instalacion-tinaco-guia-compra/ L493 sin .table-wrapper; protegida en prod por el fallback global table{overflow-x:auto}. Inconsistencia, no overflow real. Envolver para consistencia.", "severidad": "baja", "razon": "baja; no desborda en render 375px"},
+    {"id": "perf-401", "categoria": "perf", "descripcion": "main.js (20KB) no esta minificado real (677 lineas, 1 salto por sentencia); se sirve immutable 1 anio y lo precachea el SW. Minificar a main.min.js de una linea + bump ?v=/sw.js.", "severidad": "baja", "razon": "RIESGO: minificar puede truncar URLs wa.me (REGLA f8c72299); requiere validacion completa antes de publicar"},
+    {"id": "perf-402", "categoria": "perf", "descripcion": "Ninguna pagina hace <link rel=preload as=image> del hero LCP. Mejora opcional de LCP.", "severidad": "baja", "razon": "requiere medir LCP antes/despues con Lighthouse; aplicar solo si hay mejora real"},
+    {"id": "seo-304", "categoria": "seo", "descripcion": "/servicios/desazolve-de-drenajes/ tiene BreadcrumbList de 2 niveles (Inicio > Desazolve) sin el nivel intermedio 'Servicios'; el ultimo item SI == canonical (no es bug de mismatch, solo inconsistencia con el patron de 3 niveles).", "severidad": "baja", "razon": "baja; no se toca en auto (solo alta/media)"},
+    {"id": "seo-305", "categoria": "seo", "descripcion": "/blog/marcha-paz-culiacan-2025/ og:url con typo de anio 2026 (canonical es 2025); pagina noindex,follow off-topic.", "severidad": "baja", "razon": "baja; pagina noindex"},
     {"id": "infra-001", "categoria": "infra", "estado": "RESUELTO 2026-06-12", "descripcion": "El hook pre-push (auto-indexacion Google) no enviaba URLs porque ~/gsc-mcp/sites.json tenia el 'folder' de Plomero apuntando a la ruta vieja '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacan' (ya inexistente); auto-index.mjs hace git -C en esa carpeta -> 0 html -> 'Sin paginas HTML que indexar'. CORREGIDO: folder -> '/Users/openclaw/Sitios Web/Plomero Culiacan'. Verificado: git -C en ruta nueva detecta los 17 html del push. Nota: lo de 'node fuera del PATH' era falsa alarma (esa frase es output del propio script; node corrio bien). AUTOMATIZADO: auto-index.mjs ahora encola en ~/gsc-mcp/pending-index.json las URLs que fallan por cuota/error transitorio (en vez de perderlas), y el job launchd 'com.gscmcp.reindex' (diario 9:10) las reintenta con 'node auto-index.mjs --drain-all' cuando la cuota se reinicia. Las 16 paginas del push 7efbf5bb..fcb190a1 (que hoy chocaron con 'Quota exceeded') ya estan en la cola; se enviaran solas manana.", "severidad": "baja"},
     {"id": "gsc-205", "categoria": "gsc", "descripcion": "/servicios/instalacion-de-tinaco/ CTR 0% en 27 keywords de precio (pos 7-11). Anadir rango de precio visible en title/meta/H1.", "severidad": "media", "razon": "copy; validar precio real con el negocio"},
     {"id": "gsc-206", "categoria": "gsc", "descripcion": "Cluster 'reparacion/mantenimiento de boiler' con demanda real y cobertura marginal (CTR 0% en 'reparacion de boiler' pos 11.1; 'cerca de mi' pos 2.3 sin clics). Evaluar pagina dedicada sin canibalizar.", "severidad": "media", "razon": "estrategia de contenido"},
@@ -66,10 +78,10 @@
 }
 ```
 
-## Resumen de la corrida 2026-06-12 noche (auto/mantenimiento-20260612-noche — AUTÓNOMA, PUBLICADA)
+## Resumen de la corrida 2026-06-12 20:01 (auto/mantenimiento-20260612-2001 — AUTÓNOMA, PUBLICADA)
 
-- **Health check:** 9/9 rutas en 200, main.js sintaxis OK, wa.me intactas. 0 regresiones de la corrida de la tarde (los 6 revisores lo confirmaron explícitamente).
-- **Arreglados y verificados (8):** URLs de JSON-LD/og:url sin `/servicios/` en plomero-economico y desazolve (seo-201/202); dims reales del hero de tecnico-de-gas (perf-201); fetchpriority=high solo en el hero LCP en 3 servicios (perf-202/203/204); preload con imagesrcset en emergencia-24-7 (perf-205); tap targets ≥44px en enlaces de texto tel:/wa.me con regla en los 3 CSS + bump ?v=20260612c + sw.js v24 (movil-201, medido con Chrome headless a 375px y desktop).
-- **Candados paso 8: 3/3 cumplidos → PUBLICADO.** Merge 6688d219 a main + push (la indexación automática agotó cuota diaria; se renueva mañana).
-- **Pendientes humano nuevos (5):** gsc-201 (consolidar /precios/, ALTA), gsc-202 (enlazar hub /servicios/, ALTA), gsc-203 (reenviar sitemaps en GSC, 1 min), gsc-204 (titles con CTR 0), a11y-201 (verde de disponibilidad 2.0:1).
-- **Aprendizaje:** 3 reglas nuevas en REGLAS.md (og:url/JSON-LD = canonical; un solo fetchpriority=high por página; cuidado con la cascada al añadir CSS al final — un selector casi des-oculta .hero-phone-link en desktop, cazado antes de publicar).
+- **Health check:** 9/9 rutas en 200, main.js sintaxis OK (node v22.18 vía /usr/local/bin), wa.me intactas (526673922273). 0 regresiones (los 6 revisores confirmaron que perf-301..314, og:url=canonical, fetchpriority único, versionado CSS/JS y links siguen sanos).
+- **Arreglados y verificados (3):** seo-301/302/303 — BreadcrumbList JSON-LD truncado a 1 item (Inicio→home, último item ≠ canonical) en 3 páginas de servicio indexables (instalacion-de-boiler, plomero-a-domicilio, plomero-cerca-de-mi). Añadidos niveles 2 (Servicios) y 3 (la página, item==canonical), igualando el patrón del resto. Verificado: JSON-LD reparseado OK, pos3==canonical, HTTP 200 en las 3. Solo HTML → sin bump de ?v=/sw.js.
+- **Candados paso 8: 3/3 cumplidos → PUBLICADO.** Merge eee3c396 a main + push fcb190a1..eee3c396. Indexación: el hook (infra-001 resuelto) detectó las 17 URLs (incl. las 3 editadas) pero la cuota diaria de Google sigue agotada → encoladas en pending-index.json para reintento automático (0 perdidas). El `git push` pelado falló por `node: command not found` en el hook (infra-002); se completó con `PATH=/usr/local/bin:$PATH git push`.
+- **Pendientes humano nuevos (10):** gsc-210..214 (clusters baño/drenaje/bombas/fugas con CTR 0 + ruido off-target), perf-401 (minificar main.js, riesgo wa.me), perf-402 (preload hero), a11y-301 (footer h4→h3 en 18 págs), movil-301 (2ª tabla sin wrapper), infra-002 (hook pre-push sin node en PATH). Bajas no tocadas: seo-304 (desazolve breadcrumb 2 niveles), seo-305 (typo año marcha-paz noindex).
+- **Aprendizaje:** 2 reglas en REGLAS.md — (1) variante del bug og:url=canonical: el BreadcrumbList puede quedar truncado a 1 nivel con el último item apuntando a la home; verificar que el último `item` == canonical y que existan los 3 niveles en páginas de servicio. (2) infra/push: el hook pre-push necesita node en PATH (`/usr/local/bin`); usar `PATH=/usr/local/bin:$PATH git push`.

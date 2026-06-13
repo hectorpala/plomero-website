@@ -1,40 +1,48 @@
-# Última corrida — auto/mantenimiento-20260612-1720 (AUTÓNOMA, PUBLICADA)
+# Última corrida del pipeline autónomo
 
-**Fecha:** 2026-06-12 17:20
-**Modo:** autónomo, sin supervisión
-**Resultado:** PUBLICADO a main (merge `2bcea0df`, push `7efbf5bb..2bcea0df`)
+**Rama:** auto/mantenimiento-20260612-2001
+**Fecha:** 2026-06-12 ~20:01
+**Modo:** AUTÓNOMO (sin supervisión)
+**Resultado:** PUBLICADO ✅ (merge eee3c396 → main; push fcb190a1..eee3c396)
 
-## Health check (antes de tocar nada)
-- 8/8 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /gracias/, /privacidad/, /terminos/, /blog/).
-- main.js sintaxis OK (`node --check`), wa.me intacta (`526673922273`), sw v24.
-- 0 regresiones preexistentes de la corrida de la noche.
+## Health check
+- 9/9 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /blog/, /terminos/, /privacidad/, /gracias/, /404.html).
+- main.js sintaxis OK (node v22.18 vía /usr/local/bin); URLs wa.me intactas (526673922273).
+- 0 regresiones: los 6 revisores confirmaron que los fixes previos (perf-301..314 eager→lazy, og:url=canonical, fetchpriority único por página, versionado CSS/JS, enlaces) siguen sanos.
 
-## Revisión (6 subagentes en paralelo)
-- 22 hallazgos brutos → 19 únicos nuevos tras dedup contra HISTORIAL/ESTADO.
-- a11y: 0 hallazgos nuevos (sitio limpio en alt/aria/foco).
+## Arreglado y verificado (3) — todos seo media, mecánicos
+- **seo-301** servicios/instalacion-de-boiler — BreadcrumbList JSON-LD truncado a 1 item (Inicio→home); último item ≠ canonical.
+- **seo-302** servicios/plomero-a-domicilio — ídem.
+- **seo-303** servicios/plomero-cerca-de-mi — ídem.
 
-## Arreglados y verificados (7 grupos, 19 ediciones) — todos MECÁNICOS
-1. **perf-301..314** — 14 páginas: la 2ª imagen de contenido (bajo el fold) pasó de `loading="eager"` a `"lazy"`. Hero (`fetchpriority="high"`) y logo del nav intactos. Regla segura aplicada: solo imgs sin `fetchpriority="high"` y src sin "logo". Regresión de REGLA línea 28. 14/14 en 200, 0 content-imgs eager restantes.
-2. **seo-206/207** — `og:url` apuntaba a la home en `instalacion-de-boiler` y `plomero-cerca-de-mi` (indexables) → corregido al canonical. Servido y verificado; JSON-LD válido. Reincidencia de REGLA og:url=canonical.
-3. **seo-208** — `/contacto/` declaraba `twitter:card=summary_large_image` sin `twitter:image` → añadido (= og:image). 4 JSON-LD válidos.
-4. **movil-203** — bloque fallback global de scroll de tablas (`@media(max-width:768px){table{display:block;overflow-x:auto}}`) faltaba en `styles.css`; copiado para paridad 1/1/1. **Sin bump de ?v=/sw.js**: styles.css es solo fuente, ninguna página lo sirve (sirven min/hash que ya lo tenían) → asset servido sin cambio.
-5. **movil-204** — única `price-table` del sitio sin `.table-wrapper` (tecnico-de-gas) → envuelta. Balance div 75/75.
-6. **links-204** — CTA principal de marcha-paz con `#contacto` inerte → `/#contacto` (sección vive en la home). Página noindex.
+Fix: añadidos niveles 2 (Servicios → /servicios/) y 3 (la propia página, item == canonical), igualando el patrón de las demás páginas de servicio (ref: instalacion-de-tinaco, cambio-de-tuberias).
+Verificación escéptica: JSON-LD reparseado con node (parse OK, 1 bloque), último breadcrumb `item` == canonical en las 3, y HTTP 200 con el servidor local corriendo. Solo HTML estructural → sin bump de ?v=/sw.js (regla confirmada).
 
-## Candados paso 8 — 3/3 CUMPLIDOS → publicado
-- Auto-revisión limpia: JSON-LD válido en todas las editadas, health 200, div balance OK, paridad 1/1/1, diff sin copy/contenido/precios.
-- Diff: **18 archivos ≤ 200**.
-- Borrados estructurales: **0** (0 borrados, 0 renombrados, 0 tests tocados).
+Diff: 3 archivos, +36 líneas, 0 borrados, 0 renombrados, 0 tests/CSS/JS tocados.
 
-## Pendientes para humano (nuevos)
-- **gsc-205..209** (copy/estrategia, datos reales GSC): tinaco CTR0 en queries de precio; cluster boiler con cobertura marginal; baja-presión rankea "bombas de agua" (mismatch intención); colonia mónaco CTR0; head terms "plomero culiacan"/"plomero" estancados pos ~10.6.
-- **movil-205/206**: `terminos/` y `privacidad/` no enlazan el CSS compartido (solo inline + placeholder #0066cc) → tap targets <44px. Añadir stylesheet = cambio de diseño con riesgo de restyle, requiere validación visual humana.
-- **seo-209**: 56 colonias sin `twitter:image` (ligado a doorways seo-002, no tocar hasta decidir consolidación).
-- **movil-207**: `.footer-logo img` duplicado en `styles.min.css` (ruido de paridad, baja).
+## Candados de publicación (paso 8)
+- Auto-revisión limpia: ✅ (JSON-LD válido, último item == canonical, 200).
+- Diff ≤ 200 archivos: ✅ (3).
+- Sin borrados estructurales: ✅ (0).
+→ **3/3 → PUBLICADO.**
 
-## ⚠️ Infra — indexación NO ejecutada
-El hook `pre-push` corrió pero su script de auto-indexación tiene una ruta hardcodeada obsoleta (`/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán`) que ya no existe tras la mudanza a `~/Sitios Web` (commit 76e3b9d0). Resultado: "Sin páginas HTML que indexar" — **no se enviaron URLs a Google**. El push sí se completó. Corregir la ruta del hook es tarea de infra/humano (toca OAuth/indexación, fuera del alcance mecánico auto). Mientras tanto, indexación manual en GSC pendiente (junto con gsc-203).
+## Indexación
+- infra-001 (resuelto): el hook detectó las 17 URLs del push, incluidas las 3 páginas editadas.
+- Cuota diaria de Google agotada → las 17 quedaron **encoladas en pending-index.json**; el job launchd diario (com.gscmcp.reindex) las reenvía cuando la cuota se reinicia. **0 URLs perdidas.**
+- **infra-002 (nuevo, baja):** `git push` pelado abortó porque el hook llama `node` sin ruta absoluta y node no está en el PATH por defecto (vive en /usr/local/bin). Workaround usado: `PATH=/usr/local/bin:$PATH git push`. Pendiente: endurecer el hook.
+
+## Pendientes para humano (10 nuevos)
+- **gsc-210** cluster baño/WC tapado (~130 impr pos 7.1, CTR ~0.8%) → reescribir title/meta.
+- **gsc-211** /correccion-baja-presion/ rankea solo "bombas de agua" (CTR 0); mismatch de intención (amplía gsc-207).
+- **gsc-212** cluster "drenaje tapado" ~440 impr top10 sin clics → snippet débil.
+- **gsc-213** "detección de fugas" fragmentado (pos 4.3–56); posible canibalización servicio↔blog.
+- **gsc-214** ruido off-target (alemán, marcas ajenas) infla impresiones / deprime CTR agregado (informativo).
+- **perf-401** main.js no minificado real → minificar con cuidado (riesgo de truncar wa.me).
+- **perf-402** sin preload del hero LCP → medir antes de aplicar.
+- **a11y-301** footer h4→h3 (salto h2→h4) en 18 páginas → mecánico pero baja y fuera de alcance auto.
+- **movil-301** 2ª tabla sin .table-wrapper en blog/instalacion-tinaco-guia-compra (protegida por fallback global).
+- **seo-304** desazolve breadcrumb de 2 niveles (último item OK == canonical; falta "Servicios"); **seo-305** typo año en og:url de marcha-paz (noindex).
 
 ## Aprendizaje (REGLAS.md)
-- Regla NUEVA: la plantilla de servicio/blog emite img#2 (bajo el fold) con `loading="eager"`; debe ser `lazy`. Patrón recurrente.
-- Reincidencia anotada: og:url=home en plantilla de servicio; paridad CSS con bloque fallback de tablas; nota de que styles.css no es servido (no requiere bump).
+1. **SEO/SCHEMA:** variante del bug og:url=canonical — el BreadcrumbList puede quedar truncado a 1 nivel con el último item apuntando a la home. Verificar que el último `item` == canonical y que existan los 3 niveles (`grep -c '"position": 3'` == 1 en servicios).
+2. **INFRA/PUSH:** el hook pre-push necesita node en PATH; usar `PATH=/usr/local/bin:$PATH git push`.
