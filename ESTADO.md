@@ -4,27 +4,39 @@
 {
   "ultima_corrida": {
     "fecha": "2026-06-12",
-    "rama": "auto/mantenimiento-20260612-noche",
-    "modo": "AUTONOMO (primera corrida sin supervision que publica)",
+    "rama": "auto/mantenimiento-20260612-1720",
+    "modo": "AUTONOMO",
     "revisores": 6,
-    "hallazgos_brutos": 16,
-    "hallazgos_unicos": 13,
-    "arreglados": 8,
-    "verificados": 8,
-    "regresiones": 0,
+    "hallazgos_brutos": 22,
+    "hallazgos_unicos_nuevos": 19,
+    "arreglados": 19,
+    "verificados": 19,
+    "regresiones": "3 (seo-206/207 og:url=home, movil-203 paridad CSS)",
     "pendientes_humano_nuevos": 5,
-    "bajas_no_tocadas": 5,
+    "bajas_no_tocadas": 3,
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_200_archivos": "106 <= 200",
-      "sin_borrados_estructurales": "0 archivos borrados",
-      "publicado": true,
-      "merge": "6688d219",
-      "push": "68022930..6688d219 main -> main",
-      "nota_indexacion": "hook pre-push corrio pero la cuota diaria de la Indexing API ya estaba agotada por la corrida de la tarde (2 enviadas, 98 con error de cuota); se renueva manana"
-    }
+      "diff_max_200_archivos": "18 <= 200",
+      "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
+      "tests_tocados": "0",
+      "publicado": "PENDIENTE_MERGE_EN_ESTE_TURNO"
+    },
+    "detalle_arreglos": "perf-301..314 (14 imgs bajo-el-fold eager->lazy, hero/logo intactos); seo-206/207 (og:url->canonical); seo-208 (twitter:image en /contacto/); movil-203 (paridad bloque fallback tablas en styles.css, sin bump=asset servido sin cambio); movil-204 (table-wrapper en tecnico-de-gas); links-204 (#contacto->/#contacto en marcha-paz)"
+  },
+  "corrida_previa": {
+    "fecha": "2026-06-12",
+    "rama": "auto/mantenimiento-20260612-noche",
+    "merge": "6688d219",
+    "arreglados": 8,
+    "nota": "primera corrida autonoma que publico"
   },
   "pendientes": [
+    {"id": "gsc-205", "categoria": "gsc", "descripcion": "/servicios/instalacion-de-tinaco/ CTR 0% en 27 keywords de precio (pos 7-11). Anadir rango de precio visible en title/meta/H1.", "severidad": "media", "razon": "copy; validar precio real con el negocio"},
+    {"id": "gsc-206", "categoria": "gsc", "descripcion": "Cluster 'reparacion/mantenimiento de boiler' con demanda real y cobertura marginal (CTR 0% en 'reparacion de boiler' pos 11.1; 'cerca de mi' pos 2.3 sin clics). Evaluar pagina dedicada sin canibalizar.", "severidad": "media", "razon": "estrategia de contenido"},
+    {"id": "gsc-207", "categoria": "gsc", "descripcion": "/servicios/correccion-baja-presion/ rankea 'bombas de agua' (pos 6-8, CTR 0) pero intencion = comprar/reparar bomba (taller); mismatch. Decidir si el negocio atiende esa intencion.", "severidad": "media", "razon": "estrategia/negocio"},
+    {"id": "gsc-208", "categoria": "gsc", "descripcion": "Colonia /monaco/ 31 impr pos 9.3 CTR 0 ('monaco culiacan' es navegacional). Vigilar doorway (ligado a seo-002).", "severidad": "media", "razon": "estrategia, ligado a consolidacion de colonias"},
+    {"id": "gsc-209", "categoria": "gsc", "descripcion": "Head terms 'plomero culiacan' (159 impr pos 10.7) y 'plomero' (123 impr pos 10.6) estancados al borde de pagina 2. Reforzar home/hub con enlazado interno (ligado a gsc-202).", "severidad": "media", "razon": "estrategia/autoridad"},
+    {"id": "movil-205-206", "categoria": "movil", "descripcion": "terminos/ y privacidad/ no enlazan el CSS compartido (solo <style> inline) y usan placeholder #0066cc; por eso ningun fix movil aplica (tap targets <44px). Anadir <link stylesheet> o replicar reglas inline.", "severidad": "media", "razon": "anadir stylesheet completo a paginas que hoy solo usan inline = cambio de diseno con riesgo de restyle; requiere validacion visual humana"},
     {"id": "gsc-201", "categoria": "gsc", "descripcion": "/precios/ (pagina de dinero) NUNCA indexada; canibalizada por /servicios/plomero-precios/ que SI esta indexada con title casi identico. Consolidar con 301 o canonical.", "severidad": "alta", "razon": "consolidar paginas es decision estrategica"},
     {"id": "gsc-202", "categoria": "gsc", "descripcion": "Hub /servicios/ invisible para Google ('no reconoce esta URL'): solo 2 paginas lo enlazan, la home usa el ancla #servicios. Anadir enlace real en nav/footer.", "severidad": "alta", "razon": "cambio de navegacion sitio-completo"},
     {"id": "seo-002", "categoria": "seo", "descripcion": "56 colonias siguen siendo plantillas casi identicas (doorway). Consolidar en zonas con 301 o reescribir.", "severidad": "alta", "razon": "decision estrategica"},
