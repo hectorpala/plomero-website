@@ -2663,6 +2663,11 @@ p {
   }
 }
 
+/* === QA movil 2026-06-11 === paridad con styles.min.css y styles.7f293647.css (movil-203) */
+@media (max-width: 768px) {
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
 /* mant-altos 2026-06-12: paridad imágenes social proof (movil-003) + scroll de tablas (movil-001/002) */
 .google-review-image,.before-after-image{max-width:100%;height:auto;display:block;border-radius:12px}
 .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
