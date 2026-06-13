@@ -1,34 +1,40 @@
-# Última corrida — 2026-06-12 noche (AUTÓNOMA)
+# Última corrida — auto/mantenimiento-20260612-1720 (AUTÓNOMA, PUBLICADA)
 
-**Rama:** auto/mantenimiento-20260612-noche → merge 6688d219 a main → push OK → rama borrada.
-**Publicado: SÍ.** Candados 3/3: auto-revisión limpia, 106 archivos ≤ 200, 0 borrados.
+**Fecha:** 2026-06-12 17:20
+**Modo:** autónomo, sin supervisión
+**Resultado:** PUBLICADO a main (merge `2bcea0df`, push `7efbf5bb..2bcea0df`)
 
-## Qué se arregló (8 hallazgos mecánicos, todos verificados con el sitio corriendo)
+## Health check (antes de tocar nada)
+- 8/8 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /gracias/, /privacidad/, /terminos/, /blog/).
+- main.js sintaxis OK (`node --check`), wa.me intacta (`526673922273`), sw v24.
+- 0 regresiones preexistentes de la corrida de la noche.
 
-| ID | Qué | Verificación |
-|----|-----|--------------|
-| seo-201 (=links-202) | JSON-LD de plomero-economico con URLs sin `/servicios/` (404) | grep 0 malas, JSON-LD 4/4 válido, curl 200 |
-| seo-202 (=links-201) | og:url + breadcrumb de desazolve sin `/servicios/` (404) | 3/3 URLs correctas servidas |
-| perf-201 | hero de tecnico-de-gas declaraba 1200x800, imagen real 800x800 (CLS) | sips + HTML servido |
-| perf-202/203/204 | 2-3 `fetchpriority=high` por página en 3 servicios; bajo-el-fold a `loading=lazy` | conteo de high servido = preloads+hero exacto |
-| perf-205 | preload de emergencia-24-7 sin imagesrcset (doble descarga en desktop) | atributo servido |
-| movil-201 | CTAs de texto tel:/wa.me con tap target 17-27px | regla en los 3 CSS (paridad 1/1/1), Chrome headless: 44-52px a 375px, 0 overflow en 10 páginas, .hero-phone-link sigue oculto en desktop, botones excluidos |
+## Revisión (6 subagentes en paralelo)
+- 22 hallazgos brutos → 19 únicos nuevos tras dedup contra HISTORIAL/ESTADO.
+- a11y: 0 hallazgos nuevos (sitio limpio en alt/aria/foco).
 
-Bump CSS `?v=20260612c` (102 páginas) + sw.js CACHE_NAME v24 (regla de caché cumplida).
+## Arreglados y verificados (7 grupos, 19 ediciones) — todos MECÁNICOS
+1. **perf-301..314** — 14 páginas: la 2ª imagen de contenido (bajo el fold) pasó de `loading="eager"` a `"lazy"`. Hero (`fetchpriority="high"`) y logo del nav intactos. Regla segura aplicada: solo imgs sin `fetchpriority="high"` y src sin "logo". Regresión de REGLA línea 28. 14/14 en 200, 0 content-imgs eager restantes.
+2. **seo-206/207** — `og:url` apuntaba a la home en `instalacion-de-boiler` y `plomero-cerca-de-mi` (indexables) → corregido al canonical. Servido y verificado; JSON-LD válido. Reincidencia de REGLA og:url=canonical.
+3. **seo-208** — `/contacto/` declaraba `twitter:card=summary_large_image` sin `twitter:image` → añadido (= og:image). 4 JSON-LD válidos.
+4. **movil-203** — bloque fallback global de scroll de tablas (`@media(max-width:768px){table{display:block;overflow-x:auto}}`) faltaba en `styles.css`; copiado para paridad 1/1/1. **Sin bump de ?v=/sw.js**: styles.css es solo fuente, ninguna página lo sirve (sirven min/hash que ya lo tenían) → asset servido sin cambio.
+5. **movil-204** — única `price-table` del sitio sin `.table-wrapper` (tecnico-de-gas) → envuelta. Balance div 75/75.
+6. **links-204** — CTA principal de marcha-paz con `#contacto` inerte → `/#contacto` (sección vive en la home). Página noindex.
 
-## Qué quedó pendiente para humano (nuevos)
+## Candados paso 8 — 3/3 CUMPLIDOS → publicado
+- Auto-revisión limpia: JSON-LD válido en todas las editadas, health 200, div balance OK, paridad 1/1/1, diff sin copy/contenido/precios.
+- Diff: **18 archivos ≤ 200**.
+- Borrados estructurales: **0** (0 borrados, 0 renombrados, 0 tests tocados).
 
-1. **gsc-201 (ALTA):** /precios/ jamás indexada — canibalizada por /servicios/plomero-precios/ (sí indexada, title casi igual). Decidir consolidación (301 o canonical).
-2. **gsc-202 (ALTA):** hub /servicios/ "Google no reconoce esta URL" — solo 2 enlaces internos; la home usa el ancla #servicios. Añadir enlace real en nav/footer.
-3. **gsc-203 (1 minuto):** reenviar sitemap.xml y sitemaps/main_sitemap.xml en GSC (copia de Google del 06-03/06-04, anterior a la consolidación).
-4. **gsc-204:** titles/metas con CTR 0 pese a ~430 impresiones (drenaje-tapado) y pos 1.9 (desatascar-wc) — copy.
-5. **a11y-201:** verde "Disponibles ahora" 2.0:1; recomendado #15803d (~4.7:1) en inline de index.html + 3 CSS.
+## Pendientes para humano (nuevos)
+- **gsc-205..209** (copy/estrategia, datos reales GSC): tinaco CTR0 en queries de precio; cluster boiler con cobertura marginal; baja-presión rankea "bombas de agua" (mismatch intención); colonia mónaco CTR0; head terms "plomero culiacan"/"plomero" estancados pos ~10.6.
+- **movil-205/206**: `terminos/` y `privacidad/` no enlazan el CSS compartido (solo inline + placeholder #0066cc) → tap targets <44px. Añadir stylesheet = cambio de diseño con riesgo de restyle, requiere validación visual humana.
+- **seo-209**: 56 colonias sin `twitter:image` (ligado a doorways seo-002, no tocar hasta decidir consolidación).
+- **movil-207**: `.footer-logo img` duplicado en `styles.min.css` (ruido de paridad, baja).
 
-Bajas registradas sin tocar: seo-203/204 (og:url a la home), seo-205 (typo año, página noindex), movil-202 (link Términos 65x19), perf-206 (dims de logo).
+## ⚠️ Infra — indexación NO ejecutada
+El hook `pre-push` corrió pero su script de auto-indexación tiene una ruta hardcodeada obsoleta (`/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán`) que ya no existe tras la mudanza a `~/Sitios Web` (commit 76e3b9d0). Resultado: "Sin páginas HTML que indexar" — **no se enviaron URLs a Google**. El push sí se completó. Corregir la ruta del hook es tarea de infra/humano (toca OAuth/indexación, fuera del alcance mecánico auto). Mientras tanto, indexación manual en GSC pendiente (junto con gsc-203).
 
-## Notas
-
-- 0 regresiones de la corrida de la tarde (los 6 revisores verificaron los fixes previos).
-- El hook de indexación del push agotó la cuota diaria (consumida por la corrida de la tarde): 2 enviadas, 98 con error de cuota. Se renueva mañana; no afecta el deploy.
-- Aprendizaje clave: una regla CSS añadida al final casi anula el `display:none` de `.hero-phone-link` en desktop (misma especificidad, orden gana). Cazado antes de publicar; regla nueva CSS/CASCADA en REGLAS.md.
-- GSC rendimiento 28d: 336 clics (+26%), 23,801 impresiones (+23%) — al alza, sin caídas.
+## Aprendizaje (REGLAS.md)
+- Regla NUEVA: la plantilla de servicio/blog emite img#2 (bajo el fold) con `loading="eager"`; debe ser `lazy`. Patrón recurrente.
+- Reincidencia anotada: og:url=home en plantilla de servicio; paridad CSS con bloque fallback de tablas; nota de que styles.css no es servido (no requiere bump).

@@ -19,7 +19,10 @@
       "diff_max_200_archivos": "18 <= 200",
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
-      "publicado": "PENDIENTE_MERGE_EN_ESTE_TURNO"
+      "publicado": true,
+      "merge": "2bcea0df",
+      "push": "7efbf5bb..2bcea0df main -> main",
+      "nota_indexacion": "INDEXACION NO EJECUTADA: el hook pre-push tiene ruta hardcodeada obsoleta (/Users/openclaw/Documents/Mis Apps/...) tras la mudanza a ~/Sitios Web; dijo 'Sin paginas HTML que indexar'. El push si se completo. Ver infra-001."
     },
     "detalle_arreglos": "perf-301..314 (14 imgs bajo-el-fold eager->lazy, hero/logo intactos); seo-206/207 (og:url->canonical); seo-208 (twitter:image en /contacto/); movil-203 (paridad bloque fallback tablas en styles.css, sin bump=asset servido sin cambio); movil-204 (table-wrapper en tecnico-de-gas); links-204 (#contacto->/#contacto en marcha-paz)"
   },
@@ -31,6 +34,7 @@
     "nota": "primera corrida autonoma que publico"
   },
   "pendientes": [
+    {"id": "infra-001", "categoria": "infra", "descripcion": "El hook .git/hooks/pre-push (auto-indexacion Google) tiene una ruta hardcodeada obsoleta '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacan' que ya no existe; no envia URLs a la Indexing API. Corregir la ruta a ~/Sitios Web. Tambien: 'node' no esta en el PATH por defecto del entorno (esta en /usr/local/bin); el push requiere PATH=/usr/local/bin:$PATH para que el hook corra.", "severidad": "media", "razon": "modificar hooks/OAuth/indexacion es infra; fuera del alcance mecanico auto"},
     {"id": "gsc-205", "categoria": "gsc", "descripcion": "/servicios/instalacion-de-tinaco/ CTR 0% en 27 keywords de precio (pos 7-11). Anadir rango de precio visible en title/meta/H1.", "severidad": "media", "razon": "copy; validar precio real con el negocio"},
     {"id": "gsc-206", "categoria": "gsc", "descripcion": "Cluster 'reparacion/mantenimiento de boiler' con demanda real y cobertura marginal (CTR 0% en 'reparacion de boiler' pos 11.1; 'cerca de mi' pos 2.3 sin clics). Evaluar pagina dedicada sin canibalizar.", "severidad": "media", "razon": "estrategia de contenido"},
     {"id": "gsc-207", "categoria": "gsc", "descripcion": "/servicios/correccion-baja-presion/ rankea 'bombas de agua' (pos 6-8, CTR 0) pero intencion = comprar/reparar bomba (taller); mismatch. Decidir si el negocio atiende esa intencion.", "severidad": "media", "razon": "estrategia/negocio"},
