@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 
-const BASE = '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/servicios/plomero-colonias-culiacan';
+const BASE = '/Users/openclaw/Sitios Web/Plomero Culiacán/servicios/plomero-colonias-culiacan';
 
 // Mismos datos que el script original
 const colonias = {

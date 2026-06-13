@@ -13,7 +13,7 @@ import { readFileSync, existsSync } from 'fs';
 import { indexUrls } from './search-console.js';
 
 const BASE_URL = 'https://plomeroculiacanpro.mx';
-const BASE_DIR = '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán';
+const BASE_DIR = '/Users/openclaw/Sitios Web/Plomero Culiacán';
 const MAX_URLS = 50; // límite conservador (API permite 200/día)
 
 const range = process.argv[2] || 'HEAD~1..HEAD';

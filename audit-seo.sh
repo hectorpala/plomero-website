@@ -1,5 +1,5 @@
 #!/bin/bash
-SITIO="/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán"
+SITIO="/Users/openclaw/Sitios Web/Plomero Culiacán"
 echo "🔍 AUDITORÍA SEO COMPLETA"
 echo "========================="
 echo ""

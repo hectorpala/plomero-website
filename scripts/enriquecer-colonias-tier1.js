@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE = '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/servicios/plomero-colonias-culiacan';
+const BASE = '/Users/openclaw/Sitios Web/Plomero Culiacán/servicios/plomero-colonias-culiacan';
 
 const colonias = {
   'tres-rios': {

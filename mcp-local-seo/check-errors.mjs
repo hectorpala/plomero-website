@@ -1,7 +1,7 @@
 import { google } from 'googleapis';
 import { readFileSync } from 'fs';
 
-const DIR = '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/mcp-local-seo';
+const DIR = '/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo';
 const SITE_URL = 'sc-domain:plomeroculiacanpro.mx';
 
 const creds = JSON.parse(readFileSync(`${DIR}/client_secret.json`, 'utf-8'));

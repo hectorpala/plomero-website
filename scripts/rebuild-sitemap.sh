@@ -1,6 +1,6 @@
 #!/bin/bash
 # Reconstruye el sitemap eliminando todas las páginas con noindex
-BASE="/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán"
+BASE="/Users/openclaw/Sitios Web/Plomero Culiacán"
 SITEMAP="$BASE/sitemaps/main_sitemap.xml"
 TEMP="$BASE/sitemaps/main_sitemap_new.xml"
 

@@ -1,9 +1,9 @@
-import { submitSitemap } from '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/mcp-local-seo/search-console.js';
+import { submitSitemap } from '/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo/search-console.js';
 import { writeFileSync } from 'fs';
 import { google } from 'googleapis';
 import { readFileSync } from 'fs';
 
-const DIR = '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/mcp-local-seo';
+const DIR = '/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo';
 const SITE_URL = 'sc-domain:plomeroculiacanpro.mx';
 
 async function getAuth() {
@@ -35,7 +35,7 @@ ${urgentUrls.map(url => `  <url>
   </url>`).join('\n')}
 </urlset>`;
 
-const miniPath = '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/sitemaps/priority_sitemap.xml';
+const miniPath = '/Users/openclaw/Sitios Web/Plomero Culiacán/sitemaps/priority_sitemap.xml';
 writeFileSync(miniPath, miniSitemap);
 console.log('Sitemap de prioridad creado con', urgentUrls.length, 'URLs');
 

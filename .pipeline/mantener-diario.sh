@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-cd "/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán" || exit 1
+cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
 STAMP=$(date +%Y%m%d-%H%M%S)

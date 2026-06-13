@@ -1,5 +1,5 @@
 #!/bin/bash
-BASE="/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacán/servicios/plomero-colonias-culiacan"
+BASE="/Users/openclaw/Sitios Web/Plomero Culiacán/servicios/plomero-colonias-culiacan"
 
 SKIP="tres-rios chapultepec centro guadalupe bachigualato humaya campestre montebello valle-alto zona-dorada country-tres-rios la-campina colinas-de-san-miguel lomas-del-boulevard cumbres-tres-rios infonavit-barrancos monaco real-del-valle hacienda-los-huertos bugambilias santa-fe las-palmas bosques-del-humaya amorada jardines-del-valle lomas-de-san-isidro altamira colinas-de-la-rivera villa-universidad isla-del-oeste nuevo-culiacan libertad barrancos fovissste praderas-del-humaya villas-del-humaya culiacan-tres-rios lomas-del-humaya balcones-del-humaya portales-del-rio jardines-tres-rios campestre-tres-rios floresta-tres-rios los-laureles hacienda-del-valle santa-clara residencial-san-jose index.html las-quintas"
 
