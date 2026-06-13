@@ -14,4 +14,9 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
 fi
 trap 'rmdir "$LOCK_DIR"' EXIT
 
-"$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/mantener-prompt.txt)" >> "$LOG_DIR/run-$STAMP.log" 2>&1
+"$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/mantener-prompt.txt)" >> "$LOG_DIR/run-$STAMP.log" 2>&1 \
+  || echo "[$STAMP] La corrida de claude terminó con error (continúo para enviar el parte)." >> "$LOG_DIR/run-$STAMP.log"
+
+# Parte por email — SIEMPRE, aun si la corrida falló: send-report detecta resumen viejo/ausente y alerta.
+/usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs >> "$LOG_DIR/run-$STAMP.log" 2>&1 \
+  || echo "[$STAMP] No se pudo enviar el email del parte." >> "$LOG_DIR/run-$STAMP.log"
