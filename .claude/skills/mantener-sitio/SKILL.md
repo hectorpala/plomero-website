@@ -16,10 +16,11 @@ Ejecuta este ciclo en orden. Muestra EVIDENCIA en cada fase, no solo afirmacione
 
 ## FASE 1 — Revisión (en paralelo)
 4. Lanza los 9 subagentes revisores con la herramienta Task, en paralelo (un solo mensaje, varias llamadas): revisor-seo, revisor-movil, revisor-a11y, revisor-perf, revisor-links, revisor-gsc, revisor-indexabilidad, revisor-produccion, revisor-plantilla. Los 5 primeros (seo, movil, a11y, perf, links) son LLM y cubren lo SUBJETIVO (calidad de copy, intención de búsqueda, similitud de doorways, contraste). revisor-plantilla es DETERMINISTA (corre `python3 .pipeline/check-plantilla.py`) y garantiza las reglas MECÁNICAS de REGLAS.md (enlaces/og:image inexistentes, popup sin ARIA, fetchpriority/CLS, paridad CSS, table-wrapper, theme-color) — para que no dependan de que el LLM "recuerde leer REGLAS.md".
+   **Verificación ciega (obligatorio):** los 4 revisores DETERMINISTAS (revisor-indexabilidad, revisor-produccion, revisor-plantilla, revisor-gsc) NUNCA pueden "pasar callando". Si la herramienta de uno falla, no imprime JSON parseable, sale con error, o devuelve un vacío ANÓMALO por no poder acceder a sus datos (recorrió 0 páginas/0 URLs, o auth/cuota caída en GSC), ese revisor debe emitir un hallazgo de severidad **ALTA** `"verificación ciega: <tool> no devolvió datos (<motivo>)"` — NO un resultado vacío que parezca sano. (Una corrida exitosa con 0 hallazgos sobre datos reales sí es sana; lo prohibido es confundir "no pude mirar" con "está limpio". Evita repetir gsc-215, que dejó la indexación ciega varios días.)
 5. Junta todos sus hallazgos JSON en una sola lista.
 
 ## FASE 2 — Deduplicar contra memoria
-6. Para cada hallazgo, genera una firma (archivo + categoria + descripción corta). Búscala en HISTORIAL.jsonl:
+6. Para cada hallazgo, genera una FIRMA CANÓNICA ESTABLE = `archivo` + `categoria` + CLAVE DE REGLA (el tipo de defecto, NO la descripción en texto libre, que es frágil porque incluye rutas/conteos variables). Para hallazgos de los checkers deterministas, la clave es la regla de la que provienen (p.ej. "links-rotos", "og-image-inexistente", "breadcrumb-3-niveles", "exit-popup-aria", "paridad-css", "theme-color"); para hallazgos de revisores LLM, el invariante del problema (categoria + patrón estable del defecto), no la frase exacta. Búscala en HISTORIAL.jsonl:
    - Si NUNCA se vio: es nuevo.
    - Si ya se vio y se marcó arreglado pero reaparece: márcalo como REGRESIÓN (prioridad alta) — significa que falta una regla.
    - Si ya se vio y sigue pendiente: no lo repitas, solo cuéntalo.
@@ -34,7 +35,7 @@ Ejecuta este ciclo en orden. Muestra EVIDENCIA en cada fase, no solo afirmacione
 
 ## FASE 5 — Gate de publicación
 11. Auto-revisa el diff contra main: confirma que nada quedó fuera de alcance, que HTML/JSON-LD siguen válidos, y que no se tocaron tests ni contenido estratégico.
-12. Solo publica si se cumplen TODOS los candados: auto-revisión limpia, diff de máximo 200 archivos y cero borrados estructurales inesperados. Si cualquier candado falla, NO hagas merge ni push; deja la rama, escribe en ESTADO.md por qué se detuvo y termina.
+12. Solo publica si se cumplen TODOS los candados: auto-revisión limpia, diff de máximo 15 archivos (una corrida normal toca 1–5; en un sitio de ~100 páginas, >15 archivos es señal de que algo se salió de alcance y debe revisarlo un humano antes de publicar) y cero borrados estructurales inesperados. Si cualquier candado falla, NO hagas merge ni push; deja la rama, escribe en ESTADO.md por qué se detuvo y termina.
 13. Si todo pasa, PUBLICA sincronizando ANTES con el remoto. `git push --force` (o `-f`) está PROHIBIDO en cualquier circunstancia. Sigue exactamente este orden:
     a. `git checkout main`.
     b. SINCRONIZA con el remoto antes de mergear: `git fetch origin` y luego `git merge --ff-only origin/main`. Esto adelanta la main local al remoto (que otro escritor pudo haber movido). Si el `--ff-only` FALLA (la main local divergió del remoto), NO fuerces ni hagas un merge normal: ABORTA la publicación, deja la rama de la corrida sin fusionar, escribe el motivo en ESTADO.md ("publicación detenida: main local divergió de origin/main") y termina.

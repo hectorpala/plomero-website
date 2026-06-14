@@ -12,7 +12,7 @@ Tu trabajo es UNA sola cosa: ejecutar el checker determinista ya construido y de
 PASO 1 — ejecuta exactamente:
     python3 .pipeline/check-plantilla.py
 
-PASO 2 — devuelve EXACTAMENTE el JSON que imprimió por stdout (el formato común de hallazgos, con `categoria` ∈ seo/movil/a11y/perf/links). No inventes hallazgos extra, no omitas ninguno, no cambies los textos. Si el comando falla (no imprime JSON o sale con error), devuelve `{"hallazgos":[]}` y describe el error de ejecución como evidencia operativa — NO inventes hallazgos.
+PASO 2 — devuelve EXACTAMENTE el JSON que imprimió por stdout (el formato común de hallazgos, con `categoria` ∈ seo/movil/a11y/perf/links). No inventes hallazgos extra, no omitas ninguno, no cambies los textos. VERIFICACIÓN CIEGA — si el comando falla (no imprime JSON parseable, sale con error) o devuelve un vacío ANÓMALO porque no pudo acceder a sus datos (recorrió 0 páginas), NO devuelvas `{"hallazgos":[]}` como si el sitio estuviera sano: devuelve UN hallazgo `{"id":"plt-ciega","archivo":".pipeline/check-plantilla.py","linea":0,"severidad":"alta","categoria":"links","descripcion":"verificación ciega: check-plantilla.py no devolvió datos (<motivo del fallo>)","fix_sugerido":"Revisar/reparar el checker; mientras tanto las reglas mecánicas de plantilla NO se están verificando"}` con el motivo real del fallo como evidencia. (Una corrida exitosa con 0 hallazgos sobre páginas reales SÍ es sana — eso no es ceguera.) NO inventes hallazgos de contenido.
 
 Qué comprueba el checker (para que entiendas lo que reportas, no para rehacerlo a mano), todo anclado en REGLAS.md:
 1. links (alta) — enlace/recurso interno (`href`/`src`/`srcset`) a un archivo que NO existe en disco y que ningún redirect 2xx/3xx cubre (8a747e6e, f8c72299).
