@@ -26,7 +26,7 @@ Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola 
 
 ## FASE 2 — conectar lo que ya existe
 - [x] ✅ #3 revisor-perf-real → baseline + presupuesto CWV — ⚠️ TOCA site-monitor.yml → **push SSH**
-- [ ] #4 revisor-tracking → `verificar-tracking.js` envuelto (dataLayer/GTM/GA)
+- [x] ✅ #4 revisor-tracking → `verificar-tracking.js` envuelto (dataLayer/GTM/GA)
 
 ## FASE 3 — ofensiva / negocio
 - [ ] #5 revisor-conversion → `.pipeline/check-conversion.py`
@@ -116,6 +116,28 @@ check-produccion), por eso la determinación se prueba con fixtures.
 **Pendiente operativo (cola humana):** establecer la primera baseline tras el merge (correr
 `--update-baseline` en un entorno con Lighthouse, idealmente CI) — ver cola humana abajo.
 
+### #4 revisor-tracking — ✅ HECHO (commit en esta rama)
+**Qué valida:** que el tracking REALMENTE funcione en producción, no solo que el snippet esté en
+el HTML. Envuelve la lógica de `verificar-tracking.js` (snippet manual) en puppeteer (mismo stack
+que check-produccion). Por página clave: (1) HTML referencia GTM (si no, página clave → media);
+(2) dataLayer existe (si no con GTM → alta); (3) contenedor GTM carga (si no → alta); (4) GA:
+sin GA4 configurado → alta; GA4 cargó pero sin beacon /g/collect → media con salvedad de consent.
+**Descubrimiento clave (evitó falsos positivos):** el sitio DIFIERE GTM a propósito — lo carga en
+la primera interacción (`scroll/click/touchstart/keydown`) o a los 12s (fallback), para proteger el
+LCP (index.html líneas 107-120). Un primer borrador sin interacción daba falsos positivos
+inconsistentes. El checker ahora SIMULA la interacción y hace POLL hasta 8s.
+**Segundo descubrimiento (calibró severidad):** en prod, GTM + GA4 (G-NSV2K9N2ZD) cargan pero NO
+se ve beacon /g/collect en headless — causa probable Consent Mode denegado por defecto (un usuario
+real que acepta sí dispararía). Por eso ese caso es MEDIA + "verificar en GA4 Realtime", no ALTA
+(evita crying-wolf diario). "Sin GA4 del todo" o "contenedor no carga" sí son ALTA.
+**Determinista:** la parte local (fixture sin red) es determinista (md5 idéntico c2e600...). La
+medición contra prod es no-determinista por naturaleza (red/headless), igual que check-produccion.
+**Prueba negativa (fixtures locales + prod, todas detectan):**
+- página clave sin GTM (fixture local) → media "NO referencia GTM".
+- GTM con id inexistente GTM-FAKE0000 (fixture local, gtm.js 404) → alta "el CONTENEDOR no carga".
+- prod real "/" → media (GA4 cargó, sin beacon: consent) — ver cola humana.
+**Corrida real:** "/" → 1 media (consent). Detección coherente entre páginas tras el fix de interacción.
+
 ---
 
 ## Cola humana / propuestas (de los revisores construidos)
@@ -136,6 +158,13 @@ activar la detección de REGRESIÓN (no solo el presupuesto absoluto), correr un
 con Lighthouse (PERF_REPORTS apuntando a los lighthouse-run-*.json) y commitear el resultado, o
 en local con puppeteer. No lo siembro yo porque mezclar métricas de puppeteer (local) con las de
 Lighthouse (CI) para comparar regresión sería apples-to-oranges.
+
+### 🧑 [#4 — verificar] ¿GA4 recibe hits en producción?
+revisor-tracking observó en headless que GTM + GA4 (G-NSV2K9N2ZD) cargan pero NO sale el beacon
+`/g/collect`. La causa más probable es Consent Mode denegado por defecto (headless no acepta el
+banner). **Acción humana:** abrir el sitio en un navegador real, ACEPTAR consentimiento y mirar
+GA4 → Realtime; si llegan hits, está bien (esperado). Si NO llegan ni aceptando, revisar el trigger
+page_view de la etiqueta GA4 dentro del contenedor GTM-W75CRTX5. No es necesariamente un bug.
 
 ### 💡 [#2 — PROPUESTA, no instalada] Hook pre-commit anti-secretos
 Para atajar secretos ANTES de que entren al historial, propongo (sin instalar sin tu OK) un
