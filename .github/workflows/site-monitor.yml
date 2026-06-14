@@ -103,24 +103,28 @@ jobs:
       - name: Instalar Lighthouse
         run: npm install -g lighthouse
 
-      - name: Correr Lighthouse
+      - name: Correr Lighthouse (x3 para mediana; ya NO se tira el JSON)
         id: lighthouse
         continue-on-error: true
         run: |
-          echo "🚀 Corriendo Lighthouse..."
+          echo "🚀 Corriendo Lighthouse x3 (para mediana de Core Web Vitals)..."
+          mkdir -p .pipeline
 
-          lighthouse ${{ env.SITE_URL }} \
-            --output=json \
-            --output-path=./lighthouse-report.json \
-            --chrome-flags="--headless --no-sandbox" \
-            --only-categories=performance,accessibility,best-practices,seo \
-            --quiet
+          for i in 1 2 3; do
+            lighthouse ${{ env.SITE_URL }} \
+              --output=json \
+              --output-path=.pipeline/lighthouse-run-$i.json \
+              --chrome-flags="--headless --no-sandbox" \
+              --only-categories=performance,accessibility,best-practices,seo \
+              --quiet || echo "⚠️ Lighthouse corrida $i falló (se sigue con las demás)"
+          done
 
-          # Extraer scores
-          PERF=$(jq '.categories.performance.score * 100 | floor' lighthouse-report.json)
-          ACCESS=$(jq '.categories.accessibility.score * 100 | floor' lighthouse-report.json)
-          BP=$(jq '.categories["best-practices"].score * 100 | floor' lighthouse-report.json)
-          SEO=$(jq '.categories.seo.score * 100 | floor' lighthouse-report.json)
+          # Scores generales desde la 1ª corrida (compatibilidad con el resto del workflow)
+          REPORT=.pipeline/lighthouse-run-1.json
+          PERF=$(jq '.categories.performance.score * 100 | floor' "$REPORT")
+          ACCESS=$(jq '.categories.accessibility.score * 100 | floor' "$REPORT")
+          BP=$(jq '.categories["best-practices"].score * 100 | floor' "$REPORT")
+          SEO=$(jq '.categories.seo.score * 100 | floor' "$REPORT")
 
           echo "performance=$PERF" >> $GITHUB_OUTPUT
           echo "accessibility=$ACCESS" >> $GITHUB_OUTPUT
@@ -140,8 +144,40 @@ jobs:
             echo "perf_warning=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Evaluar Core Web Vitals (presupuesto + regresión vs baseline)
+        id: cwv
+        continue-on-error: true
+        run: |
+          echo "📐 CWV: presupuesto LCP<2.5s, CLS<0.1, INP<200ms + regresión vs baseline (mediana de 3)"
+          REPORTS=$(ls .pipeline/lighthouse-run-*.json 2>/dev/null | paste -sd, -)
+          if [ -z "$REPORTS" ]; then
+            echo "⚠️ No hay reportes Lighthouse; no se evalúan CWV."
+            echo "cwv_regression=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          PERF_REPORTS="$REPORTS" node .pipeline/check-perf.mjs > .pipeline/cwv-result.json 2>/dev/null || true
+          COUNT=$(jq '[.hallazgos[] | select(.severidad=="alta" or .severidad=="media")] | length' .pipeline/cwv-result.json 2>/dev/null || echo 0)
+          echo "### 📐 Core Web Vitals (presupuesto + baseline)" >> $GITHUB_STEP_SUMMARY
+          jq -r '.hallazgos[]? | "- [\(.severidad)] \(.descripcion)"' .pipeline/cwv-result.json >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "- (sin datos de CWV)" >> $GITHUB_STEP_SUMMARY
+          if [ "${COUNT:-0}" -gt 0 ]; then
+            echo "cwv_regression=true" >> $GITHUB_OUTPUT
+          else
+            echo "cwv_regression=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Subir reportes Lighthouse + resultado CWV (persistir, ya no se tiran)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: |
+            .pipeline/lighthouse-run-*.json
+            .pipeline/cwv-result.json
+          retention-days: 30
+          if-no-files-found: ignore
+
       - name: Crear Issue si hay problemas
-        if: steps.health.outputs.site_ok == 'false' || steps.pages.outputs.pages_ok == 'false' || steps.lighthouse.outputs.perf_warning == 'true'
+        if: steps.health.outputs.site_ok == 'false' || steps.pages.outputs.pages_ok == 'false' || steps.lighthouse.outputs.perf_warning == 'true' || steps.cwv.outputs.cwv_regression == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -169,6 +205,14 @@ jobs:
             if (perfWarning) {
               title += 'Performance baja';
               body += '### ⚠️ Performance Baja\n';
+            }
+
+            const cwvReg = '${{ steps.cwv.outputs.cwv_regression }}' === 'true';
+            if (cwvReg) {
+              title += 'CWV fuera de presupuesto/regresión ';
+              body += '### 📐 Core Web Vitals (presupuesto/regresión)\n';
+              body += 'Una o más métricas (LCP/CLS/INP, mediana de 3) superan el presupuesto o regresaron vs baseline. ';
+              body += 'Ver el _step summary_ y el artefacto `lighthouse-reports` (JSON de las 3 corridas + `cwv-result.json`) para el detalle.\n\n';
             }
 
             body += '### 📊 Lighthouse Scores\n';

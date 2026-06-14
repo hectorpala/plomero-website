@@ -25,7 +25,7 @@ Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola 
 - [x] ✅ #2 revisor-secretos → `.pipeline/check-secretos.sh` (+ candado de publicación)
 
 ## FASE 2 — conectar lo que ya existe
-- [ ] #3 revisor-perf-real → baseline + presupuesto CWV (puede tocar site-monitor.yml → push SSH)
+- [x] ✅ #3 revisor-perf-real → baseline + presupuesto CWV — ⚠️ TOCA site-monitor.yml → **push SSH**
 - [ ] #4 revisor-tracking → `verificar-tracking.js` envuelto (dataLayer/GTM/GA)
 
 ## FASE 3 — ofensiva / negocio
@@ -88,6 +88,34 @@ hay gitleaks → corre regex).
 - (3) historial: detecta sobre el repo real (ver hallazgo real abajo); caso limpio → exit 0.
 **Corrida real sobre el repo:** 1 hallazgo (HISTORIAL) — ver cola humana. Exit 0 (no bloquea publicación).
 
+### #3 revisor-perf-real — ✅ HECHO (commit en esta rama) — ⚠️ requiere push SSH
+**Qué valida:** Core Web Vitals reales (no el "score" de Lighthouse que se tiraba). Mediana de
+varias corridas de LCP/CLS/INP comparada contra (a) presupuesto absoluto Google "good"
+(LCP<2500ms, CLS<0.1, INP<200ms) y (b) regresión vs baseline (.pipeline/perf-baseline.json):
+empeora >20% Y supera piso de ruido (LCP +200ms, CLS +0.02, INP +50ms).
+**Fuentes:** (1) reportes Lighthouse JSON de site-monitor.yml (`PERF_REPORTS` o
+`.pipeline/lighthouse-run-*.json`); (2) fallback puppeteer+Chrome (3 cargas, mismo stack que
+check-produccion) para la corrida LOCAL del pipeline. Sin fuente → verificación ciega ALTA.
+**Cambios en site-monitor.yml (⚠️ push por SSH):** la corrida de Lighthouse pasa de 1 a 3 y
+guarda `.pipeline/lighthouse-run-{1,2,3}.json` (ya NO se tiran); nuevo step "Evaluar Core Web
+Vitals" corre check-perf.mjs sobre los 3 reportes; nuevo step sube los JSON + `cwv-result.json`
+como artefacto (retención 30d); el Issue de monitoreo se dispara también por regresión CWV.
+.gitignore: se ignoran los reportes transitorios (`lighthouse-run-*.json`, `cwv-result.json`);
+la baseline `perf-baseline.json` SÍ se versiona.
+**Decisiones:** INP no existe en el "lab" de Lighthouse → si el audit no está, se usa TBT como
+PROXY documentado (severidad media, no alta). Baseline se ESCRIBE solo con `--update-baseline`
+(el checker normal solo REPORTA). INP/LCP/CLS mecánicos ya los caza revisor-plantilla; aquí se MIDE.
+**Determinista:** SÍ sobre entradas fijas (reportes Lighthouse). md5 idéntico en 2 corridas con
+fixtures (5d6e6c...). La medición LIVE con puppeteer es no-determinista por naturaleza (igual que
+check-produccion), por eso la determinación se prueba con fixtures.
+**Prueba negativa (fixtures, todas detectan):**
+- sobre presupuesto: LCP~3000/CLS~0.2 → ALTA "LCP mediana 3000ms supera presupuesto 2500ms" + CLS.
+- regresión: baseline LCP 1000 vs medido 3000 → media "LCP subió de 1000ms a 3000ms (+200%)".
+- verificación ciega: reporte sin métricas → ALTA "no se pudieron MEDIR Core Web Vitals".
+- fallback live: con PERF_URLS por defecto midió 2 URLs reales bajo presupuesto (puppeteer OK).
+**Pendiente operativo (cola humana):** establecer la primera baseline tras el merge (correr
+`--update-baseline` en un entorno con Lighthouse, idealmente CI) — ver cola humana abajo.
+
 ---
 
 ## Cola humana / propuestas (de los revisores construidos)
@@ -100,6 +128,14 @@ client_secret.json"). El secreto **sigue en el historial** → sigue expuesto.
 **Acción humana requerida:** ROTAR/revocar ese client secret en Google Cloud Console (asúmelo
 comprometido). Opcional: purgar el historial (`git filter-repo`) — decisión tuya; NO bloquea
 publicación (el pasado es inmutable). NO lo hago yo: toca credenciales reales y reescritura de historia.
+
+### 🧑 [#3 — operativo] Establecer la baseline de Core Web Vitals
+Tras mergear, no hay `.pipeline/perf-baseline.json` (no se sembró con números falsos). Para
+activar la detección de REGRESIÓN (no solo el presupuesto absoluto), correr una vez
+`node .pipeline/check-perf.mjs --update-baseline` en un entorno con datos reales — idealmente CI
+con Lighthouse (PERF_REPORTS apuntando a los lighthouse-run-*.json) y commitear el resultado, o
+en local con puppeteer. No lo siembro yo porque mezclar métricas de puppeteer (local) con las de
+Lighthouse (CI) para comparar regresión sería apples-to-oranges.
 
 ### 💡 [#2 — PROPUESTA, no instalada] Hook pre-commit anti-secretos
 Para atajar secretos ANTES de que entren al historial, propongo (sin instalar sin tu OK) un
