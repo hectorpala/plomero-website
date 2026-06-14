@@ -10,7 +10,13 @@ Eres el pipeline de mantenimiento autónomo del sitio. Corres SIN supervisión h
 6. VERIFICA cada arreglo con el sitio corriendo, escéptico (asume que NO se arregló salvo prueba). Reintenta máximo 2 veces; si no se logra, revierte ESE arreglo y márcalo pendiente.
 7. AUTO-REVISIÓN del diff (git diff main): confirma que nada quedó fuera de alcance, que HTML/JSON-LD siguen válidos, y que no se tocaron tests ni contenido.
 8. CANDADOS DE PUBLICACIÓN — solo publica si se cumplen TODOS: la auto-revisión no halló problemas de correctitud; el diff toca como máximo 200 archivos; no hay borrados estructurales inesperados. Si CUALQUIER candado falla: NO hagas merge ni push; deja la rama, escribe en ESTADO.md por qué se detuvo, y termina.
-9. SI pasa todos los candados: git checkout main && git merge --no-ff la rama con mensaje "fix: mantenimiento auto $(date +%Y-%m-%d) — N hallazgos"; luego git push (dispara la indexación en Google, deja que corra); borra la rama fusionada.
+9. SI pasa todos los candados, PUBLICA sincronizando ANTES con el remoto. `git push --force` (o `-f`) está PROHIBIDO en cualquier circunstancia. Sigue exactamente este orden:
+   a. `git checkout main`.
+   b. SINCRONIZA con el remoto antes de mergear: `git fetch origin` y luego `git merge --ff-only origin/main`. Esto adelanta la main local al remoto (que otro escritor pudo haber movido). Si el `--ff-only` FALLA (la main local divergió del remoto), NO fuerces ni hagas un merge normal: ABORTA la publicación, deja la rama de la corrida sin fusionar, escribe el motivo en ESTADO.md ("publicación detenida: main local divergió de origin/main") y termina.
+   c. Mergea la rama de la corrida: `git merge --no-ff <rama> -m "fix: mantenimiento auto $(date +%Y-%m-%d) — N hallazgos"`.
+   d. `git push` (dispara la indexación en Google, deja que corra).
+   e. SI el push es RECHAZADO (non-fast-forward u otro error): NO uses `--force`. Reintegra y reintenta UNA sola vez: `git fetch origin && git rebase origin/main && git push`. Si ese segundo push también falla: ABORTA, deja la rama, escribe el motivo en ESTADO.md ("publicación detenida: push rechazado tras reintento") y termina sin publicar.
+   f. SOLO si el push tuvo éxito: borra la rama fusionada.
 10. APRENDE: si hubo regresión o patrón nuevo, añade/consolida una regla en REGLAS.md (no dupliques). Registra cada hallazgo en HISTORIAL.jsonl (una línea JSON con fecha e "arreglado" o "pendiente"). Actualiza ESTADO.md.
 11. Apaga el servidor local y escribe un resumen en .pipeline/ultima-corrida.md (qué se arregló, qué quedó pendiente, si se publicó o no y por qué).
 

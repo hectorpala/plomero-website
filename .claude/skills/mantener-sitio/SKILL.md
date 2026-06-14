@@ -35,7 +35,13 @@ Ejecuta este ciclo en orden. Muestra EVIDENCIA en cada fase, no solo afirmacione
 ## FASE 5 — Gate de publicación
 11. Auto-revisa el diff contra main: confirma que nada quedó fuera de alcance, que HTML/JSON-LD siguen válidos, y que no se tocaron tests ni contenido estratégico.
 12. Solo publica si se cumplen TODOS los candados: auto-revisión limpia, diff de máximo 200 archivos y cero borrados estructurales inesperados. Si cualquier candado falla, NO hagas merge ni push; deja la rama, escribe en ESTADO.md por qué se detuvo y termina.
-13. Si todo pasa: merge a main con mensaje `fix: mantenimiento auto YYYY-MM-DD — N hallazgos`, push, y borra la rama fusionada.
+13. Si todo pasa, PUBLICA sincronizando ANTES con el remoto. `git push --force` (o `-f`) está PROHIBIDO en cualquier circunstancia. Sigue exactamente este orden:
+    a. `git checkout main`.
+    b. SINCRONIZA con el remoto antes de mergear: `git fetch origin` y luego `git merge --ff-only origin/main`. Esto adelanta la main local al remoto (que otro escritor pudo haber movido). Si el `--ff-only` FALLA (la main local divergió del remoto), NO fuerces ni hagas un merge normal: ABORTA la publicación, deja la rama de la corrida sin fusionar, escribe el motivo en ESTADO.md ("publicación detenida: main local divergió de origin/main") y termina.
+    c. Mergea la rama de la corrida: `git merge --no-ff <rama> -m "fix: mantenimiento auto YYYY-MM-DD — N hallazgos"`.
+    d. `git push` (dispara la indexación en Google, deja que corra).
+    e. SI el push es RECHAZADO (non-fast-forward u otro error): NO uses `--force`. Reintegra y reintenta UNA sola vez: `git fetch origin && git rebase origin/main && git push`. Si ese segundo push también falla: ABORTA, deja la rama, escribe el motivo en ESTADO.md ("publicación detenida: push rechazado tras reintento") y termina sin publicar.
+    f. SOLO si el push tuvo éxito: borra la rama fusionada.
 
 ## FASE 6 — Aprender
 14. Si algún error fue una REGRESIÓN o reveló un patrón nuevo, añade/actualiza una regla en REGLAS.md (formato: "- [FECHA] CATEGORÍA: regla — por qué. Severidad: X"). CONSOLIDA, no dupliques. Solo crea regla de un error ya verificado.
