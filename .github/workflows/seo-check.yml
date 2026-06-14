@@ -4,8 +4,15 @@ on:
   schedule:
     - cron: "0 15 * * 1"   # Lunes 15:00 UTC (~10:00 MX)
   workflow_dispatch: {}
-  push:
-    branches: [ main, master ]
+  # NOTA: se eliminó el trigger `push`. Corría el check contra producción al
+  # instante del push, antes de que Netlify terminara de desplegar → falsos
+  # negativos (carrera con el deploy). No hay señal fiable del fin del deploy de
+  # Netlify sin API/token, y un check SEO no necesita correr por commit. Se deja
+  # solo schedule semanal + ejecución manual, igual que site-monitor.yml.
+
+permissions:
+  contents: read
+  issues: write
 
 jobs:
   seo_audit:
@@ -22,7 +29,11 @@ jobs:
       - name: Define URLs
         id: urls
         run: |
-          echo 'URLS=/ /servicios/plomero/cerca-de-mi/ /servicios/plomero/24-7/ /servicios/plomero/a-domicilio/ /servicios/plomero/precios/ /contacto/' >> $GITHUB_OUTPUT
+          # URLs canónicas reales (las /servicios/plomero/* anteriores eran stubs
+          # de meta-refresh → 200 sin contenido SEO → fallo permanente). Cada
+          # destino se tomó del <link rel="canonical"> de su stub y responde 200
+          # directo (sin redirección) en producción.
+          echo 'URLS=/ /servicios/plomero-cerca-de-mi/ /servicios/emergencia-24-7/ /servicios/plomero-a-domicilio/ /servicios/plomero-precios/ /contacto/' >> $GITHUB_OUTPUT
 
       - name: Check sitemap HTTP 200
         run: |
@@ -40,7 +51,9 @@ jobs:
           urls='${{ steps.urls.outputs.URLS }}'
           for u in $urls; do
             echo "== $u"
-            html="$(curl -sS "$BASE$u")" || FAIL=1
+            # -L: sigue redirecciones como defensa ante un 301 futuro (las URLs
+            # ya deben ser directas, pero esto evita que un redirect rompa el check).
+            html="$(curl -sSL "$BASE$u")" || FAIL=1
 
             # 1) GTM: exactamente 1 gtm.js y 1 ns.html
             js=$(printf "%s" "$html" | rg -c 'googletagmanager\.com/gtm\.js\?id=GTM-W75CRTX5')
@@ -48,21 +61,21 @@ jobs:
             echo "GTM gtm.js:$js ns.html:$ns"
             [ "$js" -eq 1 ] && [ "$ns" -eq 1 ] || { echo "❌ GTM count mismatch in $u"; FAIL=1; }
 
-            # 2) Title length 50–60 (Home permite 50–65)
+            # 2) Title length 50–66 (rango alineado a las páginas reales: el más
+            #    largo es /servicios/plomero-precios/ con 66; ~66 chars ≈ 600px,
+            #    límite práctico de Google). El check sigue atrapando títulos
+            #    ausentes o desproporcionados.
             title=$(printf "%s" "$html" | rg -o '<title>.*?</title>' -N | sed -E 's|</?title>||g')
             tlen=${#title}
             echo "Title($tlen): $title"
-            if [ "$u" = "/" ]; then
-              [ $tlen -ge 50 ] && [ $tlen -le 65 ] || { echo "❌ Title length Home out of range in $u ($tlen)"; FAIL=1; }
-            else
-              [ $tlen -ge 50 ] && [ $tlen -le 60 ] || { echo "❌ Title length out of range in $u ($tlen)"; FAIL=1; }
-            fi
+            [ $tlen -ge 50 ] && [ $tlen -le 66 ] || { echo "❌ Title length out of range in $u ($tlen)"; FAIL=1; }
 
-            # 3) Meta description 120–155
+            # 3) Meta description 120–160 (160 es el máximo estándar SEO; páginas
+            #    reales llegan a 160 en /servicios/plomero-a-domicilio/).
             desc=$(printf "%s" "$html" | rg -o '<meta name="description" content="[^"]*"' -N | sed -E 's/.*content="(.*)"/\1/')
             dlen=${#desc}
             echo "Desc($dlen): ${desc:0:80}..."
-            [ $dlen -ge 120 ] && [ $dlen -le 155 ] || { echo "❌ Description length out of range in $u ($dlen)"; FAIL=1; }
+            [ $dlen -ge 120 ] && [ $dlen -le 160 ] || { echo "❌ Description length out of range in $u ($dlen)"; FAIL=1; }
 
             # 4) Canonical & og:url al dominio correcto
             can=$(printf "%s" "$html" | rg -c '<link[^>]+rel="canonical"[^>]+https://plomeroculiacanpro.mx' -i)
@@ -85,6 +98,56 @@ jobs:
             fi
           done
           [ $FAIL -eq 0 ] || exit 1
+
+      - name: Crear Issue si el check SEO falla
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const label = 'seo-automatico';
+            const title = '🚨 Falla del check SEO semanal';
+            // Dedup: si ya hay un Issue abierto con esta etiqueta, solo comenta;
+            // no abre uno nuevo en cada corrida.
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: label,
+            });
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const fecha = new Date().toLocaleString('es-MX', { timeZone: 'America/Mazatlan' });
+            const body = [
+              '## El check SEO semanal falló',
+              '',
+              `**Fecha:** ${fecha}`,
+              `**Corrida:** ${runUrl}`,
+              '',
+              'Uno o más chequeos (GTM, título, meta description, canonical/og:url o JSON-LD)',
+              'no pasaron en alguna de las URLs auditadas. Revisa el log de la corrida.',
+              '',
+              '---',
+              '_Generado automáticamente por el Weekly SEO Check_',
+            ].join('\n');
+
+            if (existing.data.length > 0) {
+              const issue = existing.data[0];
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Volvió a fallar el ${fecha}. Corrida: ${runUrl}`,
+              });
+              core.info(`Issue #${issue.number} ya existe; se agregó comentario.`);
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['bug', label],
+              });
+              core.info('Se creó un nuevo Issue de falla SEO.');
+            }
 
       - name: Summary
         if: always()
