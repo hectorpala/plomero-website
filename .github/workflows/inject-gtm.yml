@@ -30,13 +30,19 @@ jobs:
           test -f "$PARTIAL" || { echo "ERROR: $PARTIAL no existe"; exit 1; }
 
           # Archivos HTML candidatos (excluye carpetas típicas y el propio parcial)
-          mapfile -t FILES < <(rg -l --glob '!node_modules/**' --glob '!dist/**' --glob '!build/**' --glob '!partials/**' --glob '!**/.git/**' '\.html$' || true)
+          mapfile -t FILES < <(rg --files --glob '*.html' --glob '!node_modules/**' --glob '!dist/**' --glob '!build/**' --glob '!partials/**' --glob '!**/*.min.html' --glob '!**/.git/**' || true)
           echo "HTML detectados: ${#FILES[@]}"
 
           for f in "${FILES[@]}"; do
             # Si ya contiene GTM, no inyectar de nuevo (idempotente)
             if rg -q 'googletagmanager\.com/(gtm\.js|ns\.html)' "$f"; then
               echo "SKIP (ya tiene GTM): $f"
+              continue
+            fi
+
+            # Saltar stubs de redirección (meta-refresh): GTM no aplica ahí
+            if rg -q 'http-equiv="refresh"' "$f"; then
+              echo "SKIP (redirect stub): $f"
               continue
             fi
 
