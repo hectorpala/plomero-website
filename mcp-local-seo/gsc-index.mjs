@@ -5,7 +5,6 @@ const DIR = '/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo';
 const TOKEN_FILE = `${DIR}/gsc-token.json`;
 const CLIENT_SECRET_FILE = `${DIR}/client_secret.json`;
 const SITE_URL = 'sc-domain:plomeroculiacanpro.mx';
-const SITE_URL_HTTP = 'https://plomeroculiacanpro.mx/';
 
 async function getAuth() {
   const creds = JSON.parse(readFileSync(CLIENT_SECRET_FILE, 'utf-8'));
@@ -15,13 +14,8 @@ async function getAuth() {
   return oauth2;
 }
 
-// 1. Ping sitemap
+// (El endpoint google.com/ping de sitemaps fue retirado por Google en 2023; se eliminó — gsc-216)
 const sitemapUrl = 'https://plomeroculiacanpro.mx/sitemaps/main_sitemap.xml';
-console.log('=== 1. Ping sitemap ===');
-try {
-  const res = await fetch(`https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`);
-  console.log(`HTTP ${res.status} ${res.status === 200 ? '✅' : '⚠️'}`);
-} catch(e) { console.log('Error:', e.message); }
 
 // 2. Submit sitemap vía GSC API
 console.log('\n=== 2. Submit sitemap vía API ===');
@@ -50,7 +44,7 @@ try {
   for (const url of urls) {
     try {
       const res = await sc.urlInspection.index.inspect({
-        requestBody: { inspectionUrl: url, siteUrl: SITE_URL_HTTP, languageCode: 'es' }
+        requestBody: { inspectionUrl: url, siteUrl: SITE_URL, languageCode: 'es' }
       });
       const r = res.data?.inspectionResult?.indexStatusResult;
       const verdict = r?.verdict || '?';
