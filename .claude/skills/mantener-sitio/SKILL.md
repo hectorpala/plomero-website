@@ -15,7 +15,7 @@ Ejecuta este ciclo en orden. Muestra EVIDENCIA en cada fase, no solo afirmacione
 3. Comprueba que la home y 2-3 páginas clave (/precios/, /contacto/) responden 200 con `curl -sI`. Si algo está roto YA, anótalo como hallazgo de severidad alta.
 
 ## FASE 1 — Revisión (en paralelo)
-4. Lanza los 6 subagentes revisores con la herramienta Task, en paralelo (un solo mensaje, varias llamadas): revisor-seo, revisor-movil, revisor-a11y, revisor-perf, revisor-links, revisor-gsc.
+4. Lanza los 9 subagentes revisores con la herramienta Task, en paralelo (un solo mensaje, varias llamadas): revisor-seo, revisor-movil, revisor-a11y, revisor-perf, revisor-links, revisor-gsc, revisor-indexabilidad, revisor-produccion, revisor-plantilla. Los 5 primeros (seo, movil, a11y, perf, links) son LLM y cubren lo SUBJETIVO (calidad de copy, intención de búsqueda, similitud de doorways, contraste). revisor-plantilla es DETERMINISTA (corre `python3 .pipeline/check-plantilla.py`) y garantiza las reglas MECÁNICAS de REGLAS.md (enlaces/og:image inexistentes, popup sin ARIA, fetchpriority/CLS, paridad CSS, table-wrapper, theme-color) — para que no dependan de que el LLM "recuerde leer REGLAS.md".
 5. Junta todos sus hallazgos JSON en una sola lista.
 
 ## FASE 2 — Deduplicar contra memoria
