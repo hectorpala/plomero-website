@@ -29,7 +29,7 @@ Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola 
 - [x] ✅ #4 revisor-tracking → `verificar-tracking.js` envuelto (dataLayer/GTM/GA)
 
 ## FASE 3 — ofensiva / negocio
-- [ ] #5 revisor-conversion → `.pipeline/check-conversion.py`
+- [x] ✅ #5 revisor-conversion → `.pipeline/check-conversion.py`
 - [ ] #6 revisor-nap → teléfono/email/nombre idénticos en todas las páginas
 
 ## FASE 4 — profundidad
@@ -137,6 +137,25 @@ medición contra prod es no-determinista por naturaleza (red/headless), igual qu
 - GTM con id inexistente GTM-FAKE0000 (fixture local, gtm.js 404) → alta "el CONTENEDOR no carga".
 - prod real "/" → media (GA4 cargó, sin beacon: consent) — ver cola humana.
 **Corrida real:** "/" → 1 media (consent). Detección coherente entre páginas tras el fix de interacción.
+
+### #5 revisor-conversion — ✅ HECHO (commit en esta rama)
+**Qué valida:** que cada página INDEXABLE tenga los caminos de conversión. (1) >=1 `tel:` con el
+número correcto (667 392 2273 / 526673922273) → alta; (2) >=1 `wa.me`/api.whatsapp.com con
+526673922273 → alta; (3) un CTA antes del fold (tel/wa o botón con clase btn-primary/cta/
+floating-btn/emergency/whatsapp en hero/header/flotante) → media (heurístico); (4) formulario en
+las páginas clave (/ y /contacto/) → alta.
+**Decisión (acordada con Héctor):** "página clave con formulario" = solo / y /contacto/ (ambas ya
+lo tienen → 0 falsos positivos). tel/wa/CTA se exigen en TODAS las indexables. "Form en cada
+servicio" queda como posible mejora futura, no hallazgo.
+**Validación de números:** tel: tolera `+526673922273`, `6673922273`, prefijo 52/521; wa.me exige
+empezar con 526673922273. Calibrado sobre el markup real (btn-primary, floating-btn, etc.).
+**Determinista:** SÍ, solo lee disco, orden estable (md5 idéntico df04ed...).
+**Prueba negativa (fixtures scratch, todas detectan; repo restaurado):**
+- sin tel/wa/CTA → 2 alta (sin tel, sin wa) + 1 media (sin CTA).
+- tel/wa con número equivocado (+521112223333) → 2 alta (número incorrecto).
+- canonical=/contacto/ sin <form> → alta "página clave sin form".
+**Corrida real:** 99 páginas indexables analizadas, 0 hallazgos (el sitio ya está completo en
+conversión: todas con tel/wa/CTA y las dos clave con formulario).
 
 ---
 
