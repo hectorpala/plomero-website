@@ -3,35 +3,35 @@
 ```json
 {
   "ultima_corrida": {
-    "fecha": "2026-06-12",
-    "rama": "auto/mantenimiento-20260612-2001",
+    "fecha": "2026-06-13",
+    "rama": "auto/mantenimiento-20260613-2000",
     "modo": "AUTONOMO",
-    "revisores": 6,
-    "hallazgos_brutos": 16,
-    "hallazgos_unicos_nuevos": 13,
-    "arreglados": 3,
-    "verificados": 3,
+    "revisores": 8,
+    "hallazgos_brutos": 14,
+    "hallazgos_unicos_nuevos": 11,
+    "arreglados": 2,
+    "verificados": 2,
     "regresiones": "0",
-    "pendientes_humano_nuevos": "10 (gsc-210..214, perf-401/402, a11y-301, movil-301, infra-002)",
-    "bajas_no_tocadas": "4 (seo-304 desazolve breadcrumb 2 niveles, seo-305 typo anio marcha-paz, movil-301, a11y-301)",
+    "pendientes_humano_nuevos": "gsc-215 (bug tooling gsc-index.mjs L53 ciega deteccion de indexacion), gsc-216, perf-501/502/503/504, a11y-303, seo-004",
+    "bajas_no_tocadas": "perf-501 (fuentes fetchpriority high, requiere medir LCP), a11y-303, seo-305, movil-301, seo-002/107",
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_200_archivos": "3 <= 200",
+      "diff_max_200_archivos": "5 <= 200",
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "publicado": true,
-      "merge": "eee3c396",
-      "push": "fcb190a1..eee3c396 main -> main",
-      "nota_indexacion": "INDEXACION OK (infra-001 ya resuelto): el hook detecto 17 URLs (incluidas las 3 paginas editadas) pero la cuota diaria de Google sigue agotada -> las 17 quedaron encoladas en pending-index.json para reintento automatico (job launchd diario). 0 URLs perdidas. NOTA infra-002: el push pelado fallo porque el hook llama 'node' sin ruta y node no esta en el PATH por defecto; se reintento con PATH=/usr/local/bin:$PATH git push y funciono."
+      "merge": "e2418d1e",
+      "push": "ef3b57f7..e2418d1e main -> main",
+      "nota_indexacion": "INDEXACION COMPLETA: el hook (infra-001 resuelto) detecto 5 URLs (las 5 paginas editadas) y las envio TODAS a Google (cuota disponible hoy): 5 enviadas, 0 en cola, 0 descartadas. NOTA infra-002 sigue vigente: push completado con PATH=/usr/local/bin:$PATH git push (el hook llama 'node' sin ruta absoluta)."
     },
-    "detalle_arreglos": "seo-301/302/303: BreadcrumbList JSON-LD truncado a 1 item (Inicio->home) en 3 paginas de servicio indexables; el ultimo item no coincidia con el canonical. Anadidos niveles 2 (Servicios) y 3 (la pagina, item==canonical) igual que el patron del resto de servicios. JSON-LD revalidado (parse OK), pos3==canonical y HTTP 200 en las 3."
+    "detalle_arreglos": "seo-304: servicios/desazolve-de-drenajes BreadcrumbList de 2 niveles (faltaba 'Servicios'); insertado pos2 Servicios->/servicios/ y renumerada la pagina a pos3 (item==canonical); checker indexabilidad pasa de 1 a 0 hallazgos. a11y-302: exit-intent popup sin role=dialog/aria-modal/aria-labelledby en 5 paginas de servicio (cerca-de-mi, desazolve, a-domicilio, economico, instalacion-de-boiler); anadidos los atributos + id=exit-popup-title al h3, replicando index.html. Solo HTML (sin CSS/JS) -> sin bump de ?v=/sw.js. 5/5 verificadas 200, JSON-LD valido, wa.me intacto. revisor-produccion: produccion LIMPIA (0 pageerror, prod-001 sin regresion)."
   },
   "corrida_previa": {
     "fecha": "2026-06-12",
-    "rama": "auto/mantenimiento-20260612-1720",
-    "merge": "2bcea0df",
-    "arreglados": 19,
-    "nota": "perf-301..314 eager->lazy; seo-206/207; movil-203/204; links-204"
+    "rama": "auto/mantenimiento-20260612-2001",
+    "merge": "eee3c396",
+    "arreglados": 3,
+    "nota": "seo-301/302/303 BreadcrumbList truncado a 1 item en 3 servicios"
   },
   "pendientes": [
     {"id": "prod-001", "categoria": "produccion", "estado": "RESUELTO 2026-06-13 (commit ea91bc12)", "descripcion": "EXCEPCION JS NO CAPTURADA en produccion. RESUELTO: eran 2 bugs encadenados en main.js — (1) L273 '()' espurio invocaba un id como funcion ('is not a function'); (2) L274 el polyfill pasaba 2500 a requestIdleCallback (espera {timeout:..}) -> 'IdleRequestOptions', oculto detras del bug 1. Fix: L273 '})();'->'});' ; L274 polyfill->setTimeout directo. Versionado main.js?v=20260613 en 30 HTML + sw.js v24->v25. Verificado en headless local (0 errores en / /precios/ /contacto/) Y contra produccion con check-produccion.mjs (hallazgos vacios). wa.me intacto. Revivio popup salida-intencion, quote-sheet, registro SW y scroll tracking.", "severidad": "alta"},
@@ -45,7 +45,13 @@
     {"id": "movil-301", "categoria": "movil", "descripcion": "2a tabla (Desglose de Inversion) en /blog/instalacion-tinaco-guia-compra/ L493 sin .table-wrapper; protegida en prod por el fallback global table{overflow-x:auto}. Inconsistencia, no overflow real. Envolver para consistencia.", "severidad": "baja", "razon": "baja; no desborda en render 375px"},
     {"id": "perf-401", "categoria": "perf", "descripcion": "main.js (20KB) no esta minificado real (677 lineas, 1 salto por sentencia); se sirve immutable 1 anio y lo precachea el SW. Minificar a main.min.js de una linea + bump ?v=/sw.js.", "severidad": "baja", "razon": "RIESGO: minificar puede truncar URLs wa.me (REGLA f8c72299); requiere validacion completa antes de publicar"},
     {"id": "perf-402", "categoria": "perf", "descripcion": "Ninguna pagina hace <link rel=preload as=image> del hero LCP. Mejora opcional de LCP.", "severidad": "baja", "razon": "requiere medir LCP antes/despues con Lighthouse; aplicar solo si hay mejora real"},
-    {"id": "seo-304", "categoria": "seo", "descripcion": "/servicios/desazolve-de-drenajes/ tiene BreadcrumbList de 2 niveles (Inicio > Desazolve) sin el nivel intermedio 'Servicios'; el ultimo item SI == canonical (no es bug de mismatch, solo inconsistencia con el patron de 3 niveles).", "severidad": "baja", "razon": "baja; no se toca en auto (solo alta/media)"},
+    {"id": "seo-304", "categoria": "indexabilidad", "estado": "RESUELTO 2026-06-13 (merge e2418d1e)", "descripcion": "/servicios/desazolve-de-drenajes/ BreadcrumbList de 2 niveles sin el nivel intermedio 'Servicios'. RESUELTO: insertado pos2 Servicios->/servicios/ y renumerada la pagina a pos3 (item==canonical); checker indexabilidad 0 hallazgos. Lo elevo el revisor-indexabilidad a alta (idx-001).", "severidad": "alta"},
+    {"id": "gsc-215", "categoria": "gsc", "descripcion": "BUG tooling en mcp-local-seo/gsc-index.mjs L53: urlInspection.index.inspect pasa siteUrl=SITE_URL_HTTP (https://...) en vez de la propiedad verificada SITE_URL (sc-domain:plomeroculiacanpro.mx); las 7 URLs devuelven 'You do not own this site' -> el chequeo de indexacion NO devuelve nada en ninguna corrida, dejando CIEGA la deteccion de des-indexaciones. Fix de 1 string: L53 SITE_URL_HTTP -> SITE_URL. No afecta el sitio servido.", "severidad": "media", "razon": "infra/tooling de auditoria; precedente infra-002 (cambios de infra fuera del auto-fix de sitio). Fix recomendado y de bajo riesgo para humano."},
+    {"id": "gsc-216", "categoria": "gsc", "descripcion": "gsc-index.mjs L18-24 hace ping a www.google.com/ping?sitemap= (endpoint retirado por Google en 2023, siempre 404); ruido/falsa alarma en cada corrida. El sitemap esta sano (200/200) y el submit por API funciona. Eliminar el bloque de ping.", "severidad": "baja", "razon": "infra/tooling, cosmetico"},
+    {"id": "perf-501", "categoria": "perf", "descripcion": "26 paginas de servicio/blog preloadean 2-3 woff2 con fetchpriority='high', en el mismo carril que el hero LCP; index.html (home) preloadea las fuentes SIN fetchpriority. Quitar fetchpriority='high' de los <link rel=preload as=font> para igualar el patron de home.", "severidad": "media", "razon": "optimizacion de tuning, no defecto roto; requiere medir LCP antes/despues como perf-104/401/402"},
+    {"id": "perf-502", "categoria": "perf", "descripcion": "Los 3 pesos de Inter (inter-400/500/600.woff2) son BYTE-IDENTICOS (mismo md5, 38760 bytes c/u); el CSS declara 3 @font-face y se preloadean hasta 3 URLs identicas (~76KB desperdiciados). Re-subsetear desde los .original (que SI difieren) o colapsar a 1 @font-face.", "severidad": "media", "razon": "requiere herramienta de subset de fuentes; si se cambia un woff2 servido, bump de sw.js"},
+    {"id": "a11y-303", "categoria": "a11y", "descripcion": "mobile-menu-btn con solo aria-label en 99 paginas; falta aria-expanded='false' y aria-controls='nav-menu' estaticos + id='nav-menu' en el <ul> (index.html si los tiene). Mitigado porque main.js setea aria-expanded al abrir/cerrar.", "severidad": "baja", "razon": "baja; mecanico pero fuera de alcance auto (solo alta/media); 99 archivos"},
+    {"id": "seo-004", "categoria": "seo", "descripcion": "6 redirect-stubs servicios/plomero/{index,24-7,a-domicilio,cerca-de-mi,colonias,precios} sin <meta robots noindex> (titles 'Redirigiendo...' identicos); riesgo bajo porque el canonical ya consolida la senal y no estan en sitemap.", "severidad": "baja", "razon": "baja; opcional"},
     {"id": "seo-305", "categoria": "seo", "descripcion": "/blog/marcha-paz-culiacan-2025/ og:url con typo de anio 2026 (canonical es 2025); pagina noindex,follow off-topic.", "severidad": "baja", "razon": "baja; pagina noindex"},
     {"id": "infra-001", "categoria": "infra", "estado": "RESUELTO 2026-06-12", "descripcion": "El hook pre-push (auto-indexacion Google) no enviaba URLs porque ~/gsc-mcp/sites.json tenia el 'folder' de Plomero apuntando a la ruta vieja '/Users/openclaw/Documents/Mis Apps/Sitios Web/Plomero Culiacan' (ya inexistente); auto-index.mjs hace git -C en esa carpeta -> 0 html -> 'Sin paginas HTML que indexar'. CORREGIDO: folder -> '/Users/openclaw/Sitios Web/Plomero Culiacan'. Verificado: git -C en ruta nueva detecta los 17 html del push. Nota: lo de 'node fuera del PATH' era falsa alarma (esa frase es output del propio script; node corrio bien). AUTOMATIZADO: auto-index.mjs ahora encola en ~/gsc-mcp/pending-index.json las URLs que fallan por cuota/error transitorio (en vez de perderlas), y el job launchd 'com.gscmcp.reindex' (diario 9:10) las reintenta con 'node auto-index.mjs --drain-all' cuando la cuota se reinicia. Las 16 paginas del push 7efbf5bb..fcb190a1 (que hoy chocaron con 'Quota exceeded') ya estan en la cola; se enviaran solas manana.", "severidad": "baja"},
     {"id": "gsc-205", "categoria": "gsc", "descripcion": "/servicios/instalacion-de-tinaco/ CTR 0% en 27 keywords de precio (pos 7-11). Anadir rango de precio visible en title/meta/H1.", "severidad": "media", "razon": "copy; validar precio real con el negocio"},
@@ -78,6 +84,18 @@
   }
 }
 ```
+
+## Resumen de la corrida 2026-06-13 20:00 (auto/mantenimiento-20260613-2000 — AUTÓNOMA, PUBLICADA)
+
+- **Health check:** 9/9 rutas en 200, main.js sintaxis OK (node v22.18 vía /usr/local/bin), wa.me intacto (526673922273), main.js?v=20260613 (30 refs) y CSS ?v=20260612c consistentes, sw.js v25 precachea la versión correcta. 0 regresiones (los 8 revisores confirmaron perf-301..314, prod-001 sin reaparecer, og:url=canonical, fetchpriority único, versionado y links sanos).
+- **Revisores (8 en paralelo):** seo, móvil, a11y, perf, links, gsc, indexabilidad, producción. revisor-produccion: **producción LIMPIA** (0 pageerror en /, /precios/, /contacto/; prod-001 sin regresión; 8/8 URLs 200; HSTS/XCTO/RefPol presentes; form 2xx). revisor-links: 0 rotos. revisor-indexabilidad: idx-001 (=seo-304).
+- **Arreglados y verificados (2):**
+  - **seo-304** (ALTA, idx-001) — servicios/desazolve-de-drenajes: BreadcrumbList de 2 niveles sin el intermedio "Servicios". Insertado pos2 Servicios→/servicios/ y renumerada la página a pos3 (item==canonical). El checker de indexabilidad pasó de 1 a **0 hallazgos**.
+  - **a11y-302** (MEDIA) — exit-intent popup sin `role="dialog" aria-modal="true" aria-labelledby` en 5 páginas de servicio (cerca-de-mi, desazolve, a-domicilio, economico, instalacion-de-boiler). Añadidos los atributos + `id="exit-popup-title"` al h3, replicando index.html. 5/5 verificadas (popup-role=1, title-id=1, HTTP 200, JSON-LD válido, wa.me intacto).
+  - Solo HTML (sin CSS/JS) → sin bump de ?v=/sw.js.
+- **Candados paso 8: 3/3 cumplidos → PUBLICADO.** Diff: 5 archivos, 11 inserciones / 5 borrados, 0 archivos borrados/renombrados, 0 tests tocados. Merge **e2418d1e** a main + push **ef3b57f7..e2418d1e**. **Indexación COMPLETA**: el hook envió las 5 URLs editadas a Google (5 enviadas, 0 en cola, 0 descartadas — cuota disponible hoy). infra-002 sigue vigente: push con `PATH=/usr/local/bin:$PATH git push`.
+- **Pendientes humano nuevos:** **gsc-215** (bug 1-string en gsc-index.mjs L53 que deja CIEGA la verificación de indexación — recomendado arreglar pronto), gsc-216 (ping sitemap a endpoint Google muerto), perf-501 (fuentes con fetchpriority=high en 26 págs, medir LCP), perf-502 (3 woff2 Inter idénticos ~76KB), perf-503/504 (binarios pesados), a11y-303 (menu-btn aria en 99 págs), seo-004 (6 redirect-stubs sin noindex). Bajas no tocadas: seo-305, movil-301, seo-002/107.
+- **Aprendizaje:** 1 regla nueva en REGLAS.md — A11Y/PLANTILLA: el exit-intent popup de páginas de servicio debe llevar `role="dialog" aria-modal="true" aria-labelledby="exit-popup-title"` + `id` en el h3, igual que index.html (chequeo `grep -c 'id="exit-intent-popup" role="dialog"'` == 1).
 
 ## Resumen de la corrida 2026-06-12 20:01 (auto/mantenimiento-20260612-2001 — AUTÓNOMA, PUBLICADA)
 
