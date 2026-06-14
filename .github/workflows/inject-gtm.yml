@@ -5,8 +5,12 @@ on:
     branches: [ main, master ]
   workflow_dispatch: {}
 
+# Ya NO pushea a main: inyecta GTM en una rama y abre un PR (así main tiene un
+# único escritor automático directo — el pipeline de mantenimiento — y se elimina
+# la carrera/divergencia). Necesita escribir la rama (contents) y abrir PRs.
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   inject:
@@ -58,14 +62,48 @@ jobs:
           echo "Archivos con GTM (repo):"
           rg -n "googletagmanager\.com/(gtm\.js|ns\.html)" -S || true
 
-      - name: Commit changes
+      - name: Open PR with GTM injection (NO direct push to main)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if ! git diff --quiet; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A
-            git commit -m "fix(gtm): auto-inject GTM-W75CRTX5 partial into HTML files [skip ci]"
-            git push
-          else
-            echo "Sin cambios que commitear."
+          set -euo pipefail
+
+          # Idempotencia: si la inyección no produjo cambios, todos los HTML ya
+          # tienen GTM → no hay nada que proponer.
+          if git diff --quiet; then
+            echo "Sin cambios: todos los HTML ya tienen GTM. No se abre PR."
+            exit 0
           fi
+
+          # Dedup: no abrir un segundo PR si ya hay uno automático de GTM abierto.
+          EXISTING=$(gh pr list --state open --json number,headRefName \
+            --jq '[.[] | select(.headRefName | startswith("auto/gtm-inject"))] | length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "Ya hay un PR automático de GTM abierto; no se crea otro."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Commit en una RAMA dedicada (nunca en main). El [skip ci] evita
+          # disparar workflows sobre esta rama de automatización.
+          BRANCH="auto/gtm-inject-${{ github.run_id }}"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "fix(gtm): auto-inject GTM-W75CRTX5 partial into HTML files [skip ci]"
+          git push origin "$BRANCH"
+
+          cat > /tmp/pr-body.md <<'EOF'
+          Inyección automática del parcial `partials/gtm.html` en los archivos HTML que aún no incluyen GTM.
+
+          Este workflow ya **no** pushea a `main` directamente: abre este PR para que main tenga un único escritor automático directo (el pipeline de mantenimiento) y se elimine la divergencia / push rechazado. Revisa y fusiona para aplicar los cambios.
+
+          _Generado automáticamente por inject-gtm.yml_
+          EOF
+
+          gh pr create \
+            --base "${{ github.ref_name }}" \
+            --head "$BRANCH" \
+            --title "fix(gtm): inyectar GTM en HTML que no lo tienen" \
+            --body-file /tmp/pr-body.md
