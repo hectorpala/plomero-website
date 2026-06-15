@@ -34,7 +34,7 @@ Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola 
 
 ## FASE 4 — profundidad
 - [x] ✅ #7 revisor-enlazado-interno → `.pipeline/check-linking.py` (huérfanas, profundidad >3)
-- [ ] #8 revisor-contenido → parte mecánica (regex restos plantilla); subjetivo → LLM
+- [x] ✅ #8 revisor-contenido → parte mecánica (regex restos plantilla); subjetivo → LLM
 - [ ] #9 revisor-e2e-funcional → `.pipeline/check-e2e.mjs` (puppeteer)
 
 ---
@@ -194,6 +194,24 @@ que el 0-hallazgos es real (no un bug de resolución): el sitio está bien inter
 - (bug encontrado y corregido en el camino: depth None de páginas inalcanzables rompía `%d`).
 **Corrida real:** 99 páginas, 0 hallazgos (sin huérfanas ni páginas a >3 clics).
 
+### #8 revisor-contenido — ✅ HECHO (commit en esta rama)
+**Qué valida:** HÍBRIDO. Parte MECÁNICA (`check-contenido.py`, determinista, checker propio): restos
+de plantilla `{{}}`/`${}`/`[ciudad]`, "lorem ipsum", `TODO:`/`FIXME`, `XXXX`, y años caducos
+(< actual) en `<title>`/`<h1>` de páginas indexables. Parte SUBJETIVA (en el agente LLM, NO en el
+checker): thin content, duplicado, ortografía.
+**Decisiones (evitaron FP):**
+- `TODO` suelto NO se marca (en español "todo" es común); solo `TODO:` con dos puntos. Verificado:
+  "TODO lo necesario" no dispara.
+- Se quitan `<script>`/`<style>` antes de escanear (evita `${}`/TODO de JS).
+- El año caduco solo en páginas INDEXABLES: las noindex son archivos/eventos históricos
+  (blog/marcha-paz-culiacan-2025 con h1 "2025" es correcto) → se excluyen.
+**Determinista:** SÍ (md5 idéntico b205b7...). 110 páginas.
+**Prueba negativa (fixture, todos los patrones detectan):** `{{nombre}}`, `${precio}`, `[ciudad]`,
+"lorem ipsum", `TODO:` (de un comentario), `XXXX` → detectados; "TODO lo necesario" NO. Repo restaurado.
+**Corrida real:** 8 hallazgos REALES — 7 blog con `<h1>` "2025" mientras el `<title>` dice "[2026]"
+(año caduco en h1), y 1 enlace de reseña roto `g.page/r/XXXXX/review` (placeholder sin reemplazar).
+Ver cola humana.
+
 ---
 
 ## Cola humana / propuestas (de los revisores construidos)
@@ -229,6 +247,13 @@ page_view de la etiqueta GA4 dentro del contenedor GTM-W75CRTX5. No es necesaria
    schema. **Pregunta concreta:** ¿es intencional el sufijo por colonia? Si SÍ → lo dejo y ajusto el
    checker para aceptar el patrón "Marca – <Colonia>" (dejaría de reportarlo). Si NO → unificar todos
    los `name` de schema a "Plomero Culiacán Pro". No lo decido yo (afecta estrategia de SEO local).
+
+### 🧑 [#8 — REAL] Restos/años caducos detectados
+1. 7 posts/índice de blog tienen el `<h1>` con "2025" mientras el `<title>` ya dice "[2026]"
+   (inconsistencia de año). Actualizar el año del h1 a 2026 (o quitarlo). Editorial → revisar.
+2. `servicios/reparacion-de-fugas/` tiene el enlace de reseñas roto:
+   `https://g.page/r/XXXXX/review` (placeholder `XXXXX` sin el ID real de Google). **Acción humana:**
+   poner el ID real del Place de Google Business (el botón "déjanos una reseña" no funciona).
 
 ### 💡 [#2 — PROPUESTA, no instalada] Hook pre-commit anti-secretos
 Para atajar secretos ANTES de que entren al historial, propongo (sin instalar sin tu OK) un
