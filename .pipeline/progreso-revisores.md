@@ -92,6 +92,13 @@ hay gitleaks → corre regex).
 - (2) archivo de secreto trackeado: `client_secret.json` force-added → ALTA "archivo … TRACKEADO" + **exit 2**; `git rm --cached` + borrado.
 - (3) historial: detecta sobre el repo real (ver hallazgo real abajo); caso limpio → exit 0.
 **Corrida real sobre el repo:** 1 hallazgo (HISTORIAL) — ver cola humana. Exit 0 (no bloquea publicación).
+**FIX post-revisión (encontrado revisando en la rama):** al estar ya commiteados, los propios
+archivos de doc (`revisor-secretos.md`, `progreso-revisores.md`) contienen el literal de ejemplo
+`-----BEGIN PRIVATE KEY-----` y el checker los marcaba como secreto en el working tree → exit 2
+PERMANENTE (habría bloqueado TODA publicación). Corregido: el patrón `private-key-block` ahora exige
+material base64 real tras el marcador (`-----BEGIN … PRIVATE KEY-----[^A-Za-z0-9+/]{0,4}[A-Za-z0-9+/]{30,}`),
+así una clave PEM/JSON real SÍ se detecta pero las menciones en prosa NO. Verificado: repo real exit 0
+(solo queda el hallazgo real de historial); fixture con clave PEM real → ALTA; mención en prosa → nada.
 
 ### #3 revisor-perf-real — ✅ HECHO (commit en esta rama) — ⚠️ requiere push SSH
 **Qué valida:** Core Web Vitals reales (no el "score" de Lighthouse que se tiraba). Mediana de

@@ -40,7 +40,7 @@ RULES=(
   "openai-key|sk-[A-Za-z0-9]{20,}"
   "google-api-key|AIza[0-9A-Za-z_-]{20,}"
   "github-token|gh[opsu]_[A-Za-z0-9]{20,}"
-  "private-key-block|-----BEGIN [A-Z ]*PRIVATE KEY-----"
+  "private-key-block|-----BEGIN [A-Z ]*PRIVATE KEY-----[^A-Za-z0-9+/]{0,4}[A-Za-z0-9+/]{30,}"
   "client-secret-value|client_secret[\"']?[[:space:]]*[:=][[:space:]]*[\"'][A-Za-z0-9_-]{12,}[\"']"
   "refresh-token-value|refresh_token[\"']?[[:space:]]*[:=][[:space:]]*[\"'][A-Za-z0-9_/-]{12,}[\"']"
 )
