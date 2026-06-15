@@ -157,13 +157,11 @@ def main():
                 "NAP: nombre de negocio SIN acento en %s: '%s' (el canónico es '%s')" % (r, NAME_NOACCENT, NAME_OK),
                 "Corregir a '%s' (con acento) para consistencia NAP" % NAME_OK)
 
-    # Patrón localizado "Marca – <Colonia>" (agregado en un solo hallazgo).
-    if localized:
-        total = sum(localized.values())
-        ejemplos = ", ".join(repr(k) for k in sorted(localized)[:3])
-        add("media", "servicios/plomero-colonias-culiacan/",
-            "NAP: %d página(s) usan un nombre de negocio LOCALIZADO con sufijo (marca + colonia), p.ej. %s — el canónico de Google Business es %r; nombres distintos por página debilitan la señal NAP local" % (total, ejemplos, NAME_OK),
-            "DECISIÓN HUMANA: si el sufijo por colonia es intencional, mantenerlo y ajustar el checker para aceptar 'Marca – <Colonia>'; si no, unificar todos los `name` de schema a %r" % NAME_OK)
+    # Patrón localizado "Marca – <Colonia>" (p.ej. "Plomero Culiacán Pro – Las Quintas"):
+    # DECISIÓN DE HÉCTOR (2026-06-14): es INTENCIONAL (nombre por colonia) -> se ACEPTA y
+    # NO se reporta. Las variantes de marca que NO empiezan por el canónico sí se reportan
+    # (bloque #3 de arriba); aquí solo se ignora el sufijo de colonia.
+    _ = localized  # aceptado por decisión; sin hallazgo
 
     print(json.dumps({"hallazgos": hallazgos, "analizadas": analizadas}, ensure_ascii=False, indent=2))
 

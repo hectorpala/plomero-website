@@ -272,13 +272,12 @@ banner). **Acción humana:** abrir el sitio en un navegador real, ACEPTAR consen
 GA4 → Realtime; si llegan hits, está bien (esperado). Si NO llegan ni aceptando, revisar el trigger
 page_view de la etiqueta GA4 dentro del contenedor GTM-W75CRTX5. No es necesariamente un bug.
 
-### 🧑 [#6 — REAL] Inconsistencias NAP detectadas
-1. `servicios/tecnico-de-gas-culiacan/` usa "Plomero **Culiacan** Pro" (sin acento) en el texto —
-   debería ser "Plomero Culiacán Pro". Fix mecánico simple.
-2. 56 páginas de colonia usan nombre de negocio LOCALIZADO "Plomero Culiacán Pro – <Colonia>" en el
-   schema. **Pregunta concreta:** ¿es intencional el sufijo por colonia? Si SÍ → lo dejo y ajusto el
-   checker para aceptar el patrón "Marca – <Colonia>" (dejaría de reportarlo). Si NO → unificar todos
-   los `name` de schema a "Plomero Culiacán Pro". No lo decido yo (afecta estrategia de SEO local).
+### [#6 — RESUELTO/EN CURSO] Inconsistencias NAP detectadas
+1. `servicios/tecnico-de-gas-culiacan/` usa "Plomero **Culiacan** Pro" (sin acento) — debería ser
+   "Plomero Culiacán Pro". → **DECISIÓN: arreglar en rama `fix/` aparte** (en curso).
+2. 56 páginas de colonia usan "Plomero Culiacán Pro – <Colonia>" en el schema. → **DECISIÓN de Héctor
+   (2026-06-14): es INTENCIONAL.** `revisor-nap` ajustado para ACEPTAR el patrón "Marca – <Colonia>"
+   (ya no lo reporta); las variantes de marca inesperadas siguen detectándose. ✅
 
 ### 🧑 [#8 — REAL] Restos/años caducos detectados
 1. 7 posts/índice de blog tienen el `<h1>` con "2025" mientras el `<title>` ya dice "[2026]"
