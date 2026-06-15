@@ -30,7 +30,7 @@ Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola 
 
 ## FASE 3 — ofensiva / negocio
 - [x] ✅ #5 revisor-conversion → `.pipeline/check-conversion.py`
-- [ ] #6 revisor-nap → teléfono/email/nombre idénticos en todas las páginas
+- [x] ✅ #6 revisor-nap → teléfono/email/nombre idénticos en todas las páginas
 
 ## FASE 4 — profundidad
 - [ ] #7 revisor-enlazado-interno → `.pipeline/check-linking.py` (huérfanas, profundidad >3)
@@ -157,6 +157,28 @@ empezar con 526673922273. Calibrado sobre el markup real (btn-primary, floating-
 **Corrida real:** 99 páginas indexables analizadas, 0 hallazgos (el sitio ya está completo en
 conversión: todas con tel/wa/CTA y las dos clave con formulario).
 
+### #6 revisor-nap — ✅ HECHO (commit en esta rama)
+**Qué valida:** consistencia NAP (señal de SEO local). Checker propio (NO toca check-plantilla, que
+es de un revisor existente). (1) email `@plomeropro.com` → alta; (2) email del dominio bueno con
+local-part != info → media; (3) nombre de negocio "de marca" (contiene "plomer") en JSON-LD de
+nodos de negocio distinto al canónico → media; (4) nombre sin acento en texto → media; (5) telephone
+de schema con dígitos != correctos → alta.
+**Decisiones clave (evitaron falsos positivos masivos):**
+- Filtro de MARCA ("plomer" en el name): descarta los Organization de reseñas (author/publisher
+  "Google") que comparten @type Organization con el negocio. Sin esto daba 13+ falsos "name: Google".
+- AGREGACIÓN del patrón "Marca – <Colonia>" (56 páginas de colonia con nombre localizado): un solo
+  hallazgo + decisión humana, en vez de inundar con 55. Las variantes brand-like que NO empiezan con
+  el canónico sí se reportan por página.
+- Stem "plomer" (no "plomero") para cazar también "Plomería/Plomeria".
+- Se saltan `.min.html` (artefactos no servidos) — por eso los 2 `contacto@` de index.min.html no se
+  reportan (consistente con los demás checkers).
+**Determinista:** SÍ (md5 idéntico 0a1e84...). 110 páginas analizadas.
+**Prueba negativa (fixture scratch, todas detectan; repo restaurado):**
+- email @plomeropro.com → alta; ventas@plomeroculiacanpro.mx → media; telephone +52 555… → alta;
+- name "Plomeria Pro de Culiacan" → media "VARIANTE INESPERADA".
+**Corrida real:** 2 hallazgos — (a) tecnico-de-gas: nombre SIN acento (media, fixable); (b) agregado:
+56 colonias con "Marca – Colonia" (media, decisión humana). Ver cola humana.
+
 ---
 
 ## Cola humana / propuestas (de los revisores construidos)
@@ -184,6 +206,14 @@ revisor-tracking observó en headless que GTM + GA4 (G-NSV2K9N2ZD) cargan pero N
 banner). **Acción humana:** abrir el sitio en un navegador real, ACEPTAR consentimiento y mirar
 GA4 → Realtime; si llegan hits, está bien (esperado). Si NO llegan ni aceptando, revisar el trigger
 page_view de la etiqueta GA4 dentro del contenedor GTM-W75CRTX5. No es necesariamente un bug.
+
+### 🧑 [#6 — REAL] Inconsistencias NAP detectadas
+1. `servicios/tecnico-de-gas-culiacan/` usa "Plomero **Culiacan** Pro" (sin acento) en el texto —
+   debería ser "Plomero Culiacán Pro". Fix mecánico simple.
+2. 56 páginas de colonia usan nombre de negocio LOCALIZADO "Plomero Culiacán Pro – <Colonia>" en el
+   schema. **Pregunta concreta:** ¿es intencional el sufijo por colonia? Si SÍ → lo dejo y ajusto el
+   checker para aceptar el patrón "Marca – <Colonia>" (dejaría de reportarlo). Si NO → unificar todos
+   los `name` de schema a "Plomero Culiacán Pro". No lo decido yo (afecta estrategia de SEO local).
 
 ### 💡 [#2 — PROPUESTA, no instalada] Hook pre-commit anti-secretos
 Para atajar secretos ANTES de que entren al historial, propongo (sin instalar sin tu OK) un
