@@ -63,3 +63,7 @@ build/
 
 # Local Netlify folder
 .netlify
+
+# Reportes transitorios de Core Web Vitals (CI); la baseline (perf-baseline.json) SÍ se versiona
+.pipeline/lighthouse-run-*.json
+.pipeline/cwv-result.json
