@@ -18,6 +18,11 @@ Umbrales acordados con Héctor (2026-06-14):
 
 Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola humana (con pregunta)
 
+## ESTADO FINAL: 9/9 revisores construidos y commiteados ✅ (pipeline 9 → 18)
+Todos verificados (sintaxis, corrida real, prueba negativa, determinismo donde aplica). Falta
+SOLO: revisión humana de Héctor commit por commit + push/merge. NO se hizo push ni merge.
+⚠️ El commit #3 (revisor-perf-real) toca `.github/workflows/site-monitor.yml` → requiere **push por SSH**.
+
 ---
 
 ## FASE 1 — confianza en los sensores + seguridad
