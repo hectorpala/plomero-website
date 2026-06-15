@@ -33,7 +33,7 @@ Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola 
 - [x] ✅ #6 revisor-nap → teléfono/email/nombre idénticos en todas las páginas
 
 ## FASE 4 — profundidad
-- [ ] #7 revisor-enlazado-interno → `.pipeline/check-linking.py` (huérfanas, profundidad >3)
+- [x] ✅ #7 revisor-enlazado-interno → `.pipeline/check-linking.py` (huérfanas, profundidad >3)
 - [ ] #8 revisor-contenido → parte mecánica (regex restos plantilla); subjetivo → LLM
 - [ ] #9 revisor-e2e-funcional → `.pipeline/check-e2e.mjs` (puppeteer)
 
@@ -178,6 +178,21 @@ de schema con dígitos != correctos → alta.
 - name "Plomeria Pro de Culiacan" → media "VARIANTE INESPERADA".
 **Corrida real:** 2 hallazgos — (a) tecnico-de-gas: nombre SIN acento (media, fixable); (b) agregado:
 56 colonias con "Marca – Colonia" (media, decisión humana). Ver cola humana.
+
+### #7 revisor-enlazado-interno — ✅ HECHO (commit en esta rama)
+**Qué valida:** grafo dirigido de enlaces internos (`<a href>`) entre páginas indexables. (1)
+HUÉRFANAS = 0 enlaces entrantes (solo por sitemap) → media; (2) PROFUNDIDAD >3 clics desde "/"
+(BFS) o inalcanzables por enlaces → media. Resuelve rutas relativas + alias (con/sin barra,
+index.html) e ignora externos/mailto/tel/#. >8 del mismo tipo → se agregan.
+**Determinista:** SÍ (output vacío estable). 99 nodos.
+**Verificación del grafo (escéptica):** reconstruí el grafo aparte → 99 nodos, 904 aristas,
+out-degree del home=31, distribución de profundidad {0:1, 1:31, 2:67}, 0 inalcanzables. Confirma
+que el 0-hallazgos es real (no un bug de resolución): el sitio está bien interligado.
+**Prueba negativa (fixtures, ambas ramas; repo restaurado):**
+- `/zz-deep-a/` sin entrantes → media "es HUÉRFANA".
+- `/zz-deep-b/` con entrante desde a pero inalcanzable desde home → media "a ∞ (inalcanzable) clics".
+- (bug encontrado y corregido en el camino: depth None de páginas inalcanzables rompía `%d`).
+**Corrida real:** 99 páginas, 0 hallazgos (sin huérfanas ni páginas a >3 clics).
 
 ---
 
