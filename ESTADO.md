@@ -3,35 +3,33 @@
 ```json
 {
   "ultima_corrida": {
-    "fecha": "2026-06-13",
-    "rama": "auto/mantenimiento-20260613-2000",
+    "fecha": "2026-06-14",
+    "rama": "auto/mantenimiento-20260614-1825",
     "modo": "AUTONOMO",
-    "revisores": 8,
-    "hallazgos_brutos": 14,
-    "hallazgos_unicos_nuevos": 11,
-    "arreglados": 2,
-    "verificados": 2,
+    "revisores": 18,
+    "hallazgos_brutos": "~50 (la mayoria pendientes ya documentados o bajas)",
+    "hallazgos_unicos_nuevos": 10,
+    "arreglados": 3,
+    "verificados": 3,
     "regresiones": "0",
-    "pendientes_humano_nuevos": "gsc-215 (bug tooling gsc-index.mjs L53 ciega deteccion de indexacion), gsc-216, perf-501/502/503/504, a11y-303, seo-004",
-    "bajas_no_tocadas": "perf-501 (fuentes fetchpriority high, requiere medir LCP), a11y-303, seo-305, movil-301, seo-002/107",
+    "pendientes_humano_nuevos": "cont-002 (cuerpo de tecnico-de-gas sin acentos, ALTA, es copy amplio), seo-402 (NAP/geo de relleno en LocalBusiness del hub+10 servicios), seo-403 (3a URL canibalizacion precios), a11y-401 (skip-link falta en ~114 paginas, excede candado), gsc-217 (hub /servicios/ nunca rastreado, ALTA), gsc-218 (tecnico-de-gas nuevo sin indexar)",
+    "bajas_no_tocadas": "trk-001..004 (GA4 sin beacon en headless = Consent Mode esperado), plt-001..026 (theme-color faltante/placeholder + 3 tablas sin wrapper; theme-color ambiguo por color de marca sin decidir), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder g.page reseñas), sec-001=R-01 (client_secret en historial a rotar)",
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_200_archivos": "5 <= 200",
+      "diff_max_15_archivos": "PENDIENTE publicacion",
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
-      "publicado": true,
-      "merge": "e2418d1e",
-      "push": "ef3b57f7..e2418d1e main -> main",
-      "nota_indexacion": "INDEXACION COMPLETA: el hook (infra-001 resuelto) detecto 5 URLs (las 5 paginas editadas) y las envio TODAS a Google (cuota disponible hoy): 5 enviadas, 0 en cola, 0 descartadas. NOTA infra-002 sigue vigente: push completado con PATH=/usr/local/bin:$PATH git push (el hook llama 'node' sin ruta absoluta)."
+      "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
+      "publicado": "PENDIENTE (en proceso)"
     },
-    "detalle_arreglos": "seo-304: servicios/desazolve-de-drenajes BreadcrumbList de 2 niveles (faltaba 'Servicios'); insertado pos2 Servicios->/servicios/ y renumerada la pagina a pos3 (item==canonical); checker indexabilidad pasa de 1 a 0 hallazgos. a11y-302: exit-intent popup sin role=dialog/aria-modal/aria-labelledby en 5 paginas de servicio (cerca-de-mi, desazolve, a-domicilio, economico, instalacion-de-boiler); anadidos los atributos + id=exit-popup-title al h3, replicando index.html. Solo HTML (sin CSS/JS) -> sin bump de ?v=/sw.js. 5/5 verificadas 200, JSON-LD valido, wa.me intacto. revisor-produccion: produccion LIMPIA (0 pageerror, prod-001 sin regresion)."
+    "detalle_arreglos": "movil-401 (ALTA): servicios/reparacion-de-boiler sin reglas .floating-btn/.floating-call/.floating-whatsapp en su <style> inline (unica pagina con esos botones en HTML pero sin estilarlos; no estan en los 3 CSS compartidos) -> botones WhatsApp/llamada en position:static y <44px; anadidas las 4 reglas verbatim; verificado headless 375px (position:fixed 54x54, colores OK, br 50%, wa.me intacto, 0 pageerror). cont-003 (MEDIA): ano caduco en titulo de tarjeta del post de tinaco 2024/2025->2026 (coincide con titulo real [2026]) en home+5 servicios; datetime publicacion intacto. seo-401 (MEDIA): 59 enlaces internos /servicios/<slug>/index.html -> forma de directorio canonica (home+5 servicios); checker-linking 0 hallazgos. Solo HTML inline -> sin bump ?v=/sw.js. Deterministas re-corridos sin regresion (indexabilidad/linking/conversion/nap 0; e2e 0)."
   },
   "corrida_previa": {
-    "fecha": "2026-06-12",
-    "rama": "auto/mantenimiento-20260612-2001",
-    "merge": "eee3c396",
-    "arreglados": 3,
-    "nota": "seo-301/302/303 BreadcrumbList truncado a 1 item en 3 servicios"
+    "fecha": "2026-06-13",
+    "rama": "auto/mantenimiento-20260613-2000",
+    "merge": "e2418d1e",
+    "arreglados": 2,
+    "nota": "seo-304 BreadcrumbList 2 niveles + a11y-302 exit-popup ARIA en 5 servicios"
   },
   "pendientes": [
     {"id": "prod-001", "categoria": "produccion", "estado": "RESUELTO 2026-06-13 (commit ea91bc12)", "descripcion": "EXCEPCION JS NO CAPTURADA en produccion. RESUELTO: eran 2 bugs encadenados en main.js — (1) L273 '()' espurio invocaba un id como funcion ('is not a function'); (2) L274 el polyfill pasaba 2500 a requestIdleCallback (espera {timeout:..}) -> 'IdleRequestOptions', oculto detras del bug 1. Fix: L273 '})();'->'});' ; L274 polyfill->setTimeout directo. Versionado main.js?v=20260613 en 30 HTML + sw.js v24->v25. Verificado en headless local (0 errores en / /precios/ /contacto/) Y contra produccion con check-produccion.mjs (hallazgos vacios). wa.me intacto. Revivio popup salida-intencion, quote-sheet, registro SW y scroll tracking.", "severidad": "alta"},
@@ -84,6 +82,19 @@
   }
 }
 ```
+
+## Resumen de la corrida 2026-06-14 18:25 (auto/mantenimiento-20260614-1825 — AUTÓNOMA)
+
+- **Health check:** 5/5 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /blog/), node v22.18 vía /usr/local/bin. Compuerta `revisor-infra-salud` (check-infra.mjs) **exit 0, 0 hallazgos** (sensores sanos).
+- **18 revisores.** Deterministas (corridos directos) **limpios sobre corpus real** (no ciegos): indexabilidad 0, conversión 0/99, NAP 0/110, linking 0/99, e2e 0/3, producción 0 (prod-001 sin regresión, prod LIMPIA), secretos exit 0. Con hallazgos: plantilla 26 (todas BAJA: theme-color + 3 tablas), contenido-mecánico 1 (cont-001=R-02), tracking 4 (Consent Mode esperado), perf-real OK presupuesto (falta baseline=R-03). LLM (seo, móvil, a11y, perf, links, contenido-subj, gsc) en paralelo.
+- **Arreglados y verificados (3):**
+  - **movil-401** (ALTA) — `servicios/reparacion-de-boiler`: botones flotantes WhatsApp/llamada rotos en móvil (única página con esos botones en HTML sin sus reglas `.floating-btn` en el `<style>` inline; no están en los 3 CSS compartidos) → caían a `position:static` y <44px. Añadidas las 4 reglas verbatim. Verificado headless 375px: ambos `position:fixed` 54×54, colores correctos, `border-radius:50%`, wa.me intacto, 0 pageerror.
+  - **cont-003** (MEDIA) — año caduco en el título de la tarjeta del post de tinaco (2024/2025 → 2026, coincide con el título real "[2026]") en home + 5 servicios. `datetime` de publicación intacto.
+  - **seo-401** (MEDIA) — 59 enlaces internos a `/servicios/<slug>/index.html` → forma de directorio canónica (home + 5 servicios), igualando los 535+ restantes. checker-linking sigue 0.
+  - Solo HTML (`<style>` inline + texto/href) → sin bump de `?v=`/sw.js. Diff: 7 archivos HTML (los 6 de cont-003/seo-401 se solapan + reparacion-de-boiler).
+- **Candados paso 8:** auto-revisión limpia (solo HTML, 0 tests/CSS/JS/XML, wa.me intacto en los 7, JSON-LD válido), diff 7≤15, 0 borrados/renombrados, secretos exit 0. → cumplidos.
+- **Pendientes humano nuevos:** **cont-002** (ALTA — cuerpo de `tecnico-de-gas-culiacan` entero sin acentos, incl. "anos"→"años"; es copy amplio, fuera de auto), **gsc-217** (ALTA — hub /servicios/ nunca rastreado pese a sitemap/enlaces correctos; acción GSC + revisar calidad), seo-402 (NAP/geo de relleno en LocalBusiness del hub+10 servicios), seo-403 (3ª URL canibalización precios), a11y-401 (skip-link falta en ~114 págs → excede candado), gsc-218 (tecnico-de-gas nuevo sin indexar, vigilar). Bajas: trk-001..004 (Consent Mode), plt-001..026 (theme-color/tablas), perf-001=R-03, cont-001=R-02, sec-001=R-01.
+- **Aprendizaje:** 3 reglas nuevas en REGLAS.md — (1) MÓVIL/PLANTILLA: los botones flotantes se estilan inline por página; si el HTML los usa, el `<style>` debe traer `.floating-btn` (chequeo grep). (2) SEO/ENLACES: enlaces internos en forma de directorio, no `/index.html`. (3) CONTENIDO/AÑO: el año embebido en títulos de tarjetas de relacionados se desincroniza del título real del post.
 
 ## Resumen de la corrida 2026-06-13 20:00 (auto/mantenimiento-20260613-2000 — AUTÓNOMA, PUBLICADA)
 
