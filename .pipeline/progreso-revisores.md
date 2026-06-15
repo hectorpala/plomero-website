@@ -35,7 +35,7 @@ Leyenda estado: ⬜ pendiente · 🔄 en curso · ✅ hecho+commit · 🧑 cola 
 ## FASE 4 — profundidad
 - [x] ✅ #7 revisor-enlazado-interno → `.pipeline/check-linking.py` (huérfanas, profundidad >3)
 - [x] ✅ #8 revisor-contenido → parte mecánica (regex restos plantilla); subjetivo → LLM
-- [ ] #9 revisor-e2e-funcional → `.pipeline/check-e2e.mjs` (puppeteer)
+- [x] ✅ #9 revisor-e2e-funcional → `.pipeline/check-e2e.mjs` (puppeteer)
 
 ---
 
@@ -211,6 +211,26 @@ checker): thin content, duplicado, ortografía.
 **Corrida real:** 8 hallazgos REALES — 7 blog con `<h1>` "2025" mientras el `<title>` dice "[2026]"
 (año caduco en h1), y 1 enlace de reseña roto `g.page/r/XXXXX/review` (placeholder sin reemplazar).
 Ver cola humana.
+
+### #9 revisor-e2e-funcional — ✅ HECHO (commit en esta rama)
+**Qué valida:** flujos de usuario REALES con Chrome headless (puppeteer). (1) MENÚ HAMBURGUESA
+(viewport móvil): clic en `.mobile-menu-btn` → `#nav-menu` visible; (2) FORMULARIO (/contacto/):
+rellena y envía, pero INTERCEPTA y ABORTA el POST de mismo origen → NO manda lead real; confirma
+que el envío se dispara; (3) WhatsApp: el `wa.me` del DOM tiene 526673922273. Todo ALTA si falla.
+**Descubrimientos clave (depuración profunda, evitaron falsos positivos):**
+- El submit "no disparaba POST" SOLO cuando el check de menú corría antes: el **service worker**
+  (PWA) se activaba con la home y luego controlaba /contacto/, ocultando el POST del formulario a
+  la interceptación. SW bypass por CDP no bastó; la solución robusta fue correr CADA flujo en su
+  PROPIO contexto de navegador (incognito) → sin fuga de SW/cookies/caché entre checks.
+- El submit usaba un selector con lista (`#lead-form, form[data-netlify], form[name]`) que en CSS
+  resuelve por ORDEN DE DOCUMENTO y podía enviar otro form; se cambió a querySelector encadenado
+  con prioridad explícita a `#lead-form`.
+**Determinista:** es un checker EN VIVO (puppeteer/red), no-determinista por naturaleza (como
+check-produccion/tracking); la corrida real dio 0 hallazgos estable en 2 pasadas.
+**Prueba negativa (fixtures locales + server, todas detectan):** menú que no abre → alta; /contacto/
+sin `<form>` → alta; `wa.me/521112223333` (número malo) → alta.
+**Corrida real contra producción:** 3 flujos OK, 0 hallazgos (menú abre, formulario envía sin lead
+real, wa.me correcto).
 
 ---
 
