@@ -20,7 +20,7 @@
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
-      "publicado": "PENDIENTE (en proceso)"
+      "publicado": "SI — merge 573faef8, push 95781c8b..573faef8; el hook indexo /precios/ (2 URLs enviadas, 0 en cola)"
     },
     "detalle_arreglos": "movil-501 (MEDIA): los 25 enlaces .service-link de la tabla de precios en /precios/ (selector solo en <style> inline, no en los 3 CSS) rendian ~41px de alto en 375px (<44px tactil). Anadido display:inline-block + padding:0.35rem 0 -> min 60px >=44 en 375px, 0 overflow movil/desktop, enlaces desktop normales (38px). Solo CSS inline -> sin bump ?v=/sw.js. Verificado headless 375 y 1280. Deterministas re-corridos sin regresion (conversion 0/99, indexabilidad 0, secretos exit 0, /precios/ 200)."
   },
