@@ -3,33 +3,32 @@
 ```json
 {
   "ultima_corrida": {
-    "fecha": "2026-06-14",
-    "rama": "auto/mantenimiento-20260614-1825",
+    "fecha": "2026-06-16",
+    "rama": "auto/mantenimiento-20260616-0831",
     "modo": "AUTONOMO",
     "revisores": 18,
-    "hallazgos_brutos": "~50 (la mayoria pendientes ya documentados o bajas)",
-    "hallazgos_unicos_nuevos": 10,
-    "arreglados": 3,
-    "verificados": 3,
+    "hallazgos_brutos": "~45 (la mayoria pendientes ya documentados o bajas)",
+    "hallazgos_unicos_nuevos": 7,
+    "arreglados": 1,
+    "verificados": 1,
     "regresiones": "0",
-    "pendientes_humano_nuevos": "cont-002 (cuerpo de tecnico-de-gas sin acentos, ALTA, es copy amplio), seo-402 (NAP/geo de relleno en LocalBusiness del hub+10 servicios), seo-403 (3a URL canibalizacion precios), a11y-401 (skip-link falta en ~114 paginas, excede candado), gsc-217 (hub /servicios/ nunca rastreado, ALTA), gsc-218 (tecnico-de-gas nuevo sin indexar)",
-    "bajas_no_tocadas": "trk-001..004 (GA4 sin beacon en headless = Consent Mode esperado), plt-001..026 (theme-color faltante/placeholder + 3 tablas sin wrapper; theme-color ambiguo por color de marca sin decidir), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder g.page reseñas), sec-001=R-01 (client_secret en historial a rotar)",
+    "pendientes_humano_nuevos": "seo-404 (canibalizacion on-page 'reparacion de boiler' entre mantenimiento-de-boiler y reparacion-de-boiler, MEDIA, copy), seo-405 (canibalizacion 'destape' entre destape-de-drenajes y desazolve-de-drenajes, MEDIA, copy), a11y-402 (estrellas ★★★★★ sin aria en ~92 pags, BAJA, excede candado), a11y-403 (falta <main> en 46 pags, BAJA, excede candado), perf-505 (montserrat-700/800.woff2 byte-identicos, BAJA, requiere subset+bump sw.js), gsc-219 (bug cosmetico de logging en gsc-index.mjs L54, BAJA, tooling)",
+    "bajas_no_tocadas": "trk-001..004 (GA4 sin beacon en headless = Consent Mode esperado), plt-001..026 (theme-color faltante/placeholder + 3 tablas sin wrapper; theme-color ambiguo por color de marca sin decidir), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder XXXX g.page reseñas), sec-001=R-01 (client_secret en historial a rotar)",
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_15_archivos": "PENDIENTE publicacion",
+      "diff_max_15_archivos": "1 archivo de sitio (precios) + docs de pipeline",
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
       "publicado": "PENDIENTE (en proceso)"
     },
-    "detalle_arreglos": "movil-401 (ALTA): servicios/reparacion-de-boiler sin reglas .floating-btn/.floating-call/.floating-whatsapp en su <style> inline (unica pagina con esos botones en HTML pero sin estilarlos; no estan en los 3 CSS compartidos) -> botones WhatsApp/llamada en position:static y <44px; anadidas las 4 reglas verbatim; verificado headless 375px (position:fixed 54x54, colores OK, br 50%, wa.me intacto, 0 pageerror). cont-003 (MEDIA): ano caduco en titulo de tarjeta del post de tinaco 2024/2025->2026 (coincide con titulo real [2026]) en home+5 servicios; datetime publicacion intacto. seo-401 (MEDIA): 59 enlaces internos /servicios/<slug>/index.html -> forma de directorio canonica (home+5 servicios); checker-linking 0 hallazgos. Solo HTML inline -> sin bump ?v=/sw.js. Deterministas re-corridos sin regresion (indexabilidad/linking/conversion/nap 0; e2e 0)."
+    "detalle_arreglos": "movil-501 (MEDIA): los 25 enlaces .service-link de la tabla de precios en /precios/ (selector solo en <style> inline, no en los 3 CSS) rendian ~41px de alto en 375px (<44px tactil). Anadido display:inline-block + padding:0.35rem 0 -> min 60px >=44 en 375px, 0 overflow movil/desktop, enlaces desktop normales (38px). Solo CSS inline -> sin bump ?v=/sw.js. Verificado headless 375 y 1280. Deterministas re-corridos sin regresion (conversion 0/99, indexabilidad 0, secretos exit 0, /precios/ 200)."
   },
   "corrida_previa": {
-    "fecha": "2026-06-13",
-    "rama": "auto/mantenimiento-20260613-2000",
-    "merge": "e2418d1e",
-    "arreglados": 2,
-    "nota": "seo-304 BreadcrumbList 2 niveles + a11y-302 exit-popup ARIA en 5 servicios"
+    "fecha": "2026-06-14",
+    "rama": "auto/mantenimiento-20260614-1825",
+    "arreglados": 3,
+    "nota": "movil-401 floating-btn + cont-003 año tarjeta tinaco + seo-401 enlaces /index.html->directorio"
   },
   "pendientes": [
     {"id": "prod-001", "categoria": "produccion", "estado": "RESUELTO 2026-06-13 (commit ea91bc12)", "descripcion": "EXCEPCION JS NO CAPTURADA en produccion. RESUELTO: eran 2 bugs encadenados en main.js — (1) L273 '()' espurio invocaba un id como funcion ('is not a function'); (2) L274 el polyfill pasaba 2500 a requestIdleCallback (espera {timeout:..}) -> 'IdleRequestOptions', oculto detras del bug 1. Fix: L273 '})();'->'});' ; L274 polyfill->setTimeout directo. Versionado main.js?v=20260613 en 30 HTML + sw.js v24->v25. Verificado en headless local (0 errores en / /precios/ /contacto/) Y contra produccion con check-produccion.mjs (hallazgos vacios). wa.me intacto. Revivio popup salida-intencion, quote-sheet, registro SW y scroll tracking.", "severidad": "alta"},
@@ -73,7 +72,13 @@
     {"id": "perf-108", "categoria": "perf", "descripcion": "icon-512.png 164KB precacheado a todos; heros 1200w de 145-200KB.", "severidad": "media", "razon": "recomprimir binarios altera assets visuales"},
     {"id": "a11y-109", "categoria": "a11y", "descripcion": "Salto h2->h4 en blog/bano-completo.", "severidad": "media", "razon": "cambio de estructura de contenido"},
     {"id": "html-001", "categoria": "html", "descripcion": "Desbalance <div> 143/144 preexistente en servicios/desazolve-de-drenajes (ya estaba en main).", "severidad": "baja", "razon": "requiere localizar el div sobrante a mano"},
-    {"id": "bajas-20260612-noche", "categoria": "varios", "descripcion": "seo-203/204 (og:url a la home en 2 servicios), seo-205 (typo año en marcha-paz noindex), movil-202 (link Terminos 65x19 en 44 paginas), perf-206 (dims logo en instalacion-de-tinaco).", "severidad": "baja", "razon": "bajas: no se tocan en auto"}
+    {"id": "bajas-20260612-noche", "categoria": "varios", "descripcion": "seo-203/204 (og:url a la home en 2 servicios), seo-205 (typo año en marcha-paz noindex), movil-202 (link Terminos 65x19 en 44 paginas), perf-206 (dims logo en instalacion-de-tinaco).", "severidad": "baja", "razon": "bajas: no se tocan en auto"},
+    {"id": "seo-404", "categoria": "seo", "descripcion": "Canibalizacion on-page 'reparacion de boiler Culiacan': servicios/mantenimiento-de-boiler usa 'Reparacion' como termino principal en title/h1/meta, misma intencion que la pagina dedicada servicios/reparacion-de-boiler. Cuerpos solo 16% iguales (NO doorway), es targeting on-page. Amplia gsc-206.", "severidad": "media", "razon": "copy/estrategia: reenfocar a 'mantenimiento preventivo' o consolidar con 301"},
+    {"id": "seo-405", "categoria": "seo", "descripcion": "Canibalizacion on-page 'destape de drenajes/destapacanos' entre servicios/destape-de-drenajes y servicios/desazolve-de-drenajes (ambas usan 'destape' como gancho; desazolve trae 'Destape Garantizado' en title/h1). Cuerpos 1.8% iguales (NO doorway).", "severidad": "media", "razon": "copy/estrategia: diferenciar intencion (destape=urgencia vs desazolve=limpieza profunda) o 301"},
+    {"id": "a11y-402", "categoria": "a11y", "descripcion": "Calificaciones por estrellas ★★★★★ como glifos literales sin aria-label/role=img ni aria-hidden en ~92 paginas (.rating-stars en 75 + .stars en 17); lector de pantalla anuncia 5x 'estrella negra' sin contexto numerico.", "severidad": "baja", "razon": "mecanico pero ~92 archivos excede el candado (<=15); lote/supervisado"},
+    {"id": "a11y-403", "categoria": "a11y", "descripcion": "46 de 110 paginas servidas sin landmark <main> ni role=main; navegacion por landmarks no ofrece 'saltar al contenido'. Criterio WCAG distinto de a11y-401 (skip-link). index.html SI lo tiene.", "severidad": "baja", "razon": "mecanico pero 46 archivos excede el candado; hacerlo junto con a11y-401 para dar destino al skip-link"},
+    {"id": "perf-505", "categoria": "perf", "descripcion": "montserrat-700.woff2 y montserrat-800.woff2 byte-identicos (md5 3d42f7e7..., 33508b c/u) y sus .original tambien; 2 @font-face al mismo glyph (~33KB desperdiciados). Mismo defecto que perf-502 pero Montserrat; el remedio de perf-502 (re-subsetear de .original) NO aplica (los .original tambien identicos).", "severidad": "baja", "razon": "colapsar a 1 @font-face o re-subsetear pesos reales; cambio de woff2 servido (PRECACHE) exige bump CACHE_NAME sw.js + validar render"},
+    {"id": "gsc-219", "categoria": "gsc", "descripcion": "Bug cosmetico de logging en mcp-local-seo/gsc-index.mjs L54: url.replace('https://...', ''||'/') -> ''||'/' siempre '/' y produce rutas con doble slash ('//servicios/') en el reporte. NO afecta la inspeccion (inspectionUrl real correcto, veredictos reales).", "severidad": "baja", "razon": "tooling, no toca el sitio servido; L54 mover el ||'/' fuera del replace"}
   ],
   "baseline": {
     "fecha": "2026-06-12",
@@ -82,6 +87,17 @@
   }
 }
 ```
+
+## Resumen de la corrida 2026-06-16 08:31 (auto/mantenimiento-20260616-0831 — AUTÓNOMA)
+
+- **Health check:** 5/5 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /blog/), node v22.18 vía /usr/local/bin. Compuerta `revisor-infra-salud` (check-infra.mjs) **exit 0, 0 hallazgos** (sensores sanos). main = origin/main sincronizados al inicio.
+- **18 revisores.** Deterministas (corridos directos) **limpios sobre corpus real** (no ciegos): indexabilidad 0, conversión 0/99, NAP 0/110, linking 0/99, e2e 0/3, producción 0 (prod LIMPIA, real), secretos exit 0, perf-real OK presupuesto. Con hallazgos: plantilla 26 (todas BAJA: theme-color + 3 tablas = plt-001..026 conocidos), contenido-mecánico 1 (cont-001=R-02), tracking 4 (Consent Mode esperado), perf-real perf-001 (falta baseline=R-03). LLM (seo, móvil, a11y, perf, links, contenido-subj, gsc-datos-reales) en paralelo.
+- **Arreglado y verificado (1):**
+  - **movil-501** (MEDIA) — `/precios/`: los 25 enlaces `.service-link` de la tabla de precios (selector solo en `<style>` inline, no en los 3 CSS) rendían ~41px de alto en 375px (< 44px táctil). Añadido `display:inline-block; padding:0.35rem 0` → mín 60px ≥44 en 375px, 0 overflow móvil/desktop, enlaces desktop normales (38px). Solo CSS inline → sin bump de `?v=`/sw.js. Verificado headless 375 y 1280. Deterministas re-corridos sin regresión (conversión 0/99, indexabilidad 0, secretos exit 0, /precios/ 200).
+- **Candados paso 8:** auto-revisión limpia (1 archivo de sitio, 2 líneas, solo CSS inline, 0 wa.me/JSON-LD/tests/assets compartidos), diff 1≤15, 0 borrados/renombrados, secretos exit 0. → cumplidos.
+- **Pendientes humano nuevos (6):** **seo-404** (MEDIA — canibalización on-page "reparación de boiler" entre mantenimiento-de-boiler y reparacion-de-boiler, copy), **seo-405** (MEDIA — canibalización "destape" entre destape-de-drenajes y desazolve-de-drenajes, copy), a11y-402 (estrellas ★★★★★ sin aria en ~92 págs, BAJA, excede candado), a11y-403 (falta `<main>` en 46 págs, BAJA, excede candado), perf-505 (montserrat-700/800.woff2 byte-idénticos, BAJA, requiere subset+bump sw.js), gsc-219 (bug cosmético de logging en gsc-index.mjs L54, BAJA, tooling). Bajas: trk-001..004 (Consent Mode), plt-001..026 (theme-color/tablas), perf-001=R-03, cont-001=R-02, sec-001=R-01.
+- **revisor-gsc NO ciego:** datos GSC reales (source: search_console_api, 50 keywords, 8 páginas inspeccionadas, propiedad correcta sc-domain). Confirmados conocidos sin re-reportar: gsc-217/202 (hub /servicios/ aún "Descubierta sin indexar/nunca"), gsc-218 (tecnico-de-gas sin indexar). Sin des-indexaciones nuevas.
+- **Aprendizaje:** 1 regla nueva en REGLAS.md — MÓVIL/TAP-TARGET: los enlaces inline dentro de tablas (p.ej. `.service-link` en /precios/) rinden a la altura de línea (~41px) y quedan bajo 44px; fix `display:inline-block; padding` (amplía el patrón de tap targets de breadcrumbs a enlaces de tabla).
 
 ## Resumen de la corrida 2026-06-14 18:25 (auto/mantenimiento-20260614-1825 — AUTÓNOMA)
 
