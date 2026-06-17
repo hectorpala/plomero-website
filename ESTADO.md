@@ -22,7 +22,7 @@
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
-      "publicado": "PENDIENTE_AL_ESCRIBIR — ver bloque final"
+      "publicado": "SI — merge 5131950e, push fac11e63..5131950e; el hook indexo /servicios/plomero-colonias-culiacan/ (1 URL enviada, 0 en cola, 0 descartadas). Rama borrada."
     },
     "detalle_arreglos": "links-201 (ALTA, REGRESION de la consolidacion humana eaf83781): 25 enlaces internos rotos en la rejilla de tarjetas <a class=card href=./slug/> de servicios/plomero-colonias-culiacan/index.html apuntando a directorios de colonia borrados. El humano reescribio la lista <ul> absoluta pero omitio la rejilla relativa. Reescrito cada href=./slug/ al destino 301 EXACTO de _redirects (hub de zona, forma absoluta canonica, no via redirect). check-plantilla paso de 25 a 0 enlaces rotos, check-linking 0, conversion 0/66, pagina 200, 0 errores JS headless, menu hamburguesa OK, wa.me (526673922273) y JSON-LD intactos. Solo HTML -> sin bump ?v=/sw.js."
   },
