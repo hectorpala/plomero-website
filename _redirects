@@ -586,3 +586,6 @@
 /servicios/plomero-colonias-culiacan/vistas-del-lago/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/vistas-del-lago-la-primavera/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/zona-dorada-ii/* /servicios/plomero-zona-norte-culiacan/ 301
+
+# 301: consolidacion pagina de precios (gsc-201) — plomero-precios -> /precios/
+/servicios/plomero-precios/* /precios/ 301
