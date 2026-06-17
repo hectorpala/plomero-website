@@ -251,6 +251,8 @@
         }
     }
     .floating-btn{position:fixed;right:18px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.1rem;box-shadow:0 10px 28px rgba(0,0,0,0.16);transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;z-index:60;text-decoration:none}.floating-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,0.2);filter:brightness(1.05)}.floating-call{background:#0f4fa8;bottom:18px}.floating-whatsapp{background:#22c55e;bottom:78px}
+    /* movil-601: tap targets >=44px en el directorio de colonias */
+    @media (max-width: 768px){.colonia-dir li{margin-bottom:.15rem}.colonia-dir a{display:inline-block;padding:.5rem .25rem;min-height:44px;box-sizing:border-box}}
 </style>
 
 </head>
@@ -759,7 +761,7 @@ if (window.requestIdleCallback) {
         <div class="container">
             <h2>Encuentra tu colonia</h2>
             <p class="about-text">Tenemos página con información de servicio, tiempos de llegada y problemas comunes para estas colonias y fraccionamientos de Culiacán:</p>
-            <ul>
+            <ul class="colonia-dir">
                 <li><a href="/servicios/plomero-zona-sur-culiacan/">Plomero en Altamira</a></li>
                 <li><a href="/servicios/plomero-colonias-culiacan/amorada/">Plomero en Amorada</a></li>
                 <li><a href="/servicios/plomero-zona-sur-culiacan/">Plomero en Bachigualato</a></li>
