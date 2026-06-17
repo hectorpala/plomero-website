@@ -589,3 +589,37 @@
 
 # 301: consolidacion pagina de precios (gsc-201) — plomero-precios -> /precios/
 /servicios/plomero-precios/* /precios/ 301
+
+# 301: consolidacion 32 colonias doorway sin indexar (seo-002 / Carril C) 2026-06-17
+/servicios/plomero-colonias-culiacan/altamira/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/bachigualato/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/campestre/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/colina-del-rey/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/colinas-de-la-rivera/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/colinas-de-san-miguel/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/hacienda-del-valle/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/hacienda-los-huertos/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/jardines-del-valle/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/la-primavera/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/las-palmas/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/lomas-de-san-isidro/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/real-del-valle/* /servicios/plomero-zona-sur-culiacan/ 301
+/servicios/plomero-colonias-culiacan/balcones-del-humaya/* /servicios/plomero-zona-norte-culiacan/ 301
+/servicios/plomero-colonias-culiacan/bosques-del-humaya/* /servicios/plomero-zona-norte-culiacan/ 301
+/servicios/plomero-colonias-culiacan/campestre-tres-rios/* /servicios/plomero-zona-norte-culiacan/ 301
+/servicios/plomero-colonias-culiacan/cumbres-tres-rios/* /servicios/plomero-zona-norte-culiacan/ 301
+/servicios/plomero-colonias-culiacan/lomas-del-humaya/* /servicios/plomero-zona-norte-culiacan/ 301
+/servicios/plomero-colonias-culiacan/praderas-del-humaya/* /servicios/plomero-zona-norte-culiacan/ 301
+/servicios/plomero-colonias-culiacan/villas-del-humaya/* /servicios/plomero-zona-norte-culiacan/ 301
+/servicios/plomero-colonias-culiacan/isla-del-oeste/* /servicios/plomero-zona-poniente-culiacan/ 301
+/servicios/plomero-colonias-culiacan/lomas-del-boulevard/* /servicios/plomero-zona-poniente-culiacan/ 301
+/servicios/plomero-colonias-culiacan/portales-del-rio/* /servicios/plomero-zona-poniente-culiacan/ 301
+/servicios/plomero-colonias-culiacan/santa-clara/* /servicios/plomero-zona-poniente-culiacan/ 301
+/servicios/plomero-colonias-culiacan/villa-universidad/* /servicios/plomero-zona-poniente-culiacan/ 301
+/servicios/plomero-colonias-culiacan/benito-juarez-norte/* /servicios/plomero-colonias-culiacan/ 301
+/servicios/plomero-colonias-culiacan/bosques-del-rio/* /servicios/plomero-colonias-culiacan/ 301
+/servicios/plomero-colonias-culiacan/chapultepec-del-rio/* /servicios/plomero-colonias-culiacan/ 301
+/servicios/plomero-colonias-culiacan/los-laureles/* /servicios/plomero-colonias-culiacan/ 301
+/servicios/plomero-colonias-culiacan/obrera/* /servicios/plomero-colonias-culiacan/ 301
+/servicios/plomero-colonias-culiacan/zona-dorada/* /servicios/plomero-colonias-culiacan/ 301
+/servicios/plomero-colonias-culiacan/campesina-el-barrio/* /servicios/plomero-zona-oriente-culiacan/ 301
