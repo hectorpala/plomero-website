@@ -1,6 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+# Forzar IPv4: el 2026-06-16 la corrida de claude (socket cerrado) y el correo
+# (EHOSTUNREACH IPv6 a Gmail) fallaron por IPv6 roto en la red. Esto hace que node
+# (claude CLI + send-report) prefiera IPv4 y evita ambos fallos.
+export NODE_OPTIONS="--dns-result-order=ipv4first"
+
 cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
