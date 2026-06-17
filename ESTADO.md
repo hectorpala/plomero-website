@@ -3,32 +3,34 @@
 ```json
 {
   "ultima_corrida": {
-    "fecha": "2026-06-16",
-    "rama": "auto/mantenimiento-20260616-0831",
+    "fecha": "2026-06-17",
+    "rama": "auto/mantenimiento-20260617-1117",
     "modo": "AUTONOMO",
     "revisores": 18,
-    "hallazgos_brutos": "~45 (la mayoria pendientes ya documentados o bajas)",
-    "hallazgos_unicos_nuevos": 7,
+    "hallazgos_brutos": "~40 (la mayoria secuelas de la consolidacion humana de 32 colonias o pendientes/bajas conocidos)",
+    "hallazgos_unicos_nuevos": "1 regresion ALTA arreglada + ~9 clusters pendientes nuevos",
     "arreglados": 1,
     "verificados": 1,
-    "regresiones": "0",
-    "pendientes_humano_nuevos": "seo-404 (canibalizacion on-page 'reparacion de boiler' entre mantenimiento-de-boiler y reparacion-de-boiler, MEDIA, copy), seo-405 (canibalizacion 'destape' entre destape-de-drenajes y desazolve-de-drenajes, MEDIA, copy), a11y-402 (estrellas ★★★★★ sin aria en ~92 pags, BAJA, excede candado), a11y-403 (falta <main> en 46 pags, BAJA, excede candado), perf-505 (montserrat-700/800.woff2 byte-identicos, BAJA, requiere subset+bump sw.js), gsc-219 (bug cosmetico de logging en gsc-index.mjs L54, BAJA, tooling)",
-    "bajas_no_tocadas": "trk-001..004 (GA4 sin beacon en headless = Consent Mode esperado), plt-001..026 (theme-color faltante/placeholder + 3 tablas sin wrapper; theme-color ambiguo por color de marca sin decidir), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder XXXX g.page reseñas), sec-001=R-01 (client_secret en historial a rotar)",
+    "regresiones": "1 (links-201, introducida por la consolidacion humana eaf83781 — arreglada)",
+    "contexto_corpus": "El corpus de paginas indexables BAJO de ~99 a 66 (conversion 66, nap 77, linking 66) por la consolidacion humana de hoy: 32 colonias doorway->4 hubs de zona (commit eaf83781) + /precios/ (246336db). NO es ceguera: verificado contra los commits reales. Total HTML 108.",
+    "pendientes_humano_nuevos": "cont-010 (ancla VACIA 'Plomero en ' -> culiacan-tres-rios, MEDIA, copy), cont-011 (ancla truncada 'Plomero en Nuevo' -> nuevo-culiacan, MEDIA, copy), cont-012/013/014 (conteo desync + self-links + acentos lista colonias, BAJA, copy), seo-501..506 (anclas auto-referenciales en 4 hubs + centro aplanado + relevancia 301, BAJA-MEDIA, arquitectura), movil-601..604 (tap targets <44px en directorios de colonias; movil-602/603 exigen 3 CSS+bump, MEDIA), perf-601..604 (5 hubs plantilla WebP-only sin AVIF; hero centro 196KB, BAJA-MEDIA, binarios), links-data (21 URLs obsoletas en colonias-completas-culiacan.json no servido, BAJA)",
+    "verificado_no_bug": "main.js ausente en plomero-colonias-culiacan/index.html NO es bug: plantilla antigua con JS inline (script #3 maneja menu+form); headless OK 0 errores. Falsa alarma de revisor-perf.",
+    "bajas_no_tocadas": "trk-001..004 (Consent Mode esperado), plt-001..025 (theme-color faltante/placeholder + 3 tablas sin wrapper protegidas por fallback), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder XXXX g.page reseñas, ahora en reparacion-de-fugas), sec-001=R-01 (client_secret en historial a rotar)",
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_15_archivos": "1 archivo de sitio (precios) + docs de pipeline",
+      "diff_max_15_archivos": "1 archivo de sitio (servicios/plomero-colonias-culiacan) + docs de pipeline",
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
-      "publicado": "SI — merge 573faef8, push 95781c8b..573faef8; el hook indexo /precios/ (2 URLs enviadas, 0 en cola)"
+      "publicado": "PENDIENTE_AL_ESCRIBIR — ver bloque final"
     },
-    "detalle_arreglos": "movil-501 (MEDIA): los 25 enlaces .service-link de la tabla de precios en /precios/ (selector solo en <style> inline, no en los 3 CSS) rendian ~41px de alto en 375px (<44px tactil). Anadido display:inline-block + padding:0.35rem 0 -> min 60px >=44 en 375px, 0 overflow movil/desktop, enlaces desktop normales (38px). Solo CSS inline -> sin bump ?v=/sw.js. Verificado headless 375 y 1280. Deterministas re-corridos sin regresion (conversion 0/99, indexabilidad 0, secretos exit 0, /precios/ 200)."
+    "detalle_arreglos": "links-201 (ALTA, REGRESION de la consolidacion humana eaf83781): 25 enlaces internos rotos en la rejilla de tarjetas <a class=card href=./slug/> de servicios/plomero-colonias-culiacan/index.html apuntando a directorios de colonia borrados. El humano reescribio la lista <ul> absoluta pero omitio la rejilla relativa. Reescrito cada href=./slug/ al destino 301 EXACTO de _redirects (hub de zona, forma absoluta canonica, no via redirect). check-plantilla paso de 25 a 0 enlaces rotos, check-linking 0, conversion 0/66, pagina 200, 0 errores JS headless, menu hamburguesa OK, wa.me (526673922273) y JSON-LD intactos. Solo HTML -> sin bump ?v=/sw.js."
   },
   "corrida_previa": {
-    "fecha": "2026-06-14",
-    "rama": "auto/mantenimiento-20260614-1825",
-    "arreglados": 3,
-    "nota": "movil-401 floating-btn + cont-003 año tarjeta tinaco + seo-401 enlaces /index.html->directorio"
+    "fecha": "2026-06-16",
+    "rama": "auto/mantenimiento-20260616-0831",
+    "arreglados": 1,
+    "nota": "movil-501 enlaces .service-link tabla precios <44px (publicado merge 573faef8)"
   },
   "pendientes": [
     {"id": "prod-001", "categoria": "produccion", "estado": "RESUELTO 2026-06-13 (commit ea91bc12)", "descripcion": "EXCEPCION JS NO CAPTURADA en produccion. RESUELTO: eran 2 bugs encadenados en main.js — (1) L273 '()' espurio invocaba un id como funcion ('is not a function'); (2) L274 el polyfill pasaba 2500 a requestIdleCallback (espera {timeout:..}) -> 'IdleRequestOptions', oculto detras del bug 1. Fix: L273 '})();'->'});' ; L274 polyfill->setTimeout directo. Versionado main.js?v=20260613 en 30 HTML + sw.js v24->v25. Verificado en headless local (0 errores en / /precios/ /contacto/) Y contra produccion con check-produccion.mjs (hallazgos vacios). wa.me intacto. Revivio popup salida-intencion, quote-sheet, registro SW y scroll tracking.", "severidad": "alta"},
