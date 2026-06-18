@@ -22,7 +22,7 @@
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
-      "publicado": "PENDIENTE (ver bloque al cierre tras el push)"
+      "publicado": "SI — merge 63f20460, push 1dd3f939..63f20460. El hook detecto /precios/ pero la cuota diaria de Google estaba agotada -> encolada para reintento automatico (0 perdidas, mecanismo infra-001). Rama borrada. Push con PATH=/usr/local/bin (infra-002)."
     },
     "detalle_arreglos": "movil-502 (MEDIA, residual de movil-501): el fix de movil-501 acoto el selector a '.price-table .service-link' y dejo 5 CTA .service-link en PROSA (<p> L478/507/571 de precios/index.html) a 20px de alto (<44px) en 375px. Anadida regla separada 'p .service-link{display:inline-block;padding:0.6rem 0}' en el <style> inline (0.35rem no basta para prosa de 1 linea -> 38px; NO ampliar .price-table que ya cumple). Verificado headless 375px (prosa 46-74px, tabla 60px, todos>=44) y 1280px (sin overflow). /precios/ 200, wa.me (526673922273) intacto, 0 errores JS, plantilla 25 baja sin cambio, conversion 0/66, e2e 0/3. Solo CSS inline -> sin bump ?v=/sw.js."
   },
