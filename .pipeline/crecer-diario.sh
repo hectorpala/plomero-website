@@ -36,6 +36,16 @@ fi
 echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
+# Guard "ya corrió hoy": si una corrida YA terminó OK hoy (marca datada), no repetir — evita el
+# doble cuando un disparo MANUAL coincide con el job programado de las 18:25. Una corrida FALLIDA
+# NO deja marca, así que la de las 18:25 sí la recupera (no rompe el recovery).
+# Forzar una corrida extra a propósito:  FORCE_RUN=1 bash .pipeline/crecer-diario.sh
+TODAY=$(date +%Y%m%d)
+if [ "${FORCE_RUN:-0}" != "1" ] && [ "$(cat "$LOG_DIR/auto-agente-plomero-last-run-day" 2>/dev/null || echo "")" = "$TODAY" ]; then
+  echo "[$STAMP] Ya hubo una corrida exitosa hoy ($TODAY); no repito (FORCE_RUN=1 para forzar)." >> "$LOG"
+  exit 0
+fi
+
 # Corrida autónoma del sistema completo (auto-permiso). El prompt orquesta las 10 fases.
 RUN_START=$(date +%s)   # para atribuir el costo (tokens) de los transcripts de ESTA corrida
 if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then

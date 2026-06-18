@@ -27,6 +27,9 @@ PY = sys.executable
 
 
 def sh(cmd, **kw):
+    # errors="replace": el pre-push hook puede emitir bytes no-utf8 (emoji/acentos de la
+    # auto-indexación); sin esto, decodificar la salida revienta y aborta `publicar` (infra-004).
+    kw.setdefault("errors", "replace")
     return subprocess.run(cmd, cwd=ROOT, text=True, capture_output=True, **kw)
 
 
@@ -231,7 +234,10 @@ def cmd_publicar(args):
     env = dict(os.environ); env["PATH"] = "/usr/local/bin:" + env.get("PATH", "")
 
     def git(*a):
-        return subprocess.run(["git", *a], cwd=ROOT, text=True, capture_output=True, env=env)
+        # errors="replace": `git push` arrastra la salida del pre-push hook (auto-indexación),
+        # que puede traer bytes no-utf8; sin esto, decodificar revienta y aborta el push (infra-004).
+        return subprocess.run(["git", *a], cwd=ROOT, text=True, capture_output=True, env=env,
+                              errors="replace")
 
     # Publicación SEGURA: sincroniza con el remoto antes de mergear; NUNCA --force.
     sh(["git", "checkout", "main"])
