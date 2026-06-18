@@ -1,39 +1,35 @@
-# Última corrida — auto/mantenimiento-20260617-1117 (AUTÓNOMA)
+# Última corrida — auto/mantenimiento-20260617-1826 (AUTÓNOMA)
 
-**Fecha:** 2026-06-17 · **Modo:** autónomo sin supervisión · **Revisores:** 18
+**Fecha:** 2026-06-17 18:26 · **Modo:** autónomo sin supervisión · **Revisores:** 18
 
 ## Health check
-- 5/5 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /blog/), node v22 vía /usr/local/bin.
+- 5/5 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /blog/), node v22.18 vía /usr/local/bin.
 - Compuerta `revisor-infra-salud` (check-infra.mjs): **exit 0, 0 hallazgos** (sensores sanos).
-- main = origin/main al inicio.
+- main = origin/main al inicio (sincronizado con fetch + merge --ff-only).
 
-## Contexto de corpus (importante)
-El corpus de páginas indexables bajó de ~99 a **66** (conversión 66, NAP 77, linking 66; total HTML 108). **NO es ceguera**: hoy un humano ("Carril C") consolidó **32 colonias doorway → 4 hubs de zona** con 301 (commit `eaf83781`) y `/precios/` (`246336db`). Verificado contra los commits reales. Los deterministas corrieron sobre corpus real, no vacío.
+## Contexto de corpus
+Corpus indexable estable tras la consolidación de colonias: conversión 66, NAP 77, linking 66, contenido 77, secretos 414, total HTML 108. **NO es ceguera** — todos los deterministas corrieron sobre datos reales. Varios pendientes de la corrida 1117 de hoy ya quedaron resueltos en commits intermedios (perf-601..604 AVIF, cont-010/011, cont-012/013/014, movil-601..604, seo-501..506+links-data).
 
 ## Deterministas (corridos directos, no ciegos)
-- indexabilidad 0 · conversión 0/66 · NAP 0/77 · linking 0/66 · e2e 0/3 · producción 0 (prod LIMPIA, real) · secretos **exit 0** (sec-001 en historial inmutable = R-01) · perf-real solo perf-001 (falta baseline=R-03) · tracking trk-001..004 (Consent Mode esperado) · contenido-mecánico 1 (cont-001=R-02, placeholder XXXX g.page).
-- **check-plantilla: 25 enlaces internos ROTOS (ALTA)** → la regresión de esta corrida (ver abajo). El resto de plantilla: 25 BAJA conocidas (theme-color + 3 tablas).
+indexabilidad 0 · conversión 0/66 · NAP 0/77 · linking 0/66 · e2e 0/3 · producción 0 (prod LIMPIA real) · secretos **exit 0** (sec-001 historial inmutable = R-01) · perf-real perf-001 (falta baseline = R-03) · tracking trk-001..004 (Consent Mode esperado) · contenido-mec 1 (cont-001 = R-02, placeholder XXXX) · plantilla 25 **todas BAJA** (theme-color + 3 tablas con fallback = plt-001..025). **0 hallazgos mecánicos ALTA/MEDIA nuevos en deterministas.**
+
+## Revisores LLM (6 en paralelo)
+- **revisor-movil:** 1 NUEVO MEDIA → **movil-502** (abajo). Resto = conocidos, sin regresiones; 0 overflow en 21 páginas medidas a 375px.
+- **revisor-contenido (subjetivo):** 1 NUEVO MEDIA → **cont-020** (doorway, pendiente humano). 0 ortografía nueva, 0 thin content real.
+- **revisor-a11y / links / seo / perf:** 0 hallazgos nuevos accionables (lo detectado excede el candado de 15 archivos o es pendiente conocido: 24 colonias sin twitter:image, 42 SVG decorativos sin aria-hidden).
 
 ## Arreglado y verificado (1)
-**links-201 (ALTA — REGRESIÓN de la consolidación humana `eaf83781`).** En `servicios/plomero-colonias-culiacan/index.html`, la rejilla de tarjetas `<a class="card" href="./slug/">` conservaba **25 enlaces a directorios de colonia borrados** (altamira, campestre, zona-dorada…). El humano reescribió la lista `<ul>` (forma absoluta) pero **omitió la rejilla relativa**. Reescrito cada `href="./slug/"` roto al **destino 301 exacto de `_redirects`** (hub de zona norte/sur/poniente o el índice de colonias), en forma absoluta canónica (no vía redirect; regla seo-401).
-- **Verificación:** check-plantilla 25→**0** enlaces rotos; check-linking 0; conversión 0/66; página 200; **0 errores JS headless**; menú hamburguesa funciona (inline); los 4 hubs destino 200; wa.me (526673922273) y JSON-LD intactos. Solo HTML → **sin bump** de `?v=`/sw.js.
+**movil-502 (MEDIA — residual de movil-501).** El fix de movil-501 acotó el selector a `.price-table .service-link`, dejando fuera **5 CTA `.service-link` en PROSA** (`<p>` L478/507/571 de `precios/index.html`: "Ver servicio completo de destape →", "Ver servicio de reparación de fugas →", "Detección de fugas sin romper →", "Ver reparación de boiler →", "Ver mantenimiento de boiler →") que rendían **20px** de alto en 375px (< 44px táctil). Se intentó primero ampliar el selector a `.service-link` global pero el padding 0.35rem solo llevaba la prosa a **38px** (insuficiente: en la tabla alcanza porque las celdas envuelven a 2-3 líneas). **Fix final:** regla separada `p .service-link{display:inline-block; padding:0.6rem 0}` en el `<style>` inline — la tabla conserva su 0.35rem (ya cumplía, no se ve más alta).
+- **Verificación headless:** 375px → prosa 46–74px, tabla 60px (todos ≥44); 1280px → sin overflow. /precios/ 200, wa.me (526673922273) intacto, **0 errores JS**, plantilla 25 BAJA sin cambio, conversión 0/66, e2e 0/3. Solo CSS inline → **sin bump** de `?v=`/sw.js.
 
-## Verificado NO-bug
-- **main.js ausente** en `plomero-colonias-culiacan/index.html`: **falsa alarma** de revisor-perf. Es plantilla antigua con 5 `<script>` inline; el script #3 maneja menú + formulario. Headless OK, 0 errores. Funciona.
-
-## Pendientes humano nuevos (secuelas de la consolidación)
-- **cont-010 / cont-011 (MEDIA, copy):** ancla VACÍA `Plomero en </a>` → culiacan-tres-rios, y truncada `Plomero en Nuevo` → nuevo-culiacan (el generador de la lista cortó "Culiacán"). Restaurar nombres.
-- **cont-012/013/014 (BAJA, copy):** conteo h2 "30 colonias" vs title "640+" desincronizado; 8 self-links (decisión del humano en _redirects); acentos/preposiciones en lista autogenerada.
-- **seo-501..506 (BAJA-MEDIA, arquitectura):** anclas auto-referenciales en los 4 hubs; centro aplanó 6 anclas al mismo href; relevancia temática débil en 3 redirects. NO doorways (hubs ~2000 palabras, distintos).
-- **movil-601..604 (MEDIA):** tap targets <44px en directorios de colonias; movil-602/603 exigen regla `.checklist a` en los 3 CSS + bump → corrida dedicada.
-- **perf-601..604 (BAJA-MEDIA, binarios):** las 5 hubs usan plantilla WebP-only sin AVIF; hero de centro 196KB. Requiere recomprimir/generar AVIF.
-- **links-data (BAJA):** 21 URLs obsoletas en `colonias-completas-culiacan.json` (data file no servido por ninguna página).
+## Pendiente humano nuevo (1)
+- **cont-020 (MEDIA, copy/estrategia):** `servicios/plomero-cerca-de-mi/index.html` es casi-clon indexable de la home (~92% del cuerpo: 6/72 bloques únicos, 15/16 H2 verbatim, rejilla de 6 servicios + tarjetas de zona + 6 testimonios + blog cards idénticos = patrón **doorway**). Solo la intro "cerca de mí" y los tiempos de llegada son propios. Reescritura/consolidación → prohibido en auto; amplía seo-002.
 
 ## Candados paso 8
-auto-revisión limpia (1 archivo de sitio, 25/25 href, 0 CSS/JS/XML/test/sw), diff 1≤15, 0 borrados/renombrados, secretos exit 0 → **cumplidos**.
+auto-revisión limpia (1 archivo de sitio, 4 líneas, solo `<style>` inline; 0 CSS compartidos/JS/XML/test/sw; wa.me y JSON-LD intactos), diff 1≤15, 0 borrados/renombrados, secretos **exit 0** → **cumplidos**.
 
 ## Aprendizaje
-1 regla nueva en REGLAS.md (SEO/ENLACES): al consolidar, los enlaces a páginas borradas existen en MÚLTIPLES formas en la misma página (rejilla relativa `./slug/` + lista absoluta); una reescritura parcial deja unas rotas. Verificar `check-plantilla` 0 y que ninguna página conserve `href="./<slug-borrado>/"`. Nota del bug del generador que trunca "Culiacán" en anclas (cont-010/011).
+Ampliada la regla MÓVIL/TAP-TARGET (movil-501) en REGLAS.md con la reincidencia movil-502: (1) al arreglar tap targets de una clase, revisar **todas** sus instancias en la página, no solo las del contenedor principal; (2) el padding **no es transferible** entre contextos — `0.35rem` basta en tabla (celdas multilinea, 60px) pero un enlace de prosa de una línea solo llega a 38px; usar `0.6rem` para prosa.
 
 ## Publicación
-Ver bloque "publicado" en ESTADO.md (actualizado tras el push).
+Ver el bloque "publicado" en ESTADO.md (actualizado tras el push).

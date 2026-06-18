@@ -4,33 +4,33 @@
 {
   "ultima_corrida": {
     "fecha": "2026-06-17",
-    "rama": "auto/mantenimiento-20260617-1117",
+    "rama": "auto/mantenimiento-20260617-1826",
     "modo": "AUTONOMO",
     "revisores": 18,
-    "hallazgos_brutos": "~40 (la mayoria secuelas de la consolidacion humana de 32 colonias o pendientes/bajas conocidos)",
-    "hallazgos_unicos_nuevos": "1 regresion ALTA arreglada + ~9 clusters pendientes nuevos",
+    "hallazgos_brutos": "Deterministas limpios sobre corpus real; LLM hallaron 1 mecanico nuevo (movil-502) + 1 pendiente copy (cont-020). El resto = conocidos/pendientes/bajas.",
+    "hallazgos_unicos_nuevos": "1 MEDIA mecanico arreglado (movil-502) + 1 MEDIA pendiente humano (cont-020)",
     "arreglados": 1,
     "verificados": 1,
-    "regresiones": "1 (links-201, introducida por la consolidacion humana eaf83781 — arreglada)",
-    "contexto_corpus": "El corpus de paginas indexables BAJO de ~99 a 66 (conversion 66, nap 77, linking 66) por la consolidacion humana de hoy: 32 colonias doorway->4 hubs de zona (commit eaf83781) + /precios/ (246336db). NO es ceguera: verificado contra los commits reales. Total HTML 108.",
-    "pendientes_humano_nuevos": "cont-010 (ancla VACIA 'Plomero en ' -> culiacan-tres-rios, MEDIA, copy), cont-011 (ancla truncada 'Plomero en Nuevo' -> nuevo-culiacan, MEDIA, copy), cont-012/013/014 (conteo desync + self-links + acentos lista colonias, BAJA, copy), seo-501..506 (anclas auto-referenciales en 4 hubs + centro aplanado + relevancia 301, BAJA-MEDIA, arquitectura), movil-601..604 (tap targets <44px en directorios de colonias; movil-602/603 exigen 3 CSS+bump, MEDIA), perf-601..604 (5 hubs plantilla WebP-only sin AVIF; hero centro 196KB, BAJA-MEDIA, binarios), links-data (21 URLs obsoletas en colonias-completas-culiacan.json no servido, BAJA)",
-    "verificado_no_bug": "main.js ausente en plomero-colonias-culiacan/index.html NO es bug: plantilla antigua con JS inline (script #3 maneja menu+form); headless OK 0 errores. Falsa alarma de revisor-perf.",
-    "bajas_no_tocadas": "trk-001..004 (Consent Mode esperado), plt-001..025 (theme-color faltante/placeholder + 3 tablas sin wrapper protegidas por fallback), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder XXXX g.page reseñas, ahora en reparacion-de-fugas), sec-001=R-01 (client_secret en historial a rotar)",
+    "regresiones": "0",
+    "contexto_corpus": "Corpus indexable estable tras la consolidacion: conversion 66, nap 77, linking 66, contenido 77, secretos 414, total HTML 108. NO ceguera: todos los deterministas corrieron sobre datos reales. Varios pendientes de la corrida 1117 ya resueltos en commits intermedios de hoy (perf-601..604 AVIF 1dd3f939/5c69b3bc; cont-010/011 954ba047; cont-012/013/014 bd8619c8; movil-601..604 86e75908/a7436a93; seo-501..506+links-data 0462a3b4/247f8a1a).",
+    "pendientes_humano_nuevos": "cont-020 (MEDIA, doorway: plomero-cerca-de-mi ~92% clon del cuerpo de la home; reescritura/consolidacion, amplia seo-002)",
+    "verificado_no_bug": "24 paginas de colonia sin twitter:image (excede candado 15 + solapa seo-002, fallback a og:image valido) -> revisor-seo NO lo reporta accionable. 42 paginas con SVG decorativos sin aria-hidden (BAJA, clase de a11y-402, 42 archivos) -> revisor-a11y NO accionable.",
+    "bajas_no_tocadas": "trk-001..004 (Consent Mode esperado), plt-001..025 (theme-color + 3 tablas con fallback), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder XXXX en reparacion-de-fugas), sec-001=R-01 (client_secret en historial a rotar)",
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_15_archivos": "1 archivo de sitio (servicios/plomero-colonias-culiacan) + docs de pipeline",
+      "diff_max_15_archivos": "1 archivo de sitio (precios/index.html) + docs de pipeline (REGLAS/HISTORIAL/ESTADO/ultima-corrida)",
       "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
       "tests_tocados": "0",
       "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
-      "publicado": "SI — merge 5131950e, push fac11e63..5131950e; el hook indexo /servicios/plomero-colonias-culiacan/ (1 URL enviada, 0 en cola, 0 descartadas). Rama borrada."
+      "publicado": "PENDIENTE (ver bloque al cierre tras el push)"
     },
-    "detalle_arreglos": "links-201 (ALTA, REGRESION de la consolidacion humana eaf83781): 25 enlaces internos rotos en la rejilla de tarjetas <a class=card href=./slug/> de servicios/plomero-colonias-culiacan/index.html apuntando a directorios de colonia borrados. El humano reescribio la lista <ul> absoluta pero omitio la rejilla relativa. Reescrito cada href=./slug/ al destino 301 EXACTO de _redirects (hub de zona, forma absoluta canonica, no via redirect). check-plantilla paso de 25 a 0 enlaces rotos, check-linking 0, conversion 0/66, pagina 200, 0 errores JS headless, menu hamburguesa OK, wa.me (526673922273) y JSON-LD intactos. Solo HTML -> sin bump ?v=/sw.js."
+    "detalle_arreglos": "movil-502 (MEDIA, residual de movil-501): el fix de movil-501 acoto el selector a '.price-table .service-link' y dejo 5 CTA .service-link en PROSA (<p> L478/507/571 de precios/index.html) a 20px de alto (<44px) en 375px. Anadida regla separada 'p .service-link{display:inline-block;padding:0.6rem 0}' en el <style> inline (0.35rem no basta para prosa de 1 linea -> 38px; NO ampliar .price-table que ya cumple). Verificado headless 375px (prosa 46-74px, tabla 60px, todos>=44) y 1280px (sin overflow). /precios/ 200, wa.me (526673922273) intacto, 0 errores JS, plantilla 25 baja sin cambio, conversion 0/66, e2e 0/3. Solo CSS inline -> sin bump ?v=/sw.js."
   },
   "corrida_previa": {
-    "fecha": "2026-06-16",
-    "rama": "auto/mantenimiento-20260616-0831",
+    "fecha": "2026-06-17",
+    "rama": "auto/mantenimiento-20260617-1117",
     "arreglados": 1,
-    "nota": "movil-501 enlaces .service-link tabla precios <44px (publicado merge 573faef8)"
+    "nota": "links-201 regresion ALTA de la consolidacion humana eaf83781 (25 enlaces rotos rejilla colonias) (publicado merge 5131950e)"
   },
   "pendientes": [
     {"id": "prod-001", "categoria": "produccion", "estado": "RESUELTO 2026-06-13 (commit ea91bc12)", "descripcion": "EXCEPCION JS NO CAPTURADA en produccion. RESUELTO: eran 2 bugs encadenados en main.js — (1) L273 '()' espurio invocaba un id como funcion ('is not a function'); (2) L274 el polyfill pasaba 2500 a requestIdleCallback (espera {timeout:..}) -> 'IdleRequestOptions', oculto detras del bug 1. Fix: L273 '})();'->'});' ; L274 polyfill->setTimeout directo. Versionado main.js?v=20260613 en 30 HTML + sw.js v24->v25. Verificado en headless local (0 errores en / /precios/ /contacto/) Y contra produccion con check-produccion.mjs (hallazgos vacios). wa.me intacto. Revivio popup salida-intencion, quote-sheet, registro SW y scroll tracking.", "severidad": "alta"},
@@ -80,7 +80,8 @@
     {"id": "a11y-402", "categoria": "a11y", "descripcion": "Calificaciones por estrellas ★★★★★ como glifos literales sin aria-label/role=img ni aria-hidden en ~92 paginas (.rating-stars en 75 + .stars en 17); lector de pantalla anuncia 5x 'estrella negra' sin contexto numerico.", "severidad": "baja", "razon": "mecanico pero ~92 archivos excede el candado (<=15); lote/supervisado"},
     {"id": "a11y-403", "categoria": "a11y", "descripcion": "46 de 110 paginas servidas sin landmark <main> ni role=main; navegacion por landmarks no ofrece 'saltar al contenido'. Criterio WCAG distinto de a11y-401 (skip-link). index.html SI lo tiene.", "severidad": "baja", "razon": "mecanico pero 46 archivos excede el candado; hacerlo junto con a11y-401 para dar destino al skip-link"},
     {"id": "perf-505", "categoria": "perf", "descripcion": "montserrat-700.woff2 y montserrat-800.woff2 byte-identicos (md5 3d42f7e7..., 33508b c/u) y sus .original tambien; 2 @font-face al mismo glyph (~33KB desperdiciados). Mismo defecto que perf-502 pero Montserrat; el remedio de perf-502 (re-subsetear de .original) NO aplica (los .original tambien identicos).", "severidad": "baja", "razon": "colapsar a 1 @font-face o re-subsetear pesos reales; cambio de woff2 servido (PRECACHE) exige bump CACHE_NAME sw.js + validar render"},
-    {"id": "gsc-219", "categoria": "gsc", "descripcion": "Bug cosmetico de logging en mcp-local-seo/gsc-index.mjs L54: url.replace('https://...', ''||'/') -> ''||'/' siempre '/' y produce rutas con doble slash ('//servicios/') en el reporte. NO afecta la inspeccion (inspectionUrl real correcto, veredictos reales).", "severidad": "baja", "razon": "tooling, no toca el sitio servido; L54 mover el ||'/' fuera del replace"}
+    {"id": "gsc-219", "categoria": "gsc", "descripcion": "Bug cosmetico de logging en mcp-local-seo/gsc-index.mjs L54: url.replace('https://...', ''||'/') -> ''||'/' siempre '/' y produce rutas con doble slash ('//servicios/') en el reporte. NO afecta la inspeccion (inspectionUrl real correcto, veredictos reales).", "severidad": "baja", "razon": "tooling, no toca el sitio servido; L54 mover el ||'/' fuera del replace"},
+    {"id": "cont-020", "categoria": "contenido", "descripcion": "servicios/plomero-cerca-de-mi es casi-clon indexable de la home (~92% del cuerpo: 6/72 bloques unicos, 15/16 H2 verbatim, rejilla de 6 servicios + tarjetas de zona + 6 testimonios + blog cards identicos). Patron doorway. Solo intro 'cerca de mi' y tiempos de llegada son propios.", "severidad": "media", "razon": "reescritura de copy/estrategia + posible consolidacion -> prohibido en auto; amplia seo-002"}
   ],
   "baseline": {
     "fecha": "2026-06-12",
