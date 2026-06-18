@@ -22,10 +22,20 @@ es hallazgo de severidad ALTA y es lo primero a corregir; no se crece sobre un s
 `git checkout -b auto/diario-$(date +%Y%m%d-%H%M)`. Todo el trabajo del día vive aquí hasta pasar candados.
 
 ============================ FASE 3 — REVISIÓN (encontrar errores) ============================
-Lanza en paralelo (un solo mensaje, varias llamadas Task) los revisores del sitio. Plomero tiene un roster RICO;
-úsalo TODO: revisor-seo, revisor-movil, revisor-a11y, revisor-perf, revisor-links, revisor-contenido,
-revisor-conversion, revisor-nap, revisor-gsc, revisor-indexabilidad, revisor-produccion, revisor-plantilla,
-revisor-enlazado-interno, revisor-tracking, revisor-secretos, revisor-infra-salud, revisor-e2e-funcional.
+FAN-OUT SELECTIVO (corre lo justo, no malgastes cuota). Lanza en paralelo (un solo mensaje, varias Task):
+  • EL PISO — SIEMPRE, site-wide (son los deterministas baratos + el candado de secretos; dan cobertura mecánica
+    total y la verificación ciega): revisor-infra-salud (PRIMERO), revisor-plantilla, revisor-indexabilidad,
+    revisor-nap, revisor-conversion, revisor-enlazado-interno, revisor-e2e-funcional, revisor-perf-real,
+    revisor-produccion, revisor-tracking, revisor-secretos.
+  • LOS DE JUICIO (caros: contenido, seo, a11y, movil, perf, links, critico-completitud) — SOLO los relevantes a lo
+    que cambió desde la última corrida. Corre `python3 .pipeline/selector-revisores.py --base <sha-última-auto-diario>`
+    (el último commit `auto-diario`/`mant`); lanza SOLO los que liste en JUICIO, y ACÓTALOS a las páginas que cambiaron.
+    Si no cambió nada servido, NO corras ninguno de juicio (el piso ya barre todo lo mecánico).
+  • LOTE ROTATIVO (cobertura sin re-auditar las ~100 páginas cada día): además, pasa los revisores de juicio por
+    un pequeño lote ROTATIVO de ~5 páginas viejas (las que más tiempo llevan sin revisar, p.ej. por orden en
+    HISTORIAL) — así, en ~3 semanas, todo el sitio se re-audita subjetivamente, barato.
+revisor-gsc va en la FASE 6 (crecimiento), no aquí. El routing de modelos (.claude/agents/MODELO-ROUTING.md) ya pone
+Opus solo en contenido + critico-completitud; el piso corre en Haiku.
 Los revisores LLM cubren lo SUBJETIVO (calidad de copy, intención de búsqueda, doorways, contraste, conversión,
 y ERRORES HUMANOS DE CONTENIDO: faltas de ortografía, redacción rota, caracteres mal codificados —p.ej. una "е"
 cirílica donde va una "e" latina—, frases sin terminar, datos contradictorios, claims que violan REGLAS.md).
