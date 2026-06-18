@@ -1,35 +1,30 @@
-# Última corrida — auto/mantenimiento-20260617-1826 (AUTÓNOMA)
+# Auto Agente Plomero — parte del 2026-06-18
 
-**Fecha:** 2026-06-17 18:26 · **Modo:** autónomo sin supervisión · **Revisores:** 18
+**Resultado:** encontré 8, arreglé 4, 1 para ti · publicado
 
-## Health check
-- 5/5 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /blog/), node v22.18 vía /usr/local/bin.
-- Compuerta `revisor-infra-salud` (check-infra.mjs): **exit 0, 0 hallazgos** (sensores sanos).
-- main = origin/main al inicio (sincronizado con fetch + merge --ff-only).
+Hola Héctor, esto es lo que hice hoy solo.
+Encontré 8 cosas: arreglé 4 · 1 necesitan tu decisión · 3 no pude arreglar solo.
 
-## Contexto de corpus
-Corpus indexable estable tras la consolidación de colonias: conversión 66, NAP 77, linking 66, contenido 77, secretos 414, total HTML 108. **NO es ceguera** — todos los deterministas corrieron sobre datos reales. Varios pendientes de la corrida 1117 de hoy ya quedaron resueltos en commits intermedios (perf-601..604 AVIF, cont-010/011, cont-012/013/014, movil-601..604, seo-501..506+links-data).
+## ✅ Arreglé (4)
+- El **botón "Ver más reseñas en Google"** de tu página de reparación de fugas estaba roto: llevaba a una dirección de relleno (`XXXXX`) que daba error en vez de a tu perfil de Google. Lo apunté a tu perfil real (el mismo que usa el resto del sitio) → https://plomeroculiacanpro.mx/servicios/reparacion-de-fugas/
+- En la **página nueva de destape de baño e inodoro** (la que armé ayer), el botón principal de WhatsApp de arriba traía un mensaje equivocado heredado de una plantilla: decía "necesito un plomero en la zona oriente" en lugar de hablar del baño tapado. Lo corregí para que el cliente te escriba "tengo el baño/inodoro tapado y necesito destaparlo" → https://plomeroculiacanpro.mx/servicios/destape-de-bano-inodoro/
+- En esa misma página nueva, tres enlaces dentro del texto eran demasiado pequeños para tocarlos bien con el dedo en el celular (medían ~20px y lo recomendable son ~44px). Les di más área táctil solo en móvil, sin cambiar cómo se ven en computadora → https://plomeroculiacanpro.mx/servicios/destape-de-bano-inodoro/
+- El **sistema interno que vigila que el sitio no se rompa** se estaba dando a sí mismo 2 alarmas falsas (por una pieza que añadí ayer y quedó mal conectada). Lo ajusté para que solo avise de problemas reales y no te genere ruido. (Es una herramienta interna, no una página del sitio.)
 
-## Deterministas (corridos directos, no ciegos)
-indexabilidad 0 · conversión 0/66 · NAP 0/77 · linking 0/66 · e2e 0/3 · producción 0 (prod LIMPIA real) · secretos **exit 0** (sec-001 historial inmutable = R-01) · perf-real perf-001 (falta baseline = R-03) · tracking trk-001..004 (Consent Mode esperado) · contenido-mec 1 (cont-001 = R-02, placeholder XXXX) · plantilla 25 **todas BAJA** (theme-color + 3 tablas con fallback = plt-001..025). **0 hallazgos mecánicos ALTA/MEDIA nuevos en deterministas.**
+## ⚠️ Encontré pero NO pude arreglar solo (3)
+- En la **página nueva de destape**, la foto principal (la que también se ve al compartir en redes) muestra un tinaco, no un baño/inodoro tapado. No la cambié porque no tengo en el sitio una foto adecuada de destape de baño; haría falta conseguir o generar esa imagen. (Impacto bajo.)
+- Las **"migas de pan"** (esa línea de navegación Inicio › Servicios › … que ayuda a Google a entender la estructura) tienen una pequeña incoherencia técnica en 18 páginas de servicio a la vez. Tocar 18 páginas en una sola corrida automática es arriesgado, así que lo dejé para un cambio supervisado, no automático. (Impacto bajo.)
+- Hay un **dato que no coincide**: la página principal dice "más de 600 colonias" y la página de colonias dice "640+ colonias". No cambié el número porque no sé cuál es el correcto; dime la cifra real y lo unifico. (Impacto bajo.)
 
-## Revisores LLM (6 en paralelo)
-- **revisor-movil:** 1 NUEVO MEDIA → **movil-502** (abajo). Resto = conocidos, sin regresiones; 0 overflow en 21 páginas medidas a 375px.
-- **revisor-contenido (subjetivo):** 1 NUEVO MEDIA → **cont-020** (doorway, pendiente humano). 0 ortografía nueva, 0 thin content real.
-- **revisor-a11y / links / seo / perf:** 0 hallazgos nuevos accionables (lo detectado excede el candado de 15 archivos o es pendiente conocido: 24 colonias sin twitter:image, 42 SVG decorativos sin aria-hidden).
+## 🌱 Mejoré / agregué (1)
+- MEJORÉ el enlazado de tu sitio: tu artículo de blog **"Cómo destapar un baño tapado"** (que es el que más aparece en Google de ese tema, unas 190 veces al mes) no enlazaba a tu página de servicio de destape de baño. Le puse un enlace directo, para que el lector que prefiere contratar en vez de hacerlo él mismo llegue justo a la página correcta, y para empujar mejor esa página nueva en Google → https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/ → https://plomeroculiacanpro.mx/servicios/destape-de-bano-inodoro/
 
-## Arreglado y verificado (1)
-**movil-502 (MEDIA — residual de movil-501).** El fix de movil-501 acotó el selector a `.price-table .service-link`, dejando fuera **5 CTA `.service-link` en PROSA** (`<p>` L478/507/571 de `precios/index.html`: "Ver servicio completo de destape →", "Ver servicio de reparación de fugas →", "Detección de fugas sin romper →", "Ver reparación de boiler →", "Ver mantenimiento de boiler →") que rendían **20px** de alto en 375px (< 44px táctil). Se intentó primero ampliar el selector a `.service-link` global pero el padding 0.35rem solo llevaba la prosa a **38px** (insuficiente: en la tabla alcanza porque las celdas envuelven a 2-3 líneas). **Fix final:** regla separada `p .service-link{display:inline-block; padding:0.6rem 0}` en el `<style>` inline — la tabla conserva su 0.35rem (ya cumplía, no se ve más alta).
-- **Verificación headless:** 375px → prosa 46–74px, tabla 60px (todos ≥44); 1280px → sin overflow. /precios/ 200, wa.me (526673922273) intacto, **0 errores JS**, plantilla 25 BAJA sin cambio, conversión 0/66, e2e 0/3. Solo CSS inline → **sin bump** de `?v=`/sw.js.
+## 🧠 Aprendí hoy (para no volver a fallar)
+- Cuando arme una página nueva copiando una plantilla, debo revisar que TODOS los botones de WhatsApp (incluido el de arriba) lleven el mensaje del servicio correcto y no un texto sobrante de la plantilla. Además dejé programada una alarma automática que de ahora en adelante detecta sola este error de "mensaje equivocado de zona" antes de publicar.
+- (ya van 36 reglas aprendidas en total)
 
-## Pendiente humano nuevo (1)
-- **cont-020 (MEDIA, copy/estrategia):** `servicios/plomero-cerca-de-mi/index.html` es casi-clon indexable de la home (~92% del cuerpo: 6/72 bloques únicos, 15/16 H2 verbatim, rejilla de 6 servicios + tarjetas de zona + 6 testimonios + blog cards idénticos = patrón **doorway**). Solo la intro "cerca de mí" y los tiempos de llegada son propios. Reescritura/consolidación → prohibido en auto; amplía seo-002.
+## ⏳ Necesito que tú decidas (1)
+- En Google, hay gente buscando **"bombas de agua en Culiacán/Sinaloa"** y cae en tu página de baja presión de agua, pero no hace clic: parece que quieren **comprar o reparar una bomba**, no corregir la presión. ¿Tu negocio ofrece venta o reparación de bombas de agua? Si sí, vale la pena una página dedicada; si no, lo dejamos como está. (No lo decido yo porque depende de qué servicios ofreces.)
 
-## Candados paso 8
-auto-revisión limpia (1 archivo de sitio, 4 líneas, solo `<style>` inline; 0 CSS compartidos/JS/XML/test/sw; wa.me y JSON-LD intactos), diff 1≤15, 0 borrados/renombrados, secretos **exit 0** → **cumplidos**.
-
-## Aprendizaje
-Ampliada la regla MÓVIL/TAP-TARGET (movil-501) en REGLAS.md con la reincidencia movil-502: (1) al arreglar tap targets de una clase, revisar **todas** sus instancias en la página, no solo las del contenedor principal; (2) el padding **no es transferible** entre contextos — `0.35rem` basta en tabla (celdas multilinea, 60px) pero un enlace de prosa de una línea solo llega a 38px; usar `0.6rem` para prosa.
-
-## Publicación
-Ver el bloque "publicado" en ESTADO.md (actualizado tras el push).
+## 📦 ¿Se publicó?
+Sí, todo revisado por un segundo agente que intentó encontrarle fallas y no halló ninguna; quedó en vivo y le avisé a Google para que muestre los cambios.

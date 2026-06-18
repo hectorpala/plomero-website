@@ -50,7 +50,9 @@ const CRON_MAX_HOURS = process.env.INFRA_CRON_MAX_HOURS ? Number(process.env.INF
 // Checkers pesados/red: solo smoke (no se corren completos aquí).
 const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-e2e.mjs"]);
 // No son checkers de páginas con el contrato JSON estándar (se excluyen del barrido local).
-const NOT_PAGE_CHECKERS = new Set(["check-infra.mjs", "check-secretos.sh"]);
+// check-parte.py (valida un parte concreto; requiere argumento) y check-reglas.py (utilidad de
+// presupuesto de REGLAS.md) NO emiten {"hallazgos":[...]} — no son sensores de página.
+const NOT_PAGE_CHECKERS = new Set(["check-infra.mjs", "check-secretos.sh", "check-parte.py", "check-reglas.py"]);
 
 const SKIP_DIRS = ["/node_modules/", "/.git/", "/partials/", "/docs/", "/.netlify/",
   "/reivision de sitio/", "/site-check/", "/keyword-volume-tool/", "/mcp-local-seo/", "/scripts/"];

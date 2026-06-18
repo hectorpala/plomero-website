@@ -3,34 +3,33 @@
 ```json
 {
   "ultima_corrida": {
-    "fecha": "2026-06-17",
-    "rama": "auto/mantenimiento-20260617-1826",
-    "modo": "AUTONOMO",
-    "revisores": 18,
-    "hallazgos_brutos": "Deterministas limpios sobre corpus real; LLM hallaron 1 mecanico nuevo (movil-502) + 1 pendiente copy (cont-020). El resto = conocidos/pendientes/bajas.",
-    "hallazgos_unicos_nuevos": "1 MEDIA mecanico arreglado (movil-502) + 1 MEDIA pendiente humano (cont-020)",
-    "arreglados": 1,
-    "verificados": 1,
-    "regresiones": "0",
-    "contexto_corpus": "Corpus indexable estable tras la consolidacion: conversion 66, nap 77, linking 66, contenido 77, secretos 414, total HTML 108. NO ceguera: todos los deterministas corrieron sobre datos reales. Varios pendientes de la corrida 1117 ya resueltos en commits intermedios de hoy (perf-601..604 AVIF 1dd3f939/5c69b3bc; cont-010/011 954ba047; cont-012/013/014 bd8619c8; movil-601..604 86e75908/a7436a93; seo-501..506+links-data 0462a3b4/247f8a1a).",
-    "pendientes_humano_nuevos": "cont-020 (MEDIA, doorway: plomero-cerca-de-mi ~92% clon del cuerpo de la home; reescritura/consolidacion, amplia seo-002)",
-    "verificado_no_bug": "24 paginas de colonia sin twitter:image (excede candado 15 + solapa seo-002, fallback a og:image valido) -> revisor-seo NO lo reporta accionable. 42 paginas con SVG decorativos sin aria-hidden (BAJA, clase de a11y-402, 42 archivos) -> revisor-a11y NO accionable.",
-    "bajas_no_tocadas": "trk-001..004 (Consent Mode esperado), plt-001..025 (theme-color + 3 tablas con fallback), perf-001 (baseline CWV=R-03), cont-001=R-02 (placeholder XXXX en reparacion-de-fugas), sec-001=R-01 (client_secret en historial a rotar)",
+    "fecha": "2026-06-18",
+    "rama": "auto/diario-20260618-1428",
+    "modo": "AUTONOMO (diario: mantener+crecer+verificar+aprender)",
+    "revisores": "deterministas (ci-gate, nap, linking, conversion, contenido, indexabilidad, infra, produccion) + 3 LLM (contenido, seo, movil)",
+    "hallazgos_brutos": "Deterministas limpios salvo cont-001 (XXXX) + infra (2 ALTA falsas por regresion de hoy). LLM convergieron en 3 fugas de plantilla de la pagina nueva crece-001 (hero wa.me zona-oriente, tap targets prosa, breadcrumb #servicios) + 2 bajas (imagen tinaco, conteo colonias).",
+    "arreglados": 4,
+    "mejoras": 1,
+    "verificado_ok": true,
+    "regresiones": "1 (infra-003: commit 2871010f de hoy anadio check-parte/check-reglas sin actualizar NOT_PAGE_CHECKERS -> sensor dead-mans-switch con 2 ALTA falsas). Corregida + sin checker nuevo necesario (era el propio sensor).",
+    "detalle_arreglos": "infra-003 (ALTA, regresion): NOT_PAGE_CHECKERS en check-infra.mjs += check-parte.py/check-reglas.py -> re-corrido 0 hallazgos. cont-001 (MEDIA): boton 'Ver mas reseñas' en reparacion-de-fugas XXXX->g.page/r/plomeroculiacanpro (perfil real del sitio). crece-002 (MEDIA): hero wa.me de destape-de-bano-inodoro 'zona oriente'->'tengo el bano/inodoro tapado'; MECANIZADO con check #4b en check-plantilla.py (plt-leak-zona). movil-701 (MEDIA): 3 enlaces .about-text a en prosa <44px -> regla en @media(max-width:768px) (46px@375, sin overflow@1280, desktop intacto). Todo verificado headless con Chrome del sistema: 0 errores JS, gate-pagina OK (Jaccard 0.29), ci-gate 0 ALTA, produccion en vivo 0 hallazgos.",
+    "crecimiento": "PIVOTE FASE 6 (sin hueco de pagina nueva sin canibalizar: cluster bano/inodoro ya tiene pagina dedicada desde ayer, drenaje/presion ya tienen blog, bombas=decision negocio). Enriquecido: crece-link-001 repunto el callout del blog desatascar-wc (192 impr/mes, post de mas impresion del cluster) -> /servicios/destape-de-bano-inodoro/ (de-orfaniza la pagina nueva: 1->2 enlaces entrantes, corrige desajuste tematico, informacional->transaccional). Tabla en .pipeline/oportunidades-20260618.md.",
+    "pendientes_humano_nuevos": "Y: bombas de agua (gsc-207/211, decision de oferta). Z (encontrado, no auto): breadcrumb JSON-LD #servicios en 18 paginas de servicio (pase supervisado, excede candado), imagen tinaco en pagina nueva (falta asset de destape de bano, BAJA), conteo colonias home '600' vs hub '640+' (BAJA, no toco claim sin cifra real).",
     "candados_paso8": {
       "auto_revision_limpia": true,
-      "diff_max_15_archivos": "1 archivo de sitio (precios/index.html) + docs de pipeline (REGLAS/HISTORIAL/ESTADO/ultima-corrida)",
-      "sin_borrados_estructurales": "0 archivos borrados, 0 renombrados",
+      "verificador_ok": "true (agente esceptico independiente: 0 problemas, evidencia toda verde)",
+      "diff_archivos": "4 sitio/pipeline (check-infra.mjs, reparacion-de-fugas, destape-de-bano-inodoro, desatascar-wc) + check-plantilla.py + docs (REGLAS/HISTORIAL/ESTADO/oportunidades/ultima-corrida) — bajo el tope de 18",
+      "sin_borrados_estructurales": "0 borrados, 0 renombrados",
       "tests_tocados": "0",
-      "secretos_exit": "0 (sec-001 en historial inmutable, no bloquea)",
-      "publicado": "SI — merge 63f20460, push 1dd3f939..63f20460. El hook detecto /precios/ pero la cuota diaria de Google estaba agotada -> encolada para reintento automatico (0 perdidas, mecanismo infra-001). Rama borrada. Push con PATH=/usr/local/bin (infra-002)."
-    },
-    "detalle_arreglos": "movil-502 (MEDIA, residual de movil-501): el fix de movil-501 acoto el selector a '.price-table .service-link' y dejo 5 CTA .service-link en PROSA (<p> L478/507/571 de precios/index.html) a 20px de alto (<44px) en 375px. Anadida regla separada 'p .service-link{display:inline-block;padding:0.6rem 0}' en el <style> inline (0.35rem no basta para prosa de 1 linea -> 38px; NO ampliar .price-table que ya cumple). Verificado headless 375px (prosa 46-74px, tabla 60px, todos>=44) y 1280px (sin overflow). /precios/ 200, wa.me (526673922273) intacto, 0 errores JS, plantilla 25 baja sin cambio, conversion 0/66, e2e 0/3. Solo CSS inline -> sin bump ?v=/sw.js."
+      "sin_electricista_ni_gtm_ajeno": true,
+      "publicado": "PENDIENTE (ver abajo)"
+    }
   },
   "corrida_previa": {
     "fecha": "2026-06-17",
-    "rama": "auto/mantenimiento-20260617-1117",
+    "rama": "auto/mantenimiento-20260617-1826",
     "arreglados": 1,
-    "nota": "links-201 regresion ALTA de la consolidacion humana eaf83781 (25 enlaces rotos rejilla colonias) (publicado merge 5131950e)"
+    "nota": "movil-502 (residual de movil-501): 5 CTA .service-link en prosa de /precios/ a <44px. Publicado merge 63f20460."
   },
   "pendientes": [
     {"id": "prod-001", "categoria": "produccion", "estado": "RESUELTO 2026-06-13 (commit ea91bc12)", "descripcion": "EXCEPCION JS NO CAPTURADA en produccion. RESUELTO: eran 2 bugs encadenados en main.js — (1) L273 '()' espurio invocaba un id como funcion ('is not a function'); (2) L274 el polyfill pasaba 2500 a requestIdleCallback (espera {timeout:..}) -> 'IdleRequestOptions', oculto detras del bug 1. Fix: L273 '})();'->'});' ; L274 polyfill->setTimeout directo. Versionado main.js?v=20260613 en 30 HTML + sw.js v24->v25. Verificado en headless local (0 errores en / /precios/ /contacto/) Y contra produccion con check-produccion.mjs (hallazgos vacios). wa.me intacto. Revivio popup salida-intencion, quote-sheet, registro SW y scroll tracking.", "severidad": "alta"},
