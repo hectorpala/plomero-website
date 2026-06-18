@@ -11,6 +11,7 @@ Comandos:
   add  [spec.json | -]   Encola (o actualiza) una tarea. DEDUP por firma. Riesgo 'alto' → cola humana.
   next [--max N] [--riesgo-max medio]   Top-N PENDIENTES auto-ejecutables, por prioridad (JSON).
   close --id X --estado hecho|descartado|bloqueado [--nota ".."] [--commit SHA]
+  approve --id X [--riesgo bajo|medio] [--nota ".."]   Aprobación humana: requiere_humano → pendiente.
   stats                  Resumen por estado/tipo/riesgo + tamaño de la cola humana.
   list [--estado E] [--tipo T] [--riesgo R]
   --ejemplo              Imprime un spec de tarea de ejemplo.
@@ -186,6 +187,29 @@ def cmd_close(args):
     print("❌ no encontré la tarea %s" % tid); sys.exit(1)
 
 
+def cmd_approve(args):
+    """Aprobación HUMANA: pasa una tarea 'requiere_humano'/'bloqueado' a 'pendiente' auto-ejecutable
+    (decisión de negocio resuelta). Baja el riesgo al nivel dado (default 'medio')."""
+    def opt(name, default=None):
+        return args[args.index(name) + 1] if name in args else default
+    tid = opt("--id")
+    riesgo = (opt("--riesgo", "medio") or "medio").lower()
+    if not tid or riesgo not in RIESGOS:
+        print("uso: approve --id <id> [--riesgo bajo|medio] [--nota ..]"); sys.exit(2)
+    tareas = cargar()
+    for t in tareas:
+        if t.get("id") == tid:
+            t["estado"] = "pendiente"
+            t["riesgo"] = riesgo
+            t["cerrado"] = None
+            if opt("--nota"):
+                t["nota"] = opt("--nota")
+            t["prioridad"] = prioridad_de(t)
+            guardar(tareas)
+            print("✅ aprobada %s → pendiente (riesgo %s, prioridad %.2f)" % (tid, riesgo, t["prioridad"])); return
+    print("❌ no encontré la tarea %s" % tid); sys.exit(1)
+
+
 def cmd_stats(_args):
     tareas = cargar()
     por_estado, por_tipo = {}, {}
@@ -224,7 +248,7 @@ def main():
     cmd, rest = sys.argv[1], sys.argv[2:]
     if cmd == "--ejemplo":
         print(json.dumps(EJEMPLO, ensure_ascii=False, indent=2)); return
-    {"add": cmd_add, "next": cmd_next, "close": cmd_close,
+    {"add": cmd_add, "next": cmd_next, "close": cmd_close, "approve": cmd_approve,
      "stats": cmd_stats, "list": cmd_list}.get(cmd, lambda a: (
         print("comando desconocido: %s" % cmd) or sys.exit(2)))(rest)
 
