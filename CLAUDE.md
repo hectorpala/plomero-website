@@ -24,7 +24,7 @@
 ## Pipeline de crecimiento autónomo (clon adaptado del Auto Agente del electricista)
 - **Mapa completo del sistema: `AUTOMATIZACION.md`** (cómo encajan skill + orquestador + motor + driver diario).
 - **Orquestador (punto de entrada determinista): `scripts/crecer.py`** — `estado` | `servicio spec.json` | `colonia spec.json` | `gate <ruta>` | `publicar "msg"`. Automatiza crear + sitemap (`sitemaps/main_sitemap.xml`) + enlace en la home + bump sw (`CACHE_NAME='plomero-culiacan-vN'`) + candado + publicar.
-- Invocar el cerebro con `/expandir-sitio` (skill en `.claude/skills/expandir-sitio/SKILL.md`). Hermano de `/mantener-sitio`: aquél ARREGLA, éste CREA lo que falta. La auditoría GSC (propiedad `https://plomeroculiacanpro.mx/`) y la indexación por MCP viven en el skill. Tope duro `MAX_PAGINAS=3` por corrida.
+- Invocar el cerebro con `/expandir-sitio` (skill en `.claude/skills/expandir-sitio/SKILL.md`). Hermano de `/mantener-sitio`: aquél ARREGLA, éste CREA lo que falta. La auditoría GSC (propiedad `https://plomeroculiacanpro.mx/`) y la indexación por MCP viven en el skill. SIN tope numérico: loop-until-dry sobre el backlog (`.pipeline/gestor-backlog.py`), con freno por DEMANDA REAL + anti-doorway, no por un número (ver `.pipeline/BACKLOG-DESIGN.md`).
 - Backbone determinista (garantiza paridad de plantilla y bloquea doorways):
   - `python3 .pipeline/gen-landing.py spec.json` — genera copiando un esqueleto byte a byte + sustituciones afirmadas (aborta si no calzan o si hay fuga "electricista").
   - `python3 .pipeline/gate-pagina.py <ruta/index.html> ...` — candado: validate-landing + ci-gate (0 ALTA) + anti-doorway (Jaccard < 0.80 vs hermanas).

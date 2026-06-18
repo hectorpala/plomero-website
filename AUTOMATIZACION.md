@@ -17,7 +17,7 @@ día (18:25). En una sola corrida hace CUATRO trabajos:
 | Fase | Qué hace |
 |---|---|
 | **A) Corrige** | Errores **mecánicos** (CSS, links/imágenes rotas, schema, CLS…) **y humanos/de contenido** (ortografía, caracteres mal codificados, claims que violan reglas, email contaminado, fuga "electricista") — reescritos bien y por completo. |
-| **B) Crece** | Hasta **3 páginas nuevas al día según Google Search Console** (MCP): detecta huecos con datos reales (impresiones sin página propia) y los llena. 0 si no hay señal — nunca fuerza doorways. |
+| **B) Crece** | **Loop-until-dry según Google Search Console** (MCP): detecta TODOS los huecos con datos reales (impresiones sin página propia), los encola en el backlog y los drena por prioridad. SIN tope numérico — el freno es DEMANDA REAL + anti-doorway, no un número. 0 páginas si no hay señal (nunca fuerza doorways); la optimización se drena sin límite. |
 | **C) Verifica** | Un **agente verificador** independiente y escéptico re-corre los candados y carga cada página tocada para demostrar que **todo quedó bien** ANTES de publicar. Si algo falla, no publica. |
 | **D) Aprende** | Un **agente aprendiz** convierte cada error en una **regla permanente** (REGLAS.md) y, si es mecanizable, en un **checker**. El sistema se vuelve más inteligente con cada corrida. |
 
@@ -59,7 +59,7 @@ Specs de contenido:
 - `scripts/crear-servicio.py` · `scripts/diferenciar-colonia.py` — generadores de contenido (specs JSON).
 
 ## El cerebro (decide qué crear)
-- `.claude/skills/expandir-sitio/SKILL.md` — agente de crecimiento (`/expandir-sitio`). Audita huecos con datos reales de GSC (MCP), prioriza con tope `MAX_PAGINAS=3` y dispara el orquestador.
+- `.claude/skills/expandir-sitio/SKILL.md` — agente de crecimiento (`/expandir-sitio`). Audita huecos con datos reales de GSC (MCP), encola en `.pipeline/gestor-backlog.py` y drena en loop-until-dry (sin tope numérico; freno = demanda real + anti-doorway) vía el orquestador. Ver `.pipeline/BACKLOG-DESIGN.md`.
 - `.claude/skills/mantener-sitio/SKILL.md` — hermano que *arregla* lo existente (`/mantener-sitio`).
 
 ## Esqueleto representativo

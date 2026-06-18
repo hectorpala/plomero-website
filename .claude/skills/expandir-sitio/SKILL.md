@@ -12,7 +12,12 @@ creando lo que le falta. Trabaja en rama, verifica con candados deterministas y
 Muestra EVIDENCIA (salida de comando) en cada fase. NO afirmes éxito sin probarlo.
 
 ## Configuración de la corrida (defaults)
-- `MAX_PAGINAS = 3` — tope duro de páginas nuevas por corrida (evita generación masiva = doorway).
+- SIN tope numérico de páginas (ya NO existe `MAX_PAGINAS`). El freno son los candados NATURALES, no un número:
+  páginas nuevas solo con **DEMANDA REAL** (GSC ≥ `UMBRAL_DEMANDA` de impresiones/volumen) + **anti-doorway**
+  (Jaccard < 0.80). La OPTIMIZACIÓN (ctr-fix/enriquecer/enlazado/schema/perf/deuda) se drena SIN límite.
+- `MODO = loop-until-dry` — descubrir → encolar en `.pipeline/gestor-backlog.py` → drenar por prioridad
+  (`next`/`close`) hasta que el backlog auto-ejecutable quede vacío (2 vueltas sin sacar nada) o se llegue a
+  `MINUTOS_MAX = 35`. Lo que no se alcance queda en el backlog para la próxima corrida (nada se pierde).
 - `DIMENSIONES = [gsc, geo, blog, mejoras]` — las 4 activas.
 - `AUTO_PUBLICA = sí` — si los candados pasan, mergea a main + indexa. Si fallan, NO publica.
 - Propiedad GSC: `https://plomeroculiacanpro.mx/`. Email del sitio: `info@plomeroculiacanpro.mx`.
@@ -91,11 +96,14 @@ Escribe `.pipeline/oportunidades-<YYYYMMDD>.md` con una tabla rankeada:
 `| # | oportunidad | dimensión | impacto (alto/med/bajo) | esfuerzo | riesgo doorway | acción |`
 Ordena por impacto/riesgo. Esto es "determinar bien qué falta".
 
-## FASE 3 — Priorizar (tope duro)
-Elige las **top `MAX_PAGINAS`** acciones de menor riesgo y mayor impacto. Prefiere
-oportunidades respaldadas por datos de GSC sobre las especulativas. Si NO hay ninguna
-oportunidad de bajo riesgo y alto impacto, está PERMITIDO crear 0 páginas esta corrida y
-solo dejar el reporte (no fuerces crecimiento sin señal — eso genera doorways).
+## FASE 3 — Encolar y drenar (loop-until-dry, SIN tope numérico)
+ENCOLA en `.pipeline/gestor-backlog.py` TODA acción que califique, ordenada por la propia cola
+(prioridad = impacto/esfuerzo). Luego DRENA en loop por prioridad (`next --max 1 --riesgo-max medio`
+→ ejecuta → `close`) hasta que el backlog auto-ejecutable quede vacío o se llegue a `MINUTOS_MAX`.
+Páginas nuevas SOLO con demanda real de GSC + anti-doorway; la optimización se drena sin límite.
+Prefiere lo respaldado por datos sobre lo especulativo. Está PERMITIDO crear 0 páginas si no hay
+señal de demanda (no fuerces crecimiento — eso genera doorways); lo que nunca queda ocioso es la
+optimización. Lo que no se alcance esta corrida queda en el backlog para la siguiente.
 
 ## FASE 4 — CONSTRUIR (autónomo)
 Para los dos casos más comunes hay GENERADORES REUSABLES (úsalos en vez de escribir

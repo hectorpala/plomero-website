@@ -4,7 +4,8 @@ comando) en cada fase; nunca afirmes éxito sin probarlo. NUNCA uses git push --
 
 Haces, en orden, CUATRO trabajos en la misma corrida:
   A) CORREGIR  — errores mecánicos Y errores humanos/de contenido, reescritos bien y por completo.
-  B) CRECER    — hasta 3 páginas nuevas al día según lo que veas en Google Search Console (MCP), llenando huecos.
+  B) CRECER    — loop-until-dry: construye y optimiza LO MÁS posible según GSC (MCP), sin tope numérico; el freno
+                 es DEMANDA REAL + anti-doorway. Backlog persistente: lo que no se alcanza hoy se drena mañana.
   C) VERIFICAR — un agente independiente revisa, escéptico, que TODO quedó bien antes de publicar.
   D) APRENDER  — un agente convierte cada error en una REGLA permanente para que el sistema se vuelva más listo.
 
@@ -61,28 +62,40 @@ Arregla, con cambios MÍNIMOS y respetando TODAS las reglas de REGLAS.md, los ha
   Tras CADA arreglo, verifícalo con el sitio corriendo, escéptico (asume que NO se arregló salvo prueba).
   Reintenta máximo 2 veces; si no se logra, REVIERTE ese arreglo y márcalo pendiente.
 
-==================== FASE 6 — CRECER (hasta 3 páginas según GSC) ====================
-Objetivo: llenar huecos REALES con datos, no inventar páginas (eso genera doorways). Tope duro: MAX_PAGINAS = 3.
-Sigue el skill /expandir-sitio (.claude/skills/expandir-sitio/SKILL.md) y usa el ORQUESTADOR scripts/crecer.py.
+==================== FASE 6 — CRECER (loop-until-dry: lo MÁS posible con DEMANDA REAL) ====================
+Objetivo: construir y optimizar LO MÁS POSIBLE en esta corrida, SIN tope numérico arbitrario. El freno NO es
+un número (ya no existe MAX_PAGINAS): son los frenos NATURALES que protegen el SEO —
+  (1) DEMANDA REAL: una página NUEVA solo se crea si hay señal real en GSC (impresiones/volumen ≥ UMBRAL_DEMANDA);
+      sin demanda no hay página (así es imposible inflar doorways: no hay mercado que los respalde).
+  (2) ANTI-DOORWAY: cada página única (Jaccard < 0.80 — lo bloquea gate-pagina.py).
+  (3) Verificador + diff cap de la FASE 8.
+Las tareas de OPTIMIZACIÓN (ctr-fix, enriquecer, enlazado, schema, perf, fix-deuda) NO tienen riesgo de doorway:
+drénalas SIN límite. Las PÁGINAS NUEVAS, tantas como huecos de demanda real pasen los candados.
+Cota práctica de la corrida: MINUTOS_MAX = 35 (tiempo, no tokens — corre por suscripción). Sigue el skill
+/expandir-sitio y usa el ORQUESTADOR scripts/crecer.py y la cola .pipeline/gestor-backlog.py.
 
-  1. AUDITA con el MCP de GSC sobre https://plomeroculiacanpro.mx/:
-       - mcp__gsc__gsc_opportunities / mcp__gsc__gsc_keywords → queries con IMPRESIONES reales y posición 8-30 sin
-         página propia (el sitio sale "de rebote"): cada una es candidata a página que captaría ese tráfico.
-       - mcp__gsc__gsc_performance → CTR bajo + impresiones altas (mejora) y queries emergentes.
-       - mcp__gsc__gsc_inspect → páginas nuevas "descubiertas sin indexar" = reforzar enlaces internos, no duplicar.
-     Escribe .pipeline/oportunidades-$(date +%Y%m%d).md con una tabla rankeada por impacto/riesgo-doorway.
-  2. PRIORIZA las top ≤3 de mayor impacto y MENOR riesgo, respaldadas por datos de GSC sobre las especulativas.
-     Está PERMITIDO crear 0 páginas si no hay señal real de bajo riesgo: NO fuerces crecimiento (eso es doorway).
-     REGLA DE PIVOTE (obligatoria — el crecimiento NUNCA queda ocioso): si NO hay hueco para páginas
-     nuevas (el sitio ya cubre la demanda, o crear canibalizaría a una página existente), NO termines sin
-     hacer nada — PIVOTA a MEJORAR/ENRIQUECER las páginas que ya tenemos a partir de la misma tabla de
-     oportunidades: query con impresiones que rankea en una página genérica (p.ej. el home) en vez de en su
-     página dedicada → optimiza title/meta/H1 de la página dedicada hacia esa query y enlázala internamente;
-     cluster informativo que rankea pos 8-15 en un blog existente → añade esas variantes (H2/FAQ) al blog;
-     CTR 0 con buena posición → afina title/meta. Cada mejora pasa por el CANDADO y respeta las reglas de
-     contenido de la FASE 5 (sin claims engañosos, sin tocar precios). El objetivo de esta fase es: SIEMPRE
-     crear una página con señal real O, si no la hay, dejar el sitio MÁS RICO mejorando lo existente — nunca
-     ambas cosas a cero. Tope: hasta 3 acciones (crear y/o mejorar) por corrida.
+  1. DESCUBRIR (ancho) — recolecta TODO lo que califica y ENCÓLALO en el backlog (dedup automático):
+       - mcp__gsc__gsc_opportunities / gsc_keywords → queries pos 8-30 con impresiones sin página propia → `pagina-nueva`.
+       - mcp__gsc__gsc_performance → CTR bajo + impresiones altas → `ctr-fix`; query que rankea de rebote en una
+         genérica → `enriquecer` la página dedicada; queries emergentes.
+       - mcp__gsc__gsc_inspect → "descubierta sin indexar" → `enlazado` (reforzar enlaces internos, NO duplicar).
+       - matriz servicio×intención, minería de preguntas (FAQ/blog), keyword-volume-tool/, gap de competidores.
+     Encola cada hallazgo:  echo '<spec json>' | python3 .pipeline/gestor-backlog.py add -
+       (tipo/objetivo/descripcion/evidencia/impacto/esfuerzo/riesgo). DEMANDA es obligatoria para `pagina-nueva`;
+       si una idea NO trae señal de demanda, NO la encoles como página — a lo sumo como enriquecer/enlazado.
+       Riesgo de NEGOCIO (nicho/servicio que el dueño quizá no ofrece) → riesgo "alto" → la cola lo manda a humano.
+     Escribe .pipeline/oportunidades-$(date +%Y%m%d).md con la tabla rankeada (respaldo del descubrimiento).
+  2. DRENAR EN LOOP (loop-until-dry, SIN tope de 3):
+       repite:
+         a. `python3 .pipeline/gestor-backlog.py next --max 1 --riesgo-max medio` → toma la tarea de mayor prioridad.
+            Si no hay ninguna → sal del loop.
+         b. EJECÚTALA según su tipo (página nueva → paso 3; optimización → mejora directa: title/meta, H2/FAQ,
+            enlace interno, schema, perf). Pasa SIEMPRE por el CANDADO (gate-pagina.py) y las reglas de la FASE 5.
+         c. Si pasa: cierra `gestor-backlog.py close --id <id> --estado hecho --commit <sha-o-rama>`.
+            Si falla 2 veces: REVIERTE esa tarea y `close --id <id> --estado bloqueado --nota "<motivo>"`.
+       hasta que: el backlog auto-ejecutable quede vacío (2 vueltas sin sacar nada), O se alcance MINUTOS_MAX.
+       Lo que NO se alcanzó queda en el backlog y se drena la próxima corrida — NADA se pierde, el sitio mejora
+       continuamente. PERMITIDO 0 páginas nuevas si no hay demanda; lo que NUNCA queda ocioso es la optimización.
   2b. COLONIAS — estrategia de CALIDAD DIRIGIDA, no de volumen. Hoy TODAS las colonias de
      servicios/plomero-colonias-culiacan/ ya están diferenciadas e indexables (0 noindex). Por tanto NO hay
      promoción masiva pendiente. Si en el futuro se agregan colonias noindex doorway, diferenciar SOLO las
