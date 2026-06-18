@@ -18,7 +18,21 @@
 - MÓVIL: tablas con scroll horizontal; imágenes con max-width:100%; grids con auto-fit minmax, no columnas fijas; tap targets ~44px.
 - SEO: nada de doorways (páginas casi idénticas); coordenadas GPS reales y únicas; sin aggregateRating self-serving en blog; og:image/twitter:image deben existir; al borrar páginas, cero enlaces rotos + actualizar sitemap.
 - JS: tras minificar, verificar que las URLs wa.me no queden truncadas (rompe todo el sitio).
-- CONTACTO: el email correcto es info@plomeroculiacanpro.mx
+- CONTACTO: el email correcto es info@plomeroculiacanpro.mx. NUNCA un email de "electricista" (sería fuga de la plantilla origen del clon).
+- ANTI-FUGA (clon del electricista): la palabra "electricista" y el GTM del electricista (GTM-5Z2QRZ5Q) JAMÁS deben aparecer en este sitio de plomería. El generador (`gen-landing.py`) y `validate-landing.sh` ABORTAN si las detectan.
+
+## Pipeline de crecimiento autónomo (clon adaptado del Auto Agente del electricista)
+- **Mapa completo del sistema: `AUTOMATIZACION.md`** (cómo encajan skill + orquestador + motor + driver diario).
+- **Orquestador (punto de entrada determinista): `scripts/crecer.py`** — `estado` | `servicio spec.json` | `colonia spec.json` | `gate <ruta>` | `publicar "msg"`. Automatiza crear + sitemap (`sitemaps/main_sitemap.xml`) + enlace en la home + bump sw (`CACHE_NAME='plomero-culiacan-vN'`) + candado + publicar.
+- Invocar el cerebro con `/expandir-sitio` (skill en `.claude/skills/expandir-sitio/SKILL.md`). Hermano de `/mantener-sitio`: aquél ARREGLA, éste CREA lo que falta. La auditoría GSC (propiedad `https://plomeroculiacanpro.mx/`) y la indexación por MCP viven en el skill. Tope duro `MAX_PAGINAS=3` por corrida.
+- Backbone determinista (garantiza paridad de plantilla y bloquea doorways):
+  - `python3 .pipeline/gen-landing.py spec.json` — genera copiando un esqueleto byte a byte + sustituciones afirmadas (aborta si no calzan o si hay fuga "electricista").
+  - `python3 .pipeline/gate-pagina.py <ruta/index.html> ...` — candado: validate-landing + ci-gate (0 ALTA) + anti-doorway (Jaccard < 0.80 vs hermanas).
+- Generadores reusables (corren `--ejemplo` para ver el spec): `scripts/crear-servicio.py` (servicio nuevo; esqueleto `servicios/plomero-zona-oriente-culiacan/`, el campo `cuerpo_html` lleva la PROSA ÚNICA) · `scripts/diferenciar-colonia.py` (promueve colonia noindex→indexable; hoy no hay colonias noindex).
+
+## Auto Agente diario (mantener + crecer + verificar + aprender, una corrida)
+- Driver: `.pipeline/crecer-diario.sh` · Prompt (10 fases): `.pipeline/crecer-diario-prompt.txt` · Horario 18:25: `.pipeline/launchd/com.plomeroculiacan.autoagente.plist`.
+- Reemplaza al viejo job de solo-mantenimiento (comparten el lock `/tmp/plomero-mantener-sitio.lock` para no correr ambos). El `catchup.sh` recupera la corrida si la Mac estaba apagada a la hora.
 
 ## Comandos útiles
 - git log --oneline -30  (ver historia reciente)
