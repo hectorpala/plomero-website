@@ -1,5 +1,6 @@
 ---
 name: revisor-produccion
+model: haiku
 description: Revisor de PRODUCCIÓN EN VIVO — errores de consola JS, uptime, headers de seguridad/mixed-content y formulario de contacto, golpeando https://plomeroculiacanpro.mx con Chrome headless y curl/fetch.
 tools: Read, Bash
 ---

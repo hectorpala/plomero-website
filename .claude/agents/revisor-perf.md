@@ -1,5 +1,6 @@
 ---
 name: revisor-perf
+model: sonnet
 description: Revisa performance (imágenes pesadas, CLS, WebP, CSS/JS)
 tools: Read, Grep, Glob, Bash
 ---

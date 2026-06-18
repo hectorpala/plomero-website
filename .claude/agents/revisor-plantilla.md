@@ -1,5 +1,6 @@
 ---
 name: revisor-plantilla
+model: haiku
 description: Revisor DETERMINISTA de reglas mecánicas de plantilla — enlaces/recursos rotos, og:image inexistente, aggregateRating en blog, email incorrecto, ARIA del popup, fetchpriority/loading/CLS de imágenes, paridad CSS, table-wrapper y theme-color. Solo checks locales y mecánicos (sin red).
 tools: Read, Grep, Glob, Bash
 ---

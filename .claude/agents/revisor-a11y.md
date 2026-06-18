@@ -1,5 +1,6 @@
 ---
 name: revisor-a11y
+model: sonnet
 description: Revisa accesibilidad (contraste, alt, labels, headings, foco)
 tools: Read, Grep, Glob, Bash
 ---

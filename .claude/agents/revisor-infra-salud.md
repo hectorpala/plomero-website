@@ -1,5 +1,6 @@
 ---
 name: revisor-infra-salud
+model: haiku
 description: Dead-man's switch del pipeline — verifica que los SENSORES funcionan (frescura del cron, token GSC vivo, checkers deterministas sanos, producción 200) antes que cualquier otro revisor. Corre PRIMERO.
 tools: Read, Bash
 ---

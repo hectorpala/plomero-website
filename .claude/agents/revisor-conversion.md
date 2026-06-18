@@ -1,5 +1,6 @@
 ---
 name: revisor-conversion
+model: haiku
 description: Revisor DETERMINISTA de conversión — por cada página indexable asegura tel: y wa.me con el número correcto, un CTA antes del fold, y formulario en las páginas clave. Solo checks locales y mecánicos.
 tools: Read, Grep, Glob, Bash
 ---

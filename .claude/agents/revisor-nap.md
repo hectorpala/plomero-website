@@ -1,5 +1,6 @@
 ---
 name: revisor-nap
+model: haiku
 description: Revisor DETERMINISTA de NAP — el nombre del negocio, el teléfono y el email deben ser idénticos en todo el sitio (señal de SEO local). Marca variantes y el dominio de email incorrecto. Solo checks locales.
 tools: Read, Grep, Glob, Bash
 ---

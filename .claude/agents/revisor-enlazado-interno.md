@@ -1,5 +1,6 @@
 ---
 name: revisor-enlazado-interno
+model: haiku
 description: Revisor DETERMINISTA de enlazado interno — arma el grafo de hrefs internos entre páginas indexables y detecta huérfanas (0 enlaces entrantes) y páginas a más de 3 clics del home. Solo checks locales.
 tools: Read, Grep, Glob, Bash
 ---

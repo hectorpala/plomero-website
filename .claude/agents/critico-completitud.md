@@ -1,5 +1,6 @@
 ---
 name: critico-completitud
+model: opus
 description: Detecta huecos ciegos del pipeline — qué tipos de problema NO se están revisando — y propone nuevas inspecciones o reglas. Solo propone, no modifica.
 tools: Read, Grep, Glob, Bash
 ---

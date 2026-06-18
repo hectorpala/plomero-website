@@ -1,5 +1,6 @@
 ---
 name: revisor-contenido
+model: opus
 description: Revisor de CONTENIDO — parte MECÁNICA determinista (restos de plantilla, placeholders, años caducos en título/h1) vía checker, y parte SUBJETIVA por LLM (thin content, duplicado, ortografía). Lo subjetivo NO va en el checker.
 tools: Read, Grep, Glob, Bash
 ---

@@ -1,5 +1,6 @@
 ---
 name: revisor-gsc
+model: sonnet
 description: Revisa datos reales de Google Search Console (indexación, cobertura, sitemaps, rendimiento) y los convierte en hallazgos accionables
 tools: Read, Bash, mcp__local-seo__search_keywords, mcp__local-seo__find_opportunities
 ---

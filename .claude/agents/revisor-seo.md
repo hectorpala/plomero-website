@@ -1,5 +1,6 @@
 ---
 name: revisor-seo
+model: sonnet
 description: Revisa SEO técnico del sitio (titles, meta, schema, sitemap, canonical, og:image)
 tools: Read, Grep, Glob, Bash
 ---

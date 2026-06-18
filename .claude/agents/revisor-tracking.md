@@ -1,5 +1,6 @@
 ---
 name: revisor-tracking
+model: haiku
 description: Revisor de TRACKING (GTM/GA) — carga las páginas clave en Chrome headless, simula la primera interacción (el sitio difiere GTM para proteger el LCP) y confirma que dataLayer existe, el contenedor GTM carga y se dispara la request a GA.
 tools: Read, Bash
 ---

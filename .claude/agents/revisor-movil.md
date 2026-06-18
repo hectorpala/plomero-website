@@ -1,5 +1,6 @@
 ---
 name: revisor-movil
+model: sonnet
 description: Revisa problemas de diseño móvil/responsive
 tools: Read, Grep, Glob, Bash
 ---

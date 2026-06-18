@@ -1,5 +1,6 @@
 ---
 name: revisor-links
+model: sonnet
 description: Revisa enlaces y recursos rotos
 tools: Read, Grep, Glob, Bash
 ---

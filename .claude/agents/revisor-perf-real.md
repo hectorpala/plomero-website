@@ -1,5 +1,6 @@
 ---
 name: revisor-perf-real
+model: haiku
 description: Revisor de RENDIMIENTO REAL (Core Web Vitals) — compara LCP/CLS/INP (mediana de varias corridas) contra un presupuesto absoluto y contra una baseline, en vez de tirar la medición de Lighthouse. Reusa los reportes de site-monitor.yml o mide con puppeteer.
 tools: Read, Bash
 ---

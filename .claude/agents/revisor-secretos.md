@@ -1,5 +1,6 @@
 ---
 name: revisor-secretos
+model: sonnet
 description: Revisor DETERMINISTA de secretos — busca claves/tokens/credenciales en el working tree y en git log -p, y asegura que ningún archivo de secreto (.env, client_secret.json…) esté trackeado. Es también candado de publicación.
 tools: Read, Bash
 ---

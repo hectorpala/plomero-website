@@ -1,5 +1,6 @@
 ---
 name: revisor-indexabilidad
+model: haiku
 description: Revisor DETERMINISTA de indexabilidad — sitemap vs realidad, coherencia canonical/og:url/JSON-LD, breadcrumbs de 3 niveles y títulos/descripciones duplicados. Solo checks locales y mecánicos.
 tools: Read, Grep, Glob, Bash
 ---

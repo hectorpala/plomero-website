@@ -1,5 +1,6 @@
 ---
 name: revisor-e2e-funcional
+model: haiku
 description: Revisor E2E FUNCIONAL — con Chrome headless prueba los flujos reales: abrir el menú hamburguesa, enviar el formulario SIN mandar lead real (aborta el POST) y que el enlace wa.me tenga el número correcto.
 tools: Read, Bash
 ---
