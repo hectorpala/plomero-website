@@ -274,6 +274,19 @@ def check_page(fpath, t, noindex, redirects):
             "Email con dominio incorrecto @plomeropro.com",
             "Usar info@plomeroculiacanpro.mx (dominio correcto)")
 
+    # --- 4b. fuga de esqueleto: wa.me ?text= con una "zona" ajena al slug de la página (media, contenido)
+    #     caso crece-001: una página de servicio nueva heredó "zona oriente" del esqueleto de zona,
+    #     así el lead de WhatsApp llega con la intención equivocada.
+    for m in re.finditer(r'wa\.me/\d+\?text=([^"\'\s>]+)', t, re.I):
+        texto = m.group(1).replace("%20", " ").lower()
+        for z in ("oriente", "norte", "poniente", "sur"):
+            if ("zona " + z) in texto and ("zona-" + z) not in r:
+                add("media", r, "contenido",
+                    "Mensaje de WhatsApp prellenado con 'zona %s' en una página cuyo slug no es de esa zona "
+                    "(fuga del esqueleto plomero-zona-%s-culiacan)" % (z, z),
+                    "Reemplazar el ?text= del enlace wa.me por un mensaje acorde al servicio/zona de ESTA página")
+                break
+
     # --- 5. exit-intent-popup sin ARIA (media, a11y)
     mp = re.search(r'<div\b[^>]*id=["\']exit-intent-popup["\'][^>]*>', t, re.I)
     if mp:
