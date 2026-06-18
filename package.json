@@ -8,7 +8,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "python3 -m unittest discover -s tests -p 'test_*.py' -v",
     "clean": "npm run clean:ds-store && npm run clean:logs",
     "clean:ds-store": "find . -name '.DS_Store' -type f -delete && echo '✓ .DS_Store files deleted'",
     "clean:logs": "find . -name '*.log' -type f -delete && echo '✓ Log files deleted'",

@@ -131,7 +131,10 @@ y NUNCA usa --force):
 Lanza un subagente APRENDIZ (Task) cuyo único objetivo es que el MISMO error NO se repita y se detecte MECÁNICAMENTE
 la próxima vez. Para cada error corregido este día —sobre todo REGRESIONES y errores humanos de contenido—:
   a. Añade o CONSOLIDA (no dupliques) una regla de PREVENCIÓN en REGLAS.md: qué pasó, por qué, y la regla dura para
-     no repetirlo. Si varias reglas se solapan, fúndelas.
+     no repetirlo. Si varias reglas se solapan, fúndelas. PRESUPUESTO (REGLAS.md se inyecta en CADA corrida y lo lee
+     cada subagente — el bloat cuesta tokens y diluye atención): corre `python3 .pipeline/check-reglas.py`; si excede,
+     CONSOLIDA hasta que pase — cada regla = 1-2 líneas accionables (qué hacer + el checker que lo caza) y el relato de
+     cada incidente va a HISTORIAL.jsonl, NO a REGLAS.md. Cuando un error ya está mecanizado, la regla se reduce a «qué + checker».
   b. Si el error es mecanizable, propón el CHECK que lo cazaría solo y, si es de bajo riesgo, AÑÁDELO a
      .pipeline/check-plantilla.py (o el checker que corresponda) para que de ahora en más sea un hallazgo
      determinista y deje de depender de que un LLM "se acuerde". Verifica que el checker sigue imprimiendo JSON
@@ -191,5 +194,12 @@ Estructura EXACTA del parte (respétala):
   ## 📦 ¿Se publicó?
   <"Sí, todo revisado y en vivo; le avisé a Google para que lo muestre." | "No publiqué: <motivo simple>;
    lo dejé guardado para revisión.">
+
+CUADRE OBLIGATORIO del parte (antes de terminar): corre `python3 .pipeline/check-parte.py .pipeline/ultima-corrida.md`.
+Verifica que los conteos del encabezado ("Encontré N: arreglé X · Y · Z") igualen EXACTAMENTE los ítems listados en
+cada sección y que NINGUNA URL que digas haber arreglado/mejorado sea de una página inexistente. Si NO cuadra, CORRIGE
+el parte hasta que pase — el parte debe reflejar EXACTAMENTE lo que cambió, ni más ni menos. (Variante con cuadre contra
+el diff de la corrida, útil ANTES de publicar con la rama aún viva: `… --diff-base main`.) Si igual lo dejas desfasado,
+el driver lo detecta y antepone un aviso visible al correo — no cuentes con que pase inadvertido.
 
 Ante cualquier ambigüedad o riesgo, prefiere NO publicar y dejarlo para revisión humana.

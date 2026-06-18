@@ -37,11 +37,40 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Corrida autónoma del sistema completo (auto-permiso). El prompt orquesta las 10 fases.
+RUN_START=$(date +%s)   # para atribuir el costo (tokens) de los transcripts de ESTA corrida
 if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then
   CLAUDE_OK=1
 else
   CLAUDE_OK=0
   echo "[$STAMP] La corrida de claude terminó con error (continúo para enviar el parte)." >> "$LOG"
+fi
+
+# Registro de costo/tokens de la corrida (no bloqueante): suma los transcripts (sesión + subagentes)
+# producidos desde RUN_START y los anexa a .pipeline/costos.jsonl. Da visibilidad del gasto diario.
+/usr/local/bin/node "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/registrar-costo.mjs" \
+  "$HOME/.claude/projects/-Users-openclaw-Sitios-Web-Plomero-Culiac-n" "$RUN_START" \
+  "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/costos.jsonl" "auto-agente $STAMP" >> "$LOG" 2>&1 \
+  || echo "[$STAMP] No pude registrar el costo de la corrida (sigo)." >> "$LOG"
+
+# Cuadre del parte (red de seguridad INDEPENDIENTE del LLM): verifica que el correo cuadre con los
+# cambios reales (conteos del encabezado == ítems listados, y ninguna URL "arreglada" inventada).
+# Si NO cuadra, antepone un AVISO automático al cuerpo del correo para que el humano SIEMPRE lo vea
+# (el agente no puede esconder una discrepancia). No bloquea el envío.
+PARTE="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ultima-corrida.md"
+if [ -f "$PARTE" ]; then
+  if ! CUADRE=$(python3 "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/check-parte.py" "$PARTE" 2>&1); then
+    {
+      echo "## ⚠️ AVISO AUTOMÁTICO — el parte no cuadra con los cambios reales"
+      echo "**Esto lo verificó el sistema, NO el agente.** Revisa el parte de abajo con ojo crítico — puede faltar o sobrar algo de lo reportado:"
+      echo
+      echo "$CUADRE"
+      echo
+      echo "---"
+      echo
+      cat "$PARTE"
+    } > "$PARTE.tmp" && mv "$PARTE.tmp" "$PARTE"
+    echo "[$STAMP] check-parte: el parte NO cuadra; antepuse aviso al correo." >> "$LOG"
+  fi
 fi
 
 # Parte por email — SIEMPRE, aun si la corrida falló (send-report alerta si el resumen es viejo/ausente).
