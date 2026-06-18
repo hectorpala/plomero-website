@@ -22,7 +22,7 @@
       "sin_borrados_estructurales": "0 borrados, 0 renombrados",
       "tests_tocados": "0",
       "sin_electricista_ni_gtm_ajeno": true,
-      "publicado": "PENDIENTE (ver abajo)"
+      "publicado": "SI — push b1ef40c1..9d3c170d main->main. El gate pre-push EXPUSO una falla pre-existente: validate-landing exige <meta name=robots> y reparacion-de-fugas (10+ paginas de servicio antiguas) no lo tenia; mi edicion la metio al alcance del gate. Anadido el robots meta estandar (commit extra), gate verde, pusheado. Auto-indexado /servicios/reparacion-de-fugas/ en Google (token OAuth vivo). Nota: crecer.py publicar crasheo con UnicodeDecodeError al decodificar la salida del hook (byte 0x80) DESPUES de commitear+merge; el push se completo a mano con PATH=/usr/local/bin git push (infra-002). Pendiente menor (infra-004): crecer.py debe decodificar la salida de git con errors='replace'."
     }
   },
   "corrida_previa": {
