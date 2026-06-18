@@ -51,23 +51,34 @@ defecto, NO la descripción en texto libre). Búscala en HISTORIAL.jsonl: si es 
 reaparece, márcalo REGRESIÓN (prioridad alta: falta una regla/checker que lo prevenga); si sigue pendiente, solo
 cuéntalo. Ignora lo marcado como decisión humana. Añade nuevos y regresiones a HISTORIAL.jsonl con la fecha de hoy.
 
-==================== FASE 5 — CORREGIR (mecánicos + humanos), uno por uno ====================
-Arregla, con cambios MÍNIMOS y respetando TODAS las reglas de REGLAS.md, los hallazgos de severidad alta y media:
+==================== FASE 5 — ARREGLAR TODO (sin cola humana; el freno es la CALIDAD) ====================
+Arregla TODO lo que encuentres, BIEN HECHO. NO hay cola humana: no difieras lo arreglable "por timidez". El freno
+NO es un humano — son los CANDADOS de calidad: validate-landing + gate-pagina + anti-doorway + verificador + medición
+headless + demanda real de GSC. Si un arreglo pasa los candados, VA; si no, se itera; nada se publica roto.
 
-  • MECÁNICOS: envolver/ajustar CSS, max-width, table-wrapper, aria-label, foco visible, versionar assets con ?v=
-    + bump de CACHE_NAME en sw.js (en los CSS), corregir enlaces/imágenes rotas a archivos que EXISTEN, quitar
-    bloques de schema inválidos puntuales, og:image inexistente, theme-color, fetchpriority/CLS.
+DISPOSICIÓN de cada hallazgo (de barato a potente — usa el primero que aplique, NO te frenes en ninguno):
+  1) ¿Tiene auto-fixer conocido?  → `python3 .pipeline/auto-fixers.py run --apply [rutas]`  (mecánico, SIN límite).
+  2) ¿Mecánico simple sin fixer aún?  → arréglalo a mano Y mecanízalo en FASE 9 (que la próxima vez sea auto).
+  3) ¿ESTRUCTURAL o un tipo NUEVO sin receta (p.ej. un hero mal armado)? → lanza el subagente `fixer-autonomo`
+     (Task), que actúa como humano incansable con criterio de senior dev y NO se frena. Hace SELF-PROMPTING:
+       (a) abre el HOME `index.html` (y/o una página HERMANA sana) como ESQUELETO de referencia (la estructura = la verdad);
+       (b) escribe TU PROPIO brief de arreglo ("transforma esta sección para que calce EXACTO con el esqueleto");
+       (c) aplícalo;  (d) VERIFÍCALO contra los candados (validate-landing + gate-pagina) y MÍDELO headless
+           (sin overflow a 375px, tap targets ≥44px, 0 errores JS, JSON-LD parsea) — ITERA hasta 3 veces.
+       Si pasa, VA. Si tras 3 intentos no pasa, deja esa página en la rama con una nota y SIGUE con lo demás
+       (no congeles la corrida por una sola página).
+  4) CONTENIDO / copy → reescríbelo BIEN y completo, orientado a la QUERY real de GSC y al CTR: que SIRVA de
+     contenido y dé CLICKS (títulos/H1/meta que respondan la intención; ortografía, mojibake, frases truncadas,
+     años caducos; sin claims que violen REGLAS.md). Conserva y mejora la intención SEO.
 
-  • HUMANOS / DE CONTENIDO (reescríbelos BIEN y por completo, no a medias): faltas de ortografía y gramática,
-    caracteres mal codificados (cirílicos/mojibake), frases truncadas o duplicadas, años caducos en title/H1,
-    email contaminado (debe ser info@plomeroculiacanpro.mx — NUNCA un email de "electricista"), fugas de plantilla
-    (la palabra "electricista" o el GTM del electricista GTM-5Z2QRZ5Q NUNCA deben aparecer en este sitio de plomería),
-    y claims que violan REGLAS.md (p.ej. "se pagan solos", "sin riesgos", tiempos de llegada en servicios que no son
-    emergencia). Reescribe el texto correcto y natural, conservando intención SEO.
+REGLA DE ORO — DERIVA, NO INVENTES: todo DATO (conteos, números, fechas, precios) se DERIVA del source of truth
+(el repo, GSC, los archivos), nunca se inventa. Si un dato solo lo sabe el dueño y NO se puede derivar (p.ej. un
+precio nuevo, o cuántas colonias atiende de verdad), NO inventes una cifra: deja lo existente CONSISTENTE — si hay
+varias versiones contradictorias (p.ej. "600" vs "640+" vs "1,895" colonias), UNIFÍCALAS a una sola defendible — y
+menciónalo en el parte en UNA línea (sin cola). Nunca pongas un número que no puedas respaldar: eso no es "bien hecho".
 
-  PROHIBIDO en automático (anótalo como PENDIENTE HUMANO en ESTADO.md, no lo hagas): cambiar precios; fusionar,
-  borrar o reescribir páginas completas; apuestas de estrategia SEO; añadir servicios que el negocio NO ofrece;
-  borrar o editar tests; cualquier cambio que elimine más de 5 archivos completos. Estos son criterio del dueño.
+Siguen vigentes TODAS las reglas duras de REGLAS.md y la anti-fuga (email correcto; jamás "electricista"/GTM ajeno).
+Detalle de la frontera "deriva no inventes" y de la calidad mínima: .pipeline/CALIDAD-Y-VERDAD.md.
 
   Tras CADA arreglo, verifícalo con el sitio corriendo, escéptico (asume que NO se arregló salvo prueba).
   Reintenta máximo 2 veces; si no se logra, REVIERTE ese arreglo y márcalo pendiente.
