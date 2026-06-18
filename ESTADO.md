@@ -90,6 +90,18 @@
 }
 ```
 
+## Resumen de la corrida 2026-06-18 15:37 (auto/diario-20260618-1537 — AUTÓNOMA, 2ª del día / FORCE_RUN)
+
+- **Contexto:** la corrida diaria normal ya había corrido y PUBLICADO hoy (merge `1f89c325`, marca `last-run-day=20260618`). Esta es una 2ª corrida forzada (driver PID 58553). Por eso el diff de páginas servidas desde la última auto-diario es casi nulo.
+- **Health check:** 5/5 rutas clave 200 (/, /contacto/, /servicios/, /blog/, /precios/).
+- **Fan-out selectivo:** selector contra `1f89c325` → 1 sola página servida cambiada (reparacion-de-fugas, el `<meta robots>` ya publicado hoy). PISO determinista corrido directo, **limpio sobre corpus real**: infra-salud exit 0 (sensores sanos), ci-gate 0 ALTA (25 media/baja conocidas = theme-color+tablas), NAP 0/78, conversión 0/67, e2e 0/3, indexabilidad 0, producción EN VIVO 0 hallazgos. Conocidos/esperados sin re-reportar: sec-001 (secreto histórico en git, R-01, no bloquea publicación), trk-001..004 (Consent Mode denegado en headless = esperado).
+- **Crecimiento (FASE 6) — drenado 1 de optimización del backlog:**
+  - **bk-028dd6c5 / deuda-robots-001** (BAJA, fix-deuda): 8 páginas de servicio indexables (en sitemap, ninguna noindex) no tenían `<meta name="robots">` — lo expone el gate al editarlas (mismo patrón que reparacion-de-fugas hoy). Añadido el estándar `index, follow, max-image-preview:large…` antes del canonical en: correccion-baja-presion, deteccion-de-fugas, emergencia-24-7, instalacion-de-sanitarios, mantenimiento-de-boiler, plomero-colonias-culiacan, reparacion-de-boiler, tecnico-de-gas-culiacan. Solo HTML → sin bump `?v=`/sw.js. **gate-pagina 8/8 OK** (Jaccard 0.19–0.42), ci-gate 0 ALTA, HTTP 200 en las 8.
+  - Backlog: el resto NO se drenó por riesgo/alcance: bombas-de-agua (página nueva aprobada por el dueño, contenido extenso — se deja en cola para una corrida dedicada, no se rushea), conteo colonias 600/640+ (no toco claim sin cifra real), imagen tinaco (asset binario), breadcrumb #servicios 18 págs (excede candado).
+- **Verificador independiente (FASE 7): ok=true, 0 problemas.** Re-corrió gate-pagina 8/8, ci-gate 0 ALTA, HTTP 200, canonical==og:url donde existe, robots ×1 por página antes del canonical, 0 fuga electricista/GTM ajeno, email correcto, wa.me intactas, instalacion-de-tinaco intacta.
+- **Hallazgo nuevo (pendiente, NO auto):** **plt-hero-tinaco** (MEDIA) — `instalacion-de-tinaco` tiene `class="hero"` pero le falta el wrapper `div.hero-content` del estándar → validate-landing/gate-pagina FALLAN. Por eso se EXCLUYÓ del lote de robots (editarla la metía al gate y bloqueaba el push). Encolado bk-3527704a (requiere reestructura de hero + verificación visual). También **seo-ogurl-6serv** (BAJA): 6 de las 8 páginas no emiten `<meta property="og:url>` (canonical correcto; inconsistencia, no rotura).
+- **Candados paso 8:** verificador ok=true; diff 8 archivos de sitio + docs ≤ 18; 0 borrados/renombrados; 0 tests/precios/CSS/JS tocados; sin electricista/GTM ajeno. → cumplidos.
+
 ## Resumen de la corrida 2026-06-16 08:31 (auto/mantenimiento-20260616-0831 — AUTÓNOMA)
 
 - **Health check:** 5/5 rutas clave en 200 (/, /precios/, /contacto/, /servicios/, /blog/), node v22.18 vía /usr/local/bin. Compuerta `revisor-infra-salud` (check-infra.mjs) **exit 0, 0 hallazgos** (sensores sanos). main = origin/main sincronizados al inicio.
