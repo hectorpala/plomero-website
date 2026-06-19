@@ -675,3 +675,20 @@ window.dataLayer.push({
 } catch(e) {}
 }
 })();
+/* Lead tracking UNIVERSAL: cualquier clic a WhatsApp o telefono, en CUALQUIER pagina
+   (hero, flotantes, inline, paginas de servicio). Empuja generate_lead a dataLayer en el
+   momento del clic (queda en la cola aunque GTM cargue diferido). Listener delegado en captura. */
+(function() {
+  document.addEventListener('click', function(e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var metodo = (href.indexOf('wa.me') !== -1 || href.indexOf('api.whatsapp') !== -1) ? 'whatsapp'
+               : (href.indexOf('tel:') === 0) ? 'llamada' : null;
+    if (!metodo) return;
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'generate_lead', metodo: metodo, page: location.pathname });
+    } catch (err) {}
+  }, true);
+})();
