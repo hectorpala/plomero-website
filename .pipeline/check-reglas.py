@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# infra:utilidad-no-sensor (no emite el contrato {hallazgos}; se auto-excluye del dead-man's switch — infra-003)
 """check-reglas.py — Guard de PRESUPUESTO de REGLAS.md.
 
 REGLAS.md se inyecta como contexto en CADA corrida y lo lee CADA subagente (~19 lecturas/día).

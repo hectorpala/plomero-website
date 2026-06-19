@@ -52,7 +52,9 @@ const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking
 // No son checkers de páginas con el contrato JSON estándar (se excluyen del barrido local).
 // check-parte.py (valida un parte concreto; requiere argumento) y check-reglas.py (utilidad de
 // presupuesto de REGLAS.md) NO emiten {"hallazgos":[...]} — no son sensores de página.
-const NOT_PAGE_CHECKERS = new Set(["check-infra.mjs", "check-secretos.sh", "check-parte.py", "check-reglas.py"]);
+// Solo el NÚCLEO va aquí. Las utilidades (check-parte.py, check-reglas.py, …) se auto-excluyen
+// declarando `infra:utilidad-no-sensor` en su cabecera (ver esUtilidadDeclarada) — evita infra-003.
+const NOT_PAGE_CHECKERS = new Set(["check-infra.mjs", "check-secretos.sh"]);
 
 const SKIP_DIRS = ["/node_modules/", "/.git/", "/partials/", "/docs/", "/.netlify/",
   "/reivision de sitio/", "/site-check/", "/keyword-volume-tool/", "/mcp-local-seo/", "/scripts/"];
@@ -132,9 +134,17 @@ function checkGsc() {
 }
 
 // ---------------------------------------------------------------- (c) checkers sanos
+// Una utilidad (no-sensor de página) puede auto-excluirse SIN tocar este archivo declarando el
+// marcador `infra:utilidad-no-sensor` en su cabecera. Evita la regresión infra-003 (añadir un
+// check-*.py utilitario y olvidar NOT_PAGE_CHECKERS -> ALTA falsa de "verificación ciega").
+function esUtilidadDeclarada(f) {
+  try {
+    return fs.readFileSync(`${__dirname}/${f}`, "utf8").slice(0, 800).includes("infra:utilidad-no-sensor");
+  } catch (_) { return false; }
+}
 function listPageCheckers() {
   return fs.readdirSync(__dirname)
-    .filter((f) => /^check-.*\.(py|mjs)$/.test(f) && !NOT_PAGE_CHECKERS.has(f))
+    .filter((f) => /^check-.*\.(py|mjs)$/.test(f) && !NOT_PAGE_CHECKERS.has(f) && !esUtilidadDeclarada(f))
     .sort();
 }
 function corpusSanity() {

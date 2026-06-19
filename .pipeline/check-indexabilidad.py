@@ -290,13 +290,17 @@ def main():
                     "canonical de %s apunta a OTRA URL (%s), no a si misma" % (loc, canonical),
                     "Corregir canonical a %s" % loc)
 
-            # 2: og:url == canonical (referencia seo-201..207)
+            # 2: og:url == canonical (referencia seo-201..207, seo-ogurl-6serv)
             ref = canonical or loc
             og = get_og_url(t)
             if og is not None and og != ref:
                 add("alta", r,
                     "og:url (%s) != canonical (%s) en %s" % (og, ref, loc),
                     "Corregir <meta property=\"og:url\"> a %s" % ref)
+            elif og is None:
+                add("media", r,
+                    "%s (indexable) no emite <meta property=\"og:url\">; inconsistente con el estándar (las hermanas sí lo tienen). Ausente != incorrecto, pero deja la página sin la señal" % loc,
+                    "Añadir <meta property=\"og:url\" content=\"%s\"> junto al resto de etiquetas og en el <head>" % ref)
 
             # 2: BreadcrumbList ultimo item == canonical + 3 niveles en /servicios/ (seo-301..303)
             found = parse_jsonld(t)

@@ -111,7 +111,7 @@ if __name__ == "__main__":
 
 ---
 
-## [PENDIENTE] seo — Cazar `og:url` AUSENTE (no solo el incorrecto) en páginas indexables   (impacto M · esfuerzo S · riesgo bajo)
+## [HECHO 2026-06-19] seo — Cazar `og:url` AUSENTE (no solo el incorrecto) en páginas indexables   (impacto M · esfuerzo S · riesgo bajo)
 **Problema:** `check-indexabilidad.py` (~L296) solo marca `og:url` cuando está presente Y difiere del canonical (`if og is not None and og != ref`). Si la etiqueta **falta del todo**, no la caza nadie — la inconsistencia queda como deuda silenciosa.
 **Evidencia (HISTORIAL):** `seo-ogurl-6serv` — "6 de 8 páginas de servicio no emiten `<meta property=og:url>`... Inconsistencia con el estándar... og:url ausente != og:url incorrecto" → quedó PENDIENTE porque el checker no lo detecta. Mismo eje que las regresiones `seo-206/207` (og:url) ya mecanizadas para el caso "incorrecto".
 **Propuesta:** Añadir una rama `elif og is None` al bloque que ya existe, severidad `media` (ausencia es inconsistencia, no contradicción → no bloquea, pero el diario la drena). Edición de 5 líneas en el checker que YA recorre todas las páginas del sitemap.
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 
 ---
 
-## [PENDIENTE] infra — Eliminar el acoplamiento que hace mentir al dead-man's switch (regresión infra-003)   (impacto M · esfuerzo S · riesgo bajo)
+## [HECHO 2026-06-19] infra — Eliminar el acoplamiento que hace mentir al dead-man's switch (regresión infra-003)   (impacto M · esfuerzo S · riesgo bajo)
 **Problema:** `check-infra.mjs` clasifica los checkers con una denylist HARDCODEADA (`NOT_PAGE_CHECKERS`). Cada vez que se añade un checker UTILITARIO (que no emite el contrato `{hallazgos}`) hay que acordarse de editar ese set central; si se olvida, el sensor emite ALTA falsa de "verificación ciega". El sensor miente.
 **Evidencia (HISTORIAL):** `infra-003` — "REGRESION introducida por commit 2871010f: se añadieron check-parte.py y check-reglas.py sin actualizar NOT_PAGE_CHECKERS → 2 ALTA falsas de 'verificación ciega'. El sensor mentía." (categoría infra, severidad alta).
 **Propuesta:** Hacer que una utilidad pueda **auto-excluirse declarando un marcador en su propio archivo** (`infra:utilidad-no-sensor`), sin tocar `check-infra.mjs`. Cambio puramente ADITIVO (la denylist sigue valiendo para el núcleo): elimina el acoplamiento que causó la regresión, es local y auto-documentado. (No invertir a allowlist: un olvido ahí apagaría un sensor REAL en silencio — peor que una ALTA ruidosa.)

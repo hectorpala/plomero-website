@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# infra:utilidad-no-sensor (candado por-argumentos; no emite el contrato {hallazgos} — se auto-excluye del dead-man's switch)
 """
 check-pagina-nueva.py — CANDADO para páginas NUEVAS (recién creadas en el push).
 Hace AUTOMÁTICO (bloqueante) lo que el dueño pidió y antes solo vivía como nota:

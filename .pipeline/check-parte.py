@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# infra:utilidad-no-sensor (no emite el contrato {hallazgos}; se auto-excluye del dead-man's switch — infra-003)
 """check-parte.py — CUADRE determinista del parte por email contra los cambios reales.
 
 Cierra el hueco: la completitud del parte (.pipeline/ultima-corrida.md) la auto-reporta el LLM
