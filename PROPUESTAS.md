@@ -162,7 +162,7 @@ function esUtilidadDeclarada(f) {
 
 ---
 
-## [PENDIENTE] costo — Tripwire de visibilidad de costo por corrida   (impacto B · esfuerzo S · riesgo bajo)
+## [HECHO 2026-06-19] costo — Tripwire de visibilidad de costo por corrida   (impacto B · esfuerzo S · riesgo bajo)
 **Problema:** El costo por corrida se registra en `costos.jsonl` pero nada lo VIGILA: un pico solo se descubriría en la factura. No hay alerta cuando una corrida se dispara.
 **Evidencia (brief de costo):** corridas en M tokens: `35.5 · 11.8`; la corrida grande del 2026-06-18 = **35.5M tokens / ~$91 api-ref** (3× la corrida normal de 11.8M). Solo 2 datapoints, pero el pico es real.
 **Propuesta:** Checker liviano `check-costos.py` que lee la última fila de `costos.jsonl` y emite un hallazgo `media` si supera el presupuesto (tokens o USD). Solo VISIBILIDAD (no corta nada): el pico aparece en el reporte diario. Se auto-integra (emite `{hallazgos}`, lo smoke-testea check-infra). Umbral conservador (≈2× la corrida normal) para no alertar de rutina.
