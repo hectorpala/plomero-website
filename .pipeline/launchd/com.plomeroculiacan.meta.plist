@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Crítico-Sistema — meta-pase 3×/semana (Lun/Mié/Vie 09:15). Observa el sistema y deja PROPUESTAS.
+  ACTIVAR:
+    cp ".pipeline/launchd/com.plomeroculiacan.meta.plist" ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.plomeroculiacan.meta.plist
+  PROBAR YA:  launchctl start com.plomeroculiacan.meta
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.plomeroculiacan.meta</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/meta-semanal.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>15</integer></dict>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>15</integer></dict>
+        <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>15</integer></dict>
+    </array>
+    <key>StandardOutPath</key>
+    <string>/Users/openclaw/Library/Logs/mantener-sitio/meta-launchd.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/openclaw/Library/Logs/mantener-sitio/meta-launchd.err.log</string>
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

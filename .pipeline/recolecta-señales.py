@@ -55,7 +55,7 @@ def sec_historial():
 
 
 def sec_costos():
-    c = _jsonl("costos.jsonl")
+    c = _jsonl(".pipeline/costos.jsonl")
     print("## COSTO/CUOTA — uso por corrida (%d corridas registradas)" % len(c))
     if not c:
         print("  (sin datos)\n"); return
