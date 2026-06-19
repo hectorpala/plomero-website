@@ -63,6 +63,19 @@ def _fix_email(h):
             h.count('info@plomeropro.com'))
 
 
+_ROBOTS = '<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">'
+
+def _det_robots(h):
+    # página indexable (tiene canonical, no es noindex) que NO emite <meta name="robots">
+    return (not es_noindex(h)) and canonical_de(h) and not re.search(r'<meta[^>]+name=["\']robots["\']', h, re.I)
+
+def _fix_robots(h):
+    # inserta el robots estándar justo ANTES de la línea del canonical, con su misma sangría
+    def repl(m):
+        return m.group(1) + _ROBOTS + "\n" + m.group(0)
+    return re.subn(r'(^[ \t]*)<link[^>]+rel=["\']canonical["\'][^>]*>', repl, h, count=1, flags=re.I | re.M)
+
+
 FIXERS = [
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
@@ -70,12 +83,15 @@ FIXERS = [
      "mecanico", _det_theme, _fix_theme),
     ("email", "email contaminado info@plomeropro.com → info@plomeroculiacanpro.mx",
      "mecanico", _det_email, _fix_email),
+    ("meta-robots", "página indexable sin <meta name=robots> → añade el estándar index,follow (scope: indexables)",
+     "mecanico", _det_robots, _fix_robots),
 ]
 
 
 def paginas_default():
     pats = [
         "index.html",
+        "*/index.html",                                      # secciones top-level (contacto, precios, blog…)
         "servicios/*/index.html",
         "servicios/plomero-colonias-culiacan/*/index.html",
         "blog/*/index.html",

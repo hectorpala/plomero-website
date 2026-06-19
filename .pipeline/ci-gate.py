@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CHECKERS = ["check-plantilla.py", "check-indexabilidad.py"]
+CHECKERS = ["check-plantilla.py", "check-indexabilidad.py", "check-estructura-sitio.py"]
 
 def _parse_json_lenient(s):
     """Tolera texto extra antes/después del JSON (p.ej. un warning a stdout) extrayendo
