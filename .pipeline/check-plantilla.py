@@ -375,6 +375,20 @@ def check_page(fpath, t, noindex, redirects):
             "Página indexable sin <meta name=\"theme-color\">",
             "Añadir <meta name=\"theme-color\" content=\"#...\"> con el color de marca en el <head>")
 
+    # --- 12. marca/color: paleta AZUL off-brand prohibida (seo)
+    # La marca del sitio es NARANJA (--brand:#E36414, --brand-light:#F97316, --brand-dark:#C2410C).
+    # El blog (y restos en servicios) traía un esquema AZUL hardcodeado inline (#0066cc/#0284c7/
+    # #0369a1) que hacía verse esas páginas DISTINTAS de la home. La home es la fuente de verdad
+    # (0 azul). Caso real color-blog-20260619.
+    BLUES = ("#0066cc", "#0284c7", "#0369a1")
+    azul = {h: len(re.findall(h, t, re.I)) for h in BLUES}
+    if any(azul.values()):
+        detalle = ", ".join("%s×%d" % (h, n) for h, n in azul.items() if n)
+        add("media", r, "seo",
+            "Color AZUL off-brand en la página (%s) — la marca es NARANJA como la home" % detalle,
+            "Reemplazar por la paleta de marca preservando la jerarquía: "
+            "#0284c7→#F97316 (claro), #0066cc→#E36414 (base), #0369a1→#C2410C (oscuro).")
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): el sitio sirve DOS hojas distintas
