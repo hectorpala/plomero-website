@@ -377,34 +377,92 @@ def check_page(fpath, t, noindex, redirects):
 
 
 # ================================================================ CHECK global: paridad CSS
-# Firmas EXACTAS (normalizadas sin espacios) de reglas que REGLAS.md documenta como
-# reincidentes en paridad. Se comprueba PRESENCIA (>=1) en cada styles*.css: si una
-# firma esta en algun archivo pero falta (0) en otro -> regresion de paridad.
-CSS_PARITY_SIGNATURES = [
-    "table-wrapper{overflow-x:auto",          # envoltura de tablas (f44ef39f)
-    "table{display:block;overflow-x:auto",    # fallback global de tablas (movil-203)
-    ".footer-logoimg",                         # regla del logo del footer (f44ef39f)
-]
+# PARIDAD TOTAL (no solo firmas): el sitio sirve DOS hojas distintas
+#   - styles.<hash>.css  -> la sirven la home (index.html) + las paginas de colonia
+#   - styles.min.css     -> la sirve el resto del sitio
+# y styles.css es la FUENTE. Las tres DEBEN tener las mismas reglas; si una se queda
+# atras, esas paginas renderizan distinto (caso real 20260619: logo movil 100px vs 62px,
+# animacion hero fadeInUp vs slideInUp, .hero .hero-image ausente). El checker viejo solo
+# comparaba 3 firmas hardcodeadas y dejaba pasar el resto.
+#
+# Se descompone cada styles*.css en ATOMOS (selector individual + bloque de declaraciones
+# normalizado, con su contexto @media) y se reporta todo atomo presente en alguna hoja pero
+# ausente en otra. Ignora diferencias de minificacion (espacios) y de agrupacion de
+# selectores -> sin falsos positivos. (Logica espejo de .pipeline/check-css-paridad.py.)
+def _css_norm_sel(s):
+    # conserva el combinador descendiente (' '), que es semantico
+    s = re.sub(r"\s+", " ", s).strip()
+    return re.sub(r"\s*([>+~,])\s*", r"\1", s)
+
+
+def _css_norm_decls(body):
+    b = re.sub(r"\s+", " ", body).strip()
+    b = re.sub(r"\s*([;:,])\s*", r"\1", b)
+    return ";".join(sorted(d.strip() for d in b.split(";") if d.strip()))
+
+
+def _css_split_rules(css):
+    rules, depth, prelude, buf, prelude_s = [], 0, [], [], ""
+    for ch in css:
+        if ch == "{":
+            if depth == 0:
+                prelude_s, prelude, depth = "".join(prelude), [], 1
+            else:
+                depth += 1
+                buf.append(ch)
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                rules.append((prelude_s.strip(), "".join(buf)))
+                buf = []
+            else:
+                buf.append(ch)
+        else:
+            (prelude if depth == 0 else buf).append(ch)
+    return rules
+
+
+def _css_style_atoms(prelude, body, ctx=""):
+    decls = _css_norm_decls(body)
+    return ["%s%s{%s}" % (ctx, sel, decls)
+            for sel in _css_norm_sel(prelude).split(",") if sel]
+
+
+def _css_atoms(css):
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    out = set()
+    for prelude, body in _css_split_rules(css):
+        p = _css_norm_sel(prelude)
+        head = p.split("(")[0].lower()
+        if head.startswith("@media") or head.startswith("@supports"):
+            ctx = re.sub(r"\s+", "", p) + "||"
+            for ip, ib in _css_split_rules(body):
+                out.update(_css_style_atoms(ip, ib, ctx))
+        elif p.startswith("@"):
+            out.add(re.sub(r"\s+", "", p) + "{" + re.sub(r"\s+", "", body) + "}")
+        else:
+            out.update(_css_style_atoms(prelude, body))
+    return out
 
 
 def check_css_parity():
     css_files = sorted(glob.glob(os.path.join(ROOT, "styles*.css")))
     if len(css_files) < 2:
         return  # nada que comparar
-    norm = {}
-    for c in css_files:
-        norm[c] = re.sub(r"\s+", "", read(c))
-    for sig in CSS_PARITY_SIGNATURES:
-        present = {c: (sig in norm[c]) for c in css_files}
-        if any(present.values()) and not all(present.values()):
-            tienen = sorted(rel(c) for c in css_files if present[c])
-            faltan = sorted(c for c in css_files if not present[c])
-            for c in faltan:
+    A = {c: _css_atoms(read(c)) for c in css_files}
+    union = set().union(*A.values())
+    for atom in sorted(union):
+        tienen = [c for c in css_files if atom in A[c]]
+        if len(tienen) == len(css_files):
+            continue
+        nombres = ", ".join(sorted(os.path.basename(c) for c in tienen))
+        for c in css_files:
+            if atom not in A[c]:
                 add("media", rel(c), "movil",
-                    "Paridad CSS rota: la regla '%s' existe en %s pero falta aquí"
-                    % (sig, ", ".join(tienen)),
-                    "Copiar la regla '%s' a este archivo para mantener los 3 CSS en paridad "
-                    "(styles.css fuente + styles.min.css + styles.<hash>.css servido)" % sig)
+                    "Paridad CSS rota: la regla '%s' existe en %s pero falta aquí" % (atom, nombres),
+                    "Copiar la regla a este archivo para mantener los 3 CSS en paridad total "
+                    "(styles.css fuente + styles.min.css + styles.<hash>.css servido). "
+                    "Si tras corregir cambia el render, versionar ?v= y subir CACHE_NAME en sw.js.")
 
 
 # ================================================================ MAIN

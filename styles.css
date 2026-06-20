@@ -652,7 +652,12 @@ p {
 }
 
 .hero h1 {
-  animation: fadeInUp 0.8s ease-out;
+  animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(40px); }
+  to { transform: translateY(0); }
 }
 
 .hero .btn-primary {
@@ -2663,40 +2668,19 @@ p {
   }
 }
 
-/* === QA movil 2026-06-11 === paridad con styles.min.css y styles.7f293647.css (movil-203) */
-@media (max-width: 768px) {
-  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+/* === QA móvil 2026-06-11 === */
+@media(max-width:768px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+.breadcrumb-item a{display:inline-block;padding:10px 6px;margin:-8px -2px}
+.footer-logo img{max-width:200px;height:auto;margin:0 auto;display:block}
+/* Hero móvil con foto-card (paridad con home/colonias) */
+@media(max-width:768px){
+.hero .hero-image{position:relative!important;inset:auto!important;display:block!important;width:calc(100% - 0px)!important;max-width:400px!important;height:150px!important;margin:0 auto .75rem!important;border-radius:16px!important;overflow:hidden!important;box-shadow:0 2px 12px rgba(0,0,0,.10)!important;z-index:1!important}
+.hero .hero-image img,.hero .hero-image picture{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 30%!important;display:block!important}
 }
 
 /* mant-altos 2026-06-12: paridad imágenes social proof (movil-003) + scroll de tablas (movil-001/002) */
 .google-review-image,.before-after-image{max-width:100%;height:auto;display:block;border-radius:12px}
 .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
-/* Tap target breadcrumbs (~44px) — paridad con styles.min.css y styles.7f293647.css */
-.breadcrumb-item a {
-    display: inline-block;
-    padding: 10px 6px;
-    margin: -8px -2px;
-}
-
-/* Tap target enlaces del footer (~44px) sin cambiar el aspecto */
-.footer-links a {
-    display: inline-block;
-    padding: 8px 0;
-    margin: -4px 0;
-}
-
-/* Tap target enlaces de texto tel:/wa.me (~44px) sin cambiar el aspecto (movil-201) */
-p a[href^="tel:"]:not([class*="btn"]),
-p a[href*="wa.me"]:not([class*="btn"]),
-li a[href^="tel:"]:not([class*="btn"]),
-li a[href*="wa.me"]:not([class*="btn"]) {
-    display: inline-block;
-    padding: 12px 6px;
-    margin: -10px -4px;
-}
-/* hero-phone-link: solo area tactil; NO tocar display (display:none en desktop) */
-.hero-phone-link {
-    padding: 12px 6px;
-    margin: -10px -4px;
-}
+.footer-links a{display:inline-block;padding:8px 0;margin:-4px 0}
+p a[href^="tel:"]:not([class*="btn"]),p a[href*="wa.me"]:not([class*="btn"]),li a[href^="tel:"]:not([class*="btn"]),li a[href*="wa.me"]:not([class*="btn"]){display:inline-block;padding:12px 6px;margin:-10px -4px}.hero-phone-link{padding:12px 6px;margin:-10px -4px}
