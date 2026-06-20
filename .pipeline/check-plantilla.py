@@ -375,19 +375,30 @@ def check_page(fpath, t, noindex, redirects):
             "Página indexable sin <meta name=\"theme-color\">",
             "Añadir <meta name=\"theme-color\" content=\"#...\"> con el color de marca en el <head>")
 
-    # --- 12. marca/color: paleta AZUL off-brand prohibida (seo)
-    # La marca del sitio es NARANJA (--brand:#E36414, --brand-light:#F97316, --brand-dark:#C2410C).
-    # El blog (y restos en servicios) traía un esquema AZUL hardcodeado inline (#0066cc/#0284c7/
-    # #0369a1) que hacía verse esas páginas DISTINTAS de la home. La home es la fuente de verdad
-    # (0 azul). Caso real color-blog-20260619.
-    BLUES = ("#0066cc", "#0284c7", "#0369a1")
-    azul = {h: len(re.findall(h, t, re.I)) for h in BLUES}
-    if any(azul.values()):
-        detalle = ", ".join("%s×%d" % (h, n) for h, n in azul.items() if n)
+    # --- 12. marca/color: hex AZUL/MORADO/ROJO off-brand prohibidos (seo)
+    # La marca del sitio es NARANJA (--brand:#E36414, --brand-light:#F97316, --brand-dark:#C2410C)
+    # + neutros slate (#475569, #64748b, #1e293b…) + verde WhatsApp. El blog (y restos en
+    # servicios) traía CAJAS azules/moradas/rojas hardcodeadas inline que hacían verse esas
+    # páginas DISTINTAS de la home (la home es la fuente de verdad: 0 azul/rojo decorativo).
+    # Denylist EXPLÍCITA (no hue automático: los neutros slate son levemente azulados y darían
+    # falsos positivos; los colores del logo de Google van en <path fill> y son legítimos).
+    # Casos color-blog-20260619 / color-blog-20260620. Si aparece un tono nuevo, añádelo aquí.
+    OFFBRAND_HEX = (
+        # azul / morado
+        "#0066cc", "#0284c7", "#0369a1", "#667eea", "#764ba2", "#004499", "#0c4a6e",
+        "#0f4fa8", "#1e40af", "#e0f2fe", "#f0f9ff", "#0ea5e9", "#075985", "#1a5276",
+        "#1a73e8", "#bae6fd", "#e8f4fd", "#f0f8ff", "#2c3e50",
+        # rojo (NO confundir con naranja de marca; #ea4335 es del logo de Google y NO va aquí)
+        "#dc2626", "#dc3545", "#b91c1c", "#991b1b", "#fef2f2",
+    )
+    offb = {h: len(re.findall(h, t, re.I)) for h in OFFBRAND_HEX}
+    offb = {h: n for h, n in offb.items() if n}
+    if offb:
+        detalle = ", ".join("%s×%d" % (h, n) for h, n in offb.items())
         add("media", r, "seo",
-            "Color AZUL off-brand en la página (%s) — la marca es NARANJA como la home" % detalle,
-            "Reemplazar por la paleta de marca preservando la jerarquía: "
-            "#0284c7→#F97316 (claro), #0066cc→#E36414 (base), #0369a1→#C2410C (oscuro).")
+            "Color off-brand (azul/morado/rojo) en la página: %s — la marca es NARANJA como la home" % detalle,
+            "Reemplazar por la paleta de marca: texto/acentos #C2410C o #E36414, fondos claros #FFF7ED. "
+            "No tocar el logo de Google (#4285f4/#ea4335 van en <path fill> de SVG).")
 
 
 # ================================================================ CHECK global: paridad CSS
