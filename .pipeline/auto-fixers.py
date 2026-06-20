@@ -76,11 +76,38 @@ def _fix_robots(h):
     return re.subn(r'(^[ \t]*)<link[^>]+rel=["\']canonical["\'][^>]*>', repl, h, count=1, flags=re.I | re.M)
 
 
+# ── color off-brand → paleta de marca (NARANJA). Auto-sana el azul/morado/rojo/verde
+#    decorativo que se cuela en el HTML inline (blog/servicios). CONSERVA los legítimos:
+#    #22c55e (disponibilidad), #25d366 (WhatsApp), #34a853/#4285f4/#ea4335/#fbbc05 (logo
+#    Google), grises slate (#475569…). Espejo del check 12 de check-plantilla.py. ──
+_COLOR_LIGHT_BG = ("#e0f2fe", "#f0f9ff", "#bae6fd", "#e8f4fd", "#f0f8ff",
+                   "#fef2f2", "#dcfce7", "#f0fdf4", "#ecfdf5")          # fondos claros → tinte naranja
+_COLOR_ACCENT = ("#0066cc", "#0284c7", "#0369a1", "#667eea", "#764ba2", "#004499",
+                 "#0c4a6e", "#0f4fa8", "#1e40af", "#0ea5e9", "#075985", "#1a5276",
+                 "#1a73e8", "#2c3e50", "#dc2626", "#dc3545", "#b91c1c", "#991b1b",
+                 "#059669", "#166534", "#16a34a", "#28a745", "#10b981")  # texto/acento → marca oscura
+_COLOR_OFFBRAND = _COLOR_LIGHT_BG + _COLOR_ACCENT
+
+def _det_color(h):
+    low = h.lower()
+    return any(c in low for c in _COLOR_OFFBRAND)
+
+def _fix_color(h):
+    n = 0
+    for c in _COLOR_LIGHT_BG:
+        h, k = re.subn(re.escape(c), "#FFF7ED", h, flags=re.I); n += k
+    for c in _COLOR_ACCENT:
+        h, k = re.subn(re.escape(c), "#C2410C", h, flags=re.I); n += k
+    return h, n
+
+
 FIXERS = [
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
     ("theme-color", "theme-color placeholder #0066cc → color de marca #F97316",
      "mecanico", _det_theme, _fix_theme),
+    ("color-off-brand", "color off-brand (azul/morado/rojo/verde decorativo) → paleta de marca naranja; conserva #22c55e/WhatsApp/Google",
+     "mecanico", _det_color, _fix_color),
     ("email", "email contaminado info@plomeropro.com → info@plomeroculiacanpro.mx",
      "mecanico", _det_email, _fix_email),
     ("meta-robots", "página indexable sin <meta name=robots> → añade el estándar index,follow (scope: indexables)",
