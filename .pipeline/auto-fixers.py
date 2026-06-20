@@ -55,6 +55,14 @@ def _fix_theme(h):
     return re.subn(r'(name=["\']theme-color["\'][^>]*content=["\'])#0066cc', r'\g<1>#F97316', h, flags=re.I)
 
 
+# Añade theme-color de marca a páginas INDEXABLES que no lo tengan (scope: indexables).
+def _det_theme_add(h):
+    return (not es_noindex(h)) and canonical_de(h) and not re.search(r'<meta[^>]+name=["\']theme-color["\']', h, re.I)
+
+def _fix_theme_add(h):
+    return re.subn(r'</head>', '<meta name="theme-color" content="#F97316"></head>', h, count=1, flags=re.I)
+
+
 def _det_email(h):
     return 'info@plomeropro.com' in h
 
@@ -106,6 +114,8 @@ FIXERS = [
      "mecanico", _det_ogurl, _fix_ogurl),
     ("theme-color", "theme-color placeholder #0066cc → color de marca #F97316",
      "mecanico", _det_theme, _fix_theme),
+    ("theme-color-add", "página indexable sin theme-color → añade el de marca #F97316 (scope: indexables)",
+     "mecanico", _det_theme_add, _fix_theme_add),
     ("color-off-brand", "color off-brand (azul/morado/rojo/verde decorativo) → paleta de marca naranja; conserva #22c55e/WhatsApp/Google",
      "mecanico", _det_color, _fix_color),
     ("email", "email contaminado info@plomeropro.com → info@plomeroculiacanpro.mx",
