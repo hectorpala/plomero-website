@@ -90,6 +90,23 @@
 }
 ```
 
+## Resumen de la corrida 2026-06-19 11:10 (auto/diario-20260619-1110 — AUTÓNOMA, diario)
+
+- **Health check:** 5/5 rutas clave 200 (/, /contacto/, /servicios/, /blog/, /precios/).
+- **Cambios servidos desde la última auto-diario (acb8440c):** barrido meta site-wide (1 línea: `<meta robots>` a ~17 págs, mecánico) + **lead-tracking UNIVERSAL de hoy** (commit 18119d9b): listener delegado en captura que LEE el href de wa.me/tel sin reescribirlo → 0 riesgo de truncado wa.me; `main.js?v=20260619` versionado en las 31 refs, `sw.js` v27. Verificado limpio.
+- **PISO determinista:** infra-salud **destapó infra-005 (ALTA)** → arreglado; ci-gate 0 ALTA (25 media/baja conocidas), nap 0, conversión 0, linking 0, indexabilidad 0, contenido-mecánico 0, secretos 0, producción EN VIVO 0, e2e 0. tracking trk-001..004 = Consent Mode headless (R-04, esperado). JUICIO (lote rotativo de 5 págs viejas): contenido/seo/a11y convergieron en defectos de plantilla de blog.
+- **Arreglados y verificados (4 clases):**
+  - **infra-005 (ALTA, dead-man's switch ciego):** el driver se renombró a `auto-agente-*.log` pero `check-infra.mjs` solo matcheaba `run-*.log` → ALTA falsa "mantenimiento DETENIDO" CADA día pese a correr. Regex → `/^(run|auto-agente)-.*\.log$/`. Re-corrido 0 hallazgos, JSON válido.
+  - **Blog plantilla — div dentro de `<h2>` (8 posts):** CTA `<div>` de bloque embebido en el `<h2>` (HTML inválido). Cerrado el `</h2>` y movido el div a hermano. El revisor LLM halló 7; el **checker nuevo cazó el 8º** (cuanto-cobra, h2 con `style=` que el grep ad-hoc omitió).
+  - **Blog plantilla — `related-articles` duplicada (5 posts):** removida la 2ª sección idéntica (queda 1).
+  - **cont-014 año (como-detectar-fugas):** `Guía Práctica 2025`→`2026` (×4) al año del título real; fechas intactas.
+  - **bk-2a3a24ed conteo colonias:** hub `640+`→`600+` (×4); el dataset real tiene 631 colonias → 600+ defendible, 640+ no. Unificado con la home ("más de 600"). Backlog cerrado.
+- **Mecanización (FASE 9):** 2 checks nuevos en `check-plantilla.py` (4c: `<div>` en `<h2>`; 4d: `related-articles` duplicada) — disparan contra la versión pre-arreglo, 0 en el árbol limpio. 2 reglas nuevas en REGLAS.md (37 reglas, 3619/4000 tokens).
+- **Verificador independiente (FASE 7): ok=true, 0 problemas** (descartó un falso "electricista" = prosa de negocio pre-existente, no en el diff). gate-pagina 8/8 OK, ci-gate 0 ALTA, HTTP 200, JSON-LD parsea, canonical==og:url, wa.me 526673922273 intacta, 0 GTM ajeno, 0 huérfanas. Headless: 0 errores JS, 0 h2-con-div en las páginas tocadas.
+- **Crecimiento (FASE 6):** 1 optimización drenada (conteo colonias). **0 páginas nuevas** (sin hueco de demanda sin canibalizar; bombas-de-agua aprobada pero diferida como contenido extenso). **CTR-fix descartado**: el post de mayor impresión (drenaje-tapado, ~400 impr pos 3-8, 0 clics) YA tiene title/meta fuertes → 0 clics es ranking/SERP-features, no snippet (gsc-214); reescribir sería cambio-por-cambiar.
+- **Diff:** 12 archivos de sitio/pipeline (check-infra.mjs, check-plantilla.py, 8 blogs, hub colonias, BACKLOG) + docs — bajo el tope de 18. Sin CSS/JS servidos, sitemap, precios ni tests tocados.
+- **Pendientes encolados (no auto):** aria-hidden en `article-header` de 8 posts (a11y, oculta fecha al lector de pantalla), metas de blog faltantes (twitter:url/og:locale/og:site_name/theme-color), anclas engañosas en plomero-centro-culiacan, año-freshness de cuanto-cobra (decisión humana), + conocidos (bombas-de-agua, breadcrumb-#servicios 18 págs).
+
 ## Resumen de la corrida 2026-06-18 15:37 (auto/diario-20260618-1537 — AUTÓNOMA, 2ª del día / FORCE_RUN)
 
 - **Contexto:** la corrida diaria normal ya había corrido y PUBLICADO hoy (merge `1f89c325`, marca `last-run-day=20260618`). Esta es una 2ª corrida forzada (driver PID 58553). Por eso el diff de páginas servidas desde la última auto-diario es casi nulo.

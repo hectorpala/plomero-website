@@ -287,6 +287,23 @@ def check_page(fpath, t, noindex, redirects):
                     "Reemplazar el ?text= del enlace wa.me por un mensaje acorde al servicio/zona de ESTA página")
                 break
 
+    # --- 4c. <div> de bloque anidado dentro de un <h2> = HTML inválido (media, a11y)
+    #     caso 20260619: la plantilla de blog metió un CTA <div> dentro del <h2>; el lector
+    #     de pantalla anuncia todo el bloque como texto del encabezado y rompe la navegación.
+    if re.search(r'<h2\b[^>]*>(?:(?!</h2>).)*?<div\b', t, re.I | re.S):
+        add("media", r, "a11y",
+            "Un <div> de bloque está anidado dentro de un <h2> (HTML inválido); el lector de "
+            "pantalla anuncia todo el contenido como texto del encabezado",
+            "Cerrar el </h2> tras el texto del encabezado y mover el <div> a elemento hermano")
+
+    # --- 4d. <section class="related-articles"> duplicada en la misma página (media, seo)
+    #     caso 20260619: la plantilla de blog dejó 2 secciones idénticas de "Artículos Relacionados".
+    if len(re.findall(r'<section\b[^>]*class=["\'][^"\']*related-articles[^"\']*["\']', t, re.I)) > 1:
+        add("media", r, "seo",
+            "Sección <section class=\"related-articles\"> duplicada (aparece más de una vez) en la "
+            "misma página: contenido y encabezado repetidos",
+            "Dejar una sola sección de artículos relacionados; eliminar la duplicada")
+
     # --- 5. exit-intent-popup sin ARIA (media, a11y)
     mp = re.search(r'<div\b[^>]*id=["\']exit-intent-popup["\'][^>]*>', t, re.I)
     if mp:
