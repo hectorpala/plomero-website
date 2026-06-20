@@ -75,7 +75,7 @@ function out() { process.stdout.write(JSON.stringify({ hallazgos }, null, 2) + "
 function checkCron() {
   let entries = [];
   try {
-    entries = fs.readdirSync(LOG_DIR).filter((f) => /^run-.*\.log$/.test(f));
+    entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run|auto-agente)-.*\.log$/.test(f));
   } catch (_) {
     add("alta", LOG_DIR,
       `INFRA: no existe el directorio de logs del cron (${LOG_DIR}); el mantenimiento automático nunca corrió o el launchd no está cargado`,
@@ -84,7 +84,7 @@ function checkCron() {
   }
   if (entries.length === 0) {
     add("alta", LOG_DIR,
-      "INFRA: no hay ningún log run-*.log del cron; la corrida diaria de las 20:00 no está dejando rastro",
+      "INFRA: no hay ningún log run-*.log ni auto-agente-*.log del cron; la corrida diaria de las 20:00 no está dejando rastro",
       "Verificar el LaunchAgent de mantener-diario.sh (que corre y escribe en ~/Library/Logs/mantener-sitio/)");
     return;
   }
