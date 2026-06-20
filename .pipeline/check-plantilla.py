@@ -390,6 +390,9 @@ def check_page(fpath, t, noindex, redirects):
         "#1a73e8", "#bae6fd", "#e8f4fd", "#f0f8ff", "#2c3e50",
         # rojo (NO confundir con naranja de marca; #ea4335 es del logo de Google y NO va aquí)
         "#dc2626", "#dc3545", "#b91c1c", "#991b1b", "#fef2f2",
+        # verde decorativo de cajas "tip" (NO el verde de marca/disponibilidad #22c55e,
+        # NI WhatsApp #25d366, NI el logo de Google #34a853 — esos son legítimos)
+        "#059669", "#166534", "#16a34a", "#28a745", "#10b981", "#dcfce7", "#f0fdf4", "#ecfdf5",
     )
     offb = {h: len(re.findall(h, t, re.I)) for h in OFFBRAND_HEX}
     offb = {h: n for h, n in offb.items() if n}
