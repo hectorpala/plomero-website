@@ -396,6 +396,20 @@ def check_page(fpath, t, noindex, redirects):
     )
     offb = {h: len(re.findall(h, t, re.I)) for h in OFFBRAND_HEX}
     offb = {h: n for h, n in offb.items() if n}
+    # 12b. mismas familias off-brand pero en forma rgb()/rgba(): un mismo color puede
+    # escribirse como hex O como rgb. Caso real color-form-rgba-20260620: el azul #0066cc
+    # reapareció como rgba(0, 102, 204, .1) en el box-shadow de foco de 5 formularios de
+    # servicio y la denylist HEX no lo cazó. Para cada hex de la denylist, buscar también su
+    # triplete rgb (tolerante a espacios). Mismo conjunto de colores -> sin FP nuevos.
+    def _hex_to_rgb(h):
+        h = h.lstrip("#")
+        return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+    for h in OFFBRAND_HEX:
+        r_, g_, b_ = _hex_to_rgb(h)
+        n = len(re.findall(r"rgba?\(\s*%d\s*,\s*%d\s*,\s*%d\b" % (r_, g_, b_), t, re.I))
+        if n:
+            k = "rgb(%d,%d,%d)" % (r_, g_, b_)
+            offb[k] = offb.get(k, 0) + n
     if offb:
         detalle = ", ".join("%s×%d" % (h, n) for h, n in offb.items())
         add("media", r, "seo",
