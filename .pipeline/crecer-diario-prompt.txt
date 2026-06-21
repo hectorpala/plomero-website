@@ -58,6 +58,14 @@ headless + demanda real de GSC. Si un arreglo pasa los candados, VA; si no, se i
 
 DISPOSICIÓN de cada hallazgo (de barato a potente — usa el primero que aplique, NO te frenes en ninguno):
   1) ¿Tiene auto-fixer conocido?  → `python3 .pipeline/auto-fixers.py run --apply [rutas]`  (mecánico, SIN límite).
+     Incluye ASSET FIXERS de CSS COMPARTIDO (p.ej. `tap-target-44`: garantiza tap targets ≥44px en los 3 CSS).
+     CACHE-BUSTING DE CSS: el CSS se sirve `immutable` (max-age 1 año), así que cambiar su CONTENIDO no basta —
+     hay que cambiar la URL. El asset-fixer lo hace SOLO: bumpea `?v=AAAAMMDD` en las ~70 páginas que referencian
+     el CSS + el CACHE_NAME de sw.js. Ese changeset (3 CSS + ~70 HTML con el ?v= + sw.js) es UN cambio lógico
+     site-wide y NO cuenta contra el cap de archivos de la FASE 8.
+  1b) ¿Archivo HUÉRFANO/artefacto viejo (p.ej. *.min.html, *.bak)? → `python3 .pipeline/limpiar-huerfanos.py run --apply`
+     borra SOLO lo provadamente huérfano (cero referencias + no en sitemap + git-trackeado = recuperable). Modo
+     conservador: jamás toca una página/asset en uso. NO es "cola humana": si pasa el checker, BORRA y regístralo.
   2) ¿Mecánico simple sin fixer aún?  → arréglalo a mano Y mecanízalo en FASE 9 (que la próxima vez sea auto).
   3) ¿ESTRUCTURAL o un tipo NUEVO sin receta (p.ej. un hero mal armado)? → lanza el subagente `fixer-autonomo`
      (Task), que actúa como humano incansable con criterio de senior dev y NO se frena. Hace SELF-PROMPTING:
@@ -143,15 +151,20 @@ demostrar que algo quedó MAL, no confirmar que está bien. Debe, sobre la rama 
      nueva/modificada, `python3 .pipeline/gate-pagina.py <ruta/index.html>` (validate + checkers + anti-doorway).
   c. Con el sitio corriendo, cargar cada página tocada y confirmar HTTP 200, JSON-LD que parsea,
      canonical==og:url==twitter:url, 0 enlaces internos rotos, y que cada arreglo de la FASE 5 realmente se aplicó.
-  d. Confirmar que NO se tocaron precios, tests, ni se borraron páginas; que el email no quedó contaminado (sin
-     "electricista"); que ninguna página nueva quedó huérfana (tiene enlace entrante).
+  d. Confirmar que NO se tocaron precios ni tests; que NO se borró ninguna PÁGINA indexable / con enlaces
+     entrantes / listada en el sitemap (los artefactos huérfanos que pasan `limpiar-huerfanos.py` SÍ se pueden
+     borrar — son recuperables por git — y se registran); que el email no quedó contaminado (sin "electricista");
+     que ninguna página nueva quedó huérfana (tiene enlace entrante).
 El verificador entrega un veredicto JSON {ok: true/false, problemas: [...]}. Si ok=false o encuentra CUALQUIER
 problema: NO se publica nada; deja la rama, escribe el motivo en ESTADO.md y salta a la FASE 9 (aprender) y email.
 
 ==================== FASE 8 — PUBLICAR (solo si la FASE 7 fue 100% verde) ====================
 Candados de publicación (TODOS deben cumplirse): el verificador dio ok=true; el diff toca como máximo 18 archivos
-(corrida normal: 1–8; un diff mayor en un sitio de ~100 páginas es señal de que algo se salió de alcance → lo ve
-un humano); sin borrados estructurales inesperados. Si cualquiera falla: NO publiques; deja la rama y explica en
+de PÁGINA HTML (corrida normal: 1–8; un diff mayor en un sitio de ~100 páginas es señal de que algo se salió de
+alcance → lo ve un humano). NO cuentan contra ese cap: un cambio de ASSET compartido (styles*.css + el bump de
+?v= en las ~70 páginas que lo referencian + sw.js — TODO es UN cambio lógico aunque toque muchas páginas) ni los
+borrados de artefactos huérfanos que pasaron limpiar-huerfanos.py.
+Sí se prohíben los borrados ESTRUCTURALES inesperados (una página indexable, una entrada de sitemap, un asset en uso). Si cualquiera falla: NO publiques; deja la rama y explica en
 ESTADO.md. Si pasan TODOS, lo más simple y seguro es publicar con el orquestador (sincroniza con el remoto ANTES
 y NUNCA usa --force):
   python3 scripts/crecer.py publicar "auto-diario $(date +%Y-%m-%d): N arreglos + M páginas"

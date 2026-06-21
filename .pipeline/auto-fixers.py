@@ -17,6 +17,7 @@ Uso:
 
 Salida: qué arregló (o arreglaría) por página. Exit 0 siempre.
 """
+import datetime
 import glob
 import os
 import re
@@ -125,6 +126,122 @@ FIXERS = [
 ]
 
 
+# ──────────────────── ASSET FIXERS (CSS/JS COMPARTIDO, no por página) ────────────────────
+# Operan UNA vez sobre los assets compartidos (los 3 CSS) en vez de por página HTML. Cuando
+# tocan CSS, bumpean sw.js (CACHE_NAME) — ese bump de 1 archivo ES el cache-busting del sitio
+# (NO hace falta versionar ?v= en las ~100 páginas). Riesgo mecánico → auto, sin límite.
+CSS_FILES = ["styles.css", "styles.min.css", "styles.7f293647.css"]
+SW_FILE = "sw.js"
+
+# Selectores interactivos que DEBEN ser tap-target ≥44px en móvil. Ampliar esta lista cuando
+# un revisor a11y encuentre uno nuevo (así se MECANIZA el fix — FASE 9 del Auto Agente).
+TAP_SELECTORS = [".breadcrumb-item a"]
+
+
+def _bump_sw():
+    """Sube CACHE_NAME 'plomero-culiacan-vN' → vN+1 en sw.js (cache-busting de 1 archivo)."""
+    p = os.path.join(ROOT, SW_FILE)
+    try:
+        s = open(p, encoding="utf-8").read()
+    except Exception:
+        return 0
+    def repl(m):
+        return "%s%d%s" % (m.group(1), int(m.group(2)) + 1, m.group(3))
+    nuevo, n = re.subn(r"(CACHE_NAME\s*=\s*['\"]plomero-culiacan-v)(\d+)(['\"])", repl, s, count=1)
+    if n:
+        open(p, "w", encoding="utf-8").write(nuevo)
+    return n
+
+
+def _bump_css_version_html(version):
+    """Sube el token `styles*.css?v=AAAAMMDD` a `version` en TODAS las páginas HTML.
+    Esto es OBLIGATORIO al cambiar un CSS: se sirve con `immutable` (max-age 1 año), así que
+    un visitante que regresa solo re-pide el CSS si CAMBIA la URL (el ?v=). Reemplazo literal
+    del token de fecha → seguro (no toca estructura). Devuelve nº de páginas tocadas."""
+    n_files = 0
+    htmls = sorted(set(glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True)))
+    for p in htmls:
+        if "/node_modules/" in p or "/.git/" in p:
+            continue
+        try:
+            s = open(p, encoding="utf-8").read()
+        except Exception:
+            continue
+        s2, k = re.subn(r'(styles[\w.]*\.css\?v=)\d{8}', r'\g<1>' + version, s)
+        if k:
+            open(p, "w", encoding="utf-8").write(s2)
+            n_files += 1
+    return n_files
+
+
+def _fix_tap_target(css):
+    """Garantiza min-height:44px + inline-flex centrado en cada TAP_SELECTORS. Idempotente:
+    si la regla ya cumple, 0 cambios. Solo toca reglas STANDALONE (inicio o tras `}`), nunca
+    un selector embebido en un grupo (`.x,.sel{...}`) para no alterar declaraciones compartidas."""
+    n = 0
+    for sel in TAP_SELECTORS:
+        pat = re.compile(r"(^|\})(" + re.escape(sel) + r")\{([^}]*)\}", re.M)
+        m = pat.search(css)
+        if not m:
+            continue
+        decl = m.group(3)
+        if "min-height:44px" in decl.replace(" ", ""):
+            continue  # ya cumple → no tocar
+        nuevo = decl
+        if "display:inline-flex" not in nuevo.replace(" ", ""):
+            nuevo = re.sub(r"display:\s*inline-block", "display:inline-flex;align-items:center", nuevo)
+            if "display:inline-flex" not in nuevo.replace(" ", ""):
+                nuevo = "display:inline-flex;align-items:center;" + nuevo
+        nuevo = "min-height:44px;" + nuevo
+        css = css[:m.start()] + m.group(1) + sel + "{" + nuevo + "}" + css[m.end():]
+        n += 1
+    return css, n
+
+
+# (id, descripcion, riesgo, arregla(css)->(css, n))
+ASSET_FIXERS = [
+    ("tap-target-44",
+     "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump sw.js",
+     "mecanico", _fix_tap_target),
+]
+
+
+def cmd_run_assets(apply, solo=None):
+    """Corre los ASSET_FIXERS sobre los 3 CSS; si alguno toca CSS y se aplica, bumpea sw.js."""
+    fixers = [f for f in ASSET_FIXERS if (solo is None or f[0] == solo)]
+    if not fixers:
+        return 0
+    total, css_tocado, lineas = 0, False, []
+    for fid, _, _, fix in fixers:
+        for css_name in CSS_FILES:
+            p = os.path.join(ROOT, css_name)
+            try:
+                s = open(p, encoding="utf-8").read()
+            except Exception:
+                continue
+            s2, n = fix(s)
+            if n:
+                total += n
+                css_tocado = True
+                if apply:
+                    open(p, "w", encoding="utf-8").write(s2)
+                lineas.append("  %s %s → %s×%d%s" % (
+                    "✅" if apply else "○", css_name, fid, n, "" if apply else " (dry-run)"))
+    if lineas:
+        print("ASSET fixers (CSS compartido):")
+        for ln in lineas:
+            print(ln)
+        if css_tocado and apply:
+            hoy = datetime.date.today().strftime("%Y%m%d")
+            np = _bump_css_version_html(hoy)
+            print("  ✅ ?v=%s bumpeado en %d página(s) (rompe el cache immutable del CSS)" % (hoy, np))
+            nb = _bump_sw()
+            print("  ✅ %s → CACHE_NAME +1" % SW_FILE if nb else "  ⚠️  no pude bumpear %s" % SW_FILE)
+        elif css_tocado:
+            print("  (con --apply: bumpea ?v= en las páginas + sw.js — necesario por el cache immutable)")
+    return total
+
+
 def paginas_default():
     pats = [
         "index.html",
@@ -141,18 +258,25 @@ def paginas_default():
 
 def cmd_list():
     print("Auto-fixers registrados (todos riesgo MECÁNICO → auto, sin límite):")
+    print(" PÁGINA (HTML, por archivo):")
     for fid, desc, riesgo, _, _ in FIXERS:
-        print("  • %-12s %s" % (fid, desc))
-    print("\nLo que NO vive aquí (reestructuras/negocio/precios/borrar): ver .pipeline/CALIDAD-Y-VERDAD.md")
+        print("  • %-14s %s" % (fid, desc))
+    print(" ASSET (CSS/JS compartido, una vez + bump sw.js):")
+    for fid, desc, riesgo, _ in ASSET_FIXERS:
+        print("  • %-14s %s" % (fid, desc))
+    print("\nBorrar archivos huérfanos: .pipeline/limpiar-huerfanos.py (no vive aquí: es borrado, no edición).")
+    print("Lo que NO se mecaniza (reestructuras/negocio/precios): ver .pipeline/CALIDAD-Y-VERDAD.md")
 
 
 def cmd_run(args):
     apply = "--apply" in args
     solo = args[args.index("--solo") + 1] if "--solo" in args else None
     paths = [a for a in args if not a.startswith("--") and a != solo]
+    full_run = not paths   # sin rutas explícitas → barrido de todo el sitio
     if not paths:
         paths = paginas_default()
     fixers = [f for f in FIXERS if (solo is None or f[0] == solo)]
+    asset_ids = {f[0] for f in ASSET_FIXERS}
 
     total = 0
     for p in paths:
@@ -184,6 +308,10 @@ def cmd_run(args):
     else:
         print("%s %d página(s) con fix mecánico%s." % (
             "✅ Arregladas" if apply else "○ Arreglaría", total, "" if apply else " (corre con --apply)"))
+
+    # ASSET fixers (CSS compartido): en barrido completo, o si --solo nombra uno de asset.
+    if full_run or (solo in asset_ids):
+        cmd_run_assets(apply, solo=solo if solo in asset_ids else None)
 
 
 def main():

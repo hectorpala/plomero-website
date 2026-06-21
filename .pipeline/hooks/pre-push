@@ -1,0 +1,119 @@
+#!/bin/bash
+# pre-push — DOS trabajos al pushear a main:
+#   1) GATE DETERMINISTA BLOQUEANTE (estructural): corre ci-gate.py (0 ALTA) y, sobre las
+#      páginas index.html que cambian en este push, gate-pagina.py (validate-landing +
+#      anti-doorway). Si algo falla, el push NO procede. Esto hace ESTRUCTURAL lo que antes
+#      era solo instrucción del prompt (fases 7/8 del Auto Agente): aunque el agente desatendido
+#      se "salte" la verificación, un push de algo roto a producción queda imposible.
+#   2) Auto-indexación en Google (gsc-mcp). NUNCA bloquea el push.
+#
+# Escape de emergencia (solo criterio humano explícito):  SKIP_GATE=1 git push
+# Solo aplica en main/master; otras ramas pasan sin gate (el trabajo del día vive en su rama).
+
+BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null)
+[ "$BRANCH" != "main" ] && [ "$BRANCH" != "master" ] && exit 0
+
+# Resolver python3 y node por ruta absoluta: bajo launchd el PATH es mínimo y el binario
+# "pelado" da exit 127, lo que abortaría el push por una razón equivocada (infra-002).
+PY="$(command -v python3 2>/dev/null || true)"
+[ -x "$PY" ] || PY="/usr/local/bin/python3"
+[ -x "$PY" ] || PY="/opt/homebrew/bin/python3"
+[ -x "$PY" ] || PY="/usr/bin/python3"
+NODE="$(command -v node 2>/dev/null || true)"
+[ -x "$NODE" ] || NODE="/usr/local/bin/node"
+
+REPO="$(git rev-parse --show-toplevel)"
+
+# ───────────────────────── 1) GATE BLOQUEANTE ─────────────────────────
+if [ "${SKIP_GATE:-0}" = "1" ]; then
+  echo "⏭  SKIP_GATE=1 — gate pre-push omitido por decisión humana explícita."
+else
+  echo "🔒 Gate pre-push (determinista) antes de publicar a $BRANCH…"
+
+  # 1a) Gate de sitio completo: 0 hallazgos de severidad ALTA (sin red).
+  if ! ( cd "$REPO" && "$PY" .pipeline/ci-gate.py ); then
+    echo ""
+    echo "❌ PUSH BLOQUEADO: ci-gate.py encontró hallazgo(s) de severidad ALTA."
+    echo "   Corrige en la rama y vuelve a pushear."
+    echo "   (Emergencia, con criterio humano: SKIP_GATE=1 git push)"
+    exit 1
+  fi
+
+  # 1b) Gate por página (validate-landing + anti-doorway) SOLO sobre las páginas
+  #     index.html de servicios/blog que cambian en este push.
+  RANGE_BASE="origin/$BRANCH"
+  git rev-parse --verify "$RANGE_BASE" >/dev/null 2>&1 || RANGE_BASE="HEAD~1"
+  CHANGED=$(git diff --name-only "$RANGE_BASE"...HEAD 2>/dev/null \
+            | grep -E '^(servicios|blog)/.*/index\.html$' || true)
+  if [ -n "$CHANGED" ]; then
+    echo "🔍 Gate por página sobre lo que cambia en este push:"
+    echo "$CHANGED" | sed 's/^/     • /'
+    # shellcheck disable=SC2086
+    if ! ( cd "$REPO" && "$PY" .pipeline/gate-pagina.py $CHANGED ); then
+      echo ""
+      echo "❌ PUSH BLOQUEADO: gate-pagina.py (estructura/anti-doorway) falló en una página modificada."
+      echo "   Déjala en la rama y revisa el spec/contenido."
+      echo "   (Emergencia, con criterio humano: SKIP_GATE=1 git push)"
+      exit 1
+    fi
+  fi
+
+  # 1c) Candado de PÁGINAS NUEVAS (solo añadidas, --diff-filter=A): sin precio VISIBLE
+  #     ni testimonio inventado. Hace AUTOMÁTICO lo que el dueño pidió (modo desatendido).
+  ADDED=$(git diff --name-only --diff-filter=A "$RANGE_BASE"...HEAD 2>/dev/null \
+            | grep -E '^(servicios|blog)/.*/index\.html$' || true)
+  if [ -n "$ADDED" ]; then
+    echo "🔍 Candado de páginas NUEVAS:"; echo "$ADDED" | sed 's/^/     + /'
+    # shellcheck disable=SC2086
+    if ! ( cd "$REPO" && "$PY" .pipeline/check-pagina-nueva.py $ADDED ); then
+      echo ""; echo "❌ PUSH BLOQUEADO: página nueva con precio visible o testimonio inventado. (Emergencia: SKIP_GATE=1 git push)"
+      exit 1
+    fi
+  fi
+  # 1d) DEFENSA EN PROFUNDIDAD contra borrado de páginas VIVAS. Aunque el agente desatendido
+  #     borre algo por error, aquí se ABORTA si un archivo eliminado en este push sigue
+  #     referenciado por una página viva (enlace roto) o aparece en el sitemap (*.xml). Los
+  #     artefactos huérfanos de verdad (cero referencias) pasan sin problema.
+  DELETED=$(git diff --name-only --diff-filter=D "$RANGE_BASE"...HEAD 2>/dev/null || true)
+  if [ -n "$DELETED" ]; then
+    PROBLEMA=""
+    while IFS= read -r f; do
+      [ -z "$f" ] && continue
+      # La home jamás se auto-borra.
+      if [ "$f" = "index.html" ]; then
+        PROBLEMA="$PROBLEMA
+   - $f (la home NUNCA se borra)"; continue
+      fi
+      # PÁGINA (*/index.html): su identidad es la URL de su directorio (con barra final),
+      # NO el basename (todas las páginas son index.html). Otros archivos: por basename.
+      case "$f" in
+        */index.html) NEEDLE="${f%index.html}" ;;   # p.ej. servicios/plomero-economico/
+        *)            NEEDLE="$(basename "$f")" ;;
+      esac
+      # Referenciado por una página VIVA (HEAD) o presente en el sitemap del estado BASE
+      # (= era una página indexable). Cualquiera de los dos ⇒ borrado estructural.
+      if ( cd "$REPO" && git grep -l --fixed-strings "$NEEDLE" HEAD -- '*.html' '*.xml' '_redirects' ) >/dev/null 2>&1 \
+         || ( cd "$REPO" && git show "$RANGE_BASE:sitemaps/main_sitemap.xml" 2>/dev/null | grep -qF "$NEEDLE" ); then
+        PROBLEMA="$PROBLEMA
+   - $f (era página indexable / aún referenciado o en el sitemap)"
+      fi
+    done <<EOF
+$DELETED
+EOF
+    if [ -n "$PROBLEMA" ]; then
+      echo ""
+      echo "❌ PUSH BLOQUEADO: borrado ESTRUCTURAL (un archivo en uso, no un huérfano):$PROBLEMA"
+      echo "   Restáuralo o quita primero las referencias. (Emergencia: SKIP_GATE=1 git push)"
+      exit 1
+    fi
+  fi
+  echo "✅ Gate OK — apto para publicar."
+fi
+
+# ───────────────────────── 2) AUTO-INDEXACIÓN (nunca bloquea) ─────────────────────────
+echo ""
+echo "🔄 Verificando token OAuth..."
+"$NODE" /Users/openclaw/gsc-mcp/refresh-token.js || echo "⚠️  refresh-token falló (sigo; no bloqueo el push)"
+echo "🔍 Auto-indexando cambios en Google..."
+"$NODE" /Users/openclaw/gsc-mcp/auto-index.mjs "plomeroculiacanpro.mx" || echo "⚠️  auto-index falló (las URLs quedan en cola; no bloqueo el push)"
+exit 0
