@@ -2670,7 +2670,7 @@ p {
 
 /* === QA móvil 2026-06-11 === */
 @media(max-width:768px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
-.breadcrumb-item a{display:inline-block;padding:10px 6px;margin:-8px -2px}
+.breadcrumb-item a{display:inline-flex;align-items:center;min-height:44px;padding:10px 6px;margin:-8px -2px}
 .footer-logo img{max-width:200px;height:auto;margin:0 auto;display:block}
 /* Hero móvil con foto-card (paridad con home/colonias) */
 @media(max-width:768px){
