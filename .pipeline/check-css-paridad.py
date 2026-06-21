@@ -3,6 +3,10 @@
 """
 check-css-paridad.py — Paridad CSS COMPLETA (no solo firmas).
 
+infra:utilidad-no-sensor  (utilidad standalone: imprime texto humano, no el contrato
+JSON {"hallazgos":[...]}; la paridad CSS la enforce el pipeline via check-plantilla.py.
+Sin este marcador el dead-man's switch check-infra.mjs dispara una ALTA falsa.)
+
 El sitio sirve DOS hojas de estilo distintas:
   - styles.7f293647.css  -> la sirven la home (index.html) + las paginas de colonia
   - styles.min.css       -> la sirve el resto del sitio (servicios, blog, etc.)

@@ -90,6 +90,24 @@
 }
 ```
 
+## Resumen de la corrida 2026-06-20 18:26 (auto/diario-20260620-1826 — AUTÓNOMA, diario)
+
+- **Concurrencia:** el puerto 8080 estaba ocupado por OTRO agente autónomo (sitio hermano *electricista*, PID 9567); mi `http.server` falló al bindear y los curl golpeaban el sitio equivocado (/precios/ daba 404 falso). Levanté MI server en **8091** → health check válido del sitio plomero: **5/5 200** (/, /contacto/, /servicios/, /blog/, /precios/), 0 "electricista" en la home.
+- **PISO determinista:** infra-salud **destapó infra-001 (ALTA, regresión)** → arreglado. ci-gate 0 ALTA, nap 0/78, conversión 0/67, linking 0/67, contenido-mecánico 0/78, e2e 0/3, producción EN VIVO 0, perf-001=R-03 (baseline), trk-001..004=R-04 (Consent Mode headless), sec-001=R-01 (secreto histórico inmutable). JUICIO (acotado): contenido+seo en las 2 doorway-diff de hoy (a-domicilio/cerca-de-mi) + lote rotativo de 5 servicios viejos (a11y/movil/contenido).
+- **Arreglados y verificados (8 clases):**
+  - **infra-001 (ALTA, regresión clase infra-003/005):** `check-css-paridad.py` (checker nuevo del 06-19) imprime texto humano, no JSON → el dead-man's switch lo marcó "verificación ciega". Añadido marcador `infra:utilidad-no-sensor` en cabecera. Re-corrido 0 hallazgos; paridad real OK (415 átomos).
+  - **seo-001 (ALTA):** cerca-de-mi `twitter:url` apuntaba a la home → corregido a su canonical. canonical==og:url==twitter:url.
+  - **color-form-rgba (5 servicios):** azul off-brand `#0066cc` en forma `rgba(0,102,204,0.1)` en el box-shadow de foco de formulario (el check 12 hex no lo cazaba); en economico con `outline:none` = foco casi invisible (a11y ALTA). → `rgba(227,100,20,0.25)` naranja, foco claramente visible. Solo inline → sin bump.
+  - **color-red-rgba (2 blogs):** rojo `#dc2626`=`rgba(220,38,38)` en box-shadow → naranja. **Lo cazó el detector rgb NUEVO** del check 12.
+  - **cont-001 (cerca-de-mi):** tiempos de llegada contradictorios (15-25/20-30/"30 min o menos" vs 30-60) → unificados al rango defendible 30-60 (gradiente 30-40→60 por sector).
+  - **cont-002 (5 servicios):** "Ver todas las colonias (1,895)" inflado → "(643)" (alineado a la home, fuente de verdad).
+  - **anclas-centro (bk-254d3596):** lista "con página propia" del centro listaba 9 colonias pero 6 enlazaban al hub (sin página) → dejadas las 3 reales.
+  - **bk-3527704a:** verificado YA resuelto (hero tinaco con `.hero-content`, gate OK) → backlog cerrado.
+- **Mecanización (FASE 9):** check 12 de `check-plantilla.py` AMPLIADO — detecta los colores off-brand también en `rgb()/rgba()` (deriva el triplete de cada hex del denylist; cazó 2 rojos que el hex no veía). 2 reglas consolidadas en REGLAS.md (39 reglas, 3988/4000 tokens): MARCA/COLOR (hex+rgb) e INFRA/SENSOR (log-regex + marcador utilidad).
+- **Verificador independiente (FASE 7): ok=true, 0 problemas.** Re-corrió ci-gate (0 ALTA), check-infra (0), check-plantilla (JSON válido, 0), gate-pagina 8/8 CANDADO OK, HTTP 200 8/8, JSON-LD parsea 8/8, canonical==og:url==twitter:url en cerca-de-mi, 0 residuales (azul/1,895/rojo/tiempos viejos), 0 fuga electricista/GTM ajeno, email y wa.me intactos, 0 styles/sw/tests/precios tocados, 0 huérfanas.
+- **Crecimiento (FASE 6):** GSC real (local-seo find_opportunities, NO ciego): demanda concentrada en 3 blogs (drenaje/wc/presión, 0 clics = ranking/SERP-features, gsc-214, no se toca). Bombas-de-agua confirmada (25+16 impr, pos 4.9/7.9) pero la página dedicada sigue diferida (bk-51f9103d, corrida dedicada). **0 páginas nuevas**; optimización drenada: 2 colores off-brand + anclas centro + 2 backlog cerrados.
+- **Pendientes (no auto):** bombas-de-agua (página nueva, backlog), año-desync cuanto-cobra (decisión de frescura/precios del dueño), breadcrumb 42px template-wide (excede candado, requiere bump CSS), index.min.html muerto con datos viejos (borrado humano), + conocidos (a11y-301 footer h4, a11y-402/403 estrellas/main, perf-501/502).
+
 ## Resumen de la corrida 2026-06-19 11:10 (auto/diario-20260619-1110 — AUTÓNOMA, diario)
 
 - **Health check:** 5/5 rutas clave 200 (/, /contacto/, /servicios/, /blog/, /precios/).

@@ -1,45 +1,33 @@
-# Auto Agente Plomero — parte del 19 de junio de 2026
-**Resultado:** encontré 9, arreglé 5, 3 en cola, 1 para ti · publicado
+# Auto Agente Plomero — parte del 2026-06-20
+**Resultado:** encontré 11, arreglé 7, 2 para ti, 2 no pude solo · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 9 cosas: arreglé 5 · 1 necesitan tu decisión · 3 no pude arreglar solo.
+Encontré 11 cosas: arreglé 7 · 2 necesitan tu decisión · 2 no pude arreglar solo.
 
-## ✅ Arreglé (5)
-- **El "vigilante" que avisa si el robot deja de trabajar estaba roto y daba falsa alarma todos los días.** El sistema tiene un sensor que avisa "¡el mantenimiento se detuvo!" si pasan más de 26 horas sin correr. Hace unos días le cambiamos el nombre al archivo donde el robot anota que trabajó, pero el sensor seguía buscando el nombre viejo → creía que estaba detenido aunque sí corría. Lo arreglé para que reconozca el nombre nuevo. (Es una pieza interna, no una página del sitio.)
-- **8 artículos del blog tenían un trozo de código mal armado en sus títulos** que hacía que los lectores de pantalla (los que usan las personas ciegas) leyeran todo un anuncio pegado como si fuera el título de la sección. Lo separé bien en los 8. Artículos:
-  https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/
-  https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/
-  https://plomeroculiacanpro.mx/blog/cuanto-cobra-plomero-visita-culiacan/
-  https://plomeroculiacanpro.mx/blog/cuanto-cuesta-cambiar-taza-bano-culiacan/
-  https://plomeroculiacanpro.mx/blog/cuanto-cuesta-plomeria-bano-completo-culiacan/
-  https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/
-  https://plomeroculiacanpro.mx/blog/mantenimiento-boiler-noritz-checklist/
-  https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
-- **La sección "Artículos Relacionados" aparecía DUPLICADA** (dos veces idénticas) al final de 5 artículos. Dejé una sola en cada uno:
-  https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/
-  https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/
-  https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/
-  https://plomeroculiacanpro.mx/blog/mantenimiento-boiler-noritz-checklist/
-  https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
-- **Un artículo mostraba el año equivocado**: el título decía "Guía 2026" pero por dentro (en los datos que lee Google y en las migas de navegación) seguía diciendo "2025". Lo unifiqué a 2026; no toqué la fecha real de publicación → https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/
-- **El número de colonias no coincidía**: la página de colonias decía "640+ colonias" pero la portada dice "más de 600". Tu base de datos real tiene 631 colonias, así que "640+" no se sostiene (631 es menos que 640) pero "más de 600" sí. Cambié la página a "600+" para que ambas digan lo mismo y sea verdad → https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/
+## ✅ Arreglé (7)
+- Una alarma interna del sistema sonaba en falso todos los días (una revisión automática nueva no "hablaba el mismo idioma" que el vigilante) — la silencié sin perder la revisión, así las alertas vuelven a ser de fiar.
+- En la página "plomero cerca de mí", el enlace que usan Facebook/Twitter para identificar la página apuntaba por error a la página principal en vez de a ella misma — lo corregí a su propia dirección → https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/
+- En 5 páginas de servicio, el recuadro del formulario se iluminaba de **azul** (un color que no es el de tu marca naranja) al escribir, y en una de ellas casi no se veía qué casilla estabas usando — lo pasé a naranja y bien visible → https://plomeroculiacanpro.mx/servicios/plomero-economico/ · https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/ · https://plomeroculiacanpro.mx/servicios/plomero-a-domicilio/ · https://plomeroculiacanpro.mx/servicios/desazolve-de-drenajes/ · https://plomeroculiacanpro.mx/servicios/instalacion-de-boiler/
+- En 2 artículos del blog había un brillo **rojo** fuera de tu marca en unos botones — lo cambié a naranja → https://plomeroculiacanpro.mx/blog/cuanto-cuesta-plomeria-bano-completo-culiacan/ · https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/
+- En "plomero cerca de mí" los tiempos de llegada se contradecían entre sí (en un lado decía "15 a 25 minutos", en otro "20-30", y arriba "30-60") — lo dejé todo en **30-60 minutos** (los sectores más cercanos en la parte rápida del rango), una sola promesa creíble → https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/
+- En 5 páginas el enlace decía "Ver todas las colonias (1,895)" — un número inflado y poco creíble — lo puse en **(643)**, el mismo que muestra tu página principal → https://plomeroculiacanpro.mx/servicios/plomero-a-domicilio/
+- En "plomero centro de Culiacán", la lista titulada "colonias con página propia" prometía 9 colonias pero 6 de ellas no tenían página (el enlace iba al listado general) — dejé solo las 3 que sí la tienen, para no prometer de más → https://plomeroculiacanpro.mx/servicios/plomero-centro-culiacan/
 
-## ⚠️ Encontré pero NO pude arreglar solo (3)
-(Sí sé arreglarlos, pero los dejé en la cola para una pasada enfocada y no agrandar demasiado el cambio de hoy de golpe — así es más seguro.)
-- **La fecha de publicación de 8 artículos del blog está oculta para los lectores de pantalla** (un atributo la esconde). Las personas ciegas no oyen "publicado el…". Es un arreglo mecánico de 8 páginas; lo haré en la próxima corrida enfocada de accesibilidad.
-- **Los artículos del blog no traen unas etiquetas que sí tienen las páginas de servicio** (las que controlan cómo se ve la vista previa al compartir en WhatsApp/Facebook y el color de la barra del navegador). No rompe nada, pero conviene igualarlo. En cola.
-- **En la página del centro, la lista "colonias donde tenemos página" promete páginas que no existen**: 6 de 9 enlaces llevan al directorio general en vez de a una página propia de esa colonia. Hay que quitar esos 6 o cambiar el texto. En cola → https://plomeroculiacanpro.mx/servicios/plomero-centro-culiacan/
+## ⚠️ Encontré pero NO pude arreglar solo (2)
+- Los "migas de pan" (la fila de enlaces Inicio › Servicios › … arriba de cada página) miden 42 píxeles de alto en celular, 2 menos que el ideal de 44 para tocar cómodo. El arreglo correcto va en la hoja de estilos compartida y tocaría ~50 páginas a la vez (más que mi límite de seguridad por corrida) — lo dejo para una corrida dedicada. No es grave: igual son tocables.
+- Quedó un archivo viejo y suelto en el servidor (`index.min.html`) que aún trae el número inflado "1,895"; nadie lo usa ni Google lo ve (ninguna página enlaza a él), pero borrar archivos completos no lo hago solo. Si quieres lo elimino con tu visto bueno.
 
 ## 🌱 Mejoré / agregué (0)
-Sin páginas nuevas hoy: tu sitio ya cubre lo que la gente busca y no había un hueco con demanda real que no canibalizara páginas existentes; no inventé páginas porque eso dañaría tu posicionamiento. La página de "bombas de agua" que aprobaste sigue en cola para una corrida dedicada (es contenido extenso y no quiero apurarlo). También revisé el artículo de mayor visibilidad (drenaje tapado): su título y descripción YA están bien hechos, así que NO los toqué — sus 0 clics vienen de la posición en Google, no del texto.
+Sin páginas nuevas hoy: tu sitio ya cubre lo que la gente busca y no inventé páginas porque eso dañaría tu posicionamiento. La única candidata con búsquedas reales ("bombas de agua", que ya aprobaste) la estoy preparando bien para una corrida dedicada, sin prisas.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Cuando se le cambie el nombre al archivo donde el robot anota que trabajó, hay que avisarle también al sensor que vigila esa frescura, o vuelve a dar falsa alarma. Ya quedó registrado.
-- Programé dos "detectores automáticos" nuevos para que, de ahora en adelante, el sistema cace solo: (1) cualquier título de blog con código mal anidado adentro, y (2) cualquier "Artículos Relacionados" duplicado. De hecho ese segundo detector ya pescó un 8º artículo que mi primera revisión a mano había pasado por alto.
-(ya van 37 reglas aprendidas en total)
+- Los colores fuera de marca a veces se escriben de otra forma (con números "rgb" en vez del código de color de siempre); enseñé a mi revisión automática a detectarlos también así — y de hecho hoy mismo cazó 2 rojos que antes se le escapaban.
+- Cuando agrego una herramienta interna nueva, debe "presentarse" ante el vigilante del sistema para no disparar alarmas falsas; dejé esa regla escrita.
+(ya van 39 reglas aprendidas en total)
 
-## ⏳ Necesito que tú decidas (1)
-- **El artículo "¿Cuánto cobra un plomero por visita?"** tiene el título en "[2026]" pero por dentro dice "precios reales 2025" (los precios son de noviembre 2025). Decide tú: ¿actualizo los precios y los paso a 2026 (implica revisarlos contigo), o regreso el título a 2025 para que sea honesto con la fecha real? No lo cambio yo porque tocar precios/recencia es decisión tuya → https://plomeroculiacanpro.mx/blog/cuanto-cobra-plomero-visita-culiacan/
+## ⏳ Necesito que tú decidas (2)
+- **Página de "reparación de bombas de agua":** hay búsquedas reales en Google ("bombas de agua en Culiacán", apareces en posición 5 sin página propia) y ya me confirmaste que sí lo haces. Quiero crearla con calidad en una corrida dedicada — solo confírmame que sigues queriéndola y la armo.
+- **El artículo "¿Cuánto cobra un plomero?"** tiene el título en [2026] pero por dentro varios encabezados dicen 2025 (su última actualización real fue noviembre 2025). Bajar el título a 2025 o subir todo a 2026 cambia qué tan "fresco" se ve y si das a entender que los precios son de este año — eso es decisión tuya. Dime y lo unifico.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google para que lo muestre. Un revisor independiente confirmó que nada quedó roto (las páginas cargan bien, los datos que lee Google son válidos, el WhatsApp y el correo intactos) antes de publicar.
+Sí, todo revisado por un segundo verificador independiente y en vivo; le avisé a Google de las páginas que cambiaron para que las muestre actualizadas.
