@@ -7,6 +7,11 @@ siempre.** Lo lee en la FASE 0 y lo aplica en la FASE 6 (qué crear) y en la FAS
 
 > Regla madre: **"deriva, no inventes".** Si una decisión se puede resolver con ESTE archivo +
 > los datos (repo/GSC), la máquina decide sola. Si NO, va a humano (cola `requiere_humano`).
+>
+> QUIÉN decide: el panel **`decisor-negocio`** (`.claude/agents/decisor-negocio.md`) — un **dev senior**
+> + un **maestro plomero/experto del mercado de Culiacán**. Aplica el CONOCIMIENTO del oficio sobre los
+> DATOS de este archivo. Tú curas los datos; el panel pone el criterio. Reserva al humano lo que de
+> verdad solo el dueño sabe (un precio nuevo, un servicio que quizá no presta) o lo que sale del giro.
 
 ## Giro
 Plomería **residencial y comercial** en Culiacán, Sinaloa. Todo lo que sea PLOMERÍA cae en el giro.

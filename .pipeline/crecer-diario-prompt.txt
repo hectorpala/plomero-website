@@ -114,10 +114,12 @@ Cota práctica de la corrida: MINUTOS_MAX = 35 (tiempo, no tokens — corre por 
      Encola cada hallazgo:  echo '<spec json>' | python3 .pipeline/gestor-backlog.py add -
        (tipo/objetivo/descripcion/evidencia/impacto/esfuerzo/riesgo). DEMANDA es obligatoria para `pagina-nueva`;
        si una idea NO trae señal de demanda, NO la encoles como página — a lo sumo como enriquecer/enlazado.
-       Riesgo de NEGOCIO — decídelo con NEGOCIO.md ("auto si es plomería"): si el servicio cae CLARAMENTE en el
-       giro de plomería (o un vecino directo) y NO está en la lista "NO ofreces" → riesgo "medio" (auto-crea sola).
-       Si está FUERA de plomería, en la lista "NO ofreces", o es AMBIGUO si lo es → riesgo "alto" → cola humana.
-       Ante la duda de si algo es plomería, trátalo como ambiguo (alto). Nunca inventes que ofreces un servicio.
+       QUIÉN DECIDE el riesgo/acción: NO lo decidas tú a ojo. Lanza el subagente `decisor-negocio` (Task) — el
+       panel de DOS personalidades (dev senior + maestro plomero/experto del mercado de Culiacán) que lee NEGOCIO.md
+       y la demanda de GSC y devuelve, por oportunidad, {accion: crear|enriquecer|enlazar|humano, riesgo, porque}.
+       Encola EXACTAMENTE lo que el panel decida. Su regla: servicio de plomería con demanda real → crear (riesgo
+       medio, auto); fuera del oficio / ambiguo / requiere un dato 100% del dueño → humano (riesgo alto). Si los dos
+       expertos no concuerdan, gana el conservador (humano). Nunca inventes que el dueño ofrece un servicio.
      Escribe .pipeline/oportunidades-$(date +%Y%m%d).md con la tabla rankeada (respaldo del descubrimiento).
   2. DRENAR EN LOOP (loop-until-dry, SIN tope de 3):
        repite:
