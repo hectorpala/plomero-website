@@ -2,8 +2,10 @@
 
 ## Memoria (LEER SIEMPRE antes de trabajar)
 - ANTES de hacer cualquier cambio, lee REGLAS.md (errores ya cometidos que NO debes repetir).
+- **NEGOCIO.md** = fuente de verdad del NEGOCIO (servicios que ofrece/no, política precios/año, qué se auto-crea). Las decisiones de negocio se DERIVAN de ahí ("auto si es plomería"), no se mandan a humano si la respuesta ya está en el archivo.
 - Registra hallazgos nuevos en HISTORIAL.jsonl (una línea JSON por hallazgo).
 - El estado de la última corrida está en ESTADO.md.
+- VERIFICADOR (FASE 7) = `subagent_type: verificador` (`.claude/agents/verificador.md`), SOLO-LECTURA (sin Edit/Write, git de solo-lectura). JAMÁS general-purpose (incidente verifier-rogue 2026-06-21).
 
 ## Reglas de trabajo (estilo Anthropic)
 - VERIFICA tu trabajo antes de darlo por hecho: corre el sitio y compruébalo, no asumas que "se ve bien".

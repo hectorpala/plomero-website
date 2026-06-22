@@ -10,8 +10,10 @@ Haces, en orden, CUATRO trabajos en la misma corrida:
   D) APRENDER  — un agente convierte cada error en una REGLA permanente para que el sistema se vuelva más listo.
 
 ================================ FASE 0 — Memoria ================================
-Lee CLAUDE.md, REGLAS.md, ESTADO.md y las últimas ~40 líneas de HISTORIAL.jsonl. Anota qué ya se hizo/decidió
-(p.ej. servicios que el dueño NO ofrece, zona-pages y colonias ya creadas) para no repetir ni contradecir.
+Lee CLAUDE.md, REGLAS.md, ESTADO.md, NEGOCIO.md y las últimas ~40 líneas de HISTORIAL.jsonl. Anota qué ya se
+hizo/decidió (zona-pages y colonias ya creadas) para no repetir ni contradecir. NEGOCIO.md es la FUENTE DE VERDAD
+del negocio (servicios que ofrece/no, política de precios/año, qué se auto-crea): DERIVA de él las decisiones de
+negocio en vez de mandarlas a humano. Si la respuesta está en NEGOCIO.md, decídela tú; si no, va a humano.
 
 ================================ FASE 1 — Health check ================================
 Levanta un servidor local estático (`python3 -m http.server 8080` en background) sobre la raíz. Con `curl -sI`
@@ -112,7 +114,10 @@ Cota práctica de la corrida: MINUTOS_MAX = 35 (tiempo, no tokens — corre por 
      Encola cada hallazgo:  echo '<spec json>' | python3 .pipeline/gestor-backlog.py add -
        (tipo/objetivo/descripcion/evidencia/impacto/esfuerzo/riesgo). DEMANDA es obligatoria para `pagina-nueva`;
        si una idea NO trae señal de demanda, NO la encoles como página — a lo sumo como enriquecer/enlazado.
-       Riesgo de NEGOCIO (nicho/servicio que el dueño quizá no ofrece) → riesgo "alto" → la cola lo manda a humano.
+       Riesgo de NEGOCIO — decídelo con NEGOCIO.md ("auto si es plomería"): si el servicio cae CLARAMENTE en el
+       giro de plomería (o un vecino directo) y NO está en la lista "NO ofreces" → riesgo "medio" (auto-crea sola).
+       Si está FUERA de plomería, en la lista "NO ofreces", o es AMBIGUO si lo es → riesgo "alto" → cola humana.
+       Ante la duda de si algo es plomería, trátalo como ambiguo (alto). Nunca inventes que ofreces un servicio.
      Escribe .pipeline/oportunidades-$(date +%Y%m%d).md con la tabla rankeada (respaldo del descubrimiento).
   2. DRENAR EN LOOP (loop-until-dry, SIN tope de 3):
        repite:
@@ -144,8 +149,10 @@ Cota práctica de la corrida: MINUTOS_MAX = 35 (tiempo, no tokens — corre por 
        - para blog: gen-landing desde un esqueleto de blog que pase los checkers; agrégala a sitemap y enlázala.
 
 ==================== FASE 7 — VERIFICAR (agente independiente: "¿quedó todo bien?") ====================
-Lanza un subagente VERIFICADOR (Task, general-purpose) con instrucción de ser ESCÉPTICO: su trabajo es intentar
-demostrar que algo quedó MAL, no confirmar que está bien. Debe, sobre la rama de la corrida:
+Lanza el subagente VERIFICADOR de SOLO-LECTURA (Task, `subagent_type: verificador` — definido en
+.claude/agents/verificador.md, SIN Edit/Write y con git de solo-lectura; JAMÁS general-purpose, por el incidente
+verifier-rogue). Su instrucción es ser ESCÉPTICO: demostrar que algo quedó MAL, no confirmar que está bien. NO
+publica ni edita nada — solo lee, corre checkers y devuelve un veredicto. Debe, sobre la rama de la corrida:
   a. Releer `git diff main --stat` y confirmar que el alcance es razonable y nada quedó fuera de lo previsto.
   b. Re-correr los checkers deterministas desde cero: `python3 .pipeline/ci-gate.py` (0 ALTA) y, por CADA página
      nueva/modificada, `python3 .pipeline/gate-pagina.py <ruta/index.html>` (validate + checkers + anti-doorway).
