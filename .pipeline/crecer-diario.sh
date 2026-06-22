@@ -83,11 +83,21 @@ if [ -f "$PARTE" ]; then
   fi
 fi
 
-# Parte por email — SIEMPRE, aun si la corrida falló (send-report alerta si el resumen es viejo/ausente).
-/usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
-  "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ultima-corrida.md" \
-  "Auto Agente Plomero" "18:25" >> "$LOG" 2>&1 \
-  || echo "[$STAMP] No se pudo enviar el email del parte (Auto Agente Plomero)." >> "$LOG"
+# Parte por email. Si la corrida tuvo ÉXITO → parte nuevo. Si FALLÓ (cuota/error) → NO mandes
+# el parte viejo (correo engañoso "encontré N" de otra corrida); manda un aviso honesto.
+if [ "${CLAUDE_OK:-0}" = 1 ]; then
+  /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
+    "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ultima-corrida.md" \
+    "Auto Agente Plomero" "18:25" >> "$LOG" 2>&1 \
+    || echo "[$STAMP] No se pudo enviar el email del parte (Auto Agente Plomero)." >> "$LOG"
+else
+  FAILNOTE="$LOG_DIR/fail-$STAMP.md"
+  REASON=$(grep -m1 -iE "session limit|hit your|cuota|rate" "$LOG" 2>/dev/null || echo "error de la corrida")
+  printf '# Auto Agente Plomero — corrida NO completada\n**Resultado:** la corrida no terminó (%s); NO hay parte nuevo. Reintenta cuando se restablezca la cuota.\n\nNo se hizo ni publicó ningún cambio en esta corrida.\n' "$REASON" > "$FAILNOTE"
+  /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
+    "$FAILNOTE" "Auto Agente Plomero" "no completada" >> "$LOG" 2>&1 \
+    || echo "[$STAMP] No se pudo enviar el aviso de falla (Auto Agente Plomero)." >> "$LOG"
+fi
 
 # Marca que YA corrió hoy SOLO si la corrida tuvo éxito. Si falló, NO se marca → el
 # catch-up sí podrá recuperarla hoy (si se marcara siempre, una corrida fallida quedaría sin recuperar).
