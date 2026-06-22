@@ -106,6 +106,11 @@ Cota práctica de la corrida: MINUTOS_MAX = 35 (tiempo, no tokens — corre por 
 /expandir-sitio y usa el ORQUESTADOR scripts/crecer.py y la cola .pipeline/gestor-backlog.py.
 
   1. DESCUBRIR (ancho) — recolecta TODO lo que califica y ENCÓLALO en el backlog (dedup automático):
+     ⚠️ OBLIGATORIO PRIMERO — CARGAR LAS TOOLS DIFERIDAS: las herramientas `mcp__gsc__*` son DIFERIDAS (aparecen por
+     NOMBRE pero SIN esquema; un ToolSearch genérico NO las "encuentra"). ANTES de usarlas corre EXACTAMENTE:
+       ToolSearch  select:mcp__gsc__gsc_opportunities,mcp__gsc__gsc_keywords,mcp__gsc__gsc_performance,mcp__gsc__gsc_inspect,mcp__gsc__gsc_index,mcp__gsc__gsc_list_sites,mcp__gsc__gsc_sitemaps
+     Eso carga sus esquemas y YA puedes llamarlas. PROHIBIDO declarar "GSC ciego/desconectado" sin antes hacer este
+     `select:` — GSC SÍ está conectado; verifícalo con `mcp__gsc__gsc_list_sites` antes de decir que no hay datos.
        - mcp__gsc__gsc_opportunities / gsc_keywords → queries pos 8-30 con impresiones sin página propia → `pagina-nueva`.
        - mcp__gsc__gsc_performance → CTR bajo + impresiones altas → `ctr-fix`; query que rankea de rebote en una
          genérica → `enriquecer` la página dedicada; queries emergentes.
