@@ -179,10 +179,11 @@ def parse_jsonld(t):
     return found
 
 def breadcrumb_info(found):
-    """(ultimo_item, set_de_posiciones) consolidando todos los BreadcrumbList."""
+    """(ultimo_item, set_de_posiciones, {posicion: item}) consolidando todos los BreadcrumbList."""
     last_item = None
     last_pos = -1
     positions = set()
+    pos_items = {}
     for bc in found.get("breadcrumbs", []):
         items = bc.get("itemListElement") or []
         for it in items:
@@ -196,10 +197,12 @@ def breadcrumb_info(found):
             target = it.get("item")
             if isinstance(target, dict):
                 target = target.get("@id") or target.get("url")
+            if target:
+                pos_items.setdefault(pos, target.strip())
             if pos > last_pos and target:
                 last_pos = pos
                 last_item = target.strip()
-    return last_item, positions
+    return last_item, positions, pos_items
 
 # ---------------------------------------------------------------- servidor local
 class _QuietHandler(SimpleHTTPRequestHandler):
@@ -304,7 +307,7 @@ def main():
 
             # 2: BreadcrumbList ultimo item == canonical + 3 niveles en /servicios/ (seo-301..303)
             found = parse_jsonld(t)
-            last_item, positions = breadcrumb_info(found)
+            last_item, positions, pos_items = breadcrumb_info(found)
             if last_item is not None and last_item != ref:
                 add("alta", r,
                     "ultimo item del BreadcrumbList (%s) != canonical (%s) en %s" % (last_item, ref, loc),
@@ -314,6 +317,17 @@ def main():
                 add("alta", r,
                     "pagina de servicio %s sin breadcrumb de 3 niveles (posiciones presentes: %s)" % (loc, sorted(positions)),
                     "Reconstruir BreadcrumbList con 3 niveles: Inicio(1)->/ , Servicios(2)->/servicios/ , [Pagina](3)->%s" % ref)
+            # 2b: ningun nivel intermedio del breadcrumb debe apuntar a una ancla de la home (BASE/#...),
+            # debe ser un hub indexable real (p.ej. /servicios/). Caso /#servicios (seo-201..304).
+            for p, target in sorted(pos_items.items()):
+                if p == 1:
+                    continue
+                if target == last_item:
+                    continue  # el ultimo item ya se valida contra canonical arriba
+                if target.startswith(BASE + "/#"):
+                    add("media", r,
+                        "BreadcrumbList posicion %d (%s) apunta a una ancla de la home en vez de un hub indexable real, en %s" % (p, target, loc),
+                        "Corregir el item de la posicion %d a un hub real (p.ej. %s/servicios/)" % (p, BASE))
 
             # 2: WebPage @id == canonical (si existe)
             for wid in found.get("webpage_ids", []):
