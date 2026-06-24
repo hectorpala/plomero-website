@@ -304,6 +304,29 @@ def check_page(fpath, t, noindex, redirects):
             "misma página: contenido y encabezado repetidos",
             "Dejar una sola sección de artículos relacionados; eliminar la duplicada")
 
+    # --- 4e. <header class="article-header" aria-hidden="true"> oculta fecha/lectura al lector (media, a11y)
+    #     caso bk-64bed7fd / a11y-501..502 (20260623): la plantilla de blog marcó TODO el header
+    #     como aria-hidden, ocultando <time> y tiempo de lectura. Solo el título redundante interior
+    #     (.article-title-hidden) debe ir oculto.
+    if r.startswith("blog/") and re.search(
+            r'<header\b[^>]*class=["\'][^"\']*article-header[^"\']*["\'][^>]*aria-hidden=["\']true["\']',
+            t, re.I):
+        add("media", r, "a11y",
+            "<header class=\"article-header\"> con aria-hidden=\"true\" oculta la fecha de "
+            "publicación y el tiempo de lectura al lector de pantalla",
+            "Quitar aria-hidden del <header>; si hay un título redundante, ocultar solo el "
+            "<div class=\"article-title-hidden\" aria-hidden=\"true\"> interior")
+
+    # --- 4f. blog indexable sin metas de plantilla og:locale/og:site_name/twitter:url (baja, seo)
+    #     caso bk-546d0a06 (20260623): posts de blog omitían metas que las páginas de servicio sí traen.
+    if r.startswith("blog/") and not noindex:
+        faltan = [m for m in ("og:locale", "og:site_name", "twitter:url") if m not in t]
+        if faltan:
+            add("baja", r, "seo",
+                "Post de blog indexable sin metas de plantilla: falta %s" % ", ".join(faltan),
+                "Añadir og:locale=es_MX, og:site_name=\"Plomero Culiacán Pro\" y twitter:url "
+                "(= canonical) como en las páginas de servicio")
+
     # --- 5. exit-intent-popup sin ARIA (media, a11y)
     mp = re.search(r'<div\b[^>]*id=["\']exit-intent-popup["\'][^>]*>', t, re.I)
     if mp:

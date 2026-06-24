@@ -3,23 +3,22 @@
 ```json
 {
   "ultima_corrida": {
-    "fecha": "2026-06-22",
-    "rama": "auto/diario-20260622-1914",
+    "fecha": "2026-06-23",
+    "rama": "auto/diario-20260623-1826",
     "modo": "AUTONOMO (diario: mantener+crecer+verificar+aprender)",
-    "resumen": "Nada SERVIDO cambió desde la última auto-diario (998c23b8): solo scripts del driver. Health 6/6 200, 0 electricista. PISO determinista LIMPIO (0 ALTA/MEDIA nuevas, 0 ciegos). infra-salud reportó 'GSC ciego' pero es el token CLI de mcp-local-seo (invalid_grant); el MCP gsc SÍ está vivo (gsc_list_sites OK) -> GSC NO ciego, FASE 6 usó datos reales. Lote rotativo (5 págs) destapó el defecto de breadcrumb.",
-    "arreglados": "1 clase, 19 págs: BreadcrumbList JSON-LD nivel intermedio 'Servicios' apuntaba a la ANCLA de la home (/#servicios) en vez del hub real /servicios/. 15 sin espacios + 4 con espacios (un replace de string exacto falló estas; el checker parse-aware las cazó). MECANIZADO: check 2b en check-indexabilidad.py.",
-    "crecimiento": "0 páginas nuevas (sin hueco de demanda sin canibalizar; todos los clusters GSC ya tienen página). 1 enlazado: de-orfanizada la página nueva de bombas (creada 06-21, 'Google no reconoce URL') con enlace contextual desde correccion-baja-presion -> 1->2 enlaces entrantes. Rendimiento 28d: 361 clics (+19%), 28332 impr (+27%), pos 6.8.",
-    "verificado_ok": "true (verificador SOLO-LECTURA independiente, ok=true 0 problemas, sobre el árbol final de 19): ci-gate 0 ALTA; check-indexabilidad JSON válido 0; gate-pagina OK; HTTP 200; JSON-LD parsea; canonical==og:url==último item; 0 /#servicios restantes; colonias NO alteradas; bombas no-huérfana; 0 electricista/GTM ajeno; precios/tests intactos; 0 borrados.",
-    "publicado": "NO — 19 págs HTML > candado de 18 => PASE SUPERVISADO (humano), consistente con la decisión documentada 2026-06-18 ('breadcrumb #servicios excede candado, pase supervisado'). Rama verificada lista para aprobación. Tras merge: pedir indexación MCP de la página de bombas.",
-    "pendientes_nuevos": "(humano) re-auth token CLI mcp-local-seo gsc-token.json (invalid_grant, bk-12b83ae9). (humano) aprobar/mergear esta rama (19>18). Diferido bajo candado: bk-64bed7fd aria-hidden 8 blogs; bk-6a3a1bcc imagen destape-bano. Observación: badge de rating visible en 12 blogs (sin schema, no viola regla dura; posible decisión de marca).",
+    "resumen": "El PASE SUPERVISADO de ayer (breadcrumb, 890d13de) ya está en origin/main (humano lo mergeó). Nada SERVIDO cambió desde entonces -> solo PISO + lote rotativo. Health 6/6 200, 0 electricista/GTM ajeno. PISO determinista LIMPIO (0 ALTA nuevas, 0 ciegos): plantilla 0/68, indexabilidad 0/68, nap 0/79, conversion 0/68, enlazado 0/68, e2e 0/3, produccion EN VIVO 0; señales conocidas perf-001(R-03)/trk(R-04)/sec-001(R-01). GSC CIEGO hoy (token totalmente expirado, no renueva; ayer aún vivía) -> 0 páginas nuevas (sin señal de demanda). Lote rotativo (5 págs) + backlog destaparon defectos de plantilla de blog. OJO: 'main' local quedó atrás (29c6e96d pre-merge); diff real se mide vs origin/main (10 págs, no 29 falsas).",
+    "arreglados": "3 clases en blog (10 HTML): (a11y-501/502=bk-64bed7fd) quitado aria-hidden del <header class=article-header> en 8 posts (ocultaba fecha+lectura al lector de pantalla; el .article-title-hidden interior sigue oculto); (cont-003) 'aeradores'->'aireadores' x2 en problemas-comunes; (cont-004/005) fecha visible <time> alineada a datePublished 2025-11-21 en baja-presion + problemas-comunes. + limpieza 2 .bak huérfanos. FALSO POSITIVO descartado: movil-001 (botón menú mide 48px reales, min-width gana sobre width). MECANIZADO: checks 4e/4f en check-plantilla.py.",
+    "crecimiento": "0 páginas nuevas (GSC ciego -> sin demanda verificable; conservador). Optimización drenada: bk-546d0a06 (9 blogs indexables +og:locale +og:site_name +twitter:url=canonical; marcha-paz noindex excluido). Cerrado STALE bk-891b5be6 (breadcrumb ya resuelto en 890d13de).",
+    "verificado_ok": "true (verificador SOLO-LECTURA independiente, ok=true 0 problemas): git diff origin/main = 10 HTML blog + 2 .bak + BACKLOG + costos; ci-gate 0 ALTA; check-indexabilidad 0; gate-pagina 10/10 (Jaccard máx 0.29); HTTP 200; JSON-LD parsea; aria-hidden header 0 / inner 1; metas 1 c/u y twitter:url==canonical; 0 aeradores; fechas 2025-11-21; 0 electricista/GTM ajeno; email+wa.me intactos; 0 CSS/JS/sitemap/precios/tests; 0 páginas vivas borradas.",
+    "publicado": "SI (pendiente de ejecutar el merge ff-only -> no-ff -> push al cierre de esta corrida). 10 págs HTML <= candado 18; verificador ok=true.",
+    "pendientes_nuevos": "(humano, ALTA) re-auth gsc-token.json: GSC totalmente ciego (invalid_grant, no renueva) -> sin crecimiento de páginas hasta reconectar; bk-12b83ae9. (humano/decisión) badge '4.8/5 150+ reseñas' visible en blogs (política self-serving de Google; no viola regla dura). (diferido) a11y nav sin aria-label site-wide ~68 págs; :focus-visible de botones (CSS+bump); bk-6a3a1bcc imagen destape-bano; bk-b2b4878f year-desync cuanto-cobra (precios=humano).",
     "_archivo_anterior": {
-      "fecha": "2026-06-21",
-      "rama": "auto/diario-20260621-1518",
-      "modo": "AUTONOMO (diario: mantener+crecer+verificar+aprender)",
-      "resumen": "Nada servido cambió desde 2026-06-20 (solo costos.jsonl). PISO 11 revisores verde salvo señales conocidas/esperadas (tracking Consent Mode R-04; secreto en historial = pendiente humano rotación). perf-real emitió 'verificación ciega ALTA' FALSA (node en /usr/local/bin fuera del PATH del subagente, infra-002); re-corrido por el orquestador = solo perf-001 baja. Lote rotativo (5 págs viejas) destapó 4 arreglos de contenido.",
-      "crecimiento": "1 PÁGINA NUEVA por demanda real GSC: /servicios/reparacion-de-bombas-de-agua/ (cluster 'bomba de agua' ~100+ impr/28d pos 2-8 CTR 0; dueño confirmó oferta 2026-06-18). Prosa única (Jaccard 0.26), hero=imagen bomba, cableada sitemap+home+sw v30, headless 375px 0 overflow. Backlog bk-51f9103d cerrado.",
-      "verificado_ok": "true (determinista por el orquestador, NO por el agente rogue): ci-gate 0 ALTA; gate-pagina OK en las 4 págs (Jaccard tecnico 0.25/como-identificar 0.21/cuanto-cobra 0.24/bombas 0.26); HTTP 200; JSON-LD parsea; 0 electricista/GTM ajeno; email correcto; wa.me 291 OK 0 truncados; precios intactos; página nueva no-huérfana+en sitemap.",
-      "cierre_bitacora": "2026-06-21: corrida 1518 reanudada en FASE 10. Rama=main=origin/main=108fed8e (todo el código ya publicado en corrida previa). Health check OK (home+contacto+servicios+blog+bombas+gas = 200); anti-fuga OK (0 electricista, 0 GTM ajeno, contacto correcto). Parte corregido: el pendiente de migas 44px estaba desactualizado (ya resuelto por 24e3b925) -> movido a 'arreglé' (3->4); check-parte cuadra. Solo se commiteó la bitácora pendiente; sin cambios de código ni nueva publicación de sitio."
+      "fecha": "2026-06-22",
+      "rama": "auto/diario-20260622-1914",
+      "resumen": "Nada SERVIDO cambió desde 998c23b8. PISO LIMPIO. infra-salud reportó 'GSC ciego' = token CLI mcp-local-seo (invalid_grant) pero el MCP gsc SÍ vivía (gsc_list_sites OK) -> FASE 6 usó datos reales. Lote rotativo destapó breadcrumb.",
+      "arreglados": "1 clase, 19 págs: BreadcrumbList nivel intermedio 'Servicios' apuntaba a /#servicios en vez del hub /servicios/. MECANIZADO check 2b en check-indexabilidad.py.",
+      "verificado_ok": "true (verificador SOLO-LECTURA, ok=true 0 problemas sobre 19).",
+      "publicado": "NO — 19>18 candado => PASE SUPERVISADO. Mergeado por humano el 2026-06-23 (890d13de en origin/main)."
     }
   },
   "corrida_previa": {
@@ -386,6 +385,25 @@
   }
 }
 ```
+
+## Resumen de la corrida 2026-06-23 18:26 (auto/diario-20260623-1826 — AUTÓNOMA, diario)
+
+- **Contexto:** el PASE SUPERVISADO de ayer (breadcrumb, 890d13de) ya está en origin/main (humano lo mergeó). `main` LOCAL quedó atrás en 29c6e96d → lo sincronicé a origin/main; el diff de la corrida se mide contra **origin/main** (10 págs reales, no las 29 falsas que daba el main viejo).
+- **Health check:** 6/6 rutas 200 (/, /contacto/, /servicios/, /blog/, /precios/, /servicios/reparacion-de-bombas-de-agua/), 0 "electricista", 0 GTM ajeno. Server en 8091.
+- **Selector:** nada SERVIDO cambió desde 890d13de → solo PISO + lote rotativo.
+- **PISO determinista LIMPIO (0 ciegos):** plantilla 0/68, indexabilidad 0/68, nap 0/79, conversión 0/68, enlazado 0/68, e2e 0/3, producción EN VIVO 0; señales conocidas perf-001 (R-03 baseline), trk-001..004 (R-04 Consent Mode), sec-001 (R-01 secreto histórico, exit 0). infra-salud: único ALTA = token GSC.
+- **GSC CIEGO hoy:** ambas tools de local-seo (find_opportunities + search_keywords) devuelven "Token expirado y no se pudo renovar". A diferencia de ayer (el MCP aún vivía), hoy el token `gsc-token.json` está totalmente expirado (invalid_grant). NO se intentó copiar/eludir el token (el clasificador lo bloqueó el 06-22, correctamente). = bk-12b83ae9, degradado por completo → 0 páginas nuevas (candado de demanda ciego).
+- **Arreglado (3 clases, 10 HTML blog):**
+  - **a11y-501/502 = bk-64bed7fd:** `<header class="article-header" aria-hidden="true">` ocultaba la fecha de publicación (`<time>`) y el tiempo de lectura al lector de pantalla en 8 posts. 3 posts ya tenían el patrón correcto (sin aria-hidden). Quitado el aria-hidden del header; el `.article-title-hidden` interior conserva el suyo (título redundante sigue oculto). Posts: como-detectar-fugas, baja-presion, cuando-llamar, cuanto-cuesta-plomeria-bano, desatascar-wc, mantenimiento-boiler-noritz, instalacion-tinaco, problemas-comunes.
+  - **cont-003:** "aeradores" → "aireadores" (×2) en problemas-comunes (lo destapó el revisor-contenido del lote rotativo).
+  - **cont-004/005:** fecha visible `<time>` contradecía datePublished (12/10 nov vs 21 nov en schema) → alineada a 2025-11-21 (campo canónico) en baja-presion + problemas-comunes.
+  - + limpieza: 2 .bak huérfanos borrados (pasaron limpiar-huerfanos.py).
+- **FALSO POSITIVO descartado:** movil-001 (revisor-movil dijo botón menú 24×18px a 375px). Medido con headless: **48×48px reales** porque `min-width/min-height:48px` del `@media 768px` gana sobre `width:24px` del `@media 480px`. El revisor leyó la declaración sin la cascada → se evitó un cambio CSS site-wide inútil.
+- **Mecanización (FASE 9):** checks 4e (header aria-hidden) y 4f (blog indexable sin og:locale/og:site_name/twitter:url) en `check-plantilla.py`; disparan en pre-fix, 0 en árbol limpio. Regla BLOG/PLANTILLA consolidada en REGLAS.md (40 reglas, 3992/4000 tokens).
+- **Crecimiento (FASE 6):** 0 páginas nuevas (GSC ciego). Optimización drenada: **bk-546d0a06** (9 blogs indexables + og:locale + og:site_name + twitter:url=canonical; marcha-paz noindex excluido). Cerrado STALE **bk-891b5be6** (breadcrumb ya resuelto en 890d13de).
+- **Verificador (FASE 7): ok=true, 0 problemas** (alcance 10 HTML + 2 .bak; ci-gate 0 ALTA; gate-pagina 10/10 Jaccard máx 0.29; HTTP 200; JSON-LD parsea; fixes aplicados; anti-fuga limpia; 0 páginas vivas borradas).
+- **Publicación (FASE 8): SÍ** (10 ≤ 18, verificador ok=true). Merge ff-only → no-ff → push al cierre.
+- **Pendientes (humano):** re-auth GSC (ALTA, bloquea crecimiento); decisión badge "4.8/5" visible en blogs; diferidos a11y nav aria-label site-wide + :focus-visible botones; bk-6a3a1bcc imagen destape-bano; bk-b2b4878f year-desync cuanto-cobra (precios).
 
 ## Resumen de la corrida 2026-06-22 19:14 (auto/diario-20260622-1914 — AUTÓNOMA, diario)
 
