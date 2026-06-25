@@ -48,12 +48,45 @@ fi
 
 # Corrida autónoma del sistema completo (auto-permiso). El prompt orquesta las 10 fases.
 RUN_START=$(date +%s)   # para atribuir el costo (tokens) de los transcripts de ESTA corrida
-if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then
-  CLAUDE_OK=1
-else
-  CLAUDE_OK=0
-  echo "[$STAMP] La corrida de claude terminó con error (continúo para enviar el parte)." >> "$LOG"
-fi
+
+# ── Clasificación de errores (NO confundir red con cuota) ────────────────────
+# TRANSITORIO = se cayó la conexión / el servidor falló a media respuesta. Se REINTENTA:
+#   no perdimos cuota, solo se cortó el stream (el caso del 2026-06-24: "Connection closed mid-response").
+# LIMITE = de verdad se agotó el uso del plan. NO se reintenta (sería inútil hasta que reinicie la cuota).
+# El match se hace SOLO sobre lo que imprimió ESE intento (por offset de bytes), así la línea de
+# estadística "📊 Uso de la corrida (cuota de suscripción)" —que se anexa DESPUÉS— nunca cuenta como motivo.
+TRANSIENT_RE='Connection closed mid-response|API Error|Connection error|overloaded|ECONNRESET|ETIMEDOUT|EHOSTUNREACH|ENETUNREACH|fetch failed|socket hang up|terminated|Internal server error|HTTP 5[0-9][0-9]|\b5(00|02|03|29)\b|may be incomplete'
+LIMIT_RE='session limit|usage limit|hit your (usage|limit)|rate limit|límite de uso|quota exceeded|resets? at|your limit will reset'
+
+MAX_ATTEMPTS=3
+CLAUDE_OK=0
+FAIL_KIND=""          # transitorio | limite | desconocido
+for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
+  echo "[$STAMP] >>> intento $attempt/$MAX_ATTEMPTS de la corrida @ $(date +%H:%M:%S)" >> "$LOG"
+  OFF=$(wc -c < "$LOG")   # byte-offset: leeremos SOLO lo que agregue este intento
+  if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then
+    CLAUDE_OK=1; FAIL_KIND=""; break
+  fi
+  TAIL=$(tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null || echo "")
+  if printf '%s' "$TAIL" | grep -qiE "$LIMIT_RE"; then
+    FAIL_KIND="limite"
+    echo "[$STAMP] Falla por LÍMITE DE USO real del plan; no tiene caso reintentar." >> "$LOG"
+    break
+  fi
+  if printf '%s' "$TAIL" | grep -qiE "$TRANSIENT_RE"; then
+    FAIL_KIND="transitorio"
+  else
+    FAIL_KIND="desconocido"
+  fi
+  if [ "$attempt" -lt "$MAX_ATTEMPTS" ]; then
+    WAIT=$((attempt * 120))   # backoff: 120s, luego 240s
+    echo "[$STAMP] Error $FAIL_KIND (NO de cuota); reintento en ${WAIT}s." >> "$LOG"
+    sleep "$WAIT"
+  else
+    echo "[$STAMP] Agotados los $MAX_ATTEMPTS intentos; la corrida no completó." >> "$LOG"
+  fi
+done
+[ "$CLAUDE_OK" = 1 ] || echo "[$STAMP] La corrida de claude terminó con error ($FAIL_KIND); continúo para enviar el parte." >> "$LOG"
 
 # Registro de costo/tokens de la corrida (no bloqueante): suma los transcripts (sesión + subagentes)
 # producidos desde RUN_START y los anexa a .pipeline/costos.jsonl. Da visibilidad del gasto diario.
@@ -92,8 +125,23 @@ if [ "${CLAUDE_OK:-0}" = 1 ]; then
     || echo "[$STAMP] No se pudo enviar el email del parte (Auto Agente Plomero)." >> "$LOG"
 else
   FAILNOTE="$LOG_DIR/fail-$STAMP.md"
-  REASON=$(grep -m1 -iE "session limit|hit your|cuota|rate" "$LOG" 2>/dev/null || echo "error de la corrida")
-  printf '# Auto Agente Plomero — corrida NO completada\n**Resultado:** la corrida no terminó (%s); NO hay parte nuevo. Reintenta cuando se restablezca la cuota.\n\nNo se hizo ni publicó ningún cambio en esta corrida.\n' "$REASON" > "$FAILNOTE"
+  # Motivo HONESTO según el tipo de falla (no asumir cuota). La línea de evidencia se saca del
+  # log EXCLUYENDO la estadística "📊 Uso ... (cuota de suscripción)" para no volver a confundirla con un error.
+  ERRLINE=$(grep -iE "$TRANSIENT_RE|$LIMIT_RE" "$LOG" 2>/dev/null | grep -viE '📊 Uso|cuota de suscripción|equiv-API' | head -1 | sed 's/^[[:space:]]*//')
+  [ -n "$ERRLINE" ] || ERRLINE="(sin línea de error reconocible; revisa el log completo)"
+  case "$FAIL_KIND" in
+    transitorio)
+      MOTIVO="se cayó la conexión con el servidor a media respuesta — error TRANSITORIO de red, NO de cuota (corrió con tu plan, no se facturó nada)"
+      SUGERENCIA="El sistema ya reintentó $MAX_ATTEMPTS veces sin éxito. No requiere acción: el catch-up o la corrida de mañana lo recuperan." ;;
+    limite)
+      MOTIVO="se alcanzó el límite de uso del plan"
+      SUGERENCIA="Reintenta cuando se restablezca la cuota." ;;
+    *)
+      MOTIVO="error no reconocido de la corrida"
+      SUGERENCIA="Revisa el log: $LOG" ;;
+  esac
+  printf '# Auto Agente Plomero — corrida NO completada\n**Motivo:** %s.\n**Evidencia (del log):** `%s`\n**Qué sigue:** %s\n\nNo se hizo ni publicó ningún cambio en esta corrida.\n' \
+    "$MOTIVO" "$ERRLINE" "$SUGERENCIA" > "$FAILNOTE"
   /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
     "$FAILNOTE" "Auto Agente Plomero" "no completada" >> "$LOG" 2>&1 \
     || echo "[$STAMP] No se pudo enviar el aviso de falla (Auto Agente Plomero)." >> "$LOG"
