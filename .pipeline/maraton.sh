@@ -36,6 +36,19 @@ fi
 echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
+# Espera a que la API de Claude sea alcanzable (NordVPN puede estar reconectando y
+# bloqueando la salida con el kill switch). Devuelve 0 si vuelve la red, 1 si no en ~8 min.
+# curl a /v1/messages da HTTP 405 (exit 0 = conectó); solo error de RED da exit != 0.
+wait_for_net() {
+  local i
+  for i in $(seq 1 32); do
+    if curl -sS -o /dev/null --max-time 6 https://api.anthropic.com/v1/messages 2>/dev/null; then return 0; fi
+    echo "[$(date)] red caída (¿NordVPN reconectando?); espero 15s ($i/32)…" >> "$MLOG"
+    sleep 15
+  done
+  return 1
+}
+
 END=$(( $(date +%s) + DUR ))
 PASS=0; DRY=0; HECHAS=0
 echo "[$(date)] === MARATÓN inicio · dura ${DUR}s · máx ${MAX_PASS} pasadas ===" | tee -a "$MLOG"
@@ -45,6 +58,12 @@ while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
   PLOG="$LOG_DIR/maraton-pasada-$ST.log"
   REST=$(( END - $(date +%s) ))
   echo "[$(date)] --- pasada $PASS (quedan ${REST}s) -> $PLOG" | tee -a "$MLOG"
+
+  # Resiliencia a NordVPN: no quemar una unidad si la red está caída; espera a que vuelva.
+  if ! wait_for_net; then
+    echo "[$(date)] la red no volvió tras ~8 min -> termino el maratón (el catch-up/diario lo retoma)." | tee -a "$MLOG"
+    break
+  fi
 
   "$CLAUDE_CMD" --permission-mode auto -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
 

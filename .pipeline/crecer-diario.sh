@@ -58,12 +58,27 @@ RUN_START=$(date +%s)   # para atribuir el costo (tokens) de los transcripts de 
 TRANSIENT_RE='Connection closed mid-response|API Error|Connection error|overloaded|ECONNRESET|ETIMEDOUT|EHOSTUNREACH|ENETUNREACH|fetch failed|socket hang up|terminated|Internal server error|HTTP 5[0-9][0-9]|\b5(00|02|03|29)\b|may be incomplete'
 LIMIT_RE='session limit|usage limit|hit your (usage|limit)|rate limit|límite de uso|quota exceeded|resets? at|your limit will reset'
 
+# Espera a que la API de Claude vuelva antes de cada intento. NordVPN (kill switch)
+# bloquea la salida al reconectar; sin esto, el intento se quema de inmediato (caso 06-25:
+# 3 intentos fallaron por red caída, no por cuota). curl a /v1/messages da HTTP 405
+# (exit 0 = conectó); solo un error de RED da exit != 0.
+wait_for_net() {
+  local i
+  for i in $(seq 1 32); do
+    curl -sS -o /dev/null --max-time 6 https://api.anthropic.com/v1/messages 2>/dev/null && return 0
+    echo "[$STAMP] red caída (¿NordVPN reconectando?); espero 15s ($i/32)…" >> "$LOG"
+    sleep 15
+  done
+  return 1
+}
+
 MAX_ATTEMPTS=3
 CLAUDE_OK=0
 FAIL_KIND=""          # transitorio | limite | desconocido
 for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   echo "[$STAMP] >>> intento $attempt/$MAX_ATTEMPTS de la corrida @ $(date +%H:%M:%S)" >> "$LOG"
   OFF=$(wc -c < "$LOG")   # byte-offset: leeremos SOLO lo que agregue este intento
+  wait_for_net || echo "[$STAMP] red no volvió tras ~8 min; intento igual (puede fallar)." >> "$LOG"
   if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then
     CLAUDE_OK=1; FAIL_KIND=""; break
   fi
