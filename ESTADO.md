@@ -4,6 +4,16 @@
 {
   "ultima_corrida": {
     "fecha": "2026-06-26",
+    "rama": "auto/crecer-20260626-120322",
+    "modo": "MARATÓN (pasada única: 1 unidad tipo a)",
+    "resumen": "Piso determinista LIMPIO (ci-gate 0 ALTA, check-plantilla 0, check-indexabilidad 0). GSC vivo por MCP: 0 reescrituras CTR (blogs ya tienen match exacto, 0-clic=SERP-features). Unidad elegida: a11y-109 (MEDIA) — salto h2->h4 en blog/cuanto-cuesta-plomeria-bano-completo-culiacan (comparacion-materiales: Economico/Estandar/Premium). Fix: 3x h4->h3 + selector CSS inline .comparison-card h4->.comparison-card h3 (preserva estilos naranja/1.1rem). Headless: 0 JS errors, h3s=['ECONOMICO','ESTANDAR','PREMIUM'] en cards, 0 h4 restantes. ci-gate 0 ALTA, gate-pagina Jaccard 0.29, HTTP 200. Publicado commit 978b3999 + push 15247052 + gsc_index /blog/cuanto-cuesta-plomeria-bano-completo-culiacan/.",
+    "arreglados": "1 archivo: blog/cuanto-cuesta-plomeria-bano-completo-culiacan/index.html — jerarquia h1->h2->h3 sin saltos.",
+    "crecimiento": "0 paginas nuevas.",
+    "verificado_ok": "determinista (sin verificador independiente en pasada maraton): ci-gate 0 ALTA, gate-pagina CANDADO OK Jaccard 0.29, headless 0 JS errors, HTTP 200.",
+    "publicado": "SI (1 archivo <= candado 18; candados todos OK).",
+    "pendientes_nuevos": "ninguno nuevo.",
+    "_corrida_anterior": {
+    "fecha": "2026-06-26",
     "rama": "auto/diario-20260626-1113",
     "modo": "AUTONOMO (diario: mantener+crecer+verificar+aprender)",
     "resumen": "Al iniciar habia CAMBIOS SIN COMMITEAR en el arbol (corrida previa interrumpida): 18 colonias+home tocadas por fix-colonia-eta.py + el script nuevo. Verificados en sus meritos y ADOPTADOS (no creados hoy): el hero-eta-badge contradecia el ETA del cuerpo en 17 colonias (deriva-no-inventes: las 3 fuentes del cuerpo coinciden y el badge difiere) + 8 metas truncadas. El cambio de link de la home se DIFIRIO (revertido) para dejar 1 fix coherente bajo el cap. Health 6/6 200, 0 electricista/GTM ajeno. PISO determinista LIMPIO: ci-gate 0 ALTA, nap 0, conversion 0, linking 0, css-paridad OK. GSC REVIVIO via MCP (ciego 06-22/06-23): 359 clics/29577 impr 28d (+13%/+26% pos 6.7).",
@@ -19,6 +29,7 @@
       "arreglados": "1 clase, 19 págs: BreadcrumbList nivel intermedio 'Servicios' apuntaba a /#servicios en vez del hub /servicios/. MECANIZADO check 2b en check-indexabilidad.py.",
       "verificado_ok": "true (verificador SOLO-LECTURA, ok=true 0 problemas sobre 19).",
       "publicado": "NO — 19>18 candado => PASE SUPERVISADO. Mergeado por humano el 2026-06-23 (890d13de en origin/main)."
+    }
     }
   },
   "corrida_previa": {
