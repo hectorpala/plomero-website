@@ -440,6 +440,35 @@ def check_page(fpath, t, noindex, redirects):
             "Reemplazar por la paleta de marca: texto/acentos #C2410C o #E36414, fondos claros #FFF7ED. "
             "No tocar el logo de Google (#4285f4/#ea4335 van en <path fill> de SVG).")
 
+    # --- 13. colonia: badge ETA contradice el cuerpo / meta truncada (media, contenido)
+    #     caso fix-colonia-eta 20260626: el hero-eta-badge ("Llegamos en NN-NN min a X")
+    #     mostraba un ETA distinto al del cuerpo (meta + benefit-h3 + cobertura). Solo se marca
+    #     cuando las 3 fuentes del cuerpo COINCIDEN y el badge difiere (deriva, no inventa: el
+    #     cuerpo manda). También: meta description truncada a mitad de palabra antes de "· Llegada".
+    if "plomero-colonias-culiacan/" in r and r.count("/") >= 3:
+        def _eta(pat):
+            m = re.search(pat, t)
+            return m.group(1) if m else None
+        meta_eta = _eta(r'<meta name="description" content="[^"]*?([0-9]{2}-[0-9]{2}) min')
+        badge = re.search(r'hero-eta-badge[^>]*>(?:<[^>]+>)*\s*<span>Llegamos en ([0-9]{2}-[0-9]{2}) min a ', t)
+        benefit = _eta(r'<h3>Llegada (?:en|R[aá]pida)[^<]*?([0-9]{2}-[0-9]{2}) min') or _eta(r'Llegada R[aá]pida</h3><p>([0-9]{2}-[0-9]{2}) min')
+        cob = _eta(r'Cobertura.*?Llegamos en ([0-9]{2}-[0-9]{2}) min')
+        body = [v for v in (meta_eta, benefit, cob) if v]
+        if badge and len(body) == 3 and len(set(body)) == 1 and badge.group(1) != body[0]:
+            add("media", r, "contenido",
+                "El badge de llegada del hero dice %s min pero el cuerpo (meta+beneficio+cobertura) dice %s min" % (badge.group(1), body[0]),
+                "Igualar el ETA del hero-eta-badge al del cuerpo (el cuerpo manda: deriva, no inventes). "
+                "Auto: python3 .pipeline/fix-colonia-eta.py --apply")
+        m = re.search(r'<meta name="description" content="([^"]*)"', t)
+        if m and ' · Llegada' in m.group(1):
+            head = m.group(1).split(' · Llegada')[0].rstrip()
+            last = head.split(' ')[-1] if head else ''
+            if re.fullmatch(r'[a-záéíóúñ]{1,3},?', last) or head.endswith(','):
+                add("media", r, "contenido",
+                    "Meta description truncada a mitad de cláusula antes de '· Llegada' (termina en '%s')" % last,
+                    "Recortar el fragmento colgante al último borde de cláusula completo. "
+                    "Auto: python3 .pipeline/fix-colonia-eta.py --apply")
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): el sitio sirve DOS hojas distintas
