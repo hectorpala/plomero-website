@@ -1,51 +1,42 @@
-# Auto Agente Plomero — parte del 23 de junio de 2026
-**Resultado:** encontré 7, arreglé 3, mejoré 9 artículos · 1 para ti · publicado
+# Auto Agente Plomero — parte del 2026-06-26
+**Resultado:** encontré 3, arreglé 2, 1 para reconectar tú · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 7 cosas: arreglé 3 · 1 necesitan tu decisión · 3 no pude arreglar solo.
+Encontré 3 cosas: arreglé 2 · 0 necesitan tu decisión · 1 no pude arreglar solo.
 
-## ✅ Arreglé (3)
-- En 8 artículos de tu blog, la fecha de publicación y el "tiempo de lectura" estaban **ocultos para los lectores de pantalla** (el programa que usan las personas ciegas para navegar): el bloque entero estaba marcado como "no leer". Lo destapé para que esa tecnología sí anuncie la fecha, sin cambiar nada de lo que se ve en pantalla. Páginas:
-https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/
-https://plomeroculiacanpro.mx/blog/baja-presion-agua-causas-soluciones/
-https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/
-https://plomeroculiacanpro.mx/blog/cuanto-cuesta-plomeria-bano-completo-culiacan/
-https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/
-https://plomeroculiacanpro.mx/blog/mantenimiento-boiler-noritz-checklist/
-https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/
-https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
-- Una **falta de ortografía**: decía "aeradores" donde debe decir "aireadores" (las mallitas de las llaves) — 2 veces en el artículo de problemas comunes. Corregido → https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
-- Una **fecha contradictoria**: la fecha visible del artículo no coincidía con la que lee Google (una decía 12 o 10 de noviembre y la otra, 21). Las unifiqué a la fecha que Google ya tiene registrada (21 de noviembre de 2025), en 2 artículos:
-https://plomeroculiacanpro.mx/blog/baja-presion-agua-causas-soluciones/
-https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
+## ✅ Arreglé (2)
+- **Tiempos de llegada equivocados en 17 páginas de colonia.** Arriba de cada página hay una etiqueta tipo "Llegamos en 20-30 min a tu colonia", pero el resto del texto de la misma página (descripción, sección de beneficios y cobertura) decía otro tiempo, p.ej. 25-35 min. La etiqueta contradecía al cuerpo y daba una promesa que no cuadraba. Igualé la etiqueta al tiempo que ya repetía el resto de la página (no inventé números: tomé el que las 3 partes del cuerpo ya coincidían). Páginas corregidas:
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/amorada/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/barrancos/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/barrio-estacion/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/bugambilias/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/centro/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/chapultepec/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/country-tres-rios/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/culiacan-tres-rios/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/guadalupe/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/humaya/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/infonavit-barrancos/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/libertad/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/montebello/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/nuevo-culiacan/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/santa-fe/
+  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/valle-alto/
+- **El texto que muestra Google estaba cortado a media palabra en 8 de esas colonias.** La descripción que aparece bajo el título en los resultados de Google terminaba en algo como "...fugas en conexiones r · Llegada 25-35 min" (la palabra cortada). Recorté la frase para que cierre completa y se lea bien ("...agua con olor metálico o color rojizo · Llegada 25-35 min"). Afectaba a: barrio-estación, bugambilias, centro, chapultepec, humaya, libertad, nuevo culiacán y valle alto (mismas páginas de la lista de arriba).
 
-## ⚠️ Encontré pero NO pude arreglar solo (3)
-- **Google Search Console se quedó "ciego" hoy**: el permiso de acceso a tus datos de búsqueda (qué busca la gente para encontrarte) caducó y ya no se renovó solo. Sin esos datos NO puedo crear páginas nuevas con confianza, porque mi regla es ver demanda real antes de crear algo para no dañar tu posicionamiento. Necesito que **reconectes el acceso** (volver a iniciar sesión con tu cuenta de Google en la herramienta). Mientras tanto sigo manteniendo y mejorando lo que ya existe.
-- El **menú de navegación no tiene un "nombre"** que los lectores de pantalla puedan distinguir, en todo el sitio. Es un detalle menor de accesibilidad, pero ponerlo toca las ~68 páginas a la vez, así que prefiero revisarlo con calma antes de soltarlo (no es un cambio de un clic).
-- Los **botones de WhatsApp y Llamar no tienen garantizado un "aro" visible** cuando alguien navega con el teclado (sin mouse). Mejorarlo toca el archivo de estilos que comparten todas las páginas y conviene revisarlo a ojo primero.
+## ⚠️ Encontré pero NO pude arreglar solo (1)
+- **El chequeo automático de Google Search Console usa una llave que ya caducó y no se renueva sola.** Hoy igual conseguí los datos de Google (clics, búsquedas) por otra conexión que sí funciona, así que NO me quedé a ciegas. Pero la llave que usa mi "termómetro" de salud está vencida y por seguridad no puedo regenerarla yo. Necesito que la reconectes una vez (es el re-login de Google de `mcp-local-seo`) para que el chequeo deje de marcar falsa alarma. No bloquea tu sitio ni la publicación.
 
-## 🌱 Mejoré / agregué (2)
-- MEJORÉ: 9 artículos del blog ahora llevan las **mismas "etiquetas" de redes sociales y Google** (idioma es-MX, el nombre de tu marca y la dirección para Twitter/X) que ya tenían tus páginas de servicio. Esto hace que se vean mejor y más consistentes cuando alguien los comparte o cuando Google los muestra. Páginas:
-https://plomeroculiacanpro.mx/blog/baja-presion-agua-causas-soluciones/
-https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/
-https://plomeroculiacanpro.mx/blog/como-identificar-buen-plomero-culiacan/
-https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/
-https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/
-https://plomeroculiacanpro.mx/blog/drenaje-tapado-senales-prevencion/
-https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/
-https://plomeroculiacanpro.mx/blog/mantenimiento-boiler-noritz-checklist/
-https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
-- LIMPIÉ: borré 2 archivos de respaldo viejos (basura interna) que no usaba ninguna página; son recuperables si hicieran falta.
-
-Sin páginas nuevas hoy: no fue por falta de ganas, sino porque Google Search Console quedó ciego (lo de arriba) y mi regla es NO inventar páginas sin ver demanda real — eso dañaría tu posicionamiento. En cuanto reconectes el acceso, retomo el crecimiento.
+## 🌱 Mejoré / agregué (0)
+Sin páginas nuevas hoy: revisé lo que la gente busca en Google y todo lo que tiene demanda real ya tiene su página en tu sitio; no inventé páginas porque crear páginas casi iguales sin búsquedas reales detrás dañaría tu posicionamiento. Buena noticia: en los últimos 28 días tu sitio subió a 359 clics (+13%) y 29.577 apariciones en Google (+26%).
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Le puse al sistema dos "alarmas" nuevas automáticas para que estos errores de blog no se repitan: (1) un artículo nunca debe ocultar su fecha a los lectores de pantalla, y (2) todo artículo indexable debe traer completas sus etiquetas de redes/Google. Ahora se detectan solos cada día.
-- También me ahorré un cambio inútil: un revisor reportó que el botón del menú en celular era demasiado pequeño; lo medí de verdad en un navegador y resultó que sí cumple el tamaño correcto. No toqué nada — verificar antes de actuar evita romper lo que está bien.
-(ya van 41 reglas aprendidas en total)
+- Le puse un detector automático nuevo: ahora, si la etiqueta de "tiempo de llegada" de una colonia no coincide con el tiempo que dice el resto de la página, o si la descripción de Google queda cortada a media palabra, el sistema lo marca solo en cada revisión (antes dependía de que yo me diera cuenta a ojo).
+(ya van 42 reglas aprendidas en total)
 
-## ⏳ Necesito que tú decidas (1)
-- En varios artículos del blog aparece visible el sello **"★★★★★ 4.8/5 · 150+ reseñas"**. Google desaconseja mostrar calificaciones propias en contenido de blog (lo permite en páginas de negocio). No viola ninguna regla dura, así que no lo toco solo: ¿prefieres **quitarlo de los artículos** (más seguro ante Google) o **dejarlo** como prueba social? Tú decides.
+## ⏳ Necesito que tú decidas (0)
+Nada pendiente de tu parte hoy.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; un segundo revisor independiente lo aprobó (0 problemas) antes de subirlo. Lo único que quedó fuera de mi alcance es reconectar Google Search Console, que depende de tu cuenta.
+Sí, todo revisado y en vivo. Un segundo agente independiente revisó las 17 páginas antes de publicar (tiempos ya cuadrados, nada roto, 0 errores). Además le avisé a Google para que vuelva a visitar las colonias mejoradas y tu página de "reparación de bombas de agua" (esa lleva una semana publicada y Google aún no la había visitado; le di un empujón).
