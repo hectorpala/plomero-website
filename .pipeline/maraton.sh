@@ -65,7 +65,8 @@ while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
     break
   fi
 
-  "$CLAUDE_CMD" --permission-mode auto -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
+  # Orquestador en SONNET (~5x más barato); el juicio crítico vive en subagentes model:opus.
+  "$CLAUDE_CMD" --model sonnet --permission-mode auto -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
 
   LAST=$(grep -E '^(HECHO|SIN TRABAJO):' "$PLOG" | tail -1)
   echo "    -> ${LAST:-(sin línea de cierre — pasada incompleta)}" | tee -a "$MLOG"

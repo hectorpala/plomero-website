@@ -79,7 +79,10 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   echo "[$STAMP] >>> intento $attempt/$MAX_ATTEMPTS de la corrida @ $(date +%H:%M:%S)" >> "$LOG"
   OFF=$(wc -c < "$LOG")   # byte-offset: leeremos SOLO lo que agregue este intento
   wait_for_net || echo "[$STAMP] red no volvió tras ~8 min; intento igual (puede fallar)." >> "$LOG"
-  if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then
+  # Orquestador en SONNET (~5x más barato; el gasto es 67% releer contexto). Los agentes
+  # de juicio crítico (revisor-contenido/critico-completitud/decisor-negocio/fixer-autonomo)
+  # declaran model:opus en su frontmatter -> NO se degradan. Ver MODELO-ROUTING.md.
+  if "$RUTA_CLAUDE" --model sonnet --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then
     CLAUDE_OK=1; FAIL_KIND=""; break
   fi
   TAIL=$(tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null || echo "")

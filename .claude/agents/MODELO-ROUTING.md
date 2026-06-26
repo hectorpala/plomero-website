@@ -29,3 +29,15 @@ modelo NO cambia el resultado; mantener el fuerte donde su juicio ES el producto
 Si su `description` dice "Solo checks locales y mecánicos" y corre un `check-*`, es **haiku**.
 Si pide juzgar calidad/intención/duplicado, es **opus**. Si está en medio, **sonnet**.
 Ante la duda, sube un escalón: el ahorro no vale perder efectividad.
+
+## El ORQUESTADOR (loop principal) corre en SONNET — decisión 2026-06-26
+Los drivers (`crecer-diario.sh`, `maraton.sh`, `mantener-diario.sh`) invocan el CLI con
+`--model sonnet`. Razón: el costo de una corrida es **~67% releer contexto** (cacheR) sobre
+cientos de mensajes; bajar el orquestador de Opus→Sonnet recorta el costo **~5×** (~$1420→~$284
+de referencia por corrida) **sin tocar la calidad**, porque el JUICIO crítico NO vive en el
+orquestador sino en subagentes con `model:` propio:
+- **opus**: revisor-contenido, critico-completitud, decisor-negocio, fixer-autonomo.
+- **sonnet**: verificador (reja de publicación), gitops.
+El orquestador solo coordina + corre fixers deterministas + escribe la prosa de páginas nuevas
+(que el `revisor-contenido` en Opus filtra igual). Si algún día la calidad de la prosa nueva
+baja, la palanca es volver el orquestador a `--model opus` SOLO en `crecer-diario.sh`.
