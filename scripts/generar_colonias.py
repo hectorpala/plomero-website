@@ -18,7 +18,7 @@ from pathlib import Path
 # ─── Rutas ───────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).parent.parent
 COLONIAS_DIR = BASE_DIR / "servicios" / "plomero-colonias-culiacan"
-DATA_FILE = BASE_DIR / "colonias-data.json"
+DATA_FILE = BASE_DIR / "data/colonias-data.json"
 
 # ─── Narrativas por era ───────────────────────────────────────────────────────
 # Cada era define: intro_p1_template, intro_p2, beneficios, servicios

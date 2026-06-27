@@ -21,7 +21,7 @@ from datetime import datetime
 # ── Rutas ─────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parents[1]
 COLONIAS_DIR = BASE_DIR / "servicios" / "plomero-colonias-culiacan"
-JSON_PATH = BASE_DIR / "colonias-completas-culiacan.json"
+JSON_PATH = BASE_DIR / "data/colonias-completas-culiacan.json"
 BACKUP_DIR = BASE_DIR / "scripts" / "backups_inject_zona"
 
 # ── Perfiles de zona ───────────────────────────────────────────────────────────

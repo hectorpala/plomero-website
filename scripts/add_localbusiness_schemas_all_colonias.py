@@ -22,7 +22,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).parent
 COLONIAS_DIR = PROJECT_ROOT / "servicios" / "plomero-colonias-culiacan"
-COLONIAS_JSON = PROJECT_ROOT / "colonias-completas-culiacan.json"
+COLONIAS_JSON = PROJECT_ROOT / "data/colonias-completas-culiacan.json"
 
 PHONE = "+52 667 392 2273"
 FALLBACK_LAT = 24.7903

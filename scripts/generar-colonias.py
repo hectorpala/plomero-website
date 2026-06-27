@@ -11,7 +11,7 @@ import sys
 
 # Configuracion
 COLONIAS_DIR = "servicios/plomero-colonias-culiacan"
-FALTANTES_FILE = "colonias-faltantes.json"
+FALTANTES_FILE = "data/colonias-faltantes.json"
 BLOQUE_SIZE = 15
 
 def create_slug(nombre):
