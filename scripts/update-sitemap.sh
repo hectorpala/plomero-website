@@ -1,59 +1,125 @@
 #!/bin/bash
-# Actualizar lastmod en sitemap basado en archivos modificados
-# Uso: ./scripts/update-sitemap.sh
+# Script para actualizar automáticamente las fechas del sitemap basándose en las últimas modificaciones
+# Uso: ./update-sitemap.sh
 
-HOST="plomeroculiacanpro.mx"
 SITEMAP="sitemaps/main_sitemap.xml"
-ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+TEMP_FILE="sitemaps/sitemap_temp.xml"
 
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m'
+# Obtener la fecha actual en formato ISO 8601
+CURRENT_DATE=$(date -u +"%Y-%m-%dT%H:%M:%S+00:00")
 
-cd "$ROOT_DIR"
+echo "🔄 Actualizando sitemap con fechas reales de modificación..."
 
-echo -e "${YELLOW}Actualizando sitemap...${NC}"
+# Función para obtener la fecha de modificación de un archivo
+get_file_date() {
+    local url="$1"
+    local file_path=""
 
-# Obtener fecha actual en formato ISO 8601
-NOW=$(date -u +"%Y-%m-%dT%H:%M:%S+00:00")
-
-# Contador de actualizaciones
-updated=0
-
-# Buscar archivos HTML modificados en los últimos 7 días
-while IFS= read -r file; do
-    # Obtener la URL correspondiente
-    relative_path="${file#./}"
-    
-    # Convertir path a URL
-    if [[ "$relative_path" == "index.html" ]]; then
-        url="https://${HOST}/"
-    elif [[ "$relative_path" == */index.html ]]; then
-        dir=$(dirname "$relative_path")
-        url="https://${HOST}/${dir}/"
+    # Convertir URL a ruta de archivo
+    if [ "$url" = "https://plomeroculiacanpro.mx/" ]; then
+        file_path="index.html"
+    elif echo "$url" | grep -q "/blog/"; then
+        # Extraer el path después de /blog/
+        local blog_path="${url#https://plomeroculiacanpro.mx/blog/}"
+        blog_path="${blog_path%/}"
+        if [ -z "$blog_path" ]; then
+            file_path="blog/index.html"
+        else
+            file_path="blog/$blog_path/index.html"
+        fi
     else
-        continue
+        # Para servicios y otras páginas
+        local page_path="${url#https://plomeroculiacanpro.mx/}"
+        page_path="${page_path%/}"
+        file_path="$page_path/index.html"
     fi
-    
-    # Obtener fecha de modificación del archivo
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        file_date=$(stat -f "%Sm" -t "%Y-%m-%dT%H:%M:%S" "$file")
+
+    # Verificar si el archivo existe y obtener su fecha de modificación
+    if [ -f "$file_path" ]; then
+        # macOS usa -f para formato de fecha personalizado
+        stat -f "%Sm" -t "%Y-%m-%dT%H:%M:%S+00:00" "$file_path" 2>/dev/null || echo "$CURRENT_DATE"
     else
-        file_date=$(stat -c "%y" "$file" | cut -d'.' -f1 | tr ' ' 'T')
+        echo "$CURRENT_DATE"
     fi
-    file_date="${file_date}-07:00"
-    
-    # Actualizar lastmod en sitemap si la URL existe
-    if grep -q "<loc>${url}</loc>" "$SITEMAP"; then
-        # Usar sed compatible con macOS
-        sed -i '' "/<loc>${url//\//\\/}<\/loc>/,/<\/url>/ s/<lastmod>[^<]*<\/lastmod>/<lastmod>${file_date}<\/lastmod>/" "$SITEMAP"
-        echo -e "  ${GREEN}✓${NC} $url"
-        ((updated++))
+}
+
+# Función para determinar changefreq basado en el tipo de página
+get_changefreq() {
+    local url="$1"
+
+    if [ "$url" = "https://plomeroculiacanpro.mx/" ]; then
+        echo "weekly"  # Homepage se actualiza frecuentemente
+    elif echo "$url" | grep -q "/blog/" && [ "$url" != "https://plomeroculiacanpro.mx/blog/" ]; then
+        echo "monthly"  # Artículos de blog son contenido estático
+    elif [ "$url" = "https://plomeroculiacanpro.mx/blog/" ]; then
+        echo "weekly"  # El índice del blog se actualiza con nuevos artículos
+    elif echo "$url" | grep -q "/contacto/"; then
+        echo "yearly"  # Página de contacto rara vez cambia
+    else
+        echo "monthly"  # Páginas de servicio son relativamente estables
     fi
-done < <(find . -name "index.html" -mtime -7 -type f)
+}
 
-# Actualizar fecha del sitemap index
-sed -i '' "s/<lastmod>[^<]*<\/lastmod>/<lastmod>${NOW}<\/lastmod>/g" sitemap.xml
+# Crear el sitemap directamente con todas las URLs
+cat > "$TEMP_FILE" << 'XMLEOF'
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+XMLEOF
 
-echo -e "\n${GREEN}Listo.${NC} $updated URLs actualizadas en sitemap."
-echo -e "Ejecuta ${YELLOW}git add && git commit && git push${NC} para publicar."
+# Procesar cada URL individualmente
+process_url() {
+    local url="$1"
+    local priority="$2"
+    local lastmod=$(get_file_date "$url")
+    local changefreq=$(get_changefreq "$url")
+
+    cat >> "$TEMP_FILE" << URLEOF
+  <url>
+    <loc>$url</loc>
+    <lastmod>$lastmod</lastmod>
+    <changefreq>$changefreq</changefreq>
+    <priority>$priority</priority>
+  </url>
+URLEOF
+}
+
+# Procesar todas las URLs
+process_url "https://plomeroculiacanpro.mx/" "1.0"
+process_url "https://plomeroculiacanpro.mx/servicios/emergencia-24-7/" "0.9"
+process_url "https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/" "0.8"
+process_url "https://plomeroculiacanpro.mx/servicios/plomero-a-domicilio/" "0.8"
+process_url "https://plomeroculiacanpro.mx/servicios/plomero-precios/" "0.8"
+process_url "https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/" "0.8"
+process_url "https://plomeroculiacanpro.mx/servicios/reparacion-de-fugas/" "0.9"
+process_url "https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/" "0.9"
+process_url "https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/" "0.9"
+process_url "https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/" "0.9"
+process_url "https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/" "0.9"
+process_url "https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/" "0.9"
+process_url "https://plomeroculiacanpro.mx/contacto/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/" "0.8"
+process_url "https://plomeroculiacanpro.mx/blog/marcha-paz-culiacan-2025/" "0.6"
+process_url "https://plomeroculiacanpro.mx/blog/mantenimiento-boiler-noritz-checklist/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/baja-presion-agua-causas-soluciones/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/instalacion-tinaco-guia-compra/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/" "0.7"
+process_url "https://plomeroculiacanpro.mx/blog/drenaje-tapado-senales-prevencion/" "0.7"
+
+# Cerrar el XML
+echo "</urlset>" >> "$TEMP_FILE"
+
+# Reemplazar el sitemap original
+mv "$TEMP_FILE" "$SITEMAP"
+
+echo "✅ Sitemap actualizado exitosamente en $SITEMAP"
+echo "📅 Fecha de actualización: $CURRENT_DATE"
+
+# Mostrar resumen
+echo ""
+echo "📊 Resumen de changefreq:"
+echo "  - weekly:  Homepage, Blog index"
+echo "  - monthly: Servicios, Artículos de blog"
+echo "  - yearly:  Contacto"
