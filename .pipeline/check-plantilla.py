@@ -317,15 +317,19 @@ def check_page(fpath, t, noindex, redirects):
             "Quitar aria-hidden del <header>; si hay un título redundante, ocultar solo el "
             "<div class=\"article-title-hidden\" aria-hidden=\"true\"> interior")
 
-    # --- 4f. blog indexable sin metas de plantilla og:locale/og:site_name/twitter:url (baja, seo)
+    # --- 4f. blog/colonia indexable sin metas de plantilla og:locale/og:site_name/twitter:url (baja, seo)
     #     caso bk-546d0a06 (20260623): posts de blog omitían metas que las páginas de servicio sí traen.
-    if r.startswith("blog/") and not noindex:
-        faltan = [m for m in ("og:locale", "og:site_name", "twitter:url") if m not in t]
+    #     caso twitter-url-colonias-20260627: 24 páginas de colonia carecían de twitter:url/title/desc/img.
+    is_blog_or_colonia = r.startswith("blog/") or r.startswith("servicios/plomero-colonias-culiacan/")
+    if is_blog_or_colonia and not noindex:
+        faltan_og = [m for m in ("og:locale", "og:site_name") if m not in t]
+        faltan_tw = [m for m in ("twitter:url", "twitter:title", "twitter:description", "twitter:image") if m not in t]
+        faltan = faltan_og + faltan_tw
         if faltan:
             add("baja", r, "seo",
-                "Post de blog indexable sin metas de plantilla: falta %s" % ", ".join(faltan),
-                "Añadir og:locale=es_MX, og:site_name=\"Plomero Culiacán Pro\" y twitter:url "
-                "(= canonical) como en las páginas de servicio")
+                "Página indexable sin metas de plantilla: falta %s" % ", ".join(faltan),
+                "Añadir og:locale=es_MX, og:site_name=\"Plomero Culiacán Pro\" y twitter:url/title/desc/image "
+                "(= canonical/og equivalentes) como en las páginas de servicio")
 
     # --- 5. exit-intent-popup sin ARIA (media, a11y)
     mp = re.search(r'<div\b[^>]*id=["\']exit-intent-popup["\'][^>]*>', t, re.I)
