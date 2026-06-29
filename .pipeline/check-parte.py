@@ -150,7 +150,7 @@ def main():
                                    "diff de la corrida (%s...HEAD)." % (DOMINIO, u, diff_base))
 
     # ── 4) HISTORIAL.jsonl de hoy (blando) ────────────────────────────────
-    hist = os.path.join(ROOT, "HISTORIAL.jsonl")
+    hist = os.path.join(ROOT, "data", "HISTORIAL.jsonl")
     if X is not None and os.path.isfile(hist):
         hoy = subprocess.run(["date", "+%Y-%m-%d"], capture_output=True, text=True).stdout.strip()
         arreglados_hoy = 0

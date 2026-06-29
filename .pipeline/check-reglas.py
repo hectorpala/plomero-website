@@ -20,7 +20,7 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-REGLAS = os.path.join(ROOT, "REGLAS.md")
+REGLAS = os.path.join(ROOT, "docs", "REGLAS.md")
 
 MAX_TOKENS = 4000        # presupuesto total (estimado)
 MAX_RULE_CHARS = 900     # una sola regla no debería pasar de ~1-2 líneas accionables
