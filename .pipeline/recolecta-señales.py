@@ -37,7 +37,7 @@ def _jsonl(path):
 
 
 def sec_historial():
-    h = _jsonl("HISTORIAL.jsonl")
+    h = _jsonl("data/HISTORIAL.jsonl")
     print("## HISTORIAL — errores (%d entradas)" % len(h))
     if not h:
         print("  (sin datos)\n"); return
@@ -91,7 +91,7 @@ def sec_backlog():
 
 
 def sec_reglas():
-    p = os.path.join(ROOT, "REGLAS.md")
+    p = os.path.join(ROOT, "docs", "REGLAS.md")
     if not os.path.isfile(p):
         return
     chars = sum(len(l) for l in open(p, encoding="utf-8"))
