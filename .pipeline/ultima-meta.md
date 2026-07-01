@@ -1,18 +1,15 @@
-# Meta-pase del Crítico-Sistema — 2026-06-19
+# Meta-pase del Crítico-Sistema — 2026-06-29
 
-Dejé **4 propuestas nuevas**, todas con su DRAFT ya escrito y listas para merge en `PROPUESTAS.md`
+Dejé **3 propuestas nuevas**, todas con su DRAFT ya escrito y listas para merge en `docs/PROPUESTAS.md`
 (las nuevas van arriba). Yo no apliqué nada — tú apruebas.
 
 ## Top 3 por impacto
-1. **Barrido estructural de TODO el sitio** (impacto A) — hoy el gate solo revisa las páginas que se editan, así que faltas viejas (sin `<meta robots>`, hero sin `.hero-content`) quedan ocultas hasta que tocas la página y el push se traba por sorpresa. Un checker nuevo barre el sitio entero y las convierte en tareas de backlog antes de que estorben.
-2. **Cazar `og:url` ausente** (impacto M) — el checker de indexabilidad solo marca el `og:url` *equivocado*, no el que *falta*; por eso 6 páginas de servicio sin esa etiqueta quedaron como deuda silenciosa. Son 5 líneas extra en un checker que ya existe.
-3. **Quitar el acoplamiento que hace mentir al sensor de salud** (impacto M) — el 18-jun se añadieron 2 utilidades y el dead-man's switch gritó 2 alarmas falsas porque había que actualizar una lista central a mano. La propuesta deja que cada utilidad se auto-excluya con un marcador, sin tocar ese archivo central.
+1. **Detector de corrida DESBOCADA por costo** (impacto A) — 3 de las últimas ~11 corridas explotaron a 606–654M tokens (~$1300–1420 cada una) frente a una mediana de 26.6M. La firma real es un loop sin freno (output 2.1–2.3M y >1400 mensajes), que el tripwire actual no distingue de un día grande. El draft añade un aviso ALTA cuando output o mensajes pasan de ~5× la mediana.
+2. **El over-budget de REGLAS.md se vuelve tarea drenable** (impacto M) — REGLAS lleva pegado al tope (3997/4000 tok) corrida tras corrida; hoy solo lo marca un exit-1 de la FASE 9 que se puede ignorar si la fase se salta. El draft es un sensor que emite el hallazgo para que el diario lo drene solo como consolidación.
+3. **Gate proactivo de contrato de checkers en pre-push** (impacto M) — la clase "añadí un checker y rompí el sensor de salud" (infra-003/005) ya reincidió ≥3 veces y solo se caza en la corrida del día siguiente, con una ALTA falsa. El draft la bloquea al pushear, antes de que llegue a una corrida.
 
-La 4ª (impacto B): un *tripwire de costo* que avisa en el reporte cuando una corrida se dispara
-(la grande del 18-jun fueron 35.5M tokens / ~$91, 3× lo normal). Solo da visibilidad, no corta nada.
+**Estado del sistema:** sano salvo el costo. Backlog sin tareas (0 pendientes, 0 bloqueadas); 0 hallazgos
+marcados pendientes en HISTORIAL; pero el costo tiene picos reales sin vigilancia fina y REGLAS.md sigue
+al borde del presupuesto. Esos son justo los dos huecos que cubren las propuestas 1 y 2.
 
-**Estado del sistema:** sano. Backlog sin tareas bloqueadas (5 pendientes, 0 esperando humano);
-REGLAS.md al 85% del presupuesto (3411/4000 tok); sin regresiones nuevas sin atender.
-Los dos drafts en Python los validé contra datos reales (lógica y sintaxis OK).
-
-Todas están listas para merge en `PROPUESTAS.md`.
+Todas están listas para merge en `docs/PROPUESTAS.md`.

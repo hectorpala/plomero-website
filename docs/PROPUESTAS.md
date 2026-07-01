@@ -18,6 +18,155 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [PENDIENTE] costo — Detector de CORRIDA DESBOCADA (output/mensajes vs mediana), no solo volumen total   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** El tripwire actual (`check-costos.py`) solo mira `total_tokens > 28M`. Pero `total_tokens` lo domina el `cache_read` (barato por token y proporcional al CONTEXTO, no al trabajo). El modo de fallo caro de verdad es un **loop que se desboca**: la corrida genera millones de `output_tokens` y miles de mensajes. Ese eje hoy NO se vigila, y un umbral fijo sobre el total no distingue "día grande pero acotado" de "loop sin freno".
+**Evidencia (brief de costo, 15 corridas):** 3 de las últimas ~11 corridas explotaron a **606M · 617M · 654M tokens (~$1307 · $1343 · $1420 api-ref)** vs **mediana 26.6M**. Las tres comparten la firma de desboque: `output_tokens` **2.1–2.3M** (vs ~150–260K normal, ≈10×) y **1453 · 1659 · 1415 mensajes** (vs 36–368 normal). El total fijo las marca, pero como `media` y sin nombrar la causa; el discriminante real (output/mensajes) queda invisible.
+**Propuesta:** Añadir a `check-costos.py` un segundo cheque que compare la última corrida contra la **mediana móvil** de las previas en DOS ejes de trabajo real —`output_tokens` y `mensajes`— y emita `alta` ("corrida desbocada") cuando cualquiera supere ~5× la mediana. Mantiene el cheque de volumen actual como `media`. Cambio aditivo, sin red, auto-drenado por el diario.
+**DRAFT (listo para merge — añadir a `.pipeline/check-costos.py`, dentro de `main()` tras leer `filas`):**
+```python
+    # ── Detector de CORRIDA DESBOCADA: output_tokens y nº de mensajes vs mediana móvil.
+    #    total_tokens lo domina cache_read (∝ contexto, barato); el costo de un loop sin
+    #    freno se ve en output_tokens y en mensajes. Marca ALTA si la última corrida supera
+    #    FACTOR× la mediana de las previas. (3 corridas a 606–654M / $1300+ tenían
+    #    output 2.1–2.3M y 1415–1659 mensajes vs mediana 26.6M.)
+    FACTOR = 5
+    MIN_HIST = 4            # no juzgar sin historia suficiente
+    def _mediana(xs):
+        s = sorted(xs); n = len(s)
+        if not n: return 0
+        return s[n//2] if n % 2 else (s[n//2-1] + s[n//2]) / 2
+    if len(filas) > MIN_HIST:
+        u = filas[-1]; prev = filas[:-1]
+        for campo, etiqueta in (("output_tokens", "output"), ("mensajes", "mensajes")):
+            cur = u.get(campo, 0) or 0
+            med = _mediana([f.get(campo, 0) or 0 for f in prev])
+            if med > 0 and cur > FACTOR * med:
+                hallazgos.append({
+                    "id": "costo-runaway-%s" % etiqueta, "archivo": ".pipeline/costos.jsonl", "linea": 0,
+                    "severidad": "alta", "categoria": "costo",
+                    "descripcion": "CORRIDA DESBOCADA: la última (%s) generó %s=%s, ~%.0f× la mediana (%s). Firma de loop sin freno, no de día grande." % (
+                        u.get("etiqueta", "?"), etiqueta, f"{cur:,}", cur/med, f"{int(med):,}"),
+                    "fix_sugerido": "Auditar la corrida: ¿loop-until-dry sin tope, fan-out de revisores sin lote, o re-trabajo en bucle? Poner freno por nº de páginas/iteraciones en el driver (crecer-diario) y/o bajar el fan-out paralelo.",
+                })
+```
+
+---
+
+## [PENDIENTE] infra — Convertir el over-budget de REGLAS.md en tarea DRENABLE (no solo exit 1 de FASE 9)   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** El presupuesto de `REGLAS.md` lo vigila `check-reglas.py`, pero es una **utilidad** (`infra:utilidad-no-sensor`, exit 0/1) que solo corre en FASE 9 y depende de que el bibliotecario actúe esa corrida. Si la fase se salta o el agente ignora el exit 1, el over-budget queda silencioso y se arrastra entre corridas. Nada lo mete a la cola de hallazgos que el diario DRENA solo.
+**Evidencia (brief de REGLAS):** `~3997 tokens estimados (presupuesto 4000) ⚠️ cerca/encima del tope`. La señal persiste pegada al cap corrida tras corrida → la consolidación no está ocurriendo de forma fiable; el guard actual no la fuerza.
+**Propuesta:** Un sensor delgado `check-reglas-presupuesto.py` que REUSA el mismo estimado (chars/4) y emite el contrato `{hallazgos}` (no exit-code) con `media` cuando REGLAS pasa el 95% del presupuesto o tiene reglas gordas, listando las ofensoras. Así el over-budget se vuelve un hallazgo que `check-infra` smoke-testea y el diario drena como tarea de consolidación, en vez de un exit-1 que se puede ignorar. No reemplaza a `check-reglas.py` (sigue siendo el gate duro de FASE 9); lo complementa con visibilidad continua.
+**DRAFT (listo para merge — crear `.pipeline/check-reglas-presupuesto.py`):**
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Sensor de PRESUPUESTO de REGLAS.md (versión que emite el contrato {hallazgos}).
+Complementa a check-reglas.py (utilidad exit-0/1 de FASE 9): convierte el over-budget en un
+hallazgo DRENABLE por el diario, en vez de un exit-1 que se puede ignorar si la fase se salta.
+REGLAS.md se inyecta en cada corrida y lo lee cada subagente (~19 lecturas/día); si se arrastra
+sobre el tope, cuesta tokens y diluye atención. Emite a stdout SOLO {"hallazgos":[...]}.
+"""
+import os, json
+
+ROOT   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REGLAS = os.path.join(ROOT, "docs", "REGLAS.md")
+MAX_TOKENS     = 4000   # idéntico a check-reglas.py
+MAX_RULE_CHARS = 900
+AVISO_FRAC     = 0.95   # avisar al rozar el cap, no solo al pasarlo (hoy: 3997/4000)
+
+def main():
+    hallazgos = []
+    if os.path.isfile(REGLAS):
+        lines = open(REGLAS, encoding="utf-8", errors="replace").read().splitlines()
+        rules = [ln for ln in lines if ln.lstrip().startswith("- [")]
+        total_chars = sum(len(ln) for ln in lines)
+        est_tokens = total_chars // 4
+        gordas = [ln for ln in rules if len(ln) > MAX_RULE_CHARS]
+        if est_tokens >= MAX_TOKENS * AVISO_FRAC:
+            hallazgos.append({
+                "id": "reglas-presupuesto", "archivo": "docs/REGLAS.md", "linea": 0,
+                "severidad": "media", "categoria": "infra",
+                "descripcion": "REGLAS.md ~%d tokens estimados (presupuesto %d). Se inyecta en cada corrida y lo lee cada subagente; arrastrarlo sobre el tope cuesta tokens y diluye atención." % (est_tokens, MAX_TOKENS),
+                "fix_sugerido": "Consolidar: cada regla = qué hacer + el checker que lo caza. Cuando un error ya está mecanizado, reduce la regla a «qué + checker» y manda el relato a HISTORIAL.jsonl.",
+            })
+        if gordas:
+            hallazgos.append({
+                "id": "reglas-gordas", "archivo": "docs/REGLAS.md", "linea": 0,
+                "severidad": "media", "categoria": "infra",
+                "descripcion": "%d regla(s) de REGLAS.md pasan de %d chars (relato de incidente sin podar): %s" % (
+                    len(gordas), MAX_RULE_CHARS, " | ".join(ln[:70] for ln in gordas[:3])),
+                "fix_sugerido": "Podar cada regla gorda a 1-2 líneas accionables; el relato largo va a HISTORIAL.jsonl, no a REGLAS.md.",
+            })
+    print(json.dumps({"hallazgos": hallazgos}, ensure_ascii=False, indent=2))
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## [PENDIENTE] infra — Gate PROACTIVO de contrato de checkers en pre-push (matar la clase infra-003 al commit, no a la corrida siguiente)   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** Cuando se añade un `check-*.{py,mjs}` que NO emite `{hallazgos}` ni declara `infra:utilidad-no-sensor`, el dead-man's switch (`check-infra.mjs`) lo descubre — pero solo en la **corrida diaria siguiente**, disparando una ALTA falsa de "verificación ciega" que cuesta un ciclo manual de fix. La detección es REACTIVA: el checker roto ya se commiteó y la próxima corrida tropieza con él.
+**Evidencia (HISTORIAL, regresiones):** `infra-003` (añadir check-parte.py/check-reglas.py sin actualizar NOT_PAGE_CHECKERS → 2 ALTA falsas), `infra-001-css-paridad` (check-css-paridad.py imprimía texto humano → ALTA "verificación ciega"), descritas explícitamente como **"clase infra-003/005"**. Es un patrón reincidente (≥3 veces) que se mecaniza solo a medias.
+**Propuesta:** Hacer el smoke PROACTIVO: un guard liviano que en `pre-push` (sección gate de `main`) corra cada `check-*.{py,mjs}` que NO sea NOT_PAGE_CHECKER ni utilidad declarada, y aborte el push si alguno no imprime un JSON con array `hallazgos`. Así un checker roto **nunca llega** a una corrida diaria; el fallo se ve al pushear, con criterio humano presente. Reusa exactamente las reglas de clasificación de `check-infra.mjs`.
+**DRAFT (listo para merge — crear `.pipeline/check-contrato-checkers.mjs`):**
+```javascript
+#!/usr/bin/env node
+// Gate PROACTIVO del contrato de checkers (clase regresión infra-003/005).
+// Corre cada .pipeline/check-*.{py,mjs} que sea SENSOR DE PÁGINA (no NOT_PAGE_CHECKERS ni
+// utilidad declarada) y verifica que imprima un JSON con array "hallazgos". exit 1 si alguno
+// no cumple — pensado para pre-push, para que un checker roto no llegue a la corrida diaria
+// (donde hoy dispara una ALTA falsa de "verificación ciega" un ciclo después).
+const fs = require("fs");
+const cp = require("child_process");
+const dir = __dirname;
+const NOT_PAGE = new Set(["check-infra.mjs", "check-secretos.sh", "check-contrato-checkers.mjs"]);
+const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-e2e.mjs"]); // tocan red: omitir en pre-push
+const esUtilidad = (f) => {
+  try { return fs.readFileSync(`${dir}/${f}`, "utf8").slice(0, 800).includes("infra:utilidad-no-sensor"); }
+  catch { return false; }
+};
+const checkers = fs.readdirSync(dir)
+  .filter((f) => /^check-.*\.(py|mjs)$/.test(f) && !NOT_PAGE.has(f) && !HEAVY.has(f) && !esUtilidad(f))
+  .sort();
+let fallos = 0;
+for (const f of checkers) {
+  const runner = f.endsWith(".py") ? "python3" : process.execPath;
+  let ok = false, motivo = "";
+  try {
+    const r = cp.spawnSync(runner, [`${dir}/${f}`], { encoding: "utf8", timeout: 60000 });
+    if (r.status !== 0) { motivo = `exit ${r.status}: ${(r.stderr || "").slice(0, 160)}`; }
+    else {
+      const data = JSON.parse(r.stdout);
+      if (Array.isArray(data.hallazgos)) ok = true;
+      else motivo = "el JSON no tiene array \"hallazgos\"";
+    }
+  } catch (e) { motivo = `no devolvió JSON parseable (${String(e).slice(0, 120)})`; }
+  if (!ok) { fallos++; console.error(`❌ ${f}: ${motivo}`); }
+}
+if (fallos) {
+  console.error(`\n${fallos} checker(s) NO emiten el contrato {hallazgos}. Si es una UTILIDAD, ` +
+    `declara \`infra:utilidad-no-sensor\` en su cabecera; si es un sensor, arregla su salida.`);
+  process.exit(1);
+}
+console.log(`✅ ${checkers.length} checkers emiten el contrato {hallazgos}.`);
+```
+**DRAFT (2/2 — añadir en `.pipeline/hooks/pre-push`, dentro del bloque gate de `main`, junto a la llamada a `ci-gate.py`):**
+```bash
+  # 1c) Contrato de checkers: ningún sensor de página puede dejar de emitir {hallazgos}
+  #     (clase regresión infra-003/005). Proactivo: bloquea aquí, no en la corrida siguiente.
+  if [ -x "$NODE" ] && [ -f "$REPO/.pipeline/check-contrato-checkers.mjs" ]; then
+    if ! ( cd "$REPO" && "$NODE" .pipeline/check-contrato-checkers.mjs ); then
+      echo ""
+      echo "❌ PUSH BLOQUEADO: un checker no emite el contrato {hallazgos} (ver arriba)."
+      exit 1
+    fi
+  fi
+```
+
+---
+
 ## [HECHO 2026-06-19] cobertura — Barrido estructural de TODO el sitio (no solo páginas editadas)   (impacto A · esfuerzo M · riesgo bajo)
 > ✅ Mergeada: `.pipeline/check-estructura-sitio.py` creado + en `ci-gate`. Encontró 12 páginas con `<meta robots>` faltante; se cerraron con un auto-fixer `meta-robots` nuevo (12/12). Checker ahora en 0.
 **Problema:** El gate (`validate-landing` / `gate-pagina.py`) solo corre sobre las páginas del diff. Por eso defectos PRE-EXISTENTES quedan invisibles hasta que alguien toca esa página por casualidad y el push se **bloquea por sorpresa**. Ningún checker determinista barre el sitio entero buscando estos invariantes de plantilla.
