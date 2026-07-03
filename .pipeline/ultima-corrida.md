@@ -1,42 +1,40 @@
-# Auto Agente Plomero — parte del 2026-06-26
-**Resultado:** encontré 3, arreglé 2, 1 para reconectar tú · publicado
+# Auto Agente Plomero — parte del 2026-07-02
+**Resultado:** terminé un trabajo que se había quedado a medias · arreglé 5 · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 3 cosas: arreglé 2 · 0 necesitan tu decisión · 1 no pude arreglar solo.
+Encontré 5 cosas: arreglé 5 · 0 necesitan tu decisión · 0 no pude arreglar solo.
 
-## ✅ Arreglé (2)
-- **Tiempos de llegada equivocados en 17 páginas de colonia.** Arriba de cada página hay una etiqueta tipo "Llegamos en 20-30 min a tu colonia", pero el resto del texto de la misma página (descripción, sección de beneficios y cobertura) decía otro tiempo, p.ej. 25-35 min. La etiqueta contradecía al cuerpo y daba una promesa que no cuadraba. Igualé la etiqueta al tiempo que ya repetía el resto de la página (no inventé números: tomé el que las 3 partes del cuerpo ya coincidían). Páginas corregidas:
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/amorada/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/barrancos/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/barrio-estacion/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/bugambilias/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/centro/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/chapultepec/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/country-tres-rios/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/culiacan-tres-rios/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/guadalupe/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/humaya/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/infonavit-barrancos/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/las-quintas/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/libertad/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/montebello/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/nuevo-culiacan/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/santa-fe/
-  https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/valle-alto/
-- **El texto que muestra Google estaba cortado a media palabra en 8 de esas colonias.** La descripción que aparece bajo el título en los resultados de Google terminaba en algo como "...fugas en conexiones r · Llegada 25-35 min" (la palabra cortada). Recorté la frase para que cierre completa y se lea bien ("...agua con olor metálico o color rojizo · Llegada 25-35 min"). Afectaba a: barrio-estación, bugambilias, centro, chapultepec, humaya, libertad, nuevo culiacán y valle alto (mismas páginas de la lista de arriba).
+## ✅ Arreglé (5)
+- Los botones y tarjetas de servicio no mostraban ninguna señal visible cuando alguien navega tu sitio con el teclado (en vez del mouse) — esto lo usan sobre todo personas con alguna discapacidad visual o motora, con un lector de pantalla o software de accesibilidad. Le agregué un marco naranja visible que aparece al pasar entre botones con la tecla Tab. → https://plomeroculiacanpro.mx/
+- En 17 páginas de servicio, los enlaces dentro del texto de "sobre nosotros" eran demasiado chiquitos para tocarlos con el dedo en el celular (más chicos que la yema de un dedo, el estándar mínimo recomendado). Los agrandé para que sean fáciles de tocar. → https://plomeroculiacanpro.mx/servicios/cambio-de-tuberias/ (y 16 páginas más de servicio/zona)
+- En 2 páginas (cambio de tuberías y plomero zona Centro) la foto principal cargaba en un formato más pesado de lo necesario, aunque ya tenías guardada una versión más liviana de esa misma foto — hice que el sitio use la versión liviana primero, así carga más rápido en el celular. → https://plomeroculiacanpro.mx/servicios/cambio-de-tuberias/ · https://plomeroculiacanpro.mx/servicios/plomero-centro-culiacan/
+- La página de "Destape de baño/inodoro" mostraba, por error, la foto de un tinaco en vez de una foto de una taza de baño — la cambié por la foto correcta (también en la vista previa que aparece cuando alguien comparte el link en WhatsApp o redes sociales). → https://plomeroculiacanpro.mx/servicios/destape-de-bano-inodoro/
+- Encontré y arreglé 2 errores internos de mi propio sistema (no se ven en el sitio, pero afectaban cómo trabajo yo): por un reacomodo de carpetas reciente, dos de mis scripts se quedaron buscando archivos en la carpeta vieja — uno hacía que mi "lista de tareas pendientes" no se pudiera revisar, y el otro hacía que mi "candado de calidad" (el que revisa que una página esté bien antes de dejarla publicar) fallara SIEMPRE en toda página de servicio, aunque estuviera perfectamente sana. Arreglé los dos y le enseñé al sistema a detectar este tipo de error solo de ahora en adelante.
 
-## ⚠️ Encontré pero NO pude arreglar solo (1)
-- **El chequeo automático de Google Search Console usa una llave que ya caducó y no se renueva sola.** Hoy igual conseguí los datos de Google (clics, búsquedas) por otra conexión que sí funciona, así que NO me quedé a ciegas. Pero la llave que usa mi "termómetro" de salud está vencida y por seguridad no puedo regenerarla yo. Necesito que la reconectes una vez (es el re-login de Google de `mcp-local-seo`) para que el chequeo deje de marcar falsa alarma. No bloquea tu sitio ni la publicación.
+## ⚠️ Encontré pero NO pude arreglar solo (0)
+Todo lo que encontré lo pude arreglar.
 
 ## 🌱 Mejoré / agregué (0)
-Sin páginas nuevas hoy: revisé lo que la gente busca en Google y todo lo que tiene demanda real ya tiene su página en tu sitio; no inventé páginas porque crear páginas casi iguales sin búsquedas reales detrás dañaría tu posicionamiento. Buena noticia: en los últimos 28 días tu sitio subió a 359 clics (+13%) y 29.577 apariciones en Google (+26%).
+Sin páginas nuevas hoy: dediqué la sesión a terminar bien un trabajo que se había quedado a medias
+(una corrida anterior se interrumpió a mitad de camino hace un par de días) y a corregir errores que
+afectaban a mi propio sistema de revisión de calidad — antes de crear algo nuevo, preferí asegurarme
+de que los cimientos estuvieran sanos. Ya quedan 2 mejoras preparadas y listas para la próxima
+corrida: agregar 2 servicios que faltan en el menú de "todos nuestros servicios", y decidir sobre una
+fecha desactualizada en un artículo del blog (ver abajo).
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Le puse un detector automático nuevo: ahora, si la etiqueta de "tiempo de llegada" de una colonia no coincide con el tiempo que dice el resto de la página, o si la descripción de Google queda cortada a media palabra, el sistema lo marca solo en cada revisión (antes dependía de que yo me diera cuenta a ojo).
-(ya van 42 reglas aprendidas en total)
+- Cuando reorganizamos las carpetas del sitio hace unos días, algunos de mis scripts internos se
+  quedaron apuntando a la ubicación vieja de ciertos archivos. Ya había encontrado y arreglado 2
+  casos antes; hoy encontré un tercero (mi propio candado de calidad para páginas de servicio). Como
+  ya van 3 veces, le enseñé al sistema a revisarse a sí mismo automáticamente por este tipo de error
+  de ahora en adelante, en vez de depender de que yo lo note a mano.
+(ya van 43 reglas aprendidas en total)
 
 ## ⏳ Necesito que tú decidas (0)
-Nada pendiente de tu parte hoy.
+Nada pendiente de tu parte hoy. (Sigue pendiente de antes, sin cambios: reconectar el acceso a
+Google Search Console que se venció, y decidir si el artículo "cuánto cobra un plomero" se actualiza
+a 2026 o se deja con la fecha 2025 — ninguna de las dos es urgente.)
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo. Un segundo agente independiente revisó las 17 páginas antes de publicar (tiempos ya cuadrados, nada roto, 0 errores). Además le avisé a Google para que vuelva a visitar las colonias mejoradas y tu página de "reparación de bombas de agua" (esa lleva una semana publicada y Google aún no la había visitado; le di un empujón).
+Sí, todo revisado y en vivo — lo confirmé directamente entrando a https://plomeroculiacanpro.mx
+después de publicar; le avisé a Google para que lo muestre.
