@@ -1618,6 +1618,7 @@ p {
   border-color: #e67e22; 
 }
 .seo-card:focus-visible { outline: 3px solid #e67e22; outline-offset: 3px; }
+a:focus-visible, button:focus-visible, .btn-primary:focus-visible, .card:focus-visible, .nav-link:focus-visible { outline: 3px solid #C2410C; outline-offset: 2px; }
 
 .seo-links__note {
   text-align: center;

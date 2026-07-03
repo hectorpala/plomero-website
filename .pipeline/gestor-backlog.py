@@ -26,7 +26,7 @@ import sys
 from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BACKLOG = os.path.join(ROOT, "BACKLOG.jsonl")
+BACKLOG = os.path.join(ROOT, "data", "BACKLOG.jsonl")
 
 ESTADOS = {"pendiente", "en_progreso", "hecho", "descartado", "bloqueado", "requiere_humano"}
 RIESGOS = {"bajo": 0, "medio": 1, "alto": 2}

@@ -71,7 +71,7 @@ def sec_costos():
 
 
 def sec_backlog():
-    b = _jsonl("BACKLOG.jsonl")
+    b = _jsonl("data/BACKLOG.jsonl")
     print("## BACKLOG — cola de mejoras (%d tareas)" % len(b))
     if not b:
         print("  (sin datos)\n"); return
