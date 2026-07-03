@@ -53,6 +53,16 @@ else
     exit 1
   fi
 
+  # 1c) Contrato de checkers: ningún sensor de página puede dejar de emitir {hallazgos}
+  #     (clase regresión infra-003/005). Proactivo: bloquea aquí, no en la corrida siguiente.
+  if [ -x "$NODE" ] && [ -f "$REPO/.pipeline/check-contrato-checkers.mjs" ]; then
+    if ! ( cd "$REPO" && "$NODE" .pipeline/check-contrato-checkers.mjs ); then
+      echo ""
+      echo "❌ PUSH BLOQUEADO: un checker no emite el contrato {hallazgos} (ver arriba)."
+      exit 1
+    fi
+  fi
+
   # 1b) Gate por página (validate-landing + anti-doorway) SOLO sobre las páginas
   #     index.html de servicios/blog que cambian en este push.
   # Rango = (main remoto actual)...(sha que se publica). BASE_REF en ceros = primer push

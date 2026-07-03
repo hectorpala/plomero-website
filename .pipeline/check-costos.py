@@ -22,6 +22,30 @@ def main():
             if ln:
                 try: filas.append(json.loads(ln))
                 except Exception: pass
+    # ── Detector de CORRIDA DESBOCADA: output_tokens y nº de mensajes vs mediana móvil.
+    #    total_tokens lo domina cache_read (∝ contexto, barato); el costo de un loop sin
+    #    freno se ve en output_tokens y en mensajes. Marca ALTA si la última corrida supera
+    #    FACTOR× la mediana de las previas. (3 corridas a 606–654M / $1300+ tenían
+    #    output 2.1–2.3M y 1415–1659 mensajes vs mediana 26.6M.)
+    FACTOR = 5
+    MIN_HIST = 4            # no juzgar sin historia suficiente
+    def _mediana(xs):
+        s = sorted(xs); n = len(s)
+        if not n: return 0
+        return s[n//2] if n % 2 else (s[n//2-1] + s[n//2]) / 2
+    if len(filas) > MIN_HIST:
+        u = filas[-1]; prev = filas[:-1]
+        for campo, etiqueta in (("output_tokens", "output"), ("mensajes", "mensajes")):
+            cur = u.get(campo, 0) or 0
+            med = _mediana([f.get(campo, 0) or 0 for f in prev])
+            if med > 0 and cur > FACTOR * med:
+                hallazgos.append({
+                    "id": "costo-runaway-%s" % etiqueta, "archivo": ".pipeline/costos.jsonl", "linea": 0,
+                    "severidad": "alta", "categoria": "costo",
+                    "descripcion": "CORRIDA DESBOCADA: la última (%s) generó %s=%s, ~%.0f× la mediana (%s). Firma de loop sin freno, no de día grande." % (
+                        u.get("etiqueta", "?"), etiqueta, f"{cur:,}", cur/med, f"{int(med):,}"),
+                    "fix_sugerido": "Auditar la corrida: ¿loop-until-dry sin tope, fan-out de revisores sin lote, o re-trabajo en bucle? Poner freno por nº de páginas/iteraciones en el driver (crecer-diario) y/o bajar el fan-out paralelo.",
+                })
     if filas:
         u   = filas[-1]
         tok = u.get("total_tokens", 0)
