@@ -1,15 +1,24 @@
-# Meta-pase del Crítico-Sistema — 2026-06-29
+# Meta-pase del Crítico-Sistema — 2026-07-03
 
 Dejé **3 propuestas nuevas**, todas con su DRAFT ya escrito y listas para merge en `docs/PROPUESTAS.md`
 (las nuevas van arriba). Yo no apliqué nada — tú apruebas.
 
 ## Top 3 por impacto
-1. **Detector de corrida DESBOCADA por costo** (impacto A) — 3 de las últimas ~11 corridas explotaron a 606–654M tokens (~$1300–1420 cada una) frente a una mediana de 26.6M. La firma real es un loop sin freno (output 2.1–2.3M y >1400 mensajes), que el tripwire actual no distingue de un día grande. El draft añade un aviso ALTA cuando output o mensajes pasan de ~5× la mediana.
-2. **El over-budget de REGLAS.md se vuelve tarea drenable** (impacto M) — REGLAS lleva pegado al tope (3997/4000 tok) corrida tras corrida; hoy solo lo marca un exit-1 de la FASE 9 que se puede ignorar si la fase se salta. El draft es un sensor que emite el hallazgo para que el diario lo drene solo como consolidación.
-3. **Gate proactivo de contrato de checkers en pre-push** (impacto M) — la clase "añadí un checker y rompí el sensor de salud" (infra-003/005) ya reincidió ≥3 veces y solo se caza en la corrida del día siguiente, con una ALTA falsa. El draft la bloquea al pushear, antes de que llegue a una corrida.
+1. **(A) Cerrar el segundo hueco de "rutas rotas".** El sistema ya se tropezó DOS veces seguidas
+   (infra-006 y infra-007, las 2 corridas más recientes) con rutas que quedaron mal tras reorganizar el
+   repo. El checker de la vez pasada solo tapó una mitad; el draft tapa la otra —la que dejó el backlog
+   marcando "0 tareas" varios días sin que nadie lo notara.
+2. **(M) Cazar la corrida de 0 tokens.** Una corrida marcó "0 tokens" (2026-07-01) y el vigilante de
+   costo la leyó como "todo barato" cuando en realidad el medidor se rompió o la corrida no corrió. El
+   draft hace que ese 0 salte en el reporte diario en vez de esconderse.
+3. **(M) Vigilar que los arreglos móviles lleguen a TODAS las páginas de servicio.** Un arreglo se
+   aplicó a 1 de 18 páginas y las otras 17 se quedaron sin él hasta notarlo a ojo (familia movil-502/701/801).
+   El draft es un vigilante que revisa la paridad solo, para siempre, y hoy arranca limpio (18/18 ya cubiertas).
 
-**Estado del sistema:** sano salvo el costo. Backlog sin tareas (0 pendientes, 0 bloqueadas); 0 hallazgos
-marcados pendientes en HISTORIAL; pero el costo tiene picos reales sin vigilancia fina y REGLAS.md sigue
-al borde del presupuesto. Esos son justo los dos huecos que cubren las propuestas 1 y 2.
+**Estado del sistema:** sano en lo esencial. 0 hallazgos marcados pendientes en HISTORIAL; backlog con 2
+tareas pendientes y 2 en espera de decisión humana (doorway-domicilio, re-auth token GSC). La señal más
+fuerte es la REINCIDENCIA de la clase "rutas rotas" (2 de 2 corridas recientes) → la propuesta 1 la cierra.
+El costo tuvo un pico de ~654M tokens (~25× la mediana) y una fila de 0 tokens; el pico ya lo cubre la
+propuesta de "corrida desbocada" que sigue pendiente, y el 0 lo cubre la nueva propuesta 2.
 
 Todas están listas para merge en `docs/PROPUESTAS.md`.
