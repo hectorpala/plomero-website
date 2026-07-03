@@ -79,7 +79,7 @@ def main():
     # 1) validate-landing.sh por página (solo landings de servicio; los blogs usan
     #    otra plantilla y se omiten — su paridad se evalúa contra hermanas de blog).
     print("── 1) validate-landing.sh ──")
-    vs = os.path.join(ROOT, "validate-landing.sh")
+    vs = os.path.join(ROOT, "scripts", "validate-landing.sh")
     for p in pages:
         pn = p.replace("\\", "/")
         if "blog" in pn.split("/"):

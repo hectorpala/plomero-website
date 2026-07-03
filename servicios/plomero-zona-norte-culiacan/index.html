@@ -41,7 +41,7 @@
     <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
     <link rel="preload" href="/assets/fonts/montserrat-700.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
 
-    <link rel="stylesheet" href="../../styles.min.css?v=20260621">
+    <link rel="stylesheet" href="../../styles.min.css?v=20260630">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -161,7 +161,14 @@ window.dataLayer = window.dataLayer || [];
             margin: 0 6px;
         }
     }
-    </style>
+        @media (max-width: 768px) {
+        /* Tap target ~44px para enlaces inline en prosa (movil-502/movil-701) */
+        .about-text a {
+            display: inline-block;
+            padding: 0.6rem 0;
+        }
+    }
+</style>
 
 </head>
 <body>
