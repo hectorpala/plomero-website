@@ -18,6 +18,279 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [HECHO 2026-07-03] infra — Cerrar la forma B (open/`_jsonl` literal) de la clase "rutas rotas"   (impacto A · esfuerzo S · riesgo bajo)
+> ✅ Mergeada: `.pipeline/check-rutas-pipeline.py` reemplazado con el detector de forma B. Verificado: 51 archivos analizados, 0 rutas rotas; check-infra.mjs lo acepta (0 hallazgos, sin ALTA falsa).
+**Problema:** La clase de regresión "rutas post-reorganización" ya reincidió DOS veces seguidas (infra-006 el 06-30, infra-007 el 07-02). El checker `check-rutas-pipeline.py` que se mecanizó en infra-007 **solo caza la forma `os.path.join(ROOT, "lit.ext")`** (forma A). Pero infra-006 —el que dejó el backlog reportando "0 tareas" durante días sin que nadie lo notara— fue la **forma B**: un literal relativo pasado directo a un helper (`_jsonl("BACKLOG.jsonl")`, SIN `ROOT`). Esa forma B sigue sin red: si mañana otro `open("data/algo.jsonl")` apunta a una ruta movida, nadie lo caza hasta que un síntoma aparece a ojo.
+**Evidencia (brief):** 14 regresiones en HISTORIAL; **2 de ellas (infra-006, infra-007) son esta misma clase en las 2 corridas más recientes**. El checker actual (líneas 23-52) exige `node.args[0] == ROOT` → estructuralmente nunca ve la forma B.
+**Propuesta:** Extender `check-rutas-pipeline.py` con un segundo detector AST que cace literales de string pasados como PRIMER argumento a `open(...)` o `_jsonl(...)` en **modo lectura**, con extensión de datos/config conocida (`.jsonl/.json/.md/.txt/.csv/.sh/.yml/.yaml`) que no resuelva desde `ROOT`. Se excluyen `.html/.css/.js/.webp` (se abren contra un base de página ya calculado → ruido) y el modo escritura/crear (`w/a/x`, donde que el archivo no exista es legítimo). Sigue emitiendo el mismo contrato `{"hallazgos":[...]}`.
+**DRAFT (listo para merge — reemplaza `.pipeline/check-rutas-pipeline.py` completo):**
+```python
+#!/usr/bin/env python3
+"""Checker DETERMINISTA: rutas hardcodeadas rotas en .pipeline/*.py y scripts/*.py.
+
+Caza la clase de regresión "rutas post-reorganización" (REGLAS.md, familia
+infra-006/infra-007/0d3fb737): una ruta literal que apuntaba a la raíz antes de
+que el repo se reordenara en scripts/ + docs/ + data/, y que nadie actualizó al
+mover el archivo real. DOS formas de la MISMA clase:
+
+  A) os.path.join(ROOT, "BACKLOG.jsonl")                (forma infra-007)
+  B) open("BACKLOG.jsonl") / _jsonl("BACKLOG.jsonl")    (forma infra-006: literal
+     relativo pasado directo a open()/helper, SIN ROOT — el que dejó el backlog
+     reportando "0 tareas" durante días)
+
+Solo mira LITERALES (sin *, sin f-strings con variables) que terminan en una
+extensión de DATOS/CONFIG conocida — evita falsos positivos con globs
+(`servicios/*/index.html`) y con plantillas .html abiertas contra un base ya
+resuelto. Emite el contrato común {"hallazgos":[...]} para que check-infra.mjs
+lo recoja solo.
+"""
+import ast
+import json
+import os
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SCAN_DIRS = ["scripts", ".pipeline"]
+SELF = os.path.basename(__file__)
+
+# Extensiones de datos/config que se resuelven contra la raíz del repo. Se
+# excluyen .html/.webp/.css/.js a propósito (suelen abrirse contra un base de
+# página ya calculado -> alto ruido).
+EXT_DATOS = {".jsonl", ".json", ".md", ".txt", ".csv", ".sh", ".tsv", ".yml", ".yaml"}
+# Funciones cuyo PRIMER argumento es una ruta de archivo relativa a la raíz.
+OPEN_FUNCS = {"open", "_jsonl"}
+
+
+def _es_literal_str(node):
+    return isinstance(node, ast.Constant) and isinstance(node.value, str)
+
+
+def _modo_de_open(node):
+    """Modo de una llamada open(path, mode=...) si es literal; 'r' por defecto."""
+    if len(node.args) >= 2 and _es_literal_str(node.args[1]):
+        return node.args[1].value
+    for kw in node.keywords:
+        if kw.arg == "mode" and _es_literal_str(kw.value):
+            return kw.value
+    return "r"
+
+
+def _literal_join_paths(src):
+    """Forma A: os.path.join(ROOT, "a", "b", ...) con literales tras ROOT."""
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    found = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        f = node.func
+        is_join = (isinstance(f, ast.Attribute) and f.attr == "join") or \
+                  (isinstance(f, ast.Name) and f.id == "join")
+        if not is_join or not node.args:
+            continue
+        first = node.args[0]
+        if not (isinstance(first, ast.Name) and first.id == "ROOT"):
+            continue
+        parts, ok = [], True
+        for a in node.args[1:]:
+            if _es_literal_str(a):
+                parts.append(a.value)
+            else:
+                ok = False
+                break
+        if ok and parts:
+            found.append((os.path.join(*parts), node.lineno))
+    return found
+
+
+def _literal_open_paths(src):
+    """Forma B: open("lit.ext") / _jsonl("lit.ext") — literal relativo directo,
+    solo en modo LECTURA (crear/escribir un archivo que aún no existe es válido)."""
+    try:
+        tree = ast.parse(src)
+    except SyntaxError:
+        return []
+    found = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call) or not node.args:
+            continue
+        f = node.func
+        name = f.id if isinstance(f, ast.Name) else (
+            f.attr if isinstance(f, ast.Attribute) else None)
+        if name not in OPEN_FUNCS:
+            continue
+        first = node.args[0]
+        if not _es_literal_str(first):
+            continue
+        if name == "open" and any(c in _modo_de_open(node) for c in ("w", "a", "x")):
+            continue  # escribe/crea -> que no exista es legítimo
+        found.append((first.value, node.lineno))
+    return found
+
+
+def _ruta_rota(rel, ext_whitelist):
+    if os.path.isabs(rel) or "*" in rel:
+        return False
+    ext = os.path.splitext(rel)[1].lower()
+    if not ext:
+        return False  # sin extensión -> probablemente un directorio
+    if ext_whitelist is not None and ext not in ext_whitelist:
+        return False
+    return not os.path.exists(os.path.join(ROOT, rel))
+
+
+def _hallazgo(seq, full, lineno, rel, forma):
+    return {
+        "id": f"rutas-{seq:03d}",
+        "archivo": os.path.relpath(full, ROOT),
+        "linea": lineno,
+        "severidad": "alta",
+        "categoria": "infra",
+        "descripcion": (
+            f"RUTA ROTA ({forma}): apunta a '{rel}', que no existe en el repo "
+            "(posible regresión de rutas post-reorganización — familia infra-006/007)."
+        ),
+        "fix_sugerido": (
+            f"Corregir la constante/llamada para que apunte a la ubicación real de "
+            f"'{os.path.basename(rel)}'."
+        ),
+    }
+
+
+def main():
+    hallazgos = []
+    analizadas = 0
+    seq = 0
+    for d in SCAN_DIRS:
+        base = os.path.join(ROOT, d)
+        if not os.path.isdir(base):
+            continue
+        for name in sorted(os.listdir(base)):
+            if not name.endswith(".py") or name == SELF:
+                continue
+            full = os.path.join(base, name)
+            try:
+                src = open(full, encoding="utf-8").read()
+            except OSError:
+                continue
+            analizadas += 1
+            for rel, lineno in _literal_join_paths(src):
+                if _ruta_rota(rel, None):        # forma A: cualquier extensión (como hoy)
+                    seq += 1
+                    hallazgos.append(_hallazgo(seq, full, lineno, rel, "join(ROOT, …)"))
+            for rel, lineno in _literal_open_paths(src):
+                if _ruta_rota(rel, EXT_DATOS):   # forma B: solo extensiones de datos
+                    seq += 1
+                    hallazgos.append(_hallazgo(seq, full, lineno, rel,
+                                               "open()/_jsonl() literal relativo"))
+    print(json.dumps({"hallazgos": hallazgos, "analizadas": analizadas},
+                     ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## [HECHO 2026-07-03] costo — Cazar la corrida de 0 tokens (medidor roto / corrida caída)   (impacto M · esfuerzo S · riesgo bajo)
+> ✅ Mergeada: bloque `costo-000` añadido a `.pipeline/check-costos.py`. Verificado: dispararía sobre la fila real de 0 tokens (auto-agente 20260701-182502); 0 hallazgos hoy porque la última corrida tiene 22M tokens.
+**Problema:** `check-costos.py` solo evalúa `total_tokens > 28M` sobre la última fila. Una fila con **`total_tokens: 0`** pasa como "todo bien" cuando en realidad significa lo contrario: el recolector de costos falló o la corrida no ejecutó. Es un fallo SILENCIOSO — un 0 se lee igual que "corrida barata". (Complementa, no reemplaza, la propuesta de "corrida desbocada" de abajo, que cubre el otro extremo.)
+**Evidencia (brief de costo):** Las últimas 6 corridas fueron `654.2 · 26.6 · 24.9 · 66.2 · **0.0** · 22.1` M tokens. La fila `0.0` es real: `auto-agente 20260701-182502` con `total_tokens: 0` (verificado en `costos.jsonl`). Ninguna condición actual la marca.
+**Propuesta:** Bloque aditivo en `main()` de `check-costos.py`: si la última fila tiene `total_tokens == 0`, emitir `costo-000` (media) para que el diario lo SURJA en vez de esconderlo. No corta nada (solo visibilidad).
+**DRAFT (listo para merge — añadir a `.pipeline/check-costos.py`, dentro de `main()`, justo antes del `print(json.dumps(...))` final):**
+```python
+    # ── Fila de 0 tokens: NO es una corrida barata, es un fallo silencioso —
+    #    el recolector de costos no leyó los transcripts o la corrida no ejecutó.
+    #    (Visto el 2026-07-01: auto-agente 20260701-182502 con total_tokens=0.)
+    if filas and (filas[-1].get("total_tokens", 0) == 0):
+        hallazgos.append({
+            "id": "costo-000", "archivo": ".pipeline/costos.jsonl", "linea": 0,
+            "severidad": "media", "categoria": "costo",
+            "descripcion": "La última corrida (%s) registró 0 tokens: el medidor de costo falló o la corrida no ejecutó (no hay señal de gasto)." % (
+                filas[-1].get("etiqueta", "?")),
+            "fix_sugerido": "Revisar que el driver haya corrido y que el recolector de costos leyó los transcripts; un 0 oculta tanto una corrida caída como un medidor roto.",
+        })
+```
+
+---
+
+## [HECHO 2026-07-03] movil — Checker de PARIDAD de plantilla en la familia de páginas de servicio   (impacto M · esfuerzo S · riesgo bajo)
+> ✅ Mergeada: `.pipeline/check-familia-servicios.py` creado. Verificado: 18 páginas tienen el disparador `.about-text` y 18/18 la regla tap-target (paridad completa); 0 hallazgos; check-infra.mjs lo acepta.
+**Problema:** Cuando un fix de `<style>` inline se aplica a UNA página de servicio, nada garantiza que llegue a sus 17 hermanas del mismo esqueleto. El fix se queda huérfano hasta que alguien nota la regresión a ojo, corrida tras corrida.
+**Evidencia (HISTORIAL):** La familia movil-502 → movil-701 → **movil-801** (06-30) es exactamente esto: la regla de tap-target `.about-text a{display:inline-block;padding:.6rem 0}` vivía en **1 de 18** páginas y las otras 17 "nunca la recibieron". Hoy la paridad está completa (verifiqué: 18/18 la tienen), pero no hay tripwire que impida que la próxima página nueva o el próximo fix parcial reabra el hueco.
+**Propuesta:** Nuevo checker `check-familia-servicios.py` con un REGISTRO de reglas «si la página contiene `<disparador>`, DEBE contener `<patrón>`». Al añadir un fix de familia en el futuro, se agrega UNA línea al registro y el pipeline vigila la paridad para siempre. Emite el contrato `{"hallazgos":[...]}` → `check-infra.mjs` lo recoge automáticamente (patrón sin-args, como `check-costos.py`). Hoy devuelve 0 hallazgos → arranca limpio y solo dispara ante una regresión real.
+**DRAFT (listo para merge — crear `.pipeline/check-familia-servicios.py`):**
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Checker DETERMINISTA: PARIDAD de reglas de plantilla en la familia de páginas de servicio.
+
+Caza la clase de regresión movil-502 / movil-701 / movil-801: un fix de <style> inline
+(o de estructura) se aplica a UNA página de servicio y no se propaga a sus hermanas del
+mismo esqueleto -> la mayoría se queda sin el fix hasta que alguien lo nota a ojo.
+
+Modelo: un REGISTRO de reglas obligatorias. Cada regla dice «si la página CONTIENE
+<disparador>, DEBE contener <patrón>». Al añadir un fix nuevo a la familia, se agrega
+una línea aquí y el pipeline vigila la paridad solo, para siempre.
+
+Emite el contrato común {"hallazgos":[...]} — check-infra.mjs lo recoge sin tocar nada.
+Sin argumentos.
+"""
+import glob
+import json
+import os
+import re
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SERVICIOS_GLOB = os.path.join(ROOT, "servicios", "*", "index.html")
+
+# (id, categoría, disparador-regex, patrón-obligatorio-regex, descripción)
+REGLAS_FAMILIA = [
+    (
+        "familia-about-text-tap",
+        "movil",
+        re.compile(r"\.about-text\b"),
+        re.compile(r"\.about-text\s+a\s*\{[^}]*display\s*:\s*inline-block", re.S),
+        "Página de servicio con .about-text SIN la regla de tap-target ~44px "
+        "(@media(max-width:768px){.about-text a{display:inline-block;padding:.6rem 0}}) — "
+        "regresión de la familia movil-502/701/801.",
+    ),
+    # Añadir aquí futuras reglas de familia: (id, categoría, disparador, obligatorio, desc)
+]
+
+
+def main():
+    hallazgos = []
+    seq = 0
+    for full in sorted(glob.glob(SERVICIOS_GLOB)):
+        try:
+            html = open(full, encoding="utf-8").read()
+        except OSError:
+            continue
+        rel = os.path.relpath(full, ROOT)
+        for rid, cat, disparador, obligatorio, desc in REGLAS_FAMILIA:
+            if disparador.search(html) and not obligatorio.search(html):
+                seq += 1
+                hallazgos.append({
+                    "id": f"{rid}-{seq:03d}",
+                    "archivo": rel,
+                    "linea": 0,
+                    "severidad": "media",
+                    "categoria": cat,
+                    "descripcion": desc,
+                    "fix_sugerido": "Copiar la regla ya probada desde una página hermana (mismo esqueleto) a esta página; verificar headless a 375px que el tap-target quede >=44px.",
+                })
+    print(json.dumps({"hallazgos": hallazgos}, ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
 ## [PENDIENTE] costo — Detector de CORRIDA DESBOCADA (output/mensajes vs mediana), no solo volumen total   (impacto A · esfuerzo S · riesgo bajo)
 **Problema:** El tripwire actual (`check-costos.py`) solo mira `total_tokens > 28M`. Pero `total_tokens` lo domina el `cache_read` (barato por token y proporcional al CONTEXTO, no al trabajo). El modo de fallo caro de verdad es un **loop que se desboca**: la corrida genera millones de `output_tokens` y miles de mensajes. Ese eje hoy NO se vigila, y un umbral fijo sobre el total no distingue "día grande pero acotado" de "loop sin freno".
 **Evidencia (brief de costo, 15 corridas):** 3 de las últimas ~11 corridas explotaron a **606M · 617M · 654M tokens (~$1307 · $1343 · $1420 api-ref)** vs **mediana 26.6M**. Las tres comparten la firma de desboque: `output_tokens` **2.1–2.3M** (vs ~150–260K normal, ≈10×) y **1453 · 1659 · 1415 mensajes** (vs 36–368 normal). El total fijo las marca, pero como `media` y sin nombrar la causa; el discriminante real (output/mensajes) queda invisible.

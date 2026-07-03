@@ -34,6 +34,17 @@ def main():
                     u.get("etiqueta", "?"), tok/1e6, usd, UMBRAL_TOKENS/1e6, UMBRAL_USD),
                 "fix_sugerido": "Auditar la corrida: ¿demasiados revisores en paralelo, lote grande, o un loop sin freno? Bajar fan-out o usar modelo más barato en revisores deterministas.",
             })
+    # ── Fila de 0 tokens: NO es una corrida barata, es un fallo silencioso —
+    #    el recolector de costos no leyó los transcripts o la corrida no ejecutó.
+    #    (Visto el 2026-07-01: auto-agente 20260701-182502 con total_tokens=0.)
+    if filas and (filas[-1].get("total_tokens", 0) == 0):
+        hallazgos.append({
+            "id": "costo-000", "archivo": ".pipeline/costos.jsonl", "linea": 0,
+            "severidad": "media", "categoria": "costo",
+            "descripcion": "La última corrida (%s) registró 0 tokens: el medidor de costo falló o la corrida no ejecutó (no hay señal de gasto)." % (
+                filas[-1].get("etiqueta", "?")),
+            "fix_sugerido": "Revisar que el driver haya corrido y que el recolector de costos leyó los transcripts; un 0 oculta tanto una corrida caída como un medidor roto.",
+        })
     print(json.dumps({"hallazgos": hallazgos}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
