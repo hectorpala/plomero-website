@@ -3,40 +3,45 @@
 ```json
 {
   "ultima_corrida": {
-    "fecha": "2026-06-26",
-    "rama": "auto/crecer-20260626-120322",
-    "modo": "MARATÓN (pasada única: 1 unidad tipo a)",
-    "resumen": "Piso determinista LIMPIO (ci-gate 0 ALTA, check-plantilla 0, check-indexabilidad 0). GSC vivo por MCP: 0 reescrituras CTR (blogs ya tienen match exacto, 0-clic=SERP-features). Unidad elegida: a11y-109 (MEDIA) — salto h2->h4 en blog/cuanto-cuesta-plomeria-bano-completo-culiacan (comparacion-materiales: Economico/Estandar/Premium). Fix: 3x h4->h3 + selector CSS inline .comparison-card h4->.comparison-card h3 (preserva estilos naranja/1.1rem). Headless: 0 JS errors, h3s=['ECONOMICO','ESTANDAR','PREMIUM'] en cards, 0 h4 restantes. ci-gate 0 ALTA, gate-pagina Jaccard 0.29, HTTP 200. Publicado commit 978b3999 + push 15247052 + gsc_index /blog/cuanto-cuesta-plomeria-bano-completo-culiacan/.",
-    "arreglados": "1 archivo: blog/cuanto-cuesta-plomeria-bano-completo-culiacan/index.html — jerarquia h1->h2->h3 sin saltos.",
-    "crecimiento": "0 paginas nuevas.",
-    "verificado_ok": "determinista (sin verificador independiente en pasada maraton): ci-gate 0 ALTA, gate-pagina CANDADO OK Jaccard 0.29, headless 0 JS errors, HTTP 200.",
-    "publicado": "SI (1 archivo <= candado 18; candados todos OK).",
-    "pendientes_nuevos": "ninguno nuevo.",
+    "fecha": "2026-07-02",
+    "rama": "auto/diario-20260630-1827 -> publicado en main (5dfa860b, 482a3d54)",
+    "modo": "AUTONOMO (diario: continuacion de corrida interrumpida 2026-06-30 + fix de infra encontrado en FASE 7)",
+    "resumen": "Al iniciar la corrida diaria de hoy, la rama auto/diario-20260630-1827 tenia TODO el trabajo de la corrida del 2026-06-30 sin commitear (interrumpida antes de FASE 7/8/9/10): cache-busting de CSS compartido (?v=20260621->20260630 en ~70 paginas + sw.js CACHE_NAME v31->v32), fix de imagen incorrecta en servicios/destape-de-bano-inodoro (tinaco->taza de bano), y un fix de infra (rutas post-reorganizacion en gestor-backlog.py/recolecta-senales.py). Verificado en sus meritos (health check 200, ci-gate 0 ALTA) y ADOPTADO como el trabajo de hoy en vez de descartarlo. Durante la FASE 7 (verificador SOLO-LECTURA) se encontro una REGRESION nueva de la MISMA clase: gate-pagina.py apuntaba a validate-landing.sh en la raiz (ya no existe ahi, vive en scripts/) -> el candado fallaba SIEMPRE con '(sin salida)' en toda pagina de servicio, aunque la pagina estuviera sana. Se arreglo, se re-verifico (CANDADO OK), se publico, y se MECANIZO con un checker nuevo (check-rutas-pipeline.py, AST sobre .pipeline/*.py y scripts/*.py) que check-infra.mjs recoge solo sin tocarlo. Dado el volumen ya acumulado y para no abarcar de mas en una sola sesion, NO se lanzo un FASE 3-6 nuevo de revision/crecimiento hoy; el backlog (2 tareas auto-ejecutables) queda para la proxima corrida.",
+    "arreglados": "3 clases: (1) cache-busting CSS ~70 paginas+3 CSS+sw.js; (2) imagen incorrecta en servicios/destape-de-bano-inodoro (og:image/twitter:image/JSON-LD/hero); (3) infra: 3 scripts con rutas rotas post-reorganizacion (gestor-backlog.py, recolecta-senales.py, gate-pagina.py) + checker nuevo check-rutas-pipeline.py que lo caza solo de ahora en mas.",
+    "crecimiento": "0 paginas nuevas (sesion dedicada a cerrar backlog interrumpido + un bug de infra critico para el propio pipeline de verificacion).",
+    "verificado_ok": "true (verificador SOLO-LECTURA independiente, ok=true 0 problemas tras el fix de gate-pagina.py): ci-gate 0 ALTA; gate-pagina CANDADO OK en las 18 paginas con contenido real; css-paridad OK (420 atomos x3); HTTP 200 en paginas clave; JSON-LD parsea; canonical==og:url==twitter:url; email/wa.me intactos; 0 electricista/GTM ajeno; 0 precios tocados; 0 paginas borradas; sitemap sin cambios (0 paginas nuevas). Confirmado en PRODUCCION tras publicar: og:image correcto y ?v=20260630 servidos en vivo.",
+    "publicado": "SI, en 2 commits: (1) 5bbabf82/5dfa860b - el changeset de la corrida 2026-06-30 (80 archivos: <=18 paginas HTML de contenido real, resto asset-changeset CSS que no cuenta contra el cap); (2) c1d1b888/482a3d54 - el fix+mecanizacion del bug de gate-pagina.py encontrado hoy en FASE 7 (3 archivos). Ambos via scripts/crecer.py publicar (merge --no-ff + push, pre-push OK).",
+    "pendientes_nuevos": "(auto, prioridad normal) 2 tareas auto-ejecutables en el backlog (data/BACKLOG.jsonl) quedan para la proxima corrida: bk-cb2ad285 (agregar 2 tarjetas a servicios/index.html, fix ya redactado, se revirtio hoy por exceder el cap de 18) y bk-b2b4878f (year-desync 2025/2026 en blog/cuanto-cobra-plomero-visita-culiacan, requiere decision humana sobre bumpear precios o revertir el title). (humano, ALTA, sin cambio) bk-12b83ae9 re-auth mcp-local-seo/gsc-token.json sigue pendiente. (humano, ALTA, sin cambio) pend-secreto-historial-git: un client_secret aparecio historicamente en git log -p (arbol actual limpio) — requiere que el dueno rote/revoque la credencial.",
     "_corrida_anterior": {
-    "fecha": "2026-06-26",
-    "rama": "auto/diario-20260626-1113",
-    "modo": "AUTONOMO (diario: mantener+crecer+verificar+aprender)",
-    "resumen": "Al iniciar habia CAMBIOS SIN COMMITEAR en el arbol (corrida previa interrumpida): 18 colonias+home tocadas por fix-colonia-eta.py + el script nuevo. Verificados en sus meritos y ADOPTADOS (no creados hoy): el hero-eta-badge contradecia el ETA del cuerpo en 17 colonias (deriva-no-inventes: las 3 fuentes del cuerpo coinciden y el badge difiere) + 8 metas truncadas. El cambio de link de la home se DIFIRIO (revertido) para dejar 1 fix coherente bajo el cap. Health 6/6 200, 0 electricista/GTM ajeno. PISO determinista LIMPIO: ci-gate 0 ALTA, nap 0, conversion 0, linking 0, css-paridad OK. GSC REVIVIO via MCP (ciego 06-22/06-23): 359 clics/29577 impr 28d (+13%/+26% pos 6.7).",
-    "arreglados": "1 clase, 17 HTML colonia (fix-colonia-eta-20260626): hero-eta-badge igualado al ETA dominante del cuerpo (meta+benefit+cobertura) — ej amorada/barrio-estacion 20-30->25-35; + 8 metas recortadas al borde de clausula completo (ej '...conexiones r'->'...color rojizo'). dry-run post-fix=0 colonias (consistente). MECANIZADO: check 13 en check-plantilla.py (dispara contra el badge viejo, 0 en arbol limpio).",
-    "crecimiento": "0 paginas nuevas (toda la demanda GSC mapea a paginas existentes, sin hueco). 0 reescrituras CTR: los 2 blogs de mayor volumen (drenaje-tapado 415 impr 0-clic; desatascar-wc ~440 impr) YA tienen title/meta con match exacto fuerte -> 0-clic es SERP-features/PAA (gsc-214), no snippet -> reescribir seria cambio-por-cambiar. Bombas-de-agua sigue 'nunca rastreada' pese a 2 inlinks+sitemap -> gsc_index tras publicar.",
-    "verificado_ok": "true (verificador SOLO-LECTURA independiente, ok=true 0 problemas): git diff origin/main = 17 HTML colonia + costos + fix-colonia-eta.py; ci-gate 0 ALTA; gate-pagina 17/17 (Jaccard max 0.68); dry-run ETA 0 colonias; 0 metas truncadas; HTTP 17/17 200; JSON-LD parsea; canonical==og:url; index.html FUERA del diff; 0 electricista/GTM ajeno; email+wa.me intactos; 0 CSS/JS/sitemap/precios/tests; 0 paginas vivas borradas.",
-    "publicado": "SI (17 <= candado 18; verificador ok=true). Merge ff-only -> no-ff -> push al cierre + gsc_index colonias mejoradas + bombas.",
-    "pendientes_nuevos": "(humano, ALTA) re-auth mcp-local-seo/gsc-token.json: el SENSOR check-infra.mjs sigue ciego (token CLI invalid_grant) aunque el MCP gsc vive; bk-12b83ae9/infra-gsc-cli-token. (diferido) link home emergencia-24-7/index.html->/ (forma directorio seo-401, arrastra el doorway pre-existente home/cerca-de-mi cont-020 al candado); twitter:url ausente en las 17 colonias (pre-existente, las blogs si lo traen). (vigilar) bombas-de-agua sin rastrear; amorada 'rastreada sin indexar' (presion doorway colonias).",
-    "_archivo_anterior": {
-      "fecha": "2026-06-22",
-      "rama": "auto/diario-20260622-1914",
-      "resumen": "Nada SERVIDO cambió desde 998c23b8. PISO LIMPIO. infra-salud reportó 'GSC ciego' = token CLI mcp-local-seo (invalid_grant) pero el MCP gsc SÍ vivía (gsc_list_sites OK) -> FASE 6 usó datos reales. Lote rotativo destapó breadcrumb.",
-      "arreglados": "1 clase, 19 págs: BreadcrumbList nivel intermedio 'Servicios' apuntaba a /#servicios en vez del hub /servicios/. MECANIZADO check 2b en check-indexabilidad.py.",
-      "verificado_ok": "true (verificador SOLO-LECTURA, ok=true 0 problemas sobre 19).",
-      "publicado": "NO — 19>18 candado => PASE SUPERVISADO. Mergeado por humano el 2026-06-23 (890d13de en origin/main)."
+      "fecha": "2026-06-26",
+      "rama": "auto/crecer-20260626-120322",
+      "modo": "MARATÓN (pasada única: 1 unidad tipo a)",
+      "resumen": "Piso determinista LIMPIO (ci-gate 0 ALTA, check-plantilla 0, check-indexabilidad 0). GSC vivo por MCP: 0 reescrituras CTR (blogs ya tienen match exacto, 0-clic=SERP-features). Unidad elegida: a11y-109 (MEDIA) — salto h2->h4 en blog/cuanto-cuesta-plomeria-bano-completo-culiacan (comparacion-materiales: Economico/Estandar/Premium). Fix: 3x h4->h3 + selector CSS inline .comparison-card h4->.comparison-card h3 (preserva estilos naranja/1.1rem). Headless: 0 JS errors, h3s=['ECONOMICO','ESTANDAR','PREMIUM'] en cards, 0 h4 restantes. ci-gate 0 ALTA, gate-pagina Jaccard 0.29, HTTP 200. Publicado commit 978b3999 + push 15247052 + gsc_index /blog/cuanto-cuesta-plomeria-bano-completo-culiacan/.",
+      "arreglados": "1 archivo: blog/cuanto-cuesta-plomeria-bano-completo-culiacan/index.html — jerarquia h1->h2->h3 sin saltos.",
+      "crecimiento": "0 paginas nuevas.",
+      "verificado_ok": "determinista (sin verificador independiente en pasada maraton): ci-gate 0 ALTA, gate-pagina CANDADO OK Jaccard 0.29, headless 0 JS errors, HTTP 200.",
+      "publicado": "SI (1 archivo <= candado 18; candados todos OK).",
+      "pendientes_nuevos": "ninguno nuevo.",
+      "_corrida_anterior": {
+        "fecha": "2026-06-26",
+        "rama": "auto/diario-20260626-1113",
+        "modo": "AUTONOMO (diario: mantener+crecer+verificar+aprender)",
+        "resumen": "Al iniciar habia CAMBIOS SIN COMMITEAR en el arbol (corrida previa interrumpida): 18 colonias+home tocadas por fix-colonia-eta.py + el script nuevo. Verificados en sus meritos y ADOPTADOS (no creados hoy): el hero-eta-badge contradecia el ETA del cuerpo en 17 colonias (deriva-no-inventes: las 3 fuentes del cuerpo coinciden y el badge difiere) + 8 metas truncadas. El cambio de link de la home se DIFIRIO (revertido) para dejar 1 fix coherente bajo el cap. Health 6/6 200, 0 electricista/GTM ajeno. PISO determinista LIMPIO: ci-gate 0 ALTA, nap 0, conversion 0, linking 0, css-paridad OK. GSC REVIVIO via MCP (ciego 06-22/06-23): 359 clics/29577 impr 28d (+13%/+26% pos 6.7).",
+        "arreglados": "1 clase, 17 HTML colonia (fix-colonia-eta-20260626): hero-eta-badge igualado al ETA dominante del cuerpo (meta+benefit+cobertura) — ej amorada/barrio-estacion 20-30->25-35; + 8 metas recortadas al borde de clausula completo (ej '...conexiones r'->'...color rojizo'). dry-run post-fix=0 colonias (consistente). MECANIZADO: check 13 en check-plantilla.py (dispara contra el badge viejo, 0 en arbol limpio).",
+        "crecimiento": "0 paginas nuevas (toda la demanda GSC mapea a paginas existentes, sin hueco). 0 reescrituras CTR: los 2 blogs de mayor volumen (drenaje-tapado 415 impr 0-clic; desatascar-wc ~440 impr) YA tienen title/meta con match exacto fuerte -> 0-clic es SERP-features/PAA (gsc-214), no snippet -> reescribir seria cambio-por-cambiar. Bombas-de-agua sigue 'nunca rastreada' pese a 2 inlinks+sitemap -> gsc_index tras publicar.",
+        "verificado_ok": "true (verificador SOLO-LECTURA independiente, ok=true 0 problemas): git diff origin/main = 17 HTML colonia + costos + fix-colonia-eta.py; ci-gate 0 ALTA; gate-pagina 17/17 (Jaccard max 0.68); dry-run ETA 0 colonias; 0 metas truncadas; HTTP 17/17 200; JSON-LD parsea; canonical==og:url; index.html FUERA del diff; 0 electricista/GTM ajeno; email+wa.me intactos; 0 CSS/JS/sitemap/precios/tests; 0 paginas vivas borradas.",
+        "publicado": "SI (17 <= candado 18; verificador ok=true). Merge ff-only -> no-ff -> push al cierre + gsc_index colonias mejoradas + bombas.",
+        "pendientes_nuevos": "(humano, ALTA) re-auth mcp-local-seo/gsc-token.json: el SENSOR check-infra.mjs sigue ciego (token CLI invalid_grant) aunque el MCP gsc vive; bk-12b83ae9/infra-gsc-cli-token. (diferido) link home emergencia-24-7/index.html->/ (forma directorio seo-401, arrastra el doorway pre-existente home/cerca-de-mi cont-020 al candado); twitter:url ausente en las 17 colonias (pre-existente, las blogs si lo traen). (vigilar) bombas-de-agua sin rastrear; amorada 'rastreada sin indexar' (presion doorway colonias).",
+        "_archivo_anterior": {
+          "fecha": "2026-06-22",
+          "rama": "auto/diario-20260622-1914",
+          "resumen": "Nada SERVIDO cambió desde 998c23b8. PISO LIMPIO. infra-salud reportó 'GSC ciego' = token CLI mcp-local-seo (invalid_grant) pero el MCP gsc SÍ vivía (gsc_list_sites OK) -> FASE 6 usó datos reales. Lote rotativo destapó breadcrumb.",
+          "arreglados": "1 clase, 19 págs: BreadcrumbList nivel intermedio 'Servicios' apuntaba a /#servicios en vez del hub /servicios/. MECANIZADO check 2b en check-indexabilidad.py.",
+          "verificado_ok": "true (verificador SOLO-LECTURA, ok=true 0 problemas sobre 19).",
+          "publicado": "NO — 19>18 candado => PASE SUPERVISADO. Mergeado por humano el 2026-06-23 (890d13de en origin/main)."
+        }
+      }
     }
-    }
-  },
-  "corrida_previa": {
-    "fecha": "2026-06-17",
-    "rama": "auto/mantenimiento-20260617-1826",
-    "arreglados": 1,
-    "nota": "movil-502 (residual de movil-501): 5 CTA .service-link en prosa de /precios/ a <44px. Publicado merge 63f20460."
   },
   "pendientes": [
     {
