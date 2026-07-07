@@ -43,7 +43,10 @@ jobs:
               --compressed \
               2>/dev/null || echo "000")
 
-            if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "301" ] || [ "$HTTP_STATUS" = "302" ]; then
+            # curl -L ya siguió las redirecciones, así que el status FINAL debe
+            # ser 200. (Antes el loop aceptaba 301/302 como éxito pero site_ok
+            # exigía 200 → un 3xx final rompía el retry Y marcaba caído a la vez.)
+            if [ "$HTTP_STATUS" = "200" ]; then
               break
             fi
             echo "Intento $i: status $HTTP_STATUS, reintentando..."
@@ -119,26 +122,44 @@ jobs:
               --quiet || echo "⚠️ Lighthouse corrida $i falló (se sigue con las demás)"
           done
 
-          # Scores generales desde la 1ª corrida (compatibilidad con el resto del workflow)
-          REPORT=.pipeline/lighthouse-run-1.json
-          PERF=$(jq '.categories.performance.score * 100 | floor' "$REPORT")
-          ACCESS=$(jq '.categories.accessibility.score * 100 | floor' "$REPORT")
-          BP=$(jq '.categories["best-practices"].score * 100 | floor' "$REPORT")
-          SEO=$(jq '.categories.seo.score * 100 | floor' "$REPORT")
+          # Scores = MEDIANA de las corridas que sí produjeron JSON.
+          # (Antes se leía SOLO lighthouse-run-1.json: si esa corrida fallaba,
+          # jq reventaba, PERF quedaba vacío, la comparación numérica moría y el
+          # reporte salía con la tabla de scores en blanco.)
+          RUNS=$(ls .pipeline/lighthouse-run-*.json 2>/dev/null || true)
+          if [ -z "$RUNS" ]; then
+            echo "⚠️ Ninguna corrida de Lighthouse produjo reporte; sin scores."
+            echo "performance=" >> $GITHUB_OUTPUT
+            echo "accessibility=" >> $GITHUB_OUTPUT
+            echo "best_practices=" >> $GITHUB_OUTPUT
+            echo "seo=" >> $GITHUB_OUTPUT
+            echo "perf_warning=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          med() {
+            jq -s '[.[].categories[$cat].score | select(. != null) | . * 100 | floor]
+                   | sort | if length == 0 then empty else .[(length - 1) / 2 | floor] end' \
+              --arg cat "$1" $RUNS 2>/dev/null || true
+          }
+          PERF=$(med performance)
+          ACCESS=$(med accessibility)
+          BP=$(med best-practices)
+          SEO=$(med seo)
 
           echo "performance=$PERF" >> $GITHUB_OUTPUT
           echo "accessibility=$ACCESS" >> $GITHUB_OUTPUT
           echo "best_practices=$BP" >> $GITHUB_OUTPUT
           echo "seo=$SEO" >> $GITHUB_OUTPUT
 
-          echo "📊 Resultados:"
+          echo "📊 Resultados (mediana de $(echo "$RUNS" | wc -w | tr -d ' ') corrida(s)):"
           echo "   Performance: $PERF"
           echo "   Accessibility: $ACCESS"
           echo "   Best Practices: $BP"
           echo "   SEO: $SEO"
 
-          # Alerta si performance < 50
-          if [ "$PERF" -lt 50 ]; then
+          # Alerta si performance < 50 (solo si hubo score)
+          if [ -n "$PERF" ] && [ "$PERF" -lt 50 ]; then
             echo "perf_warning=true" >> $GITHUB_OUTPUT
           else
             echo "perf_warning=false" >> $GITHUB_OUTPUT
@@ -147,15 +168,30 @@ jobs:
       - name: Evaluar Core Web Vitals (presupuesto + regresión vs baseline)
         id: cwv
         continue-on-error: true
+        env:
+          # Umbrales de LABORATORIO (Lighthouse con throttling móvil en runner
+          # compartido), NO los de campo de Google (esos son para usuarios
+          # reales p75 y aquí disparaban alerta permanente — issue #2):
+          # LCP 4000ms = frontera "needs improvement" de Lighthouse móvil;
+          # INP 600ms porque el lab no mide INP y se usa TBT como proxy
+          # (600ms = frontera "needs improvement" de TBT). CLS es igual en
+          # lab y campo → se queda el default 0.1 de check-perf.mjs.
+          PERF_BUDGET_LCP: "4000"
+          PERF_BUDGET_INP: "600"
         run: |
-          echo "📐 CWV: presupuesto LCP<2.5s, CLS<0.1, INP<200ms + regresión vs baseline (mediana de 3)"
+          echo "📐 CWV: presupuesto lab LCP<${PERF_BUDGET_LCP}ms, CLS<0.1, TBT<${PERF_BUDGET_INP}ms + regresión vs baseline (mediana de 3)"
           REPORTS=$(ls .pipeline/lighthouse-run-*.json 2>/dev/null | paste -sd, -)
           if [ -z "$REPORTS" ]; then
             echo "⚠️ No hay reportes Lighthouse; no se evalúan CWV."
             echo "cwv_regression=false" >> $GITHUB_OUTPUT
             exit 0
           fi
-          PERF_REPORTS="$REPORTS" node .pipeline/check-perf.mjs > .pipeline/cwv-result.json 2>/dev/null || true
+          # stderr al log (antes iba a /dev/null: si el checker moría, el falso
+          # negativo era invisible).
+          PERF_REPORTS="$REPORTS" node .pipeline/check-perf.mjs > .pipeline/cwv-result.json 2> .pipeline/cwv-stderr.log || true
+          if [ -s .pipeline/cwv-stderr.log ]; then
+            sed 's/^/[check-perf stderr] /' .pipeline/cwv-stderr.log
+          fi
           COUNT=$(jq '[.hallazgos[] | select(.severidad=="alta" or .severidad=="media")] | length' .pipeline/cwv-result.json 2>/dev/null || echo 0)
           echo "### 📐 Core Web Vitals (presupuesto + baseline)" >> $GITHUB_STEP_SUMMARY
           jq -r '.hallazgos[]? | "- [\(.severidad)] \(.descripcion)"' .pipeline/cwv-result.json >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "- (sin datos de CWV)" >> $GITHUB_STEP_SUMMARY
@@ -174,62 +210,85 @@ jobs:
             .pipeline/lighthouse-run-*.json
             .pipeline/cwv-result.json
           retention-days: 30
+          # .pipeline/ es carpeta OCULTA: desde upload-artifact v4.4 los paths
+          # ocultos se excluyen por defecto → el artefacto no se subía NUNCA
+          # ("No files were found") y el Issue mandaba a un detalle inexistente.
+          include-hidden-files: true
           if-no-files-found: ignore
 
       - name: Crear Issue si hay problemas
         if: steps.health.outputs.site_ok == 'false' || steps.pages.outputs.pages_ok == 'false' || steps.lighthouse.outputs.perf_warning == 'true' || steps.cwv.outputs.cwv_regression == 'true'
         uses: actions/github-script@v7
+        # Los outputs entran por env y se leen con process.env: interpolar
+        # `${{ }}` DENTRO del JavaScript inyectaba texto crudo en literales de
+        # cadena — con `errors` multilínea el script moría con SyntaxError justo
+        # cuando había páginas caídas que reportar.
+        env:
+          SITE_OK: ${{ steps.health.outputs.site_ok }}
+          PAGES_OK: ${{ steps.pages.outputs.pages_ok }}
+          PERF_WARNING: ${{ steps.lighthouse.outputs.perf_warning }}
+          CWV_REGRESSION: ${{ steps.cwv.outputs.cwv_regression }}
+          HTTP_STATUS: ${{ steps.health.outputs.status }}
+          RESPONSE_TIME: ${{ steps.health.outputs.response_time }}
+          PAGES_ERRORS: ${{ steps.pages.outputs.errors }}
+          SCORE_PERF: ${{ steps.lighthouse.outputs.performance }}
+          SCORE_ACCESS: ${{ steps.lighthouse.outputs.accessibility }}
+          SCORE_BP: ${{ steps.lighthouse.outputs.best_practices }}
+          SCORE_SEO: ${{ steps.lighthouse.outputs.seo }}
         with:
           script: |
-            const siteOk = '${{ steps.health.outputs.site_ok }}' === 'true';
-            const pagesOk = '${{ steps.pages.outputs.pages_ok }}' === 'true';
-            const perfWarning = '${{ steps.lighthouse.outputs.perf_warning }}' === 'true';
+            const env = process.env;
+            const siteOk = env.SITE_OK === 'true';
+            const pagesOk = env.PAGES_OK === 'true';
+            const perfWarning = env.PERF_WARNING === 'true';
+            const cwvReg = env.CWV_REGRESSION === 'true';
+            const na = (v) => (v && v.trim()) ? v.trim() : 'n/a';
 
-            let title = '🚨 Alerta: ';
+            const causas = [];
             let body = '## Reporte de Monitoreo\n\n';
             body += `**Fecha:** ${new Date().toLocaleString('es-MX', {timeZone: 'America/Mazatlan'})}\n\n`;
 
             if (!siteOk) {
-              title += 'Sitio caído ';
+              causas.push('Sitio caído');
               body += '### ❌ Estado del Sitio\n';
-              body += `- Status HTTP: ${{ steps.health.outputs.status }}\n`;
-              body += `- Tiempo de respuesta: ${{ steps.health.outputs.response_time }}s\n\n`;
+              body += `- Status HTTP: ${na(env.HTTP_STATUS)}\n`;
+              body += `- Tiempo de respuesta: ${na(env.RESPONSE_TIME)}s\n\n`;
             }
 
             if (!pagesOk) {
-              title += 'Páginas con error ';
+              causas.push('Páginas con error');
               body += '### ❌ Páginas con Error\n';
-              body += '${{ steps.pages.outputs.errors }}\n\n';
+              body += (env.PAGES_ERRORS || '(sin detalle)') + '\n\n';
             }
 
             if (perfWarning) {
-              title += 'Performance baja';
-              body += '### ⚠️ Performance Baja\n';
+              causas.push('Performance baja');
+              body += '### ⚠️ Performance Baja\n\n';
             }
 
-            const cwvReg = '${{ steps.cwv.outputs.cwv_regression }}' === 'true';
             if (cwvReg) {
-              title += 'CWV fuera de presupuesto/regresión ';
+              causas.push('CWV fuera de presupuesto/regresión');
               body += '### 📐 Core Web Vitals (presupuesto/regresión)\n';
-              body += 'Una o más métricas (LCP/CLS/INP, mediana de 3) superan el presupuesto o regresaron vs baseline. ';
+              body += 'Una o más métricas (mediana de 3 corridas Lighthouse) superan el presupuesto de laboratorio o regresaron vs baseline. ';
               body += 'Ver el _step summary_ y el artefacto `lighthouse-reports` (JSON de las 3 corridas + `cwv-result.json`) para el detalle.\n\n';
             }
 
-            body += '### 📊 Lighthouse Scores\n';
-            body += `| Métrica | Score |\n`;
-            body += `|---------|-------|\n`;
-            body += `| Performance | ${{ steps.lighthouse.outputs.performance }} |\n`;
-            body += `| Accessibility | ${{ steps.lighthouse.outputs.accessibility }} |\n`;
-            body += `| Best Practices | ${{ steps.lighthouse.outputs.best_practices }} |\n`;
-            body += `| SEO | ${{ steps.lighthouse.outputs.seo }} |\n\n`;
+            body += '### 📊 Lighthouse Scores (mediana de 3)\n';
+            body += '| Métrica | Score |\n';
+            body += '|---------|-------|\n';
+            body += `| Performance | ${na(env.SCORE_PERF)} |\n`;
+            body += `| Accessibility | ${na(env.SCORE_ACCESS)} |\n`;
+            body += `| Best Practices | ${na(env.SCORE_BP)} |\n`;
+            body += `| SEO | ${na(env.SCORE_SEO)} |\n\n`;
 
             body += '---\n';
             body += '_Generado automáticamente por el Monitor del Sitio_';
 
-            // Dedup: si ya hay un Issue abierto con la etiqueta del monitor,
-            // comenta en él en vez de abrir uno nuevo cada 6 h mientras el
-            // problema persiste (mismo patrón que seo-check.yml). Evita inundar
-            // el repo de Issues duplicados.
+            const title = '🚨 Alerta: ' + causas.join(' + ');
+
+            // Dedup por etiqueta + MISMO título (misma combinación de causas):
+            // así una caída real del sitio abre su propio Issue en vez de
+            // quedar enterrada como comentario N del Issue de CWV.
             const label = 'monitor-automatico';
             const existing = await github.rest.issues.listForRepo({
               owner: context.repo.owner,
@@ -239,16 +298,16 @@ jobs:
             });
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             const fecha = new Date().toLocaleString('es-MX', { timeZone: 'America/Mazatlan' });
+            const match = existing.data.find((i) => i.title === title);
 
-            if (existing.data.length > 0) {
-              const issue = existing.data[0];
+            if (match) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: issue.number,
-                body: `${title}\n\nVolvió a detectarse el ${fecha}. Corrida: ${runUrl}\n\n${body}`,
+                issue_number: match.number,
+                body: `Volvió a detectarse el ${fecha}. Corrida: ${runUrl}\n\n${body}`,
               });
-              core.info(`Issue #${issue.number} ya existe; se agregó comentario en vez de abrir otro.`);
+              core.info(`Issue #${match.number} ya existe; se agregó comentario en vez de abrir otro.`);
             } else {
               await github.rest.issues.create({
                 owner: context.repo.owner,
@@ -258,6 +317,39 @@ jobs:
                 labels: ['bug', label]
               });
               core.info('Se creó un nuevo Issue de monitoreo.');
+            }
+
+      - name: Cerrar Issues del monitor si todo pasó
+        if: steps.health.outputs.site_ok == 'true' && steps.pages.outputs.pages_ok == 'true' && steps.lighthouse.outputs.perf_warning != 'true' && steps.cwv.outputs.cwv_regression != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Contraparte del dedup: en una corrida limpia, los Issues del
+            // monitor se cierran solos (antes quedaban abiertos para siempre
+            // acumulando un comentario cada 6 h).
+            const label = 'monitor-automatico';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: label,
+            });
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const fecha = new Date().toLocaleString('es-MX', { timeZone: 'America/Mazatlan' });
+            for (const issue of existing.data) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `✅ Corrida limpia del monitor el ${fecha} (sitio OK, páginas OK, performance OK, CWV dentro de presupuesto). Corrida: ${runUrl}. Se cierra automáticamente.`,
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+              });
+              core.info(`Issue #${issue.number} cerrado (monitor en verde).`);
             }
 
       - name: Resumen

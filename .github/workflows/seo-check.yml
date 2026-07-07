@@ -33,7 +33,9 @@ jobs:
           # de meta-refresh → 200 sin contenido SEO → fallo permanente). Cada
           # destino se tomó del <link rel="canonical"> de su stub y responde 200
           # directo (sin redirección) en producción.
-          echo 'URLS=/ /servicios/plomero-cerca-de-mi/ /servicios/emergencia-24-7/ /servicios/plomero-a-domicilio/ /servicios/plomero-precios/ /contacto/' >> $GITHUB_OUTPUT
+          # 2026-07: /servicios/plomero-precios/ se consolidó en /precios/ con 301
+          # (commit b85b4092, gsc-201) → se audita la URL nueva, no la borrada.
+          echo 'URLS=/ /servicios/plomero-cerca-de-mi/ /servicios/emergencia-24-7/ /servicios/plomero-a-domicilio/ /precios/ /contacto/' >> $GITHUB_OUTPUT
 
       - name: Check sitemap HTTP 200
         run: |
@@ -46,6 +48,10 @@ jobs:
       - name: Crawl pages (public) & run checks
         env:
           BASE: https://plomeroculiacanpro.mx
+          # ${#var} cuenta CARACTERES solo con locale UTF-8; en locale C contaría
+          # bytes y los títulos con acentos (í/á/ó) darían 2-3 de más → falso
+          # positivo de longitud. Se fija explícito para no depender del runner.
+          LC_ALL: C.UTF-8
         run: |
           FAIL=0
           urls='${{ steps.urls.outputs.URLS }}'
@@ -55,41 +61,51 @@ jobs:
             # ya deben ser directas, pero esto evita que un redirect rompa el check).
             html="$(curl -sSL "$BASE$u")" || FAIL=1
 
-            # 1) GTM: exactamente 1 gtm.js y 1 ns.html
-            js=$(printf "%s" "$html" | rg -c 'googletagmanager\.com/gtm\.js\?id=GTM-W75CRTX5')
-            ns=$(printf "%s" "$html" | rg -c 'googletagmanager\.com/ns\.html\?id=GTM-W75CRTX5')
-            echo "GTM gtm.js:$js ns.html:$ns"
-            [ "$js" -eq 1 ] && [ "$ns" -eq 1 ] || { echo "❌ GTM count mismatch in $u"; FAIL=1; }
+            # 1) GTM: exactamente 1 carga de gtm.js y 1 ns.html.
+            # OJO: el snippet ESTÁNDAR de Google construye la URL dinámicamente
+            # ('gtm.js?id='+i), así que exigir el literal "gtm.js?id=GTM-..."
+            # daba falso positivo en páginas con el snippet oficial (p.ej.
+            # /precios/). Se cuenta la carga de gtm.js y se exige el ID en la
+            # página por separado.
+            # Además: todos los `rg -c` llevan `|| echo 0` porque rg sale con
+            # código 1 cuando cuenta 0 y el shell de Actions corre con
+            # `set -eo pipefail` → sin el guard, el script MORÍA sin imprimir
+            # qué check falló (y sin auditar las URLs restantes).
+            js=$(printf "%s" "$html" | rg -c 'googletagmanager\.com/gtm\.js' || echo 0)
+            ns=$(printf "%s" "$html" | rg -c 'googletagmanager\.com/ns\.html\?id=GTM-W75CRTX5' || echo 0)
+            gid=$(printf "%s" "$html" | rg -c 'GTM-W75CRTX5' || echo 0)
+            echo "GTM gtm.js:$js ns.html:$ns id:$gid"
+            [ "$js" -eq 1 ] && [ "$ns" -eq 1 ] && [ "$gid" -ge 1 ] || { echo "❌ GTM count mismatch in $u"; FAIL=1; }
 
             # 2) Title length 50–66 (rango alineado a las páginas reales: el más
             #    largo es /servicios/plomero-precios/ con 66; ~66 chars ≈ 600px,
             #    límite práctico de Google). El check sigue atrapando títulos
             #    ausentes o desproporcionados.
-            title=$(printf "%s" "$html" | rg -o '<title>.*?</title>' -N | sed -E 's|</?title>||g')
+            title=$(printf "%s" "$html" | rg -o '<title>.*?</title>' -N | sed -E 's|</?title>||g' || true)
             tlen=${#title}
             echo "Title($tlen): $title"
             [ $tlen -ge 50 ] && [ $tlen -le 66 ] || { echo "❌ Title length out of range in $u ($tlen)"; FAIL=1; }
 
             # 3) Meta description 120–160 (160 es el máximo estándar SEO; páginas
             #    reales llegan a 160 en /servicios/plomero-a-domicilio/).
-            desc=$(printf "%s" "$html" | rg -o '<meta name="description" content="[^"]*"' -N | sed -E 's/.*content="(.*)"/\1/')
+            desc=$(printf "%s" "$html" | rg -o '<meta name="description" content="[^"]*"' -N | sed -E 's/.*content="(.*)"/\1/' || true)
             dlen=${#desc}
             echo "Desc($dlen): ${desc:0:80}..."
             [ $dlen -ge 120 ] && [ $dlen -le 160 ] || { echo "❌ Description length out of range in $u ($dlen)"; FAIL=1; }
 
             # 4) Canonical & og:url al dominio correcto
-            can=$(printf "%s" "$html" | rg -c '<link[^>]+rel="canonical"[^>]+https://plomeroculiacanpro.mx' -i)
-            ogu=$(printf "%s" "$html" | rg -c 'property="og:url"[^>]+https://plomeroculiacanpro.mx' -i)
+            can=$(printf "%s" "$html" | rg -c '<link[^>]+rel="canonical"[^>]+https://plomeroculiacanpro.mx' -i || echo 0)
+            ogu=$(printf "%s" "$html" | rg -c 'property="og:url"[^>]+https://plomeroculiacanpro.mx' -i || echo 0)
             echo "Canonical:$can og:url:$ogu"
             [ "$can" -ge 1 ] || { echo "❌ Missing canonical in $u"; FAIL=1; }
             [ "$ogu" -ge 1 ] || { echo "❌ Missing og:url in $u"; FAIL=1; }
 
             # 5) JSON-LD: 1 bloque en cada página y @graph en Home+Servicios; Contacto puede no tener @graph
-            blocks=$(printf "%s" "$html" | rg -c '<script type="application/ld\+json">')
+            blocks=$(printf "%s" "$html" | rg -c '<script type="application/ld\+json">' || echo 0)
             echo "JSON-LD blocks: $blocks"
             [ "$blocks" -ge 1 ] || { echo "❌ No JSON-LD in $u"; FAIL=1; }
 
-            json=$(printf "%s" "$html" | rg -oP '(?s)(?<=<script type="application/ld\+json">).*(?=</script>)' | head -n1)
+            json=$(printf "%s" "$html" | rg -oP '(?s)(?<=<script type="application/ld\+json">).*(?=</script>)' | head -n1 || true)
             if [ -n "$json" ]; then
               echo "$json" | jq -e . >/dev/null || { echo "❌ Invalid JSON-LD in $u"; FAIL=1; }
               if [ "$u" = "/" ] || printf "%s" "$u" | rg -q '^/servicios/'; then
@@ -147,6 +163,39 @@ jobs:
                 labels: ['bug', label],
               });
               core.info('Se creó un nuevo Issue de falla SEO.');
+            }
+
+      - name: Cerrar Issue SEO si la corrida pasó limpia
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Contraparte del dedup: cuando el check vuelve a pasar, el Issue
+            // abierto se cierra solo (antes quedaba abierto para siempre
+            // acumulando comentarios).
+            const label = 'seo-automatico';
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: label,
+            });
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const fecha = new Date().toLocaleString('es-MX', { timeZone: 'America/Mazatlan' });
+            for (const issue of existing.data) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `✅ El check SEO volvió a pasar el ${fecha}. Corrida: ${runUrl}. Se cierra automáticamente.`,
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+              });
+              core.info(`Issue #${issue.number} cerrado (check en verde).`);
             }
 
       - name: Summary

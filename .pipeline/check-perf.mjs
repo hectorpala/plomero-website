@@ -37,7 +37,20 @@ const BASE = process.env.PERF_BASE || "https://plomeroculiacanpro.mx";
 const BASELINE_FILE = process.env.PERF_BASELINE || path.join(__dirname, "perf-baseline.json");
 const UPDATE = process.argv.includes("--update-baseline");
 
-const BUDGET = { lcp: 2500, cls: 0.1, inp: 200 };          // unidades: ms, unitless, ms
+// Presupuesto sobreescribible por env (PERF_BUDGET_LCP/CLS/INP). Los defaults
+// son los umbrales "good" de Google para datos de CAMPO; en CI (Lighthouse lab
+// con throttling móvil en runner compartido) site-monitor.yml pasa umbrales de
+// LABORATORIO más realistas — aplicar los de campo al lab disparaba una alerta
+// permanente cada 6 h (issue #2).
+function budgetEnv(name, def) {
+  const v = Number(process.env[name]);
+  return Number.isFinite(v) && v > 0 ? v : def;
+}
+const BUDGET = {
+  lcp: budgetEnv("PERF_BUDGET_LCP", 2500),
+  cls: budgetEnv("PERF_BUDGET_CLS", 0.1),
+  inp: budgetEnv("PERF_BUDGET_INP", 200),
+};                                                         // unidades: ms, unitless, ms
 const REL = 0.20;                                          // regresión relativa mínima
 const FLOOR = { lcp: 200, cls: 0.02, inp: 50 };            // piso de ruido absoluto
 const UNIT = { lcp: "ms", cls: "", inp: "ms" };
