@@ -1,0 +1,9 @@
+{
+  "/": {
+    "lcp": 1921,
+    "cls": 0.015,
+    "inp": 33,
+    "inpSrc": "lighthouse:tbt(proxy)",
+    "fuente": "lighthouse"
+  }
+}

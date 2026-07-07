@@ -192,7 +192,10 @@ jobs:
           if [ -s .pipeline/cwv-stderr.log ]; then
             sed 's/^/[check-perf stderr] /' .pipeline/cwv-stderr.log
           fi
-          COUNT=$(jq '[.hallazgos[] | select(.severidad=="alta" or .severidad=="media")] | length' .pipeline/cwv-result.json 2>/dev/null || echo 0)
+          # Solo severidad ALTA abre/comenta Issue: las "media" (regresión vs
+          # baseline, INP-proxy) varían con el ruido del runner compartido y
+          # quedan visibles en el step summary sin spamear el repo.
+          COUNT=$(jq '[.hallazgos[] | select(.severidad=="alta")] | length' .pipeline/cwv-result.json 2>/dev/null || echo 0)
           echo "### 📐 Core Web Vitals (presupuesto + baseline)" >> $GITHUB_STEP_SUMMARY
           jq -r '.hallazgos[]? | "- [\(.severidad)] \(.descripcion)"' .pipeline/cwv-result.json >> $GITHUB_STEP_SUMMARY 2>/dev/null || echo "- (sin datos de CWV)" >> $GITHUB_STEP_SUMMARY
           if [ "${COUNT:-0}" -gt 0 ]; then
