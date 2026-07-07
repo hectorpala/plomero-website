@@ -1,24 +1,26 @@
-# Meta-pase del Crítico-Sistema — 2026-07-03
+# Meta-pase del Crítico-Sistema — 2026-07-06
 
-Dejé **3 propuestas nuevas**, todas con su DRAFT ya escrito y listas para merge en `docs/PROPUESTAS.md`
+Dejé **4 propuestas nuevas**, todas con su DRAFT ya escrito y listas para merge en `docs/PROPUESTAS.md`
 (las nuevas van arriba). Yo no apliqué nada — tú apruebas.
 
 ## Top 3 por impacto
-1. **(A) Cerrar el segundo hueco de "rutas rotas".** El sistema ya se tropezó DOS veces seguidas
-   (infra-006 y infra-007, las 2 corridas más recientes) con rutas que quedaron mal tras reorganizar el
-   repo. El checker de la vez pasada solo tapó una mitad; el draft tapa la otra —la que dejó el backlog
-   marcando "0 tareas" varios días sin que nadie lo notara.
-2. **(M) Cazar la corrida de 0 tokens.** Una corrida marcó "0 tokens" (2026-07-01) y el vigilante de
-   costo la leyó como "todo barato" cuando en realidad el medidor se rompió o la corrida no corrió. El
-   draft hace que ese 0 salte en el reporte diario en vez de esconderse.
-3. **(M) Vigilar que los arreglos móviles lleguen a TODAS las páginas de servicio.** Un arreglo se
-   aplicó a 1 de 18 páginas y las otras 17 se quedaron sin él hasta notarlo a ojo (familia movil-502/701/801).
-   El draft es un vigilante que revisa la paridad solo, para siempre, y hoy arranca limpio (18/18 ya cubiertas).
+1. **(A) Los vigilantes del Plomero pueden confundirse con el sitio del Electricista.** Los dos sitios
+   guardan sus registros de corrida en la MISMA carpeta con el MISMO nombre. El vigilante que revisa
+   "¿corrió hoy el sistema?" y el que recupera corridas saltadas toman "el registro más nuevo" sin fijarse
+   de qué sitio es: si el del Plomero se muere pero el del Electricista sigue corriendo, nadie se enteraría.
+   Lo comprobé hoy con un caso real. El draft les pone apellido a los registros del Plomero (3 parches chicos).
+2. **(A) El sistema lleva 4 días sin completar una corrida y ningún sensor lo dijo.** El 4 de julio no corrió
+   nada (día perdido en silencio) y el 5 de julio la corrida murió a medias por fallas de conexión (3 intentos
+   agotados). Hoy nada lo reporta: el registro simplemente "no tiene fila". El draft añade dos detectores al
+   vigilante de costos: "hubo un día sin corrida" y "la corrida quedó enana (murió a medias); adopta su trabajo".
+3. **(M) Los reintentos "de 2 minutos" pueden ocurrir 15 horas después.** Cuando la Mac se duerme, la espera
+   entre reintentos se congela: un reintento programado para las 8 de la noche corrió a las 3 de la madrugada,
+   y en el sitio hermano uno corrió al día siguiente a media mañana, encimado con otros procesos. El draft
+   pone un límite de reloj real: si ya pasaron más de 3 horas, se abandona y lo recupera la corrida de mañana.
 
-**Estado del sistema:** sano en lo esencial. 0 hallazgos marcados pendientes en HISTORIAL; backlog con 2
-tareas pendientes y 2 en espera de decisión humana (doorway-domicilio, re-auth token GSC). La señal más
-fuerte es la REINCIDENCIA de la clase "rutas rotas" (2 de 2 corridas recientes) → la propuesta 1 la cierra.
-El costo tuvo un pico de ~654M tokens (~25× la mediana) y una fila de 0 tokens; el pico ya lo cubre la
-propuesta de "corrida desbocada" que sigue pendiente, y el 0 lo cubre la nueva propuesta 2.
+La 4ª (M): el brief ahora dirá cuántos DÍAS lleva esperándote cada decisión pendiente — hay una de 17 días
+(páginas casi gemelas por consolidar) y una de 14 (reconectar el sensor de Google Search Console del CLI).
 
-Todas están listas para merge en `docs/PROPUESTAS.md`.
+**Estado del sistema:** los checkers en sí están sanos y el backlog no tiene tareas bloqueadas; el problema
+de esta semana es de CONTINUIDAD (corridas que no ocurren o mueren a medias sin que nadie lo diga) — las
+propuestas 1-3 cierran justo eso. Todas están listas para merge en `docs/PROPUESTAS.md`.

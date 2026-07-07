@@ -18,6 +18,146 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [PENDIENTE] infra — Logs compartidos entre sitios: el catch-up y el sensor de frescura del cron pueden leer al ELECTRICISTA como si fuera el Plomero   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** Los dos sitios (Plomero y Electricista) escriben sus logs de corrida con el MISMO nombre (`auto-agente-<stamp>.log`) en el MISMO directorio (`~/Library/Logs/mantener-sitio/`). Dos sensores del Plomero eligen "el log más nuevo" SIN filtrar por sitio: (1) `catchup.sh` (decide si recuperar una corrida saltada) y (2) `check-infra.mjs` checkCron (el dead-man's switch de "el cron está vivo"). Escenario de fallo: el LaunchAgent del Plomero muere, pero el Electricista sigue corriendo a diario → el catch-up dice "última corrida hace 0h, OK → sin acción" y check-infra dice "cron fresco" — el Plomero queda MUERTO EN SILENCIO, que es exactamente lo que estos dos sensores existen para impedir.
+**Evidencia:** Verificado HOY (2026-07-06): `auto-agente-20260705-201428.log` en ese directorio es del ELECTRICISTA (lo escribió `/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/crecer-diario.sh`, pid 78944; su `claude` reintentaba a las 11:13 con el prompt de electricistaculiacanpro.mx). El `crecer-diario.sh` del Electricista usa el MISMO `LOG_DIR="$HOME/Library/Logs/mantener-sitio"` (su línea 19) y el mismo patrón de nombre. Consumidores sin filtro en ESTE repo: `.pipeline/catchup.sh` línea 23 (`ls -t "$LOG_DIR"/auto-agente-2*.log …`) y `.pipeline/check-infra.mjs` línea 78 (`/^(run|auto-agente)-.*\.log$/`). El marcador `last-run-day` sí está namespaceado (`auto-agente-plomero-last-run-day`) — los logs no.
+**Propuesta:** Namespacear el log del Plomero (`auto-agente-plomero-<stamp>.log`) y que los dos consumidores filtren por ese prefijo (+ `run-*.log` legado, que era exclusivo de este sitio). Espejo recomendado en el repo del Electricista (su log → `auto-agente-electricista-*`), pero el fix de ESTE repo ya lo protege solo.
+**DRAFT (listo para merge — 3 parches + 1 migración):**
+```bash
+# ── Parche 1: .pipeline/crecer-diario.sh (línea 20) ──────────────────────────
+# ANTES:
+LOG="$LOG_DIR/auto-agente-$STAMP.log"
+# DESPUÉS (namespacear: el electricista escribe auto-agente-*.log en el MISMO dir):
+LOG="$LOG_DIR/auto-agente-plomero-$STAMP.log"
+
+# ── Parche 2: .pipeline/catchup.sh (línea 23) ────────────────────────────────
+# ANTES:
+NEWEST=$(ls -t "$LOG_DIR"/auto-agente-2*.log "$LOG_DIR"/run-2*.log 2>/dev/null | head -1)
+# DESPUÉS (solo logs del PLOMERO: prefijo nuevo + run-* legado, exclusivo de este sitio):
+NEWEST=$(ls -t "$LOG_DIR"/auto-agente-plomero-2*.log "$LOG_DIR"/run-2*.log 2>/dev/null | head -1)
+
+# ── Migración (UNA vez, junto con el merge): renombrar los logs históricos que
+#    son del Plomero para que la frescura del cron no dé una ALTA falsa ese día.
+#    Discriminador: solo el parte del Plomero dice "Auto Agente Plomero"/plomeroculiacanpro.
+for f in "$HOME/Library/Logs/mantener-sitio"/auto-agente-2*.log; do
+  [ -f "$f" ] || continue
+  grep -ql "Auto Agente Plomero\|plomeroculiacanpro" "$f" \
+    && mv "$f" "${f/auto-agente-/auto-agente-plomero-}"
+done
+# (Los que no matcheen quedan con el nombre viejo: inofensivo — ya no los mira nadie
+#  del Plomero, y el primer cron tras el merge escribe el primer log con nombre nuevo.)
+```
+```js
+// ── Parche 3: .pipeline/check-infra.mjs (línea 78, dentro de checkCron) ──────
+// ANTES:
+entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run|auto-agente)-.*\.log$/.test(f));
+// DESPUÉS (excluir los logs del electricista, que comparten directorio y prefijo):
+entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run-|auto-agente-plomero-).*\.log$/.test(f));
+```
+
+## [PENDIENTE] costo/visibilidad — `check-costos.py`: detectar el HUECO de días sin corrida y la CORRIDA ENANA que murió a medias   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** Hoy el sistema lleva 4 días sin una corrida diaria COMPLETADA y ningún sensor lo dice: el 07-04 no corrió NADA (no hay fila en costos.jsonl — la diaria se saltó en silencio) y el 07-05 la corrida agotó sus 3 intentos de API ("Connection closed mid-response") dejando una fila enana que ningún detector actual distingue de un "día tranquilo". `check-costos.py` ya caza el 0 exacto (costo-000) y la corrida desbocada, pero un DÍA AUSENTE o una corrida al 12% de la mediana pasan limpios. `ESTADO.md` sigue diciendo "ultima_corrida: 2026-07-02".
+**Evidencia:** `costos.jsonl`: existe `auto-agente 20260703-182515` y luego salta a `20260705-183943` — el 2026-07-04 no tiene fila. La del 07-05: output 25,861 tokens / 48 mensajes vs mediana 216,528 / ~300 (12% — su log `auto-agente-20260705-183943.log` muestra los 3 intentos fallidos), y dejó la rama `auto/diario-20260705-2032` con trabajo sin commitear. `catchup.log` no registra nada desde el 06-24 (solo dispara al boot; la Mac duerme, no se reinicia).
+**Propuesta:** Añadir a `check-costos.py` dos detectores: (1) HUECO — si entre las dos últimas corridas hay >1 día calendario, hallazgo (alta si faltan ≥2 días); (2) ENANA — si la última corrida tiene `output_tokens` > 0 pero < 25% de la mediana previa (calibrado: caza el 25.8k del 07-05 con mediana 216k, sin marcar la corta legítima de 102k del 07-02), hallazgo media con la instrucción de ADOPTAR el trabajo huérfano de su rama (patrón ya usado el 2026-07-02).
+**DRAFT (listo para merge — pegar en `.pipeline/check-costos.py` DESPUÉS del bloque costo-000 y ANTES del `print(json.dumps(...))` final):**
+```python
+    # ── HUECO de días y CORRIDA ENANA (familia 20260704/20260705): una diaria que NO
+    #    ocurrió (Mac apagada, launchd sin disparar, catch-up ciego) no deja NINGUNA
+    #    fila; una que murió a medias (reintentos de API agotados) deja una fila enana.
+    #    En ambos casos ESTADO.md se queda viejo y nadie lo nota hasta a ojo.
+    import datetime as _dt
+    import re as _re
+
+    def _dia_corrida(fila):
+        # El día REAL va en la etiqueta ("auto-agente 20260705-183943"); "fecha" es
+        # cuándo se recolectó el costo (a veces el día siguiente).
+        m = _re.search(r"(20\d{6})-\d{6}", fila.get("etiqueta", "") or "")
+        if m:
+            s = m.group(1)
+            try:
+                return _dt.date(int(s[:4]), int(s[4:6]), int(s[6:8]))
+            except ValueError:
+                pass
+        try:
+            return _dt.date.fromisoformat(fila.get("fecha", "") or "")
+        except ValueError:
+            return None
+
+    dias = [d for d in (_dia_corrida(f) for f in filas) if d]
+    if len(dias) >= 2 and (dias[-1] - dias[-2]).days > 1:
+        perdidos = (dias[-1] - dias[-2]).days - 1
+        hallazgos.append({
+            "id": "costo-hueco", "archivo": ".pipeline/costos.jsonl", "linea": 0,
+            "severidad": "alta" if perdidos >= 2 else "media", "categoria": "costo",
+            "descripcion": "HUECO de corridas: entre %s y %s NO hubo corrida diaria (%d día(s) sin fila en costos.jsonl). La diaria se saltó en silencio (Mac apagada / launchd sin disparar / catch-up ciego)." % (
+                dias[-2], dias[-1], perdidos),
+            "fix_sugerido": "Revisar ~/Library/Logs/mantener-sitio/ y catchup.log de esos días; confirmar que el LaunchAgent y el catch-up están cargados (launchctl list | grep plomero).",
+        })
+    if len(filas) > MIN_HIST:
+        u = filas[-1]
+        cur = u.get("output_tokens", 0) or 0
+        med = _mediana([f.get("output_tokens", 0) or 0 for f in filas[:-1]])
+        if med > 0 and 0 < cur < 0.25 * med:
+            hallazgos.append({
+                "id": "costo-enana", "archivo": ".pipeline/costos.jsonl", "linea": 0,
+                "severidad": "media", "categoria": "costo",
+                "descripcion": "CORRIDA ENANA: la última (%s) generó output=%s, %.0f%% de la mediana (%s) — firma de corrida que MURIÓ A MEDIAS (reintentos de API agotados), no de día tranquilo." % (
+                    u.get("etiqueta", "?"), f"{cur:,}", 100.0 * cur / med, f"{int(med):,}"),
+                "fix_sugerido": "Revisar el log auto-agente-*.log de esa corrida y su rama auto/diario-*: puede haber trabajo a medio commitear que la corrida de hoy debe ADOPTAR o descartar (patrón ya usado el 2026-07-02).",
+            })
+```
+
+## [PENDIENTE] infra — Reintentos del driver con deadline de RELOJ DE PARED (el `sleep` se pausa cuando la Mac duerme)   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** El backoff del loop de reintentos de `crecer-diario.sh` usa `sleep 120/240`, pero `sleep` se PAUSA cuando la Mac se duerme: un "reintento en 240s" puede ejecutarse horas después, en la madrugada o al día siguiente — compitiendo por cuota y solapándose con el meta-pase o con la corrida diaria siguiente. Un intento que despierta 15 horas tarde ya no es "la corrida de hoy" y no debería correr.
+**Evidencia:** `auto-agente-20260705-183943.log`: intento 2 @ 19:31, "reintento en 240s" → intento 3 @ **03:06:13** (7h35m después). El gemelo electricista (mismo driver): intento 1 @ 20:14 del 07-05, "reintento en 120s" → intento 2 @ **11:13:49 del 07-06** (15 h después), corriendo HOY en paralelo con los dos meta-pases de las 11:12.
+**Propuesta:** Deadline de reloj de pared: si al despertar del `sleep` ya pasaron >3h desde `RUN_START`, abandonar los reintentos (el propio driver ya promete "el catch-up o la corrida de mañana lo recuperan" en su email de fallo — esto lo hace verdad). Espejo recomendado en el driver del Electricista.
+**DRAFT (listo para merge — 2 toques a `.pipeline/crecer-diario.sh`):**
+```bash
+# ── Toque 1: justo DESPUÉS de la línea  RUN_START=$(date +%s)   (línea ~50) ──
+# Deadline de RELOJ DE PARED para los reintentos: `sleep` se pausa si la Mac duerme
+# (2026-07-05: "reintento en 240s" ejecutado 7h35m después, a las 03:06; el gemelo
+# electricista: "120s" → 15h después, solapado con el meta-pase del día siguiente).
+RETRY_DEADLINE=$((RUN_START + 3*3600))
+
+# ── Toque 2: en el loop de reintentos, REEMPLAZAR este bloque: ────────────────
+  if [ "$attempt" -lt "$MAX_ATTEMPTS" ]; then
+    WAIT=$((attempt * 120))   # backoff: 120s, luego 240s
+    echo "[$STAMP] Error $FAIL_KIND (NO de cuota); reintento en ${WAIT}s." >> "$LOG"
+    sleep "$WAIT"
+  else
+# ── por este (solo se AÑADE el if tras el sleep): ─────────────────────────────
+  if [ "$attempt" -lt "$MAX_ATTEMPTS" ]; then
+    WAIT=$((attempt * 120))   # backoff: 120s, luego 240s
+    echo "[$STAMP] Error $FAIL_KIND (NO de cuota); reintento en ${WAIT}s." >> "$LOG"
+    sleep "$WAIT"
+    if [ "$(date +%s)" -gt "$RETRY_DEADLINE" ]; then
+      echo "[$STAMP] Desperté FUERA de la ventana de la corrida (>3h desde el inicio: la Mac durmió durante el sleep). Abandono los reintentos; el catch-up o la corrida de mañana lo recuperan." >> "$LOG"
+      break
+    fi
+  else
+```
+
+## [PENDIENTE] proceso — Mostrar la EDAD de las tareas `requiere_humano` en el brief (2 llevan 14 y 17 días esperando)   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** `recolecta-señales.py` imprime "⏳ esperando decisión humana: 2" pero NO cuánto llevan esperando. Una tarea humana de 2 días y una de 17 se ven igual, así que ni el meta-pase ni el parte diario escalan las que se pudren — y una de ellas mantiene un SENSOR ciego mientras espera.
+**Evidencia:** `data/BACKLOG.jsonl`: bk-218a5844 (doorway domicilio/cerca-de-mi, Jaccard 0.85) creada 2026-06-19 → **17 días**; bk-12b83ae9 (re-auth token GSC del CLI) creada 2026-06-22 → **14 días**, y mientras tanto `check-infra.mjs` sigue dando ALTA de "GSC ciego" en cada corrida. El bloque actual (sec_backlog, líneas 86-89) solo lista los objetivos.
+**Propuesta:** Que el brief imprima la edad en días de cada tarea `requiere_humano` y marque ⚠️ las >7 días, para que el parte al dueño las repita hasta que decida.
+**DRAFT (listo para merge — en `.pipeline/recolecta-señales.py`, sec_backlog(), REEMPLAZAR el bloque `hum` de las líneas 86-89):**
+```python
+    hum = [t for t in b if t.get("estado") == "requiere_humano"]
+    if hum:
+        hoy = date.today()
+        print("  ⏳ esperando decisión humana: %d" % len(hum))
+        for t in hum:
+            edad = ""
+            try:
+                dias = (hoy - date.fromisoformat((t.get("creado") or "")[:10])).days
+                edad = " — lleva %d días%s" % (
+                    dias, "  ⚠️ ATASCADA >7d → repetirla en el parte al dueño" if dias > 7 else "")
+            except ValueError:
+                pass
+            print("    %s [%s] %s%s" % (t.get("id"), t.get("tipo"), t.get("objetivo", "?"), edad))
+```
+
 ## [HECHO 2026-07-03] infra — Cerrar la forma B (open/`_jsonl` literal) de la clase "rutas rotas"   (impacto A · esfuerzo S · riesgo bajo)
 > ✅ Mergeada: `.pipeline/check-rutas-pipeline.py` reemplazado con el detector de forma B. Verificado: 51 archivos analizados, 0 rutas rotas; check-infra.mjs lo acepta (0 hallazgos, sin ALTA falsa).
 **Problema:** La clase de regresión "rutas post-reorganización" ya reincidió DOS veces seguidas (infra-006 el 06-30, infra-007 el 07-02). El checker `check-rutas-pipeline.py` que se mecanizó en infra-007 **solo caza la forma `os.path.join(ROOT, "lit.ext")`** (forma A). Pero infra-006 —el que dejó el backlog reportando "0 tareas" durante días sin que nadie lo notara— fue la **forma B**: un literal relativo pasado directo a un helper (`_jsonl("BACKLOG.jsonl")`, SIN `ROOT`). Esa forma B sigue sin red: si mañana otro `open("data/algo.jsonl")` apunta a una ruta movida, nadie lo caza hasta que un síntoma aparece a ojo.
