@@ -11,9 +11,10 @@
 //
 // Uso:  node registrar-costo.mjs <dir-transcripts> <epoch-inicio> <ledger.jsonl> [etiqueta]
 //
-// Atribución por VENTANA DE TIEMPO: cuenta los .jsonl del proyecto con mtime >= inicio de la
-// corrida. Caveat: si hubo una sesión interactiva en el MISMO proyecto durante la corrida,
-// sus tokens se sumarían (sobre-estima). Para una corrida desatendida normal no ocurre.
+// Atribución por VENTANA DE TIEMPO en dos niveles: (1) archivos con mtime >= inicio (filtro
+// grueso) y (2) DENTRO de cada archivo, solo las líneas cuyo timestamp cae en la ventana.
+// Antes se sumaba el archivo ENTERO: una sesión interactiva vieja retomada durante la corrida
+// contabilizaba todo su pasado al auto-agente (ledger inflado + falso positivo runaway).
 
 import { readdirSync, statSync, readFileSync, appendFileSync } from 'fs';
 import { join } from 'path';
@@ -53,6 +54,12 @@ for (const f of walk(DIR)) {
     if (!ln.includes('"usage"')) continue;
     let o;
     try { o = JSON.parse(ln); } catch { continue; }
+    // Solo mensajes DE ESTA corrida: si la línea trae timestamp y es anterior al
+    // inicio, es historia de otra sesión dentro del mismo archivo — no se cuenta.
+    if (o?.timestamp) {
+      const t = Date.parse(o.timestamp);
+      if (!Number.isNaN(t) && t < startMs) continue;
+    }
     const u = o?.message?.usage || o?.usage;
     if (!u) continue;
     inTok += u.input_tokens || 0;
@@ -65,7 +72,9 @@ for (const f of walk(DIR)) {
 
 const usd = inTok / 1e6 * P_IN + outTok / 1e6 * P_OUT + cw / 1e6 * P_CW + cr / 1e6 * P_CR;
 const rec = {
-  fecha: new Date(startMs || Date.now()).toISOString().slice(0, 10),
+  // Fecha LOCAL (Mazatlán), no UTC: toISOString fechaba las corridas de las 18:25
+  // en el día siguiente (UTC-7) y todo análisis por día quedaba corrido.
+  fecha: new Date(startMs || Date.now()).toLocaleDateString('sv-SE', { timeZone: 'America/Mazatlan' }),
   inicio_epoch: Number(startStr),
   etiqueta: LABEL,
   transcripts: files,

@@ -97,8 +97,15 @@ def main():
     h = h[:ss] + seccion(z["nombre"], z["p1"], z["p2"], z["p3"], z["problemas"], z["servicios"]) + h[ss:]
     # 4) breadcrumb item 3 con URL propia (si aún no la tiene). Reemplazo con FUNCIÓN
     #    para insertar el slug LITERAL (un '\1'/'\g<>' en el slug no se interpreta).
-    h = re.sub(r'(\{"@type": "ListItem", "position": 3, "name": "[^"]*")\}',
-               lambda m: m.group(1) + ', "item": "%s%s/"}' % (BASEURL, slug), h, count=1)
+    #    Regex con \s* entre tokens y VERIFICACIÓN de match: con JSON-LD compacto (sin
+    #    espacios) el patrón rígido no calzaba y el script reportaba éxito sin tocar el
+    #    breadcrumb (no-op silencioso, clase documentada en REGLAS.md 2026-06-12).
+    bc_re = re.compile(r'(\{\s*"@type":\s*"ListItem",\s*"position":\s*3,\s*"name":\s*"[^"]*")\s*\}')
+    if '"position": 3' in h or '"position":3' in h:
+        h2 = bc_re.sub(lambda m: m.group(1) + ', "item": "%s%s/"}' % (BASEURL, slug), h, count=1)
+        if h2 == h and ('"item"' not in h.split('"position"')[-1][:200]):
+            sys.exit("❌ breadcrumb item 3 existe pero el patrón no calzó (¿JSON-LD con formato inesperado?) — reviso a mano, no publico a medias")
+        h = h2
 
     open(f, "w", encoding="utf-8").write(h)
     print("✅ %s diferenciada e indexable (meta única + sección + breadcrumb)" % slug)

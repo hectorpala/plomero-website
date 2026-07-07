@@ -15,7 +15,8 @@ Uso:
   python3 .pipeline/auto-fixers.py run --apply               # aplica y escribe
   python3 .pipeline/auto-fixers.py run --solo og-url [paths] # un fixer / rutas concretas
 
-Salida: qué arregló (o arreglaría) por página. Exit 0 siempre.
+Salida: qué arregló (o arreglaría) por página. Exit 0 salvo bump de cache-busting
+incompleto (exit 1: estado inconsistente que NO debe publicarse).
 """
 import datetime
 import glob
@@ -97,16 +98,29 @@ _COLOR_ACCENT = ("#0066cc", "#0284c7", "#0369a1", "#667eea", "#764ba2", "#004499
                  "#059669", "#166534", "#16a34a", "#28a745", "#10b981")  # texto/acento → marca oscura
 _COLOR_OFFBRAND = _COLOR_LIGHT_BG + _COLOR_ACCENT
 
+def _sin_svg(h):
+    """Quita los bloques <svg>…</svg> (para detectar sin tocar arte vectorial)."""
+    return re.sub(r"<svg\b.*?</svg>", " ", h, flags=re.S | re.I)
+
 def _det_color(h):
-    low = h.lower()
+    low = _sin_svg(h).lower()
     return any(c in low for c in _COLOR_OFFBRAND)
 
 def _fix_color(h):
+    # PROTEGER los <svg>: el reemplazo global ciego podía repintar un fill legítimo
+    # dentro de arte vectorial (p.ej. #1a73e8 en un ícono de Google) — se apartan los
+    # bloques svg, se sanan los colores del resto, y se restauran intactos.
     n = 0
+    svgs = []
+    def _stash(m):
+        svgs.append(m.group(0))
+        return "\x00SVG%d\x00" % (len(svgs) - 1)
+    h = re.sub(r"<svg\b.*?</svg>", _stash, h, flags=re.S | re.I)
     for c in _COLOR_LIGHT_BG:
         h, k = re.subn(re.escape(c), "#FFF7ED", h, flags=re.I); n += k
     for c in _COLOR_ACCENT:
         h, k = re.subn(re.escape(c), "#C2410C", h, flags=re.I); n += k
+    h = re.sub(r"\x00SVG(\d+)\x00", lambda m: svgs[int(m.group(1))], h)
     return h, n
 
 
@@ -127,9 +141,11 @@ FIXERS = [
 
 
 # ──────────────────── ASSET FIXERS (CSS/JS COMPARTIDO, no por página) ────────────────────
-# Operan UNA vez sobre los assets compartidos (los 3 CSS) en vez de por página HTML. Cuando
-# tocan CSS, bumpean sw.js (CACHE_NAME) — ese bump de 1 archivo ES el cache-busting del sitio
-# (NO hace falta versionar ?v= en las ~100 páginas). Riesgo mecánico → auto, sin límite.
+# Operan UNA vez sobre los assets compartidos (los 3 CSS). Cuando tocan CSS, el flujo completo
+# de cache-busting es OBLIGATORIO: bump del token ?v= en TODAS las páginas (el CSS se sirve
+# `immutable` 1 año — sin cambiar la URL, los visitantes que regresan no re-piden el CSS) +
+# bump de CACHE_NAME en sw.js (para los clientes con service worker). Ver REGLAS.md (CACHÉ).
+# Riesgo mecánico → auto, sin límite.
 CSS_FILES = ["styles.css", "styles.min.css", "styles.7f293647.css"]
 SW_FILE = "sw.js"
 
@@ -154,11 +170,13 @@ def _bump_sw():
 
 
 def _bump_css_version_html(version):
-    """Sube el token `styles*.css?v=AAAAMMDD` a `version` en TODAS las páginas HTML.
+    """Sube el token `styles*.css?v=…` a `version` en TODAS las páginas HTML.
     Esto es OBLIGATORIO al cambiar un CSS: se sirve con `immutable` (max-age 1 año), así que
     un visitante que regresa solo re-pide el CSS si CAMBIA la URL (el ?v=). Reemplazo literal
-    del token de fecha → seguro (no toca estructura). Devuelve nº de páginas tocadas."""
-    n_files = 0
+    del token → seguro (no toca estructura). Devuelve (páginas tocadas, fallos de escritura).
+    El patrón acepta 8-12 dígitos: dos cambios de CSS el mismo día necesitan token con hora
+    (AAAAMMDDHHMM), si no el segundo bump repetiría la URL y no rompería el cache."""
+    n_files, fallos = 0, 0
     htmls = sorted(set(glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True)))
     for p in htmls:
         if "/node_modules/" in p or "/.git/" in p:
@@ -167,11 +185,63 @@ def _bump_css_version_html(version):
             s = open(p, encoding="utf-8").read()
         except Exception:
             continue
-        s2, k = re.subn(r'(styles[\w.]*\.css\?v=)\d{8}', r'\g<1>' + version, s)
-        if k:
-            open(p, "w", encoding="utf-8").write(s2)
-            n_files += 1
-    return n_files
+        s2, k = re.subn(r'(styles[\w.]*\.css\?v=)\d{8,12}', r'\g<1>' + version, s)
+        if k and s2 != s:
+            try:
+                open(p, "w", encoding="utf-8").write(s2)
+                n_files += 1
+            except Exception:
+                # Antes un fallo de ESCRITURA abortaba el barrido a medias sin aviso:
+                # unas páginas bumpeadas y otras no.
+                fallos += 1
+    return n_files, fallos
+
+
+# Estado del cache-busting: hash del contenido de los 3 CSS registrado DESPUÉS del último
+# bump exitoso. Si al arrancar el hash actual difiere del registrado, un cambio de CSS quedó
+# SIN bump (p.ej. el fixer murió entre escribir el CSS y bumpear) → se repara aquí mismo.
+BUMP_STATE = os.path.join(ROOT, ".pipeline", "css-bump-state.json")
+
+def _css_hash():
+    import hashlib
+    hh = hashlib.sha256()
+    for css_name in CSS_FILES:
+        try:
+            hh.update(open(os.path.join(ROOT, css_name), "rb").read())
+        except Exception:
+            hh.update(b"(ausente)")
+    return hh.hexdigest()
+
+def _token_version():
+    """Token ?v= nuevo: fecha (AAAAMMDD); si las páginas YA traen el de hoy, fecha+hora
+    (AAAAMMDDHHMM) para que el segundo cambio del día también rompa el cache."""
+    hoy = datetime.date.today().strftime("%Y%m%d")
+    try:
+        home = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+        if re.search(r'styles[\w.]*\.css\?v=' + hoy + r'(?!\d)', home):
+            return datetime.datetime.now().strftime("%Y%m%d%H%M")
+    except Exception:
+        pass
+    return hoy
+
+def _do_full_bump(motivo):
+    """Bump completo (?v= en páginas + sw.js) y registro del estado. Devuelve True si OK."""
+    version = _token_version()
+    np, nf = _bump_css_version_html(version)
+    print("  ✅ ?v=%s bumpeado en %d página(s)%s [%s]" % (
+        version, np, (" · ⚠️ %d fallo(s) de escritura" % nf) if nf else "", motivo))
+    nb = _bump_sw()
+    print("  ✅ %s → CACHE_NAME +1" % SW_FILE if nb else "  ⚠️  no pude bumpear %s" % SW_FILE)
+    ok = (nf == 0 and nb > 0)
+    if ok:
+        import json as _json
+        try:
+            open(BUMP_STATE, "w", encoding="utf-8").write(
+                _json.dumps({"css_sha256": _css_hash(), "token": version,
+                             "fecha": datetime.datetime.now().isoformat(timespec="seconds")}) + "\n")
+        except Exception:
+            print("  ⚠️  no pude escribir %s (el auto-reparo del próximo run re-bumpeará)" % BUMP_STATE)
+    return ok
 
 
 def _fix_tap_target(css):
@@ -207,10 +277,30 @@ ASSET_FIXERS = [
 
 
 def cmd_run_assets(apply, solo=None):
-    """Corre los ASSET_FIXERS sobre los 3 CSS; si alguno toca CSS y se aplica, bumpea sw.js."""
+    """Corre los ASSET_FIXERS sobre los 3 CSS; si alguno toca CSS y se aplica, corre el bump
+    completo. AUTO-REPARO previo: si el hash actual de los CSS difiere del registrado tras el
+    último bump (fixer muerto a medias en una corrida anterior), se re-bumpea aunque hoy no
+    haya nada que arreglar — sin esto, un CSS cambiado sin bump quedaba invisible PARA SIEMPRE
+    (URL immutable cacheada 1 año y ningún checker lo vigila). Devuelve (total, bump_fallido)."""
     fixers = [f for f in ASSET_FIXERS if (solo is None or f[0] == solo)]
     if not fixers:
-        return 0
+        return 0, False
+    bump_fallido = False
+
+    # Auto-reparo del estado de bump (solo con --apply; el dry-run solo avisa).
+    import json as _json
+    try:
+        estado = _json.loads(open(BUMP_STATE, encoding="utf-8").read())
+    except Exception:
+        estado = None
+    if estado and estado.get("css_sha256") and estado["css_sha256"] != _css_hash():
+        if apply:
+            print("ASSET fixers: ⚠️ los CSS cambiaron SIN bump registrado (corrida anterior muerta a medias) → re-bump:")
+            if not _do_full_bump("auto-reparo"):
+                bump_fallido = True
+        else:
+            print("ASSET fixers: ⚠️ los CSS difieren del último bump registrado — con --apply se auto-repara (re-bump).")
+
     total, css_tocado, lineas = 0, False, []
     for fid, _, _, fix in fixers:
         for css_name in CSS_FILES:
@@ -232,14 +322,20 @@ def cmd_run_assets(apply, solo=None):
         for ln in lineas:
             print(ln)
         if css_tocado and apply:
-            hoy = datetime.date.today().strftime("%Y%m%d")
-            np = _bump_css_version_html(hoy)
-            print("  ✅ ?v=%s bumpeado en %d página(s) (rompe el cache immutable del CSS)" % (hoy, np))
-            nb = _bump_sw()
-            print("  ✅ %s → CACHE_NAME +1" % SW_FILE if nb else "  ⚠️  no pude bumpear %s" % SW_FILE)
+            if not _do_full_bump("fix aplicado"):
+                bump_fallido = True
         elif css_tocado:
             print("  (con --apply: bumpea ?v= en las páginas + sw.js — necesario por el cache immutable)")
-    return total
+    elif apply and estado is None:
+        # Primer run con el estado nuevo: registrar la línea base sin bumpear nada.
+        try:
+            open(BUMP_STATE, "w", encoding="utf-8").write(
+                _json.dumps({"css_sha256": _css_hash(), "token": "(baseline)",
+                             "fecha": datetime.datetime.now().isoformat(timespec="seconds")}) + "\n")
+            print("ASSET fixers: línea base de bump registrada (%s)." % os.path.relpath(BUMP_STATE, ROOT))
+        except Exception:
+            pass
+    return total, bump_fallido
 
 
 def paginas_default():
@@ -311,7 +407,12 @@ def cmd_run(args):
 
     # ASSET fixers (CSS compartido): en barrido completo, o si --solo nombra uno de asset.
     if full_run or (solo in asset_ids):
-        cmd_run_assets(apply, solo=solo if solo in asset_ids else None)
+        _, bump_fallido = cmd_run_assets(apply, solo=solo if solo in asset_ids else None)
+        if bump_fallido:
+            # Exit ≠ 0: un CSS cambiado sin bump completo es un estado inconsistente que
+            # el orquestador DEBE ver (antes solo se imprimía un ⚠️ y exit 0).
+            print("❌ bump de cache-busting INCOMPLETO — revisar antes de publicar.")
+            sys.exit(1)
 
 
 def main():

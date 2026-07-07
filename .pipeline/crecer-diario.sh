@@ -17,7 +17,10 @@ LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
 STAMP=$(date +%Y%m%d-%H%M%S)
 RUTA_CLAUDE="/Users/openclaw/.npm-global/bin/claude"
-LOG="$LOG_DIR/auto-agente-$STAMP.log"
+# Log NAMESPACEADO por proyecto: el Electricista escribe en el MISMO LOG_DIR con el
+# mismo prefijo "auto-agente-*"; catchup.sh y check-infra.mjs miran "el log más nuevo"
+# y veían el del otro sitio → el plomero muerto pasaba por vivo (auditoría 2026-07-07).
+LOG="$LOG_DIR/auto-agente-plomero-$STAMP.log"
 
 # Lock por-REPO COMPARTIDO con mantener-diario.sh (mismo nombre) para que NUNCA corran
 # dos pipelines a la vez sobre el mismo repo. Resistente a cuelgues: si el dueño del lock
@@ -29,12 +32,32 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
     echo "[$STAMP] Ya hay una corrida activa (pid $OLDPID); saliendo." >> "$LOG"
     exit 0
   fi
-  echo "[$STAMP] Lock huérfano (pid '$OLDPID' ya no vive) -> lo robo y continúo." >> "$LOG"
-  rm -rf "$LOCK_DIR"
+  # Lock sin pid: puede ser un lock RECIÉN creado (ventana mkdir→echo-pid de otro proceso).
+  # Solo se considera huérfano si además tiene >2 min de edad.
+  if [ -z "$OLDPID" ]; then
+    LOCK_AGE=$(( $(date +%s) - $(stat -f %m "$LOCK_DIR" 2>/dev/null || echo 0) ))
+    if [ "$LOCK_AGE" -lt 120 ]; then
+      echo "[$STAMP] Lock sin pid pero recién creado (${LOCK_AGE}s); asumo corrida arrancando y salgo." >> "$LOG"
+      exit 0
+    fi
+  fi
+  # Robo ATÓMICO: el mv solo se lo lleva UN proceso; el perdedor sale en vez de
+  # borrar el lock que el ganador acaba de crear (carrera de doble robo).
+  if mv "$LOCK_DIR" "$LOCK_DIR.stale.$$" 2>/dev/null; then
+    echo "[$STAMP] Lock huérfano (pid '$OLDPID' ya no vive) -> lo robo y continúo." >> "$LOG"
+    rm -rf "$LOCK_DIR.stale.$$"
+  else
+    echo "[$STAMP] Otro proceso robó el lock primero; saliendo." >> "$LOG"
+    exit 0
+  fi
   mkdir "$LOCK_DIR" 2>/dev/null || { echo "[$STAMP] No pude tomar el lock; saliendo." >> "$LOG"; exit 0; }
 fi
 echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
+
+# Server local :8080 huérfano de una corrida anterior muerta a medias (SIGKILL real
+# visto en auto-agente-launchd.err.log) chocaría con la FASE 1 → limpieza defensiva.
+pkill -f "http.server 8080" 2>/dev/null || true
 
 # Guard "ya corrió hoy": si una corrida YA terminó OK hoy (marca datada), no repetir — evita el
 # doble cuando un disparo MANUAL coincide con el job programado de las 18:25. Una corrida FALLIDA
@@ -57,6 +80,9 @@ RUN_START=$(date +%s)   # para atribuir el costo (tokens) de los transcripts de 
 # estadística "📊 Uso de la corrida (cuota de suscripción)" —que se anexa DESPUÉS— nunca cuenta como motivo.
 TRANSIENT_RE='Connection closed mid-response|API Error|Connection error|overloaded|ECONNRESET|ETIMEDOUT|EHOSTUNREACH|ENETUNREACH|fetch failed|socket hang up|terminated|Internal server error|HTTP 5[0-9][0-9]|\b5(00|02|03|29)\b|may be incomplete'
 LIMIT_RE='session limit|usage limit|hit your (usage|limit)|rate limit|límite de uso|quota exceeded|resets? at|your limit will reset'
+# PERMANENTE = error de configuración/acceso que NO se cura reintentando (caso 2026-07-06:
+# "Your organization has disabled Claude subscription access" → 3 reintentos inútiles, ~45 min).
+PERM_RE='disabled|invalid.*api.*key|unauthorized|forbidden|revoked|suspended|billing'
 
 # Espera a que la API de Claude vuelva antes de cada intento. NordVPN (kill switch)
 # bloquea la salida al reconectar; sin esto, el intento se quema de inmediato (caso 06-25:
@@ -82,13 +108,37 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   # Orquestador en SONNET (~5x más barato; el gasto es 67% releer contexto). Los agentes
   # de juicio crítico (revisor-contenido/critico-completitud/decisor-negocio/fixer-autonomo)
   # declaran model:opus en su frontmatter -> NO se degradan. Ver MODELO-ROUTING.md.
-  if "$RUTA_CLAUDE" --model sonnet --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1; then
+  # TIMEOUT DURO: el prompt ordena MINUTOS_MAX=35 pero nada lo imponía — 3 corridas
+  # desbocadas históricas de 600-654M tokens (~$1,300-1,420 equiv-API c/u). 90 min de
+  # tope da holgura para días pesados y corta lo desbocado el MISMO día, no al siguiente.
+  TIMEOUT_MIN=90
+  "$RUTA_CLAUDE" --model sonnet --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1 &
+  CPID=$!
+  ( sleep $((TIMEOUT_MIN * 60))
+    if kill -0 "$CPID" 2>/dev/null; then
+      echo "[$STAMP] TIMEOUT ${TIMEOUT_MIN}min: matando corrida desbocada (pid $CPID)." >> "$LOG"
+      kill "$CPID" 2>/dev/null; sleep 10; kill -9 "$CPID" 2>/dev/null
+    fi ) &
+  WPID=$!
+  if wait "$CPID"; then
+    kill "$WPID" 2>/dev/null || true
     CLAUDE_OK=1; FAIL_KIND=""; break
   fi
+  kill "$WPID" 2>/dev/null || true
   TAIL=$(tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null || echo "")
+  if printf '%s' "$TAIL" | grep -q "TIMEOUT ${TIMEOUT_MIN}min"; then
+    FAIL_KIND="timeout"
+    echo "[$STAMP] Corrida cortada por timeout; NO se reintenta (volvería a desbocarse)." >> "$LOG"
+    break
+  fi
   if printf '%s' "$TAIL" | grep -qiE "$LIMIT_RE"; then
     FAIL_KIND="limite"
     echo "[$STAMP] Falla por LÍMITE DE USO real del plan; no tiene caso reintentar." >> "$LOG"
+    break
+  fi
+  if printf '%s' "$TAIL" | grep -qiE "$PERM_RE"; then
+    FAIL_KIND="permanente"
+    echo "[$STAMP] Error PERMANENTE de configuración/acceso; no tiene caso reintentar." >> "$LOG"
     break
   fi
   if printf '%s' "$TAIL" | grep -qiE "$TRANSIENT_RE"; then
@@ -145,7 +195,10 @@ else
   FAILNOTE="$LOG_DIR/fail-$STAMP.md"
   # Motivo HONESTO según el tipo de falla (no asumir cuota). La línea de evidencia se saca del
   # log EXCLUYENDO la estadística "📊 Uso ... (cuota de suscripción)" para no volver a confundirla con un error.
-  ERRLINE=$(grep -iE "$TRANSIENT_RE|$LIMIT_RE" "$LOG" 2>/dev/null | grep -viE '📊 Uso|cuota de suscripción|equiv-API' | head -1 | sed 's/^[[:space:]]*//')
+  # El "|| true" es VITAL: con set -eo pipefail, un grep sin match (exit 1) mataba el
+  # script AQUÍ y el aviso de falla nunca se enviaba — exactamente en el caso
+  # "desconocido", donde más importa avisar (así murió en silencio el 2026-07-06).
+  ERRLINE=$(grep -iE "$TRANSIENT_RE|$LIMIT_RE|$PERM_RE" "$LOG" 2>/dev/null | grep -viE '📊 Uso|cuota de suscripción|equiv-API' | head -1 | sed 's/^[[:space:]]*//' || true)
   [ -n "$ERRLINE" ] || ERRLINE="(sin línea de error reconocible; revisa el log completo)"
   case "$FAIL_KIND" in
     transitorio)
@@ -154,6 +207,12 @@ else
     limite)
       MOTIVO="se alcanzó el límite de uso del plan"
       SUGERENCIA="Reintenta cuando se restablezca la cuota." ;;
+    permanente)
+      MOTIVO="error PERMANENTE de configuración/acceso (p.ej. suscripción deshabilitada o credencial inválida) — reintentar no ayuda"
+      SUGERENCIA="Revisa la suscripción/credenciales de Claude; el agente no puede resolver esto solo." ;;
+    timeout)
+      MOTIVO="la corrida excedió el tope duro de tiempo y fue cortada (posible corrida desbocada)"
+      SUGERENCIA="Revisa el log para ver en qué fase se atoró: $LOG" ;;
     *)
       MOTIVO="error no reconocido de la corrida"
       SUGERENCIA="Revisa el log: $LOG" ;;
@@ -167,4 +226,10 @@ fi
 
 # Marca que YA corrió hoy SOLO si la corrida tuvo éxito. Si falló, NO se marca → el
 # catch-up sí podrá recuperarla hoy (si se marcara siempre, una corrida fallida quedaría sin recuperar).
-[ "${CLAUDE_OK:-0}" = 1 ] && date +%Y%m%d > "$LOG_DIR/auto-agente-plomero-last-run-day"
+if [ "${CLAUDE_OK:-0}" = 1 ]; then
+  date +%Y%m%d > "$LOG_DIR/auto-agente-plomero-last-run-day"
+fi
+# Exit 0 explícito: antes el script salía con 1 en toda corrida fallida (el && de arriba
+# como última línea) y launchctl mostraba status 1 sin distinguir "driver roto" de
+# "corrida fallida ya notificada por email".
+exit 0

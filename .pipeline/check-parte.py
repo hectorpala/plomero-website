@@ -144,8 +144,10 @@ def main():
             for u in urls:
                 p = u.strip("/")
                 esperado = (p + "/index.html") if p else "index.html"
-                # ¿algún archivo cambiado corresponde a esta página?
-                if not any(c == esperado or c.startswith(p + "/") for c in cambiados):
+                # ¿algún archivo cambiado corresponde a esta página? `c == p` acepta también
+                # URLs de ARCHIVO exacto (p.ej. /sitemap.xml citado en el parte): antes se
+                # asumía que toda URL era página y un asset legítimo daba falso "inventado".
+                if not any(c == esperado or c == p or c.startswith(p + "/") for c in cambiados):
                     errores.append("el parte dice haber tocado %s%s, pero esa página NO está en el "
                                    "diff de la corrida (%s...HEAD)." % (DOMINIO, u, diff_base))
 

@@ -14,6 +14,16 @@ STAMP=$(date +%Y%m%d-%H%M%S)
 RUTA_CLAUDE="/Users/openclaw/.npm-global/bin/claude"
 LOG="$LOG_DIR/meta-$STAMP.log"
 
+# Cortesía con la corrida diaria: si el pipeline principal está corriendo (lock con pid
+# vivo), NO correr en paralelo — dos agentes en el mismo repo pueden pisarse (el meta
+# escribe PROPUESTAS.md/ultima-meta.md a mitad de un commit/checkout del diario).
+MAIN_LOCK="/tmp/plomero-mantener-sitio.lock"
+MAIN_PID=$(cat "$MAIN_LOCK/pid" 2>/dev/null || echo "")
+if [ -n "$MAIN_PID" ] && kill -0 "$MAIN_PID" 2>/dev/null; then
+  echo "[$STAMP] corrida diaria activa (pid $MAIN_PID); pospongo el meta-pase." >> "$LOG"
+  exit 0
+fi
+
 # Lock propio (NO comparte con la corrida diaria: el meta-pase solo lee + escribe PROPUESTAS.md).
 LOCK_DIR="/tmp/plomero-meta.lock"
 if ! mkdir "$LOCK_DIR" 2>/dev/null; then

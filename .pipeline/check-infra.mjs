@@ -75,7 +75,11 @@ function out() { process.stdout.write(JSON.stringify({ hallazgos }, null, 2) + "
 function checkCron() {
   let entries = [];
   try {
-    entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run|auto-agente)-.*\.log$/.test(f));
+    // SOLO logs del PLOMERO: el patrón amplio /^(run|auto-agente)-/ matcheaba también
+    // los logs del ELECTRICISTA (mismo LOG_DIR y prefijo) → dead-man's switch contaminado:
+    // con el plomero muerto y el electricista vivo, "cron fresco, OK" (visto 04→07-jul-2026).
+    // run-* eran los logs viejos solo-plomero; auto-agente-plomero-* es el namespace nuevo.
+    entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run-|auto-agente-plomero-).*\.log$/.test(f));
   } catch (_) {
     add("alta", LOG_DIR,
       `INFRA: no existe el directorio de logs del cron (${LOG_DIR}); el mantenimiento automático nunca corrió o el launchd no está cargado`,

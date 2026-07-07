@@ -19,17 +19,22 @@ if [ "$(cat "$LOG_DIR/auto-agente-plomero-last-run-day" 2>/dev/null || echo "")"
   exit 0
 fi
 
-# Busca el log más reciente de cualquiera de los dos drivers (auto-agente nuevo o run-* viejo).
-NEWEST=$(ls -t "$LOG_DIR"/auto-agente-2*.log "$LOG_DIR"/run-2*.log 2>/dev/null | head -1)
+# SOLO logs del PLOMERO (namespaceados): los globs viejos (auto-agente-2*.log/run-2*.log)
+# matcheaban también los del ELECTRICISTA (mismo LOG_DIR y prefijo) → con el plomero
+# muerto y el electricista vivo, el catch-up veía "log fresco, OK" y NO recuperaba
+# (así pasó del 04 al 07-jul-2026).
+NEWEST=$(ls -t "$LOG_DIR"/auto-agente-plomero-2*.log 2>/dev/null | head -1)
 if [ -n "$NEWEST" ]; then
   AGE_H=$(( ( $(date +%s) - $(stat -f %m "$NEWEST") ) / 3600 ))
 else
   AGE_H=999
 fi
 
-# La última corrida FALLÓ si su log trae el marcador de error de claude.
+# La última corrida FALLÓ si trae el marcador propio del DRIVER ("terminó con error").
+# Antes también grepeaba "API Error", que aparece en el STREAM de corridas exitosas
+# (reintentos internos relatados por claude) → falso FAILED → corrida extra en el boot.
 FAILED=0
-[ -n "$NEWEST" ] && grep -qiE "termin. con error|API Error" "$NEWEST" && FAILED=1
+[ -n "$NEWEST" ] && grep -qiE "termin. con error" "$NEWEST" && FAILED=1
 
 if [ "$AGE_H" -ge 20 ]; then
   echo "[$STAMP] catch-up plomero: última corrida hace ${AGE_H}h (>=20, ausente) -> RECUPERANDO" >> "$LOG_DIR/catchup.log"

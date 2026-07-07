@@ -76,6 +76,10 @@ def main():
             fail("fuga detectada en el resultado: %r (plantilla origen contaminada)" % bad)
 
     out_path = os.path.join(ROOT, spec["output"])
+    # El output DEBE quedar dentro del repo: un spec con "../" escribiría fuera
+    # (crecer.py valida el slug, pero gen-landing invocado directo no validaba nada).
+    if not os.path.realpath(out_path).startswith(os.path.realpath(ROOT) + os.sep):
+        fail("output fuera del repo: %r" % spec["output"])
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(s)

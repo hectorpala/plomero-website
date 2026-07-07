@@ -70,7 +70,11 @@ else
   RANGE_BASE="$BASE_REF"
   case "$BASE_REF" in *[!0]*) ;; *) RANGE_BASE="$NEW_REF^" ;; esac
   git rev-parse --verify "$RANGE_BASE" >/dev/null 2>&1 || RANGE_BASE="$NEW_REF^"
-  CHANGED=$(git diff --name-only "$RANGE_BASE...$NEW_REF" 2>/dev/null \
+  # Diffs con DOS argumentos (no "A...B": el merge-base ocultaba en un force-push las
+  # páginas del remoto descartadas por la reescritura) y --no-renames (un `git mv` salía
+  # como R, no como D → la URL vieja moría sin pasar por el candado de borrado; con
+  # --no-renames el rename se ve como D+A y ambas mitades pasan por su gate).
+  CHANGED=$(git diff --name-only --no-renames "$RANGE_BASE" "$NEW_REF" 2>/dev/null \
             | grep -E '^(servicios|blog)/.*/index\.html$' || true)
   if [ -n "$CHANGED" ]; then
     echo "🔍 Gate por página sobre lo que cambia en este push:"
@@ -87,7 +91,7 @@ else
 
   # 1c) Candado de PÁGINAS NUEVAS (solo añadidas, --diff-filter=A): sin precio VISIBLE
   #     ni testimonio inventado. Hace AUTOMÁTICO lo que el dueño pidió (modo desatendido).
-  ADDED=$(git diff --name-only --diff-filter=A "$RANGE_BASE...$NEW_REF" 2>/dev/null \
+  ADDED=$(git diff --name-only --no-renames --diff-filter=A "$RANGE_BASE" "$NEW_REF" 2>/dev/null \
             | grep -E '^(servicios|blog)/.*/index\.html$' || true)
   if [ -n "$ADDED" ]; then
     echo "🔍 Candado de páginas NUEVAS:"; echo "$ADDED" | sed 's/^/     + /'
@@ -101,7 +105,7 @@ else
   #     borre algo por error, aquí se ABORTA si un archivo eliminado en este push sigue
   #     referenciado por una página viva (enlace roto) o aparece en el sitemap (*.xml). Los
   #     artefactos huérfanos de verdad (cero referencias) pasan sin problema.
-  DELETED=$(git diff --name-only --diff-filter=D "$RANGE_BASE...$NEW_REF" 2>/dev/null || true)
+  DELETED=$(git diff --name-only --no-renames --diff-filter=D "$RANGE_BASE" "$NEW_REF" 2>/dev/null || true)
   if [ -n "$DELETED" ]; then
     PROBLEMA=""
     while IFS= read -r f; do

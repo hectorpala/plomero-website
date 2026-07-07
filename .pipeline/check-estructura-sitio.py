@@ -76,7 +76,9 @@ def main():
             add("media", rel,
                 "%s tiene class=\"hero\" pero le falta el wrapper div.hero-content del estándar (validate-landing/gate FALLAN al editarla)" % loc,
                 "Envolver h1+subtitle+CTA del hero en <div class=\"hero-content\">…</div> como el resto de servicios; verificar visual headless 375/1280")
-    print(json.dumps({"hallazgos": hallazgos}, ensure_ascii=False, indent=2))
+    # "analizadas" habilita la guardia genérica de check-infra (analizadas==0 → ALTA):
+    # con el sitemap ilegible este checker imprimía {"hallazgos":[]} y pasaba por sano.
+    print(json.dumps({"hallazgos": hallazgos, "analizadas": len(seen)}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
     main()

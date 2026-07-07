@@ -41,8 +41,12 @@ RULES=(
   "google-api-key|AIza[0-9A-Za-z_-]{20,}"
   "github-token|gh[opsu]_[A-Za-z0-9]{20,}"
   "private-key-block|-----BEGIN [A-Z ]*PRIVATE KEY-----[^A-Za-z0-9+/]{0,4}[A-Za-z0-9+/]{30,}"
-  "client-secret-value|client_secret[\"']?[[:space:]]*[:=][[:space:]]*[\"'][A-Za-z0-9_-]{12,}[\"']"
-  "refresh-token-value|refresh_token[\"']?[[:space:]]*[:=][[:space:]]*[\"'][A-Za-z0-9_/-]{12,}[\"']"
+  # Con y SIN comillas, y clave en cualquier case (el estilo .env `GOOGLE_CLIENT_SECRET=...`
+  # sin comillas y en MAYÚSCULAS no matcheaba nada → secreto real pasaba en verde).
+  "client-secret-value|[Cc][Ll][Ii][Ee][Nn][Tt]_[Ss][Ee][Cc][Rr][Ee][Tt][A-Z_]*[\"']?[[:space:]]*[:=][[:space:]]*[\"']?[A-Za-z0-9_-]{12,}"
+  "refresh-token-value|[Rr][Ee][Ff][Rr][Ee][Ss][Hh]_[Tt][Oo][Kk][Ee][Nn][A-Z_]*[\"']?[[:space:]]*[:=][[:space:]]*[\"']?[A-Za-z0-9_/-]{12,}"
+  # Formato ACTUAL de client secret de Google (el que está expuesto en R-01 usa este prefijo).
+  "google-client-secret-gocspx|GOCSPX-[A-Za-z0-9_-]{16,}"
 )
 
 # --- conjunto de archivos del working tree (versionables, sin ignorados ni el propio checker)
@@ -50,6 +54,13 @@ FILES_NUL="$(mktemp)"; trap 'rm -f "$TSV" "$FILES_NUL"' EXIT
 { git ls-files -z; git ls-files -z --others --exclude-standard; } 2>/dev/null \
   | LC_ALL=C sort -z -u > "$FILES_NUL"
 ANALIZADAS=$(tr -cd '\0' < "$FILES_NUL" | wc -c | tr -d ' ')
+# VERIFICACIÓN CIEGA: 0 archivos barridos = git falló (errores suprimidos arriba), no un
+# repo sin archivos. Sin esto el checker imprimía "sin secretos" con barrido vacío y
+# NINGÚN sensor lo validaba (está excluido del contrato por ser bash).
+if [ "${ANALIZADAS:-0}" -eq 0 ]; then
+  printf '{"hallazgos":[{"id":"sec-000","archivo":".pipeline/check-secretos.sh","linea":0,"severidad":"alta","categoria":"secretos","descripcion":"verificación ciega: git ls-files devolvió 0 archivos — el barrido de secretos NO corrió (git roto o fuera del repo)","fix_sugerido":"Correr desde la raíz del repo con git sano; mientras tanto los secretos NO se están vigilando"}],"analizadas":0}\n'
+  exit 2
+fi
 
 # --- BARRIDO 1: working tree
 for rule in "${RULES[@]}"; do
@@ -57,6 +68,11 @@ for rule in "${RULES[@]}"; do
   while IFS= read -r line; do
     f="${line%%:*}"; rest="${line#*:}"; ln="${rest%%:*}"
     [ "$f" = "$SELF" ] && continue
+    # Excluir REFERENCIAS a archivos de secreto (no son el secreto):
+    # p.ej. CLIENT_SECRET_FILE = "client_secret.json".
+    case "$line" in
+      *client_secret.json*|*CLIENT_SECRET_FILE*|*token.json*|*TOKEN_FILE*) continue ;;
+    esac
     printf 'tree\talta\t%s\t%s\t%s\n' "$f" "$ln" "$name" >> "$TSV"
   done < <(xargs -0 grep -nIEH -e "$re" -- < "$FILES_NUL" 2>/dev/null)
 done

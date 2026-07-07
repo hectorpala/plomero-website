@@ -8,8 +8,15 @@ Uso: python3 .pipeline/fix-colonia-eta.py [--apply]   (sin --apply = dry-run)
 infra:utilidad-no-sensor (no es checker de pagina; corre con args)"""
 import re, glob, os, sys, html
 APPLY = "--apply" in sys.argv
+# ROOT absoluto: el glob relativo dependía del cwd — corrido desde otro directorio daba
+# "0 colonias" con exit 0 (éxito falso, clase infra-006/007).
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 changed=[]
-for f in sorted(glob.glob("servicios/plomero-colonias-culiacan/*/index.html")):
+_files = sorted(glob.glob(os.path.join(ROOT, "servicios/plomero-colonias-culiacan/*/index.html")))
+if not _files:
+    print("❌ 0 colonias encontradas bajo %s — ruta rota, no un sitio sin colonias." % ROOT)
+    sys.exit(1)
+for f in _files:
     c=os.path.basename(os.path.dirname(f))
     h=open(f,encoding="utf-8").read(); orig=h
     def g(pat,s):

@@ -17,10 +17,14 @@ import sys, re
 
 viol = []
 revisadas = 0
+ilegibles = []
 for f in sys.argv[1:]:
     try:
         s = open(f, encoding="utf-8").read()
     except OSError:
+        # Una ruta pedida que NO se pudo leer es un fallo del candado, no un skip:
+        # antes daba "✅ Candado OK (0 páginas revisadas)" con rutas rotas.
+        ilegibles.append(f)
         continue
     revisadas += 1
     # cuerpo visible = quitar <script> (JSON-LD/JS) y <style>
@@ -39,6 +43,12 @@ for f in sys.argv[1:]:
     # en TODO el sitio (seo-104, decisión aparte); aquí solo lo VISIBLE inventado en el cuerpo.
     if re.search(r'class="[^"]*testimonial', body, re.I):
         viol.append(f"{f}: TESTIMONIO VISIBLE en página nueva — no inventar reseñas de clientes (seo-104).")
+
+if ilegibles:
+    print("❌ CANDADO PÁGINA NUEVA: no pude LEER estas rutas (el candado no puede aprobar lo que no vio):")
+    for f in ilegibles:
+        print("   -", f)
+    sys.exit(1)
 
 if viol:
     print("❌ CANDADO PÁGINA NUEVA: bloqueado por:")

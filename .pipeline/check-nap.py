@@ -151,8 +151,9 @@ def main():
                 "NAP: teléfono VARIANTE en JSON-LD de %s: %r (el correcto es +52 667 392 2273)" % (r, tel),
                 "Corregir telephone del schema al número correcto (526673922273)")
 
-        # 4. nombre sin acento en el texto
-        if NAME_NOACCENT in t:
+        # 4. nombre sin acento en el texto (case-insensitive: "PLOMERO CULIACAN PRO"
+        #    en mayúsculas también es la variante sin acento y antes no se cazaba)
+        if re.search(re.escape(NAME_NOACCENT), t, re.I):
             add("media", r,
                 "NAP: nombre de negocio SIN acento en %s: '%s' (el canónico es '%s')" % (r, NAME_NOACCENT, NAME_OK),
                 "Corregir a '%s' (con acento) para consistencia NAP" % NAME_OK)

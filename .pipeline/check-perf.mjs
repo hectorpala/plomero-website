@@ -94,6 +94,12 @@ function lighthouseReports() {
   }
   const byUrl = {}; // url -> {lcp:[],cls:[],inp:[], inpSrc}
   for (const f of files) {
+    // Frescura: un lighthouse-run-*.json olvidado en disco ganaría SIEMPRE sobre la
+    // medición viva → métricas rancias reportadas como actuales para siempre.
+    try {
+      const ageH = (Date.now() - fs.statSync(f).mtimeMs) / 3.6e6;
+      if (ageH > 24) { process.stderr.write(`reporte Lighthouse rancio (${Math.round(ageH)}h), ignorado: ${f}\n`); continue; }
+    } catch (_) { continue; }
     let rep;
     try { rep = JSON.parse(fs.readFileSync(f, "utf-8")); } catch (_) { continue; }
     const url = urlPath(rep.finalUrl || rep.requestedUrl || rep.finalDisplayedUrl || "/");
@@ -219,7 +225,8 @@ async function main() {
     for (const metric of ["lcp", "cls", "inp"]) {
       const v = m[metric];
       if (v == null) continue;
-      const isProxy = metric === "inp" && m.inpSrc && m.inpSrc.includes("proxy");
+      // "(aprox)" de puppeteer también es aproximación, no medición de campo → media, no alta.
+      const isProxy = metric === "inp" && m.inpSrc && (m.inpSrc.includes("proxy") || m.inpSrc.includes("aprox"));
       if (v > BUDGET[metric]) {
         add(metric === "cls" || metric === "lcp" ? "alta" : (isProxy ? "media" : "alta"), url,
           `PERF: ${url} ${metric.toUpperCase()} mediana ${round(metric, v)}${UNIT[metric]} supera el presupuesto ${BUDGET[metric]}${UNIT[metric]}${isProxy ? " (INP medido por proxy TBT — el lab no da INP)" : ""} [fuente:${m.inpSrc && metric === "inp" ? m.inpSrc : fuente}]`,

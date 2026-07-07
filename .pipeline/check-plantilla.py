@@ -274,6 +274,18 @@ def check_page(fpath, t, noindex, redirects):
             "Email con dominio incorrecto @plomeropro.com",
             "Usar info@plomeroculiacanpro.mx (dominio correcto)")
 
+    # --- 4c. ANTI-FUGA site-wide (alta, contenido): la palabra "electricista" y el GTM
+    #     del sitio hermano JAMÁS deben aparecer aquí. gen-landing/validate-landing solo
+    #     cubren la CREACIÓN de servicios; ediciones de colonias/blog no pasaban por
+    #     ningún guard (auditoría 2026-07-07) — este check cierra el hueco en todo el sitio.
+    low_t = t.lower()
+    for bad in ("electricista", "gtm-5z2qrz5q"):
+        if bad in low_t:
+            add("alta", r, "contenido",
+                "FUGA del sitio hermano: la página contiene %r (contaminación de la plantilla origen)" % bad,
+                "Eliminar toda mención/tracking del electricista; esta página es del sitio de PLOMERÍA")
+            break
+
     # --- 4b. fuga de esqueleto: wa.me ?text= con una "zona" ajena al slug de la página (media, contenido)
     #     caso crece-001: una página de servicio nueva heredó "zona oriente" del esqueleto de zona,
     #     así el lead de WhatsApp llega con la intención equivocada.

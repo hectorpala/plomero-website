@@ -71,7 +71,9 @@ def _rm_page_dir(parent_rel, slug):
 # ───────────────────────── herramientas de "plomería" ─────────────────────────
 def sitemap_add(loc, priority):
     sm = _read(SITEMAP_CHILD)
-    if loc in sm:
+    # Match EXACTO de <loc>: el substring pelado hacía que un URL padre (p.ej. el hub
+    # /plomero-colonias-culiacan/) pareciera "ya estar" porque es prefijo de toda hija.
+    if ("<loc>%s</loc>" % loc) in sm:
         print("  • sitemap: ya estaba"); return
     today = datetime.date.today().isoformat()
     entry = '  <url><loc>%s</loc><lastmod>%s</lastmod><changefreq>monthly</changefreq><priority>%s</priority></url>\n' % (loc, today, priority)
@@ -148,6 +150,11 @@ def cmd_servicio(args):
     if not _valid_slug(slug):
         sys.exit("❌ slug inválido: %r (solo minúsculas, números y guiones; nada de '/', '..' ni vacío)" % slug)
     page = "servicios/%s/index.html" % slug
+    # NUNCA sobrescribir una página VIVA: un spec con slug repetido pisaba el servicio
+    # existente y, si el candado fallaba, el rollback lo BORRABA del árbol.
+    if os.path.isfile(os.path.join(ROOT, page)):
+        sys.exit("❌ servicios/%s/ YA EXISTE. Un spec no puede pisar una página viva; "
+                 "usa otro slug o edita la página existente a mano." % slug)
     print("── crear-servicio: %s ──" % slug)
     r = sh([PY, "scripts/crear-servicio.py", spec])
     print(r.stdout.rstrip())
@@ -204,6 +211,37 @@ def cmd_gate(args):
     sys.exit(0 if gate(list(args)) else 1)
 
 
+def _cambio_solo_asset(f, base, head):
+    """True si el diff de la página solo cambia tokens de versión (?v=... / CACHE_NAME):
+    la clase 'asset-changeset' que FASE 8 exime del cap. Compara las líneas +/- con los
+    tokens de versión normalizados; si quedan idénticas, no hay cambio de contenido."""
+    d = sh(["git", "diff", "--no-renames", "-U0", base, head, "--", f]).stdout
+    norm = lambda s: re.sub(r"\?v=\d+", "?v=#", re.sub(r"plomero-culiacan-v\d+", "plomero-culiacan-v#", s))
+    plus = sorted(norm(l[1:]) for l in d.splitlines() if l.startswith("+") and not l.startswith("+++"))
+    minus = sorted(norm(l[1:]) for l in d.splitlines() if l.startswith("-") and not l.startswith("---"))
+    return bool(plus) and plus == minus
+
+
+def _cap_paginas(base, head, cap=18):
+    """Cuenta las páginas HTML con cambio SUSTANTIVO en base..head. Mecaniza el cap de
+    FASE 8 que antes era solo una instrucción al LLM (ningún código lo contaba)."""
+    ns = sh(["git", "diff", "--no-renames", "--name-status", base, head]).stdout
+    sustantivas = []
+    for ln in ns.strip().splitlines():
+        parts = ln.split("\t")
+        if len(parts) < 2:
+            continue
+        status, f = parts[0], parts[-1]
+        if not f.endswith("index.html"):
+            continue
+        if status.startswith("D"):
+            continue  # borrados: los vigila el candado anti-borrado del pre-push
+        if status.startswith("M") and _cambio_solo_asset(f, base, head):
+            continue  # asset-changeset (?v=/sw): exento por diseño
+        sustantivas.append(f)
+    return sustantivas, cap
+
+
 def cmd_publicar(args):
     if not args:
         sys.exit("uso: crecer.py publicar \"mensaje del commit\"")
@@ -230,6 +268,19 @@ def cmd_publicar(args):
     print(c.stdout.rstrip() + c.stderr.rstrip())
     if "BLOQUEADO" in (c.stdout + c.stderr) or c.returncode != 0:
         print("❌ commit bloqueado por el hook — revisa; quedó en la rama %s" % branch); sys.exit(1)
+
+    # CAP DE PÁGINAS (FASE 8) MECÁNICO: >18 páginas con cambio sustantivo NO se
+    # auto-publica; queda en la rama para pase supervisado (como el 19>18 del 06-22).
+    # Escape con criterio humano explícito:  CAP_OK=1 python3 scripts/crecer.py publicar ...
+    if os.environ.get("CAP_OK") != "1":
+        sustantivas, cap = _cap_paginas("main", "HEAD")
+        if len(sustantivas) > cap:
+            print("❌ CAP EXCEDIDO: %d páginas con cambio sustantivo (> %d). NO se auto-publica." % (len(sustantivas), cap))
+            for f in sustantivas[:25]:
+                print("     • " + f)
+            print("   El trabajo queda en la rama %s para revisión humana (CAP_OK=1 para forzar)." % branch)
+            sh(["git", "checkout", "main"])
+            sys.exit(1)
 
     env = dict(os.environ); env["PATH"] = "/usr/local/bin:" + env.get("PATH", "")
 

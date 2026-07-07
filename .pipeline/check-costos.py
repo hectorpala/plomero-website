@@ -8,6 +8,7 @@ reporte diario en vez de descubrirlo en la factura. Solo VISIBILIDAD: no corta n
 Emite el JSON común {"hallazgos":[...]}. Sin argumentos.
 """
 import os, json
+from datetime import date, datetime, timedelta
 
 ROOT   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COSTOS = os.path.join(ROOT, ".pipeline", "costos.jsonl")
@@ -37,7 +38,9 @@ def main():
         u = filas[-1]; prev = filas[:-1]
         for campo, etiqueta in (("output_tokens", "output"), ("mensajes", "mensajes")):
             cur = u.get(campo, 0) or 0
-            med = _mediana([f.get(campo, 0) or 0 for f in prev])
+            # Excluir filas de 0 tokens (corridas fallidas) de la mediana: la deprimen
+            # y generan falsos positivos de runaway en la siguiente corrida normal.
+            med = _mediana([f.get(campo, 0) or 0 for f in prev if (f.get("total_tokens", 0) or 0) > 0])
             if med > 0 and cur > FACTOR * med:
                 hallazgos.append({
                     "id": "costo-runaway-%s" % etiqueta, "archivo": ".pipeline/costos.jsonl", "linea": 0,
@@ -69,7 +72,37 @@ def main():
                 filas[-1].get("etiqueta", "?")),
             "fix_sugerido": "Revisar que el driver haya corrido y que el recolector de costos leyó los transcripts; un 0 oculta tanto una corrida caída como un medidor roto.",
         })
-    print(json.dumps({"hallazgos": hallazgos}, ensure_ascii=False, indent=2))
+    # ── CONTINUIDAD: día(s) SIN fila = el auto-agente no corrió (o no registró) y nadie
+    #    avisó. Caso real: 04→06-jul-2026, 3 días sin corrida completa y ningún sensor
+    #    gritó (el catch-up miraba el log del sitio hermano). Umbral 2: la fila de HOY
+    #    puede no existir aún cuando este checker corre a mitad de la corrida.
+    if filas:
+        fechas = [f.get("fecha", "") for f in filas if f.get("fecha")]
+        try:
+            ultima = max(datetime.strptime(x, "%Y-%m-%d").date() for x in fechas)
+            dias = (date.today() - ultima).days
+            if dias >= 2:
+                hallazgos.append({
+                    "id": "costo-continuidad", "archivo": ".pipeline/costos.jsonl", "linea": 0,
+                    "severidad": "alta", "categoria": "costo",
+                    "descripcion": "CONTINUIDAD ROTA: la última fila del ledger es del %s (%d días sin corrida registrada). El auto-agente no está corriendo o no está registrando." % (ultima.isoformat(), dias),
+                    "fix_sugerido": "Revisar launchctl (com.plomeroculiacan.autoagente), el log más reciente en ~/Library/Logs/mantener-sitio/ y los failnotes fail-*.md; el catch-up debería recuperar al siguiente arranque.",
+                })
+        except ValueError:
+            pass
+    # ── CORRIDA ENANA: fila con pocos mensajes = la corrida arrancó y murió a los minutos
+    #    (p.ej. 2026-07-01: 1 mensaje). No es 0 (eso lo caza costo-000) pero tampoco corrió.
+    if filas:
+        u = filas[-1]
+        msj = u.get("mensajes", 0) or 0
+        if 0 < msj <= 5:
+            hallazgos.append({
+                "id": "costo-enana", "archivo": ".pipeline/costos.jsonl", "linea": 0,
+                "severidad": "media", "categoria": "costo",
+                "descripcion": "CORRIDA ENANA: la última (%s) registró solo %d mensaje(s) — arrancó y murió casi de inmediato (una corrida normal trae cientos)." % (u.get("etiqueta", "?"), msj),
+                "fix_sugerido": "Revisar el log de esa corrida y el failnote correspondiente; la causa típica es error temprano del CLI (red/credenciales).",
+            })
+    print(json.dumps({"hallazgos": hallazgos, "analizadas": len(filas)}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
     main()

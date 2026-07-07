@@ -115,11 +115,17 @@ async function main() {
           await page.mouse.move(200, 200);
         } catch (_) {}
         // Poll: esperar a que el contenedor cargue y dispare GA (hasta POLL_MS).
-        let st = { htmlHasGTM: false, dataLayerOk: false, gtmLoaded: false };
+        let st = { htmlHasGTM: false, dataLayerOk: false, gtmLoaded: false, gtmAjenos: [] };
         for (let waited = 0; waited <= POLL_MS; waited += STEP_MS) {
           st = await page.evaluate(() => ({
-            htmlHasGTM: /GTM-[A-Z0-9]+/.test(document.documentElement.innerHTML) ||
-                        !!document.querySelector('script[src*="googletagmanager.com/gtm.js"]'),
+            // El contenedor debe ser EL DEL PLOMERO (GTM-W75CRTX5): el patrón pelado
+            // /GTM-[A-Z0-9]+/ aceptaba CUALQUIER contenedor, incluido el del
+            // electricista (GTM-5Z2QRZ5Q) → "tracking sano" ante una fuga del hermano.
+            htmlHasGTM: document.documentElement.innerHTML.includes("GTM-W75CRTX5") ||
+                        !!document.querySelector('script[src*="googletagmanager.com/gtm.js?id=GTM-W75CRTX5"]'),
+            gtmAjenos: (document.documentElement.innerHTML.match(/GTM-[A-Z0-9]{6,}/g) || [])
+              .filter((id) => id !== "GTM-W75CRTX5")
+              .filter((id, i, a) => a.indexOf(id) === i),
             dataLayerOk: Array.isArray(window.dataLayer),
             gtmLoaded: typeof window.google_tag_manager !== "undefined",
             gaIds: typeof window.google_tag_manager !== "undefined"
@@ -127,6 +133,11 @@ async function main() {
           }));
           if (st.gtmLoaded && gaFired) break;
           await new Promise((r) => setTimeout(r, STEP_MS));
+        }
+        if (st.gtmAjenos && st.gtmAjenos.length) {
+          add("alta", path,
+            `TRACKING/FUGA: la página ${BASE}${path} contiene contenedor(es) GTM AJENO(S): ${st.gtmAjenos.join(", ")} (el del sitio es GTM-W75CRTX5)`,
+            "Eliminar el contenedor ajeno (contaminación del sitio hermano); los eventos se están yendo a otra cuenta");
         }
         const ga4Present = gtagJs || (st.gaIds && st.gaIds.length > 0);
 

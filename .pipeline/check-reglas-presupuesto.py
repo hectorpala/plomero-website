@@ -17,6 +17,17 @@ AVISO_FRAC     = 0.95   # avisar al rozar el cap, no solo al pasarlo (hoy: 3997/
 
 def main():
     hallazgos = []
+    if not os.path.isfile(REGLAS):
+        # Verificación ciega: si REGLAS.md desaparece (clase infra-006: archivo movido),
+        # el sensor callaba justo cuando el archivo que vigila se perdió.
+        hallazgos.append({
+            "id": "reglas-ausente", "archivo": "docs/REGLAS.md", "linea": 0,
+            "severidad": "alta", "categoria": "infra",
+            "descripcion": "verificación ciega: no existe docs/REGLAS.md — la memoria de errores del agente se perdió o se movió",
+            "fix_sugerido": "Restaurar docs/REGLAS.md (git restore / revisar el último commit que lo tocó)",
+        })
+        print(json.dumps({"hallazgos": hallazgos, "analizadas": 0}, ensure_ascii=False, indent=2))
+        return
     if os.path.isfile(REGLAS):
         lines = open(REGLAS, encoding="utf-8", errors="replace").read().splitlines()
         rules = [ln for ln in lines if ln.lstrip().startswith("- [")]
@@ -38,7 +49,7 @@ def main():
                     len(gordas), MAX_RULE_CHARS, " | ".join(ln[:70] for ln in gordas[:3])),
                 "fix_sugerido": "Podar cada regla gorda a 1-2 líneas accionables; el relato largo va a HISTORIAL.jsonl, no a REGLAS.md.",
             })
-    print(json.dumps({"hallazgos": hallazgos}, ensure_ascii=False, indent=2))
+    print(json.dumps({"hallazgos": hallazgos, "analizadas": len(rules)}, ensure_ascii=False, indent=2))
 
 if __name__ == "__main__":
     main()
