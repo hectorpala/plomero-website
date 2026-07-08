@@ -1,36 +1,40 @@
-# Auto Agente Plomero — parte del 2026-07-07
-**Resultado:** encontré 12, arreglé 10 · 1 para ti · 1 no pude arreglar solo · publicado
+# Auto Agente Plomero — parte del 2026-07-08
+**Resultado:** encontré 16, arreglé 12 · 2 para ti · 2 no pude arreglar solo · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 12 cosas: arreglé 10 · 1 necesitan tu decisión · 1 no pude arreglar solo.
+Encontré 16 cosas: arreglé 12 · 2 necesitan tu decisión · 2 no pude arreglar solo.
 
-## ✅ Arreglé (10)
-- El enlace "Instalación de sanitarios" del menú de abajo (footer) llevaba a la página general de servicios en vez de a la página real de sanitarios — corregido → https://plomeroculiacanpro.mx/servicios/plomeria-comercial/
-- El mismo enlace mal dirigido, en la página de la zona norte — corregido → https://plomeroculiacanpro.mx/servicios/plomero-zona-norte-culiacan/
-- El mismo enlace mal dirigido, en la página de la zona sur — corregido → https://plomeroculiacanpro.mx/servicios/plomero-zona-sur-culiacan/
-- La página de instalación de sanitarios se contradecía a sí misma: un título decía "garantía de 6 meses" pero el texto de abajo decía "un año completo" — unifiqué todo a 6 meses (es lo que dice el resto de la página) → https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/
-- La página de mantenimiento de boiler tenía un dato oculto para Google (la "ficha" que usan los buscadores) que decía "garantía de 3 meses", mientras que lo que ve la gente en la página dice 6 meses — unifiqué a 6 meses → https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/
-- En la página de instalación de sanitarios el título principal se veía con poco contraste sobre la foto de fondo (podía ser difícil de leer para algunas personas) — le puse un fondo oscuro semitransparente detrás del texto, igual que en tu página principal → https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/
-- La foto principal de mantenimiento de boiler tenía declarado un tamaño distinto al de la imagen real, lo que hacía que se viera ligeramente estirada al cargar — corregido el tamaño → https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/
-- En la página de la zona norte, los enlaces a las colonias eran muy chiquitos para tocarlos con el dedo en el celular — los agrandé al tamaño recomendado (44px, como un botón normal) → https://plomeroculiacanpro.mx/servicios/plomero-zona-norte-culiacan/
-- Las "migas de pan" (el Inicio > Servicios > ... de arriba de cada página) tenían un gris muy clarito que baja el contraste para personas con problemas de vista, en 4 páginas — lo oscurecí un poco → https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/ · https://plomeroculiacanpro.mx/servicios/plomeria-comercial/ · https://plomeroculiacanpro.mx/servicios/plomero-zona-norte-culiacan/ · https://plomeroculiacanpro.mx/servicios/plomero-zona-sur-culiacan/
-- 10 iconos decorativos en la página de sanitarios no estaban marcados como "solo decoración" para los lectores de pantalla que usan las personas ciegas — se lo agregué → https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/
+## ✅ Arreglé (12)
+- Un par de links del pie de página ("Instalación de sanitarios", "24/7" y "plomero cerca de mí") apuntaban al lugar equivocado (uno al listado general en vez de la página real, otros a una página intermedia en vez de ir directo) → https://plomeroculiacanpro.mx/servicios/destape-de-bano-inodoro/ y https://plomeroculiacanpro.mx/servicios/reparacion-de-llaves-y-mezcladoras/
+- Dos links internos usaban una forma "vieja" de la dirección (con /index.html al final) — normalizados a la forma correcta → https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/ y https://plomeroculiacanpro.mx/servicios/desazolve-de-drenajes/
+- Cuando alguien comparte esta página en Twitter/X, la tarjeta apuntaba al inicio del sitio en vez de a la página real — corregido → https://plomeroculiacanpro.mx/servicios/desazolve-de-drenajes/
+- La garantía de instalación de tinaco decía "6 meses" en una parte de la página y "1 año" en el resto (título, encabezado, preguntas frecuentes) — unifiqué todo a 1 año, que es lo que dice la mayoría de la página → https://plomeroculiacanpro.mx/servicios/instalacion-de-tinaco/
+- Encontré un error más grande: en la página de desazolve de drenajes, la "ficha de datos" que usa Google (invisible para el visitante) tenía la descripción de "desazolve" copiada por error en otros 4 servicios que se listan ahí (boiler, sanitarios, tinaco, destape) — ya cada uno tiene su descripción correcta otra vez → https://plomeroculiacanpro.mx/servicios/desazolve-de-drenajes/
+- El título de la página "Plomero Cerca de Mí" le faltaba el acento en "Mí" — corregido → https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/
+- Una foto tenía declarado un tamaño distinto al real, lo que hacía que la página "brincara" un poco al cargar en el celular — corregido → https://plomeroculiacanpro.mx/servicios/reparacion-de-llaves-y-mezcladoras/
+- El menú de celular de la página de tinaco tenía botones demasiado chicos para tocar con el dedo (18 píxeles; lo mínimo recomendado es 44) — ya miden el tamaño correcto → https://plomeroculiacanpro.mx/servicios/instalacion-de-tinaco/
+- El texto verde de WhatsApp en varias páginas era muy claro y difícil de leer para personas con baja visión — lo oscurecí a un verde más legible (sigue siendo "verde WhatsApp", solo más oscuro) → https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/ y https://plomeroculiacanpro.mx/servicios/desazolve-de-drenajes/
+- El texto de la "miga de pan" (Inicio > Servicios > ...) de arriba de la página tenía un gris muy clarito, bajo el mínimo recomendado de legibilidad — lo oscurecí un poco → https://plomeroculiacanpro.mx/servicios/destape-de-bano-inodoro/ y https://plomeroculiacanpro.mx/servicios/reparacion-de-llaves-y-mezcladoras/
+- Varios botones y links chiquitos (menores a 44 píxeles, el tamaño mínimo recomendado para tocar con el dedo) se repetían en varias páginas del sitio: el link "Términos" del pie de página, "Leer artículo completo" en las tarjetas de blog, la lista de "Servicios de Plomería" y el link "Ver todas las colonias" — arreglado de una sola vez para todo el sitio → https://plomeroculiacanpro.mx/servicios/plomero-cerca-de-mi/ y https://plomeroculiacanpro.mx/servicios/desazolve-de-drenajes/
+- La página de instalación de tinaco no tenía registrada su ubicación (coordenadas de mapa) para los buscadores, algo que sí tiene el resto de páginas del sitio — se la agregué → https://plomeroculiacanpro.mx/servicios/instalacion-de-tinaco/
 
-## ⚠️ Encontré pero NO pude arreglar solo (1)
-- Las 4 páginas de zona (norte, sur, oriente, poniente) tienen la misma coordenada de mapa genérica en vez de una propia de cada zona — para arreglarlo bien necesito la ubicación real de cada zona y no quiero inventar un punto en el mapa que no sea el correcto → https://plomeroculiacanpro.mx/servicios/plomero-zona-norte-culiacan/
+## ⚠️ Encontré pero NO pude arreglar solo (2)
+- La página de instalación de tinaco no está construida con la misma plantilla que el resto del sitio (tiene su propio diseño interno) — eso hace que cargue más lento y no aproveche mejoras que sí tiene el resto del sitio. Arreglarlo bien significa reconstruir la página completa, no un ajuste rápido; lo dejo para una sesión dedicada a eso.
+- Varias fotos de reseñas y de "antes y después" se envían al celular en el mismo tamaño que a la computadora (hasta 159KB cada una), cuando en el celular se ven mucho más chicas — arreglarlo de raíz requiere generar versiones más ligeras de cada foto, que no pude crear yo mismo hoy.
 
 ## 🌱 Mejoré / agregué (0)
-Sin páginas nuevas hoy: revisé qué está buscando la gente en Google y ya tienes página para todo lo que tiene demanda real; no inventé páginas porque eso dañaría tu posicionamiento. Dos oportunidades de mejorar el "gancho" (título/descripción) que se habían detectado hace dos semanas ya estaban optimizadas — no había nada que tocar ahí.
+Sin páginas nuevas hoy: revisé Google Search Console y toda la demanda real de búsquedas ya tiene una página dedicada, o ya está definida como una decisión pendiente tuya (ver abajo). No inventé páginas porque eso dañaría tu posicionamiento.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Si la garantía o el precio de un servicio dice una cosa en un lugar de la página y otra cosa en otro (o en el dato oculto que usa Google), hay que dejarlos todos iguales al valor que ya aparece en la mayoría de la página — nunca inventar un número nuevo.
-- Un enlace con un texto como "Instalación de sanitarios" debe llevar exactamente a esa página, no a una genérica.
-- Descubrí que una parte del diseño para celular, pensada solo para tu página principal, se estaba colando a otras páginas y podía dejar el texto oscuro sobre un fondo también oscuro — ahora reviso esto con un navegador real en el celular, no solo en la computadora.
-- El tamaño que declara una foto en el código debe coincidir con el tamaño real del archivo, o la imagen se ve estirada.
-(ya van 46 reglas aprendidas en total)
+- Cuando una página lista varios servicios en su "ficha de datos para Google", hay que revisar que cada servicio tenga SU PROPIA descripción y no una copiada de otro por error — así detecté el error grande de hoy.
+- El texto en verde de WhatsApp necesita ser un verde más oscuro para poder leerse bien; el verde brillante se queda solo para íconos y botones.
+- Cualquier link de texto nuevo (no solo los botones) puede quedar "demasiado chico para tocar" si no se le da el tamaño mínimo a propósito — ahora reviso esto en cualquier tipo de link, no solo en los ya conocidos.
 
-## ⏳ Necesito que tú decidas (1)
-- Hace tiempo quedó expuesta una credencial de acceso de Google en el historial viejo del código; el código actual está limpio, pero para cerrarlo del todo hay que rotarla/revocarla desde tu cuenta de Google — eso solo lo puedes hacer tú.
+(ya van 48 reglas aprendidas en total)
+
+## ⏳ Necesito que tú decidas (2)
+- Varias páginas de servicio comparten la misma coordenada de mapa "genérica" del centro de Culiacán en vez de una ubicación real por zona — para poner coordenadas reales necesito que confirmes el punto exacto de cada zona (no quiero inventar un número). Ya estaba pendiente desde antes.
+- Hay una posible confusión entre tu página de precios y un artículo del blog que compiten por las mismas búsquedas de "lista de precios de plomería" — antes de tocar esto necesito que definas cuál debe ser la página principal para ese tema.
 
 ## 📦 ¿Se publicó?
-Sí, todo revisado y en vivo; le avisé a Google para que lo muestre.
+Sí, todo revisado y en vivo; le avisé a Google para que lo muestre (68 direcciones reenviadas a indexar).
