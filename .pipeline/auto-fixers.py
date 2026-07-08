@@ -170,7 +170,9 @@ def _bump_sw():
 
 
 def _bump_css_version_html(version):
-    """Sube el token `styles*.css?v=…` a `version` en TODAS las páginas HTML.
+    """Sube el token `styles*.css?v=…` a `version` en TODAS las páginas HTML **y en el
+    precache de sw.js** (lleva la URL ?v= hardcodeada — sin alinearla, el SW nuevo
+    precacheaba el CSS viejo aunque CACHE_NAME subiera; hallazgo del port al electricista).
     Esto es OBLIGATORIO al cambiar un CSS: se sirve con `immutable` (max-age 1 año), así que
     un visitante que regresa solo re-pide el CSS si CAMBIA la URL (el ?v=). Reemplazo literal
     del token → seguro (no toca estructura). Devuelve (páginas tocadas, fallos de escritura).
@@ -178,6 +180,7 @@ def _bump_css_version_html(version):
     (AAAAMMDDHHMM), si no el segundo bump repetiría la URL y no rompería el cache."""
     n_files, fallos = 0, 0
     htmls = sorted(set(glob.glob(os.path.join(ROOT, "**", "*.html"), recursive=True)))
+    htmls.append(os.path.join(ROOT, SW_FILE))
     for p in htmls:
         if "/node_modules/" in p or "/.git/" in p:
             continue

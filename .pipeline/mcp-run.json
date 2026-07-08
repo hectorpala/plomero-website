@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "gsc": {
+      "type": "stdio",
+      "command": "/usr/local/bin/node",
+      "args": ["/Users/openclaw/gsc-mcp/server.js"],
+      "env": {}
+    },
+    "local-seo": {
+      "command": "/usr/local/bin/node",
+      "args": ["/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo/index.js"],
+      "cwd": "/Users/openclaw/Sitios Web/Plomero Culiacán"
+    }
+  }
+}

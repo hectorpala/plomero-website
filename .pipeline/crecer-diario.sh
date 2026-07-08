@@ -112,7 +112,10 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   # desbocadas históricas de 600-654M tokens (~$1,300-1,420 equiv-API c/u). 90 min de
   # tope da holgura para días pesados y corta lo desbocado el MISMO día, no al siguiente.
   TIMEOUT_MIN=90
-  "$RUTA_CLAUDE" --model sonnet --permission-mode auto -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1 &
+  # --strict-mcp-config con .pipeline/mcp-run.json (gsc + local-seo): SOLO los MCP que la
+  # corrida necesita. Sin esto cargaba TODOS los del usuario (tradingview, facebook-ads
+  # con ESCRITURA…) en un agente autónomo sin humano (hallazgo del port al electricista).
+  "$RUTA_CLAUDE" --model sonnet --permission-mode auto --mcp-config .pipeline/mcp-run.json --strict-mcp-config -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1 &
   CPID=$!
   ( sleep $((TIMEOUT_MIN * 60))
     if kill -0 "$CPID" 2>/dev/null; then

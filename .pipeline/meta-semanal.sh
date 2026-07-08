@@ -37,7 +37,10 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Meta-pase (auto-permiso; solo propone, no publica).
-if "$RUTA_CLAUDE" --permission-mode auto -p "$(cat .pipeline/meta-prompt.txt)" >> "$LOG" 2>&1; then
+# --model sonnet: paridad con los demás orquestadores. --strict-mcp-config SIN --mcp-config:
+# CERO MCP — el meta solo lee archivos del repo; sin esto cargaba TODOS los del usuario
+# (tradingview, facebook-ads con escritura…) en un agente autónomo sin humano.
+if "$RUTA_CLAUDE" --model sonnet --strict-mcp-config --permission-mode auto -p "$(cat .pipeline/meta-prompt.txt)" >> "$LOG" 2>&1; then
   echo "[$STAMP] meta-pase OK." >> "$LOG"
 else
   echo "[$STAMP] meta-pase terminó con error (continúo para enviar el resumen)." >> "$LOG"
