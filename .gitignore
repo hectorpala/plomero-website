@@ -67,3 +67,7 @@ build/
 # Reportes transitorios de Core Web Vitals (CI); la baseline (perf-baseline.json) SÍ se versiona
 .pipeline/lighthouse-run-*.json
 .pipeline/cwv-result.json
+
+# Graphify: caché/salida generada. El grafo REAL se escribe FUERA del repo (~/graphify-plomero)
+# para que su graph.html no lo escaneen los checkers (check-plantilla/links) ni lo toque el pre-push.
+graphify-out/
