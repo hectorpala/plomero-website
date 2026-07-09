@@ -1,0 +1,7 @@
+#!/bin/bash
+# Lanzador con NOMBRE PROPIO para launchd/BTM (infra 08-jul-2026):
+# macOS Tahoe bloqueó (disallowed) los LaunchAgents que ejecutaban /bin/bash directo
+# —aparecían como "bash" anónimo en Elementos de inicio— y tras el reboot del 08-jul
+# NINGÚN job de los sitios cargó (muerte silenciosa). Este wrapper hace que el item
+# se registre con este nombre de archivo y un ejecutable propio, no como "bash".
+exec /bin/bash "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/crecer-diario.sh" "$@"

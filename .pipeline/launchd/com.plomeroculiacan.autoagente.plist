@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-  Auto Agente Plomero — corrida diaria autónoma (corrige + crece + verifica + aprende).
-  ACTIVAR (reemplaza al viejo de solo-mantenimiento para no correr ambos):
-    launchctl unload ~/Library/LaunchAgents/com.plomeroculiacan.mantener.plist   2>/dev/null
-    cp ".pipeline/launchd/com.plomeroculiacan.autoagente.plist" ~/Library/LaunchAgents/
-    launchctl load  ~/Library/LaunchAgents/com.plomeroculiacan.autoagente.plist
-  PROBAR YA (una corrida manual, sin esperar a las 18:25):
-    launchctl start com.plomeroculiacan.autoagente
--->
 <plist version="1.0">
 <dict>
-    <key>Label</key>
-    <string>com.plomeroculiacan.autoagente</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/bin/bash</string>
-        <string>/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/crecer-diario.sh</string>
-    </array>
-    <key>StartCalendarInterval</key>
-    <dict>
-        <key>Hour</key>
-        <integer>18</integer>
-        <key>Minute</key>
-        <integer>25</integer>
-    </dict>
-    <key>StandardOutPath</key>
-    <string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-launchd.out.log</string>
-    <key>StandardErrorPath</key>
-    <string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-launchd.err.log</string>
-    <key>RunAtLoad</key>
-    <false/>
+	<key>Label</key>
+	<string>com.plomeroculiacan.autoagente</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/launchd/bin/AutoAgentePlomero</string>
+	</array>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>StandardErrorPath</key>
+	<string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-launchd.err.log</string>
+	<key>StandardOutPath</key>
+	<string>/Users/openclaw/Library/Logs/mantener-sitio/auto-agente-launchd.out.log</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>18</integer>
+		<key>Minute</key>
+		<integer>25</integer>
+	</dict>
 </dict>
 </plist>
