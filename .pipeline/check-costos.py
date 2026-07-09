@@ -12,8 +12,23 @@ from datetime import date, datetime, timedelta
 
 ROOT   = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COSTOS = os.path.join(ROOT, ".pipeline", "costos.jsonl")
-UMBRAL_TOKENS = 28_000_000   # ~2x una corrida diaria normal (11.8M)
-UMBRAL_USD    = 70           # usd_equiv_api_ref
+
+# ── PRESUPUESTO. Dos correcciones (2026-07-08):
+# 1) UMBRAL_TOKENS era 28M "≈2x una corrida normal (11.8M)". Pero total_tokens lo domina
+#    cache_read (contexto releído, BARATO) y el contexto creció: la mediana de las últimas
+#    12 corridas es 26.4M y las recientes traen 83–147M -> el umbral disparaba en más de la
+#    mitad de las corridas. Una alarma que siempre suena es una alarma que nadie lee.
+#    Ahora mide lo que de verdad significa: EXPLOSIÓN DE CONTEXTO (cache_read desbocado).
+# 2) usd_equiv_api_ref cambió de base: antes TODO se cotizaba a precios Opus aunque la corrida
+#    es multi-modelo; ahora cada mensaje va con SU modelo (ver registrar-costo.mjs). Las filas
+#    viejas traen base "opus" (inflada ~5x) y las nuevas base "por-modelo". El umbral se elige
+#    según `base_precios` para no leer mal ninguna de las dos.
+UMBRAL_TOKENS = 200_000_000  # explosión de contexto (mediana 26M; cache_read domina y es barato)
+UMBRAL_USD_OPUS = 250        # filas viejas (base "opus", inflada ~5x). El 70 original disparaba
+                             # en la mayoría: la mediana en esa base es $90. 250 ≈ corrida de verdad
+                             # anómala (la desbocada del 26-jun marcó $1420).
+UMBRAL_USD_REAL = 70         # filas nuevas (base "por-modelo"). Conservador a propósito:
+                             # recalibrar tras ~4 corridas reales, cuando haya mediana propia.
 
 def main():
     hallazgos, filas = [], []
@@ -53,13 +68,31 @@ def main():
         u   = filas[-1]
         tok = u.get("total_tokens", 0)
         usd = u.get("usd_equiv_api_ref", 0)
-        if tok > UMBRAL_TOKENS or usd > UMBRAL_USD:
+        # Base de precios de ESTA fila: las viejas no traen el campo y están en base "opus".
+        base = u.get("base_precios", "opus")
+        umbral_usd = UMBRAL_USD_REAL if base == "por-modelo" else UMBRAL_USD_OPUS
+        if tok > UMBRAL_TOKENS or usd > umbral_usd:
+            # El desglose por modelo delata la causa: si aparece opus con mucho volumen en una
+            # corrida cuyo orquestador va en sonnet, o corrió un subagente caro o se coló otra sesión.
+            pm = u.get("por_modelo") or {}
+            detalle = "  ·  ".join(
+                "%s $%s" % (f, a.get("usd", 0)) for f, a in sorted(pm.items(), key=lambda kv: -(kv[1].get("usd") or 0)) if f != "sintetico"
+            )
             hallazgos.append({
                 "id": "costo-001", "archivo": ".pipeline/costos.jsonl", "linea": 0,
                 "severidad": "media", "categoria": "costo",
-                "descripcion": "La última corrida (%s) consumió %.1fM tokens (~$%.0f api-ref), sobre presupuesto (%.0fM / $%.0f)." % (
-                    u.get("etiqueta", "?"), tok/1e6, usd, UMBRAL_TOKENS/1e6, UMBRAL_USD),
-                "fix_sugerido": "Auditar la corrida: ¿demasiados revisores en paralelo, lote grande, o un loop sin freno? Bajar fan-out o usar modelo más barato en revisores deterministas.",
+                "descripcion": "La última corrida (%s) consumió %.1fM tokens (~$%.0f api-ref, base %s), sobre presupuesto (%.0fM / $%.0f).%s" % (
+                    u.get("etiqueta", "?"), tok/1e6, usd, base, UMBRAL_TOKENS/1e6, umbral_usd,
+                    (" Desglose: %s." % detalle) if detalle else ""),
+                "fix_sugerido": "Auditar la corrida: ¿demasiados revisores en paralelo, lote grande, o un loop sin freno? Si el desglose muestra OPUS con mucho volumen y el orquestador va en sonnet, revisar qué subagente lo usó (o si se contó una sesión interactiva ajena). Bajar fan-out o modelo en revisores deterministas.",
+            })
+        # Un modelo nuevo sin precio se cotiza como opus (conservador) pero hay que registrarlo.
+        if u.get("modelos_desconocidos"):
+            hallazgos.append({
+                "id": "costo-modelo-nuevo", "archivo": ".pipeline/registrar-costo.mjs", "linea": 0,
+                "severidad": "media", "categoria": "costo",
+                "descripcion": "Modelo(s) sin precio en la tabla: %s. Se cotizaron como Opus (no subestima), pero la referencia de costo queda inexacta." % ", ".join(u["modelos_desconocidos"]),
+                "fix_sugerido": "Añadir la familia y sus precios a PRECIOS en .pipeline/registrar-costo.mjs (patrón: out=5x in, cacheW=1.25x in, cacheR=0.1x in).",
             })
     # ── Fila de 0 tokens: NO es una corrida barata, es un fallo silencioso —
     #    el recolector de costos no leyó los transcripts o la corrida no ejecutó.
