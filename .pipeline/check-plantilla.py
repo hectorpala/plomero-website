@@ -50,7 +50,11 @@ BASE = "https://plomeroculiacanpro.mx"
 # check-indexabilidad.py).
 SKIP_DIRS = ("/node_modules/", "/.git/", "/partials/", "/docs/", "/.netlify/",
              "/reivision de sitio/", "/site-check/", "/keyword-volume-tool/",
-             "/mcp-local-seo/", "/scripts/")
+             "/mcp-local-seo/", "/scripts/", "/graphify-plomero/")
+# NOTA (2026-07-09): NO agregar "/obsidian-vault/" aquí sin verificar primero con
+# `git ls-files | grep obsidian` — está TRACKEADO (commit a3cb5ef9) y Netlify lo SIRVE en
+# produccion (publish="." en netlify.toml). Bloqueado con _redirects 404! + robots.txt
+# Disallow, pero el checker debe seguir viéndolo por si el bloqueo falla. Ver HISTORIAL.jsonl.
 
 # Extensiones que son RECURSOS en disco (un href/src a esto debe existir tal cual).
 RESOURCE_EXT = (".css", ".js", ".mjs", ".webp", ".png", ".jpg", ".jpeg", ".gif",

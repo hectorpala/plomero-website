@@ -338,9 +338,11 @@ def main():
                     break
 
         # ---- CHECK 1 (reverso): .html indexables del repo que NO estan en el sitemap
+        # NOTA (2026-07-09): NO agregar "/obsidian-vault/" — está TRACKEADO y SERVIDO en
+        # producción (ver check-plantilla.py para el detalle). Bloqueado vía _redirects/robots.txt.
         SKIP_DIRS = ("/node_modules/", "/.git/", "/partials/", "/docs/", "/.netlify/",
                      "/reivision de sitio/", "/site-check/", "/keyword-volume-tool/",
-                     "/mcp-local-seo/", "/scripts/")
+                     "/mcp-local-seo/", "/scripts/", "/graphify-plomero/")
         for dirpath, dirnames, files in os.walk(ROOT):
             dn = "/" + os.path.relpath(dirpath, ROOT).replace(os.sep, "/") + "/"
             if any(s in dn for s in SKIP_DIRS):

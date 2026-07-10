@@ -6,6 +6,7 @@ User-agent: *
 Disallow: /gracias/
 Disallow: /admin/
 Disallow: /private/
+Disallow: /obsidian-vault/
 Allow: /manifest.json
 Allow: /assets/
 Allow: /sitemaps/
