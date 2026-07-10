@@ -1,3 +1,8 @@
+# 404 forzado: obsidian-vault/ es bitácora interna del proyecto, se coló trackeada en git
+# (commit a3cb5ef9) y Netlify la sirve porque publish="." sirve todo el repo. Bloqueo duro
+# hasta que se saque del repo publicado. Hallazgo del verificador FASE 7, 2026-07-09.
+/obsidian-vault/*  /404.html  404!
+
 # 301: colonias noindex consolidadas por zona (2026-06-11)
 /servicios/plomero-colonias-culiacan/10-de-abril/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/10-de-mayo/* /servicios/plomero-zona-sur-culiacan/ 301
