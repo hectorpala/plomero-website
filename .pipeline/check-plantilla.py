@@ -223,6 +223,50 @@ def link_candidates(t):
     return vals
 
 
+# ---------------------------------------------------------------- mapa nombre servicio -> ruta
+_SERVICE_NAME_MAP = None
+
+
+def _service_name_map():
+    """Mapa {texto de servicio normalizado -> ruta canonica}, derivado del H1 de cada
+    servicios/<slug>/index.html. Caza anclas cuyo TEXTO nombra un servicio real pero el HREF
+    apunta a otro destino -- regresion vista 3x (2026-07-07/07-08/07-09): "Instalacion de
+    sanitarios" enlazando al hub generico /servicios/ en vez de la pagina real."""
+    global _SERVICE_NAME_MAP
+    if _SERVICE_NAME_MAP is not None:
+        return _SERVICE_NAME_MAP
+    m = {}
+    for fpath in sorted(glob.glob(os.path.join(ROOT, "servicios", "*", "index.html"))):
+        slug = os.path.basename(os.path.dirname(fpath))
+        if slug == "plomero-colonias-culiacan":
+            continue
+        try:
+            txt = read(fpath)
+        except Exception:
+            continue
+        h1 = re.search(r'<h1[^>]*>(.*?)</h1>', txt, re.S)
+        if not h1:
+            continue
+        name = re.sub(r'<[^>]+>', '', h1.group(1))
+        name = re.sub(r'\s+', ' ', name).strip()
+        name_norm = re.sub(r'\s+en\s+culiac[aá]n.*$', '', name, flags=re.I).strip().lower()
+        if len(name_norm) < 6:
+            continue
+        m[name_norm] = "/servicios/%s/" % slug
+    _SERVICE_NAME_MAP = m
+    return m
+
+
+def _norm_url_path(p):
+    if not p:
+        return p
+    if p.endswith("index.html"):
+        p = p[: -len("index.html")]
+    if not p.endswith("/"):
+        p += "/"
+    return p
+
+
 # ================================================================ CHECKS por pagina
 def check_page(fpath, t, noindex, redirects):
     r = rel(fpath)
@@ -489,6 +533,28 @@ def check_page(fpath, t, noindex, redirects):
                     "Recortar el fragmento colgante al último borde de cláusula completo. "
                     "Auto: python3 .pipeline/fix-colonia-eta.py --apply")
 
+    # --- 14. ancla cuyo TEXTO nombra un servicio real pero el HREF apunta a otro destino
+    #     (regresion vista 3x: "Instalacion de sanitarios" -> hub generico /servicios/ en vez
+    #     de /servicios/instalacion-de-sanitarios/). No es un 404 (el hub existe) asi que el
+    #     check 1 no lo caza; aqui se compara el TEXTO de la ancla contra el H1 real de cada
+    #     pagina de servicio.
+    smap = _service_name_map()
+    for m in re.finditer(r'<a\s+[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', t, re.I):
+        href, text = m.group(1), m.group(2)
+        text_norm = re.sub(r'\s+', ' ', text).strip().lower()
+        text_norm = re.sub(r'\s+en\s+culiac[aá]n.*$', '', text_norm)
+        expected = smap.get(text_norm)
+        if not expected:
+            continue
+        disk, url_path = resolve_to_disk(href, page_dir)
+        if url_path is None:
+            continue
+        url_norm = _norm_url_path(url_path)
+        if url_norm != expected:
+            add("media", r, "links",
+                "Ancla dice '%s' (nombre real de un servicio) pero enlaza a %s en vez de %s" % (text.strip(), href, expected),
+                "Corregir el href para que apunte a la pagina real del servicio que el texto nombra.")
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): el sitio sirve DOS hojas distintas
@@ -579,6 +645,36 @@ def check_css_parity():
                     "Si tras corregir cambia el render, versionar ?v= y subir CACHE_NAME en sw.js.")
 
 
+# ================================================================ CHECK global: aggregateRating
+# aggregateRating debe ser el MISMO en todo el sitio para el mismo LocalBusiness (mismo
+# negocio real) -- caso real 20260709: emergencia-24-7 traia ratingValue 4.7/reviewCount 120
+# mientras 14 paginas mas traian 4.8/150 para el MISMO negocio. Usa el valor MAYORITARIO
+# como verdad (deriva, no inventes) -- solo dispara si hay una mayoria clara (>=50%).
+def check_rating_consistency():
+    from collections import Counter
+    valores = {}
+    for fpath in collect_pages():
+        try:
+            t = read(fpath)
+        except Exception:
+            continue
+        mr = re.search(r'"ratingValue"\s*:\s*"([0-9.]+)"', t)
+        mc = re.search(r'"reviewCount"\s*:\s*"([0-9]+)"', t)
+        if mr and mc:
+            valores[fpath] = (mr.group(1), mc.group(1))
+    if len(valores) < 3:
+        return
+    counts = Counter(valores.values())
+    mayoria, n = counts.most_common(1)[0]
+    if n < len(valores) * 0.5:
+        return  # sin mayoria clara, no hay "verdad" derivable
+    for fpath, val in valores.items():
+        if val != mayoria:
+            add("media", rel(fpath), "seo",
+                "aggregateRating %s/%s difiere del valor mayoritario del sitio %s/%s para el mismo negocio (LocalBusiness)" % (val[0], val[1], mayoria[0], mayoria[1]),
+                "Unificar al valor mayoritario ya existente (deriva, no inventes) salvo que el dueño confirme un cambio real de rating.")
+
+
 # ================================================================ MAIN
 def main():
     redirects = load_redirects()
@@ -588,6 +684,7 @@ def main():
             continue  # stub de redireccion (meta-refresh): no es pagina de contenido
         check_page(fpath, t, has_noindex(t), redirects)
     check_css_parity()
+    check_rating_consistency()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}
