@@ -124,6 +124,88 @@ def _fix_color(h):
     return h, n
 
 
+# ── ancla cuyo TEXTO nombra un servicio real pero el HREF apunta a otro destino (regresion
+#    vista 3x: 2026-07-07/08/09, mecanizada como check 14 de check-plantilla.py pero sin
+#    fixer -> aqui se APLICA el mismo mapeo texto-ancla -> ruta canonica del servicio). ──
+_SERVICE_NAME_MAP_CACHE = None
+
+def _service_name_map_af():
+    global _SERVICE_NAME_MAP_CACHE
+    if _SERVICE_NAME_MAP_CACHE is not None:
+        return _SERVICE_NAME_MAP_CACHE
+    m = {}
+    for fpath in sorted(glob.glob(os.path.join(ROOT, "servicios", "*", "index.html"))):
+        slug = os.path.basename(os.path.dirname(fpath))
+        if slug == "plomero-colonias-culiacan":
+            continue
+        try:
+            txt = open(fpath, encoding="utf-8").read()
+        except Exception:
+            continue
+        h1 = re.search(r'<h1[^>]*>(.*?)</h1>', txt, re.S)
+        if not h1:
+            continue
+        name = re.sub(r'<[^>]+>', '', h1.group(1))
+        name = re.sub(r'\s+', ' ', name).strip()
+        name_norm = re.sub(r'\s+en\s+culiac[aá]n.*$', '', name, flags=re.I).strip().lower()
+        if len(name_norm) < 6:
+            continue
+        m[name_norm] = "/servicios/%s/" % slug
+    _SERVICE_NAME_MAP_CACHE = m
+    return m
+
+def _norm_url_path_af(p):
+    if not p:
+        return p
+    if p.endswith("index.html"):
+        p = p[: -len("index.html")]
+    if not p.endswith("/"):
+        p += "/"
+    return p
+
+def _resolve_href_af(href, page_dir):
+    if href.startswith(("http://", "https://", "mailto:", "tel:", "#", "javascript:")):
+        return None
+    path = href.split("#")[0].split("?")[0]
+    if not path:
+        return None
+    if path.startswith("/"):
+        return path
+    # relativo -> normaliza contra el directorio de la pagina, luego a ruta "/"-absoluta
+    abs_disk = os.path.normpath(os.path.join(page_dir, path))
+    rel_root = os.path.relpath(abs_disk, ROOT).replace(os.sep, "/")
+    return "/" + rel_root
+
+# El detector/fix real necesita el directorio de la pagina (para resolver hrefs relativos),
+# que el contrato (id, desc, riesgo, detecta(h), arregla(h)) de FIXERS no pasa -> se resuelve
+# con un caso especial en cmd_run() (busca fid == "ancla-servicio") en vez de forzar la firma.
+def _scan_and_fix_ancla(t, fpath):
+    """Aplica el fixer ancla-vs-servicio sobre texto YA leído de fpath (necesita su directorio
+    para resolver hrefs relativos). Sustituye por SPAN exacto de cada <a>, nunca por valor de
+    href a secas -> evita el bug 2026-07-10 donde dos anclas distintas compartían el mismo href
+    (p.ej. el nav-link "Servicios" -> /servicios/ Y la ancla rota "Instalación de sanitarios"
+    -> /servicios/ en la MISMA página) y el reemplazo por href tocaba la ancla equivocada."""
+    smap = _service_name_map_af()
+    page_dir = os.path.dirname(fpath)
+    out, last, n = [], 0, 0
+    for m in re.finditer(r'<a\s+[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', t, re.I):
+        href, text = m.group(1), m.group(2)
+        text_norm = re.sub(r'\s+', ' ', text).strip().lower()
+        text_norm = re.sub(r'\s+en\s+culiac[aá]n.*$', '', text_norm)
+        expected = smap.get(text_norm)
+        if not expected:
+            continue
+        url_path = _resolve_href_af(href, page_dir)
+        if url_path is None or _norm_url_path_af(url_path) == expected:
+            continue
+        out.append(t[last:m.start(1)])
+        out.append(expected)
+        last = m.end(1)
+        n += 1
+    out.append(t[last:])
+    return ("".join(out) if n else t), n
+
+
 FIXERS = [
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
@@ -137,6 +219,8 @@ FIXERS = [
      "mecanico", _det_email, _fix_email),
     ("meta-robots", "página indexable sin <meta name=robots> → añade el estándar index,follow (scope: indexables)",
      "mecanico", _det_robots, _fix_robots),
+    ("ancla-servicio", "ancla cuyo TEXTO nombra un servicio real pero el HREF apunta a otro destino → corrige al href canónico (regresión 3x, check 14 de check-plantilla.py)",
+     "mecanico", None, None),  # caso especial en cmd_run(): necesita page_dir para resolver hrefs relativos
 ]
 
 
@@ -151,7 +235,7 @@ SW_FILE = "sw.js"
 
 # Selectores interactivos que DEBEN ser tap-target ≥44px en móvil. Ampliar esta lista cuando
 # un revisor a11y encuentre uno nuevo (así se MECANIZA el fix — FASE 9 del Auto Agente).
-TAP_SELECTORS = [".breadcrumb-item a"]
+TAP_SELECTORS = [".breadcrumb-item a", ".footer-bottom a"]
 
 
 def _bump_sw():
@@ -250,12 +334,16 @@ def _do_full_bump(motivo):
 def _fix_tap_target(css):
     """Garantiza min-height:44px + inline-flex centrado en cada TAP_SELECTORS. Idempotente:
     si la regla ya cumple, 0 cambios. Solo toca reglas STANDALONE (inicio o tras `}`), nunca
-    un selector embebido en un grupo (`.x,.sel{...}`) para no alterar declaraciones compartidas."""
+    un selector embebido en un grupo (`.x,.sel{...}`) para no alterar declaraciones compartidas.
+    Si el selector NO existe todavía en la hoja, AÑADE una regla nueva al final (mismo patrón
+    que las reglas de tap-target existentes) en vez de quedarse callado."""
     n = 0
     for sel in TAP_SELECTORS:
         pat = re.compile(r"(^|\})(" + re.escape(sel) + r")\{([^}]*)\}", re.M)
         m = pat.search(css)
         if not m:
+            css = css.rstrip() + "\n" + sel + "{display:inline-flex;align-items:center;min-height:44px}\n"
+            n += 1
             continue
         decl = m.group(3)
         if "min-height:44px" in decl.replace(" ", ""):
@@ -386,6 +474,12 @@ def cmd_run(args):
         orig = h
         aplicados = []
         for fid, _, _, det, fix in fixers:
+            if fid == "ancla-servicio":
+                h2, n = _scan_and_fix_ancla(h, p)
+                if n:
+                    h = h2
+                    aplicados.append("%s×%d" % (fid, n))
+                continue
             if det(h):
                 h2, n = fix(h)
                 if n:

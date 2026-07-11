@@ -10,8 +10,8 @@ Reusas la infraestructura de Chrome headless ya existente en el proyecto (puppet
 
 Tu trabajo es UNA sola cosa: ejecutar el checker determinista ya construido y devolver su salida sin reinterpretarla.
 
-PASO 1 — ejecuta exactamente:
-    node .pipeline/check-produccion.mjs
+PASO 1 — ejecuta exactamente (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin, y sin él `node` da "command not found" que ANTES se reportaba como falso "verificación ciega" — incidente 2026-07-10):
+    export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-produccion.mjs
 
 PASO 2 — devuelve EXACTAMENTE el JSON que imprimió por stdout (formato común de hallazgos, `categoria` = "produccion"). No inventes ni omitas hallazgos, no cambies los textos. VERIFICACIÓN CIEGA — el script ya degrada con gracia (si Chrome no lanza o la red falla, lo reporta como hallazgo de infra dentro del JSON). Pero si AUN ASÍ el comando no imprime JSON parseable, sale con error, o devuelve un vacío ANÓMALO porque no pudo medir nada (0 URLs golpeadas, Chrome no arrancó y no lo reportó), NO devuelvas `{"hallazgos":[]}` como si producción estuviera sana: devuelve UN hallazgo `{"id":"prod-ciega","archivo":".pipeline/check-produccion.mjs","linea":0,"severidad":"alta","categoria":"produccion","descripcion":"verificación ciega: check-produccion.mjs no devolvió datos (<motivo del fallo>)","fix_sugerido":"Revisar/reparar el checker o el entorno Chrome; mientras tanto producción NO se está verificando"}` con el motivo real como evidencia. (Una corrida exitosa con 0 hallazgos contra producción real SÍ es sana — eso no es ceguera.) NO inventes hallazgos.
 

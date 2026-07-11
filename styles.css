@@ -2695,3 +2695,4 @@ p a[href^="tel:"]:not([class*="btn"]),p a[href*="wa.me"]:not([class*="btn"]),li 
 .footer p a{display:inline-flex;align-items:center;min-height:44px;color:#F8FAFC}
 .read-more{display:inline-flex;align-items:center;min-height:44px}
 section[aria-label="Servicios de Plomería en Culiacán"] a{display:inline-block;padding:0.6rem 0}
+.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
