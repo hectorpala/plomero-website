@@ -1,26 +1,36 @@
-# Meta-pase del Crítico-Sistema — 2026-07-06
+# Meta-pase del Crítico-Sistema — 2026-07-10
 
-Dejé **4 propuestas nuevas**, todas con su DRAFT ya escrito y listas para merge en `docs/PROPUESTAS.md`
-(las nuevas van arriba). Yo no apliqué nada — tú apruebas.
+Dejé **4 propuestas nuevas**, todas con su DRAFT ya escrito y probado en vivo contra el sitio real,
+listas para merge en `docs/PROPUESTAS.md` (las nuevas van arriba). Yo no apliqué nada — tú apruebas.
 
 ## Top 3 por impacto
-1. **(A) Los vigilantes del Plomero pueden confundirse con el sitio del Electricista.** Los dos sitios
-   guardan sus registros de corrida en la MISMA carpeta con el MISMO nombre. El vigilante que revisa
-   "¿corrió hoy el sistema?" y el que recupera corridas saltadas toman "el registro más nuevo" sin fijarse
-   de qué sitio es: si el del Plomero se muere pero el del Electricista sigue corriendo, nadie se enteraría.
-   Lo comprobé hoy con un caso real. El draft les pone apellido a los registros del Plomero (3 parches chicos).
-2. **(A) El sistema lleva 4 días sin completar una corrida y ningún sensor lo dijo.** El 4 de julio no corrió
-   nada (día perdido en silencio) y el 5 de julio la corrida murió a medias por fallas de conexión (3 intentos
-   agotados). Hoy nada lo reporta: el registro simplemente "no tiene fila". El draft añade dos detectores al
-   vigilante de costos: "hubo un día sin corrida" y "la corrida quedó enana (murió a medias); adopta su trabajo".
-3. **(M) Los reintentos "de 2 minutos" pueden ocurrir 15 horas después.** Cuando la Mac se duerme, la espera
-   entre reintentos se congela: un reintento programado para las 8 de la noche corrió a las 3 de la madrugada,
-   y en el sitio hermano uno corrió al día siguiente a media mañana, encimado con otros procesos. El draft
-   pone un límite de reloj real: si ya pasaron más de 3 horas, se abandona y lo recupera la corrida de mañana.
+1. **(A) 6 páginas de zona/colonia usan la coordenada GPS GENÉRICA del centro de Culiacán, no la real.**
+   La regla existe desde el 11 de junio ("cada página local debe tener coordenadas reales y únicas —
+   la genérica es señal de doorway para Google") pero es de las pocas reglas que JAMÁS se mecanizó en un
+   checker, y ya reincidió 3 veces. Lo comprobé hoy en vivo: las 4 páginas de zona (norte/sur/oriente/poniente)
+   + centro comparten la MISMA coordenada, y la colonia "Barrio Estación" también la usa (sus 24 hermanas
+   sí tienen coordenadas reales y distintas). El draft añade el checker que lo cierra para siempre.
+2. **(A) El checker de `twitter:url` solo revisa que la etiqueta EXISTA, nunca que apunte al lugar correcto.**
+   Ese hueco dejó que el mismo bug (la tarjeta de X/Twitter enlazando al HOME en vez de a la página) reincidiera
+   3 veces — la última, dos páginas a la vez, el 9 de julio. Ahora mismo el sitio está limpio (ya lo arreglaron
+   a mano), pero sin este draft el bug vuelve a aparecer la próxima vez que alguien edite una página a mano.
+3. **(M) La garantía se puede contradecir dentro de la MISMA página y nadie lo revisa.** La regla de julio
+   agrupa "garantía, precio o rating" bajo un solo checker, pero ese checker (el que ya existe) solo mira el
+   rating — la garantía se quedó fuera pese a estar nombrada. Probé el draft contra las 86 páginas del sitio
+   HOY: 5 tienen dos duraciones de garantía distintas en el mismo texto (p. ej. "30 días" y "3 meses" en
+   /precios/). Lo dejé en severidad BAJA a propósito — avisa, no autocorrige, porque puede haber garantías
+   legítimamente distintas por línea de servicio y eso necesita ojo humano, no un fixer ciego.
 
-La 4ª (M): el brief ahora dirá cuántos DÍAS lleva esperándote cada decisión pendiente — hay una de 17 días
-(páginas casi gemelas por consolidar) y una de 14 (reconectar el sensor de Google Search Console del CLI).
+La 4ª (B, esfuerzo mínimo): una tarea del backlog (`bk-12b83ae9`, "reautenticar el token de GSC") sigue
+marcada `requiere_humano` desde hace 18 días, pero el problema real se resolvió el 26 de junio por otra vía
+(sin re-login). Es ruido puro en cada corrida — el draft es un solo comando para cerrarla.
 
-**Estado del sistema:** los checkers en sí están sanos y el backlog no tiene tareas bloqueadas; el problema
-de esta semana es de CONTINUIDAD (corridas que no ocurren o mueren a medias sin que nadie lo diga) — las
-propuestas 1-3 cierran justo eso. Todas están listas para merge en `docs/PROPUESTAS.md`.
+**Cómo verifiqué los drafts:** no me quedé en "debería funcionar" — pegué las 3 funciones nuevas en una copia
+de `check-plantilla.py`, la corrí contra el sitio real (86 páginas, 0.76s, sin errores) y confirmé que
+los hallazgos de arriba (6 geo, 0 twitter:url, 5 garantía) coinciden con lo que reporta. La copia de prueba
+ya está borrada — no toqué el checker real.
+
+**Estado del sistema:** el pipeline sigue sano en general (0 corridas perdidas, backlog casi vacío salvo la
+tarea zombie de arriba). El patrón de esta semana es que hay reglas ESCRITAS en REGLAS.md que nunca se
+tradujeron a un checker — las propuestas 1 y 3 cierran ese tipo de hueco puntual; la 2 cierra una regresión
+ya reincidente. Todas están listas para merge en `docs/PROPUESTAS.md`.

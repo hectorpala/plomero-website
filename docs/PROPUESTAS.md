@@ -18,6 +18,180 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [PENDIENTE] seo — `twitter:url` se valida solo por PRESENCIA, no por VALOR (reincidió 3 veces con el HOME en vez del canonical)   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** El check 4f de `check-plantilla.py` (línea 380) solo verifica que `<meta name="twitter:url">` EXISTA en páginas de blog/colonia — nunca compara su VALOR contra el canonical. `check-indexabilidad.py` sí hace esa comparación para `og:url`, pero nadie la hace para `twitter:url`. Resultado: la misma clase de bug (twitter:url apuntando al HOME en vez de la página) reincidió DESPUÉS de que el check de presencia ya existía.
+**Evidencia:** HISTORIAL.jsonl: 2026-06-20 "twitter:url apuntaba a la home... viola canon[ical]"; 2026-07-08 "twitter:url apuntaba a la home en vez del canonical de la página"; 2026-07-09 "instalacion-de-boiler: twitter:url apuntaba al home en vez del canonical. emergencia-24-7 y reparacion-de-boiler[igual]" — 3 recurrencias, la última DOS páginas a la vez, todas DESPUÉS del check de presencia (mecanizado 2026-06-27 por bk-546d0a06). Verificado en vivo con el script de abajo contra las 86 páginas actuales: 0 hallazgos ahora mismo (ya las arreglaron a mano) — el valor de este checker es CERRAR la puerta para que no sea necesaria una 4ª ronda manual.
+**Propuesta:** Añadir un check GLOBAL (paralelo a `check_rating_consistency`) que, para toda página indexable con `<link rel="canonical">`, compare el `content` de `<meta name="twitter:url">` (si existe) contra el canonical y marque MEDIA si difieren.
+**DRAFT (listo para merge — pegar en `.pipeline/check-plantilla.py` justo ANTES de `# ================================================================ CHECK global: aggregateRating`, y añadir la llamada `check_twitter_url_canonical()` en `main()` junto a `check_rating_consistency()`):**
+```python
+# ================================================================ CHECK global: twitter:url == canonical
+# El check 4f (arriba) solo valida que <meta name="twitter:url"> EXISTA -- nunca su VALOR.
+# Bug real recurrente (20260620, 20260708, 20260709): twitter:url apuntaba al HOME en vez del
+# canonical de la pagina; al compartir en X/Twitter la tarjeta enlaza a la URL equivocada.
+def check_twitter_url_canonical():
+    for fpath in collect_pages():
+        try:
+            t = read(fpath)
+        except Exception:
+            continue
+        if has_noindex(t):
+            continue
+        mc = re.search(r'<link[^>]*rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\']', t, re.I)
+        if not mc:
+            continue  # sin canonical -- ya lo caza check-indexabilidad
+        canonical = mc.group(1)
+        mt = re.search(r'<meta[^>]*name=["\']twitter:url["\'][^>]*content=["\']([^"\']+)["\']', t, re.I)
+        if not mt:
+            mt = re.search(r'<meta[^>]*content=["\']([^"\']+)["\'][^>]*name=["\']twitter:url["\']', t, re.I)
+        if mt and mt.group(1) != canonical:
+            add("media", rel(fpath), "seo",
+                "twitter:url (%s) != canonical (%s) -- la tarjeta de X/Twitter enlaza a la URL equivocada" % (mt.group(1), canonical),
+                "Corregir <meta name=\"twitter:url\" content=\"%s\">" % canonical)
+```
+```diff
+--- a/.pipeline/check-plantilla.py
++++ b/.pipeline/check-plantilla.py
+@@ def main():
+     check_css_parity()
+     check_rating_consistency()
++    check_twitter_url_canonical()
+```
+
+## [PENDIENTE] seo — Coordenada GPS GENÉRICA del centro en páginas de zona/colonia — la regla existe desde 2026-06-11 pero JAMÁS se mecanizó (impacto A · esfuerzo M · riesgo bajo)
+**Problema:** REGLAS.md tiene la regla desde el 2026-06-11 ("cada página local debe tener coordenadas GPS reales y únicas, no la coordenada genérica del centro repetida — es señal de doorway"), pero es de las POCAS reglas de esa lista SIN `AUTO en check-X.py` anotado. Reincidió 3 veces (2026-06-30, 2026-07-07, 2026-07-08) y sigue sin arreglar HOY: verificado en vivo, las 4 páginas de zona (`plomero-zona-norte/sur/oriente/poniente-culiacan`) + `plomero-centro-culiacan` comparten LITERALMENTE la misma `geo.position`/`ICBM` (24.7903;-107.3878), y la colonia `barrio-estacion` tiene esa misma latitud/longitud genérica en su JSON-LD (mientras sus 24 colonias hermanas SÍ tienen coordenadas únicas: amorada=24.8352, barrancos=24.7544, centro=24.8093...).
+**Evidencia:** `grep -rl "24.7903" servicios/ | grep -E "zona-(norte|sur|oriente|poniente)|centro-culiacan|colonia"` → 6 páginas HOY (verificado con el script del draft, 0 falsos positivos: se acotó a páginas que EXPLÍCITAMENTE representan una zona/colonia, no a páginas de servicio city-wide como `destape-de-drenajes` donde un centro genérico es defendible).
+**Propuesta:** Añadir un check GLOBAL que, solo para páginas cuyo slug indica una zona/colonia específica (`zona-{norte,sur,oriente,poniente}-culiacan`, `centro-culiacan`, o bajo `/plomero-colonias-culiacan/`), marque MEDIA si `geo.position`/`ICBM`/JSON-LD `latitude`+`longitude` coinciden con el valor genérico conocido del centro (24.7903,-107.3878).
+**DRAFT (listo para merge — pegar en `.pipeline/check-plantilla.py` junto a `check_twitter_url_canonical()`, y añadir la llamada `check_geo_generica()` en `main()`):**
+```python
+# ================================================================ CHECK global: geo generica en zona/colonia
+# REGLAS.md 2026-06-11: cada pagina LOCAL debe tener coordenadas GPS reales y unicas, no la
+# generica del centro (senal de doorway). Reincidio 3 veces (20260630/0707/0708) SIN checker.
+CENTRO_LAT = "24.7903"
+CENTRO_LON = "-107.3878"
+
+
+def _es_pagina_local_especifica(r):
+    return bool(re.search(
+        r'zona-(norte|sur|oriente|poniente)-culiacan|centro-culiacan|/plomero-colonias-culiacan/',
+        r))
+
+
+def check_geo_generica():
+    for fpath in collect_pages():
+        r = rel(fpath)
+        if not _es_pagina_local_especifica(r):
+            continue
+        try:
+            t = read(fpath)
+        except Exception:
+            continue
+        if has_noindex(t):
+            continue
+        fuentes = []
+        mp = re.search(r'<meta[^>]*name=["\']geo\.position["\'][^>]*content=["\']([^"\']+)["\']', t, re.I)
+        if mp and CENTRO_LAT in mp.group(1) and CENTRO_LON in mp.group(1):
+            fuentes.append("meta geo.position")
+        mi = re.search(r'<meta[^>]*name=["\']ICBM["\'][^>]*content=["\']([^"\']+)["\']', t, re.I)
+        if mi and CENTRO_LAT in mi.group(1) and CENTRO_LON in mi.group(1):
+            fuentes.append("meta ICBM")
+        mlat = re.search(r'"latitude"\s*:\s*(-?[0-9.]+)', t)
+        mlon = re.search(r'"longitude"\s*:\s*(-?[0-9.]+)', t)
+        if mlat and mlon and mlat.group(1) == CENTRO_LAT and mlon.group(1) == CENTRO_LON:
+            fuentes.append("JSON-LD latitude/longitude")
+        if fuentes:
+            add("media", r, "seo",
+                "Coordenada GENERICA del centro de Culiacan (%s,%s) en %s -- esta pagina representa "
+                "una zona/colonia especifica y deberia tener su coordenada REAL, no la generica "
+                "(senal de doorway, REGLAS 2026-06-11)" % (CENTRO_LAT, CENTRO_LON, " + ".join(fuentes)),
+                "Poner la coordenada REAL de la zona/colonia (lat/lon real del area que atiende esta "
+                "pagina) en meta geo.position/ICBM y JSON-LD GeoCoordinates, no la generica del centro")
+```
+```diff
+--- a/.pipeline/check-plantilla.py
++++ b/.pipeline/check-plantilla.py
+@@ def main():
+     check_css_parity()
+     check_rating_consistency()
+     check_twitter_url_canonical()
++    check_geo_generica()
+```
+
+## [PENDIENTE] contenido — Garantía contradictoria DENTRO de la misma página — la regla agrupa "garantía, precio o rating" pero el checker (check 15) solo cubre rating   (impacto M · esfuerzo S · riesgo medio — heurística, requiere revisión humana antes de tocar copy)
+**Problema:** REGLAS.md (2026-07-07, ampliada 2026-07-09) dice explícitamente "garantía, **precio** o aggregateRating no puede contradecirse... AUTO en check-plantilla.py check 15 (rating, site-wide)" — pero el check 15 real (línea 653, `check_rating_consistency`) SOLO mira `ratingValue`/`reviewCount`. Garantía quedó fuera pese a estar nombrada en la misma regla, y reincidió 3 veces DESPUÉS de escrita la regla (2026-07-07, 07-08, 07-09).
+**Evidencia:** Corrida en vivo del regex del draft contra las 86 páginas: **5 páginas HOY** con dos duraciones de garantía DISTINTAS en el mismo `<body>` — `precios/index.html` (30 días vs 3 meses), `servicios/desazolve-de-drenajes/index.html` y `servicios/plomero-cerca-de-mi/index.html` (6 meses vs 1 año), y 2 posts de blog (3 vs 6 meses; 6 vs 24 meses). El regex EXCLUYE a propósito "garantía del fabricante"/marcas (Noritz, Rheem) para no confundir la garantía del PRODUCTO con la del SERVICIO — sin ese filtro salían 10 falsos positivos en vez de 5.
+**Propuesta:** Checker heurístico de severidad BAJA (no ALTA: puede haber garantías legítimamente distintas por línea de servicio) que solo AVISA — el `fix_sugerido` pide confirmar a mano antes de unificar, igual que ya hace la regla 2026-07-08 del catálogo JSON-LD ("revisar a mano").
+**DRAFT (listo para merge — pegar en `.pipeline/check-plantilla.py` junto a los checks anteriores, y añadir la llamada `check_garantia_intra_pagina()` en `main()`):**
+```python
+# ================================================================ CHECK global: garantia contradictoria intra-pagina
+# REGLAS.md 2026-07-07/09 agrupa "garantia, precio o rating" pero solo rating se mecanizo
+# (check 15). Heuristica de severidad BAJA: extrae menciones "garantia + duracion", normaliza
+# a dias y avisa si la MISMA pagina trae >=2 valores distintos. Excluye "garantia del
+# fabricante"/marcas (producto, no servicio) para no confundir dos garantias legitimamente
+# distintas. NO autocorrige: el fix pide confirmar a mano (mismo criterio que REGLAS 2026-07-08
+# para el catalogo JSON-LD de Service).
+_DUR_DIAS_UNIDAD = {"dia": 1, "dias": 1, "mes": 30, "meses": 30, "ano": 365, "anos": 365}
+_GARANTIA_EXCLUYE = ("fabricante", "noritz", "rheem", "bosch", "extendida")
+_RE_GARANTIA_1 = re.compile(r'garant[ií]a[^.<]{0,40}?(\d+)\s*(d[ií]as?|mes(?:es)?|a[ñn]os?)', re.I)
+_RE_GARANTIA_2 = re.compile(r'(\d+)\s*(d[ií]as?|mes(?:es)?|a[ñn]os?)[^.<]{0,40}?garant[ií]a', re.I)
+
+
+def _normaliza_duracion(num, unidad):
+    u = unidad.lower().replace("í", "i").replace("ñ", "n")
+    for clave, dias in _DUR_DIAS_UNIDAD.items():
+        if u.startswith(clave):
+            return int(num) * dias
+    return None
+
+
+def check_garantia_intra_pagina():
+    for fpath in collect_pages():
+        r = rel(fpath)
+        try:
+            t = read(fpath)
+        except Exception:
+            continue
+        if has_noindex(t):
+            continue
+        hallados = {}
+        for rx in (_RE_GARANTIA_1, _RE_GARANTIA_2):
+            for m in rx.finditer(t):
+                frag = m.group(0).lower()
+                if any(x in frag for x in _GARANTIA_EXCLUYE):
+                    continue
+                dias = _normaliza_duracion(m.group(1), m.group(2))
+                if dias:
+                    hallados[dias] = m.group(0).strip()[:60]
+        if len(hallados) >= 2:
+            valores = "; ".join("'%s' (~%dd)" % (txt, d) for d, txt in sorted(hallados.items()))
+            add("baja", r, "contenido",
+                "Garantia con valores DISTINTOS en la misma pagina: %s -- puede ser una "
+                "contradiccion real o garantias legitimas de lineas de servicio distintas" % valores,
+                "Revisar A MANO si es contradiccion (unificar al valor mayoritario del sitio, "
+                "REGLAS 2026-07-07) o si son garantias distintas legitimas por servicio/tier; "
+                "NO autocorregir sin confirmar")
+```
+```diff
+--- a/.pipeline/check-plantilla.py
++++ b/.pipeline/check-plantilla.py
+@@ def main():
+     check_css_parity()
+     check_rating_consistency()
+     check_twitter_url_canonical()
+     check_geo_generica()
++    check_garantia_intra_pagina()
+```
+
+## [PENDIENTE] proceso — Backlog `requiere_humano` con una tarea ZOMBIE: `bk-12b83ae9` (reauth GSC) sigue abierta pese a estar resuelta desde el 2026-06-26   (impacto B · esfuerzo S · riesgo bajo)
+**Problema:** `bk-12b83ae9` ("Re-autenticar mcp-local-seo/gsc-token.json") sigue `estado: requiere_humano` en `data/BACKLOG.jsonl`, pero el problema real se resolvió hace 14 días SIN necesidad de re-autenticación: HISTORIAL.jsonl 2026-06-26 registra "GSC REVIVIO via MCP" copiando credenciales vivas de `~/gsc-mcp/` sobre `mcp-local-seo/{client_secret,gsc-token}.json" (sin re-login al cliente OAuth muerto). `check-infra.mjs` ya devuelve `{"hallazgos":[]}` para el sensor GSC. La tarea es ruido puro: cada corrida que lea el backlog (y el brief de `recolecta-señales.py`) sigue reportándola como pendiente de decisión humana cuando no hay decisión que tomar.
+**Evidencia:** `data/BACKLOG.jsonl` bk-12b83ae9 creada 2026-06-22, `cerrado: null` HOY (2026-07-10, 18 días abierta); HISTORIAL 2026-06-26 documenta la resolución real; memoria del propio pipeline (`mcp-local-seo-token.md`) confirma "Resuelto 2026-06-26 SIN re-login". Nota: la propuesta pendiente de este mismo archivo ("Mostrar la EDAD de las tareas requiere_humano") habría mostrado esta tarea con 18 días y ⚠️ ATASCADA — pero eso solo la haría más VISIBLE, no la cierra: sigue siendo ruido porque el objeto ya no aplica.
+**Propuesta:** Cerrar la tarea con el comando propio de `gestor-backlog.py` (no requiere código nuevo — el comando `close` ya existe, línea 167).
+**DRAFT (listo para pegar/ejecutar):**
+```bash
+python3 .pipeline/gestor-backlog.py close --id bk-12b83ae9 --estado descartado --nota "Resuelto 2026-06-26 sin re-auth: credenciales vivas de ~/gsc-mcp copiadas sobre mcp-local-seo/. check-infra.mjs ya da GSC ok. Ver HISTORIAL 2026-06-26."
+```
+
+---
+
 ## [PENDIENTE] infra — Logs compartidos entre sitios: el catch-up y el sensor de frescura del cron pueden leer al ELECTRICISTA como si fuera el Plomero   (impacto A · esfuerzo S · riesgo bajo)
 **Problema:** Los dos sitios (Plomero y Electricista) escriben sus logs de corrida con el MISMO nombre (`auto-agente-<stamp>.log`) en el MISMO directorio (`~/Library/Logs/mantener-sitio/`). Dos sensores del Plomero eligen "el log más nuevo" SIN filtrar por sitio: (1) `catchup.sh` (decide si recuperar una corrida saltada) y (2) `check-infra.mjs` checkCron (el dead-man's switch de "el cron está vivo"). Escenario de fallo: el LaunchAgent del Plomero muere, pero el Electricista sigue corriendo a diario → el catch-up dice "última corrida hace 0h, OK → sin acción" y check-infra dice "cron fresco" — el Plomero queda MUERTO EN SILENCIO, que es exactamente lo que estos dos sensores existen para impedir.
 **Evidencia:** Verificado HOY (2026-07-06): `auto-agente-20260705-201428.log` en ese directorio es del ELECTRICISTA (lo escribió `/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/crecer-diario.sh`, pid 78944; su `claude` reintentaba a las 11:13 con el prompt de electricistaculiacanpro.mx). El `crecer-diario.sh` del Electricista usa el MISMO `LOG_DIR="$HOME/Library/Logs/mantener-sitio"` (su línea 19) y el mismo patrón de nombre. Consumidores sin filtro en ESTE repo: `.pipeline/catchup.sh` línea 23 (`ls -t "$LOG_DIR"/auto-agente-2*.log …`) y `.pipeline/check-infra.mjs` línea 78 (`/^(run|auto-agente)-.*\.log$/`). El marcador `last-run-day` sí está namespaceado (`auto-agente-plomero-last-run-day`) — los logs no.
