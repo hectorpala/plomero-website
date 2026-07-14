@@ -1710,7 +1710,7 @@ a:focus-visible, button:focus-visible, .btn-primary:focus-visible, .card:focus-v
 }
 
 .read-more {
-  color: var(--brand);
+  color: var(--brand-dark);
   text-decoration: none;
   font-weight: 500;
   margin-top: var(--space-sm);
@@ -1719,7 +1719,7 @@ a:focus-visible, button:focus-visible, .btn-primary:focus-visible, .card:focus-v
 }
 
 .read-more:hover {
-  color: var(--brand-dark);
+  color: #9A3412;
   text-decoration: underline;
 }
 
@@ -1822,7 +1822,7 @@ a:focus-visible, button:focus-visible, .btn-primary:focus-visible, .card:focus-v
 }
 
 .blog-content .read-more {
-  color: var(--brand);
+  color: var(--brand-dark);
   text-decoration: none;
   font-weight: 500;
   margin-top: var(--space-sm);
@@ -1831,7 +1831,7 @@ a:focus-visible, button:focus-visible, .btn-primary:focus-visible, .card:focus-v
 }
 
 .blog-content .read-more:hover {
-  color: var(--brand-dark);
+  color: #9A3412;
   text-decoration: underline;
 }
 
@@ -2678,7 +2678,15 @@ a:focus-visible, button:focus-visible, .btn-primary:focus-visible, .card:focus-v
 
 /* === QA móvil 2026-06-11 === */
 @media(max-width:768px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
-.breadcrumb-item a{display:inline-flex;align-items:center;min-height:44px;padding:10px 6px;margin:-8px -2px}
+.breadcrumb{background:#f8f9fa;padding:12px 0;font-size:14px;border-bottom:1px solid #e9ecef}
+.breadcrumb-container{max-width:1200px;margin:0 auto;padding:0 20px}
+.breadcrumb-list{display:flex;align-items:center;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.breadcrumb-item{display:flex;align-items:center}
+.breadcrumb-item a{display:inline-flex;align-items:center;min-height:44px;padding:10px 6px;margin:-8px -2px;color:#C2410C;text-decoration:none;transition:color .2s}
+.breadcrumb-item a:hover{color:#9A3412;text-decoration:underline}
+.breadcrumb-item.active{color:#6c757d}
+.breadcrumb-separator{margin:0 8px;color:#6c757d;user-select:none}
+@media (max-width:768px){.breadcrumb{font-size:13px;padding:10px 0}.breadcrumb-separator{margin:0 6px}}
 .footer-logo img{max-width:200px;height:auto;margin:0 auto;display:block}
 /* Hero móvil con foto-card (paridad con home/colonias) */
 @media(max-width:768px){
