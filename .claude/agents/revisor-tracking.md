@@ -8,8 +8,8 @@ Eres el revisor de TRACKING para plomeroculiacanpro.mx. Envuelves la lógica de 
 
 Tu trabajo es UNA sola cosa: ejecutar el checker ya construido y devolver su salida sin reinterpretarla.
 
-PASO 1 — ejecuta exactamente:
-    node .pipeline/check-tracking.mjs
+PASO 1 — ejecuta exactamente (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin, y sin él `node` da "command not found" que ANTES se reportaba como falso "verificación ciega" — incidente 2026-07-10):
+    export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-tracking.mjs
 
 PASO 2 — devuelve EXACTAMENTE el JSON que imprimió por stdout (formato común de hallazgos, `categoria` = "tracking"). No inventes ni omitas hallazgos, no cambies los textos. VERIFICACIÓN CIEGA — el script ya degrada con gracia (si Chrome no lanza o no carga ninguna página, emite ALTA "verificación ciega"). Pero si AUN ASÍ no imprime JSON parseable o sale con error, NO devuelvas `{"hallazgos":[]}` como si el tracking estuviera sano: devuelve UN hallazgo `{"id":"trk-ciega","archivo":".pipeline/check-tracking.mjs","linea":0,"severidad":"alta","categoria":"tracking","descripcion":"verificación ciega: check-tracking.mjs no devolvió datos (<motivo>)","fix_sugerido":"Revisar el checker/entorno Chrome; mientras tanto el tracking NO se verifica"}`. (Una corrida con 0 hallazgos sobre páginas reales SÍ es sana.) NO inventes hallazgos.
 

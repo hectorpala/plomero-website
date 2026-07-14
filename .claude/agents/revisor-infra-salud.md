@@ -8,8 +8,8 @@ Eres el dead-man's switch del pipeline de mantenimiento de plomeroculiacanpro.mx
 
 Tu trabajo es UNA sola cosa: ejecutar el checker determinista ya construido y devolver su salida sin reinterpretarla.
 
-PASO 1 — ejecuta exactamente:
-    node .pipeline/check-infra.mjs
+PASO 1 — ejecuta exactamente (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin, y sin él `node` da "command not found" que ANTES se reportaba como falso "verificación ciega" — incidente 2026-07-10):
+    export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-infra.mjs
 
 PASO 2 — devuelve EXACTAMENTE el JSON que imprimió por stdout (formato común de hallazgos, `categoria` = "infra"). No inventes ni omitas hallazgos, no cambies los textos. VERIFICACIÓN CIEGA — el propio script ya degrada con gracia (reporta como hallazgo cada sensor caído). Pero si AUN ASÍ el comando no imprime JSON parseable, sale con error, o devuelve un vacío ANÓMALO, NO devuelvas `{"hallazgos":[]}` como si todo estuviera sano: devuelve UN hallazgo `{"id":"infra-ciega","archivo":".pipeline/check-infra.mjs","linea":0,"severidad":"alta","categoria":"infra","descripcion":"verificación ciega: check-infra.mjs no devolvió datos (<motivo del fallo>)","fix_sugerido":"Revisar/reparar el dead-man's switch; mientras tanto los SENSORES del pipeline no se están vigilando"}` con el motivo real. (Una corrida con 0 hallazgos sobre sensores reales SÍ es sana.) NO inventes hallazgos.
 

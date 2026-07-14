@@ -18,6 +18,113 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [HECHO 2026-07-13] infra — 5 revisores llaman `node` SIN el `export PATH` ya probado — el mismo bug ya reincidió 3 veces y solo 1 de 6 sitios de llamada quedó parcheado   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** `node` no está en el PATH por defecto del shell de los subagentes de este pipeline (a veces vive en `/usr/local/bin`, a veces en `/opt/homebrew/bin`). Esto YA causó 3 falsos "verificación ciega" ALTA distintos (infra-002 2026-06-12, perf-real-falsa-ciega 2026-06-21, infra-produccion-path-falso-ciego-20260710), y REGLAS.md tiene la regla desde el 2026-06-12 ("anteponer siempre `export PATH=\"/opt/homebrew/bin:$PATH\" &&` antes de `node ...` en agentes/hooks que lo invoquen"). Pero el fix solo se aplicó al PASO 1 de `revisor-produccion.md` (el agente que disparó el 3er incidente) — los OTROS 5 sitios donde un revisor invoca `node` en su PASO 1/prosa quedaron intactos: `revisor-e2e-funcional.md`, `revisor-infra-salud.md`, `revisor-perf-real.md`, `revisor-tracking.md` (los 4 con el mismo patrón exacto `PASO 1 — ejecuta exactamente:\n    node .pipeline/check-X.mjs`) y `revisor-gsc.md` (invoca `node mcp-local-seo/gsc-index.mjs` en prosa). Es la clase de bug que critico-sistema existe para cazar: una regresión YA identificada y YA mecanizada UNA vez, pero no propagada a sus hermanos — 5 revisores siguen en riesgo de producir el mismo falso ALTA con solo `git status`/reboot descolocando el PATH del shell.
+**Evidencia:** `grep -rl "PATH=" .claude/agents/*.md` → SOLO `revisor-produccion.md`. `grep -L "PATH=" .claude/agents/*.md | xargs grep -l "node \|puppeteer\|Node.js"` → `revisor-e2e-funcional.md`, `revisor-gsc.md`, `revisor-infra-salud.md`, `revisor-perf-real.md`, `revisor-tracking.md` (verificado hoy, líneas exactas listadas abajo). REGLAS.md línea 32 (ampliada 2026-07-10) ya generaliza la regla a "agentes/hooks" — nunca se auditó contra el resto de `.claude/agents/*.md`.
+**Propuesta:** Aplicar el MISMO parche ya probado en `revisor-produccion.md` (línea 13-14) a los otros 5 archivos: anteponer `export PATH="/opt/homebrew/bin:$PATH" && ` a la llamada de `node`, con la misma frase explicativa. Es texto puro en prompts de agente — cero riesgo de romper código, mismo patrón ya en producción hace 3 días sin incidentes.
+**DRAFT (listo para merge — 4 diffs idénticos + 1 distinto para revisor-gsc):**
+```diff
+--- a/.claude/agents/revisor-e2e-funcional.md
++++ b/.claude/agents/revisor-e2e-funcional.md
+@@
+-PASO 1 — ejecuta exactamente:
+-    node .pipeline/check-e2e.mjs
++PASO 1 — ejecuta exactamente (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin, y sin él `node` da "command not found" que ANTES se reportaba como falso "verificación ciega" — incidente 2026-07-10):
++    export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-e2e.mjs
+```
+```diff
+--- a/.claude/agents/revisor-infra-salud.md
++++ b/.claude/agents/revisor-infra-salud.md
+@@
+-PASO 1 — ejecuta exactamente:
+-    node .pipeline/check-infra.mjs
++PASO 1 — ejecuta exactamente (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin, y sin él `node` da "command not found" que ANTES se reportaba como falso "verificación ciega" — incidente 2026-07-10):
++    export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-infra.mjs
+```
+```diff
+--- a/.claude/agents/revisor-perf-real.md
++++ b/.claude/agents/revisor-perf-real.md
+@@
+-PASO 1 — ejecuta exactamente:
+-    node .pipeline/check-perf.mjs
++PASO 1 — ejecuta exactamente (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin, y sin él `node` da "command not found" que ANTES se reportaba como falso "verificación ciega" — incidente 2026-07-10):
++    export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-perf.mjs
+```
+```diff
+--- a/.claude/agents/revisor-tracking.md
++++ b/.claude/agents/revisor-tracking.md
+@@
+-PASO 1 — ejecuta exactamente:
+-    node .pipeline/check-tracking.mjs
++PASO 1 — ejecuta exactamente (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin, y sin él `node` da "command not found" que ANTES se reportaba como falso "verificación ciega" — incidente 2026-07-10):
++    export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-tracking.mjs
+```
+```diff
+--- a/.claude/agents/revisor-gsc.md
++++ b/.claude/agents/revisor-gsc.md
+@@
+-- Si necesitas estado de indexación/sitemap de páginas clave, puedes ejecutar `node mcp-local-seo/gsc-index.mjs`.
++- Si necesitas estado de indexación/sitemap de páginas clave, puedes ejecutar `export PATH="/opt/homebrew/bin:$PATH" && node mcp-local-seo/gsc-index.mjs` (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin — incidente 2026-07-10).
+```
+
+## [PENDIENTE] contenido — Catálogo `Service` en JSON-LD con `description` duplicada entre servicios distintos — REGLAS.md lo marca ALTA y dice literalmente "Sin checker aún"   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** REGLAS.md línea 51 (2026-07-08, CONTENIDO/SCHEMA, severidad ALTA) documenta un bug real: "un catálogo JSON-LD de varios `Service` embebido puede tener su `description` sobreescrita en bloque por error (todas las entidades con la del anfitrión)... Sin checker aún — revisar a mano el `@graph`." Es la única regla de severidad ALTA en todo REGLAS.md sin ningún checker anotado (todas sus vecinas dicen `AUTO en check-X.py`). Si una página nueva o un batch de edición vuelve a sobreescribir `description` en bloque (mismo patrón que ya pasó una vez), nada lo atrapa hasta revisión manual del `@graph`.
+**Evidencia:** `grep -n "^- \[" docs/REGLAS.md | grep -vi AUTO` → línea 51 es la única de severidad `alta` sin checker (comparado con líneas 38/39/44/53/54 que sí son alta y sí tienen `AUTO`/mecanismo). Verificado en vivo con el script del draft contra las páginas actuales: **0 hallazgos hoy** (no hay regresión activa) — el valor es CERRAR la puerta, igual que el proceso ya usado para `twitter:url` (propuesta de arriba, mismo patrón "regla ya escrita, checker cierra la puerta").
+**Propuesta:** Añadir un check GLOBAL a `check-plantilla.py` que, por cada bloque JSON-LD con `@graph`, agrupe las entidades `@type:"Service"` por su `description` exacta; si ≥2 servicios con `name` DISTINTO comparten la MISMA `description`, marca ALTA (coincide con la severidad ya asignada en REGLAS.md). Cero falsos positivos esperados: dos servicios reales nunca deberían tener el mismo texto de descripción palabra por palabra.
+**DRAFT (listo para merge — pegar en `.pipeline/check-plantilla.py` justo ANTES de `# ================================================================ MAIN`, y añadir la llamada `check_service_catalog_description_dup()` en `main()` junto a `check_rating_consistency()`):**
+```python
+# ================================================================ CHECK global: catalogo Service con description duplicada
+# Bug real 2026-07-08 (REGLAS.md, severidad alta, "Sin checker aun"): un catalogo JSON-LD de
+# varios Service embebido en @graph tuvo su description sobreescrita en bloque por error --
+# TODAS las entidades quedaron con la descripcion del anfitrion en vez de la propia.
+def check_service_catalog_description_dup():
+    for fpath in collect_pages():
+        try:
+            t = read(fpath)
+        except Exception:
+            continue
+        for m in re.finditer(
+                r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+                t, re.S | re.I):
+            try:
+                data = json.loads(m.group(1))
+            except Exception:
+                continue
+            graph = data.get("@graph") if isinstance(data, dict) else None
+            if not isinstance(graph, list):
+                continue
+            servicios = []
+            for item in graph:
+                if not isinstance(item, dict):
+                    continue
+                tipo = item.get("@type")
+                tipos = tipo if isinstance(tipo, list) else [tipo]
+                if "Service" not in tipos:
+                    continue
+                nombre, desc = item.get("name"), item.get("description")
+                if nombre and desc:
+                    servicios.append((nombre, desc))
+            if len(servicios) < 2:
+                continue
+            por_desc = {}
+            for nombre, desc in servicios:
+                por_desc.setdefault(desc, set()).add(nombre)
+            for desc, nombres in por_desc.items():
+                if len(nombres) >= 2:
+                    add("alta", rel(fpath), "contenido",
+                        "Catalogo Service en JSON-LD: %d servicios distintos (%s) comparten la MISMA description ('%s...') -- probable sobreescritura en bloque (REGLAS.md 2026-07-08)" % (
+                            len(nombres), ", ".join(sorted(nombres)[:4]), desc[:60]),
+                        "Restaurar la description PROPIA de cada Service (revisar el @graph a mano o el generador que lo produjo); ninguna debe copiar la del anfitrion ni la de otro servicio.")
+```
+```diff
+--- a/.pipeline/check-plantilla.py
++++ b/.pipeline/check-plantilla.py
+@@ def main():
+     check_css_parity()
+     check_rating_consistency()
++    check_service_catalog_description_dup()
+```
+
 ## [PENDIENTE] seo — `twitter:url` se valida solo por PRESENCIA, no por VALOR (reincidió 3 veces con el HOME en vez del canonical)   (impacto A · esfuerzo S · riesgo bajo)
 **Problema:** El check 4f de `check-plantilla.py` (línea 380) solo verifica que `<meta name="twitter:url">` EXISTA en páginas de blog/colonia — nunca compara su VALOR contra el canonical. `check-indexabilidad.py` sí hace esa comparación para `og:url`, pero nadie la hace para `twitter:url`. Resultado: la misma clase de bug (twitter:url apuntando al HOME en vez de la página) reincidió DESPUÉS de que el check de presencia ya existía.
 **Evidencia:** HISTORIAL.jsonl: 2026-06-20 "twitter:url apuntaba a la home... viola canon[ical]"; 2026-07-08 "twitter:url apuntaba a la home en vez del canonical de la página"; 2026-07-09 "instalacion-de-boiler: twitter:url apuntaba al home en vez del canonical. emergencia-24-7 y reparacion-de-boiler[igual]" — 3 recurrencias, la última DOS páginas a la vez, todas DESPUÉS del check de presencia (mecanizado 2026-06-27 por bk-546d0a06). Verificado en vivo con el script de abajo contra las 86 páginas actuales: 0 hallazgos ahora mismo (ya las arreglaron a mano) — el valor de este checker es CERRAR la puerta para que no sea necesaria una 4ª ronda manual.
