@@ -37,6 +37,12 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     fallback CSS global, por eso baja).                 (f44ef39f)
  11. perf   (baja)  theme-color == #0066cc (placeholder prohibido); o pagina indexable
                     sin meta theme-color alguna.                   (bd9ccadf, fdc89c6c)
+ 16. a11y   (media) <img> con DOS atributos alt en la misma etiqueta (el 2do se pierde
+                    silenciosamente).                        (a11y-alt-duplicado-20260714)
+ 17. perf   (media) srcset/imagesrcset con la misma URL repetida bajo descriptores de
+                    ancho distintos (srcset falso).            (perf-srcset-falso-20260714)
+ 18. seo    (media) JSON-LD @id == dominio raiz sin fragmento (huerfano/duplicado, no
+                    consolida reviews/rating).              (seo-jsonld-id-huerfano-20260714)
 """
 import os
 import re
@@ -554,6 +560,44 @@ def check_page(fpath, t, noindex, redirects):
             add("media", r, "links",
                 "Ancla dice '%s' (nombre real de un servicio) pero enlaza a %s en vez de %s" % (text.strip(), href, expected),
                 "Corregir el href para que apunte a la pagina real del servicio que el texto nombra.")
+
+    # --- 16. <img> con DOS atributos alt en la misma etiqueta (media, a11y)
+    #     el navegador solo usa el primero; el segundo se pierde SIN error visible.
+    #     Caso a11y-alt-duplicado-srcset-falso-emergencia24-7-20260714.
+    for tag in img_tags:
+        if len(re.findall(r'\balt\s*=', tag, re.I)) > 1:
+            add("media", r, "a11y",
+                "<img> con DOS atributos alt en la misma etiqueta (el navegador solo usa el primero): %s" % tag[:80],
+                "Eliminar el alt duplicado y conservar solo la descripcion correcta de la foto")
+
+    # --- 17. srcset/imagesrcset con la MISMA url bajo descriptores de ancho distintos
+    #     (media, perf): ej. "foto.webp 600w, foto.webp 1024w" -- ambos descriptores apuntan
+    #     al mismo archivo real, mintiendo al navegador sobre el tamano disponible.
+    #     Mismo caso 20260714 (6 imagenes de emergencia-24-7).
+    for tag in img_tags + re.findall(r'<source\b[^>]*>', t, re.I):
+        for attrname in ("srcset", "imagesrcset"):
+            sv = attr(tag, attrname)
+            if not sv:
+                continue
+            urls = [e.strip().split()[0] for e in sv.split(",") if e.strip()]
+            dup = sorted({u for u in urls if urls.count(u) > 1})
+            if dup:
+                add("media", r, "perf",
+                    "%s con la misma URL repetida bajo descriptores de ancho distintos (srcset falso): %s" % (attrname, ", ".join(dup)),
+                    "Si solo existe UNA variante real, no declarar varios anchos ficticios; "
+                    "cada descriptor debe apuntar a un archivo de ese ancho real (verificar con sips)")
+
+    # --- 18. JSON-LD @id igual al dominio raiz SIN fragmento (huerfano/duplicado)
+    #     Toda entidad legitima del grafo usa fragmento (#organization/#business/#website/
+    #     #service-*); un @id pelon = home rompe la consolidacion de reviews/ratings en Google.
+    #     Caso seo-jsonld-provider-duplicado-emergencia24-7-20260714 (y 9 paginas mas ya
+    #     confirmadas con el mismo patron: Review.itemReviewed huerfano o LocalBusiness dup).
+    if re.search(r'"@id"\s*:\s*"%s/?"' % re.escape(BASE), t):
+        add("media", r, "seo",
+            "JSON-LD @id sin fragmento (== dominio raiz) — huerfano o entidad duplicada, "
+            "no consolida con la entidad LocalBusiness real del grafo (#organization/#business)",
+            "Reemplazar por una referencia al @id real (.../#organization o .../#business) "
+            "en vez del dominio pelon")
 
 
 # ================================================================ CHECK global: paridad CSS
