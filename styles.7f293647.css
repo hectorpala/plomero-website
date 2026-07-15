@@ -2699,7 +2699,7 @@ a:focus-visible, button:focus-visible, .btn-primary:focus-visible, .card:focus-v
 .table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
 .footer-links a{display:inline-block;padding:8px 0;margin:-4px 0;color:#F8FAFC}
-p a[href^="tel:"]:not([class*="btn"]),p a[href*="wa.me"]:not([class*="btn"]),li a[href^="tel:"]:not([class*="btn"]),li a[href*="wa.me"]:not([class*="btn"]){display:inline-block;padding:12px 6px;margin:-10px -4px}.hero-phone-link{padding:12px 6px;margin:-10px -4px}
+p a[href^="tel:"]:not([class*="btn"]),p a[href*="wa.me"]:not([class*="btn"]),li a[href^="tel:"]:not([class*="btn"]),li a[href*="wa.me"]:not([class*="btn"]){display:inline-block;padding:12px 6px;margin:-10px -4px}.hero-phone-link{padding:12px 6px;margin:-10px -4px}.section p a:not([class*="btn"]):not(.read-more):not([href^="tel:"]):not([href*="wa.me"]),.section li a:not([class*="btn"]):not(.nav-link):not([href^="tel:"]):not([href*="wa.me"]){display:inline-block;padding:12px 4px;margin:-10px -4px}
 .footer p a{display:inline-flex;align-items:center;min-height:44px;color:#F8FAFC}
 .read-more{display:inline-flex;align-items:center;min-height:44px}
 section[aria-label="Servicios de Plomería en Culiacán"] a{display:inline-block;padding:0.6rem 0}
