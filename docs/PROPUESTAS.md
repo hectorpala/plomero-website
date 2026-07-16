@@ -18,6 +18,139 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [PENDIENTE] a11y/movil — Denylist de color prohibido en `.breadcrumb-item` — reincidió 3 veces (07-09/07-13/07-14) por vivir en `<style>` inline por-página, y `.breadcrumb-item.active` sigue fallando AA HOY en las 3 hojas compartidas   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** El contraste del breadcrumb es la regresión MÁS reincidente del sistema. `.breadcrumb-item a{color:#E36414}` (3.26-3.27:1, falla AA 4.5:1) reapareció el 2026-07-09, el 2026-07-13 (la propia corrida lo diagnosticó: "el fix nunca se centralizó — vivía duplicado en el `<style>` inline de cada página y en ninguna parte del CSS compartido") y de nuevo el 2026-07-14 en 2 páginas más. Cada vez el "fix" fue manual y por-página, así que la siguiente página nueva/editada podía volver a traer el valor viejo. Además, verificado en vivo HOY (2026-07-15) contra los 3 CSS servidos: **`.breadcrumb-item.active{color:#6c757d}` SIGUE en la hoja compartida** (4.44-4.45:1, bajo AA 4.5:1) — la propia corrida del 07-14 lo detectó y lo dejó explícitamente `"arreglado": false, "pendiente": true` por ser "un cambio site-wide fuera de alcance de una sola corrida", y nunca se promovió a `BACKLOG.jsonl` (no aparece ahí) — quedó huérfano. Ninguno de los dos vive hoy en `check-plantilla.py`: el propio docstring del archivo dice explícitamente "Lo subjetivo (contraste...) NO está aquí" — pero esto YA NO es subjetivo, es un par (selector, color prohibido) conocido y medido 5 veces.
+**Evidencia:** `data/HISTORIAL.jsonl` — `a11y-breadcrumb-color-inline-20260709`, `a11y-regresion-breadcrumb-color-20260713`, `a11y-breadcrumb-color-regresion-20260714` (las 3 con `#E36414`→`#C2410C`), `a11y-breadcrumb-active-contraste-marginal-20260714` (`"pendiente": true`, sin fix). Verificado en vivo: `grep -o '\.breadcrumb-item\.active[^}]*}' styles.css styles.min.css styles.7f293647.css` → `.breadcrumb-item.active{color:#6c757d}` en las 3, HOY. `grep "6c757d" data/BACKLOG.jsonl` → 0 resultados (nunca se abrió tarea).
+**Propuesta:** (1) Checker nuevo (check 19 de `check-plantilla.py`) con una DENYLIST explícita de `(selector, color prohibido, color correcto)` — arranca con los 2 pares ya medidos 5 veces — que marca cualquier página cuyo `<style>` inline traiga el valor prohibido, MÁS un check global que vigila las 3 hojas compartidas (así el `.breadcrumb-item.active` actual sale ALTA/MEDIA en la próxima corrida en vez de seguir invisible). (2) Auto-fixer gemelo (página + asset) que corrige automáticamente al valor correcto, reutilizando el bump de `?v=`/sw.js ya existente para el asset fixer. Ámbito deliberadamente ESTRECHO (solo los 2 pares ya evidenciados) — no es contraste general, es cerrar una clase de bug específica y ya medida.
+**DRAFT (listo para merge — 1/3 pegar en `.pipeline/check-plantilla.py`, dentro de `check_page()` justo antes de `# ================================================================ CHECK global: paridad CSS`, y añadir un nuevo check global + su llamada en `main()`):**
+```python
+    # --- 19. denylist de (selector, color prohibido): pares que YA regresaron 3+ veces por
+    #     vivir duplicados en <style> INLINE por-página en vez de las 3 hojas compartidas (nunca
+    #     se centralizaron -> cada página nueva/editada podía traer el valor viejo). Ver
+    #     REGLAS.md (CSS/PARIDAD, consolidada 2026-06-19/2026-07-13) e HISTORIAL
+    #     a11y-breadcrumb-color-inline-20260709 / -regresion-...-20260713 / -...-20260714.
+    for block in re.findall(r'<style\b[^>]*>(.*?)</style>', t, re.S | re.I):
+        for sel, bad, good, evidencia in DENYLIST_COLOR:
+            if re.search(re.escape(sel) + r'\s*\{[^}]*\bcolor\s*:\s*' + re.escape(bad) + r'\b', block, re.I):
+                add("media", r, "a11y",
+                    "%s con color:%s INLINE en el <style> de esta página (%s)" % (sel, bad, evidencia),
+                    "Cambiar a color:%s (ya es el valor correcto en las 3 hojas compartidas); "
+                    "mejor aún, borrar el bloque <style> inline duplicado y dejar que herede de "
+                    "styles*.css (la duplicación es la causa raíz de la reincidencia)" % good)
+```
+```python
+# Denylist compartida entre el check de página (19) y el check global de las 3 hojas.
+# Cada par ya reincidió como bug real medido con Chrome headless -- no es un umbral de
+# contraste general, es cerrar UNA clase de bug ya vista 3+ veces.
+DENYLIST_COLOR = (
+    (".breadcrumb-item a", "#E36414", "#C2410C",
+     "3.26-3.27:1, falla AA 4.5:1 -- reincidió 2026-07-09/07-13/07-14"),
+    (".breadcrumb-item.active", "#6c757d", "#475569",
+     "4.44-4.45:1, justo bajo AA 4.5:1 -- sigue en las 3 hojas compartidas HOY, marcado "
+     "pendiente 2026-07-14 sin fix"),
+)
+
+
+# ================================================================ CHECK global: denylist de color en las 3 hojas compartidas
+def check_denylist_color_css():
+    for c in sorted(glob.glob(os.path.join(ROOT, "styles*.css"))):
+        css = read(c)
+        for sel, bad, good, evidencia in DENYLIST_COLOR:
+            if re.search(re.escape(sel) + r'\s*\{[^}]*\bcolor\s*:\s*' + re.escape(bad) + r'\b', css, re.I):
+                add("media", rel(c), "a11y",
+                    "%s sigue con color:%s en la hoja compartida (%s)" % (sel, bad, evidencia),
+                    "Cambiar a color:%s en styles.css + styles.min.css + styles.<hash>.css, "
+                    "bump ?v= en las páginas y CACHE_NAME en sw.js" % good)
+```
+```diff
+--- a/.pipeline/check-plantilla.py
++++ b/.pipeline/check-plantilla.py
+@@ def main():
+     check_css_parity()
+     check_rating_consistency()
++    check_denylist_color_css()
+```
+**DRAFT (2/3 — auto-fixer gemelo en `.pipeline/auto-fixers.py`; función compartida por el fixer de página y el asset fixer, reutiliza el bump ?v=/sw.js ya existente en `cmd_run_assets`):**
+```python
+# ── denylist de (selector, color prohibido) YA reincidente 3+ veces (check 19 de
+#    check-plantilla.py / check_denylist_color_css). Misma función sirve para el <style>
+#    inline de una página Y para el CSS compartido -- el patrón solo ancla en el texto
+#    "selector{...color:bad" y es agnóstico de si eso vive dentro de HTML o de un .css. ──
+_DENYLIST_COLOR = (
+    (".breadcrumb-item a", "#E36414", "#C2410C"),
+    (".breadcrumb-item.active", "#6c757d", "#475569"),
+)
+
+def _det_denylist_color(h):
+    return any(
+        re.search(re.escape(sel) + r'\s*\{[^}]*?\bcolor\s*:\s*' + re.escape(bad) + r'\b', h, re.I)
+        for sel, bad, good in _DENYLIST_COLOR)
+
+def _fix_denylist_color(h):
+    n = 0
+    for sel, bad, good in _DENYLIST_COLOR:
+        pat = re.compile(r'(' + re.escape(sel) + r'\s*\{[^}]*?\bcolor\s*:\s*)' + re.escape(bad) + r'\b', re.I)
+        h, k = pat.subn(r'\g<1>' + good, h)
+        n += k
+    return h, n
+```
+```diff
+--- a/.pipeline/auto-fixers.py
++++ b/.pipeline/auto-fixers.py
+@@ FIXERS = [
+     ("ancla-servicio", "ancla cuyo TEXTO nombra un servicio real pero el HREF apunta a otro destino → corrige al href canónico (regresión 3x, check 14 de check-plantilla.py)",
+      "mecanico", None, None),  # caso especial en cmd_run(): necesita page_dir para resolver hrefs relativos
++    ("denylist-color-inline", "color prohibido conocido (.breadcrumb-item a #E36414, .breadcrumb-item.active #6c757d) duplicado en <style> inline de la página → valor AA-safe centralizado (regresión 3x, check 19 de check-plantilla.py)",
++     "mecanico", _det_denylist_color, _fix_denylist_color),
+ ]
+@@ ASSET_FIXERS = [
+     ("tap-target-44",
+      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump sw.js",
+      "mecanico", _fix_tap_target),
++    ("denylist-color-css",
++     "color prohibido conocido (.breadcrumb-item a, .breadcrumb-item.active) en las 3 hojas compartidas → valor AA-safe + bump sw.js",
++     "mecanico", _fix_denylist_color),
+ ]
+```
+**DRAFT (3/3 — REGLAS.md, añadir a la regla existente en la línea 13 la referencia al checker nuevo para que quede AUTO-anotada como las demás):**
+```diff
+--- a/docs/REGLAS.md
++++ b/docs/REGLAS.md
+@@
+-- [2026-06-11, consolidada 2026-06-19/2026-07-13/2026-07-14] CSS/PARIDAD: las 3 hojas (styles.css=fuente no servida; min/hash=servidas) deben tener las MISMAS reglas — `check-css-paridad.py`. Un fix que solo vive en un `<style>` inline por-página REGRESA al perder esa página su copia local (breadcrumb #E36414→#C2410C reincidió 3 veces, la última 2026-07-14) — centralizar SIEMPRE en las 3 hojas + bump ?v=/sw.js. Severidad: media.
++- [2026-06-11, consolidada 2026-06-19/2026-07-13/2026-07-14/2026-07-15] CSS/PARIDAD: las 3 hojas (styles.css=fuente no servida; min/hash=servidas) deben tener las MISMAS reglas — `check-css-paridad.py`. Un fix que solo vive en un `<style>` inline por-página REGRESA al perder esa página su copia local (breadcrumb #E36414→#C2410C reincidió 3 veces, la última 2026-07-14; `.breadcrumb-item.active` #6c757d sigue fallando AA hoy) — centralizar SIEMPRE en las 3 hojas + bump ?v=/sw.js. AUTO en `check-plantilla.py` check 19 (`check_denylist_color_css` + inline) + auto-fixer `denylist-color-inline`/`denylist-color-css`. Severidad: media.
+```
+
+## [PENDIENTE] costo/cuota — `recolecta-señales.py` marca "PICO" usando `total_tokens` crudo, dominado por `cache_read` barato — la alarma de costo no mide costo real   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** `sec_costos()` (línea 68) dispara "⚠️ PICO" cuando `total_tokens` de la última corrida supera 1.5× la mediana — pero `total_tokens` sale de sumar `input+output+cache_write+cache_read`, y `cache_read` (lectura de caché, ~10% del precio de un token normal) domina el total: en la corrida del 2026-07-14, de 148.1M tokens totales, 144.0M (97%) fueron `cache_read`. El propio `costos.jsonl` YA calcula `usd_equiv_api_ref` (el $ real, con precio por-modelo desde el 2026-07-09) en cada entrada, pero `sec_costos()` no lo usa para la alarma — así que el brief puede gritar "PICO" en una corrida barata (mucho cache, poco $ nuevo) y quedarse callado en una corrida cara con menos tokens pero de tipos caros. El propio brief de HOY lo confirma: marcó PICO en la corrida del 07-14 (148.1M tokens) mientras la corrida del 07-13 gastó MÁS $ real ($119.19 vs $77.23) con tokens totales similares (284.3M) y ni siquiera es la última.
+**Evidencia:** `.pipeline/costos.jsonl` línea del 2026-07-14: `"cache_read_tokens":144043570` de `"total_tokens":148072897` (97.2%) con `"usd_equiv_api_ref":77.23`. Línea del 2026-07-13: `"usd_equiv_api_ref":119.19` (54% más caro en $ real) pero NO fue la que disparó el PICO de hoy porque ya no es la última corrida. `.pipeline/recolecta-señales.py` línea 62-69: `tot = [x.get("total_tokens", 0) for x in c]` y la comparación en línea 68 usa `tot`, nunca `usd_equiv_api_ref`.
+**Propuesta:** Cambiar el disparador de PICO de `total_tokens` a `usd_equiv_api_ref` (el $ real que el propio pipeline ya calcula por-modelo desde 2026-07-09), y anotar cuando tokens-altos NO se traduce en $-alto (para no perder la señal de "corrida con mucho cache" como dato informativo, solo dejar de tratarla como alarma).
+**DRAFT (listo para merge — reemplaza `sec_costos()` completa en `.pipeline/recolecta-señales.py`):**
+```python
+def sec_costos():
+    c = _jsonl(".pipeline/costos.jsonl")
+    print("## COSTO/CUOTA — uso por corrida (%d corridas registradas)" % len(c))
+    if not c:
+        print("  (sin datos)\n"); return
+    tot = [x.get("total_tokens", 0) for x in c]
+    usd = [x.get("usd_equiv_api_ref", 0) for x in c]
+    ult = c[-1]
+    mediana = sorted(tot)[len(tot) // 2]
+    mediana_usd = sorted(usd)[len(usd) // 2]
+    print("  Últimas corridas (M tokens): " + " · ".join("%.1f" % (t / 1e6) for t in tot[-6:]))
+    print("  Últimas corridas (USD equiv): " + " · ".join("$%.0f" % x for x in usd[-6:]))
+    print("  Mediana: %.1fM tok / $%.2f · última: %.1fM tok / $%.2f (%s)" % (
+        mediana / 1e6, mediana_usd, ult.get("total_tokens", 0) / 1e6,
+        ult.get("usd_equiv_api_ref", 0), ult.get("etiqueta", "")))
+    ult_usd = ult.get("usd_equiv_api_ref", 0)
+    if mediana_usd > 0 and ult_usd > 1.5 * mediana_usd:
+        print("  ⚠️ PICO DE COSTO REAL ($): la última corrida costó >1.5× la mediana en USD → ¿qué la disparó?")
+    elif ult.get("total_tokens", 0) > 1.5 * mediana and mediana > 0:
+        print("  (nota: total_tokens fue >1.5× la mediana pero el $ real NO — probablemente "
+              "cache_read barato, no es una alarma de costo real)")
+    print()
+```
+
 ## [HECHO 2026-07-13] infra — 5 revisores llaman `node` SIN el `export PATH` ya probado — el mismo bug ya reincidió 3 veces y solo 1 de 6 sitios de llamada quedó parcheado   (impacto A · esfuerzo S · riesgo bajo)
 **Problema:** `node` no está en el PATH por defecto del shell de los subagentes de este pipeline (a veces vive en `/usr/local/bin`, a veces en `/opt/homebrew/bin`). Esto YA causó 3 falsos "verificación ciega" ALTA distintos (infra-002 2026-06-12, perf-real-falsa-ciega 2026-06-21, infra-produccion-path-falso-ciego-20260710), y REGLAS.md tiene la regla desde el 2026-06-12 ("anteponer siempre `export PATH=\"/opt/homebrew/bin:$PATH\" &&` antes de `node ...` en agentes/hooks que lo invoquen"). Pero el fix solo se aplicó al PASO 1 de `revisor-produccion.md` (el agente que disparó el 3er incidente) — los OTROS 5 sitios donde un revisor invoca `node` en su PASO 1/prosa quedaron intactos: `revisor-e2e-funcional.md`, `revisor-infra-salud.md`, `revisor-perf-real.md`, `revisor-tracking.md` (los 4 con el mismo patrón exacto `PASO 1 — ejecuta exactamente:\n    node .pipeline/check-X.mjs`) y `revisor-gsc.md` (invoca `node mcp-local-seo/gsc-index.mjs` en prosa). Es la clase de bug que critico-sistema existe para cazar: una regresión YA identificada y YA mecanizada UNA vez, pero no propagada a sus hermanos — 5 revisores siguen en riesgo de producir el mismo falso ALTA con solo `git status`/reboot descolocando el PATH del shell.
 **Evidencia:** `grep -rl "PATH=" .claude/agents/*.md` → SOLO `revisor-produccion.md`. `grep -L "PATH=" .claude/agents/*.md | xargs grep -l "node \|puppeteer\|Node.js"` → `revisor-e2e-funcional.md`, `revisor-gsc.md`, `revisor-infra-salud.md`, `revisor-perf-real.md`, `revisor-tracking.md` (verificado hoy, líneas exactas listadas abajo). REGLAS.md línea 32 (ampliada 2026-07-10) ya generaliza la regla a "agentes/hooks" — nunca se auditó contra el resto de `.claude/agents/*.md`.
