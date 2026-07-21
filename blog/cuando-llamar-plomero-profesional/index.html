@@ -597,17 +597,6 @@ if (window.requestIdleCallback) {
     });
     </script>
 
-    <script>
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                const abierto = navMenu.classList.toggle('active');
-                mobileMenuBtn.classList.toggle('active');
-                mobileMenuBtn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
-            });
-        }
-    </script>
+<script src="../../main.js?v=20260619" defer></script>
 </body>
 </html>

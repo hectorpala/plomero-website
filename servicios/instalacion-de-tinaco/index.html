@@ -961,13 +961,6 @@ if (window.requestIdleCallback) {
 
     <!-- Mobile Menu Script -->
     <script>
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        mobileMenuBtn?.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-
         // Track WhatsApp clicks
         document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
             link.addEventListener('click', () => {
@@ -980,5 +973,6 @@ if (window.requestIdleCallback) {
             });
         });
     </script>
+<script src="../../main.js?v=20260619" defer></script>
 </body>
 </html>

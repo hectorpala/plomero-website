@@ -532,17 +532,6 @@ if (window.requestIdleCallback) {
     </footer>
 
     <script>
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('.nav-menu');
-
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenuBtn.classList.toggle('active');
-            });
-        }
-    </script>
-    <script>
     document.querySelector('form[name="contact-blog-fugas"]')?.addEventListener('submit', function(e) {
         dataLayer.push({
             'event': 'form_submit',
@@ -551,5 +540,6 @@ if (window.requestIdleCallback) {
         });
     });
     </script>
+<script src="../../main.js?v=20260619" defer></script>
 </body>
 </html>

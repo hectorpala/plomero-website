@@ -43,6 +43,13 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     ancho distintos (srcset falso).            (perf-srcset-falso-20260714)
  18. seo    (media) JSON-LD @id == dominio raiz sin fragmento (huerfano/duplicado, no
                     consolida reviews/rating).              (seo-jsonld-id-huerfano-20260714)
+ 19. a11y   (media) Denylist de (selector, color) que ya reincidio 3+ veces por vivir
+                    duplicado en <style> INLINE en vez de las 3 hojas compartidas.
+                                                        (a11y-breadcrumb-color-inline)
+ 20. movil  (alta/  Pagina indexable con boton .mobile-menu-btn pero SIN main.js: si
+     media)         ademas no hay ningun listener inline para ese boton, el menu movil
+                    esta ROTO (alta); si hay listener inline, solo falta SW/tracking/
+                    exit-intent (media).                       (movil-menu-sin-mainjs-20260718)
 """
 import os
 import re
@@ -599,6 +606,61 @@ def check_page(fpath, t, noindex, redirects):
             "Reemplazar por una referencia al @id real (.../#organization o .../#business) "
             "en vez del dominio pelon")
 
+    # --- 19. denylist de (selector, color prohibido): pares que YA regresaron 3+ veces por
+    #     vivir duplicados en <style> INLINE por-pagina en vez de las 3 hojas compartidas
+    #     (nunca se centralizaron -> cada pagina nueva/editada podia traer el valor viejo).
+    #     Ver REGLAS.md (CSS/PARIDAD) e HISTORIAL a11y-breadcrumb-color-inline-*.
+    for block in re.findall(r'<style\b[^>]*>(.*?)</style>', t, re.S | re.I):
+        for sel, bad, good, evidencia in DENYLIST_COLOR:
+            if re.search(re.escape(sel) + r'\s*\{[^}]*\bcolor\s*:\s*' + re.escape(bad) + r'\b', block, re.I):
+                add("media", r, "a11y",
+                    "%s con color:%s INLINE en el <style> de esta pagina (%s)" % (sel, bad, evidencia),
+                    "Cambiar a color:%s (ya es el valor correcto en las 3 hojas compartidas); "
+                    "mejor aun, borrar el bloque <style> inline duplicado y dejar que herede de "
+                    "styles*.css (la duplicacion es la causa raiz de la reincidencia)" % good)
+
+    # --- 20. boton .mobile-menu-btn sin main.js (que registra el listener real, el SW,
+    #     tracking y exit-intent). Si tampoco hay un listener INLINE de respaldo, el menu
+    #     movil esta completamente roto (confirmado 2026-07-20: 24 colonias + 1 hub + 4
+    #     blogs con 0 JS en absoluto sobre el boton). Ver REGLAS.md PLANTILLA/JS 2026-07-20.
+    if not noindex and re.search(r'class="mobile-menu-btn"', t) and not re.search(r'main\.js', t):
+        tiene_listener_inline = re.search(
+            r"querySelector\(['\"]\.mobile-menu-btn['\"]\)[\s\S]{0,400}addEventListener", t)
+        if tiene_listener_inline:
+            add("media", r, "movil",
+                "Boton .mobile-menu-btn sin main.js (el menu funciona por un listener inline, "
+                "pero nunca registra el Service Worker ni tracking/exit-intent/validacion de formulario)",
+                "Agregar <script src=\".../main.js?v=...\"> y retirar el listener inline duplicado")
+        else:
+            add("alta", r, "movil",
+                "Boton .mobile-menu-btn SIN main.js y SIN ningun listener inline — el menu movil "
+                "esta COMPLETAMENTE ROTO (el boton no responde al clic, imposible navegar en movil)",
+                "Agregar <script src=\".../main.js?v=...\"> (registra el toggle real del menu)")
+
+
+# Denylist compartida entre el check de pagina (19) y el check global de las 3 hojas.
+# Cada par ya reincidio como bug real medido con Chrome headless -- no es un umbral de
+# contraste general, es cerrar UNA clase de bug ya vista 3+ veces.
+DENYLIST_COLOR = (
+    (".breadcrumb-item a", "#E36414", "#C2410C",
+     "3.26-3.27:1, falla AA 4.5:1 -- reincidio 2026-07-09/07-13/07-14/07-16"),
+    (".breadcrumb-item.active", "#6c757d", "#475569",
+     "4.44-4.45:1, justo bajo AA 4.5:1 -- sigue en las 3 hojas compartidas, marcado "
+     "pendiente 2026-07-14 sin fix"),
+)
+
+
+# ================================================================ CHECK global: denylist de color en las 3 hojas compartidas
+def check_denylist_color_css():
+    for c in sorted(glob.glob(os.path.join(ROOT, "styles*.css"))):
+        css = read(c)
+        for sel, bad, good, evidencia in DENYLIST_COLOR:
+            if re.search(re.escape(sel) + r'\s*\{[^}]*\bcolor\s*:\s*' + re.escape(bad) + r'\b', css, re.I):
+                add("media", rel(c), "a11y",
+                    "%s sigue con color:%s en la hoja compartida (%s)" % (sel, bad, evidencia),
+                    "Cambiar a color:%s en styles.css + styles.min.css + styles.<hash>.css, "
+                    "bump ?v= en las paginas y CACHE_NAME en sw.js" % good)
+
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): el sitio sirve DOS hojas distintas
@@ -729,6 +791,7 @@ def main():
         check_page(fpath, t, has_noindex(t), redirects)
     check_css_parity()
     check_rating_consistency()
+    check_denylist_color_css()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}
