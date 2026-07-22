@@ -235,7 +235,7 @@ SW_FILE = "sw.js"
 
 # Selectores interactivos que DEBEN ser tap-target ≥44px en móvil. Ampliar esta lista cuando
 # un revisor a11y encuentre uno nuevo (así se MECANIZA el fix — FASE 9 del Auto Agente).
-TAP_SELECTORS = [".breadcrumb-item a", ".footer-bottom a"]
+TAP_SELECTORS = [".breadcrumb-item a", ".footer-bottom a", ".article-content a"]
 
 
 def _bump_sw():
