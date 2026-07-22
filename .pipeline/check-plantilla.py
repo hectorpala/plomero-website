@@ -50,6 +50,8 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
      media)         ademas no hay ningun listener inline para ese boton, el menu movil
                     esta ROTO (alta); si hay listener inline, solo falta SW/tracking/
                     exit-intent (media).                       (movil-menu-sin-mainjs-20260718)
+ 21. seo    (media) FAQPage JSON-LD con distinto numero de preguntas que el FAQ visible
+                    (.faq-item) — pierde elegibilidad a rich-results.  (faq-mismatch-20260721)
 """
 import os
 import re
@@ -636,6 +638,20 @@ def check_page(fpath, t, noindex, redirects):
                 "Boton .mobile-menu-btn SIN main.js y SIN ningun listener inline — el menu movil "
                 "esta COMPLETAMENTE ROTO (el boton no responde al clic, imposible navegar en movil)",
                 "Agregar <script src=\".../main.js?v=...\"> (registra el toggle real del menu)")
+
+    # --- 21. FAQPage JSON-LD: el numero de preguntas debe COINCIDIR con el FAQ visible
+    #     (.faq-item). Un mismatch pierde elegibilidad a rich-results y viola la guia de
+    #     Google de que el markup FAQ refleje el FAQ visible. Hallazgo critico-completitud
+    #     2026-07-21 (reparacion-de-boiler 5 vs 6, tecnico-de-gas-culiacan 5 vs 7).
+    n_visible = len(re.findall(r'class="faq-item"', t))
+    if n_visible and re.search(r'"@type"\s*:\s*"FAQPage"', t):
+        n_jsonld = len(re.findall(r'"@type"\s*:\s*"Question"', t))
+        if n_jsonld != n_visible:
+            add("media", r, "seo",
+                "FAQPage JSON-LD tiene %d pregunta(s) pero el FAQ visible (.faq-item) tiene %d "
+                "— el markup no refleja el contenido real" % (n_jsonld, n_visible),
+                "Igualar el conteo: cada pregunta visible necesita su Question+acceptedAnswer "
+                "en el FAQPage, y viceversa")
 
 
 # Denylist compartida entre el check de pagina (19) y el check global de las 3 hojas.
