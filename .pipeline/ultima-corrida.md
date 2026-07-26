@@ -1,36 +1,138 @@
-# Auto Agente Plomero — parte del 2026-07-21
-**Resultado:** encontré 12, arreglé 7 · 2 para ti · 3 no pude · publicado
+## ⚠️ AVISO AUTOMÁTICO — el parte no cuadra con los cambios reales
+**Esto lo verificó el sistema, NO el agente.** Revisa el parte de abajo con ojo crítico — puede faltar o sobrar algo de lo reportado:
 
-Hola Héctor, esto es lo que hice hoy solo.
-Encontré 12 cosas: arreglé 7 · 2 necesitan tu decisión · 3 no pude arreglar solo.
+📋 Cuadre del parte: arreglé=None/✅0 · para-ti=None/⏳0 · no-pude=None/⚠️0 · mejoras/🌱0 · URLs 0
 
-## ✅ Arreglé (7)
-- El texto de las "migas de pan" (esa línea de arriba tipo "Inicio > Servicios > Reparación de Boiler") tenía un color naranja y un gris que no se leen bien sobre fondo claro (bajo el mínimo de accesibilidad para personas con baja visión) en **27 páginas** — este mismo problema ya lo había detectado 3 veces antes y siempre se corregía "a medias" porque el color vivía copiado dentro de cada página en vez de en el diseño central. Hoy até el cabo: corregí las 27 páginas Y encontré que el diseño central también tenía el error, así que ya no debería volver a aparecer → https://plomeroculiacanpro.mx/contacto/ , https://plomeroculiacanpro.mx/precios/ , https://plomeroculiacanpro.mx/servicios/ , https://plomeroculiacanpro.mx/servicios/emergencia-24-7/ , https://plomeroculiacanpro.mx/servicios/reparacion-de-boiler/ , https://plomeroculiacanpro.mx/servicios/reparacion-de-bombas-de-agua/ , https://plomeroculiacanpro.mx/servicios/tecnico-de-gas-culiacan/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-oriente-culiacan/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-norte-culiacan/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-sur-culiacan/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-poniente-culiacan/ , https://plomeroculiacanpro.mx/servicios/plomero-centro-culiacan/ , https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/ , https://plomeroculiacanpro.mx/servicios/cambio-de-tuberias/ , https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/ , https://plomeroculiacanpro.mx/servicios/destape-de-bano-inodoro/ , https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/ , https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/ , https://plomeroculiacanpro.mx/servicios/plomeria-comercial/ , https://plomeroculiacanpro.mx/servicios/reparacion-de-llaves-y-mezcladoras/ , https://plomeroculiacanpro.mx/blog/baja-presion-agua-causas-soluciones/ , https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/ , https://plomeroculiacanpro.mx/blog/cuanto-cobra-plomero-visita-culiacan/ , https://plomeroculiacanpro.mx/blog/cuanto-cuesta-cambiar-taza-bano-culiacan/ , https://plomeroculiacanpro.mx/blog/cuanto-cuesta-plomeria-bano-completo-culiacan/ , https://plomeroculiacanpro.mx/blog/drenaje-tapado-senales-prevencion/ , https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
-- Un dato técnico interno (el "identificador" que usa Google para saber que varias páginas hablan del MISMO negocio) estaba mal puesto en **9 páginas** — apuntaba "al aire" en vez de a tu ficha de negocio real, lo que le dificulta a Google juntar tus reseñas y tu calificación en una sola ficha en vez de varias sueltas → https://plomeroculiacanpro.mx/servicios/destape-de-drenajes/ , https://plomeroculiacanpro.mx/servicios/plomero-colonias-culiacan/ , https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/ , https://plomeroculiacanpro.mx/servicios/reparacion-de-boiler/ , https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/ , https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/ , https://plomeroculiacanpro.mx/servicios/plomero-economico/ , https://plomeroculiacanpro.mx/servicios/reparacion-de-fugas/ , https://plomeroculiacanpro.mx/servicios/tecnico-de-gas-culiacan/
-- El enlace "Servicio 24/7" en **9 páginas** mandaba a una página intermedia de puro rebote en vez de ir directo a la página real de emergencias — lo redirigía bien, pero de forma indirecta y más lenta. Lo puse directo al destino final → https://plomeroculiacanpro.mx/servicios/plomeria-comercial/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-poniente-culiacan/ , https://plomeroculiacanpro.mx/servicios/reparacion-de-bombas-de-agua/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-oriente-culiacan/ , https://plomeroculiacanpro.mx/servicios/instalacion-de-cisternas/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-norte-culiacan/ , https://plomeroculiacanpro.mx/servicios/mantenimiento-de-boiler/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-sur-culiacan/ , https://plomeroculiacanpro.mx/servicios/instalacion-de-sanitarios/
-- En la página de **Reparación de Boiler** encontré 3 cosas encimadas: (1) la foto principal estaba "estirada" porque el sitio pensaba que era rectangular cuando en realidad es cuadrada — la corregí para que se vea nítida y sin distorsión; (2) el resumen de preguntas frecuentes que Google puede mostrar directo en el buscador le faltaban 2 preguntas que sí están visibles en tu página (garantía y mantenimiento preventivo) — las agregué; (3) esa misma pregunta de mantenimiento preventivo decía "desde $600", un precio viejo que contradice el precio real que ya tienes publicado en tu página de Precios y en la página de Mantenimiento de Boiler ($800-$1,500) — lo corregí para que diga lo mismo en todos lados → https://plomeroculiacanpro.mx/servicios/reparacion-de-boiler/
-- En la página de **Técnico de Gas** el dato de horario que le mandas a Google decía "abierto 24 horas los 7 días", pero el texto de tu propia página aclara que el 24/7 es solo para emergencias de gas y que el horario normal es lunes a sábado de 8am a 7pm — corregí el dato para que coincida con lo que tú mismo dices en la página (no inventé nada, lo saqué de tu propio texto). También le faltaban 2 preguntas frecuentes al resumen que ve Google, igual que en boiler — las agregué → https://plomeroculiacanpro.mx/servicios/tecnico-de-gas-culiacan/
-- En el blog "5 Problemas de Plomería Más Comunes" había una caja de ayuda con fondo naranja fuerte y letras que casi no se leían bien (poco contraste) — la cambié al mismo estilo claro y legible que ya usas en otros artículos del blog. De paso: quité un título invisible duplicado que se estaba mostrando por error, hice que los enlaces de "Artículos Relacionados" sean más fáciles de tocar con el dedo en el celular, y le agregué a la página los mismos aceleradores de carga que ya tienen sus páginas hermanas → https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
-- El botón de menú de celular en 4 páginas decía "Menu" en inglés (sin acento) en vez de "Menú" en español — pequeño detalle para las personas que usan lector de pantalla, ya que tu sitio está en español → https://plomeroculiacanpro.mx/servicios/reparacion-de-bombas-de-agua/ , https://plomeroculiacanpro.mx/servicios/plomero-zona-oriente-culiacan/ , https://plomeroculiacanpro.mx/servicios/tecnico-de-gas-culiacan/ , https://plomeroculiacanpro.mx/blog/problemas-comunes-plomeria-culiacan/
+❌ EL PARTE NO CUADRA con los cambios reales:
+   • falta la línea `**Resultado:**` (de ahí sale el asunto del correo).
+   • no encuentro el conteo «Encontré N: arreglé X · Y necesitan tu decisión · Z no pude arreglar solo» — el parte no sigue la estructura esperada.
 
-## ⚠️ Encontré pero NO pude arreglar solo (3)
-- El mismo problema de "preguntas frecuentes incompletas para Google" que corregí en boiler y técnico de gas también aparece en **otras 12 páginas** de tu sitio (incluida la portada y Precios) — hoy le enseñé a mi robot revisor a detectarlo solo de ahora en más, pero corregir las 12 a mano es una tarea completa que dejo para una próxima corrida.
-- La página de **Técnico de Gas** usa, como foto principal, una foto de un boiler (no de una instalación de gas) porque no tengo ninguna foto real de gas guardada en el sitio — no quise poner otra foto que tampoco fuera de gas solo por poner algo; hace falta una foto real del servicio o generar una nueva.
-- Detalles menores de accesibilidad que quedaron fuera del alcance de hoy: otras ~63 páginas del sitio también dicen "Menu" en inglés en el botón del celular (solo corregí las 4 de arriba), y varios iconos decorativos (🔥💨⚡) se los "leen en voz alta" de más los lectores de pantalla sin que aporten información. Son detalles de pulido, no rompen nada.
+---
 
-## 🌱 Mejoré / agregué (0)
-Sin páginas nuevas hoy: revisé las búsquedas reales de la gente en Google (522 clics y 53,253 apariciones en el mes, ambos subiendo) y todo lo que la gente busca ya tiene su página dedicada en tu sitio; no inventé páginas nuevas porque eso dañaría tu posicionamiento. El día se fue en reparar a fondo el problema de color que llevaba 3 corridas sin resolverse del todo.
+> ⚙️ Esta corrida la ejecutó CODEX (respaldo automático: Claude alcanzó su límite de cuota). Alcance reducido: solo mantenimiento mecánico, sin crecimiento ni cambios de contenido.
 
-## 🧠 Aprendí hoy (para no volver a fallar)
-- El problema del color de las migas de pan no era solo que cada página tuviera su copia vieja — el diseño CENTRAL del sitio también tenía un color viejo escondido. A partir de ahora reviso ambos lugares a la vez, no solo las páginas sueltas.
-- Cuando copio un dato que YA existe en el texto de una página hacia la parte técnica que lee Google (el "resumen" de preguntas frecuentes), tengo que comparar ese precio contra tu página de Precios ANTES de darlo por bueno — hoy amplifiqué sin querer un precio viejo ($600) que ya estaba mal escrito en la página, al copiarlo tal cual. Ya quedó documentado para revisarlo siempre antes de publicar.
-- Enseñé a mi robot revisor a comparar, en cada página, cuántas preguntas frecuentes hay escritas Y cuántas le está diciendo a Google que hay — si no coinciden, tu página pierde la oportunidad de aparecer con ese cuadrito extra de preguntas y respuestas directo en el buscador.
+# encontré 7, arreglé 0 · 4 para ti · no publicado
 
-(ya van 52 reglas aprendidas en total)
+Héctor: corrí el respaldo con alcance reducido. No publiqué porque hubo verificación ciega ALTA en los checkers que dependen de Chrome headless y porque este entorno no pudo crear la rama de respaldo exigida.
 
-## ⏳ Necesito que tú decidas (2)
-- En las páginas de Reparación de Boiler y Técnico de Gas hay 3 reseñas de clientes con nombre y colonia (ej. "Ricardo P., La Campiña") que no puedo confirmar si son reales o si quedaron ahí de una plantilla vieja — ¿son reseñas reales de clientes tuyos? Si no lo son, hay que quitarlas (nunca debemos inventar reseñas).
-- La página de la zona Oriente de Culiacán sigue compartiendo exactamente las mismas coordenadas de mapa que las zonas Norte y Poniente (esto lleva semanas pendiente) — necesito la ubicación real de referencia de cada zona para poner un mapa correcto y distinto en cada una; no puedo inventar coordenadas.
+## Qué encontré
 
-## 📦 ¿Se publicó?
-Sí, todo revisado dos veces por mi propio robot verificador independiente (en la primera pasada encontró un precio que yo había dejado mal, lo corregí, y en la segunda pasada confirmó que todo quedó bien) y ya está en vivo; le avisé a Google para que lo muestre. Nota honesta: hoy toqué más páginas de las que normalmente me permito en un solo día (32 en vez de máximo 18), porque era el mismo tipo de arreglo mecánico (mismo color, mismo dato técnico, mismo enlace) repetido en muchas páginas — la misma situación que ya se dio el 20 de julio, y decidí de nuevo que valía la pena resolverlo todo de una vez en vez de dejarlo repartido en varios días.
+1. Verificación ciega ALTA en Chrome headless.
+   Evidencia:
+   ```text
+   check-e2e.mjs
+   "verificación ciega: no se pudo lanzar Chrome headless ..."; "analizadas": 0
+
+   check-produccion.mjs
+   "No se pudo lanzar Chrome headless (puppeteer) ... No se ejecutaron los checks de consola JS, wa.me, mixed-content ni formulario"
+
+   check-tracking.mjs
+   "verificación ciega: no se pudo lanzar Chrome headless ..."; "analizadas": 0
+   ```
+
+2. No se pudo crear la rama de respaldo.
+   Evidencia:
+   ```text
+   git checkout -b auto/respaldo-codex-$(date +%Y%m%d-%H%M)
+   fatal: cannot lock ref 'refs/heads/auto/respaldo-codex-20260724-2142': Unable to create ... Operation not permitted
+   ```
+
+3. Secretos en historial git, pendiente humano ya conocido.
+   Evidencia:
+   ```text
+   bash .pipeline/check-secretos.sh
+   sec-001: client-secret-value aparece en 3 línea(s) añadida(s) del historial
+   sec-002: google-client-secret-gocspx aparece en 1 línea(s) añadida(s) del historial
+   analizadas: 523
+   ```
+
+4. No pude apagar el listener existente en 8080 por permisos del entorno.
+   Evidencia:
+   ```text
+   lsof -nP -iTCP:8080 -sTCP:LISTEN
+   Python  71396 openclaw  TCP *:8080 (LISTEN)
+
+   /bin/kill -TERM 71396
+   kill: 71396: Operation not permitted
+   ```
+
+## Qué arreglé
+
+Nada. No hubo hallazgos mecánicos locales con ruta de HTML/CSS/enlaces para aplicar `auto-fixers.py`. Los bloqueos de hoy son de entorno/operación y requieren intervención fuera del sitio servido.
+
+## Evidencia de health check
+
+```text
+python3 -m http.server 8080
+PID 87931
+
+curl -sI http://127.0.0.1:8080/
+HTTP/1.0 200 OK
+
+curl -sI http://127.0.0.1:8080/contacto/
+HTTP/1.0 200 OK
+
+curl -sI http://127.0.0.1:8080/servicios/
+HTTP/1.0 200 OK
+
+curl -sI http://127.0.0.1:8080/blog/
+HTTP/1.0 200 OK
+```
+
+## Evidencia de checkers deterministas
+
+```text
+python3 .pipeline/check-plantilla.py
+{"hallazgos":[]}
+
+python3 .pipeline/check-indexabilidad.py
+{"hallazgos":[]}
+
+python3 .pipeline/check-nap.py
+{"hallazgos":[],"analizadas":80}
+
+python3 .pipeline/check-conversion.py
+{"hallazgos":[],"analizadas":68}
+
+python3 .pipeline/check-linking.py
+{"hallazgos":[],"analizadas":68}
+
+export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-infra.mjs
+{"hallazgos":[]}
+
+export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-e2e.mjs
+e2e-001 ALTA · verificación ciega · analizadas: 0
+
+export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-produccion.mjs
+prod-001 ALTA · Chrome headless no lanza
+
+export PATH="/opt/homebrew/bin:$PATH" && node .pipeline/check-tracking.mjs
+trk-001 ALTA · verificación ciega · analizadas: 0
+
+bash .pipeline/check-secretos.sh
+2 hallazgos ALTA en historial git; analizadas: 523
+```
+
+## Evidencia de candado local
+
+```text
+python3 .pipeline/ci-gate.py
+▶ check-plantilla.py: 0 ALTA · 0 media/baja
+▶ check-indexabilidad.py: 0 ALTA · 0 media/baja
+▶ check-estructura-sitio.py: 0 ALTA · 0 media/baja
+▶ check-rutas-pipeline.py: 0 ALTA · 0 media/baja
+
+✅ Gate OK: sin hallazgos de severidad ALTA.
+```
+
+## Pendiente para Claude / humano
+
+- Corregir el entorno para que Chrome/Puppeteer arranque, o definir `PUPPETEER_EXECUTABLE_PATH`, y repetir `check-e2e`, `check-produccion` y `check-tracking`.
+- Revisar por qué este entorno no puede escribir locks en `.git/refs/heads/auto/respaldo-codex-*`.
+- Cerrar o reapropiar el listener Python PID `71396` en puerto 8080; Codex no pudo matarlo por permisos del sandbox.
+- Rotar/revocar los secretos históricos reportados por `check-secretos.sh`.
+- Retomar o descartar el árbol heredado en `auto/diario-20260723-0903`; Codex no lo publicó ni lo revirtió.
+
+## Publicación
+
+No publicado. Razón: principio rector "ante la duda, no publiques"; hubo verificación ciega ALTA y no se pudo crear la rama exigida por el procedimiento.

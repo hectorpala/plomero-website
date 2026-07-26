@@ -18,6 +18,68 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [PENDIENTE] links — Ancla a redirect-stub: check 14 solo caza texto==nombre-de-servicio, la clase MÁS ANCHA (cualquier texto, ej. "Servicio 24/7") reincidió 4 veces y HOY siguen viviendo 11 instancias sin mecanizar   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** El sitio tiene 6 páginas "redirect-stub" (`servicios/plomero/{24-7,cerca-de-mi,a-domicilio,colonias,precios,index}/index.html`, `<meta http-equiv="refresh">` + `<link rel="canonical">` al destino real) que existen solo por compatibilidad de URLs viejas. Cada vez que se descubre una página enlazando a uno de estos stubs en vez de al destino final, se corrige a mano SOLO en el lote de la corrida de ese día — nunca se mecanizó un check que cace el patrón completo. El check 14 existente (`ancla-servicio`, `check-plantilla.py` línea ~551) es estructuralmente incapaz de cerrar esto: compara el TEXTO de la ancla contra el H1 real de cada `servicios/<slug>/`, así que solo caza cuando el texto coincide con el nombre exacto de un servicio ("Instalación de sanitarios" → hub genérico). Anclas GENÉRICAS como "Servicio 24/7" o "Plomero cerca de mí" (que no calzan ningún H1) escapan por diseño — por eso la MISMA clase de bug reincidió con "patrón amplio" 4 veces (2026-07-07, -09, -14 ×2, -21) y cada vez el hallazgo dice literalmente "no mecanizado aún" / "fuera del lote de hoy".
+**Evidencia:** `data/HISTORIAL.jsonl`: `pend-links-ancla-servicio-20260709` ("16 instancias MÁS... no mecanizado, ci-gate lo mostrará"... pero ci-gate solo corre check 1/14 tal como están, no un check de stubs), `links-ancla-24-7-redirect-stub-patron-amplio-20260714` ("10 páginas más... check-plantilla check 14 no lo caza porque el texto no coincide con ningún H1"), `links-ancla-24-7-redirect-stub-amplio` (2026-07-21, "9 páginas... sin fixer genérico"). Verificado en vivo HOY (2026-07-24) con `grep -rl 'href="[^"]*plomero/24-7/\?"' --include=*.html .` (excluyendo el propio stub): **2 páginas** (`servicios/plomero-colonias-culiacan/index.html`, `partials/footer_nav.html`) siguen enlazando al stub `24-7`; `plomero/cerca-de-mi` → 2 páginas; `plomero/a-domicilio` → 2 páginas; `plomero/precios` → **5 páginas** (incluye 3 del blog) — **11 instancias vivas** de la misma clase, hoy, sin checker que las cace.
+**Propuesta:** Check nuevo (22) en `check-plantilla.py`: precomputa un mapa {ruta del stub → destino canónico} leyendo el `<link rel="canonical">` de toda página que sea `is_stub()` (ya existe esa función, usada hoy solo para excluir stubs de otros checks — nunca para cazar quién enlaza A ellos). Luego, por cada `<a href>` de cada página (sin importar el texto — cierra el hueco estructural del check 14), si el href resuelve a un stub, reporta el destino final. Cero dependencia de coincidencia de texto, así que cierra la clase completa de una vez en vez de re-descubrirla cada semana con un texto de ancla nuevo.
+**DRAFT (listo para merge — 1/2 pegar cerca de `_service_name_map()` en `.pipeline/check-plantilla.py`, ANTES de `def _norm_url_path`):**
+```python
+_STUB_MAP = None
+
+
+def _stub_target_map():
+    """Mapa {url_path normalizada del stub -> destino canonico}, para cazar CUALQUIER
+    ancla (sin importar el texto) que enlace a un redirect-stub (meta refresh) en vez
+    de su destino final. El check 14 solo caza texto-de-ancla == nombre de servicio;
+    esta clase es MAS ANCHA y reincidio 4 veces (07-07/07-09/07-14/07-21) via anclas
+    genericas ("Servicio 24/7", "Plomero cerca de mi") que nunca calzan contra un H1."""
+    global _STUB_MAP
+    if _STUB_MAP is not None:
+        return _STUB_MAP
+    m = {}
+    for fpath in collect_pages():
+        try:
+            txt = read(fpath)
+        except Exception:
+            continue
+        if not is_stub(txt):
+            continue
+        cm = re.search(r'<link\s+rel=["\']canonical["\']\s+href=["\']([^"\']+)["\']', txt, re.I)
+        if not cm:
+            continue
+        stub_url = _norm_url_path("/" + os.path.relpath(fpath, ROOT).replace(os.sep, "/"))
+        target_path = re.sub(r'^https?://[^/]+', '', cm.group(1))
+        m[stub_url] = _norm_url_path(target_path)
+    _STUB_MAP = m
+    return m
+```
+**DRAFT (2/2 — pegar dentro de `check_page()`, justo después del bloque `# --- 14. ancla cuyo TEXTO nombra un servicio real...`):**
+```python
+    # --- 22. ancla (CUALQUIER texto) que enlaza a un redirect-stub (meta refresh) en vez de
+    #     su destino final. Clase MAS ANCHA que el check 14 (que solo caza texto==nombre de
+    #     servicio): reincidio 4 veces (07-07/07-09/07-14/07-21) via anclas genericas como
+    #     "Servicio 24/7" o "Plomero cerca de mi" que nunca calzan contra un H1 real -- cada
+    #     vez se redescubrio a mano "N paginas mas fuera del lote de hoy" en vez de que lo
+    #     cazara el checker.
+    stub_map = _stub_target_map()
+    if stub_map:
+        for m in re.finditer(r'<a\s+[^>]*href="([^"]+)"[^>]*>', t, re.I):
+            href = m.group(1)
+            disk, url_path = resolve_to_disk(href, page_dir)
+            if url_path is None:
+                continue
+            url_norm = _norm_url_path(url_path)
+            target = stub_map.get(url_norm)
+            if target and target != url_norm:
+                add("media", r, "links",
+                    "Ancla enlaza al redirect-stub %s en vez del destino final %s" % (url_norm, target),
+                    "Cambiar el href directo al destino final (%s); el stub sigue vivo por si algo "
+                    "externo lo referencia, pero los enlaces internos deben ser directos" % target)
+```
+Nota aparte (no bloqueante, mismo hallazgo): `partials/footer_nav.html` — que trae 3 de los 4 hrefs de stub — no está referenciado por ningún generador (`grep -rn footer_nav *.py *.js *.sh` → 0 resultados); es un archivo huérfano que además desincroniza si alguien lo edita pensando que se usa. Candidato para `.pipeline/limpiar-huerfanos.py` si sigue sin uso tras el check nuevo.
+
+---
+
 ## [PENDIENTE] a11y/movil — Denylist de color prohibido en `.breadcrumb-item` — reincidió 3 veces (07-09/07-13/07-14) por vivir en `<style>` inline por-página, y `.breadcrumb-item.active` sigue fallando AA HOY en las 3 hojas compartidas   (impacto A · esfuerzo S · riesgo bajo)
 **Problema:** El contraste del breadcrumb es la regresión MÁS reincidente del sistema. `.breadcrumb-item a{color:#E36414}` (3.26-3.27:1, falla AA 4.5:1) reapareció el 2026-07-09, el 2026-07-13 (la propia corrida lo diagnosticó: "el fix nunca se centralizó — vivía duplicado en el `<style>` inline de cada página y en ninguna parte del CSS compartido") y de nuevo el 2026-07-14 en 2 páginas más. Cada vez el "fix" fue manual y por-página, así que la siguiente página nueva/editada podía volver a traer el valor viejo. Además, verificado en vivo HOY (2026-07-15) contra los 3 CSS servidos: **`.breadcrumb-item.active{color:#6c757d}` SIGUE en la hoja compartida** (4.44-4.45:1, bajo AA 4.5:1) — la propia corrida del 07-14 lo detectó y lo dejó explícitamente `"arreglado": false, "pendiente": true` por ser "un cambio site-wide fuera de alcance de una sola corrida", y nunca se promovió a `BACKLOG.jsonl` (no aparece ahí) — quedó huérfano. Ninguno de los dos vive hoy en `check-plantilla.py`: el propio docstring del archivo dice explícitamente "Lo subjetivo (contraste...) NO está aquí" — pero esto YA NO es subjetivo, es un par (selector, color prohibido) conocido y medido 5 veces.
 **Evidencia:** `data/HISTORIAL.jsonl` — `a11y-breadcrumb-color-inline-20260709`, `a11y-regresion-breadcrumb-color-20260713`, `a11y-breadcrumb-color-regresion-20260714` (las 3 con `#E36414`→`#C2410C`), `a11y-breadcrumb-active-contraste-marginal-20260714` (`"pendiente": true`, sin fix). Verificado en vivo: `grep -o '\.breadcrumb-item\.active[^}]*}' styles.css styles.min.css styles.7f293647.css` → `.breadcrumb-item.active{color:#6c757d}` en las 3, HOY. `grep "6c757d" data/BACKLOG.jsonl` → 0 resultados (nunca se abrió tarea).
