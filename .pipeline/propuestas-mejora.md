@@ -46,3 +46,68 @@ Se revisaron los 22 archivos `revisor-*.md`, `docs/REGLAS.md`, `data/HISTORIAL.j
 - **Acción:** ampliar `check-indexabilidad` para exigir formato ISO uniforme del `<lastmod>` y compararlo con el mtime de git del archivo (desfase grande → media). Mecánico/auto-derivable.
 - **Regla nueva:** "SEO/SITEMAP: `<lastmod>` en formato ISO uniforme y coherente con la fecha real de última edición (git). Formatos mixtos hoy. Severidad: baja."
 
+
+---
+
+## 2026-07-23 — Huecos ciegos detectados (lote rotativo: instalacion-de-sanitarios, mantenimiento-de-boiler, plomeria-comercial, plomero-zona-norte-culiacan, plomero-zona-sur-culiacan)
+
+Crítico de completitud (FASE 3). SOLO propuestas — no se modificó nada del pipeline ni del sitio.
+Se compararon las 5 páginas del lote contra el esqueleto (home) y hermanas sanas. Abajo, categorías que HOY ningún revisor cubre, con evidencia real del lote. Se evita re-listar los 6 huecos del 2026-07-14; el único que se repite se marca como RECURRENCIA.
+
+### HUECO 7 — Piso de enlazado interno SALIENTE / paridad de cross-sell entre hermanas (media)
+- **Por qué es hueco:** `revisor-enlazado-interno` (`check-linking.py`) solo caza huérfanas (0 enlaces ENTRANTES) y profundidad > 3 clics. NINGÚN revisor mira la escasez de enlaces SALIENTES contextuales: una página puede no estar huérfana (la alcanza el footer/nav) y aun así no repartir autoridad ni ofrecer rutas de navegación temática. Evidencia del lote (enlaces en el CUERPO a páginas hermanas `/servicios/…` o `/blog/…`, distintos):
+  - `servicios/mantenimiento-de-boiler/` — **0** enlaces salientes en el cuerpo a hermanas.
+  - `servicios/instalacion-de-sanitarios/` — **1**.
+  - `servicios/plomeria-comercial/`, `plomero-zona-norte-culiacan/`, `plomero-zona-sur-culiacan/` — **6 cada una** (tejidos en prosa: baja-presión, instalación-de-boiler, emergencia-24-7, colonias, cerca-de-mí…).
+  - Ninguna de las 3 páginas de servicio tiene una sección "Servicios relacionados"; las zona-pages compensan con enlaces en prosa, pero boiler/sanitarios quedaron casi sin salientes. Viola de facto la regla 2026-06-18 ("cross-sell como las hermanas") pero ningún checker lo verifica.
+- **Acción:** ampliar `check-linking.py` (revisor-enlazado-interno) para marcar toda página indexable cuyos enlaces SALIENTES en el cuerpo a hermanas `/servicios/` o `/blog/` caigan bajo un PISO (p.ej. < 3) o muy por debajo de la mediana de sus hermanas. Auto-detectable; el arreglo (elegir a qué hermanas enlazar) lo hace el fixer-autonomo copiando el patrón de una hermana sana.
+- **Regla nueva para REGLAS.md:** "SEO/ENLAZADO-SALIENTE: cada página de servicio/zona indexable debe tejer ≥3 enlaces internos en el cuerpo a hermanas relevantes (boiler tenía 0, sanitarios 1 vs 6 de las hermanas). AUTO en check-linking (piso saliente + paridad vs mediana). Severidad: media."
+
+### HUECO 8 — Review/Rating self-serving en páginas de SERVICIO (no solo /blog/) + disparidad de cobertura (media)
+- **Por qué es hueco:** `check-plantilla.py` check 3 caza `aggregateRating`/`Review` self-serving SOLO si la ruta empieza con `blog/` (`if r.startswith("blog/")`, línea 327). Las páginas de SERVICIO quedan fuera del check. Evidencia:
+  - `mantenimiento-de-boiler` y `instalacion-de-sanitarios` incrustan cada una 3 `Review` + 3 `Rating` con autores tipo Persona ("Ricardo P.", "Sandra V.", "Alejandro M." / "Fernando S.", "Claudia M.", "Jorge L.") — reseñas self-serving en el propio marcado del negocio (Google no muestra rich-results de reseñas auto-servidas en las páginas de la propia organización desde 2019; señal ignorada, y roza la regla 2026-06-18 "NO inventar testimonios").
+  - DISPARIDAD: solo **10 de 28** páginas de servicio llevan `Review`; las otras 18 no. Cobertura de rich-results incoherente entre hermanas (mismo hueco que HUECO 5 del 07-14, ahora confirmado a escala de todo `/servicios/`).
+- **Acción:** (a) extender el SCOPE del check 3 de `check-plantilla.py` para reportar `Review`/`Rating` self-serving (autor Persona inventado) en páginas de servicio, no solo blog; (b) reportar DISPARIDAD de presencia de Review/AggregateRating entre servicios hermanos. La decisión "¿reseñas reales en todas, o en ninguna?" es del `decisor-negocio` (no inventar).
+- **Regla nueva:** "SEO/SCHEMA-REVIEW: `Review`/`Rating` con autor Persona en el marcado del propio negocio (servicio) es self-serving — Google lo ignora; 10/28 servicios lo llevan (boiler, sanitarios…), el resto no = incoherente. AUTO en check-plantilla check 3 (scope ampliado a servicio + paridad). Severidad: media, decisión decisor-negocio."
+
+### RECURRENCIA — Longitud de `<title>` sigue SIN mecanizarse (baja)
+- **Estado:** el HUECO 1 del 2026-07-14 propuso un check de longitud de title/description; NO se implementó. `check-indexabilidad.py` sigue mirando solo DUPLICADOS de title (línea 386), no longitud. Reaparece en este lote: `mantenimiento-de-boiler` title = **70 chars** e `instalacion-de-sanitarios` = **67 chars** (> ~60 → Google trunca la cola "· Gas, Solar y Paso" / "WC, Lavabos y Mezcladoras"). Las descripciones (155-163) están dentro de rango.
+- **Acción:** mecanizar ya el check de longitud de `<title>` (~30-60 chars) en `check-indexabilidad.py`; el reescribir es editorial pero la detección es mecánica y hoy ciega.
+
+### NO es hueco (confirmación positiva) — FAQPage vs FAQ visible
+- `instalacion-de-sanitarios` (5 preguntas en FAQPage vs 6 visibles) y `mantenimiento-de-boiler` (6 vs 7) tienen mismatch, PERO ya lo caza `check-plantilla.py` check 21 (`faq-mismatch-20260721`). Es backlog conocido (las "12 páginas" del 07-21), no un hueco ciego. El checker funciona.
+
+**Resumen del lote:** 2 huecos NUEVOS (enlazado saliente/cross-sell; Review self-serving en servicio) + 1 RECURRENCIA no mecanizada (longitud de title). El resto de lo detectado ya lo cubre un checker existente.
+
+---
+
+## 2026-07-24 — Huecos ciegos detectados (lote rotativo: las-quintas, destape-de-drenajes, blog/como-identificar-buen-plomero, blog/cuanto-cuesta-plomeria-bano-completo, reparacion-de-llaves-y-mezcladoras)
+
+Crítico de completitud (FASE 3). SOLO propuestas — no se modificó nada del pipeline ni del sitio.
+Se revisaron las 5 páginas del lote + 4 con cambios de ayer (instalacion-de-sanitarios, mantenimiento-de-boiler, plomero-zona-norte, home). No se re-listan los HUECOS 1-8; abajo van 2 huecos NUEVOS + 2 RECURRENCIAS confirmadas/ampliadas.
+
+### HUECO 9 (NUEVO) — Headers de respuesta de seguridad (HSTS / CSP / Permissions-Policy) sin verificar (media)
+- **Por qué es hueco:** `netlify.toml` define 4 headers (`X-Frame-Options`, `X-Content-Type-Options`, `X-XSS-Protection`, `Referrer-Policy`) pero le FALTAN `Strict-Transport-Security` (HSTS — Netlify NO lo pone por defecto), `Content-Security-Policy` y `Permissions-Policy`. Ningún checker mira la sección `[[headers]]`: `check-indexabilidad.py` y `check-plantilla.py` leen `netlify.toml` SOLO para redirects/canonical (líneas 64/81 y 122/307), nunca para headers de seguridad. Categoría "seguridad básica" del brief, hoy 100% ciega.
+- **Acción:** ampliar `revisor-produccion` o `revisor-infra-salud` con un check estático que parsee el bloque `[[headers]] for="/*"` de `netlify.toml` y marque ausencia de HSTS/CSP/Permissions-Policy. Determinista y auto-detectable; el valor del CSP es decisión humana (GTM/Clarity/Google inline lo complican → severidad media, no auto-fix ciego).
+- **Regla nueva para REGLAS.md:** "SEGURIDAD/HEADERS: `netlify.toml` debe declarar HSTS (`Strict-Transport-Security`), `Content-Security-Policy` y `Permissions-Policy` además de los 4 headers ya presentes. Ningún checker lo cubría hasta hoy. Severidad: media."
+
+### HUECO 10 (NUEVO) — Frescura de `dateModified` de Article y fecha visible al lector (media)
+- **Por qué es hueco:** distinto de HUECO 6 (ese era `<lastmod>` de sitemap). Aquí es el `dateModified`/`datePublished` del JSON-LD `Article` y la fecha visible. Evidencia (git-edit de TODOS los posts = 2026-07-21):
+  - `blog/cuanto-cuesta-plomeria-bano-completo` — `dateModified` == `datePublished` == **2025-11-18** (nunca se bumpeó pese a ediciones); `marcha-paz-culiacan-2025` 2025-09-07; `como-detectar-fugas`/`problemas-comunes` 2025-11-21. El `dateModified` está DESACOPLADO de las ediciones reales de contenido (p.ej. cuando el pipeline corrige precios en una FAQ, no se bumpea) → señal de frescura estancada para Google.
+  - FECHA VISIBLE: solo **4 de 13** posts muestran "Publicado/Actualizado" al lector (como-identificar, cuanto-cobra-visita, drenaje-tapado, marcha-paz); los otros 9 no → E-E-A-T inconsistente entre hermanas y desalineado con el schema.
+- **Acción:** (a) check determinista que compare `dateModified` del Article con la última fecha de edición de CONTENIDO (no de CSS/cache-bust) y marque desfase grande; (b) verificar presencia/consistencia de la fecha visible en `/blog/` (todas o ninguna). Ampliar `revisor-contenido` (parte mecánica) o `check-indexabilidad`. El bump correcto de `dateModified` debería engancharse al fixer que edita prosa/precios.
+- **Regla nueva:** "SEO/FRESCURA-ARTICLE: `dateModified` del JSON-LD Article debe bumpearse cuando cambia el CONTENIDO (no en cache-bust de CSS) y coincidir con una fecha visible presente en TODOS los posts. Hoy 4/13 muestran fecha y varios `dateModified` llevan meses congelados. Severidad: media."
+
+### RECURRENCIA (HUECO 2) — title↔H1↔slug divergente, ahora confirmado en BLOG y aún sin mecanizar (media)
+- **Estado:** `blog/cuanto-cuesta-plomeria-bano-completo-culiacan` — `<title>` = "Lista de Precios de Plomería en Culiacán 2026 — Cotización Gratis" (head-term genérico "lista de precios de plomería") mientras H1 = "Plomería de Baño Completo en Culiacán" y slug = "…bano-completo…". El title apunta a una keyword MÁS AMPLIA y distinta del tema real de la página (baño completo) → intención de búsqueda difusa y riesgo de canibalizar con una futura página genérica de precios. Confirma que el HUECO 2 (head-term del title vs H1/slug) sigue sin mecanizarse y aplica también a `/blog/`.
+- **Acción:** mecanizar ya el check de coherencia head-term(title) ⊂ {H1, slug} propuesto el 2026-07-14, extendido a blog. Detección mecánica; reescritura editorial.
+
+### RECURRENCIA/AMPLIACIÓN (HUECO 5/8) — heterogeneidad de @type de schema entre hermanas, no solo AggregateRating (media)
+- **Estado:** más amplio que "presencia de AggregateRating". Tipos de nodo por página del lote:
+  - `destape-de-drenajes` — Service + AggregateRating + Review + Person + AggregateOffer + LocalBusiness + Organization + WebSite (set completo).
+  - `reparacion-de-llaves-y-mezcladoras` — Service + AggregateOffer, pero **SIN** Review/AggregateRating/LocalBusiness/Organization/WebSite.
+  - `plomero-colonias-culiacan/las-quintas` — **SIN** Service ni LocalBusiness (solo Place/FAQPage/Breadcrumb).
+  El grafo de entidades (LocalBusiness/Organization/WebSite/Service) es INCONSISTENTE entre páginas del mismo negocio, no solo las estrellas.
+- **Acción:** ampliar el check de disparidad (HUECO 5/8) para comparar el CONJUNTO de @type de schema entre hermanas del mismo tipo de página (servicio vs colonia) y marcar las que carezcan del núcleo esperado (Service/LocalBusiness/Organization/WebSite). Decisión de qué núcleo va en cada plantilla: `decisor-negocio`.
+
+**Resumen del lote:** 2 huecos NUEVOS (headers de seguridad HSTS/CSP; frescura de dateModified + fecha visible en blog) + 2 RECURRENCIAS confirmadas y aún sin mecanizar (title↔H1↔slug en blog; heterogeneidad de @type de schema entre hermanas). Longitud de title (HUECO 1) esta vez OK en el lote (todas ≤65 chars). Sin mixed-content, sin anchors rotos, sin duplicados de title/description, jerarquía de headings correcta.
