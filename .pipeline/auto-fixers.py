@@ -124,6 +124,45 @@ def _fix_color(h):
     return h, n
 
 
+# ── denylist de (selector, color prohibido) ya reincidente (check 19 de check-plantilla.py /
+#    check_denylist_color_css). El SENSOR existia desde 2026-07-18 pero nunca se porto el
+#    SANADOR: cada corrida detectaba la regresion y un LLM la arreglaba a mano -- por eso el
+#    color del breadcrumb reincidio 4 veces (07-09/13/14/16). Esto la cura sola.
+#    La lista se IMPORTA de check-plantilla.py: una sola fuente de verdad, cero divergencia
+#    sensor-fixer (si divergieran, el fixer "arreglaria" a un valor que el checker rechaza).
+#    Misma funcion sirve para el <style> inline de una pagina Y para el CSS compartido: el
+#    patron ancla en "selector{...color:bad" y no le importa si eso vive en HTML o en un .css.
+def _cargar_denylist_color():
+    try:
+        import importlib.util
+        ruta = os.path.join(os.path.dirname(os.path.abspath(__file__)), "check-plantilla.py")
+        spec = importlib.util.spec_from_file_location("check_plantilla_af", ruta)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)          # seguro: el modulo tiene guard __main__
+        return tuple((sel, bad, good) for sel, bad, good, _ev in mod.DENYLIST_COLOR)
+    except Exception as e:
+        # FAIL-SAFE: sin lista, el fixer no detecta nada y no toca nada. El checker sigue
+        # marcando el hallazgo, asi que se degrada a "no auto-fix", NUNCA a "fix equivocado".
+        print("aviso: no pude leer DENYLIST_COLOR de check-plantilla.py (%s); "
+              "el fixer denylist-color queda inactivo esta corrida." % e, file=sys.stderr)
+        return ()
+
+_DENYLIST_COLOR = _cargar_denylist_color()
+
+def _det_denylist_color(h):
+    return any(
+        re.search(re.escape(sel) + r'\s*\{[^}]*?\bcolor\s*:\s*' + re.escape(bad) + r'\b', h, re.I)
+        for sel, bad, good in _DENYLIST_COLOR)
+
+def _fix_denylist_color(h):
+    n = 0
+    for sel, bad, good in _DENYLIST_COLOR:
+        pat = re.compile(r'(' + re.escape(sel) + r'\s*\{[^}]*?\bcolor\s*:\s*)' + re.escape(bad) + r'\b', re.I)
+        h, k = pat.subn(r'\g<1>' + good, h)
+        n += k
+    return h, n
+
+
 # ── ancla cuyo TEXTO nombra un servicio real pero el HREF apunta a otro destino (regresion
 #    vista 3x: 2026-07-07/08/09, mecanizada como check 14 de check-plantilla.py pero sin
 #    fixer -> aqui se APLICA el mismo mapeo texto-ancla -> ruta canonica del servicio). ──
@@ -221,6 +260,8 @@ FIXERS = [
      "mecanico", _det_robots, _fix_robots),
     ("ancla-servicio", "ancla cuyo TEXTO nombra un servicio real pero el HREF apunta a otro destino → corrige al href canónico (regresión 3x, check 14 de check-plantilla.py)",
      "mecanico", None, None),  # caso especial en cmd_run(): necesita page_dir para resolver hrefs relativos
+    ("denylist-color-inline", "color de la denylist (.breadcrumb-item a #E36414, .breadcrumb-item.active #6c757d) duplicado en el <style> inline de la página → valor AA-safe (regresión 4x, check 19 de check-plantilla.py)",
+     "mecanico", _det_denylist_color, _fix_denylist_color),
 ]
 
 
@@ -364,6 +405,9 @@ ASSET_FIXERS = [
     ("tap-target-44",
      "tap target <44px en selectores interactivos compartidos (migas) → min-height:44px en los 3 CSS + bump sw.js",
      "mecanico", _fix_tap_target),
+    ("denylist-color-css",
+     "color de la denylist (.breadcrumb-item a, .breadcrumb-item.active) en las 3 hojas compartidas → valor AA-safe + bump sw.js",
+     "mecanico", _fix_denylist_color),
 ]
 
 
