@@ -249,9 +249,18 @@ def cmd_publicar(args):
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     branch = "auto/crecer-%s" % stamp
     st = sh(["git", "status", "--short"]).stdout.strip()
-    if not st:
-        sys.exit("nada que publicar (working tree limpio)")
-    print("Cambios:\n" + st)
+    # La corrida ahora hace CHECKPOINT: commitea en su rama conforme arregla, para que una
+    # muerte a media FASE 7 no deje el arbol sucio. Por eso "arbol limpio" ya NO significa
+    # "nada que publicar": el trabajo puede estar en commits por delante de main.
+    ya_commiteado = [l for l in sh(["git", "log", "--oneline", "main..HEAD"]).stdout.splitlines() if l.strip()]
+    if not st and not ya_commiteado:
+        sys.exit("nada que publicar (working tree limpio y sin commits por delante de main)")
+    if st:
+        print("Cambios sueltos:\n" + st)
+    if ya_commiteado:
+        print("Commits de checkpoint ya en la rama (%d):" % len(ya_commiteado))
+        for l in ya_commiteado:
+            print("   • " + l)
     # Purga ramas auto/* YA fusionadas (git branch -d solo borra las mergeadas; las no
     # fusionadas se conservan porque tienen trabajo pendiente de revisión humana).
     for b in sh(["git", "branch", "--merged", "main"]).stdout.splitlines():
@@ -262,12 +271,17 @@ def cmd_publicar(args):
     if cob.returncode != 0:
         print("❌ no pude crear la rama %s (%s). Aborté sin commitear." % (branch, (cob.stderr or "").strip()[:80]))
         sys.exit(1)
-    sh(["git", "add", "-A"])
     full = msg + "\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
-    c = sh(["git", "commit", "-m", full])
-    print(c.stdout.rstrip() + c.stderr.rstrip())
-    if "BLOQUEADO" in (c.stdout + c.stderr) or c.returncode != 0:
-        print("❌ commit bloqueado por el hook — revisa; quedó en la rama %s" % branch); sys.exit(1)
+    if st:
+        sh(["git", "add", "-A"])
+        c = sh(["git", "commit", "-m", full])
+        print(c.stdout.rstrip() + c.stderr.rstrip())
+        if "BLOQUEADO" in (c.stdout + c.stderr) or c.returncode != 0:
+            print("❌ commit bloqueado por el hook — revisa; quedó en la rama %s" % branch); sys.exit(1)
+    else:
+        # Sin cambios sueltos: la rama YA trae el trabajo en commits de checkpoint. Un
+        # `git commit` aqui fallaria ("nothing to commit") y se leeria como hook bloqueado.
+        print("Sin cambios sueltos que commitear: publico los %d commit(s) de checkpoint." % len(ya_commiteado))
 
     # CAP DE PÁGINAS (FASE 8) MECÁNICO: >18 páginas con cambio sustantivo NO se
     # auto-publica; queda en la rama para pase supervisado (como el 19>18 del 06-22).
