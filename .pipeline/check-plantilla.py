@@ -98,6 +98,59 @@ def read(p):
         return ""
 
 
+# Dimensiones REALES de una imagen leyendo su cabecera. Python puro y sin dependencias a
+# proposito: `sips` solo existe en macOS y este checker tambien corre en el CI (ubuntu),
+# donde caeria a None y el check 22 se volveria ciego sin avisar. Cacheado: el sitio tiene
+# ~345 <img> pero pocas decenas de archivos distintos.
+_DIMS_CACHE = {}
+
+
+def dims_imagen(path):
+    if path in _DIMS_CACHE:
+        return _DIMS_CACHE[path]
+    _DIMS_CACHE[path] = d = _leer_dims(path)
+    return d
+
+
+def _leer_dims(path):
+    try:
+        with open(path, "rb") as fh:
+            b = fh.read(64)
+            if b[:8] == b"\x89PNG\r\n\x1a\n" and b[12:16] == b"IHDR":
+                return (int.from_bytes(b[16:20], "big"), int.from_bytes(b[20:24], "big"))
+            if b[:4] == b"RIFF" and b[8:12] == b"WEBP":
+                c = b[12:16]
+                if c == b"VP8X":                       # extendido: lienzo en 24 bits LE, menos 1
+                    return (int.from_bytes(b[24:27], "little") + 1,
+                            int.from_bytes(b[27:30], "little") + 1)
+                if c == b"VP8 ":                       # con perdida: 14 bits tras el sync code
+                    i = b.find(b"\x9d\x01\x2a")
+                    if i > 0:
+                        return (int.from_bytes(b[i+3:i+5], "little") & 0x3FFF,
+                                int.from_bytes(b[i+5:i+7], "little") & 0x3FFF)
+                if c == b"VP8L":                       # sin perdida: 14+14 bits empaquetados
+                    n = int.from_bytes(b[21:25], "little")
+                    return ((n & 0x3FFF) + 1, ((n >> 14) & 0x3FFF) + 1)
+                return None
+            if b[:2] == b"\xff\xd8":                   # JPEG: recorrer segmentos hasta un SOF
+                fh.seek(2)
+                while True:
+                    m = fh.read(2)
+                    if len(m) < 2 or m[0] != 0xFF:
+                        return None
+                    if m[1] in (0xD8, 0xD9) or 0xD0 <= m[1] <= 0xD7:
+                        continue
+                    ln = int.from_bytes(fh.read(2), "big")
+                    if m[1] in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
+                                0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+                        d = fh.read(5)
+                        return (int.from_bytes(d[3:5], "big"), int.from_bytes(d[1:3], "big"))
+                    fh.seek(ln - 2, 1)
+    except (OSError, IndexError, ValueError):
+        return None
+    return None
+
+
 # ---------------------------------------------------------------- redirects (para no
 # marcar como roto un enlace que Netlify resuelve via 301/200 rewrite)
 def _mk_redirect(frm, status):
@@ -652,6 +705,41 @@ def check_page(fpath, t, noindex, redirects):
                 "— el markup no refleja el contenido real" % (n_jsonld, n_visible),
                 "Igualar el conteo: cada pregunta visible necesita su Question+acceptedAnswer "
                 "en el FAQPage, y viceversa")
+
+    # --- 22. width/height declarados con un RATIO distinto al del archivo REAL (CLS).
+    #     El navegador reserva la caja con el ratio DECLARADO y luego reflowea al real:
+    #     salto visible. Mecaniza el hallazgo 2026-07-26 (perf-cls-logo-dims-*): la corrida
+    #     de ese dia barrio por NOMBRE DE ARCHIVO (logo-512.webp) y dejo vivas 24 colonias
+    #     con logo-256 y 5 navs con un segundo <img> en la MISMA pagina. Por eso el check
+    #     recorre TODAS las <img> con un parser (las etiquetas son multilinea: un grep de
+    #     una linea no las ve) y compara contra las dimensiones reales del archivo.
+    for tag in img_tags:
+        src = attr(tag, "src")
+        w, h = attr(tag, "width"), attr(tag, "height")
+        if not src or not w or not h or not w.isdigit() or not h.isdigit():
+            continue
+        if int(w) == 0 or int(h) == 0:
+            continue
+        disk, _u = resolve_to_disk(src, page_dir)
+        if not disk or not os.path.isfile(disk):
+            continue  # inexistente: ya lo marca el check 1
+        real = dims_imagen(disk)
+        if not real:
+            continue
+        rw, rh = real
+        ratio_dec, ratio_real = int(w) / int(h), rw / rh
+        if abs(ratio_dec - ratio_real) / ratio_real <= 0.02:
+            continue
+        # Arriba del pliegue (sin loading=lazy) el salto lo ve TODO visitante y castiga el
+        # CLS de Core Web Vitals; abajo es menos grave pero igual de mecanico de arreglar.
+        arriba = "lazy" not in (attr(tag, "loading") or "").lower()
+        add("alta" if arriba else "media", r, "perf",
+            "%s declara width=%s height=%s (ratio %.2f) pero el archivo mide %dx%d (ratio %.2f)%s "
+            "— el navegador reserva una caja con la forma equivocada y la pagina salta al cargar"
+            % (src, w, h, ratio_dec, rw, rh, ratio_real, " [arriba del pliegue]" if arriba else ""),
+            "Poner width/height con las dimensiones REALES del archivo (%dx%d). El CSS sigue "
+            "mandando en el tamano renderizado; estos atributos solo declaran la FORMA. "
+            "Auto-fixable: python3 .pipeline/auto-fixers.py run --solo img-ratio-real --apply" % (rw, rh))
 
 
 # Denylist compartida entre el check de pagina (19) y el check global de las 3 hojas.
