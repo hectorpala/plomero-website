@@ -245,6 +245,79 @@ def _scan_and_fix_ancla(t, fpath):
     return ("".join(out) if n else t), n
 
 
+def _scan_and_fix_img_ratio(t, fpath):
+    """width/height declarados con un ratio distinto al del archivo REAL -> los pone reales
+    (check 22 de check-plantilla.py). Necesita el directorio de la pagina para resolver src
+    relativos, por eso no cabe en la firma normal de FIXERS.
+
+    Sustituye por SPAN EXACTO de cada atributo (como _scan_and_fix_ancla): una misma pagina
+    puede traer DOS <img> del mismo logo con valores distintos -- el caso real del 2026-07-26,
+    donde el nav y el footer diferian y un reemplazo por valor habria tocado el equivocado.
+    Reescribe SOLO width/height: el tamano renderizado lo manda el CSS, estos atributos solo
+    declaran la FORMA, asi que corregirlos no cambia como se ve la pagina."""
+    dims = _dims_imagen_af()
+    if dims is None:
+        return t, 0
+    page_dir = os.path.dirname(fpath)
+    edits, n = [], 0
+    for m in re.finditer(r'<img\b[^>]*>', t, re.I):
+        tag = m.group(0)
+        msrc = re.search(r'\bsrc\s*=\s*["\']([^"\']+)["\']', tag, re.I)
+        mw = re.search(r'\bwidth\s*=\s*["\'](\d+)["\']', tag, re.I)
+        mh = re.search(r'\bheight\s*=\s*["\'](\d+)["\']', tag, re.I)
+        if not (msrc and mw and mh):
+            continue
+        w, h = int(mw.group(1)), int(mh.group(1))
+        if not w or not h:
+            continue
+        src = msrc.group(1)
+        if src.startswith(("http://", "https://", "data:", "//")):
+            continue
+        disk = os.path.normpath(os.path.join(ROOT if src.startswith("/") else page_dir,
+                                             src.lstrip("/").split("?")[0]))
+        if not os.path.isfile(disk):
+            continue          # inexistente: es hallazgo del check 1, no de este fixer
+        real = dims(disk)
+        if not real:
+            continue
+        rw, rh = real
+        if abs(w / h - rw / rh) / (rw / rh) <= 0.02:
+            continue
+        # offsets absolutos dentro del documento, para sustituir sin tocar nada mas
+        edits.append((m.start() + mw.start(1), m.start() + mw.end(1), str(rw)))
+        edits.append((m.start() + mh.start(1), m.start() + mh.end(1), str(rh)))
+        n += 1
+    if not n:
+        return t, 0
+    out, last = [], 0
+    for ini, fin, val in sorted(edits):
+        out.append(t[last:ini]); out.append(val); last = fin
+    out.append(t[last:])
+    return "".join(out), n
+
+
+_DIMS_FN_CACHE = []
+
+def _dims_imagen_af():
+    """Reusa el lector de dimensiones de check-plantilla.py (misma fuente de verdad que el
+    check 22: si divergieran, el fixer 'arreglaria' a un valor que el checker rechaza).
+    Si no se puede importar, el fixer se desactiva en vez de adivinar."""
+    if _DIMS_FN_CACHE:
+        return _DIMS_FN_CACHE[0]
+    try:
+        import importlib.util
+        ruta = os.path.join(os.path.dirname(os.path.abspath(__file__)), "check-plantilla.py")
+        spec = importlib.util.spec_from_file_location("check_plantilla_dims", ruta)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        _DIMS_FN_CACHE.append(mod.dims_imagen)
+    except Exception as e:
+        print("aviso: no pude cargar dims_imagen de check-plantilla.py (%s); "
+              "el fixer img-ratio-real queda inactivo esta corrida." % e, file=sys.stderr)
+        _DIMS_FN_CACHE.append(None)
+    return _DIMS_FN_CACHE[0]
+
+
 FIXERS = [
     ("og-url", "og:url faltante en página indexable → copia el canonical (scope: solo indexables)",
      "mecanico", _det_ogurl, _fix_ogurl),
@@ -262,6 +335,8 @@ FIXERS = [
      "mecanico", None, None),  # caso especial en cmd_run(): necesita page_dir para resolver hrefs relativos
     ("denylist-color-inline", "color de la denylist (.breadcrumb-item a #E36414, .breadcrumb-item.active #6c757d) duplicado en el <style> inline de la página → valor AA-safe (regresión 4x, check 19 de check-plantilla.py)",
      "mecanico", _det_denylist_color, _fix_denylist_color),
+    ("img-ratio-real", "width/height de un <img> con ratio distinto al del archivo real (CLS) → dimensiones reales; el CSS sigue mandando el tamaño (check 22 de check-plantilla.py)",
+     "mecanico", None, None),  # caso especial en cmd_run(): necesita page_dir para resolver src relativos
 ]
 
 
@@ -520,6 +595,12 @@ def cmd_run(args):
         for fid, _, _, det, fix in fixers:
             if fid == "ancla-servicio":
                 h2, n = _scan_and_fix_ancla(h, p)
+                if n:
+                    h = h2
+                    aplicados.append("%s×%d" % (fid, n))
+                continue
+            if fid == "img-ratio-real":
+                h2, n = _scan_and_fix_img_ratio(h, p)
                 if n:
                     h = h2
                     aplicados.append("%s×%d" % (fid, n))
