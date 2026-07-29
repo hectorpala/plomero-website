@@ -18,6 +18,107 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [PENDIENTE] proceso/infra — `recolecta-señales.py` NO detecta ramas `auto/*` atascadas — la corrida bloqueada por el cap de 18 páginas lleva 3 días invisible en el propio brief que yo (crítico-sistema) leo   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** El brief que yo mismo uso como materia prima (`.pipeline/recolecta-señales.py`) lee `HISTORIAL.jsonl`, `costos.jsonl`, `BACKLOG.jsonl` y `REGLAS.md` — pero NUNCA mira el estado de `git branch`. Cuando `scripts/crecer.py publicar` rechaza publicar por el cap de 18 páginas (línea 286-297: "El trabajo queda en la rama %s para revisión humana"), esa rama queda viva, verificada `ok=true` por el verificador FASE 7, y **sin ningún mecanismo que la vuelva a poner enfrente del dueño**. La única forma de enterarse hoy es leer `data/HISTORIAL.jsonl` línea por línea (no el brief) y notar que el mismo `id` de hallazgo (`sistema-cap-18-excedido-48-paginas-no-publicado-*`) se repite día tras día. En mi propio pase de hoy el brief NO mencionó nada de esto — tuve que leer `HISTORIAL.jsonl` a mano para encontrarlo. Si yo, cuyo trabajo es vigilar el sistema, casi me lo salto leyendo solo el brief, el dueño (que tiene menos tiempo) con más razón.
+**Evidencia (verificado en vivo hoy, 2026-07-29):**
+```
+$ git branch --no-merged main
+  auto/crecer-20260727-183544
+* auto/diario-20260726-1826
+
+$ git log main..auto/diario-20260726-1826 --format=%ai --reverse | head -1
+2026-07-26 20:13:05 -0700          ← 3 días sin publicar, hoy es 2026-07-29
+```
+`data/HISTORIAL.jsonl` confirma el mismo bloqueo reportado 3 días seguidos: `sistema-cap-18-excedido-48-paginas-no-publicado-20260727` y `...-20260728` ("3er dia consecutivo... mismo diff verificado ok=true... 0 auto-ejecutables en backlog") — el verificador ya dijo que el contenido está bien; lo único que falta es que un humano lo mire y decida `CAP_OK=1` o lo recorte. El brief de HOY (`recolecta-señales.py`) no dice una palabra de esto en ninguna de sus 4 secciones.
+**Propuesta:** Nueva sección `sec_ramas_atascadas()` en `recolecta-señales.py`, la PRIMERA que se imprime (antes que HISTORIAL): lista ramas `auto/*` no fusionadas a `main`, con su edad en días desde el primer commit que le lleva a `main`, y marca ⚠️ATASCADA a partir de 2 días — exactamente el mismo umbral que ya usa el "regresiones" de HISTORIAL para llamar la atención.
+**DRAFT (listo para merge — pegar en `.pipeline/recolecta-señales.py`):**
+```python
+# Añadir arriba, junto a los demás imports:
+import subprocess
+
+
+def _git(args):
+    try:
+        return subprocess.run(["git", *args], cwd=ROOT, text=True, capture_output=True).stdout
+    except Exception:
+        return ""
+
+
+def sec_ramas_atascadas():
+    """Ramas auto/* vivas (no fusionadas a main). El cap de 18 páginas de FASE 8
+    (scripts/crecer.py cmd_publicar) deja el trabajo verificado ahí para revisión
+    humana, pero nada las vuelve a poner enfrente de nadie — sin esta sección, la
+    única forma de notar un bloqueo de días es leer HISTORIAL.jsonl línea por línea."""
+    ramas = [b.strip().lstrip("*").strip()
+             for b in _git(["branch", "--no-merged", "main"]).splitlines()
+             if b.strip().lstrip("*").strip().startswith("auto/")]
+    print("## RAMAS auto/* SIN PUBLICAR (no fusionadas a main)")
+    if not ramas:
+        print("  (ninguna — todo publicado)\n")
+        return
+    hoy = date.today()
+    for b in ramas:
+        primera = [l for l in _git(["log", "main..%s" % b, "--format=%ai", "--reverse"]).splitlines() if l.strip()]
+        if not primera:
+            print("    %-32s (sin commits propios respecto a main)" % b)
+            continue
+        try:
+            d0 = date.fromisoformat(primera[0].split()[0])
+            edad = (hoy - d0).days
+        except Exception:
+            edad = None
+        flag = "  ⚠️ ATASCADA ≥2 días → ¿por qué nadie decidió CAP_OK=1 o recortar?" if isinstance(edad, int) and edad >= 2 else ""
+        print("    %-32s edad=%s día(s) desde main%s" % (b, edad if edad is not None else "?", flag))
+    print()
+
+
+# En main(), llamarla PRIMERO (antes de sec_historial()):
+#     sec_ramas_atascadas()
+#     sec_historial()
+#     sec_costos()
+#     sec_backlog()
+#     sec_reglas()
+```
+Nota aparte (mismo hallazgo, hueco relacionado): hoy hay DOS ramas `auto/*` sin fusionar (`auto/diario-20260726-1826` y `auto/crecer-20260727-183544`), y la segunda es una versión VIEJA de la primera — ver la propuesta siguiente.
+
+---
+
+## [PENDIENTE] infra — `crecer.py cmd_publicar` crea una rama `auto/crecer-*` NUEVA cada vez que se llama, incluso ya parado en una rama `auto/*` — deja ramas DUPLICADAS y OBSOLETAS cuando el cap bloquea más de un día   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** `cmd_publicar` (`scripts/crecer.py:245-297`) siempre hace `branch = "auto/crecer-%s" % stamp` seguido de `git checkout -b branch`, sin mirar si YA está parado en una rama `auto/*` (que es justo el caso normal: `crecer-diario-prompt.txt` línea 29 hace `git checkout -b auto/diario-$(date +%Y%m%d-%H%M)` al arrancar el día, y `publicar` se llama al final de esa MISMA sesión). Cuando el cap de 18 páginas bloquea la publicación, el código hace `git checkout main` pero **nunca borra la rama `auto/crecer-*` que acaba de crear** (correcto: el comentario dice que ahí queda "el trabajo... para revisión humana" — pero ese trabajo YA vivía en la rama `auto/diario-*` original). Si el bloqueo persiste varios días y la corrida diaria sigue trabajando y comiteando en la rama `auto/diario-*` original, cada llamada a `publicar` deja atrás una rama `auto/crecer-*` MÁS VIEJA que la anterior.
+**Evidencia (verificado en vivo hoy, 2026-07-29):**
+```
+$ git merge-base --is-ancestor auto/crecer-20260727-183544 auto/diario-20260726-1826 && echo "crecer-* es ANCESTRO de diario-* (o sea: obsoleta, le faltan commits)"
+crecer-* es ANCESTRO de diario-* (o sea: obsoleta, le faltan commits)
+
+$ git log --oneline auto/crecer-20260727-183544..auto/diario-20260726-1826
+cd797da6 chore(bitacora): cierra corrida auto-diario 2026-07-28 — poda ESTADO.md...
+82683aab fix(pipeline): poda docs/ESTADO.md de 31k a 7.7k tokens...
+ec44e271 chore(costos): registra costo suelto de la corrida auto-diario 2026-07-27
+9ff2127b chore(bitacora): cierra corrida auto-diario 2026-07-26/27 — NO publicada...
+```
+`auto/crecer-20260727-183544` (creada por el intento de `publicar` del 07-27) le faltan 4 commits del 07-27/07-28, incluyendo el fix de `docs/ESTADO.md`. Si el dueño hiciera `CAP_OK=1` sobre la rama equivocada (la `crecer-*`, por ser el nombre que imprimió el error más reciente en su terminal ese día), publicaría contenido VIEJO sin darse cuenta.
+**Propuesta:** Si la rama actual ya empieza con `auto/` (no es `main`), reusarla en vez de crear una nueva — evita el duplicado por diseño.
+**DRAFT (listo para merge — reemplaza las líneas 249-250 y 270-273 de `scripts/crecer.py`):**
+```python
+    stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    actual = sh(["git", "branch", "--show-current"]).stdout.strip()
+    reusa_rama = actual.startswith("auto/")
+    branch = actual if reusa_rama else "auto/crecer-%s" % stamp
+```
+```python
+    # (más abajo, donde antes decía `cob = sh(["git", "checkout", "-b", branch]) ...`)
+    if reusa_rama:
+        print("Ya en rama auto/* (%s) — la reutilizo en vez de crear otra "
+              "(evita ramas auto/crecer-* obsoletas si el cap bloquea otra vez)." % branch)
+    else:
+        cob = sh(["git", "checkout", "-b", branch])
+        if cob.returncode != 0:
+            print("❌ no pude crear la rama %s (%s). Aborté sin commitear." % (branch, (cob.stderr or "").strip()[:80]))
+            sys.exit(1)
+```
+
+---
+
 ## [PENDIENTE] links — Ancla a redirect-stub: check 14 solo caza texto==nombre-de-servicio, la clase MÁS ANCHA (cualquier texto, ej. "Servicio 24/7") reincidió 4 veces y HOY siguen viviendo 11 instancias sin mecanizar   (impacto A · esfuerzo S · riesgo bajo)
 **Problema:** El sitio tiene 6 páginas "redirect-stub" (`servicios/plomero/{24-7,cerca-de-mi,a-domicilio,colonias,precios,index}/index.html`, `<meta http-equiv="refresh">` + `<link rel="canonical">` al destino real) que existen solo por compatibilidad de URLs viejas. Cada vez que se descubre una página enlazando a uno de estos stubs en vez de al destino final, se corrige a mano SOLO en el lote de la corrida de ese día — nunca se mecanizó un check que cace el patrón completo. El check 14 existente (`ancla-servicio`, `check-plantilla.py` línea ~551) es estructuralmente incapaz de cerrar esto: compara el TEXTO de la ancla contra el H1 real de cada `servicios/<slug>/`, así que solo caza cuando el texto coincide con el nombre exacto de un servicio ("Instalación de sanitarios" → hub genérico). Anclas GENÉRICAS como "Servicio 24/7" o "Plomero cerca de mí" (que no calzan ningún H1) escapan por diseño — por eso la MISMA clase de bug reincidió con "patrón amplio" 4 veces (2026-07-07, -09, -14 ×2, -21) y cada vez el hallazgo dice literalmente "no mecanizado aún" / "fuera del lote de hoy".
 **Evidencia:** `data/HISTORIAL.jsonl`: `pend-links-ancla-servicio-20260709` ("16 instancias MÁS... no mecanizado, ci-gate lo mostrará"... pero ci-gate solo corre check 1/14 tal como están, no un check de stubs), `links-ancla-24-7-redirect-stub-patron-amplio-20260714` ("10 páginas más... check-plantilla check 14 no lo caza porque el texto no coincide con ningún H1"), `links-ancla-24-7-redirect-stub-amplio` (2026-07-21, "9 páginas... sin fixer genérico"). Verificado en vivo HOY (2026-07-24) con `grep -rl 'href="[^"]*plomero/24-7/\?"' --include=*.html .` (excluyendo el propio stub): **2 páginas** (`servicios/plomero-colonias-culiacan/index.html`, `partials/footer_nav.html`) siguen enlazando al stub `24-7`; `plomero/cerca-de-mi` → 2 páginas; `plomero/a-domicilio` → 2 páginas; `plomero/precios` → **5 páginas** (incluye 3 del blog) — **11 instancias vivas** de la misma clase, hoy, sin checker que las cace.
