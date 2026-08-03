@@ -12,6 +12,16 @@
 ```json
 {
   "ultima_corrida_actual": {
+  "fecha": "2026-08-02",
+  "rama": "auto/diario-20260726-1826 (continuada, 8vo día consecutivo — mismo bloqueo, sin cambios de contenido del sitio)",
+  "modo": "AUTONOMO (diario), con hueco de 3 días (07-30/07-31/08-01) en que las corridas solo hicieron un health-check mínimo sin actualizar ESTADO.md/HISTORIAL.jsonl (costo ~$1-4 c/u, ver .pipeline/costos.jsonl) porque el bloqueo seguía idéntico. Esta corrida SÍ actualiza el registro completo. No se repitió el fan-out de FASE 3 (11+ revisores) por 5ª vez sobre el mismo diff ya verificado ok=true dos veces — sería gastar cuota sin nueva información. Se hizo health check + re-verificación determinista + confirmación de que nada cambió.",
+  "resumen": "Health check 4/4 200 en local Y 4/4 200 en producción real (plomeroculiacanpro.mx). ci-gate.py: 0 ALTA (17 media/baja, mismas de siempre). check-reglas.py: 54 reglas, 3998/4000 tokens — sigue al borde del presupuesto. gestor-backlog.py: 14 tareas, 0 auto-ejecutables, 1 requiere_humano sin cambio (doorway domicilio-vs-cerca-de-mi). El diff contra main creció de 48 a 64 archivos (docs/ESTADO.md, docs/PROPUESTAS.md y costos.jsonl siguieron acumulando checkpoints de días previos; el contenido SERVIDO del sitio no cambió). docs/PROPUESTAS.md acumula ya 9 propuestas de crítico-sistema con DRAFT listo para merge, todas [PENDIENTE], sin ninguna aprobada ni rechazada en 8+ días.",
+  "arreglados": "0 clases nuevas (nada que arreglar: mismo contenido ya verificado, sin regresiones).",
+  "crecimiento": "0 páginas nuevas — deliberado: agregar más al backlog de una rama YA bloqueada por tamaño de diff empeoraría el problema, no lo resuelve. Backlog persistente sin cambio.",
+  "verificado_ok": "no se re-lanzó un verificador independiente completo (5ª vez consecutiva con el mismo diff de contenido, ya ok=true dos veces el 07-27). Re-confirmado a mano: ci-gate.py 0 ALTA, check-reglas.py dentro de presupuesto (al borde), health check 4/4 local+producción, backlog sin sorpresas.",
+  "publicado": "NO — 8º día consecutivo (desde 2026-07-26) con el MISMO bloqueo: CAP EXCEDIDO, 64 archivos en el diff (>18 del cap de FASE 8). El verificador ya confirmó ok=true de fondo hace días; lo único que falta es la decisión de Héctor. A diferencia de las 7 corridas anteriores, esta vez se lo preguntó DIRECTO en la conversación (no solo por email) porque 7 días de reportes automáticos no habían obtenido respuesta. El trabajo sigue a salvo en auto/diario-20260726-1826.",
+  "pendientes_nuevos": "(sistema, prioridad ALTA ahora — escalado por persistencia) sistema-cap-18-excedido-no-publicado, 8vo día sin decisión. (sistema) 9 propuestas de crítico-sistema en docs/PROPUESTAS.md sin aprobar. (sigue vigente) docs/REGLAS.md a 3998/4000 tokens. (sin cambio) bk-218a5844/doorway-domicilio-vs-cerca-de-mi, a11y-101, a11y-301, seo-107, etc. — ver lista completa abajo en 'pendientes'.",
+  "_corrida_anterior": {
   "fecha": "2026-07-29",
   "rama": "auto/diario-20260726-1826 (continuada, 4to día consecutivo — mismo bloqueo, sin cambios de contenido del sitio)",
   "modo": "AUTONOMO (diario). FASE 0: árbol sucio al arrancar (3 archivos sin commitear: costos.jsonl, ultima-meta.md, docs/PROPUESTAS.md) — una pasada suelta de crítico-sistema ya había corrido hoy y escrito su brief sin commitear. Se adoptó como checkpoint de FASE 2 (commit cc44a534) en vez de descartarla. Igual que el 07-28: NO se repitió el fan-out completo de revisores sobre un diff sin cambios ya verificado 2 veces — se hizo health check + re-verificación ligera + GSC en vivo.",
@@ -64,6 +74,7 @@
     "nota": "publicado en main (5 páginas del lote rotativo + 3 CSS + sw.js + 3 checks nuevos en check-plantilla.py). Detalle completo en docs/ESTADO-ARCHIVO.md y HISTORIAL.jsonl fecha 2026-07-14."
   },
   "_historial_anterior_a_2026-07-14": "TODAS las corridas desde 2026-06-12 (narrativa completa, JSON anidado y resúmenes en Markdown) viven íntegras en docs/ESTADO-ARCHIVO.md — no se perdió nada al podar este archivo el 2026-07-28."
+  }
   }
   }
   },
