@@ -641,3 +641,25 @@
 - **Candados paso 8: 3/3 cumplidos → PUBLICADO.** Merge eee3c396 a main + push fcb190a1..eee3c396. Indexación: el hook (infra-001 resuelto) detectó las 17 URLs (incl. las 3 editadas) pero la cuota diaria de Google sigue agotada → encoladas en pending-index.json para reintento automático (0 perdidas). El `git push` pelado falló por `node: command not found` en el hook (infra-002); se completó con `PATH=/usr/local/bin:$PATH git push`.
 - **Pendientes humano nuevos (10):** gsc-210..214 (clusters baño/drenaje/bombas/fugas con CTR 0 + ruido off-target), perf-401 (minificar main.js, riesgo wa.me), perf-402 (preload hero), a11y-301 (footer h4→h3 en 18 págs), movil-301 (2ª tabla sin wrapper), infra-002 (hook pre-push sin node en PATH). Bajas no tocadas: seo-304 (desazolve breadcrumb 2 niveles), seo-305 (typo año marcha-paz noindex).
 - **Aprendizaje:** 2 reglas en REGLAS.md — (1) variante del bug og:url=canonical: el BreadcrumbList puede quedar truncado a 1 nivel con el último item apuntando a la home; verificar que el último `item` == canonical y que existan los 3 niveles en páginas de servicio. (2) infra/push: el hook pre-push necesita node en PATH (`/usr/local/bin`); usar `PATH=/usr/local/bin:$PATH git push`.
+
+---
+
+## Corridas 2026-07-28 y 2026-07-29 (archivadas 2026-08-04, podadas de docs/ESTADO.md)
+
+### 2026-07-29 (4to día consecutivo del bloqueo de cap)
+AUTONOMO (diario). FASE 0: árbol sucio al arrancar (3 archivos sin commitear: costos.jsonl, ultima-meta.md, docs/PROPUESTAS.md) — una pasada suelta de crítico-sistema ya había corrido hoy y escrito su brief sin commitear. Se adoptó como checkpoint de FASE 2 (commit cc44a534) en vez de descartarla. Igual que el 07-28: NO se repitió el fan-out completo de revisores sobre un diff sin cambios ya verificado 2 veces — se hizo health check + re-verificación ligera + GSC en vivo.
+
+**Resumen:** Health check 4/4 200 local y 4/4 200 en producción real. ci-gate.py: 0 ALTA (17 media/baja conocidas). check-reglas.py: 54 reglas, 3998/4000 tokens — AL BORDE del presupuesto. gestor-backlog.py: 14 tareas, 0 auto-ejecutables, 1 requiere_humano sin cambio. GSC en vivo: 598 clics (+36%), 61,304 impresiones (+63%), posición 6.4. HALLAZGO NUEVO (de la pasada suelta de crítico-sistema adoptada hoy): `recolecta-señales.py` NO mira `git branch`, así que un bloqueo de días como este puede quedar invisible en el brief — dejó 2 propuestas con DRAFT listo en `docs/PROPUESTAS.md` (ramas `auto/*` atascadas + evitar rama `auto/crecer-*` duplicada).
+
+**Arreglados:** 0 clases nuevas del sitio. Se commiteó el trabajo suelto de crítico-sistema (documentación, sin efecto en el sitio servido).
+
+**Publicado:** NO — 4º día consecutivo con el mismo bloqueo (CAP EXCEDIDO: 48 páginas > 18 de cap). Trabajo a salvo en `auto/diario-20260726-1826`; copia `auto/crecer-20260727-183544` ADVERTIDA como desactualizada (le faltan 4 commits del 07-27/28).
+
+### 2026-07-28 (3ra corrida consecutiva sobre el mismo trabajo verificado)
+AUTONOMO (diario). FASE 0 confirmó que la rama sigue exactamente como la dejó la corrida de ayer (07-27): 61 archivos de diff vs main, ya verificada ok=true dos veces, bloqueada SOLO por el candado del cap. Decisión: NO repetir el fan-out completo de 11+ revisores (ayer costó $9.86, el día anterior $68.77) — health check + re-verificación ligera + GSC en vivo, y una mejora de infraestructura real.
+
+**Resumen:** Health check 5/5 200 local y producción. ci-gate.py: 0 ALTA. check-reglas.py: 53 reglas, 3996/4000 tokens. gestor-backlog.py: 14 tareas, 0 auto-ejecutables, 1 requiere_humano. GSC: 574 clics (+30%), 58,607 impresiones (+56%), posición 6.4. MEJORA DE INFRAESTRUCTURA: `docs/ESTADO.md` había crecido a 643 líneas/~31,000 tokens — superaba el límite de lectura (25,000 tokens). Se archivó completo en `docs/ESTADO-ARCHIVO.md` y se podó la copia activa (se quitaron 5 entradas ya RESUELTO: prod-001, seo-304, gsc-215, gsc-216, infra-001).
+
+**Publicado:** NO — mismo bloqueo (CAP EXCEDIDO: 48 páginas > 18, sin cambios desde 07-27). RECOMENDACIÓN dada a Héctor: mergear él mismo con `CAP_OK=1 python3 scripts/crecer.py publicar "..."`, o pedir que el sistema divida el diff en 2-3 lotes por causa raíz (CLS-logo-colonias / FAQPage-9-páginas / precios-testimonios / hub-y-zona-poniente) y los publique uno por uno.
+
+**Refs previas (ya archivadas):** 07-27 (NO publicada, mismo bloqueo del cap), 07-25 (publicado 87 archivos, 1 commit), 07-21 (publicado 32 páginas+3 CSS+sw.js), 07-20 (publicado 38 páginas), 07-14 (publicado 5 páginas+3 CSS+sw.js+3 checks nuevos). Detalle íntegro de todas en este mismo archivo, entradas anteriores.
