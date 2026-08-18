@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """recolecta-señales.py — junta (determinista, barato) las SEÑALES del sistema en un brief
-compacto para que critico-sistema (Opus) las JUZGUE. Patrón del repo: el recolector es tonto y
+compacto para que critico-sistema (Codex) las JUZGUE. Patrón del repo: el recolector es tonto y
 barato; la inteligencia (qué proponer) la pone el LLM encima, sobre datos duros, no crawleando.
 
 Lee lo que el sistema YA produce y NO inventa nada:
@@ -14,10 +14,38 @@ Uso:  python3 .pipeline/recolecta-señales.py        # imprime el brief a stdout
 """
 import json
 import os
+import subprocess
 from collections import Counter
-from datetime import date
+from datetime import date, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _git(*args):
+    return subprocess.run(["git", *args], cwd=ROOT, text=True, capture_output=True,
+                          errors="replace")
+
+
+def sec_ramas_atascadas():
+    """Expone ramas auto/* no fusionadas: antes podían quedar bloqueadas por el cap sin
+    aparecer en el brief del crítico-sistema durante días."""
+    r = _git("branch", "--no-merged", "main", "--format=%(refname:short)")
+    ramas = sorted(b.strip() for b in r.stdout.splitlines() if b.strip().startswith("auto/"))
+    print("## RAMAS AUTOMÁTICAS NO FUSIONADAS — %d" % len(ramas))
+    if not ramas:
+        print("  (ninguna)\n"); return
+    hoy = date.today()
+    for rama in ramas:
+        log = _git("log", "--reverse", "--format=%ct", "main..%s" % rama)
+        primera = next((x.strip() for x in log.stdout.splitlines() if x.strip().isdigit()), "")
+        if primera:
+            inicio = datetime.fromtimestamp(int(primera)).date()
+            edad = max(0, (hoy - inicio).days)
+            marca = "  ⚠️ ATASCADA" if edad >= 2 else ""
+            print("  • %s — %d día(s) desde su primer commit%s" % (rama, edad, marca))
+        else:
+            print("  • %s — sin commit exclusivo detectable" % rama)
+    print()
 
 
 def _jsonl(path):
@@ -103,6 +131,7 @@ def sec_reglas():
 def main():
     print("# BRIEF DE SEÑALES DEL SISTEMA — %s" % date.today().isoformat())
     print("(datos duros para que critico-sistema PROPONGA; no es un veredicto, es materia prima)\n")
+    sec_ramas_atascadas()
     sec_historial()
     sec_costos()
     sec_backlog()

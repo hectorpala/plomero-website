@@ -50,7 +50,11 @@ def main():
         if not n: return 0
         return s[n//2] if n % 2 else (s[n//2-1] + s[n//2]) / 2
     if len(filas) > MIN_HIST:
-        u = filas[-1]; prev = filas[:-1]
+        u = filas[-1]
+        proveedor = u.get("proveedor", "claude")
+        # Claude y Codex emiten eventos con granularidad distinta; comparar solo corridas
+        # del mismo proveedor evita falsos positivos durante la migración.
+        prev = [f for f in filas[:-1] if f.get("proveedor", "claude") == proveedor]
         for campo, etiqueta in (("output_tokens", "output"), ("mensajes", "mensajes")):
             cur = u.get(campo, 0) or 0
             # Excluir filas de 0 tokens (corridas fallidas) de la mediana: la deprimen
@@ -71,7 +75,8 @@ def main():
         # Base de precios de ESTA fila: las viejas no traen el campo y están en base "opus".
         base = u.get("base_precios", "opus")
         umbral_usd = UMBRAL_USD_REAL if base == "por-modelo" else UMBRAL_USD_OPUS
-        if tok > UMBRAL_TOKENS or usd > umbral_usd:
+        tiene_precio = base != "codex-suscripcion-sin-precio"
+        if tok > UMBRAL_TOKENS or (tiene_precio and usd > umbral_usd):
             # El desglose por modelo delata la causa: si aparece opus con mucho volumen en una
             # corrida cuyo orquestador va en sonnet, o corrió un subagente caro o se coló otra sesión.
             pm = u.get("por_modelo") or {}
@@ -81,8 +86,10 @@ def main():
             hallazgos.append({
                 "id": "costo-001", "archivo": ".pipeline/costos.jsonl", "linea": 0,
                 "severidad": "media", "categoria": "costo",
-                "descripcion": "La última corrida (%s) consumió %.1fM tokens (~$%.0f api-ref, base %s), sobre presupuesto (%.0fM / $%.0f).%s" % (
-                    u.get("etiqueta", "?"), tok/1e6, usd, base, UMBRAL_TOKENS/1e6, umbral_usd,
+                "descripcion": "La última corrida (%s) consumió %.1fM tokens%s, sobre presupuesto (%.0fM%s).%s" % (
+                    u.get("etiqueta", "?"), tok/1e6,
+                    (" (~$%.0f api-ref, base %s)" % (usd, base)) if tiene_precio else " (Codex por suscripción; costo API no calculado)",
+                    UMBRAL_TOKENS/1e6, (" / $%.0f" % umbral_usd) if tiene_precio else "",
                     (" Desglose: %s." % detalle) if detalle else ""),
                 "fix_sugerido": "Auditar la corrida: ¿demasiados revisores en paralelo, lote grande, o un loop sin freno? Si el desglose muestra OPUS con mucho volumen y el orquestador va en sonnet, revisar qué subagente lo usó (o si se contó una sesión interactiva ajena). Bajar fan-out o modelo en revisores deterministas.",
             })

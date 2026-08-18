@@ -7,12 +7,14 @@ set -uo pipefail
 # ════════════════════════════════════════════════════════════════════════════
 
 export NODE_OPTIONS="--dns-result-order=ipv4first"
+export PATH="/Users/openclaw/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
 STAMP=$(date +%Y%m%d-%H%M%S)
-RUTA_CLAUDE="/Users/openclaw/.npm-global/bin/claude"
-LOG="$LOG_DIR/meta-$STAMP.log"
+RUN_START=$(date +%s)
+CODEX_BIN="/Users/openclaw/.local/bin/codex"
+LOG="$LOG_DIR/meta-plomero-$STAMP.log"
 
 # Cortesía con la corrida diaria: si el pipeline principal está corriendo (lock con pid
 # vivo), NO correr en paralelo — dos agentes en el mismo repo pueden pisarse (el meta
@@ -36,18 +38,29 @@ fi
 echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
-# Meta-pase (auto-permiso; solo propone, no publica).
-# --model sonnet: paridad con los demás orquestadores. --strict-mcp-config SIN --mcp-config:
-# CERO MCP — el meta solo lee archivos del repo; sin esto cargaba TODOS los del usuario
-# (tradingview, facebook-ads con escritura…) en un agente autónomo sin humano.
-if "$RUTA_CLAUDE" --model sonnet --strict-mcp-config --permission-mode auto -p "$(cat .pipeline/meta-prompt.txt)" >> "$LOG" 2>&1; then
-  echo "[$STAMP] meta-pase OK." >> "$LOG"
+# Meta-pase con Codex y CERO MCP: ignora la configuración global porque solo lee el repo
+# y escribe propuestas locales; nunca necesita integraciones externas.
+CODEX_OK=0
+if [ -x "$CODEX_BIN" ] && "$CODEX_BIN" login status >> "$LOG" 2>&1; then
+  if "$CODEX_BIN" exec --cd "/Users/openclaw/Sitios Web/Plomero Culiacán" \
+      --approve-for-me --ephemeral --ignore-user-config --strict-config --json \
+      - < .pipeline/meta-prompt.txt >> "$LOG" 2>&1 \
+      && grep -q '"type":"turn.completed"' "$LOG"; then
+    CODEX_OK=1
+    echo "[$STAMP] meta-pase Codex OK." >> "$LOG"
+  fi
 else
-  echo "[$STAMP] meta-pase terminó con error (continúo para enviar el resumen)." >> "$LOG"
+  echo "[$STAMP] Codex no está instalado o autenticado." >> "$LOG"
 fi
 
-# Resumen por email (reusa el emisor; si el agente no dejó ultima-meta.md, send-report alerta).
+# Resumen por email, solo si Codex escribió un archivo fresco en ESTA corrida.
+META="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ultima-meta.md"
+META_MTIME=$(stat -f %m "$META" 2>/dev/null || echo 0)
+if [ "$CODEX_OK" != 1 ] || [ "$META_MTIME" -lt "$RUN_START" ]; then
+  META="$LOG_DIR/meta-plomero-fail-$STAMP.md"
+  printf '# Crítico-Sistema Plomero — corrida no completada\nCodex no terminó el meta-pase o no escribió un resumen nuevo. Revisa: %s\n' "$LOG" > "$META"
+fi
 /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
-  "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ultima-meta.md" \
+  "$META" \
   "Crítico-Sistema (propuestas)" "meta" >> "$LOG" 2>&1 \
   || echo "[$STAMP] No se pudo enviar el email del meta-pase." >> "$LOG"

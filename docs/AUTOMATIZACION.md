@@ -11,6 +11,10 @@
 
 ## 🤖 Auto Agente Plomero (todo el sistema junto, 1 corrida diaria)
 
+El ejecutor activo es **Codex CLI**. `AGENTS.md` adapta las reglas históricas de `CLAUDE.md`,
+los roles de `.claude/agents/` y las skills de `.claude/skills/` a pasadas independientes de
+Codex; esos nombres de directorio se conservan únicamente por compatibilidad.
+
 **Auto Agente Plomero** es el sistema completo corriendo solo, sin supervisión, una vez al
 día (18:25). En una sola corrida hace CUATRO trabajos:
 

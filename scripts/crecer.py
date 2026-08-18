@@ -242,12 +242,19 @@ def _cap_paginas(base, head, cap=18):
     return sustantivas, cap
 
 
+def _rama_publicacion(actual, stamp):
+    """Reutiliza la rama automática de la corrida; solo crea auto/crecer-* desde otra rama."""
+    reusa = actual.startswith("auto/")
+    return (actual if reusa else "auto/crecer-%s" % stamp), reusa
+
+
 def cmd_publicar(args):
     if not args:
         sys.exit("uso: crecer.py publicar \"mensaje del commit\"")
     msg = args[0]
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    branch = "auto/crecer-%s" % stamp
+    actual = sh(["git", "branch", "--show-current"]).stdout.strip()
+    branch, reusa_rama = _rama_publicacion(actual, stamp)
     st = sh(["git", "status", "--short"]).stdout.strip()
     # La corrida ahora hace CHECKPOINT: commitea en su rama conforme arregla, para que una
     # muerte a media FASE 7 no deje el arbol sucio. Por eso "arbol limpio" ya NO significa
@@ -267,11 +274,14 @@ def cmd_publicar(args):
         b = b.strip().lstrip("*").strip()
         if b.startswith("auto/"):
             sh(["git", "branch", "-d", b])
-    cob = sh(["git", "checkout", "-b", branch])
-    if cob.returncode != 0:
-        print("❌ no pude crear la rama %s (%s). Aborté sin commitear." % (branch, (cob.stderr or "").strip()[:80]))
-        sys.exit(1)
-    full = msg + "\n\nCo-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"
+    if reusa_rama:
+        print("Ya en rama auto/* (%s): la reutilizo para no crear copias obsoletas." % branch)
+    else:
+        cob = sh(["git", "checkout", "-b", branch])
+        if cob.returncode != 0:
+            print("❌ no pude crear la rama %s (%s). Aborté sin commitear." % (branch, (cob.stderr or "").strip()[:80]))
+            sys.exit(1)
+    full = msg
     if st:
         sh(["git", "add", "-A"])
         c = sh(["git", "commit", "-m", full])
@@ -322,14 +332,15 @@ def cmd_publicar(args):
     out = (p.stdout + p.stderr).strip()
     print(out[-600:])
     if p.returncode != 0:
-        # Reintegra UNA sola vez y reintenta; si vuelve a fallar, ABORTA (sin force).
-        print("↻ push rechazado — reintegro con el remoto y reintento UNA vez (sin rebase ni force)…")
+        # Integra UNA sola vez y reintenta. Conserva el merge local: no usa reset --hard,
+        # así un fallo remoto nunca puede borrar trabajo ni commits de la corrida.
+        print("↻ push rechazado — integro origin/main y reintento UNA vez (sin reset, rebase ni force)…")
         git("fetch", "origin")
-        rs = git("reset", "--hard", "origin/main")
-        mg2 = git("merge", "--no-ff", branch, "-m", "Merge: " + msg)
-        if rs.returncode != 0 or mg2.returncode != 0:
+        sync = git("merge", "--no-edit", "origin/main")
+        if sync.returncode != 0:
             git("merge", "--abort")
-            print("❌ publicación detenida: no pude reintegrar limpio. Rama %s sin publicar; revísalo a mano." % branch)
+            print("❌ publicación detenida: origin/main cambió y no pude integrarlo limpio. "
+                  "El merge local y la rama %s se conservan; revísalo a mano." % branch)
             sys.exit(1)
         p2 = git("push", "origin", "main")
         print((p2.stdout + p2.stderr).strip()[-600:])
