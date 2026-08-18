@@ -21,7 +21,23 @@ comprueba que la home y 2-3 páginas clave (/contacto/, /servicios/, /blog/) res
 es hallazgo de severidad ALTA y es lo primero a corregir; no se crece sobre un sitio roto.
 
 ================================ FASE 2 — Rama de la corrida ================================
-`git checkout -b auto/diario-$(date +%Y%m%d-%H%M)`. Todo el trabajo del día vive aquí hasta pasar candados.
+ANTES de crear la rama, ADOPTA lo que dejó una corrida muerta (pasó el 07-11, 07-23 y 07-26: la corrida se corta
+en la FASE 7 y su trabajo queda colgado). Mira `git status --short` y `git branch --list 'auto/diario-*'`:
+  • Árbol SUCIO o rama auto/diario-* sin fusionar → NO empieces encima como si nada. Trabaja SOBRE esa rama
+    (o commitea lo suelto en ella) y trátalo como trabajo de hoy: pasa por la FASE 7 y los candados igual que
+    lo nuevo. Dilo en el parte ("retomé el trabajo del <fecha> que quedó sin publicar").
+  • Todo limpio → `git checkout -b auto/diario-$(date +%Y%m%d-%H%M)`.
+
+CHECKPOINT OBLIGATORIO (regla dura desde 2026-07-26): commitea EN LA RAMA conforme avanzas — tras cada arreglo
+verificado de la FASE 5 y tras cada tarea cerrada de la FASE 6. Un commit por cambio lógico, mensaje descriptivo.
+  • COMMITEAR EN LA RAMA **NO ES PUBLICAR**. Publicar sigue siendo exclusivo de la FASE 8, con el verificador en
+    verde y todos los candados. El checkpoint no relaja ni un candado: solo evita que el trabajo viva en un árbol
+    sucio, que es el estado frágil que hace que una muerte a media corrida lo deje huérfano o lo mezcle con el
+    día siguiente.
+  • NO commitees un arreglo que aún no verificaste, ni uno que decidiste revertir.
+  • `scripts/crecer.py publicar` ya entiende este flujo: publica los commits de checkpoint aunque el árbol quede
+    limpio, y el cap de 18 páginas se sigue aplicando igual sobre el total.
+Todo el trabajo del día vive en esa rama hasta pasar candados.
 
 ============================ FASE 3 — REVISIÓN (encontrar errores) ============================
 FAN-OUT SELECTIVO (corre lo justo, no malgastes cuota). Lanza en paralelo (un solo mensaje, varias Task):
@@ -92,6 +108,8 @@ Detalle de la frontera "deriva no inventes" y de la calidad mínima: .pipeline/C
 
   Tras CADA arreglo, verifícalo con el sitio corriendo, escéptico (asume que NO se arregló salvo prueba).
   Reintenta máximo 2 veces; si no se logra, REVIERTE ese arreglo y márcalo pendiente.
+  Ya verificado, CHECKPOINT: `git add <archivos> && git commit -m "fix: <qué arreglaste, específico>"` en la rama
+  de la corrida (ver FASE 2). Commitear no publica nada; solo pone a salvo el trabajo ya probado.
 
 ==================== FASE 6 — CRECER (loop-until-dry: lo MÁS posible con DEMANDA REAL) ====================
 Objetivo: construir y optimizar LO MÁS POSIBLE en esta corrida, SIN tope numérico arbitrario. El freno NO es
@@ -132,7 +150,9 @@ Cota práctica de la corrida: MINUTOS_MAX = 35 (tiempo, no tokens — corre por 
             Si no hay ninguna → sal del loop.
          b. EJECÚTALA según su tipo (página nueva → paso 3; optimización → mejora directa: title/meta, H2/FAQ,
             enlace interno, schema, perf). Pasa SIEMPRE por el CANDADO (gate-pagina.py) y las reglas de la FASE 5.
-         c. Si pasa: cierra `gestor-backlog.py close --id <id> --estado hecho --commit <sha-o-rama>`.
+         c. Si pasa: CHECKPOINT en la rama (`git commit`, ver FASE 2) y cierra
+            `gestor-backlog.py close --id <id> --estado hecho --commit <sha-o-rama>` con el sha real del checkpoint
+            (así el backlog apunta al commit exacto y no a la rama entera).
             Si falla 2 veces: REVIERTE esa tarea y `close --id <id> --estado bloqueado --nota "<motivo>"`.
        hasta que: el backlog auto-ejecutable quede vacío (2 vueltas sin sacar nada), O se alcance MINUTOS_MAX.
        Lo que NO se alcanzó queda en el backlog y se drena la próxima corrida — NADA se pierde, el sitio mejora
