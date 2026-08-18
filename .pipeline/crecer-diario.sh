@@ -12,6 +12,14 @@ set -euo pipefail
 # (EHOSTUNREACH). Preferir IPv4 evita que se caigan la corrida y el correo.
 export NODE_OPTIONS="--dns-result-order=ipv4first"
 
+# NO cortar las tareas en background a los 600s. El CLI en modo -p espera por defecto
+# solo 10 min a los subagentes lanzados en background y luego imprime "Background tasks
+# still running after 600s; terminating" y SALE CON CÓDIGO 0. Eso mató la FASE 7 con el
+# verificador a medias los días 2026-07-11 y 2026-07-26: la corrida se dio por exitosa,
+# el trabajo del día quedó SIN COMMITEAR en la rama y se envió por correo el parte VIEJO.
+# Con 0 espera indefinidamente; el freno real es el TIMEOUT_MIN=90 de abajo.
+export CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0
+
 cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
@@ -125,6 +133,15 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   WPID=$!
   if wait "$CPID"; then
     kill "$WPID" 2>/dev/null || true
+    # Código de salida 0 NO prueba que la corrida terminó: el CLI también sale 0 cuando MATA
+    # las tareas en background que seguían vivas (típicamente el verificador de FASE 7). Si eso
+    # pasó, las fases 8-10 (publicar, aprender, escribir el parte) nunca corrieron → NO es éxito.
+    OUTATT=$(tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null || echo "")
+    if printf '%s' "$OUTATT" | grep -q "Background tasks still running"; then
+      FAIL_KIND="incompleta"
+      echo "[$STAMP] Salió con código 0 pero cortó tareas en background: las fases finales (verificar/publicar/parte) NO terminaron; no cuenta como éxito." >> "$LOG"
+      break
+    fi
     CLAUDE_OK=1; FAIL_KIND=""; break
   fi
   kill "$WPID" 2>/dev/null || true
@@ -211,6 +228,19 @@ fi
 # Si NO cuadra, antepone un AVISO automático al cuerpo del correo para que el humano SIEMPRE lo vea
 # (el agente no puede esconder una discrepancia). No bloquea el envío.
 PARTE="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ultima-corrida.md"
+
+# CANDADO DE FRESCURA (independiente del LLM): el parte solo vale si lo escribió ESTA corrida.
+# Si su fecha de modificación es anterior al arranque, la corrida murió antes de la FASE 10 y
+# mandarlo sería un correo FALSO (caso 2026-07-26: llegó el parte del 25 diciendo "publicado"
+# mientras el trabajo del 26 seguía sin commitear). En ese caso se degrada a corrida fallida.
+if [ "${CLAUDE_OK:-0}" = 1 ] || [ "${CODEX_OK:-0}" = 1 ]; then
+  PARTE_MTIME=$(stat -f %m "$PARTE" 2>/dev/null || echo 0)
+  if [ "$PARTE_MTIME" -lt "$RUN_START" ]; then
+    echo "[$STAMP] El parte no se reescribió en esta corrida (mtime $PARTE_MTIME < inicio $RUN_START): la corrida no llegó a la FASE 10; NO mando el parte viejo." >> "$LOG"
+    CLAUDE_OK=0; CODEX_OK=0; FAIL_KIND="incompleta"
+  fi
+fi
+
 if [ -f "$PARTE" ]; then
   if ! CUADRE=$(python3 "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/check-parte.py" "$PARTE" 2>&1); then
     {
@@ -258,12 +288,24 @@ else
     timeout)
       MOTIVO="la corrida excedió el tope duro de tiempo y fue cortada (posible corrida desbocada)"
       SUGERENCIA="Revisa el log para ver en qué fase se atoró: $LOG" ;;
+    incompleta)
+      MOTIVO="la corrida hizo trabajo pero NO llegó a terminarlo (se cortó en la revisión final, antes de publicar y de escribir el parte del día)"
+      SUGERENCIA="El trabajo NO se perdió: quedó guardado en la rama de la corrida. La próxima corrida lo retoma. Log: $LOG" ;;
     *)
       MOTIVO="error no reconocido de la corrida"
       SUGERENCIA="Revisa el log: $LOG" ;;
   esac
-  printf '# Auto Agente Plomero — corrida NO completada\n**Motivo:** %s.\n**Evidencia (del log):** `%s`\n**Qué sigue:** %s\n\nNo se hizo ni publicó ningún cambio en esta corrida.\n' \
+  printf '# Auto Agente Plomero — corrida NO completada\n**Motivo:** %s.\n**Evidencia (del log):** `%s`\n**Qué sigue:** %s\n\nNo se publicó ningún cambio en esta corrida.\n' \
     "$MOTIVO" "$ERRLINE" "$SUGERENCIA" > "$FAILNOTE"
+  # TRABAJO SIN PUBLICAR: si la corrida alcanzó a editar el sitio y murió antes de publicar, dilo
+  # en el correo. Antes eso quedaba invisible y el trabajo huérfano se descubría días después
+  # (rama del 07-23 rescatada hasta el 07-25; trabajo del 07-26 abandonado sin aviso).
+  SUCIOS=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')
+  RAMA_ACTUAL=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "?")
+  if [ "${SUCIOS:-0}" -gt 0 ] || [ "$RAMA_ACTUAL" != "main" ]; then
+    printf '\n**Trabajo sin publicar:** quedaron %s archivo(s) con cambios en la rama `%s`. No se perdió nada; la próxima corrida lo retoma y lo verifica antes de publicar.\n' \
+      "$SUCIOS" "$RAMA_ACTUAL" >> "$FAILNOTE"
+  fi
   # Si además se intentó el respaldo con Codex y también murió, que el correo lo diga.
   [ "${CODEX_TRIED:-0}" = 1 ] && printf '\n**Respaldo Codex:** también se intentó la corrida con Codex CLI y falló; revisa el log: %s\n' "$LOG" >> "$FAILNOTE"
   /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
