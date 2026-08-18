@@ -86,14 +86,47 @@ while IFS= read -r f; do
 done < <(git ls-files --cached --ignored --exclude-standard 2>/dev/null)
 
 # --- BARRIDO 3: historial (git log -p) — reporta, NO bloquea
-HIST="$(git log -p --no-color 2>/dev/null)"
-for rule in "${RULES[@]}"; do
-  name="${rule%%|*}"; re="${rule#*|}"
-  n="$(printf '%s' "$HIST" | grep -cIE "^\+.*$re" 2>/dev/null || true)"
-  if [ "${n:-0}" -gt 0 ]; then
-    printf 'history\talta\t(historial git)\t0\t%s::%s\n' "$name" "$n" >> "$TSV"
-  fi
-done
+# IMPORTANTE: nunca guardar todo el historial en una variable. En este repo `git log -p`
+# ronda 920 MB y la sustitución de comando agotaba memoria antes de emitir JSON. Python
+# consume el stream línea por línea y conserva únicamente un contador por regla.
+python3 - "$TSV" <<'PY'
+import re
+import subprocess
+import sys
+
+tsv = sys.argv[1]
+rules = [
+    ("openai-key", re.compile(r"sk-[A-Za-z0-9]{20,}")),
+    ("google-api-key", re.compile(r"AIza[0-9A-Za-z_-]{20,}")),
+    ("github-token", re.compile(r"gh[opsu]_[A-Za-z0-9]{20,}")),
+    ("private-key-block", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----[^A-Za-z0-9+/]{0,4}[A-Za-z0-9+/]{30,}")),
+    ("client-secret-value", re.compile(r"client_secret[A-Z_]*[\"']?\s*[:=]\s*[\"']?[A-Za-z0-9_-]{12,}", re.I)),
+    ("refresh-token-value", re.compile(r"refresh_token[A-Z_]*[\"']?\s*[:=]\s*[\"']?[A-Za-z0-9_/-]{12,}", re.I)),
+    ("google-client-secret-gocspx", re.compile(r"GOCSPX-[A-Za-z0-9_-]{16,}")),
+]
+counts = {name: 0 for name, _ in rules}
+proc = subprocess.Popen(
+    ["git", "log", "-p", "--no-color"],
+    stdout=subprocess.PIPE,
+    stderr=subprocess.DEVNULL,
+    text=True,
+    encoding="utf-8",
+    errors="replace",
+)
+assert proc.stdout is not None
+for line in proc.stdout:
+    if not line.startswith("+") or line.startswith("+++"):
+        continue
+    for name, pattern in rules:
+        if pattern.search(line):
+            counts[name] += 1
+if proc.wait() != 0:
+    raise SystemExit("git log -p falló durante el barrido de secretos")
+with open(tsv, "a", encoding="utf-8") as out:
+    for name in sorted(counts):
+        if counts[name]:
+            out.write(f"history\talta\t(historial git)\t0\t{name}::{counts[name]}\n")
+PY
 
 # --- gitleaks (si existe): señal extra
 if command -v gitleaks >/dev/null 2>&1; then
