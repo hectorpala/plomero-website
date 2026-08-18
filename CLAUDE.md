@@ -8,7 +8,7 @@
 - El estado de la última corrida está en ESTADO.md.
 - VERIFICADOR (FASE 7) = `subagent_type: verificador` (`.claude/agents/verificador.md`), SOLO-LECTURA (sin Edit/Write, git de solo-lectura). JAMÁS general-purpose (incidente verifier-rogue 2026-06-21).
 
-## Reglas de trabajo (estilo Anthropic)
+## Reglas de trabajo
 - VERIFICA tu trabajo antes de darlo por hecho: corre el sitio y compruébalo, no asumas que "se ve bien".
 - HEALTH CHECK primero: antes de tocar nada, revisa que lo existente no esté roto.
 - UNA mejora por sesión. No abarques de más.

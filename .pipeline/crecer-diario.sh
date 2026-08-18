@@ -8,23 +8,22 @@ set -euo pipefail
 #  Reemplaza a mantener-diario.sh (lo incluye y le suma crecimiento, verificación y aprendizaje).
 # ════════════════════════════════════════════════════════════════════════════
 
-# Forzar IPv4: si IPv6 está roto en la red, node (claude CLI + send-report) falla
+# Forzar IPv4: si IPv6 está roto en la red, node (MCP + send-report) falla
 # (EHOSTUNREACH). Preferir IPv4 evita que se caigan la corrida y el correo.
 export NODE_OPTIONS="--dns-result-order=ipv4first"
-
-# NO cortar las tareas en background a los 600s. El CLI en modo -p espera por defecto
-# solo 10 min a los subagentes lanzados en background y luego imprime "Background tasks
-# still running after 600s; terminating" y SALE CON CÓDIGO 0. Eso mató la FASE 7 con el
-# verificador a medias los días 2026-07-11 y 2026-07-26: la corrida se dio por exitosa,
-# el trabajo del día quedó SIN COMMITEAR en la rama y se envió por correo el parte VIEJO.
-# Con 0 espera indefinidamente; el freno real es el TIMEOUT_MIN=90 de abajo.
-export CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0
+export PATH="/Users/openclaw/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 
 cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
 STAMP=$(date +%Y%m%d-%H%M%S)
-RUTA_CLAUDE="/Users/openclaw/.npm-global/bin/claude"
+CODEX_BIN="/Users/openclaw/.local/bin/codex"
+if [ ! -x "$CODEX_BIN" ]; then
+  CODEX_BIN=$(command -v codex 2>/dev/null || true)
+fi
+if [ -z "$CODEX_BIN" ] || [ ! -x "$CODEX_BIN" ]; then
+  CODEX_BIN=$(ls -t "$HOME"/.vscode/extensions/openai.chatgpt-*/bin/macos-aarch64/codex 2>/dev/null | head -1 || true)
+fi
 # Log NAMESPACEADO por proyecto: el Electricista escribe en el MISMO LOG_DIR con el
 # mismo prefijo "auto-agente-*"; catchup.sh y check-infra.mjs miran "el log más nuevo"
 # y veían el del otro sitio → el plomero muerto pasaba por vivo (auditoría 2026-07-07).
@@ -77,8 +76,8 @@ if [ "${FORCE_RUN:-0}" != "1" ] && [ "$(cat "$LOG_DIR/auto-agente-plomero-last-r
   exit 0
 fi
 
-# Corrida autónoma del sistema completo (auto-permiso). El prompt orquesta las 10 fases.
-RUN_START=$(date +%s)   # para atribuir el costo (tokens) de los transcripts de ESTA corrida
+# Corrida autónoma del sistema completo con Codex. El prompt orquesta las 10 fases.
+RUN_START=$(date +%s)   # para atribuir el consumo de ESTA corrida
 
 # ── Clasificación de errores (NO confundir red con cuota) ────────────────────
 # TRANSITORIO = se cayó la conexión / el servidor falló a media respuesta. Se REINTENTA:
@@ -88,18 +87,36 @@ RUN_START=$(date +%s)   # para atribuir el costo (tokens) de los transcripts de 
 # estadística "📊 Uso de la corrida (cuota de suscripción)" —que se anexa DESPUÉS— nunca cuenta como motivo.
 TRANSIENT_RE='Connection closed mid-response|API Error|Connection error|overloaded|ECONNRESET|ETIMEDOUT|EHOSTUNREACH|ENETUNREACH|fetch failed|socket hang up|terminated|Internal server error|HTTP 5[0-9][0-9]|\b5(00|02|03|29)\b|may be incomplete'
 LIMIT_RE='session limit|usage limit|hit your (usage|limit)|rate limit|límite de uso|quota exceeded|resets? at|your limit will reset'
-# PERMANENTE = error de configuración/acceso que NO se cura reintentando (caso 2026-07-06:
-# "Your organization has disabled Claude subscription access" → 3 reintentos inútiles, ~45 min).
-PERM_RE='disabled|invalid.*api.*key|unauthorized|forbidden|revoked|suspended|billing'
+# PERMANENTE = error de configuración/acceso que NO se cura reintentando.
+PERM_RE='disabled|invalid.*api.*key|unauthorized|forbidden|revoked|suspended|billing|not logged in|login required|authentication'
 
-# Espera a que la API de Claude vuelva antes de cada intento. NordVPN (kill switch)
-# bloquea la salida al reconectar; sin esto, el intento se quema de inmediato (caso 06-25:
-# 3 intentos fallaron por red caída, no por cuota). curl a /v1/messages da HTTP 405
-# (exit 0 = conectó); solo un error de RED da exit != 0.
+# Busca SOLO dentro de la salida del intento actual, sin cargar el JSONL completo en una
+# variable de shell. Una corrida grande puede producir cientos de MB; almacenarla entera
+# para buscar una marca podía agotar memoria justo después de que Codex terminara bien.
+attempt_has_fixed() {
+  local rc
+  set +o pipefail
+  tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null | grep -qF -- "$1"
+  rc=${PIPESTATUS[1]}
+  set -o pipefail
+  return "$rc"
+}
+
+attempt_has_regex() {
+  local rc
+  set +o pipefail
+  tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null | grep -qiE -- "$1"
+  rc=${PIPESTATUS[1]}
+  set -o pipefail
+  return "$rc"
+}
+
+# Espera a que ChatGPT vuelva antes de cada intento. NordVPN (kill switch) puede
+# bloquear la salida al reconectar; solo un error de RED hace fallar curl.
 wait_for_net() {
   local i
   for i in $(seq 1 32); do
-    curl -sS -o /dev/null --max-time 6 https://api.anthropic.com/v1/messages 2>/dev/null && return 0
+    curl -sS -o /dev/null --max-time 6 https://chatgpt.com/ 2>/dev/null && return 0
     echo "[$STAMP] red caída (¿NordVPN reconectando?); espero 15s ($i/32)…" >> "$LOG"
     sleep 15
   done
@@ -107,23 +124,39 @@ wait_for_net() {
 }
 
 MAX_ATTEMPTS=3
-CLAUDE_OK=0
+CODEX_OK=0
 FAIL_KIND=""          # transitorio | limite | desconocido
+TIMEOUT_MIN=90
+
+if [ -z "$CODEX_BIN" ] || [ ! -x "$CODEX_BIN" ]; then
+  FAIL_KIND="permanente"
+  echo "[$STAMP] No encontré el binario de Codex CLI; la corrida no puede iniciar." >> "$LOG"
+elif ! "$CODEX_BIN" login status >> "$LOG" 2>&1; then
+  FAIL_KIND="permanente"
+  echo "[$STAMP] Codex CLI no está autenticado; ejecuta 'codex login'." >> "$LOG"
+fi
+
 for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
+  [ -z "$FAIL_KIND" ] || break
   echo "[$STAMP] >>> intento $attempt/$MAX_ATTEMPTS de la corrida @ $(date +%H:%M:%S)" >> "$LOG"
   OFF=$(wc -c < "$LOG")   # byte-offset: leeremos SOLO lo que agregue este intento
   wait_for_net || echo "[$STAMP] red no volvió tras ~8 min; intento igual (puede fallar)." >> "$LOG"
-  # Orquestador en SONNET (~5x más barato; el gasto es 67% releer contexto). Los agentes
-  # de juicio crítico (revisor-contenido/critico-completitud/decisor-negocio/fixer-autonomo)
-  # declaran model:opus en su frontmatter -> NO se degradan. Ver MODELO-ROUTING.md.
   # TIMEOUT DURO: el prompt ordena MINUTOS_MAX=35 pero nada lo imponía — 3 corridas
   # desbocadas históricas de 600-654M tokens (~$1,300-1,420 equiv-API c/u). 90 min de
   # tope da holgura para días pesados y corta lo desbocado el MISMO día, no al siguiente.
-  TIMEOUT_MIN=90
-  # --strict-mcp-config con .pipeline/mcp-run.json (gsc + local-seo): SOLO los MCP que la
-  # corrida necesita. Sin esto cargaba TODOS los del usuario (tradingview, facebook-ads
-  # con ESCRITURA…) en un agente autónomo sin humano (hallazgo del port al electricista).
-  "$RUTA_CLAUDE" --model sonnet --permission-mode auto --mcp-config .pipeline/mcp-run.json --strict-mcp-config -p "$(cat .pipeline/crecer-diario-prompt.txt)" >> "$LOG" 2>&1 &
+  # Configuración aislada: ignora integraciones globales y carga SOLO GSC + local-seo.
+  # --approve-for-me conserva autonomía dentro del sandbox workspace-write; nunca desactiva el sandbox.
+  "$CODEX_BIN" exec --cd "/Users/openclaw/Sitios Web/Plomero Culiacán" \
+    --approve-for-me --ephemeral --ignore-user-config --strict-config \
+    --json \
+    -c agents.enabled=false \
+    -c sandbox_workspace_write.network_access=true \
+    -c 'mcp_servers.gsc.command="/usr/local/bin/node"' \
+    -c 'mcp_servers.gsc.args=["/Users/openclaw/gsc-mcp/server.js"]' \
+    -c 'mcp_servers.local-seo.command="/usr/local/bin/node"' \
+    -c 'mcp_servers.local-seo.args=["/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo/index.js"]' \
+    -c 'mcp_servers.local-seo.cwd="/Users/openclaw/Sitios Web/Plomero Culiacán"' \
+    - < .pipeline/crecer-diario-prompt.txt >> "$LOG" 2>&1 &
   CPID=$!
   ( sleep $((TIMEOUT_MIN * 60))
     if kill -0 "$CPID" 2>/dev/null; then
@@ -133,35 +166,31 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   WPID=$!
   if wait "$CPID"; then
     kill "$WPID" 2>/dev/null || true
-    # Código de salida 0 NO prueba que la corrida terminó: el CLI también sale 0 cuando MATA
-    # las tareas en background que seguían vivas (típicamente el verificador de FASE 7). Si eso
-    # pasó, las fases 8-10 (publicar, aprender, escribir el parte) nunca corrieron → NO es éxito.
-    OUTATT=$(tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null || echo "")
-    if printf '%s' "$OUTATT" | grep -q "Background tasks still running"; then
+    # Código 0 sin turn.completed indica una salida incompleta del protocolo JSONL.
+    if ! attempt_has_fixed '"type":"turn.completed"'; then
       FAIL_KIND="incompleta"
-      echo "[$STAMP] Salió con código 0 pero cortó tareas en background: las fases finales (verificar/publicar/parte) NO terminaron; no cuenta como éxito." >> "$LOG"
+      echo "[$STAMP] Codex salió con código 0 pero sin turn.completed; no cuenta como éxito." >> "$LOG"
       break
     fi
-    CLAUDE_OK=1; FAIL_KIND=""; break
+    CODEX_OK=1; FAIL_KIND=""; break
   fi
   kill "$WPID" 2>/dev/null || true
-  TAIL=$(tail -c "+$((OFF + 1))" "$LOG" 2>/dev/null || echo "")
-  if printf '%s' "$TAIL" | grep -q "TIMEOUT ${TIMEOUT_MIN}min"; then
+  if attempt_has_fixed "TIMEOUT ${TIMEOUT_MIN}min"; then
     FAIL_KIND="timeout"
     echo "[$STAMP] Corrida cortada por timeout; NO se reintenta (volvería a desbocarse)." >> "$LOG"
     break
   fi
-  if printf '%s' "$TAIL" | grep -qiE "$LIMIT_RE"; then
+  if attempt_has_regex "$LIMIT_RE"; then
     FAIL_KIND="limite"
     echo "[$STAMP] Falla por LÍMITE DE USO real del plan; no tiene caso reintentar." >> "$LOG"
     break
   fi
-  if printf '%s' "$TAIL" | grep -qiE "$PERM_RE"; then
+  if attempt_has_regex "$PERM_RE"; then
     FAIL_KIND="permanente"
     echo "[$STAMP] Error PERMANENTE de configuración/acceso; no tiene caso reintentar." >> "$LOG"
     break
   fi
-  if printf '%s' "$TAIL" | grep -qiE "$TRANSIENT_RE"; then
+  if attempt_has_regex "$TRANSIENT_RE"; then
     FAIL_KIND="transitorio"
   else
     FAIL_KIND="desconocido"
@@ -174,52 +203,11 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
     echo "[$STAMP] Agotados los $MAX_ATTEMPTS intentos; la corrida no completó." >> "$LOG"
   fi
 done
-[ "$CLAUDE_OK" = 1 ] || echo "[$STAMP] La corrida de claude terminó con error ($FAIL_KIND); continúo para enviar el parte." >> "$LOG"
+[ "$CODEX_OK" = 1 ] || echo "[$STAMP] La corrida de Codex terminó con error ($FAIL_KIND); continúo para enviar el parte." >> "$LOG"
 
-# ── RESPALDO CODEX (solo falla por CUOTA): la corrida del día la intenta Codex CLI, que
-# gasta cuota de ChatGPT (independiente de la de Claude). Alcance REDUCIDO a mantenimiento
-# determinista (checkers + auto-fixers + candados), SIN crecimiento ni cambios de contenido
-# — Codex no tiene los subagentes Task ni el MCP de GSC. Prompt: .pipeline/respaldo-codex-prompt.txt
-CODEX_OK=0
-CODEX_TRIED=0
-if [ "$CLAUDE_OK" != 1 ] && [ "$FAIL_KIND" = "limite" ]; then
-  # Binario: el CLI suelto si existe; si no, el que trae la extensión de VS Code de Codex
-  # (su ruta cambia con cada update de la extensión → se resuelve al vuelo, la más nueva).
-  CODEX_BIN=$(command -v codex 2>/dev/null || true)
-  if [ -z "$CODEX_BIN" ]; then
-    CODEX_BIN=$(ls -t "$HOME"/.vscode/extensions/openai.chatgpt-*/bin/macos-aarch64/codex 2>/dev/null | head -1 || true)
-  fi
-  if [ -n "$CODEX_BIN" ] && [ -x "$CODEX_BIN" ]; then
-    CODEX_TRIED=1
-    echo "[$STAMP] >>> RESPALDO CODEX: cuota de Claude agotada; mantenimiento reducido con $("$CODEX_BIN" --version 2>/dev/null | head -1)." >> "$LOG"
-    # Sandbox workspace-write + red habilitada: puede editar el repo y hacer git push, pero
-    # no escribir fuera del workspace. Mismo timeout duro que la corrida normal.
-    "$CODEX_BIN" exec --cd "/Users/openclaw/Sitios Web/Plomero Culiacán" \
-      --sandbox workspace-write -c sandbox_workspace_write.network_access=true \
-      "$(cat .pipeline/respaldo-codex-prompt.txt)" >> "$LOG" 2>&1 &
-    CPID=$!
-    ( sleep $((TIMEOUT_MIN * 60))
-      if kill -0 "$CPID" 2>/dev/null; then
-        echo "[$STAMP] TIMEOUT ${TIMEOUT_MIN}min del respaldo Codex: lo mato (pid $CPID)." >> "$LOG"
-        kill "$CPID" 2>/dev/null; sleep 10; kill -9 "$CPID" 2>/dev/null
-      fi ) &
-    WPID=$!
-    if wait "$CPID"; then
-      CODEX_OK=1
-      echo "[$STAMP] Respaldo Codex terminó OK; el parte del día sale de esta corrida." >> "$LOG"
-    else
-      echo "[$STAMP] El respaldo con Codex TAMBIÉN falló; se manda el aviso de falla normal." >> "$LOG"
-    fi
-    kill "$WPID" 2>/dev/null || true
-  else
-    echo "[$STAMP] Cuota agotada y NO encontré el binario de codex (CLI ni extensión VS Code); sin respaldo." >> "$LOG"
-  fi
-fi
-
-# Registro de costo/tokens de la corrida (no bloqueante): suma los transcripts (sesión + subagentes)
-# producidos desde RUN_START y los anexa a .pipeline/costos.jsonl. Da visibilidad del gasto diario.
+# Registro de consumo de la corrida Codex desde el JSONL de este log.
 /usr/local/bin/node "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/registrar-costo.mjs" \
-  "$HOME/.claude/projects/-Users-openclaw-Sitios-Web-Plomero-Culiac-n" "$RUN_START" \
+  "$LOG" "$RUN_START" \
   "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/costos.jsonl" "auto-agente $STAMP" >> "$LOG" 2>&1 \
   || echo "[$STAMP] No pude registrar el costo de la corrida (sigo)." >> "$LOG"
 
@@ -233,11 +221,11 @@ PARTE="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ultima-corrida.md"
 # Si su fecha de modificación es anterior al arranque, la corrida murió antes de la FASE 10 y
 # mandarlo sería un correo FALSO (caso 2026-07-26: llegó el parte del 25 diciendo "publicado"
 # mientras el trabajo del 26 seguía sin commitear). En ese caso se degrada a corrida fallida.
-if [ "${CLAUDE_OK:-0}" = 1 ] || [ "${CODEX_OK:-0}" = 1 ]; then
+if [ "${CODEX_OK:-0}" = 1 ]; then
   PARTE_MTIME=$(stat -f %m "$PARTE" 2>/dev/null || echo 0)
   if [ "$PARTE_MTIME" -lt "$RUN_START" ]; then
     echo "[$STAMP] El parte no se reescribió en esta corrida (mtime $PARTE_MTIME < inicio $RUN_START): la corrida no llegó a la FASE 10; NO mando el parte viejo." >> "$LOG"
-    CLAUDE_OK=0; CODEX_OK=0; FAIL_KIND="incompleta"
+    CODEX_OK=0; FAIL_KIND="incompleta"
   fi
 fi
 
@@ -257,11 +245,10 @@ if [ -f "$PARTE" ]; then
   fi
 fi
 
-# Parte por email. Si la corrida tuvo ÉXITO (Claude o respaldo Codex) → parte nuevo. Si FALLÓ
+# Parte por email. Si la corrida de Codex tuvo ÉXITO → parte nuevo. Si FALLÓ
 # (cuota/error) → NO mandes el parte viejo (correo engañoso "encontré N" de otra corrida); aviso honesto.
-if [ "${CLAUDE_OK:-0}" = 1 ] || [ "${CODEX_OK:-0}" = 1 ]; then
-  ETIQUETA="18:25"
-  [ "${CODEX_OK:-0}" = 1 ] && ETIQUETA="18:25 · respaldo Codex"
+if [ "${CODEX_OK:-0}" = 1 ]; then
+  ETIQUETA="18:25 · Codex"
   /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
     "$PARTE" \
     "Auto Agente Plomero" "$ETIQUETA" >> "$LOG" 2>&1 \
@@ -284,7 +271,7 @@ else
       SUGERENCIA="Reintenta cuando se restablezca la cuota." ;;
     permanente)
       MOTIVO="error PERMANENTE de configuración/acceso (p.ej. suscripción deshabilitada o credencial inválida) — reintentar no ayuda"
-      SUGERENCIA="Revisa la suscripción/credenciales de Claude; el agente no puede resolver esto solo." ;;
+      SUGERENCIA="Revisa el inicio de sesión de Codex (`codex login status`); el agente no puede resolver credenciales solo." ;;
     timeout)
       MOTIVO="la corrida excedió el tope duro de tiempo y fue cortada (posible corrida desbocada)"
       SUGERENCIA="Revisa el log para ver en qué fase se atoró: $LOG" ;;
@@ -306,16 +293,14 @@ else
     printf '\n**Trabajo sin publicar:** quedaron %s archivo(s) con cambios en la rama `%s`. No se perdió nada; la próxima corrida lo retoma y lo verifica antes de publicar.\n' \
       "$SUCIOS" "$RAMA_ACTUAL" >> "$FAILNOTE"
   fi
-  # Si además se intentó el respaldo con Codex y también murió, que el correo lo diga.
-  [ "${CODEX_TRIED:-0}" = 1 ] && printf '\n**Respaldo Codex:** también se intentó la corrida con Codex CLI y falló; revisa el log: %s\n' "$LOG" >> "$FAILNOTE"
   /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
     "$FAILNOTE" "Auto Agente Plomero" "no completada" >> "$LOG" 2>&1 \
     || echo "[$STAMP] No se pudo enviar el aviso de falla (Auto Agente Plomero)." >> "$LOG"
 fi
 
-# Marca que YA corrió hoy SOLO si la corrida tuvo éxito (Claude o respaldo Codex). Si falló, NO se
+# Marca que YA corrió hoy SOLO si la corrida de Codex tuvo éxito. Si falló, NO se
 # marca → el catch-up sí podrá recuperarla hoy (si se marcara siempre, quedaría sin recuperar).
-if [ "${CLAUDE_OK:-0}" = 1 ] || [ "${CODEX_OK:-0}" = 1 ]; then
+if [ "${CODEX_OK:-0}" = 1 ]; then
   date +%Y%m%d > "$LOG_DIR/auto-agente-plomero-last-run-day"
 fi
 # Exit 0 explícito: antes el script salía con 1 en toda corrida fallida (el && de arriba

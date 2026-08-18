@@ -12,11 +12,11 @@
 # ════════════════════════════════════════════════════════════════════════════
 set -uo pipefail
 export NODE_OPTIONS="--dns-result-order=ipv4first"   # IPv6 roto no tumba la corrida/correo
+export PATH="/Users/openclaw/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 
 cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"; mkdir -p "$LOG_DIR"
-RUTA_CLAUDE="/Users/openclaw/.npm-global/bin/claude"
-CLAUDE_CMD="${MARATON_CLAUDE:-$RUTA_CLAUDE}"          # override para pruebas (stub)
+CODEX_CMD="${MARATON_CODEX:-/Users/openclaw/.local/bin/codex}"  # override para pruebas (stub)
 
 DUR=${1:-3600}            # segundos (default 1 h)
 MAX_PASS=${2:-20}         # tope duro de pasadas
@@ -48,13 +48,12 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 RUN_START=$(date +%s)   # para atribuir el consumo de cuota del maratón al ledger
 
-# Espera a que la API de Claude sea alcanzable (NordVPN puede estar reconectando y
+# Espera a que ChatGPT sea alcanzable (NordVPN puede estar reconectando y
 # bloqueando la salida con el kill switch). Devuelve 0 si vuelve la red, 1 si no en ~8 min.
-# curl a /v1/messages da HTTP 405 (exit 0 = conectó); solo error de RED da exit != 0.
 wait_for_net() {
   local i
   for i in $(seq 1 32); do
-    if curl -sS -o /dev/null --max-time 6 https://api.anthropic.com/v1/messages 2>/dev/null; then return 0; fi
+    if curl -sS -o /dev/null --max-time 6 https://chatgpt.com/ 2>/dev/null; then return 0; fi
     echo "[$(date)] red caída (¿NordVPN reconectando?); espero 15s ($i/32)…" >> "$MLOG"
     sleep 15
   done
@@ -65,9 +64,16 @@ END=$(( $(date +%s) + DUR ))
 PASS=0; DRY=0; HECHAS=0
 echo "[$(date)] === MARATÓN inicio · dura ${DUR}s · máx ${MAX_PASS} pasadas ===" | tee -a "$MLOG"
 
+if [ ! -x "$CODEX_CMD" ] || ! "$CODEX_CMD" login status >> "$MLOG" 2>&1; then
+  echo "[$(date)] Codex no está instalado o autenticado; maratón cancelado." | tee -a "$MLOG"
+  /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs "$MLOG" "Plomero Culiacán (MARATÓN)" "no inició" >> "$MLOG" 2>&1 || true
+  exit 0
+fi
+
 while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
   PASS=$((PASS+1)); ST=$(date +%Y%m%d-%H%M%S)
   PLOG="$LOG_DIR/maraton-pasada-$ST.log"
+  LAST_FILE="/tmp/plomero-maraton-last-$ST.txt"
   REST=$(( END - $(date +%s) ))
   echo "[$(date)] --- pasada $PASS (quedan ${REST}s) -> $PLOG" | tee -a "$MLOG"
 
@@ -77,16 +83,24 @@ while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
     break
   fi
 
-  # Orquestador en SONNET (~5x más barato); el juicio crítico vive en subagentes model:opus.
-  # --strict-mcp-config: SOLO gsc + local-seo (sin él cargaba todos los MCP del usuario).
-  "$CLAUDE_CMD" --model sonnet --permission-mode auto --mcp-config .pipeline/mcp-run.json --strict-mcp-config -p "$(cat .pipeline/maraton-prompt.txt)" >> "$PLOG" 2>&1 || true
+  # Codex aislado: SOLO GSC + local-seo, sin integraciones globales del usuario.
+  "$CODEX_CMD" exec --cd "/Users/openclaw/Sitios Web/Plomero Culiacán" \
+    --approve-for-me --ephemeral --ignore-user-config --strict-config --json \
+    -c sandbox_workspace_write.network_access=true \
+    -c 'mcp_servers.gsc.command="/usr/local/bin/node"' \
+    -c 'mcp_servers.gsc.args=["/Users/openclaw/gsc-mcp/server.js"]' \
+    -c 'mcp_servers.local-seo.command="/usr/local/bin/node"' \
+    -c 'mcp_servers.local-seo.args=["/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo/index.js"]' \
+    -c 'mcp_servers.local-seo.cwd="/Users/openclaw/Sitios Web/Plomero Culiacán"' \
+    --output-last-message "$LAST_FILE" - < .pipeline/maraton-prompt.txt >> "$PLOG" 2>&1 || true
+  grep '"type":"turn.completed"' "$PLOG" >> "$MLOG" 2>/dev/null || true
 
-  LAST=$(grep -E '^(HECHO|SIN TRABAJO):' "$PLOG" | tail -1)
+  LAST=$(grep -E '^(HECHO|SIN TRABAJO):' "$LAST_FILE" 2>/dev/null | tail -1)
   echo "    -> ${LAST:-(sin línea de cierre — pasada incompleta)}" | tee -a "$MLOG"
   if echo "$LAST" | grep -q '^SIN TRABAJO'; then
     DRY=$((DRY+1))
   elif [ -z "$LAST" ]; then
-    # Pasada SIN línea de cierre (claude crasheó) cuenta como seca: antes reseteaba
+    # Pasada SIN línea de cierre (Codex falló) cuenta como seca: antes reseteaba
     # DRY=0 y un CLI roto quemaba las 20 pasadas sin que el corte "2 secas" actuara.
     DRY=$((DRY+1))
   else
@@ -102,7 +116,7 @@ echo "[$(date)] === MARATÓN fin · ${PASS} pasada(s) · ${HECHAS} unidad(es) he
 # Registro de consumo de cuota en el ledger (antes el maratón era invisible para
 # costos.jsonl y para el tripwire de check-costos.py).
 /usr/local/bin/node "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/registrar-costo.mjs" \
-  "$HOME/.claude/projects/-Users-openclaw-Sitios-Web-Plomero-Culiac-n" "$RUN_START" \
+  "$MLOG" "$RUN_START" \
   "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/costos.jsonl" "maraton $STAMP0" >> "$MLOG" 2>&1 \
   || echo "[$(date)] No pude registrar el consumo del maratón (sigo)." >> "$MLOG"
 # Correo resumen del maratón (mismo IPv4 fix; no bloquea si falla)
