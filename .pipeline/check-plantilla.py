@@ -57,6 +57,9 @@ import os
 import re
 import json
 import glob
+import difflib
+import html as _html
+import unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # raiz del repo
 BASE = "https://plomeroculiacanpro.mx"
@@ -102,6 +105,26 @@ def read(p):
 # proposito: `sips` solo existe en macOS y este checker tambien corre en el CI (ubuntu),
 # donde caeria a None y el check 22 se volveria ciego sin avisar. Cacheado: el sitio tiene
 # ~345 <img> pero pocas decenas de archivos distintos.
+def texto_visible(t):
+    """Texto que el usuario REALMENTE ve: fuera <script> (ahi vive el JSON-LD, justo lo que
+    NO cuenta como visible), <style>, <template>, <noscript> y comentarios; el resto sin
+    etiquetas y con entidades resueltas."""
+    for pat in (r'<script\b[^>]*>.*?</script>', r'<style\b[^>]*>.*?</style>',
+                r'<template\b[^>]*>.*?</template>', r'<noscript\b[^>]*>.*?</noscript>',
+                r'<!--.*?-->'):
+        t = re.sub(pat, " ", t, flags=re.S | re.I)
+    return _html.unescape(re.sub(r'<[^>]+>', " ", t))
+
+
+def norm_txt(s):
+    """Normaliza para comparar: sin acentos, sin emoji/puntuacion, minusculas, un solo espacio.
+    Asi '¿Cuanto cuesta?' y '¿Cuánto cuesta? 🛠️' comparan igual."""
+    s = unicodedata.normalize("NFKD", _html.unescape(s or ""))
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = "".join(c if (c.isalnum() or c.isspace()) else " " for c in s.lower())
+    return re.sub(r'\s+', " ", s).strip()
+
+
 _DIMS_CACHE = {}
 
 
@@ -692,19 +715,76 @@ def check_page(fpath, t, noindex, redirects):
                 "esta COMPLETAMENTE ROTO (el boton no responde al clic, imposible navegar en movil)",
                 "Agregar <script src=\".../main.js?v=...\"> (registra el toggle real del menu)")
 
-    # --- 21. FAQPage JSON-LD: el numero de preguntas debe COINCIDIR con el FAQ visible
-    #     (.faq-item). Un mismatch pierde elegibilidad a rich-results y viola la guia de
-    #     Google de que el markup FAQ refleje el FAQ visible. Hallazgo critico-completitud
-    #     2026-07-21 (reparacion-de-boiler 5 vs 6, tecnico-de-gas-culiacan 5 vs 7).
-    n_visible = len(re.findall(r'class="faq-item"', t))
-    if n_visible and re.search(r'"@type"\s*:\s*"FAQPage"', t):
-        n_jsonld = len(re.findall(r'"@type"\s*:\s*"Question"', t))
-        if n_jsonld != n_visible:
+    # --- 21. FAQPage JSON-LD: cada pregunta marcada debe EXISTIR como texto visible.
+    #     Google exige que el contenido marcado sea visible para el usuario; marcar un FAQ
+    #     que no esta en la pagina arriesga accion manual por "structured data markup issue",
+    #     no solo perder el rich result.
+    #     REESCRITO 2026-07-26 (HUECO 11 del critico-completitud). La version vieja contaba
+    #     elementos con class="faq-item" y hacia `if n_visible and FAQPage:` — o sea que si la
+    #     pagina no tenia NINGUN .faq-item el check se saltaba EN SILENCIO, justo el peor caso
+    #     (caso real: blog/baja-presion-agua declaraba 5 Question y 0 preguntas en pantalla).
+    #     Ademas contar por CLASE dejaba fuera 28 paginas que renderizan su FAQ con otro markup
+    #     y las marcaba como ciegas sin serlo. Ahora se compara por TEXTO NORMALIZADO.
+    if re.search(r'"@type"\s*:\s*"FAQPage"', t):
+        preguntas = [_html.unescape(m) for m in
+                     re.findall(r'"@type"\s*:\s*"Question"\s*,\s*"name"\s*:\s*"((?:[^"\\]|\\.)*)"', t)]
+        if not preguntas:  # otro orden de claves: recuperar los name dentro del bloque Question
+            preguntas = [_html.unescape(m) for m in
+                         re.findall(r'"@type"\s*:\s*"Question"[^}]*?"name"\s*:\s*"((?:[^"\\]|\\.)*)"', t)]
+        vis = norm_txt(texto_visible(t))
+        # candidatos para el fallo por REDACCION: encabezados y resumenes de acordeon, que es
+        # donde vive una pregunta de FAQ cuando esta escrita distinto al schema.
+        cands = [norm_txt(x) for x in re.findall(
+            r'<(?:h[2-6]|summary|dt)\b[^>]*>(.*?)</(?:h[2-6]|summary|dt)>', t, re.S | re.I)]
+        cands = [c for c in cands if c]
+        faltan, divergen = [], []
+        for q in preguntas:
+            qn = norm_txt(q.replace('\\"', '"'))
+            if not qn or qn in vis:
+                continue
+            # Dos señales, se queda la mejor:
+            #  - ratio global: capta reescrituras ("mi" por "tu", plurales, tildes).
+            #  - CONTENCION (bloque comun mas largo / largo de la pregunta): capta el caso en
+            #    que la pregunta SI esta en pantalla pero dentro de un encabezado mas largo
+            #    ("...tapado?" vs "...tapado? 8 Senales Claras"). Sin esto, una pregunta que el
+            #    usuario ve perfectamente se reportaba como AUSENTE (severidad alta) — falso
+            #    positivo caro, porque "alta" aqui significa riesgo de accion manual de Google.
+            #  - CONTENCION POR PALABRAS: la señal que de verdad responde "¿esta la pregunta
+            #    en pantalla?". Las de caracteres se rompen con un cambio chico en medio
+            #    ("mi" por "tu" parte el bloque en dos), aunque el lector vea la misma pregunta.
+            qtok = set(qn.split())
+            mejor = 0.0
+            for c in cands:
+                sm = difflib.SequenceMatcher(None, qn, c)
+                bloque = sm.find_longest_match(0, len(qn), 0, len(c)).size
+                tok = len(qtok & set(c.split())) / len(qtok) if qtok else 0.0
+                mejor = max(mejor, sm.ratio(), bloque / len(qn), tok)
+            (divergen if mejor >= 0.85 else faltan).append((q, mejor))
+        if faltan:
+            add("alta", r, "seo",
+                "FAQPage marca %d pregunta(s) que NO aparecen en el texto visible de la pagina "
+                "(%d de %d): %s — Google exige que el contenido marcado sea visible; esto "
+                "arriesga accion manual, no solo perder el rich result"
+                % (len(faltan), len(faltan), len(preguntas),
+                   "; ".join('"%s"' % q[:70] for q, _ in faltan[:3])),
+                "Publicar esas preguntas en el cuerpo (derivando el texto del propio JSON-LD, "
+                "sin inventar), o quitarlas del FAQPage si no van a existir en la pagina")
+        if divergen:
             add("media", r, "seo",
-                "FAQPage JSON-LD tiene %d pregunta(s) pero el FAQ visible (.faq-item) tiene %d "
-                "— el markup no refleja el contenido real" % (n_jsonld, n_visible),
-                "Igualar el conteo: cada pregunta visible necesita su Question+acceptedAnswer "
-                "en el FAQPage, y viceversa")
+                "FAQPage marca %d pregunta(s) con redaccion DISTINTA a la visible (parecido "
+                "%s) — el markup no refleja el texto real: %s"
+                % (len(divergen), ", ".join("%.0f%%" % (s * 100) for _, s in divergen[:3]),
+                   "; ".join('"%s"' % q[:70] for q, _ in divergen[:3])),
+                "Igualar literalmente la pregunta del JSON-LD con la que se ve en pantalla")
+        # Sentido INVERSO (lo unico que salvaba el check viejo por conteo): preguntas que SI se
+        # ven pero nadie marco. No es violacion de politica, es oportunidad perdida -> baja.
+        n_items = len(re.findall(r'class="[^"]*\bfaq-item\b', t))
+        if n_items and n_items > len(preguntas):
+            add("baja", r, "seo",
+                "El FAQ visible tiene %d pregunta(s) pero el FAQPage solo marca %d — hay "
+                "preguntas en pantalla que Google no ve marcadas" % (n_items, len(preguntas)),
+                "Anadir al FAQPage las Question+acceptedAnswer que falten, copiando el texto "
+                "visible tal cual")
 
     # --- 22. width/height declarados con un RATIO distinto al del archivo REAL (CLS).
     #     El navegador reserva la caja con el ratio DECLARADO y luego reflowea al real:

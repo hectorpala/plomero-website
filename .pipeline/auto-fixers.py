@@ -20,6 +20,8 @@ incompleto (exit 1: estado inconsistente que NO debe publicarse).
 """
 import datetime
 import glob
+import html as _html
+import json
 import os
 import re
 import sys
@@ -161,6 +163,102 @@ def _fix_denylist_color(h):
         h, k = pat.subn(r'\g<1>' + good, h)
         n += k
     return h, n
+
+
+# ── FAQ visible ↔ FAQPage JSON-LD. Google exige que el marcado refleje literalmente el
+#    contenido que puede leer el usuario. Cuando se amplía o reescribe el acordeón visible,
+#    sincroniza sus preguntas Y respuestas en vez de dejar un schema viejo. Se limita a
+#    `.faq-item` con encabezado + párrafo: si el markup no es inequívoco, no toca nada.
+def _texto_visible_faq(fragmento):
+    texto = re.sub(r'<[^>]+>', ' ', fragmento)
+    return re.sub(r'\s+', ' ', _html.unescape(texto)).strip()
+
+
+def _faq_items_visibles(h):
+    items = []
+    for m in re.finditer(
+            r'<div\b[^>]*class=["\'][^"\']*\bfaq-item\b[^"\']*["\'][^>]*>(.*?)</div>',
+            h, re.S | re.I):
+        bloque = m.group(1)
+        mq = re.search(r'<(?:h[2-6]|summary|dt)\b[^>]*>(.*?)</(?:h[2-6]|summary|dt)>',
+                       bloque, re.S | re.I)
+        ma = re.search(r'<(?:p|dd)\b[^>]*>(.*?)</(?:p|dd)>', bloque, re.S | re.I)
+        if not (mq and ma):
+            return []  # fail-safe: un acordeón ambiguo no se reescribe a medias
+        pregunta = _texto_visible_faq(mq.group(1))
+        respuesta = _texto_visible_faq(ma.group(1))
+        if not pregunta or not respuesta:
+            return []
+        items.append({
+            "@type": "Question",
+            "name": pregunta,
+            "acceptedAnswer": {"@type": "Answer", "text": respuesta},
+        })
+    return items
+
+
+def _fin_array_json(s, inicio):
+    """Devuelve el offset posterior al `]` que abre en inicio, respetando strings JSON."""
+    nivel, en_string, escape = 0, False, False
+    for i in range(inicio, len(s)):
+        c = s[i]
+        if en_string:
+            if escape:
+                escape = False
+            elif c == '\\':
+                escape = True
+            elif c == '"':
+                en_string = False
+            continue
+        if c == '"':
+            en_string = True
+        elif c == '[':
+            nivel += 1
+        elif c == ']':
+            nivel -= 1
+            if nivel == 0:
+                return i + 1
+    return None
+
+
+def _fix_faq_visible(h):
+    visibles = _faq_items_visibles(h)
+    if not visibles:
+        return h, 0
+    nuevo_array = json.dumps(visibles, ensure_ascii=False, separators=(',', ':'))
+    cambios = 0
+
+    def sincroniza_script(m):
+        nonlocal cambios
+        contenido = m.group(2)
+        tipo = re.search(r'"@type"\s*:\s*"FAQPage"', contenido)
+        if not tipo:
+            return m.group(0)
+        entidad = re.search(r'"mainEntity"\s*:\s*\[', contenido[tipo.end():])
+        if not entidad:
+            return m.group(0)
+        ini = tipo.end() + entidad.end() - 1
+        fin = _fin_array_json(contenido, ini)
+        if fin is None:
+            return m.group(0)
+        try:
+            actuales = json.loads(contenido[ini:fin])
+        except Exception:
+            return m.group(0)
+        if actuales == visibles:
+            return m.group(0)
+        cambios += 1
+        contenido = contenido[:ini] + nuevo_array + contenido[fin:]
+        return m.group(1) + contenido + m.group(3)
+
+    patron = re.compile(
+        r'(<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>)(.*?)(</script>)',
+        re.S | re.I)
+    return patron.sub(sincroniza_script, h), cambios
+
+
+def _det_faq_visible(h):
+    return _fix_faq_visible(h)[1] > 0
 
 
 # ── ancla cuyo TEXTO nombra un servicio real pero el HREF apunta a otro destino (regresion
@@ -335,6 +433,8 @@ FIXERS = [
      "mecanico", None, None),  # caso especial en cmd_run(): necesita page_dir para resolver hrefs relativos
     ("denylist-color-inline", "color de la denylist (.breadcrumb-item a #E36414, .breadcrumb-item.active #6c757d) duplicado en el <style> inline de la página → valor AA-safe (regresión 4x, check 19 de check-plantilla.py)",
      "mecanico", _det_denylist_color, _fix_denylist_color),
+    ("faq-visible", "FAQPage JSON-LD desfasado → copia literalmente preguntas y respuestas de cada .faq-item visible (check 21 de check-plantilla.py)",
+     "mecanico", _det_faq_visible, _fix_faq_visible),
     ("img-ratio-real", "width/height de un <img> con ratio distinto al del archivo real (CLS) → dimensiones reales; el CSS sigue mandando el tamaño (check 22 de check-plantilla.py)",
      "mecanico", None, None),  # caso especial en cmd_run(): necesita page_dir para resolver src relativos
 ]
