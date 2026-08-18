@@ -94,11 +94,12 @@ else
     fail "Falta <h1>"
 fi
 
-# 8. Hoja de estilos del sitio
-if echo "$CONTENT" | grep -q 'styles.min.css'; then
-    pass "styles.min.css presente"
+# 8. Hoja de estilos del sitio. La home sirve el CSS versionado por hash para
+# invalidar la caché immutable; las landings históricas aún pueden usar .min.
+if echo "$CONTENT" | grep -Eq 'styles(\.min|\.[0-9a-fA-F]{8})\.css'; then
+    pass "Hoja styles versionada presente"
 else
-    fail "Falta /styles.min.css"
+    fail "Falta styles.min.css o styles.<hash>.css"
 fi
 
 # 9. theme-color
