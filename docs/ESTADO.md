@@ -1,5 +1,12 @@
 # ESTADO del pipeline de agentes
 
+## 2026-08-18 — auto/diario-20260818-1825 — NO PUBLICADA
+
+- Retomado trabajo suelto de una corrida interrumpida: 36 archivos de automatización y pruebas, guardados en `6b55a58c`; reporte GSC en `0c079b5e`.
+- Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Suite: 74 pruebas, 0 fallos. `ci-gate.py`: 0 ALTA. E2E: 3 flujos, 0 hallazgos. Rendimiento: 2 páginas medidas, 0 hallazgos. Producción: 0 hallazgos.
+- GSC: 583 clics, 59,603 impresiones, CTR 0.98%, posición 6.6; sitemaps con 0 errores/advertencias. Backlog autoejecutable vacío dos veces; 0 páginas nuevas porque toda demanda válida ya tiene destino.
+- Verificador solo-lectura: `ok=false`. Bloqueos: el diff toca 15 archivos bajo `tests/` y el contrato exige que una corrida publicable no toque tests; tracking no observó beacon en 4 páginas bajo Consent Mode; el historial Git conserva dos patrones de credencial antigua que requieren rotación. No se hizo push ni merge.
+
 ```json
 {
   "ultima_corrida_actual": {
