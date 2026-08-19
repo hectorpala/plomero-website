@@ -628,3 +628,11 @@
 /servicios/plomero-colonias-culiacan/obrera/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/zona-dorada/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/campesina-el-barrio/* /servicios/plomero-zona-oriente-culiacan/ 301
+# Stubs meta-refresh convertidos a 301 reales (19-ago-2026) — específicos primero, catch-all al final
+/servicios/plomero/24-7/* /servicios/emergencia-24-7/ 301
+/servicios/plomero/a-domicilio/* /servicios/plomero-a-domicilio/ 301
+/servicios/plomero/cerca-de-mi/* /servicios/plomero-cerca-de-mi/ 301
+/servicios/plomero/colonias/* /servicios/plomero-colonias-culiacan/ 301
+/servicios/plomero/precios/* /precios/ 301
+/servicios/plomero/* /servicios/ 301
+/blog/marcha-por-la-paz-culiacan-2025.html /blog/marcha-paz-culiacan-2025/ 301
