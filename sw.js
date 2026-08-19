@@ -2,8 +2,10 @@
 // Última actualización: 2025-11-21
 // Estrategia: Cache-First para assets, Network-First para HTML
 
-const CACHE_NAME = 'plomero-culiacan-v46';
-const RUNTIME_CACHE = 'plomero-runtime-v20';
+const CACHE_NAME = 'plomero-culiacan-v47';
+// Ligado a CACHE_NAME: cada bump de versión purga también el caché runtime
+// (antes era un nombre fijo que nunca se limpiaba y crecía sin tope).
+const RUNTIME_CACHE = CACHE_NAME + '-runtime';
 
 // Assets críticos para cachear en instalación
 const PRECACHE_ASSETS = [
@@ -53,6 +55,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Cache API solo admite GET; los POST (formularios Netlify) van directo a la red
+  if (request.method !== 'GET') {
+    return;
+  }
+
   // Network-First para páginas HTML (contenido dinámico)
   if (request.headers.get('Accept')?.includes('text/html')) {
     event.respondWith(
@@ -64,7 +71,7 @@ self.addEventListener('fetch', (event) => {
           });
           return response;
         })
-        .catch(() => caches.match(request))
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('/')))
     );
     return;
   }

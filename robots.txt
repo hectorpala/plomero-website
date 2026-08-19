@@ -7,6 +7,7 @@ Disallow: /gracias/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /obsidian-vault/
+Disallow: /partials/
 Allow: /manifest.json
 Allow: /assets/
 Allow: /sitemaps/
@@ -14,6 +15,7 @@ Allow: /sitemaps/
 # Reglas específicas para Googlebot
 User-agent: Googlebot
 Disallow: /gracias/
+Disallow: /partials/
 Allow: /
 
 # Googlebot para imágenes (permitir todo)
