@@ -8,9 +8,8 @@ JSON {"hallazgos":[...]}; la paridad CSS la enforce el pipeline via check-planti
 Sin este marcador el dead-man's switch check-infra.mjs dispara una ALTA falsa.)
 
 El sitio sirve DOS hojas de estilo distintas:
-  - styles.7f293647.css  -> la sirven la home (index.html) + las paginas de colonia
-  - styles.min.css       -> la sirve el resto del sitio (servicios, blog, etc.)
-y styles.css es la FUENTE (no se sirve). REGLAS.md exige que las tres tengan las
+  - styles.min.css -> hoja UNICA de todo el sitio (consolidada 19-ago-2026; antes eran
+    3 byte-identicas). Si reaparecen styles*.css extra, este check vuelve a comparar que
 MISMAS reglas (paridad). Si una se queda atras, esas paginas renderizan distinto.
 
 El checker viejo en check-plantilla.py solo comparaba 3 firmas hardcodeadas, asi
