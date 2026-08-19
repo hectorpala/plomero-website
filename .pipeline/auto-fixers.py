@@ -441,12 +441,12 @@ FIXERS = [
 
 
 # ──────────────────── ASSET FIXERS (CSS/JS COMPARTIDO, no por página) ────────────────────
-# Operan UNA vez sobre los assets compartidos (los 3 CSS). Cuando tocan CSS, el flujo completo
+# Operan UNA vez sobre los assets compartidos (el CSS unico styles.min.css). Cuando tocan CSS, el flujo completo
 # de cache-busting es OBLIGATORIO: bump del token ?v= en TODAS las páginas (el CSS se sirve
 # `immutable` 1 año — sin cambiar la URL, los visitantes que regresan no re-piden el CSS) +
 # bump de CACHE_NAME en sw.js (para los clientes con service worker). Ver REGLAS.md (CACHÉ).
 # Riesgo mecánico → auto, sin límite.
-CSS_FILES = ["styles.css", "styles.min.css", "styles.7f293647.css"]
+CSS_FILES = ["styles.min.css"]  # hoja UNICA desde 19-ago-2026 (H-08): las 3 eran byte-identicas
 SW_FILE = "sw.js"
 
 # Selectores interactivos que DEBEN ser tap-target ≥44px en móvil. Ampliar esta lista cuando
@@ -500,7 +500,7 @@ def _bump_css_version_html(version):
     return n_files, fallos
 
 
-# Estado del cache-busting: hash del contenido de los 3 CSS registrado DESPUÉS del último
+# Estado del cache-busting: hash del contenido del CSS registrado DESPUÉS del último
 # bump exitoso. Si al arrancar el hash actual difiere del registrado, un cambio de CSS quedó
 # SIN bump (p.ej. el fixer murió entre escribir el CSS y bumpear) → se repara aquí mismo.
 BUMP_STATE = os.path.join(ROOT, ".pipeline", "css-bump-state.json")

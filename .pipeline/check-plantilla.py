@@ -842,15 +842,14 @@ def check_denylist_color_css():
             if re.search(re.escape(sel) + r'\s*\{[^}]*\bcolor\s*:\s*' + re.escape(bad) + r'\b', css, re.I):
                 add("media", rel(c), "a11y",
                     "%s sigue con color:%s en la hoja compartida (%s)" % (sel, bad, evidencia),
-                    "Cambiar a color:%s en styles.css + styles.min.css + styles.<hash>.css, "
+                    "Cambiar a color:%s en styles.min.css (hoja unica), "
                     "bump ?v= en las paginas y CACHE_NAME en sw.js" % good)
 
 
 # ================================================================ CHECK global: paridad CSS
 # PARIDAD TOTAL (no solo firmas): el sitio sirve DOS hojas distintas
-#   - styles.<hash>.css  -> la sirven la home (index.html) + las paginas de colonia
-#   - styles.min.css     -> la sirve el resto del sitio
-# y styles.css es la FUENTE. Las tres DEBEN tener las mismas reglas; si una se queda
+#   - styles.min.css -> hoja UNICA (consolidada 19-ago-2026). Si reaparecen hojas extra,
+# DEBEN tener las mismas reglas; si una se queda
 # atras, esas paginas renderizan distinto (caso real 20260619: logo movil 100px vs 62px,
 # animacion hero fadeInUp vs slideInUp, .hero .hero-image ausente). El checker viejo solo
 # comparaba 3 firmas hardcodeadas y dejaba pasar el resto.

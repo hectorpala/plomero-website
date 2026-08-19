@@ -636,3 +636,6 @@
 /servicios/plomero/precios/* /precios/ 301
 /servicios/plomero/* /servicios/ 301
 /blog/marcha-por-la-paz-culiacan-2025.html /blog/marcha-paz-culiacan-2025/ 301
+# Consolidación CSS (19-ago-2026): una sola hoja canónica styles.min.css
+/styles.css /styles.min.css 301
+/styles.7f293647.css /styles.min.css 301
