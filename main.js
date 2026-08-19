@@ -252,6 +252,7 @@ window.addEventListener('scroll', function() {
 if (scrollTicking) return;
 scrollTicking = true;
 requestAnimationFrame(function() {
+if (cachedScrollableHeight <= 0) { scrollTicking = false; return; }
 var scrollPercent = Math.round((window.scrollY / cachedScrollableHeight) * 100);
 for (var i = 0; i < scrollDepths.length; i++) {
 var depth = scrollDepths[i];
@@ -372,186 +373,24 @@ navigator.serviceWorker.register('/sw.js')
 });
 }
 (typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
-var trigger = document.getElementById('quote-trigger');
-var overlay = document.getElementById('quote-overlay');
-var sheet = document.getElementById('quote-sheet');
-var closeBtn = document.querySelector('.quote-sheet-close');
-var form = document.getElementById('quote-form');
-var chips = document.querySelectorAll('.quote-chip');
-if (!trigger || !sheet) return;
-var selectedService = '';
-var scrollY = 0;
-var focusableElements = sheet.querySelectorAll(
-'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-);
-var firstFocusable = focusableElements[0];
-var lastFocusable = focusableElements[focusableElements.length - 1];
-function openSheet() {
-scrollY = window.scrollY;
-document.body.classList.add('quote-sheet-open');
-overlay.classList.add('active');
-sheet.classList.add('active');
-sheet.setAttribute('aria-hidden', 'false');
-overlay.setAttribute('aria-hidden', 'false');
-var firstInput = sheet.querySelector('input');
-if (firstInput) {
-setTimeout(function() { firstInput.focus(); }, 100);
-}
-try {
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-'event': 'quote_sheet_open',
-'page_location': window.location.pathname
-});
-} catch(e) {}
-}
-function closeSheet() {
-document.body.classList.remove('quote-sheet-open');
-overlay.classList.remove('active');
-sheet.classList.remove('active');
-sheet.setAttribute('aria-hidden', 'true');
-overlay.setAttribute('aria-hidden', 'true');
-window.scrollTo(0, scrollY);
-trigger.focus();
-}
-trigger.addEventListener('click', openSheet);
-overlay.addEventListener('click', closeSheet);
-if (closeBtn) {
-closeBtn.addEventListener('click', closeSheet);
-}
-var touchStartY = 0;
-var touchCurrentY = 0;
-var handle = sheet.querySelector('.quote-sheet-handle');
-if (handle) {
-handle.addEventListener('touchstart', function(e) {
-touchStartY = e.touches[0].clientY;
-}, { passive: true });
-handle.addEventListener('touchmove', function(e) {
-touchCurrentY = e.touches[0].clientY;
-var deltaY = touchCurrentY - touchStartY;
-if (deltaY > 0) {
-sheet.style.transform = 'translateY(' + deltaY + 'px)';
-}
-}, { passive: true });
-handle.addEventListener('touchend', function() {
-var deltaY = touchCurrentY - touchStartY;
-if (deltaY > 100) {
-closeSheet();
-}
-sheet.style.transform = '';
-touchStartY = 0;
-touchCurrentY = 0;
-});
-}
-document.addEventListener('keydown', function(e) {
-if (!sheet.classList.contains('active')) return;
-if (e.key === 'Escape') {
-closeSheet();
-return;
-}
-if (e.key === 'Tab') {
-if (e.shiftKey) {
-if (document.activeElement === firstFocusable) {
-e.preventDefault();
-lastFocusable.focus();
-}
-} else {
-if (document.activeElement === lastFocusable) {
-e.preventDefault();
-firstFocusable.focus();
-}
-}
-}
-});
-chips.forEach(function(chip) {
-chip.addEventListener('click', function() {
-chips.forEach(function(c) { c.classList.remove('selected'); });
-this.classList.add('selected');
-selectedService = this.getAttribute('data-service');
-});
-});
-if (form) {
-form.addEventListener('submit', function(e) {
-e.preventDefault();
-var nombre = document.getElementById('quote-nombre').value.trim();
-var whatsapp = document.getElementById('quote-whatsapp').value.trim();
-var mensaje = document.getElementById('quote-mensaje').value.trim();
-if (!nombre || !whatsapp) {
-alert('Por favor completa los campos obligatorios.');
-return;
-}
-var msg = '¡Hola! Solicito cotización:\n\n';
-msg += 'Nombre: ' + nombre + '\n';
-msg += 'WhatsApp: ' + whatsapp + '\n';
-if (selectedService) {
-msg += 'Servicio: ' + selectedService + '\n';
-}
-if (mensaje) {
-msg += 'Detalle: ' + mensaje + '\n';
-}
-var whatsappURL = 'https://wa.me/526673922273?text=' + encodeURIComponent(msg);
-try {
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-'event': 'generate_lead',
-'form_name': 'quote_sheet_mobile',
-'method': 'whatsapp',
-'service': selectedService || 'no_especificado',
-'value': 1,
-'currency': 'MXN'
-});
-} catch(e) {}
-try {
-var leads = JSON.parse(localStorage.getItem('plomero_leads') || '[]');
-leads.push({
-timestamp: new Date().toISOString(),
-nombre: nombre,
-whatsapp: whatsapp,
-servicio: selectedService,
-mensaje: mensaje,
-source: 'quote_sheet_mobile',
-url: window.location.href
-});
-localStorage.setItem('plomero_leads', JSON.stringify(leads));
-} catch(e) {}
-window.open(whatsappURL, '_blank');
-closeSheet();
-form.reset();
-chips.forEach(function(c) { c.classList.remove('selected'); });
-selectedService = '';
-});
-}
-var whatsappInput = document.getElementById('quote-whatsapp');
-if (whatsappInput) {
-whatsappInput.addEventListener('input', function() {
-this.value = this.value.replace(/\D/g, '');
-});
-}
-});
-(typeof requestIdleCallback === 'function' ? requestIdleCallback : setTimeout)(function() {
 var floatingBtns = document.querySelectorAll('.floating-btn');
-var quoteTrigger = document.getElementById('quote-trigger');
 if (!floatingBtns.length) return;
 var criticalSections = document.querySelectorAll('#contacto, .footer, .contact-form, .map-embed');
 if (!criticalSections.length) return;
 var isHidden = false;
 var menuOpen = false;
-var sheetOpen = false;
 var bodyObserver = new MutationObserver(function(mutations) {
 menuOpen = document.body.classList.contains('menu-open');
-sheetOpen = document.body.classList.contains('quote-sheet-open');
 });
 bodyObserver.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 function updateVisibility(shouldHide) {
-if (shouldHide === isHidden) return; 
+if (shouldHide === isHidden) return;
 isHidden = shouldHide;
 var opacity = shouldHide ? '0' : '1';
 var pointer = shouldHide ? 'none' : 'auto';
 for (var i = 0; i < floatingBtns.length; i++) {
-floatingBtns[i].style.cssText = 'opacity:' + opacity + ';pointer-events:' + pointer;
-}
-if (quoteTrigger && !sheetOpen) {
-quoteTrigger.style.cssText = 'opacity:' + opacity + ';pointer-events:' + pointer;
+floatingBtns[i].style.opacity = opacity;
+floatingBtns[i].style.pointerEvents = pointer;
 }
 }
 var observer = new IntersectionObserver(function(entries) {
@@ -594,13 +433,15 @@ window.dataLayer.push({
 (function() {
 var timeOnPageSegments = [30, 60, 120, 300];
 var timeTracked = {};
+var trackedCount = 0;
 var startTime = Date.now();
-setInterval(function() {
+var timerId = setInterval(function() {
 var currentTime = Math.floor((Date.now() - startTime) / 1000);
 for (var i = 0; i < timeOnPageSegments.length; i++) {
 var segment = timeOnPageSegments[i];
 if (currentTime >= segment && !timeTracked[segment]) {
 timeTracked[segment] = true;
+trackedCount++;
 try {
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -611,10 +452,11 @@ window.dataLayer.push({
 } catch(e) {}
 }
 }
+if (trackedCount === timeOnPageSegments.length) clearInterval(timerId);
 }, 1000);
 })();
 (function() {
-var mainNavLinks = document.querySelectorAll('a[href^="/servicios/"], a[href^="/blog/"], a[href^="/plomero-colonias/"]');
+var mainNavLinks = document.querySelectorAll('a[href^="/servicios/"], a[href^="/blog/"]');
 mainNavLinks.forEach(function(link) {
 link.addEventListener('click', function(e) {
 var href = this.getAttribute('href');
@@ -622,7 +464,7 @@ var text = this.textContent.trim().substring(0, 100);
 var pageType = 'internal_link';
 if (href.includes('/servicios/')) pageType = 'service_page';
 if (href.includes('/blog/')) pageType = 'blog_page';
-if (href.includes('/plomero-colonias/')) pageType = 'colony_page';
+if (href.includes('/plomero-colonias-culiacan/')) pageType = 'colony_page';
 try {
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -650,9 +492,9 @@ window.dataLayer.push({
 });
 } catch(e) {}
 }
-if (pathname.includes('/plomero-colonias-culiacan/')) {
 var colonyMatch = pathname.match(/plomero-colonias-culiacan\/([^\/]+)/);
-var colonyName = colonyMatch ? colonyMatch[1].replace(/-/g, ' ') : 'unknown';
+if (colonyMatch) {
+var colonyName = colonyMatch[1].replace(/-/g, ' ');
 try {
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
