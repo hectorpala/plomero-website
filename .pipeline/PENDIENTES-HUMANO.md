@@ -9,7 +9,19 @@ seo-002/104/107/109, a11y-101/201, etc.) — ese sigue ahí. Aquí va lo de esta
 
 ---
 
-## H-06 — Rollback automático tras push (movido desde la cola AUTO, item A7)
+## H-06 — Rollback automático tras push — ✅ RESUELTO 20-ago-2026
+
+**Implementado como `.pipeline/guardia-deploy.py`** siguiendo el diseño conservador de
+abajo: señal fiable vía API de Netlify (token en el Llavero: `security find-generic-password
+-s netlify-api-token -a plomero -w`; NUNCA en el repo), espera `state:"ready"` del deploy
+del commit de origin/main, re-corre check-produccion.mjs + check-e2e.mjs, y con hallazgos
+escribe alerta LOUD en docs/ESTADO.md con el revert exacto sugerido SIN ejecutarlo
+(ROLLBACK_AUTOMATICO=true lo ejecuta, solo con señal confirmada; jamás por timeout).
+Probado en vivo 20-ago (deploy f3cc406e: ready + checkers limpios; y timeout correcto
+cuando el sha no tiene deploy). El skill /publica ya lo invoca tras cada push.
+
+### Diseño original (referencia)
+
 
 **Qué es.** Añadir al pipeline, tras un `git push` EXITOSO en la publicación: esperar el
 deploy de Netlify, re-correr `.pipeline/check-produccion.mjs` contra producción, y si
