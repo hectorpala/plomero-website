@@ -123,6 +123,25 @@
   status = 301
   force = true
 
+# Variantes en raíz del cluster de emergencia (antes daban 404)
+[[redirects]]
+  from = "/plomero-urgente/*"
+  to = "/servicios/emergencia-24-7/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/plomero-24-horas/*"
+  to = "/servicios/emergencia-24-7/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/plomero-de-emergencia/*"
+  to = "/servicios/emergencia-24-7/"
+  status = 301
+  force = true
+
 # 404 page
 [[redirects]]
   from = "/*"
