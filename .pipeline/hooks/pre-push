@@ -74,7 +74,10 @@ else
   # páginas del remoto descartadas por la reescritura) y --no-renames (un `git mv` salía
   # como R, no como D → la URL vieja moría sin pasar por el candado de borrado; con
   # --no-renames el rename se ve como D+A y ambas mitades pasan por su gate).
-  CHANGED=$(git diff --name-only --no-renames "$RANGE_BASE" "$NEW_REF" 2>/dev/null \
+  # --diff-filter=d: EXCLUIR borrados — gate-pagina.py no puede evaluar un archivo que ya
+  # no existe (FileNotFoundError = push bloqueado en falso); los borrados tienen su propio
+  # candado en 1d (--diff-filter=D). Bug visto 19-ago-2026 al borrar los stubs meta-refresh.
+  CHANGED=$(git diff --name-only --no-renames --diff-filter=d "$RANGE_BASE" "$NEW_REF" 2>/dev/null \
             | grep -E '^(servicios|blog)/.*/index\.html$' || true)
   if [ -n "$CHANGED" ]; then
     echo "🔍 Gate por página sobre lo que cambia en este push:"
@@ -123,7 +126,12 @@ else
       esac
       # Referenciado por una página VIVA (el sha que se publica) o presente en el sitemap del
       # estado BASE (= era una página indexable). Cualquiera de los dos ⇒ borrado estructural.
-      if ( cd "$REPO" && git grep -l --fixed-strings "$NEEDLE" "$NEW_REF" -- '*.html' '*.xml' '_redirects' ) >/dev/null 2>&1 \
+      # _redirects se revisa SOLO por el lado DESTINO (columna 2): una regla 301 cuyo
+      # ORIGEN es la URL borrada es el procedimiento CORRECTO de borrado (meta-refresh→301,
+      # 19-ago-2026), no una referencia rota. Con _redirects completo en el git grep, TODO
+      # borrado bien hecho quedaba bloqueado en falso.
+      if ( cd "$REPO" && git grep -l --fixed-strings "$NEEDLE" "$NEW_REF" -- '*.html' '*.xml' ) >/dev/null 2>&1 \
+         || ( cd "$REPO" && git show "$NEW_REF:_redirects" 2>/dev/null | awk '!/^#/ && NF>=2 {print $2}' | grep -qF "$NEEDLE" ) \
          || ( cd "$REPO" && git show "$RANGE_BASE:sitemaps/main_sitemap.xml" 2>/dev/null | grep -qF "$NEEDLE" ); then
         PROBLEMA="$PROBLEMA
    - $f (era página indexable / aún referenciado o en el sitemap)"
