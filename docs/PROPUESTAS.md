@@ -583,11 +583,12 @@ entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run-|auto-agente-plomero-).*\
             })
 ```
 
-## [PENDIENTE] infra — Reintentos del driver con deadline de RELOJ DE PARED (el `sleep` se pausa cuando la Mac duerme)   (impacto M · esfuerzo S · riesgo bajo)
+## [HECHO 2026-08-17] infra — Reintentos del driver con deadline de RELOJ DE PARED (el `sleep` se pausa cuando la Mac duerme)   (impacto M · esfuerzo S · riesgo bajo)
 **Problema:** El backoff del loop de reintentos de `crecer-diario.sh` usa `sleep 120/240`, pero `sleep` se PAUSA cuando la Mac se duerme: un "reintento en 240s" puede ejecutarse horas después, en la madrugada o al día siguiente — compitiendo por cuota y solapándose con el meta-pase o con la corrida diaria siguiente. Un intento que despierta 15 horas tarde ya no es "la corrida de hoy" y no debería correr.
 **Evidencia:** `auto-agente-20260705-183943.log`: intento 2 @ 19:31, "reintento en 240s" → intento 3 @ **03:06:13** (7h35m después). El gemelo electricista (mismo driver): intento 1 @ 20:14 del 07-05, "reintento en 120s" → intento 2 @ **11:13:49 del 07-06** (15 h después), corriendo HOY en paralelo con los dos meta-pases de las 11:12.
 **Propuesta:** Deadline de reloj de pared: si al despertar del `sleep` ya pasaron >3h desde `RUN_START`, abandonar los reintentos (el propio driver ya promete "el catch-up o la corrida de mañana lo recuperan" en su email de fallo — esto lo hace verdad). Espejo recomendado en el driver del Electricista.
-**DRAFT (listo para merge — 2 toques a `.pipeline/crecer-diario.sh`):**
+**Implementado:** `RETRY_DEADLINE` se fija a 3 horas desde `RUN_START`; se comprueba antes y después de cada backoff, y el correo distingue esta cancelación segura de un error desconocido. Cubierto por `tests/test_retry_deadline.py`.
+**Diseño de referencia ya aplicado:**
 ```bash
 # ── Toque 1: justo DESPUÉS de la línea  RUN_START=$(date +%s)   (línea ~50) ──
 # Deadline de RELOJ DE PARED para los reintentos: `sleep` se pausa si la Mac duerme

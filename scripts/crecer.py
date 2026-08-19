@@ -248,6 +248,30 @@ def _rama_publicacion(actual, stamp):
     return (actual if reusa else "auto/crecer-%s" % stamp), reusa
 
 
+def _nombres_git(*args):
+    """Lista rutas devueltas por git y falla cerrado si no pudo inspeccionarlas."""
+    r = sh(["git", *args])
+    if r.returncode != 0:
+        detalle = (r.stderr or r.stdout or "error desconocido").strip()[:200]
+        sys.exit("❌ no pude inspeccionar el staging de git (%s): %s" % (" ".join(args), detalle))
+    return [ruta for ruta in r.stdout.split("\0") if ruta]
+
+
+def _estado_staging():
+    """Separa el contenido preparado explícitamente de cualquier cambio suelto.
+
+    El staging es la frontera de autorización del publicador: nunca inferimos que todo el
+    working tree pertenece a esta corrida. Un archivo preparado y vuelto a modificar aparece
+    en ambas listas y bloquea hasta que se revise y prepare de nuevo.
+    """
+    preparados = sorted(set(_nombres_git("diff", "--cached", "--name-only", "-z")))
+    sin_preparar = sorted(set(
+        _nombres_git("diff", "--name-only", "-z")
+        + _nombres_git("ls-files", "--others", "--exclude-standard", "-z")
+    ))
+    return preparados, sin_preparar
+
+
 def cmd_publicar(args):
     if not args:
         sys.exit("uso: crecer.py publicar \"mensaje del commit\"")
@@ -255,15 +279,26 @@ def cmd_publicar(args):
     stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
     actual = sh(["git", "branch", "--show-current"]).stdout.strip()
     branch, reusa_rama = _rama_publicacion(actual, stamp)
-    st = sh(["git", "status", "--short"]).stdout.strip()
+    preparados, sin_preparar = _estado_staging()
     # La corrida ahora hace CHECKPOINT: commitea en su rama conforme arregla, para que una
     # muerte a media FASE 7 no deje el arbol sucio. Por eso "arbol limpio" ya NO significa
     # "nada que publicar": el trabajo puede estar en commits por delante de main.
     ya_commiteado = [l for l in sh(["git", "log", "--oneline", "main..HEAD"]).stdout.splitlines() if l.strip()]
-    if not st and not ya_commiteado:
+    # Fallar cerrado: el publicador jamás barre el working tree. Solo acepta archivos que
+    # alguien preparó explícitamente con `git add -- ruta...`; si queda cualquier cambio
+    # suelto, no crea rama, no commitea y no intenta publicar.
+    if sin_preparar:
+        print("❌ PUBLICACIÓN BLOQUEADA: hay cambios sin preparar o archivos nuevos no revisados:")
+        for f in sin_preparar:
+            print("     • " + f)
+        sys.exit("Prepara solo los archivos de esta unidad con `git add -- <rutas exactas>`; "
+                 "nunca uses `git add -A`. Deja fuera o guarda aparte cualquier cambio ajeno.")
+    if not preparados and not ya_commiteado:
         sys.exit("nada que publicar (working tree limpio y sin commits por delante de main)")
-    if st:
-        print("Cambios sueltos:\n" + st)
+    if preparados:
+        print("Cambios preparados explícitamente:")
+        for f in preparados:
+            print("   • " + f)
     if ya_commiteado:
         print("Commits de checkpoint ya en la rama (%d):" % len(ya_commiteado))
         for l in ya_commiteado:
@@ -282,12 +317,18 @@ def cmd_publicar(args):
             print("❌ no pude crear la rama %s (%s). Aborté sin commitear." % (branch, (cob.stderr or "").strip()[:80]))
             sys.exit(1)
     full = msg
-    if st:
-        sh(["git", "add", "-A"])
+    if preparados:
         c = sh(["git", "commit", "-m", full])
         print(c.stdout.rstrip() + c.stderr.rstrip())
         if "BLOQUEADO" in (c.stdout + c.stderr) or c.returncode != 0:
             print("❌ commit bloqueado por el hook — revisa; quedó en la rama %s" % branch); sys.exit(1)
+        preparados_restantes, sueltos_restantes = _estado_staging()
+        if preparados_restantes or sueltos_restantes:
+            print("❌ publicación detenida: aparecieron cambios adicionales durante el commit.")
+            for f in sorted(set(preparados_restantes + sueltos_restantes)):
+                print("     • " + f)
+            print("   El commit queda seguro en la rama %s; revisa esos archivos antes de publicar." % branch)
+            sys.exit(1)
     else:
         # Sin cambios sueltos: la rama YA trae el trabajo en commits de checkpoint. Un
         # `git commit` aqui fallaria ("nothing to commit") y se leeria como hook bloqueado.

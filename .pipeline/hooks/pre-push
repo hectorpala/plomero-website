@@ -1,13 +1,15 @@
 #!/bin/bash
 # pre-push — DOS trabajos al pushear a main:
-#   1) GATE DETERMINISTA BLOQUEANTE (estructural): corre ci-gate.py (0 ALTA) y, sobre las
+#   1) GATE DETERMINISTA BLOQUEANTE: primero secretos actuales (irrenunciable); después
+#      corre ci-gate.py (0 ALTA) y, sobre las
 #      páginas index.html que cambian en este push, gate-pagina.py (validate-landing +
 #      anti-doorway). Si algo falla, el push NO procede. Esto hace ESTRUCTURAL lo que antes
 #      era solo instrucción del prompt (fases 7/8 del Auto Agente): aunque el agente desatendido
 #      se "salte" la verificación, un push de algo roto a producción queda imposible.
 #   2) Auto-indexación en Google (gsc-mcp). NUNCA bloquea el push.
 #
-# Escape de emergencia (solo criterio humano explícito):  SKIP_GATE=1 git push
+# Escape estructural de emergencia (solo criterio humano explícito): SKIP_GATE=1 git push.
+# El candado de secretos NO se omite con SKIP_GATE.
 # Solo aplica en main/master; otras ramas pasan sin gate (el trabajo del día vive en su rama).
 
 # Decidir por el ref de DESTINO (stdin de git), NO por la rama local: `git push origin
@@ -34,9 +36,31 @@ PY="$(command -v python3 2>/dev/null || true)"
 [ -x "$PY" ] || PY="/opt/homebrew/bin/python3"
 [ -x "$PY" ] || PY="/usr/bin/python3"
 NODE="$(command -v node 2>/dev/null || true)"
-[ -x "$NODE" ] || NODE="/usr/local/bin/node"
-
 REPO="$(git rev-parse --show-toplevel)"
+if [ -z "$NODE" ] || [ ! -x "$NODE" ]; then
+  NODE=$("$PY" "$REPO/.pipeline/encontrar-node.py" 2>/dev/null || true)
+fi
+
+# Candado irrenunciable: va antes y fuera de SKIP_GATE. El escape estructural nunca
+# permite publicar una credencial ni continuar cuando el detector quedó ciego.
+SECRET_CHECK="$REPO/.pipeline/check-secretos.sh"
+if [ ! -f "$SECRET_CHECK" ]; then
+  echo "❌ PUSH BLOQUEADO: falta .pipeline/check-secretos.sh; verificación de secretos ciega."
+  exit 1
+fi
+SECRET_OUT=$(cd "$REPO" && /bin/bash "$SECRET_CHECK" --current-only 2>&1)
+SECRET_RC=$?
+echo "$SECRET_OUT"
+if [ "$SECRET_RC" -ne 0 ]; then
+  echo ""
+  if [ "$SECRET_RC" -eq 2 ]; then
+    echo "❌ PUSH BLOQUEADO: se detectó un secreto actual o archivo sensible trackeado."
+  else
+    echo "❌ PUSH BLOQUEADO: el detector de secretos falló; no se publica a ciegas."
+  fi
+  exit 1
+fi
+echo "✅ Secretos actuales: sin hallazgos bloqueantes."
 
 # ───────────────────────── 1) GATE BLOQUEANTE ─────────────────────────
 if [ "${SKIP_GATE:-0}" = "1" ]; then

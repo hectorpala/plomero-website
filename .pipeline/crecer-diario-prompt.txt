@@ -27,7 +27,8 @@ del negocio (servicios que ofrece/no, política de precios/año, qué se auto-cr
 negocio en vez de mandarlas a humano. Si la respuesta está en NEGOCIO.md, decídela tú; si no, va a humano.
 
 ================================ FASE 1 — Health check ================================
-Levanta un servidor local estático (`python3 -m http.server 8080` en background) sobre la raíz. Con `curl -sI`
+Levanta un servidor local estático sobre la raíz con este comando exacto para que el driver pueda identificar
+SU proceso sin tocar servidores manuales: `python3 -m http.server 8080 >/tmp/plomero-http-server.log 2>&1 & echo $! > /tmp/plomero-http-server.pid`. Con `curl -sI`
 comprueba que la home y 2-3 páginas clave (/contacto/, /servicios/, /blog/) responden 200. Si algo YA está roto,
 es hallazgo de severidad ALTA y es lo primero a corregir; no se crece sobre un sitio roto.
 
@@ -119,8 +120,9 @@ Detalle de la frontera "deriva no inventes" y de la calidad mínima: .pipeline/C
 
   Tras CADA arreglo, verifícalo con el sitio corriendo, escéptico (asume que NO se arregló salvo prueba).
   Reintenta máximo 2 veces; si no se logra, REVIERTE ese arreglo y márcalo pendiente.
-  Ya verificado, CHECKPOINT: `git add <archivos> && git commit -m "fix: <qué arreglaste, específico>"` en la rama
-  de la corrida (ver FASE 2). Commitear no publica nada; solo pone a salvo el trabajo ya probado.
+  Ya verificado, CHECKPOINT: `git add -- <rutas exactas de este arreglo> && git commit -m "fix: <qué arreglaste, específico>"`
+  en la rama de la corrida (ver FASE 2). NUNCA uses `git add -A`/`git add .`: mezclarían archivos ajenos a la
+  unidad. Commitear no publica nada; solo pone a salvo el trabajo ya probado.
 
 ==================== FASE 6 — CRECER (loop-until-dry: lo MÁS posible con DEMANDA REAL) ====================
 Objetivo: construir y optimizar LO MÁS POSIBLE en esta corrida, SIN tope numérico arbitrario. El freno NO es
@@ -212,6 +214,9 @@ Sí se prohíben los borrados ESTRUCTURALES inesperados (una página indexable, 
 ESTADO.md. Si pasan TODOS, lo más simple y seguro es publicar con el orquestador (sincroniza con el remoto ANTES
 y NUNCA usa --force):
   python3 scripts/crecer.py publicar "auto-diario $(date +%Y-%m-%d): N arreglos + M páginas"
+  El publicador falla cerrado si queda cualquier archivo modificado/no rastreado sin preparar; solo commitea el
+  staging explícito y nunca barre el working tree. Antes de invocarlo, prepara por ruta exacta exclusivamente los
+  archivos verificados de esta unidad, o deja el árbol limpio si todo ya vive en commits de checkpoint.
   (hace rama→commit→checkout main→fetch→merge --ff-only origin/main→merge --no-ff rama→push; si el push es
    rechazado reintegra UNA vez con re-merge limpio; si la main divergió o hay conflicto, ABORTA y deja la rama
    sin fusionar para revisión humana. El pre-push auto-indexa en GSC.)
@@ -235,7 +240,8 @@ próxima vez. Para cada error corregido este día —sobre todo REGRESIONES y er
      clase de error vista una vez debe quedar blindada por una regla o un checker.
 
 ==================== FASE 10 — Bitácora y PARTE por email (lenguaje claro, NO técnico) ====================
-Apaga el servidor local. Actualiza ESTADO.md (entrada nueva ARRIBA con fecha y evidencia técnica) y registra en
+Apaga exclusivamente el servidor registrado en `/tmp/plomero-http-server.pid` y elimina ese archivo PID; nunca
+uses `pkill` ni mates por patrón. Actualiza ESTADO.md (entrada nueva ARRIBA con fecha y evidencia técnica) y registra en
 HISTORIAL.jsonl. Luego escribe `.pipeline/ultima-corrida.md`, que es EXACTAMENTE lo que se le envía al dueño por
 email. Va dirigido a un DUEÑO DE NEGOCIO, no a un técnico. Reglas de redacción del parte:
   • Lenguaje claro de DUEÑO, pero ESPECÍFICO: di exactamente QUÉ se arregló y en qué página (ese detalle es lo

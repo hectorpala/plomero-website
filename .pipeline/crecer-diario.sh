@@ -17,17 +17,24 @@ cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"
 mkdir -p "$LOG_DIR"
 STAMP=$(date +%Y%m%d-%H%M%S)
-CODEX_BIN="/Users/openclaw/.local/bin/codex"
-if [ ! -x "$CODEX_BIN" ]; then
-  CODEX_BIN=$(command -v codex 2>/dev/null || true)
-fi
-if [ -z "$CODEX_BIN" ] || [ ! -x "$CODEX_BIN" ]; then
-  CODEX_BIN=$(ls -t "$HOME"/.vscode/extensions/openai.chatgpt-*/bin/macos-aarch64/codex 2>/dev/null | head -1 || true)
-fi
+CODEX_FINDER="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/encontrar-codex.py"
+CODEX_BIN=$(python3 "$CODEX_FINDER" 2>/dev/null || true)
+NODE_FINDER="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/encontrar-node.py"
+NODE_BIN=$(python3 "$NODE_FINDER" 2>/dev/null || true)
+AUTH_CHECK="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/codex-login-preflight.py"
+AUTH_TIMEOUT_SECONDS=30
+
+# Los pasos auxiliares no deben intentar ejecutar una cadena vacía si Node falta.
+# El preflight aborta Codex; esta función deja además una salida controlada para costo/correo.
+run_node() {
+  [ -n "$NODE_BIN" ] && [ -x "$NODE_BIN" ] || return 127
+  "$NODE_BIN" "$@"
+}
 # Log NAMESPACEADO por proyecto: el Electricista escribe en el MISMO LOG_DIR con el
 # mismo prefijo "auto-agente-*"; catchup.sh y check-infra.mjs miran "el log más nuevo"
 # y veían el del otro sitio → el plomero muerto pasaba por vivo (auditoría 2026-07-07).
 LOG="$LOG_DIR/auto-agente-plomero-$STAMP.log"
+NO_RETRY_DAY_FILE="$LOG_DIR/auto-agente-plomero-no-retry-day"
 
 # Lock por-REPO COMPARTIDO con mantener-diario.sh (mismo nombre) para que NUNCA corran
 # dos pipelines a la vez sobre el mismo repo. Resistente a cuelgues: si el dueño del lock
@@ -63,8 +70,10 @@ echo "$$" > "$LOCK_DIR/pid"
 trap 'rm -rf "$LOCK_DIR"' EXIT
 
 # Server local :8080 huérfano de una corrida anterior muerta a medias (SIGKILL real
-# visto en auto-agente-launchd.err.log) chocaría con la FASE 1 → limpieza defensiva.
-pkill -f "http.server 8080" 2>/dev/null || true
+# visto en auto-agente-launchd.err.log) chocaría con la FASE 1. La limpieza valida
+# puerto + comando + cwd: nunca debe matar el servidor 8080 de otro proyecto.
+python3 .pipeline/limpiar-servidor-local.py "$PWD" 8080 /tmp/plomero-http-server.pid >> "$LOG" 2>&1 \
+  || echo "[$STAMP] No pude comprobar el servidor local huérfano; continúo y FASE 1 validará el puerto." >> "$LOG"
 
 # Guard "ya corrió hoy": si una corrida YA terminó OK hoy (marca datada), no repetir — evita el
 # doble cuando un disparo MANUAL coincide con el job programado de las 18:25. Una corrida FALLIDA
@@ -75,9 +84,17 @@ if [ "${FORCE_RUN:-0}" != "1" ] && [ "$(cat "$LOG_DIR/auto-agente-plomero-last-r
   echo "[$STAMP] Ya hubo una corrida exitosa hoy ($TODAY); no repito (FORCE_RUN=1 para forzar)." >> "$LOG"
   exit 0
 fi
+if [ "${FORCE_RUN:-0}" != "1" ] && [ "$(cat "$NO_RETRY_DAY_FILE" 2>/dev/null || echo "")" = "$TODAY" ]; then
+  echo "[$STAMP] Hoy quedó una publicación posible/no verificable; no repito para evitar duplicarla (FORCE_RUN=1 para forzar)." >> "$LOG"
+  exit 0
+fi
 
 # Corrida autónoma del sistema completo con Codex. El prompt orquesta las 10 fases.
 RUN_START=$(date +%s)   # para atribuir el consumo de ESTA corrida
+# Deadline de RELOJ DE PARED para los reintentos. `sleep` se pausa cuando la Mac
+# duerme; sin este límite, un backoff de 2–4 minutos puede despertar horas después
+# y competir con la corrida siguiente. El intento activo conserva su timeout propio.
+RETRY_DEADLINE=$((RUN_START + 3 * 3600))
 
 # ── Clasificación de errores (NO confundir red con cuota) ────────────────────
 # TRANSITORIO = se cayó la conexión / el servidor falló a media respuesta. Se REINTENTA:
@@ -127,13 +144,51 @@ MAX_ATTEMPTS=3
 CODEX_OK=0
 FAIL_KIND=""          # transitorio | limite | desconocido
 TIMEOUT_MIN=90
+PUBLICATION_STATE="sin_ejecucion"
+PROTECT_TODAY=0
+PUB_CHECK="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/detectar-publicacion.py"
+LOCAL_MAIN_BEFORE=$(git rev-parse refs/heads/main 2>/dev/null || echo "")
+REMOTE_MAIN_BEFORE=$(python3 "$PUB_CHECK" baseline 2>/dev/null || echo "")
 
-if [ -z "$CODEX_BIN" ] || [ ! -x "$CODEX_BIN" ]; then
+# Solo autoriza un reintento si GitHub Y la main local siguen exactamente como al inicio.
+# Cualquier cambio o imposibilidad de consultar el remoto falla cerrado: repetir toda la
+# corrida podría volver a publicar algo que alcanzó a subir antes de cortarse el stream.
+check_publication_before_retry() {
+  local out rc
+  if out=$(python3 "$PUB_CHECK" check \
+      --remote-antes "$REMOTE_MAIN_BEFORE" --local-antes "$LOCAL_MAIN_BEFORE" 2>&1); then
+    PUBLICATION_STATE="no_detectada"
+    echo "[$STAMP] idempotencia: $out" >> "$LOG"
+    return 0
+  else
+    rc=$?
+  fi
+  echo "[$STAMP] idempotencia: $out" >> "$LOG"
+  case "$rc" in
+    10) PUBLICATION_STATE="origin_cambio"; FAIL_KIND="publicacion_detectada" ;;
+    11) PUBLICATION_STATE="main_local_cambio"; FAIL_KIND="main_local_modificada" ;;
+    *)  PUBLICATION_STATE="no_verificable"; FAIL_KIND="publicacion_no_verificable" ;;
+  esac
+  PROTECT_TODAY=1
+  return 1
+}
+
+if [ -z "$NODE_BIN" ] || [ ! -x "$NODE_BIN" ]; then
+  FAIL_KIND="permanente"
+  echo "[$STAMP] No encontré un ejecutable de Node; MCP, costos y reportes no pueden iniciar." >> "$LOG"
+elif [ -z "$CODEX_BIN" ] || [ ! -x "$CODEX_BIN" ]; then
   FAIL_KIND="permanente"
   echo "[$STAMP] No encontré el binario de Codex CLI; la corrida no puede iniciar." >> "$LOG"
-elif ! "$CODEX_BIN" login status >> "$LOG" 2>&1; then
+elif python3 "$AUTH_CHECK" "$CODEX_BIN" "$AUTH_TIMEOUT_SECONDS" >> "$LOG" 2>&1; then
+  : # autenticación presente
+else
+  AUTH_RC=$?
   FAIL_KIND="permanente"
-  echo "[$STAMP] Codex CLI no está autenticado; ejecuta 'codex login'." >> "$LOG"
+  if [ "$AUTH_RC" -eq 124 ]; then
+    echo "[$STAMP] El preflight de autenticación de Codex excedió ${AUTH_TIMEOUT_SECONDS}s; aborto para liberar el lock." >> "$LOG"
+  else
+    echo "[$STAMP] Codex CLI no está autenticado; ejecuta 'codex login'." >> "$LOG"
+  fi
 fi
 
 for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
@@ -146,35 +201,59 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   # tope da holgura para días pesados y corta lo desbocado el MISMO día, no al siguiente.
   # Configuración aislada: ignora integraciones globales y carga SOLO GSC + local-seo.
   # --approve-for-me conserva autonomía dentro del sandbox workspace-write; nunca desactiva el sandbox.
+  ATTEMPT_DEADLINE=$(( $(date +%s) + TIMEOUT_MIN * 60 ))
   "$CODEX_BIN" exec --cd "/Users/openclaw/Sitios Web/Plomero Culiacán" \
     --approve-for-me --ephemeral --ignore-user-config --strict-config \
     --json \
     -c agents.enabled=false \
     -c sandbox_workspace_write.network_access=true \
-    -c 'mcp_servers.gsc.command="/usr/local/bin/node"' \
+    -c "mcp_servers.gsc.command=\"$NODE_BIN\"" \
     -c 'mcp_servers.gsc.args=["/Users/openclaw/gsc-mcp/server.js"]' \
-    -c 'mcp_servers.local-seo.command="/usr/local/bin/node"' \
+    -c "mcp_servers.local-seo.command=\"$NODE_BIN\"" \
     -c 'mcp_servers.local-seo.args=["/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo/index.js"]' \
     -c 'mcp_servers.local-seo.cwd="/Users/openclaw/Sitios Web/Plomero Culiacán"' \
     - < .pipeline/crecer-diario-prompt.txt >> "$LOG" 2>&1 &
   CPID=$!
-  ( sleep $((TIMEOUT_MIN * 60))
-    if kill -0 "$CPID" 2>/dev/null; then
-      echo "[$STAMP] TIMEOUT ${TIMEOUT_MIN}min: matando corrida desbocada (pid $CPID)." >> "$LOG"
-      kill "$CPID" 2>/dev/null; sleep 10; kill -9 "$CPID" 2>/dev/null
-    fi ) &
+  # Watchdog de RELOJ DE PARED: `sleep 90m` se pausa durante el reposo y dejaba
+  # revivir al día siguiente una corrida vieja. El sondeo corto compara epoch real.
+  (
+    while kill -0 "$CPID" 2>/dev/null; do
+      if [ "$(date +%s)" -ge "$ATTEMPT_DEADLINE" ]; then
+        echo "[$STAMP] TIMEOUT ${TIMEOUT_MIN}min: matando corrida desbocada (pid $CPID)." >> "$LOG"
+        kill "$CPID" 2>/dev/null || true
+        sleep 10
+        kill -0 "$CPID" 2>/dev/null && kill -9 "$CPID" 2>/dev/null || true
+        break
+      fi
+      sleep 15
+    done
+  ) &
   WPID=$!
   if wait "$CPID"; then
     kill "$WPID" 2>/dev/null || true
+    wait "$WPID" 2>/dev/null || true
+    # Una terminación por señal normalmente es !=0, pero no confiar en eso: si
+    # el CLI maneja SIGTERM y sale 0, el marcador del watchdog sigue mandando.
+    if attempt_has_fixed "TIMEOUT ${TIMEOUT_MIN}min"; then
+      FAIL_KIND="timeout"
+      echo "[$STAMP] Corrida cortada por timeout; NO se acepta como éxito." >> "$LOG"
+      break
+    fi
     # Código 0 sin turn.completed indica una salida incompleta del protocolo JSONL.
     if ! attempt_has_fixed '"type":"turn.completed"'; then
       FAIL_KIND="incompleta"
       echo "[$STAMP] Codex salió con código 0 pero sin turn.completed; no cuenta como éxito." >> "$LOG"
+      check_publication_before_retry || true
       break
     fi
     CODEX_OK=1; FAIL_KIND=""; break
   fi
   kill "$WPID" 2>/dev/null || true
+  wait "$WPID" 2>/dev/null || true
+  if ! check_publication_before_retry; then
+    echo "[$STAMP] No reintento: no pude demostrar que el intento anterior terminó sin publicar." >> "$LOG"
+    break
+  fi
   if attempt_has_fixed "TIMEOUT ${TIMEOUT_MIN}min"; then
     FAIL_KIND="timeout"
     echo "[$STAMP] Corrida cortada por timeout; NO se reintenta (volvería a desbocarse)." >> "$LOG"
@@ -197,8 +276,20 @@ for attempt in $(seq 1 "$MAX_ATTEMPTS"); do
   fi
   if [ "$attempt" -lt "$MAX_ATTEMPTS" ]; then
     WAIT=$((attempt * 120))   # backoff: 120s, luego 240s
+    if [ "$(date +%s)" -gt "$RETRY_DEADLINE" ]; then
+      FAIL_KIND="deadline_reintentos"
+      echo "[$STAMP] Fuera de la ventana de reintentos (>3h desde el inicio); no inicio otro intento. El catch-up o la corrida de mañana lo recuperan." >> "$LOG"
+      break
+    fi
     echo "[$STAMP] Error $FAIL_KIND (NO de cuota); reintento en ${WAIT}s." >> "$LOG"
     sleep "$WAIT"
+    # Comprobar DESPUÉS del sleep es indispensable: macOS pausa `sleep` durante
+    # el reposo y puede reanudarlo muchas horas más tarde.
+    if [ "$(date +%s)" -gt "$RETRY_DEADLINE" ]; then
+      FAIL_KIND="deadline_reintentos"
+      echo "[$STAMP] La Mac despertó fuera de la ventana de reintentos (>3h desde el inicio); abandono. El catch-up o la corrida de mañana lo recuperan." >> "$LOG"
+      break
+    fi
   else
     echo "[$STAMP] Agotados los $MAX_ATTEMPTS intentos; la corrida no completó." >> "$LOG"
   fi
@@ -206,7 +297,7 @@ done
 [ "$CODEX_OK" = 1 ] || echo "[$STAMP] La corrida de Codex terminó con error ($FAIL_KIND); continúo para enviar el parte." >> "$LOG"
 
 # Registro de consumo de la corrida Codex desde el JSONL de este log.
-/usr/local/bin/node "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/registrar-costo.mjs" \
+run_node "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/registrar-costo.mjs" \
   "$LOG" "$RUN_START" \
   "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/costos.jsonl" "auto-agente $STAMP" >> "$LOG" 2>&1 \
   || echo "[$STAMP] No pude registrar el costo de la corrida (sigo)." >> "$LOG"
@@ -229,7 +320,10 @@ if [ "${CODEX_OK:-0}" = 1 ]; then
   fi
 fi
 
-if [ -f "$PARTE" ]; then
+# Solo cuadrar un parte NUEVO y COMPLETO. Si Codex falló o el candado de frescura
+# rechazó el archivo, tocar el parte viejo lo convertiría en un cambio local falso
+# que la corrida siguiente podría adoptar o publicar por accidente.
+if [ "${CODEX_OK:-0}" = 1 ] && [ -f "$PARTE" ]; then
   if ! CUADRE=$(python3 "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/check-parte.py" "$PARTE" 2>&1); then
     {
       echo "## ⚠️ AVISO AUTOMÁTICO — el parte no cuadra con los cambios reales"
@@ -249,7 +343,7 @@ fi
 # (cuota/error) → NO mandes el parte viejo (correo engañoso "encontré N" de otra corrida); aviso honesto.
 if [ "${CODEX_OK:-0}" = 1 ]; then
   ETIQUETA="18:25 · Codex"
-  /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
+  run_node /Users/openclaw/gsc-mcp/send-report.mjs \
     "$PARTE" \
     "Auto Agente Plomero" "$ETIQUETA" >> "$LOG" 2>&1 \
     || echo "[$STAMP] No se pudo enviar el email del parte (Auto Agente Plomero)." >> "$LOG"
@@ -275,15 +369,34 @@ else
     timeout)
       MOTIVO="la corrida excedió el tope duro de tiempo y fue cortada (posible corrida desbocada)"
       SUGERENCIA="Revisa el log para ver en qué fase se atoró: $LOG" ;;
+    deadline_reintentos)
+      MOTIVO="la Mac despertó fuera de la ventana segura de reintentos (más de 3 horas desde el inicio)"
+      SUGERENCIA="No requiere acción: se canceló el reintento atrasado para no cruzarlo con otra automatización; el catch-up o la corrida de mañana lo recuperan." ;;
     incompleta)
       MOTIVO="la corrida hizo trabajo pero NO llegó a terminarlo (se cortó en la revisión final, antes de publicar y de escribir el parte del día)"
       SUGERENCIA="El trabajo NO se perdió: quedó guardado en la rama de la corrida. La próxima corrida lo retoma. Log: $LOG" ;;
+    publicacion_detectada)
+      MOTIVO="origin/main CAMBIÓ durante el intento: la publicación pudo completarse antes de que se cortara la respuesta de Codex"
+      SUGERENCIA="El sistema NO reintentó para evitar publicar dos veces. Revisa el último commit remoto y el log: $LOG" ;;
+    main_local_modificada)
+      MOTIVO="la main local cambió durante el intento, aunque origin/main no cambió; quedó una integración incompleta"
+      SUGERENCIA="El sistema NO reintentó para no duplicar/mezclar la integración. Revisa la main local y la rama automática: $LOG" ;;
+    publicacion_no_verificable)
+      MOTIVO="no pude consultar origin/main después del fallo, así que no es seguro afirmar si el push ocurrió"
+      SUGERENCIA="El sistema NO reintentó para evitar una publicación duplicada. Comprueba GitHub y revisa: $LOG" ;;
     *)
       MOTIVO="error no reconocido de la corrida"
       SUGERENCIA="Revisa el log: $LOG" ;;
   esac
-  printf '# Auto Agente Plomero — corrida NO completada\n**Motivo:** %s.\n**Evidencia (del log):** `%s`\n**Qué sigue:** %s\n\nNo se publicó ningún cambio en esta corrida.\n' \
-    "$MOTIVO" "$ERRLINE" "$SUGERENCIA" > "$FAILNOTE"
+  case "$PUBLICATION_STATE" in
+    origin_cambio) PUBLICATION_NOTE="**Publicación:** origin/main cambió durante el intento; pudo haberse publicado. No se reintentó." ;;
+    main_local_cambio) PUBLICATION_NOTE="**Publicación:** origin/main no cambió, pero main local sí; no se publicó al remoto y quedó una integración local." ;;
+    no_detectada) PUBLICATION_NOTE="**Publicación:** comprobé origin/main y main local; no cambiaron durante el intento." ;;
+    sin_ejecucion) PUBLICATION_NOTE="**Publicación:** Codex no llegó a iniciar; no hubo intento de publicación." ;;
+    *) PUBLICATION_NOTE="**Publicación:** estado NO verificable; no afirmo que el push haya ocurrido ni que no haya ocurrido." ;;
+  esac
+  printf '# Auto Agente Plomero — corrida NO completada\n**Motivo:** %s.\n**Evidencia (del log):** `%s`\n**Qué sigue:** %s\n\n%s\n' \
+    "$MOTIVO" "$ERRLINE" "$SUGERENCIA" "$PUBLICATION_NOTE" > "$FAILNOTE"
   # TRABAJO SIN PUBLICAR: si la corrida alcanzó a editar el sitio y murió antes de publicar, dilo
   # en el correo. Antes eso quedaba invisible y el trabajo huérfano se descubría días después
   # (rama del 07-23 rescatada hasta el 07-25; trabajo del 07-26 abandonado sin aviso).
@@ -293,7 +406,7 @@ else
     printf '\n**Trabajo sin publicar:** quedaron %s archivo(s) con cambios en la rama `%s`. No se perdió nada; la próxima corrida lo retoma y lo verifica antes de publicar.\n' \
       "$SUCIOS" "$RAMA_ACTUAL" >> "$FAILNOTE"
   fi
-  /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs \
+  run_node /Users/openclaw/gsc-mcp/send-report.mjs \
     "$FAILNOTE" "Auto Agente Plomero" "no completada" >> "$LOG" 2>&1 \
     || echo "[$STAMP] No se pudo enviar el aviso de falla (Auto Agente Plomero)." >> "$LOG"
 fi
@@ -302,6 +415,18 @@ fi
 # marca → el catch-up sí podrá recuperarla hoy (si se marcara siempre, quedaría sin recuperar).
 if [ "${CODEX_OK:-0}" = 1 ]; then
   date +%Y%m%d > "$LOG_DIR/auto-agente-plomero-last-run-day"
+elif [ "${PROTECT_TODAY:-0}" = 1 ]; then
+  # No llamarlo "éxito": es una barrera separada que evita que catch-up repita una
+  # corrida cuyo estado remoto es posible o no verificable.
+  date +%Y%m%d > "$NO_RETRY_DAY_FILE"
+fi
+# Sentinel del DRIVER, separado del stream JSONL de Codex. Su ausencia con el lock
+# libre significa que el proceso murió abruptamente; catchup.sh debe recuperarlo en
+# vez de confundir un log reciente pero truncado con una corrida sana.
+if [ "${CODEX_OK:-0}" = 1 ]; then
+  echo "[$STAMP] DRIVER_RESULT=success" >> "$LOG"
+else
+  echo "[$STAMP] DRIVER_RESULT=failure:${FAIL_KIND:-desconocido}" >> "$LOG"
 fi
 # Exit 0 explícito: antes el script salía con 1 en toda corrida fallida (el && de arriba
 # como última línea) y launchctl mostraba status 1 sin distinguir "driver roto" de

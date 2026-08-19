@@ -16,7 +16,18 @@ export PATH="/Users/openclaw/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 
 cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1
 LOG_DIR="$HOME/Library/Logs/mantener-sitio"; mkdir -p "$LOG_DIR"
-CODEX_CMD="${MARATON_CODEX:-/Users/openclaw/.local/bin/codex}"  # override para pruebas (stub)
+CODEX_FINDER="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/encontrar-codex.py"
+if [ -n "${MARATON_CODEX:-}" ]; then
+  CODEX_BIN="$MARATON_CODEX"  # override explícito para pruebas controladas
+else
+  CODEX_BIN=$(python3 "$CODEX_FINDER" 2>/dev/null || true)
+fi
+AUTH_CHECK="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/codex-login-preflight.py"
+AUTH_TIMEOUT_SECONDS=30
+NODE_FINDER="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/encontrar-node.py"
+NODE_BIN=$(python3 "$NODE_FINDER" 2>/dev/null || true)
+DEADLINE_RUNNER="/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/ejecutar-hasta.py"
+PASS_TIMEOUT_SECONDS=${MARATON_PASS_TIMEOUT_SECONDS:-1200}
 
 DUR=${1:-3600}            # segundos (default 1 h)
 MAX_PASS=${2:-20}         # tope duro de pasadas
@@ -64,9 +75,24 @@ END=$(( $(date +%s) + DUR ))
 PASS=0; DRY=0; HECHAS=0
 echo "[$(date)] === MARATÓN inicio · dura ${DUR}s · máx ${MAX_PASS} pasadas ===" | tee -a "$MLOG"
 
-if [ ! -x "$CODEX_CMD" ] || ! "$CODEX_CMD" login status >> "$MLOG" 2>&1; then
-  echo "[$(date)] Codex no está instalado o autenticado; maratón cancelado." | tee -a "$MLOG"
-  /usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs "$MLOG" "Plomero Culiacán (MARATÓN)" "no inició" >> "$MLOG" 2>&1 || true
+if [ -z "$NODE_BIN" ] || [ ! -x "$NODE_BIN" ]; then
+  echo "[$(date)] Node no está instalado; maratón cancelado porque los MCP no pueden iniciar." | tee -a "$MLOG"
+  exit 0
+fi
+if [ -z "$CODEX_BIN" ] || [ ! -x "$CODEX_BIN" ]; then
+  echo "[$(date)] No encontré un ejecutable de Codex; maratón cancelado." | tee -a "$MLOG"
+  "$NODE_BIN" /Users/openclaw/gsc-mcp/send-report.mjs "$MLOG" "Plomero Culiacán (MARATÓN)" "no inició" >> "$MLOG" 2>&1 || true
+  exit 0
+fi
+AUTH_RC=0
+python3 "$AUTH_CHECK" "$CODEX_BIN" "$AUTH_TIMEOUT_SECONDS" >> "$MLOG" 2>&1 || AUTH_RC=$?
+if [ "$AUTH_RC" -ne 0 ]; then
+  if [ "$AUTH_RC" -eq 124 ]; then
+    echo "[$(date)] El preflight de Codex excedió ${AUTH_TIMEOUT_SECONDS}s; maratón cancelado y lock liberado." | tee -a "$MLOG"
+  else
+    echo "[$(date)] Codex no está autenticado; maratón cancelado." | tee -a "$MLOG"
+  fi
+  "$NODE_BIN" /Users/openclaw/gsc-mcp/send-report.mjs "$MLOG" "Plomero Culiacán (MARATÓN)" "no inició" >> "$MLOG" 2>&1 || true
   exit 0
 fi
 
@@ -83,16 +109,34 @@ while [ "$(date +%s)" -lt "$END" ] && [ "$PASS" -lt "$MAX_PASS" ]; do
     break
   fi
 
+  # El tiempo de red también consume el presupuesto. Nunca iniciar una pasada nueva
+  # si el maratón ya venció; cada pasada tiene además un máximo de 20 minutos.
+  PASS_START=$(date +%s)
+  if [ "$PASS_START" -ge "$END" ]; then
+    echo "[$(date)] terminó el tiempo del maratón durante la espera de red; no inicio otra pasada." | tee -a "$MLOG"
+    break
+  fi
+  PASS_DEADLINE=$((PASS_START + PASS_TIMEOUT_SECONDS))
+  [ "$PASS_DEADLINE" -gt "$END" ] && PASS_DEADLINE="$END"
+
   # Codex aislado: SOLO GSC + local-seo, sin integraciones globales del usuario.
-  "$CODEX_CMD" exec --cd "/Users/openclaw/Sitios Web/Plomero Culiacán" \
+  PASS_RC=0
+  python3 "$DEADLINE_RUNNER" "$PASS_DEADLINE" "$CODEX_BIN" exec \
+    --cd "/Users/openclaw/Sitios Web/Plomero Culiacán" \
     --approve-for-me --ephemeral --ignore-user-config --strict-config --json \
     -c sandbox_workspace_write.network_access=true \
-    -c 'mcp_servers.gsc.command="/usr/local/bin/node"' \
+    -c "mcp_servers.gsc.command=\"$NODE_BIN\"" \
     -c 'mcp_servers.gsc.args=["/Users/openclaw/gsc-mcp/server.js"]' \
-    -c 'mcp_servers.local-seo.command="/usr/local/bin/node"' \
+    -c "mcp_servers.local-seo.command=\"$NODE_BIN\"" \
     -c 'mcp_servers.local-seo.args=["/Users/openclaw/Sitios Web/Plomero Culiacán/mcp-local-seo/index.js"]' \
     -c 'mcp_servers.local-seo.cwd="/Users/openclaw/Sitios Web/Plomero Culiacán"' \
-    --output-last-message "$LAST_FILE" - < .pipeline/maraton-prompt.txt >> "$PLOG" 2>&1 || true
+    --output-last-message "$LAST_FILE" - < .pipeline/maraton-prompt.txt >> "$PLOG" 2>&1 \
+    || PASS_RC=$?
+  if [ "$PASS_RC" -eq 124 ]; then
+    echo "[$(date)] pasada $PASS cortada por deadline; Codex y sus procesos hijos fueron terminados." | tee -a "$MLOG"
+  elif [ "$PASS_RC" -ne 0 ]; then
+    echo "[$(date)] pasada $PASS terminó con código $PASS_RC." | tee -a "$MLOG"
+  fi
   grep '"type":"turn.completed"' "$PLOG" >> "$MLOG" 2>/dev/null || true
 
   LAST=$(grep -E '^(HECHO|SIN TRABAJO):' "$LAST_FILE" 2>/dev/null | tail -1)
@@ -115,9 +159,9 @@ done
 echo "[$(date)] === MARATÓN fin · ${PASS} pasada(s) · ${HECHAS} unidad(es) hecha(s) ===" | tee -a "$MLOG"
 # Registro de consumo de cuota en el ledger (antes el maratón era invisible para
 # costos.jsonl y para el tripwire de check-costos.py).
-/usr/local/bin/node "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/registrar-costo.mjs" \
+"$NODE_BIN" "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/registrar-costo.mjs" \
   "$MLOG" "$RUN_START" \
   "/Users/openclaw/Sitios Web/Plomero Culiacán/.pipeline/costos.jsonl" "maraton $STAMP0" >> "$MLOG" 2>&1 \
   || echo "[$(date)] No pude registrar el consumo del maratón (sigo)." >> "$MLOG"
 # Correo resumen del maratón (mismo IPv4 fix; no bloquea si falla)
-/usr/local/bin/node /Users/openclaw/gsc-mcp/send-report.mjs "$MLOG" "Plomero Culiacán (MARATÓN)" "maratón" >> "$MLOG" 2>&1 || true
+"$NODE_BIN" /Users/openclaw/gsc-mcp/send-report.mjs "$MLOG" "Plomero Culiacán (MARATÓN)" "maratón" >> "$MLOG" 2>&1 || true

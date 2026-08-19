@@ -2,6 +2,8 @@
 """Contratos de seguridad del publicador autónomo."""
 import importlib.util
 import os
+import subprocess
+import tempfile
 import unittest
 
 
@@ -36,6 +38,45 @@ class PublicadorSeguro(unittest.TestCase):
             fuente = archivo.read()
         self.assertNotIn('git("reset", "--hard"', fuente)
         self.assertNotIn("Claude Opus", fuente)
+        self.assertNotIn('["git", "add", "-A"]', fuente)
+
+    def test_bloquea_archivo_ajeno_sin_preparar_y_preserva_staging(self):
+        """Un untracked ajeno no se agrega ni se publica junto con un cambio preparado."""
+        with tempfile.TemporaryDirectory() as repo:
+            def git(*args):
+                return subprocess.run(
+                    ["git", *args], cwd=repo, text=True, capture_output=True, check=True
+                )
+
+            git("init", "-q")
+            git("config", "user.name", "Prueba")
+            git("config", "user.email", "prueba@example.invalid")
+            base = os.path.join(repo, "base.txt")
+            with open(base, "w", encoding="utf-8") as archivo:
+                archivo.write("base\n")
+            git("add", "--", "base.txt")
+            git("commit", "-qm", "base")
+            git("branch", "-M", "main")
+
+            with open(base, "a", encoding="utf-8") as archivo:
+                archivo.write("cambio permitido\n")
+            git("add", "--", "base.txt")
+            with open(os.path.join(repo, "ajeno.txt"), "w", encoding="utf-8") as archivo:
+                archivo.write("no publicar\n")
+
+            anterior = self.crecer.ROOT
+            self.crecer.ROOT = repo
+            try:
+                with self.assertRaises(SystemExit) as salida:
+                    self.crecer.cmd_publicar(["fix: prueba"])
+            finally:
+                self.crecer.ROOT = anterior
+
+            self.assertIn("git add -A", str(salida.exception))
+            self.assertEqual(git("diff", "--cached", "--name-only").stdout.strip(), "base.txt")
+            self.assertEqual(git("ls-files", "--others", "--exclude-standard").stdout.strip(), "ajeno.txt")
+            self.assertEqual(git("branch", "--show-current").stdout.strip(), "main")
+            self.assertEqual(git("branch", "--list", "auto/*").stdout.strip(), "")
 
 
 if __name__ == "__main__":

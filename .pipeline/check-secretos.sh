@@ -23,16 +23,26 @@
 # exit 2 = hay secreto en working tree o archivo de secreto trackeado (NO publicar);
 # exit 1 = error del propio checker. (El JSON siempre se imprime en stdout.)
 #
-# PROPUESTA (no instalada): un hook pre-commit que corra este checker y aborte el
-# commit si exit==2. Ver .pipeline/progreso-revisores.md (no se instala sin tu OK).
+# `--current-only`: corre solo los barridos 1/2 para el pre-push. El historial ya
+# publicado se audita en la corrida diaria, pero no se relee completo en cada push.
 set -uo pipefail
+
+SCAN_HISTORY=1
+case "${1:-}" in
+  "") ;;
+  --current-only) SCAN_HISTORY=0 ;;
+  *) echo '{"hallazgos":[{"id":"sec-uso","archivo":".pipeline/check-secretos.sh","linea":0,"severidad":"alta","categoria":"secretos","descripcion":"argumento inválido; el checker de secretos no corrió","fix_sugerido":"Usar sin argumentos o con --current-only"}],"analizadas":0}'; exit 1 ;;
+esac
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT" || { echo '{"hallazgos":[{"id":"sec-001","archivo":".pipeline/check-secretos.sh","linea":0,"severidad":"alta","categoria":"secretos","descripcion":"verificación ciega: no se pudo acceder a la raíz del repo","fix_sugerido":"Revisar el checker"}],"analizadas":0}'; exit 1; }
 
 SELF=".pipeline/check-secretos.sh"
 TSV="$(mktemp)"            # scope \t sev \t archivo \t linea \t rule
-trap 'rm -f "$TSV"' EXIT
+FILES_RAW="$(mktemp)"
+FILES_NUL="$(mktemp)"
+trap 'rm -f "$TSV" "$FILES_RAW" "$FILES_NUL"' EXIT
+CHECK_ERROR=0
 
 # Reglas: nombre|ERE. client_secret/refresh_token SOLO como valor asignado
 # (la palabra suelta aparece en código legítimo -> falso positivo).
@@ -50,9 +60,15 @@ RULES=(
 )
 
 # --- conjunto de archivos del working tree (versionables, sin ignorados ni el propio checker)
-FILES_NUL="$(mktemp)"; trap 'rm -f "$TSV" "$FILES_NUL"' EXIT
-{ git ls-files -z; git ls-files -z --others --exclude-standard; } 2>/dev/null \
-  | LC_ALL=C sort -z -u > "$FILES_NUL"
+# Si cualquiera de las dos consultas git falla, no aceptar un conjunto parcial como sano.
+if ! { git ls-files -z; git ls-files -z --others --exclude-standard; } > "$FILES_RAW" 2>/dev/null; then
+  printf '{"hallazgos":[{"id":"sec-000","archivo":".pipeline/check-secretos.sh","linea":0,"severidad":"alta","categoria":"secretos","descripcion":"verificación ciega: git ls-files falló; el barrido de secretos quedó incompleto","fix_sugerido":"Reparar git y repetir; mientras tanto NO publicar"}],"analizadas":0}\n'
+  exit 1
+fi
+if ! LC_ALL=C sort -z -u "$FILES_RAW" > "$FILES_NUL"; then
+  printf '{"hallazgos":[{"id":"sec-000","archivo":".pipeline/check-secretos.sh","linea":0,"severidad":"alta","categoria":"secretos","descripcion":"verificación ciega: no se pudo construir la lista de archivos","fix_sugerido":"Reparar el entorno y repetir; mientras tanto NO publicar"}],"analizadas":0}\n'
+  exit 1
+fi
 ANALIZADAS=$(tr -cd '\0' < "$FILES_NUL" | wc -c | tr -d ' ')
 # VERIFICACIÓN CIEGA: 0 archivos barridos = git falló (errores suprimidos arriba), no un
 # repo sin archivos. Sin esto el checker imprimía "sin secretos" con barrido vacío y
@@ -89,7 +105,8 @@ done < <(git ls-files --cached --ignored --exclude-standard 2>/dev/null)
 # IMPORTANTE: nunca guardar todo el historial en una variable. En este repo `git log -p`
 # ronda 920 MB y la sustitución de comando agotaba memoria antes de emitir JSON. Python
 # consume el stream línea por línea y conserva únicamente un contador por regla.
-python3 - "$TSV" <<'PY'
+if [ "$SCAN_HISTORY" = 1 ]; then
+if ! python3 - "$TSV" <<'PY'
 import re
 import subprocess
 import sys
@@ -127,11 +144,19 @@ with open(tsv, "a", encoding="utf-8") as out:
         if counts[name]:
             out.write(f"history\talta\t(historial git)\t0\t{name}::{counts[name]}\n")
 PY
+then
+  CHECK_ERROR=1
+fi
+fi
 
 # --- gitleaks (si existe): señal extra
 if command -v gitleaks >/dev/null 2>&1; then
   GL="$(mktemp)"
-  if gitleaks detect --source "$ROOT" --no-banner --redact -f json -r "$GL" >/dev/null 2>&1; then :; fi
+  if [ "$SCAN_HISTORY" = 1 ]; then
+    if gitleaks detect --source "$ROOT" --no-banner --redact -f json -r "$GL" >/dev/null 2>&1; then :; fi
+  else
+    if gitleaks detect --no-git --source "$ROOT" --no-banner --redact -f json -r "$GL" >/dev/null 2>&1; then :; fi
+  fi
   if [ -s "$GL" ]; then
     python3 - "$GL" "$TSV" <<'PY' 2>/dev/null || true
 import json,sys
@@ -152,7 +177,7 @@ LC_ALL=C sort -u "$TSV" -o "$TSV"
 BLOCK=$(grep -cE '^(tree|gitignore)' "$TSV" 2>/dev/null) || true
 BLOCK=${BLOCK:-0}
 
-python3 - "$TSV" "$ANALIZADAS" <<'PY'
+if ! python3 - "$TSV" "$ANALIZADAS" <<'PY'
 import json,sys
 tsv,analizadas=sys.argv[1],int(sys.argv[2])
 rows=[]
@@ -184,6 +209,10 @@ for i,(scope,sev,arch,ln,rule) in enumerate(rows,1):
                  "categoria":"secretos","descripcion":desc,"fix_sugerido":fix})
 print(json.dumps({"hallazgos":hall,"analizadas":analizadas},ensure_ascii=False,indent=2))
 PY
+then
+  exit 1
+fi
 
 [ "${BLOCK:-0}" -gt 0 ] && exit 2
+[ "$CHECK_ERROR" -ne 0 ] && exit 1
 exit 0

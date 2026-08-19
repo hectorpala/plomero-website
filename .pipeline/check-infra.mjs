@@ -44,7 +44,9 @@ const ROOT = path.dirname(__dirname);
 const BASE = process.env.INFRA_BASE || "https://plomeroculiacanpro.mx";
 const MCP_DIR = path.join(ROOT, "mcp-local-seo");
 const LOG_DIR = process.env.INFRA_LOG_DIR || path.join(os.homedir(), "Library", "Logs", "mantener-sitio");
-const NODE = fs.existsSync("/usr/local/bin/node") ? "/usr/local/bin/node" : process.execPath;
+// Reutiliza exactamente el runtime que lanzó este checker. Así una actualización que
+// mueva Node entre /usr/local y Homebrew no deja ciegos a los checkers hijos.
+const NODE = process.execPath;
 const CRON_MAX_HOURS = process.env.INFRA_CRON_MAX_HOURS ? Number(process.env.INFRA_CRON_MAX_HOURS) : 26;
 
 // Checkers pesados/red: solo smoke (no se corren completos aquí).
