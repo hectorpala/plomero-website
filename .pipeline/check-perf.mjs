@@ -235,9 +235,14 @@ async function main() {
             : "Reducir el trabajo del hilo principal (menos JS bloqueante, dividir tareas largas) para bajar INP/TBT");
       }
     }
-    // regresión vs baseline
+    // regresión vs baseline — SOLO entre la MISMA fuente: lighthouse (throttling móvil,
+    // LCP ~1900ms) y puppeteer local (sin throttling, ~180ms) difieren ~10x; compararlas
+    // cruza peras con manzanas y dispara regresiones falsas (visto 20-ago-2026 al
+    // re-baseline). Con fuentes distintas solo aplica el presupuesto absoluto de arriba.
     const b = baseline && baseline[url];
-    if (b) {
+    if (b && b.fuente && b.fuente !== fuente) {
+      // fuente distinta: regresión no comparable; re-baseline con la fuente activa si se quiere
+    } else if (b) {
       for (const metric of ["lcp", "cls", "inp"]) {
         const v = m[metric], bv = b[metric];
         if (v == null || typeof bv !== "number" || bv <= 0) continue;

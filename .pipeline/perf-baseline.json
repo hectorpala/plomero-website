@@ -1,9 +1,16 @@
 {
   "/": {
-    "lcp": 1921,
-    "cls": 0.015,
-    "inp": 33,
-    "inpSrc": "lighthouse:tbt(proxy)",
-    "fuente": "lighthouse"
+    "lcp": 180,
+    "cls": 0,
+    "inp": 72,
+    "inpSrc": "puppeteer:event(aprox)",
+    "fuente": "puppeteer"
+  },
+  "/servicios/reparacion-de-fugas/": {
+    "lcp": 184,
+    "cls": 0,
+    "inp": 56,
+    "inpSrc": "puppeteer:event(aprox)",
+    "fuente": "puppeteer"
   }
 }
