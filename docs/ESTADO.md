@@ -1,5 +1,13 @@
 # ESTADO del pipeline de agentes
 
+## 2026-08-21 — auto/diario-20260818-1825 retomada — NO PUBLICADA
+
+- Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Se retomó la rama interrumpida del 18 de agosto; no se abrió otra.
+- Piso: plantilla, indexabilidad, NAP, conversión, enlazado, E2E (3 flujos), rendimiento (2 páginas) y producción sin hallazgos. Secretos: dos credenciales históricas requieren rotación. Tracking quedó ciego: fuera del sandbox terminó sin JSON/salida.
+- Arreglos verificados: `servicios/reparacion-de-llaves-y-mezcladoras/` quedó sin precios visibles ni estadística de 90 litros sin fuente; `.footer-links a` pasó de ~43px a mínimo 44px. Gate de la página OK, Jaccard 0.29, HTTP 200, JSON-LD válido, 0 errores JS y 0 overflow a 375/1280; cache `?v=20260821` y `sw.js` actualizados. Checkpoints: `ffeb215c`, `4f864558`, `e9761947`.
+- GSC vivo: 605 clics, 59,516 impresiones, CTR 1.02%, posición 6.5; sitemaps 0 errores/advertencias. Toda demanda real tiene destino; backlog autoejecutable `[]` dos veces; 0 páginas nuevas.
+- Verificador solo-lectura: `ok=false`. Bloqueos: 15 archivos bajo `tests/` heredados; `gate-pagina.py contacto/index.html` falla por 124 tokens visibles (<150); tracking sin salida verificable. `ci-gate.py`: 0 ALTA. No se hizo merge ni push.
+
 ## 2026-08-18 — auto/diario-20260818-1825 — NO PUBLICADA
 
 - Retomado trabajo suelto de una corrida interrumpida: 36 archivos de automatización y pruebas, guardados en `6b55a58c`; reporte GSC en `0c079b5e`.
