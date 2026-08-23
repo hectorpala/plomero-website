@@ -14,6 +14,7 @@ Detecta (sobre cada .html servido, ignorando <script>/<style>):
      (OJO: "TODO" suelto NO se marca: en español "todo" es palabra común.)
   5. Placeholder "XXXX" (4+ equis)                                            -> media
   6. Año caduco (< año actual) en <title> o <h1> (p.ej. "Precios 2024")       -> media
+  7. Espacio incorrecto antes de puntuación en texto de JSON-LD                 -> media
 
 Emite a stdout SOLO el JSON común:
   {"hallazgos":[{id,archivo,linea,severidad,categoria,descripcion,fix_sugerido}],"analizadas":N}
@@ -62,6 +63,17 @@ def strip_code(t):
     t = re.sub(r'<script\b[^>]*>.*?</script>', ' ', t, flags=re.I | re.S)
     t = re.sub(r'<style\b[^>]*>.*?</style>', ' ', t, flags=re.I | re.S)
     return t
+
+def jsonld_strings(value):
+    """Recorre solo valores de texto del JSON-LD; no inspecciona sintaxis/URLs."""
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, list):
+        for item in value:
+            yield from jsonld_strings(item)
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from jsonld_strings(item)
 
 # (regex, severidad, etiqueta, fix)
 PATTERNS = [
@@ -135,6 +147,21 @@ def main():
             add("media", r,
                 "CONTENIDO: año caduco %s en <%s> de %s (año actual %d) — copy desactualizado para SEO" % (y, donde, r, CURRENT_YEAR),
                 "Actualizar el año en el %s a %d (o quitarlo si no aporta)" % (donde, CURRENT_YEAR))
+
+        # 7: redacción rota dentro del contenido estructurado (p. ej. "repararla .").
+        for block in re.findall(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', raw, re.I | re.S):
+            try:
+                data = json.loads(block)
+            except (TypeError, ValueError):
+                continue  # La validez JSON la cubren los checkers de plantilla/indexabilidad.
+            bad = next((s for s in jsonld_strings(data) if re.search(r'\s+[.,;:]', s)), None)
+            if bad is not None:
+                sample = re.search(r'.{0,24}\s+[.,;:].{0,24}', bad)
+                add("media", r,
+                    "CONTENIDO: espacio incorrecto antes de puntuación en texto JSON-LD de %s (ej.: %r)" %
+                    (r, sample.group(0) if sample else bad[:50]),
+                    "Quitar el espacio anterior al signo y mantener el texto estructurado bien redactado")
+                break
 
     print(json.dumps({"hallazgos": hallazgos, "analizadas": analizadas}, ensure_ascii=False, indent=2))
 
