@@ -1,5 +1,13 @@
 # ESTADO del pipeline de agentes
 
+## 2026-08-22 — auto/diario-20260818-1825 retomada — NO PUBLICADA
+
+- Health local comprobado: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Se retomó la rama interrumpida del 18 de agosto; no se abrió otra.
+- Piso con evidencia: infra, plantilla, indexabilidad, NAP (73), conversión (68), enlazado (68), E2E (3), rendimiento (2) y producción limpios. Tracking reprodujo 5 ALTAS: GTM solicitado pero `window.google_tag_manager` ausente en 5/5. Secretos: árbol actual limpio (exit 0), dos credenciales antiguas requieren rotación.
+- Arreglos: contacto ampliado con orientación útil (gate OK, Jaccard 0.22, HTTP 200); puntuación JSON-LD corregida en llaves/mezcladoras y otras 7 páginas. Las ocho pasan gate; `check-contenido.py`: 73 analizadas, 0 hallazgos. Checkpoints: `1d0b5c81`, `aa22c3bc`.
+- GSC vivo: 606 clics, 59,493 impresiones, CTR 1.02%, posición 6.5; sitemaps 0 errores/advertencias; backlog autoejecutable `[]` dos veces; 0 páginas nuevas.
+- Verificador solo-lectura: `ok=false`. Bloqueos: 15 archivos bajo `tests/` heredados, GTM no carga en 5/5 y el lote de gates de las 70 páginas modificadas fue cortado tras 14 OK sin resultado final. `ci-gate.py`: 0 ALTA. No se hizo merge ni push.
+
 ## 2026-08-21 — auto/diario-20260818-1825 retomada — NO PUBLICADA
 
 - Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Se retomó la rama interrumpida del 18 de agosto; no se abrió otra.
