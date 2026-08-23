@@ -2,7 +2,7 @@
 // Última actualización: 2025-11-21
 // Estrategia: Cache-First para assets, Network-First para HTML
 
-const CACHE_NAME = 'plomero-culiacan-v50';
+const CACHE_NAME = 'plomero-culiacan-v51';
 // Ligado a CACHE_NAME: cada bump de versión purga también el caché runtime
 // (antes era un nombre fijo que nunca se limpiaba y crecía sin tope).
 const RUNTIME_CACHE = CACHE_NAME + '-runtime';
@@ -11,7 +11,7 @@ const RUNTIME_CACHE = CACHE_NAME + '-runtime';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/main.js?v=20260818',
+  '/main.js?v=20260822',
   '/styles.min.css?v=20260821',
   '/assets/fonts/inter-400.woff2',
   '/assets/fonts/montserrat-800.woff2',
@@ -65,10 +65,14 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const clonedResponse = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => {
-            cache.put(request, clonedResponse);
-          });
+          // Solo cachear respuestas OK: evita guardar 404/500/soft-404 y servirlos
+          // luego (incluso como fallback offline).
+          if (response.ok) {
+            const clonedResponse = response.clone();
+            caches.open(RUNTIME_CACHE).then((cache) => {
+              cache.put(request, clonedResponse);
+            });
+          }
           return response;
         })
         .catch(() => caches.match(request).then((cached) => cached || caches.match('/')))
