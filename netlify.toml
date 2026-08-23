@@ -17,6 +17,8 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
 
 # HTML - no cache (siempre fresco)
 [[headers]]
@@ -45,16 +47,16 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# CSS y JS - cache agresivo
+# CSS y JS - cache 30 días immutable (más perdonador ante un ?v= olvidado que 1 año)
 [[headers]]
   for = "/*.css"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
 
 [[headers]]
   for = "/*.js"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=2592000, immutable"
 
 # Fonts - cache agresivo + CORS
 [[headers]]
