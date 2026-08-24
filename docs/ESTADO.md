@@ -1,5 +1,13 @@
 # ESTADO del pipeline de agentes
 
+## 2026-08-23 — auto/diario-20260818-1825 retomada — NO PUBLICADA
+
+- Health local comprobado con servidor persistente: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200.
+- Piso: infra, plantilla, indexabilidad, NAP (73), conversión (68), enlazado (68), E2E (3), rendimiento real (2), producción y contenido (73) limpios; `ci-gate.py` terminó con 0 ALTA.
+- Tracking bloqueó la corrida: Chrome analizó 5 páginas y reportó 5 ALTAS porque `gtm.js` se solicitó pero `window.google_tag_manager` no se inicializó. Secretos: árbol actual publicable por este criterio (exit 0), pero persisten dos credenciales antiguas que requieren rotación.
+- GSC vivo: 599 clics, 58,941 impresiones, CTR 1.02%, posición 6.5; sitemaps con 0 errores/advertencias. Toda oportunidad fuerte ya tiene página propia; 0 páginas nuevas y backlog autoejecutable vacío dos veces. Reporte: `.pipeline/oportunidades-20260823.md`.
+- No se editó ninguna página servida ni se ejecutó merge/push. El verificador final debe fallar cerrado por tracking.
+
 ## 2026-08-22 — auto/diario-20260818-1825 retomada — NO PUBLICADA
 
 - Health local comprobado: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Se retomó la rama interrumpida del 18 de agosto; no se abrió otra.
