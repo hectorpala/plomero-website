@@ -1,5 +1,13 @@
 # ESTADO del pipeline de agentes
 
+## 2026-08-26 — auto/diario-20260818-1825 retomada — NO PUBLICADA
+
+- Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Piso válido: infra, plantilla, indexabilidad, NAP 73, conversión 68, enlazado 68, E2E 3, rendimiento 2 y producción sin hallazgos; secretos exit 0 con dos credenciales históricas pendientes.
+- Arreglos: cinco artículos quedaron sin tarifas/porcentajes comerciales ni testimonios no verificables (`7ea38947`); el artículo de WC se alineó a más de 1,100 impresiones GSC agregadas y quedó sin cifras no respaldadas (`fa182f7e`). Seis gates OK; headless 375px con HTTP 200, JSON-LD válido, 0 overflow y 0 errores JS.
+- GSC: 582 clics, 57,206 impresiones, CTR 1.02%, posición 6.6; sitemaps 0 errores/advertencias. Cero páginas nuevas: toda demanda fuerte tiene destino; backlog autoejecutable `[]` dos veces. Reporte `.pipeline/oportunidades-20260826.md`.
+- Aprendizaje: `check-contenido.py` ahora detecta precios visibles en páginas indexables y reveló deuda heredada en 56/73 páginas (`16ee2c50`). `check-reglas.py` pasó con 54 reglas y ~3,981 tokens.
+- Verificador solo-lectura: `ok=false`. `ci-gate.py` y seis gates pasaron, pero tracking terminó otra vez sin JSON y quedan 56 páginas con precios visibles. No se ejecutó merge, push ni indexación.
+
 ## 2026-08-25 — auto/diario-20260818-1825 retomada — NO PUBLICADA
 
 - Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Se retomó la rama del 18 de agosto; no se abrió otra.
