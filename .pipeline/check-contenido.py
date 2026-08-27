@@ -15,6 +15,7 @@ Detecta (sobre cada .html servido, ignorando <script>/<style>):
   5. Placeholder "XXXX" (4+ equis)                                            -> media
   6. Año caduco (< año actual) en <title> o <h1> (p.ej. "Precios 2024")       -> media
   7. Espacio incorrecto antes de puntuación en texto de JSON-LD                 -> media
+  8. Precio monetario visible en el cuerpo de una página indexable              -> media
 
 Emite a stdout SOLO el JSON común:
   {"hallazgos":[{id,archivo,linea,severidad,categoria,descripcion,fix_sugerido}],"analizadas":N}
@@ -132,6 +133,17 @@ def main():
         #    p.ej. blog/marcha-paz-culiacan-2025).
         if has_noindex(raw):
             continue
+
+        # 8: NEGOCIO.md prohíbe cifras de precio visibles; las ofertas solo viven
+        # en JSON-LD. strip_code ya excluyó esos bloques y también CSS/JS.
+        visible = re.sub(r'<[^>]+>', ' ', t)
+        precio = re.search(r'(?:\$\s*\d[\d,.]*(?:\s*[-–]\s*\$?\s*\d[\d,.]*)?|\b\d[\d,.]*\s*(?:MXN|pesos)\b)', visible, re.I)
+        if precio:
+            add("media", r,
+                "CONTENIDO: precio monetario visible en el cuerpo de %s (ej.: %r); NEGOCIO.md exige cotización clara sin cifras" %
+                (r, precio.group(0)),
+                "Quitar la cifra visible y explicar qué determina la cotización; conservar ofertas solo en JSON-LD")
+
         zonas = []
         mt = re.search(r'<title>(.*?)</title>', t, re.I | re.S)
         if mt:
