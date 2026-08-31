@@ -1,5 +1,13 @@
 # ESTADO del pipeline de agentes
 
+## 2026-08-30 — auto/diario-20260818-1825 retomada — NO PUBLICADA
+
+- Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200; las seis páginas heredadas respondieron 200, parsearon JSON-LD y mantuvieron canonical/og:url/twitter:url iguales.
+- Piso: infra, plantilla, indexabilidad, NAP (73), conversión (68), enlazado (68), E2E (3) y producción sin hallazgos; `ci-gate.py` 0 ALTA y seis `gate-pagina.py` OK. Secretos: árbol actual publicable, dos credenciales históricas pendientes de rotación.
+- Hallazgos vinculantes: `check-contenido.py` mantiene 56 páginas con precios visibles; rendimiento midió LCP home 516 ms vs baseline 180 ms; tracking analizó 5 páginas y en 4 cargó GTM/GA4 sin observar beacon tras interacción sin consentimiento.
+- GSC vivo: 555 clics, 56,476 impresiones, CTR 0.98%, posición 6.6; sitemaps 0 errores/advertencias. Toda demanda fuerte ya tiene destino; backlog `[]` dos veces, 0 páginas nuevas. Reporte `.pipeline/oportunidades-20260830.md` (`558fcec2`).
+- Verificador solo-lectura: `ok=false`. No se ejecutó merge, push ni indexación.
+
 ## 2026-08-26 — auto/diario-20260818-1825 retomada — NO PUBLICADA
 
 - Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Piso válido: infra, plantilla, indexabilidad, NAP 73, conversión 68, enlazado 68, E2E 3, rendimiento 2 y producción sin hallazgos; secretos exit 0 con dos credenciales históricas pendientes.
