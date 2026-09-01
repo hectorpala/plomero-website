@@ -1,4 +1,4 @@
-# Auto Agente Plomero — parte del 30 de agosto de 2026
+# Auto Agente Plomero — parte del 31 de agosto de 2026
 **Resultado:** encontré 10, arreglé 6, 4 pendientes · no publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
@@ -15,18 +15,18 @@ Encontré 10 cosas: arreglé 6 · 0 necesitan tu decisión · 4 no pude arreglar
 ## ⚠️ Encontré pero NO pude arreglar solo (4)
 - El control encontró precios visibles pendientes en 56 páginas; corregirlas juntas excedería el límite seguro y no permitiría revisar cada reescritura bien — quedaron identificadas para drenar por lotes → https://plomeroculiacanpro.mx/
 - La medición de visitas cargó Google Tag Manager y Analytics, pero no observó envíos en cuatro páginas sin consentimiento; hace falta comprobarlos en Analytics con un navegador consentido → https://plomeroculiacanpro.mx/
-- La portada tardó 516 milisegundos en mostrar su elemento principal frente a 180 del punto de comparación; sigue siendo rápida, pero la regresión debe repetirse y atribuirse antes de aceptarla → https://plomeroculiacanpro.mx/
+- La portada y la página de reparación de fugas rindieron peor que su punto de comparación; la portada sigue mostrando rápido, pero la regresión debe atribuirse antes de aceptarla → https://plomeroculiacanpro.mx/
 - Dos credenciales antiguas siguen visibles en el historial de Git; el sitio actual está limpio, pero solo el dueño de esas cuentas puede rotarlas o revocarlas con seguridad → https://plomeroculiacanpro.mx/
 
 ## 🌱 Mejoré / agregué (1)
-- MEJORÉ: la guía de WC muy tapado para responder mejor a las búsquedas reales; no creé otra página porque esta ya cubre la intención → https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/
+- MEJORÉ: la guía de WC muy tapado para responder mejor a 759 impresiones reales de búsqueda; no creé otra página porque esta ya cubre la intención → https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Las regresiones de velocidad se comparan automáticamente contra una medición anterior; no se acepta una degradación sin repetirla y encontrar su causa.
+- Las mediciones de velocidad y visitas deben repetirse fuera del entorno restringido; si aun así muestran una regresión, el sitio no se publica sin encontrar la causa.
 (ya van 54 reglas aprendidas en total)
 
 ## ⏳ Necesito que tú decidas (0)
 Nada pendiente de tu parte hoy.
 
 ## 📦 ¿Se publicó?
-No publiqué: todavía hay precios visibles pendientes, la medición de visitas necesita confirmación con consentimiento y la portada mostró una regresión de velocidad; lo dejé guardado para revisión.
+No publiqué: siguen pendientes precios visibles, la medición de visitas necesita confirmación con consentimiento y dos páginas mostraron regresiones de rendimiento; lo dejé guardado para revisión.
