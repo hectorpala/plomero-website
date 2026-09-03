@@ -1,5 +1,12 @@
 # ESTADO del pipeline de agentes
 
+## 2026-09-02 — auto/diario-20260818-1825 retomada — NO PUBLICADA
+
+- Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Piso: infra, plantilla, indexabilidad, NAP (73), conversión (68), enlazado (68), E2E (3) y producción limpios; secretos actuales publicables, con dos credenciales históricas pendientes de rotación.
+- Seis artículos heredados pasan `gate-pagina.py` (Jaccard máximo 0.27), responden 200, parsean JSON-LD y mantienen canonical/og:url/twitter:url iguales. Lote rotativo de cinco colonias: gates OK, Jaccard máximo 0.68. `ci-gate.py` terminó con 0 ALTA; 0 tests, 0 borrados y 6 HTML modificados.
+- `check-contenido.py` mantiene la deuda conocida de precios visibles en 56/73 páginas. GSC vivo: 527 clics, 54,987 impresiones, CTR 0.96%, posición 6.7; sitemaps con 0 errores/advertencias. Toda demanda fuerte tiene destino; backlog `[]` dos veces y 0 páginas nuevas. Reporte `.pipeline/oportunidades-20260902.md` (`6829d68a`).
+- Verificador solo-lectura: `ok=false`. Tracking no imprimió JSON ni código de salida; rendimiento midió home LCP 1,024 ms vs baseline 180 ms e INP 152 ms vs 72 ms. No se ejecutó merge, push ni indexación.
+
 ## 2026-09-01 — auto/diario-20260818-1825 retomada — NO PUBLICADA
 
 - Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Piso local: plantilla, indexabilidad, NAP (73), conversión (68), enlazado (68), E2E (3) y producción limpios; secretos actuales publicables, con dos credenciales históricas pendientes de rotación.
