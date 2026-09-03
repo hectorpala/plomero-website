@@ -18,6 +18,103 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
+## [PENDIENTE] infra/tracking — Deadline externo garantiza JSON aun si Puppeteer se cuelga al cerrar   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** `check-tracking.mjs` promete JSON en sus rutas de error, pero esa garantía solo aplica si el proceso JS conserva el control. Si `page.close()`, `browser.close()` o Chrome quedan colgados, el checker puede terminar sin stdout observable y deja a toda la corrida en verificación ciega. Falta un supervisor fuera del proceso de Puppeteer.
+**Evidencia:** `data/HISTORIAL.jsonl` registra la misma regresión ALTA `tracking-verificacion-ciega-sin-stdout` el 2026-08-26 y el 2026-09-01; ambas bloquearon la publicación. La rama `auto/diario-20260818-1825` sigue sin fusionar tras 10 días. El checker actual solo llama `out(0)` desde `main().catch()`, mecanismo que no puede ejecutarse si el proceso queda colgado.
+**Propuesta:** Ejecutar el checker real bajo un supervisor Python con deadline de reloj de pared, captura de stdout y validación del contrato JSON. El supervisor siempre devuelve un objeto de hallazgos válido y mata el grupo de procesos Chrome si vence el plazo. Sustituir en los sitios de llamada `node .pipeline/check-tracking.mjs` por `python3 .pipeline/check-tracking-deadline.py`.
+**DRAFT (listo para merge — archivo nuevo completo `.pipeline/check-tracking-deadline.py`):**
+```python
+#!/usr/bin/env python3
+"""Supervisor fail-closed de check-tracking.mjs: siempre emite JSON a stdout."""
+import json
+import os
+import signal
+import subprocess
+import sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CMD = ["node", os.path.join(ROOT, ".pipeline", "check-tracking.mjs")]
+TIMEOUT_S = int(os.environ.get("TRACK_DEADLINE_SECONDS", "150"))
+
+
+def fallo(descripcion, detalle=""):
+    texto = descripcion + ((": " + detalle[-1200:]) if detalle else "")
+    return {"hallazgos": [{
+        "id": "trk-supervisor-001",
+        "archivo": ".pipeline/check-tracking.mjs",
+        "linea": 0,
+        "severidad": "alta",
+        "categoria": "tracking",
+        "descripcion": texto,
+        "fix_sugerido": "Revisar el log stderr/Chrome; el supervisor falló cerrado y no debe publicarse.",
+    }], "analizadas": 0}
+
+
+def main():
+    proc = subprocess.Popen(
+        CMD, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        start_new_session=True, env=os.environ.copy())
+    try:
+        stdout, stderr = proc.communicate(timeout=TIMEOUT_S)
+    except subprocess.TimeoutExpired:
+        os.killpg(proc.pid, signal.SIGTERM)
+        try:
+            stdout, stderr = proc.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            os.killpg(proc.pid, signal.SIGKILL)
+            stdout, stderr = proc.communicate()
+        result = fallo(
+            f"verificación ciega: check-tracking excedió {TIMEOUT_S}s y fue terminado",
+            stderr)
+    else:
+        try:
+            result = json.loads(stdout)
+            if not isinstance(result.get("hallazgos"), list) or not isinstance(result.get("analizadas"), int):
+                raise ValueError("faltan hallazgos[]/analizadas")
+            if proc.returncode != 0:
+                result = fallo(f"verificación ciega: checker terminó con código {proc.returncode}", stderr)
+        except Exception as exc:
+            result = fallo(f"verificación ciega: stdout ausente o JSON inválido ({exc})", stderr or stdout)
+    sys.stdout.write(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+## [PENDIENTE] proceso — Resolver todas las ramas automáticas antiguas antes de abrir o adoptar otra   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** La FASE 2 habla de una rama abandonada en singular y permite “trabaja SOBRE esa rama”, pero no define qué hacer cuando hay varias ni obliga a inventariarlas todas. El sistema adoptó la más reciente y dejó dos ramas de julio invisibles al flujo diario durante más de un mes.
+**Evidencia:** El brief del 2026-09-02 reporta **3 ramas automáticas no fusionadas**: `auto/crecer-20260727-183544` y `auto/diario-20260726-1826`, ambas con 38 días, y `auto/diario-20260818-1825`, con 10 días. La FASE 2 actual solo ordena mirar `auto/diario-*`, por lo que ni siquiera incluye `auto/crecer-*`.
+**Propuesta:** Reemplazar el bloque de adopción de FASE 2 por una cola explícita, antigua primero, que incluya ambos prefijos, prohíba crear otra rama mientras exista una antigua y exija clasificar cada una como fusionable, supersedida o conflictiva. Nunca borrar automáticamente: una rama supersedida queda reportada para decisión humana.
+**DRAFT (listo para merge — reemplazar el primer párrafo y sus viñetas de FASE 2 en `.pipeline/crecer-diario-prompt.txt`):**
+```text
+ANTES de crear o adoptar una rama, INVENTARÍA TODAS las ramas automáticas no fusionadas, de ambos flujos:
+  git branch --no-merged main --format='%(refname:short)' | grep -E '^auto/(diario|crecer)-' | sort
+Si la lista no está vacía, NO crees otra rama y NO elijas solo la más reciente. Atiéndelas de la más antigua a
+la más nueva. Para cada rama compara `git log --oneline main..<rama>` y `git diff --stat main...<rama>` y clasifica:
+  A) trabajo vigente y separable → adopta ESA rama, verifica desde cero en FASE 7 y publica solo si pasa todo;
+  B) totalmente supersedida por main → NO la borres: anótala como supersedida en ESTADO.md y pide al dueño decidir;
+  C) mezcla trabajo vigente con conflictos/dudas → NO publiques: anota commits/archivos y pide decisión humana.
+Mientras quede una rama de clase A sin resolver, termina esta corrida después de esa sola rama (UNA mejora por sesión).
+Mientras quede una rama B/C, no abras trabajo nuevo: el sistema debe hacer visible la deuda, no enterrarla bajo otra rama.
+Incluye en el parte el número y nombre de TODAS las ramas automáticas no fusionadas encontradas y la clasificación dada.
+```
+
+## [PENDIENTE] perf/proceso — No bloquear por regresión relativa local mientras el valor absoluto es bueno sin confirmar entorno estable   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** La baseline local de Puppeteer compara contra una medición extraordinariamente baja y convierte variación de la Mac en regresión, aunque el LCP medido continúa muy por debajo del presupuesto absoluto. El verificador falla cerrado repetidamente sin causa atribuible y mantiene la rama bloqueada.
+**Evidencia:** `data/HISTORIAL.jsonl` registra el 2026-08-30 LCP home 516 ms vs baseline 180 ms; el 2026-08-31, 1048 ms; y el 2026-09-01, 1120 ms. Los tres superan la baseline, pero todos quedan por debajo del presupuesto absoluto de 2500 ms declarado en `.pipeline/check-perf.mjs`. El historial dice explícitamente que no hubo cambio demostrado en la home y no se rebaselinó. La rama lleva 10 días sin fusionar.
+**Propuesta:** Mantener el presupuesto absoluto como candado y tratar una regresión relativa de fuente `puppeteer` como “no confirmada” hasta repetirla en un entorno estable de CI/Lighthouse o atribuirla a un diff. No autoriza rebaseline automático ni silencia una violación absoluta.
+**DRAFT (listo para merge — pegar en FASE 7, inmediatamente después de ordenar correr `check-perf.mjs`):**
+```text
+PERF — distingue salud absoluta de ruido de baseline. Si `check-perf.mjs` reporta SOLO una regresión relativa
+de severidad media con `[fuente:puppeteer]`, pero la misma métrica sigue bajo su presupuesto absoluto
+(LCP<2500ms, CLS<0.1, INP<200ms), NO afirmes que el sitio empeoró ni re-baselines. Repite una vez en proceso nuevo.
+Si sigue bajo presupuesto, registra `perf-baseline-local-no-confirmada` y pide confirmación con Lighthouse/CI estable;
+ese hallazgo aislado NO invalida otros candados verdes. SÍ bloquea si: (a) supera el presupuesto absoluto, (b) una
+medición Lighthouse/CI comparable confirma la regresión, o (c) el diff de la rama toca recursos del camino crítico
+y la degradación se reproduce. Ausencia de medición sigue siendo verificación ciega ALTA y siempre bloquea.
+```
+
 ## [PENDIENTE] links — Ancla a redirect-stub: check 14 solo caza texto==nombre-de-servicio, la clase MÁS ANCHA (cualquier texto, ej. "Servicio 24/7") reincidió 4 veces y HOY siguen viviendo 11 instancias sin mecanizar   (impacto A · esfuerzo S · riesgo bajo)
 **Problema:** El sitio tiene 6 páginas "redirect-stub" (`servicios/plomero/{24-7,cerca-de-mi,a-domicilio,colonias,precios,index}/index.html`, `<meta http-equiv="refresh">` + `<link rel="canonical">` al destino real) que existen solo por compatibilidad de URLs viejas. Cada vez que se descubre una página enlazando a uno de estos stubs en vez de al destino final, se corrige a mano SOLO en el lote de la corrida de ese día — nunca se mecanizó un check que cace el patrón completo. El check 14 existente (`ancla-servicio`, `check-plantilla.py` línea ~551) es estructuralmente incapaz de cerrar esto: compara el TEXTO de la ancla contra el H1 real de cada `servicios/<slug>/`, así que solo caza cuando el texto coincide con el nombre exacto de un servicio ("Instalación de sanitarios" → hub genérico). Anclas GENÉRICAS como "Servicio 24/7" o "Plomero cerca de mí" (que no calzan ningún H1) escapan por diseño — por eso la MISMA clase de bug reincidió con "patrón amplio" 4 veces (2026-07-07, -09, -14 ×2, -21) y cada vez el hallazgo dice literalmente "no mecanizado aún" / "fuera del lote de hoy".
 **Evidencia:** `data/HISTORIAL.jsonl`: `pend-links-ancla-servicio-20260709` ("16 instancias MÁS... no mecanizado, ci-gate lo mostrará"... pero ci-gate solo corre check 1/14 tal como están, no un check de stubs), `links-ancla-24-7-redirect-stub-patron-amplio-20260714` ("10 páginas más... check-plantilla check 14 no lo caza porque el texto no coincide con ningún H1"), `links-ancla-24-7-redirect-stub-amplio` (2026-07-21, "9 páginas... sin fixer genérico"). Verificado en vivo HOY (2026-07-24) con `grep -rl 'href="[^"]*plomero/24-7/\?"' --include=*.html .` (excluyendo el propio stub): **2 páginas** (`servicios/plomero-colonias-culiacan/index.html`, `partials/footer_nav.html`) siguen enlazando al stub `24-7`; `plomero/cerca-de-mi` → 2 páginas; `plomero/a-domicilio` → 2 páginas; `plomero/precios` → **5 páginas** (incluye 3 del blog) — **11 instancias vivas** de la misma clase, hoy, sin checker que las cace.
