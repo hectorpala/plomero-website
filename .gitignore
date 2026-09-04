@@ -78,3 +78,10 @@ obsidian-vault/
 
 # Backup de permisos locales de Claude Code (no debe publicarse)
 plomero-settings.local.json.bak-*
+
+# Líneas base del checker visual (.pipeline/check-visual.mjs).
+# NO se versionan a propósito: son 2.8 MB de PNG y se regeneran en ~18 s. Como
+# scripts/crecer.py añade un enlace en la home cada vez que crea una página, la base
+# de / cambia seguido; commitearlas metería ~2.8 MB de blobs al historial cada vez.
+# Un clon nuevo simplemente las establece en su primera corrida (hallazgo "baja").
+.pipeline/visual-baseline/

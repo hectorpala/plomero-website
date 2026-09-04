@@ -50,7 +50,7 @@ const NODE = process.execPath;
 const CRON_MAX_HOURS = process.env.INFRA_CRON_MAX_HOURS ? Number(process.env.INFRA_CRON_MAX_HOURS) : 26;
 
 // Checkers pesados/red: solo smoke (no se corren completos aquí).
-const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-tracking-deadline.py", "check-e2e.mjs"]);
+const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-tracking-deadline.py", "check-e2e.mjs", "check-visual.mjs"]);
 // No son checkers de páginas con el contrato JSON estándar (se excluyen del barrido local).
 // check-parte.py (valida un parte concreto; requiere argumento) y check-reglas.py (utilidad de
 // presupuesto de REGLAS.md) NO emiten {"hallazgos":[...]} — no son sensores de página.

@@ -67,7 +67,7 @@ REVISIONES SELECTIVAS (corre lo justo, no malgastes cuota). Ejecuta con Codex pr
   • EL PISO — SIEMPRE, site-wide (son los deterministas baratos + el candado de secretos; dan cobertura mecánica
     total y la verificación ciega): revisor-infra-salud (PRIMERO), revisor-plantilla, revisor-indexabilidad,
     revisor-nap, revisor-conversion, revisor-enlazado-interno, revisor-e2e-funcional, revisor-perf-real,
-    revisor-produccion, revisor-tracking, revisor-secretos.
+    revisor-produccion, revisor-tracking, revisor-visual, revisor-secretos.
   • LOS DE JUICIO (caros: contenido, seo, a11y, movil, perf, links, critico-completitud) — SOLO los relevantes a lo
     que cambió desde la última corrida. Corre `python3 .pipeline/selector-revisores.py --base <sha-última-auto-diario>`
     (el último commit `auto-diario`/`mant`); ejecuta SOLO los que liste en JUICIO y ACÓTALOS a las páginas que cambiaron.
@@ -218,6 +218,11 @@ El verificador entrega un veredicto JSON {ok: true/false, problemas: [...]}. Qu�
     y quedó peor en la rama. Se demuestra comparando contra `main`, no por el número absoluto de hallazgos.
   • Una verificación CIEGA (checker que no pudo medir y no entregó JSON). "Aún no terminó" NO es ciega:
     espera su deadline completo (caso tracking-20260902: se dio por muerta y sí había entregado su JSON).
+
+HALLAZGO VISUAL: `check-visual.mjs` avisa (media) cuando el render cambió. Solo se acepta regenerando la
+base (`node .pipeline/check-visual.mjs --update-baseline`) **si esta corrida modificó esa página** — p. ej.
+`crecer.py` añadió un enlace en la home al crear una. Dilo en el parte. Si el aviso sale sin que tocaras esa
+página, NO regeneres: es justo la señal para la que existe (las bases no se versionan, son regenerables).
 
 CALIBRA ANTES DE CREERLE A UNA MEDICIÓN (rendimiento, tracking, visual y todo checker que dé un NÚMERO):
   1. Una sola lectura no bloquea: repítela en el MISMO entorno. Si la segunda no confirma, es ruido.
