@@ -2,7 +2,7 @@
 // Última actualización: 2025-11-21
 // Estrategia: Cache-First para assets, Network-First para HTML
 
-const CACHE_NAME = 'plomero-culiacan-v51';
+const CACHE_NAME = 'plomero-culiacan-v52';
 // Ligado a CACHE_NAME: cada bump de versión purga también el caché runtime
 // (antes era un nombre fijo que nunca se limpiaba y crecía sin tope).
 const RUNTIME_CACHE = CACHE_NAME + '-runtime';
@@ -11,8 +11,8 @@ const RUNTIME_CACHE = CACHE_NAME + '-runtime';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/main.js?v=20260822',
-  '/styles.min.css?v=20260821',
+  '/main.js?v=20260903',
+  '/styles.min.css?v=20260903',
   '/assets/fonts/inter-400.woff2',
   '/assets/fonts/montserrat-800.woff2',
   '/assets/icons/logo-blue.svg',

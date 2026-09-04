@@ -128,6 +128,11 @@ const form = document.getElementById('contact-form');
 if (!form) return;
 form.addEventListener('submit', async function(e) {
 e.preventDefault();
+// La pestaña de WhatsApp se abre AQUI, con la activacion del usuario todavia viva.
+// Si se abriera despues del `await fetch(...)` el navegador la bloquea como popup y el
+// cliente nunca ve el mensaje pre-llenado (bug 2026-09-03).
+let waTab = null;
+try { waTab = window.open('', '_blank'); } catch (err) { waTab = null; }
 const formData = new FormData(this);
 const nombre = formData.get('nombre');
 const telefono = formData.get('telefono');
@@ -170,7 +175,11 @@ const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n
 `Email: ${email}\n` +
 `Mensaje: ${mensaje}`;
 const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+if (waTab && !waTab.closed) {
+waTab.location.href = whatsappURL;
+} else {
 window.open(whatsappURL, '_blank');
+}
 window.location.href = '/gracias';
 } else {
 throw new Error('Netlify form submission failed');
@@ -183,7 +192,11 @@ const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n
 `Email: ${email}\n` +
 `Mensaje: ${mensaje}`;
 const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+if (waTab && !waTab.closed) {
+waTab.location.href = whatsappURL;
+} else {
 window.location.href = whatsappURL;
+}
 }
 });
 })();
