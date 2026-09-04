@@ -75,3 +75,6 @@ graphify-out/
 
 # Vault privado de Obsidian — vive en disco, JAMAS en el repo (es publico) — 20-ago-2026
 obsidian-vault/
+
+# Backup de permisos locales de Claude Code (no debe publicarse)
+plomero-settings.local.json.bak-*

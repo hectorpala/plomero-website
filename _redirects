@@ -3,6 +3,27 @@
 # hasta que se saque del repo publicado. Hallazgo del verificador FASE 7, 2026-07-09.
 /obsidian-vault/*  /404.html  404!
 
+# 404 forzado: material interno del repo que Netlify sirve porque publish="." publica TODO
+# el árbol. Ninguna página enlaza estas rutas (verificado con un barrido de href/src sobre los
+# 73 HTML publicables), así que bloquearlas no rompe nada. Auditoría 2026-09-03: respondían 200
+# en producción CLAUDE.md, docs/ESTADO.md (115 KB), data/HISTORIAL.jsonl (233 KB), 48 scripts,
+# 16 tests y el .bak de permisos. Sin credenciales dentro, pero es el cerebro del proyecto.
+# Lo definitivo es mover el sitio a public/; esto es el candado mientras tanto.
+/docs/*                              /404.html  404!
+/data/*                              /404.html  404!
+/scripts/*                           /404.html  404!
+/tests/*                             /404.html  404!
+/partials/*                          /404.html  404!
+/site-check/*                        /404.html  404!
+/reivision%20de%20sitio/*            /404.html  404!
+/CLAUDE.md                           /404.html  404!
+/AGENTS.md                           /404.html  404!
+/package.json                        /404.html  404!
+/package-lock.json                   /404.html  404!
+/plomero-settings.local.json.bak-20260618  /404.html  404!
+/verificar-tracking.js               /404.html  404!
+/script-gtm-auto.js                  /404.html  404!
+
 # 301: colonias noindex consolidadas por zona (2026-06-11)
 /servicios/plomero-colonias-culiacan/10-de-abril/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/10-de-mayo/* /servicios/plomero-zona-sur-culiacan/ 301
