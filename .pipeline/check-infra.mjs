@@ -50,7 +50,7 @@ const NODE = process.execPath;
 const CRON_MAX_HOURS = process.env.INFRA_CRON_MAX_HOURS ? Number(process.env.INFRA_CRON_MAX_HOURS) : 26;
 
 // Checkers pesados/red: solo smoke (no se corren completos aquí).
-const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-e2e.mjs"]);
+const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-tracking-deadline.py", "check-e2e.mjs"]);
 // No son checkers de páginas con el contrato JSON estándar (se excluyen del barrido local).
 // check-parte.py (valida un parte concreto; requiere argumento) y check-reglas.py (utilidad de
 // presupuesto de REGLAS.md) NO emiten {"hallazgos":[...]} — no son sensores de página.
@@ -195,12 +195,18 @@ function checkCheckers() {
   for (const f of listPageCheckers()) {
     const full = path.join(__dirname, f);
     if (HEAVY.has(f)) {
-      // SMOKE: sintaxis + dependencias
+      // SMOKE: sintaxis + dependencias. El comprobador depende del LENGUAJE del archivo:
+      // un checker pesado puede ser .py (p. ej. check-tracking-deadline.py, el supervisor
+      // con deadline que envuelve al de puppeteer). Pasarle `node --check` a un .py da un
+      // error de sintaxis SIEMPRE y disparaba una ALTA falsa que bloqueaba la corrida.
+      const esPy = f.endsWith(".py");
+      const cmd = esPy ? "python3" : process.execPath;
+      const args = esPy ? ["-m", "py_compile", full] : ["--check", full];
       try {
-        execFileSync(process.execPath, ["--check", full], { timeout: 20000, stdio: "ignore" });
+        execFileSync(cmd, args, { timeout: 20000, stdio: "ignore" });
       } catch (e) {
         add("alta", path.join(".pipeline", f),
-          `INFRA: el checker pesado ${f} no pasa 'node --check' (error de sintaxis); no podría correr en el pipeline`,
+          `INFRA: el checker pesado ${f} no pasa la comprobación de sintaxis (${esPy ? "python3 -m py_compile" : "node --check"}); no podría correr en el pipeline`,
           `Reparar la sintaxis de .pipeline/${f}`);
         continue;
       }

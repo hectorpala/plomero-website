@@ -33,12 +33,32 @@ comprueba que la home y 2-3 páginas clave (/contacto/, /servicios/, /blog/) res
 es hallazgo de severidad ALTA y es lo primero a corregir; no se crece sobre un sitio roto.
 
 ================================ FASE 2 — Rama de la corrida ================================
-ANTES de crear la rama, ADOPTA lo que dejó una corrida muerta (pasó el 07-11, 07-23 y 07-26: la corrida se corta
-en la FASE 7 y su trabajo queda colgado). Mira `git status --short` y `git branch --list 'auto/diario-*'`:
-  • Árbol SUCIO o rama auto/diario-* sin fusionar → NO empieces encima como si nada. Trabaja SOBRE esa rama
-    (o commitea lo suelto en ella) y trátalo como trabajo de hoy: pasa por la FASE 7 y los candados igual que
-    lo nuevo. Dilo en el parte ("retomé el trabajo del <fecha> que quedó sin publicar").
-  • Todo limpio → `git checkout -b auto/diario-$(date +%Y%m%d-%H%M)`.
+ANTES de crear la rama, INVENTARÍA Y RESUELVE **TODAS** las ramas automáticas viejas. No es "la" rama abandonada
+en singular: el 2026-09-02 había TRES sin fusionar (`auto/crecer-20260727-183544` y `auto/diario-20260726-1826`,
+de 38 días, más `auto/diario-20260818-1825`, de 10) y el flujo solo miraba `auto/diario-*`, así que las de julio
+quedaron invisibles más de un mes. Trabajo hecho que nadie vuelve a ver es trabajo perdido.
+
+  1. Inventario COMPLETO, sin excluir prefijos:
+       git status --short
+       git branch --no-merged main --list 'auto/*' 'codex/*'     # las que traen trabajo
+       git branch --merged   main --list 'auto/*' 'codex/*'      # ya integradas, se pueden borrar
+       git stash list ; git worktree list
+  2. **Cola: la MÁS ANTIGUA primero.** Está PROHIBIDO crear una rama nueva mientras exista una vieja sin
+     clasificar. Se procesa una por corrida, de la más vieja a la más nueva.
+  3. Clasifica CADA rama sin fusionar en exactamente una de tres, con evidencia:
+       • FUSIONABLE  → su trabajo sigue siendo válido. Trabaja SOBRE ella y trátala como trabajo de hoy: pasa
+                       por la FASE 7 y los candados igual que lo nuevo. Dilo en el parte ("retomé el trabajo
+                       del <fecha> que quedó sin publicar").
+       • SUPERSEDIDA → main ya tiene ese trabajo por otra vía, o fusionarla REVERTIRÍA algo posterior.
+                       Compruébalo, no lo supongas: compara los commits por ASUNTO contra main
+                       (`git log --format='%s' main` vs `git log main..<rama>`) y revisa si el diff
+                       reintroduce contenido ya corregido (`git diff main...<rama> -- '*.html'`).
+       • CONFLICTIVA → toca lo mismo que otra rama o que main y no se puede decidir con evidencia.
+  4. **NUNCA borres una rama automáticamente.** Una SUPERSEDIDA o CONFLICTIVA se reporta en el parte para
+     decisión humana, con el porqué y el sha. Antes de proponer su borrado, empújala a origin
+     (`git push origin <rama>`): varias vivían SOLO en esta Mac. Las ya fusionadas (`--merged`) sí se pueden
+     borrar con `git branch -d`, que se niega solo si quedara trabajo suelto.
+  5. Solo con la cola vacía → `git checkout -b auto/diario-$(date +%Y%m%d-%H%M)`.
 
 CHECKPOINT OBLIGATORIO (regla dura desde 2026-07-26): commitea EN LA RAMA conforme avanzas — tras cada arreglo
 verificado de la FASE 5 y tras cada tarea cerrada de la FASE 6. Un commit por cambio lógico, mensaje descriptivo.

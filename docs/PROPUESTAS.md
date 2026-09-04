@@ -18,7 +18,132 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
-## [PENDIENTE] infra/tracking — Deadline externo garantiza JSON aun si Puppeteer se cuelga al cerrar   (impacto A · esfuerzo S · riesgo bajo)
+## [PENDIENTE] observabilidad — Agrupar regresiones accionables y separar resueltas, pendientes y ruido   (impacto A · esfuerzo S · riesgo bajo)
+**Problema:** El brief dice “39 regresiones”, pero ese total se obtiene buscando la subcadena `regres` en el JSON completo. Mezcla incidentes ya arreglados, pendientes reales y registros que solo mencionan la palabra en una regla o descripción; además no agrupa reincidencias por firma. Así el crítico recibe un número alarmante pero no puede saber qué clase sigue abierta ni cuántas veces reapareció.
+**Evidencia:** En las 39 filas contadas el 2026-09-04, **24 ya están arregladas**, **12 están pendientes** y **3 no tienen ninguno de esos estados**. Aun dentro de las pendientes hay firmas repetidas que el brief oculta: `tracking-verificacion-ciega-sin-stdout` aparece 3 veces y `perf-regresion-baseline` aparece 4 veces entre 2026-08-30 y 2026-09-02. El algoritmo actual es literalmente `"regres" in json.dumps(e).lower()`.
+**Propuesta:** Reemplazar el contador opaco por una clasificación explícita. Detectar regresión solo en `id`, `descripcion` o `hallazgo`; normalizar la firma quitando fecha/sufijo numérico; mostrar por separado resueltas, pendientes y sin estado; y listar primero las firmas pendientes recurrentes con fechas. Conservar el ranking general de categorías como contexto, pero sin insinuar que el acumulado histórico entero carece de checker.
+**DRAFT (listo para merge — reemplazo completo de `sec_historial()` en `.pipeline/recolecta-señales.py`; usa solo imports ya existentes):**
+```python
+def sec_historial():
+    h = _jsonl("data/HISTORIAL.jsonl")
+    print("## HISTORIAL — errores (%d entradas)" % len(h))
+    if not h:
+        print("  (sin datos)\n"); return
+
+    cats = Counter((e.get("categoria") or e.get("category") or "?") for e in h)
+    print("  Áreas históricas más frecuentes (categoria → veces; no implica deuda abierta):")
+    for c, n in cats.most_common(8):
+        print("    %-16s %d" % (c, n))
+
+    def es_regresion(e):
+        campos = " ".join(str(e.get(k, "")) for k in ("id", "descripcion", "hallazgo"))
+        return "regres" in campos.lower()
+
+    def esta_arreglada(e):
+        return e.get("arreglado") is True or str(e.get("estado", "")).lower() in {
+            "arreglado", "hecho", "cerrado", "descartado"
+        }
+
+    def esta_pendiente(e):
+        return e.get("pendiente") is True or str(e.get("estado", "")).lower() in {
+            "pendiente", "bloqueado", "requiere_humano"
+        }
+
+    def firma(e):
+        raw = str(e.get("id") or e.get("descripcion") or e.get("hallazgo") or "sin-id").lower()
+        raw = re.sub(r"(?:^|[-_])20\d{6}(?=$|[-_])", "-", raw)
+        raw = re.sub(r"(?:^|[-_])20\d{2}[-_]\d{2}[-_]\d{2}(?=$|[-_])", "-", raw)
+        raw = re.sub(r"[-_]\d+$", "", raw)
+        return re.sub(r"[-_]{2,}", "-", raw).strip("-_")
+
+    regres = [e for e in h if es_regresion(e)]
+    resueltas = [e for e in regres if esta_arreglada(e)]
+    pendientes = [e for e in regres if not esta_arreglada(e) and esta_pendiente(e)]
+    sin_estado = [e for e in regres if not esta_arreglada(e) and not esta_pendiente(e)]
+    print("  Regresiones: %d total · resueltas=%d · pendientes=%d · sin_estado=%d" % (
+        len(regres), len(resueltas), len(pendientes), len(sin_estado)))
+
+    grupos = {}
+    for e in pendientes:
+        grupos.setdefault(firma(e), []).append(e)
+    recurrentes = sorted(grupos.items(), key=lambda kv: (-len(kv[1]), kv[0]))
+    if recurrentes:
+        print("  ⚠️ Firmas pendientes (prioridad: más reincidente primero):")
+        for sig, filas in recurrentes:
+            fechas = sorted({str(x.get("fecha", "?")) for x in filas})
+            marca = "  ⚠️ REINCIDENTE" if len(filas) >= 2 else ""
+            print("    %s — %d vez/veces · %s%s" % (
+                sig, len(filas), ", ".join(fechas[-5:]), marca))
+    if sin_estado:
+        print("  ⚠️ Regresiones sin estado explícito (corregir instrumentación):")
+        for e in sin_estado[-5:]:
+            print("    %s — %s" % (e.get("fecha", "?"), e.get("id", "sin-id")))
+    print()
+```
+**DRAFT adicional (listo para merge — añadir junto a los imports de `.pipeline/recolecta-señales.py`):**
+```python
+import re
+```
+
+## [PENDIENTE] costo/memoria — Reservar margen en REGLAS antes de que el guard llegue al límite duro   (impacto M · esfuerzo S · riesgo bajo)
+**Problema:** `check-reglas.py` solo falla cuando la estimación supera 4,000 tokens. En FASE 9, una regla nueva puede consumir el escaso margen y obligar a una consolidación reactiva dentro de la misma corrida; el brief ya avisa desde 3,600, pero ese aviso no cambia el comportamiento del agente.
+**Evidencia:** El brief del 2026-09-04 estima ~3,996 tokens. La medición directa del guard da 15,924 caracteres / ~3,981 tokens contra un máximo de 4,000: quedan **19 tokens estimados de margen**. FASE 9 actualmente ordena consolidar únicamente “si excede”, por lo que un check verde hoy autoriza seguir añadiendo memoria.
+**Propuesta:** Mantener 4,000 como candado duro, añadir 3,600 como objetivo operativo y hacer que el guard devuelva código 2 en zona amarilla. FASE 9 debe consolidar también con código 2 antes de añadir una regla; no se pierde conocimiento porque el relato permanece en `HISTORIAL.jsonl`.
+**DRAFT (listo para merge — reemplazar desde `MAX_TOKENS` hasta el final de `main()` en `.pipeline/check-reglas.py`):**
+```python
+MAX_TOKENS = 4000        # límite duro: nunca cerrar una corrida por encima
+TARGET_TOKENS = 3600     # objetivo operativo: deja margen para la siguiente regla
+MAX_RULE_CHARS = 900
+
+
+def main():
+    if not os.path.isfile(REGLAS):
+        print("❌ no existe REGLAS.md")
+        sys.exit(1)
+    with open(REGLAS, encoding="utf-8") as f:
+        lines = f.read().splitlines()
+
+    rules = [ln for ln in lines if ln.lstrip().startswith("- [")]
+    total_chars = sum(len(ln) for ln in lines)
+    est_tokens = total_chars // 4
+    gordas = sorted(
+        [(len(ln), ln) for ln in rules if len(ln) > MAX_RULE_CHARS],
+        reverse=True,
+    )
+
+    print("📏 REGLAS.md: %d reglas · %d chars · ~%d tokens "
+          "(objetivo %d · límite %d)" %
+          (len(rules), total_chars, est_tokens, TARGET_TOKENS, MAX_TOKENS))
+    if est_tokens > MAX_TOKENS or gordas:
+        if est_tokens > MAX_TOKENS:
+            print("❌ Excede el límite duro por ~%d tokens." % (est_tokens - MAX_TOKENS))
+        if gordas:
+            print("❌ %d regla(s) demasiado larga(s) (> %d chars):" %
+                  (len(gordas), MAX_RULE_CHARS))
+            for n, ln in gordas:
+                print("   • %d chars · %s…" % (n, ln[:90]))
+        print("→ CONSOLIDA antes de cerrar la corrida.")
+        sys.exit(1)
+
+    if est_tokens > TARGET_TOKENS:
+        print("⚠️ Zona amarilla: faltan ~%d tokens por consolidar para recuperar margen." %
+              (est_tokens - TARGET_TOKENS))
+        print("→ CONSOLIDA reglas mecanizadas; conserva el relato en HISTORIAL.jsonl.")
+        sys.exit(2)
+
+    print("✅ REGLAS.md dentro del objetivo operativo y con margen.")
+    sys.exit(0)
+```
+**DRAFT adicional (listo para merge — reemplazar la oración del presupuesto en FASE 9 de `.pipeline/crecer-diario-prompt.txt`):**
+```text
+PRESUPUESTO: corre `python3 .pipeline/check-reglas.py` ANTES de añadir una regla y otra vez al terminar.
+Código 0 = dentro del objetivo; código 2 = zona amarilla, CONSOLIDA antes de añadir/cerrar; código 1 = límite
+duro incumplido, NO cierres la corrida. El objetivo operativo es 3,600 tokens y el límite absoluto 4,000.
+Cada regla queda en 1-2 líneas (qué hacer + checker); el relato completo vive en HISTORIAL.jsonl.
+```
+
+## [HECHO 2026-09-04] infra/tracking — Deadline externo garantiza JSON aun si Puppeteer se cuelga al cerrar   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** supervisor .pipeline/check-tracking-deadline.py + sitios de llamada + HEAVY.
 **Problema:** `check-tracking.mjs` promete JSON en sus rutas de error, pero esa garantía solo aplica si el proceso JS conserva el control. Si `page.close()`, `browser.close()` o Chrome quedan colgados, el checker puede terminar sin stdout observable y deja a toda la corrida en verificación ciega. Falta un supervisor fuera del proceso de Puppeteer.
 **Evidencia:** `data/HISTORIAL.jsonl` registra la misma regresión ALTA `tracking-verificacion-ciega-sin-stdout` el 2026-08-26 y el 2026-09-01; ambas bloquearon la publicación. La rama `auto/diario-20260818-1825` sigue sin fusionar tras 10 días. El checker actual solo llama `out(0)` desde `main().catch()`, mecanismo que no puede ejecutarse si el proceso queda colgado.
 **Propuesta:** Ejecutar el checker real bajo un supervisor Python con deadline de reloj de pared, captura de stdout y validación del contrato JSON. El supervisor siempre devuelve un objeto de hallazgos válido y mata el grupo de procesos Chrome si vence el plazo. Sustituir en los sitios de llamada `node .pipeline/check-tracking.mjs` por `python3 .pipeline/check-tracking-deadline.py`.
@@ -82,7 +207,8 @@ if __name__ == "__main__":
     main()
 ```
 
-## [PENDIENTE] proceso — Resolver todas las ramas automáticas antiguas antes de abrir o adoptar otra   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] proceso — Resolver todas las ramas automáticas antiguas antes de abrir o adoptar otra   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** cola explícita en FASE 2 + inventario resuelto (6 fusionadas borradas, 2 supersedidas respaldadas en origin).
 **Problema:** La FASE 2 habla de una rama abandonada en singular y permite “trabaja SOBRE esa rama”, pero no define qué hacer cuando hay varias ni obliga a inventariarlas todas. El sistema adoptó la más reciente y dejó dos ramas de julio invisibles al flujo diario durante más de un mes.
 **Evidencia:** El brief del 2026-09-02 reporta **3 ramas automáticas no fusionadas**: `auto/crecer-20260727-183544` y `auto/diario-20260726-1826`, ambas con 38 días, y `auto/diario-20260818-1825`, con 10 días. La FASE 2 actual solo ordena mirar `auto/diario-*`, por lo que ni siquiera incluye `auto/crecer-*`.
 **Propuesta:** Reemplazar el bloque de adopción de FASE 2 por una cola explícita, antigua primero, que incluya ambos prefijos, prohíba crear otra rama mientras exista una antigua y exija clasificar cada una como fusionable, supersedida o conflictiva. Nunca borrar automáticamente: una rama supersedida queda reportada para decisión humana.
@@ -100,7 +226,8 @@ Mientras quede una rama B/C, no abras trabajo nuevo: el sistema debe hacer visib
 Incluye en el parte el número y nombre de TODAS las ramas automáticas no fusionadas encontradas y la clasificación dada.
 ```
 
-## [PENDIENTE] perf/proceso — No bloquear por regresión relativa local mientras el valor absoluto es bueno sin confirmar entorno estable   (impacto M · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] perf/proceso — No bloquear por regresión relativa local mientras el valor absoluto es bueno sin confirmar entorno estable   (impacto M · esfuerzo S · riesgo bajo)
+**Resuelta:** FLOOR_RED en check-perf.mjs + baseline re-medida contra producción (3-sep).
 **Problema:** La baseline local de Puppeteer compara contra una medición extraordinariamente baja y convierte variación de la Mac en regresión, aunque el LCP medido continúa muy por debajo del presupuesto absoluto. El verificador falla cerrado repetidamente sin causa atribuible y mantiene la rama bloqueada.
 **Evidencia:** `data/HISTORIAL.jsonl` registra el 2026-08-30 LCP home 516 ms vs baseline 180 ms; el 2026-08-31, 1048 ms; y el 2026-09-01, 1120 ms. Los tres superan la baseline, pero todos quedan por debajo del presupuesto absoluto de 2500 ms declarado en `.pipeline/check-perf.mjs`. El historial dice explícitamente que no hubo cambio demostrado en la home y no se rebaselinó. La rama lleva 10 días sin fusionar.
 **Propuesta:** Mantener el presupuesto absoluto como candado y tratar una regresión relativa de fuente `puppeteer` como “no confirmada” hasta repetirla en un entorno estable de CI/Lighthouse o atribuirla a un diff. No autoriza rebaseline automático ni silencia una violación absoluta.
@@ -115,7 +242,8 @@ medición Lighthouse/CI comparable confirma la regresión, o (c) el diff de la r
 y la degradación se reproduce. Ausencia de medición sigue siendo verificación ciega ALTA y siempre bloquea.
 ```
 
-## [PENDIENTE] links — Ancla a redirect-stub: check 14 solo caza texto==nombre-de-servicio, la clase MÁS ANCHA (cualquier texto, ej. "Servicio 24/7") reincidió 4 veces y HOY siguen viviendo 11 instancias sin mecanizar   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] links — Ancla a redirect-stub: check 14 solo caza texto==nombre-de-servicio, la clase MÁS ANCHA (cualquier texto, ej. "Servicio 24/7") reincidió 4 veces y HOY siguen viviendo 11 instancias sin mecanizar   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** OBSOLETA: los 6 redirect-stubs se borraron el 19-ago y se reemplazaron por 301; no queda ninguno.
 **Problema:** El sitio tiene 6 páginas "redirect-stub" (`servicios/plomero/{24-7,cerca-de-mi,a-domicilio,colonias,precios,index}/index.html`, `<meta http-equiv="refresh">` + `<link rel="canonical">` al destino real) que existen solo por compatibilidad de URLs viejas. Cada vez que se descubre una página enlazando a uno de estos stubs en vez de al destino final, se corrige a mano SOLO en el lote de la corrida de ese día — nunca se mecanizó un check que cace el patrón completo. El check 14 existente (`ancla-servicio`, `check-plantilla.py` línea ~551) es estructuralmente incapaz de cerrar esto: compara el TEXTO de la ancla contra el H1 real de cada `servicios/<slug>/`, así que solo caza cuando el texto coincide con el nombre exacto de un servicio ("Instalación de sanitarios" → hub genérico). Anclas GENÉRICAS como "Servicio 24/7" o "Plomero cerca de mí" (que no calzan ningún H1) escapan por diseño — por eso la MISMA clase de bug reincidió con "patrón amplio" 4 veces (2026-07-07, -09, -14 ×2, -21) y cada vez el hallazgo dice literalmente "no mecanizado aún" / "fuera del lote de hoy".
 **Evidencia:** `data/HISTORIAL.jsonl`: `pend-links-ancla-servicio-20260709` ("16 instancias MÁS... no mecanizado, ci-gate lo mostrará"... pero ci-gate solo corre check 1/14 tal como están, no un check de stubs), `links-ancla-24-7-redirect-stub-patron-amplio-20260714` ("10 páginas más... check-plantilla check 14 no lo caza porque el texto no coincide con ningún H1"), `links-ancla-24-7-redirect-stub-amplio` (2026-07-21, "9 páginas... sin fixer genérico"). Verificado en vivo HOY (2026-07-24) con `grep -rl 'href="[^"]*plomero/24-7/\?"' --include=*.html .` (excluyendo el propio stub): **2 páginas** (`servicios/plomero-colonias-culiacan/index.html`, `partials/footer_nav.html`) siguen enlazando al stub `24-7`; `plomero/cerca-de-mi` → 2 páginas; `plomero/a-domicilio` → 2 páginas; `plomero/precios` → **5 páginas** (incluye 3 del blog) — **11 instancias vivas** de la misma clase, hoy, sin checker que las cace.
 **Propuesta:** Check nuevo (22) en `check-plantilla.py`: precomputa un mapa {ruta del stub → destino canónico} leyendo el `<link rel="canonical">` de toda página que sea `is_stub()` (ya existe esa función, usada hoy solo para excluir stubs de otros checks — nunca para cazar quién enlaza A ellos). Luego, por cada `<a href>` de cada página (sin importar el texto — cierra el hueco estructural del check 14), si el href resuelve a un stub, reporta el destino final. Cero dependencia de coincidencia de texto, así que cierra la clase completa de una vez en vez de re-descubrirla cada semana con un texto de ancla nuevo.
@@ -177,7 +305,8 @@ Nota aparte (no bloqueante, mismo hallazgo): `partials/footer_nav.html` — que 
 
 ---
 
-## [PENDIENTE] a11y/movil — Denylist de color prohibido en `.breadcrumb-item` — reincidió 3 veces (07-09/07-13/07-14) por vivir en `<style>` inline por-página, y `.breadcrumb-item.active` sigue fallando AA HOY en las 3 hojas compartidas   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] a11y/movil — Denylist de color prohibido en `.breadcrumb-item` — reincidió 3 veces (07-09/07-13/07-14) por vivir en `<style>` inline por-página, y `.breadcrumb-item.active` sigue fallando AA HOY en las 3 hojas compartidas   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** RESUELTA por la consolidación a hoja única: .breadcrumb-item a=#C2410C y .active=#475569 pasan AA; 0 color prohibido inline.
 **Problema:** El contraste del breadcrumb es la regresión MÁS reincidente del sistema. `.breadcrumb-item a{color:#E36414}` (3.26-3.27:1, falla AA 4.5:1) reapareció el 2026-07-09, el 2026-07-13 (la propia corrida lo diagnosticó: "el fix nunca se centralizó — vivía duplicado en el `<style>` inline de cada página y en ninguna parte del CSS compartido") y de nuevo el 2026-07-14 en 2 páginas más. Cada vez el "fix" fue manual y por-página, así que la siguiente página nueva/editada podía volver a traer el valor viejo. Además, verificado en vivo HOY (2026-07-15) contra los 3 CSS servidos: **`.breadcrumb-item.active{color:#6c757d}` SIGUE en la hoja compartida** (4.44-4.45:1, bajo AA 4.5:1) — la propia corrida del 07-14 lo detectó y lo dejó explícitamente `"arreglado": false, "pendiente": true` por ser "un cambio site-wide fuera de alcance de una sola corrida", y nunca se promovió a `BACKLOG.jsonl` (no aparece ahí) — quedó huérfano. Ninguno de los dos vive hoy en `check-plantilla.py`: el propio docstring del archivo dice explícitamente "Lo subjetivo (contraste...) NO está aquí" — pero esto YA NO es subjetivo, es un par (selector, color prohibido) conocido y medido 5 veces.
 **Evidencia:** `data/HISTORIAL.jsonl` — `a11y-breadcrumb-color-inline-20260709`, `a11y-regresion-breadcrumb-color-20260713`, `a11y-breadcrumb-color-regresion-20260714` (las 3 con `#E36414`→`#C2410C`), `a11y-breadcrumb-active-contraste-marginal-20260714` (`"pendiente": true`, sin fix). Verificado en vivo: `grep -o '\.breadcrumb-item\.active[^}]*}' styles.css styles.min.css styles.7f293647.css` → `.breadcrumb-item.active{color:#6c757d}` en las 3, HOY. `grep "6c757d" data/BACKLOG.jsonl` → 0 resultados (nunca se abrió tarea).
 **Propuesta:** (1) Checker nuevo (check 19 de `check-plantilla.py`) con una DENYLIST explícita de `(selector, color prohibido, color correcto)` — arranca con los 2 pares ya medidos 5 veces — que marca cualquier página cuyo `<style>` inline traiga el valor prohibido, MÁS un check global que vigila las 3 hojas compartidas (así el `.breadcrumb-item.active` actual sale ALTA/MEDIA en la próxima corrida en vez de seguir invisible). (2) Auto-fixer gemelo (página + asset) que corrige automáticamente al valor correcto, reutilizando el bump de `?v=`/sw.js ya existente para el asset fixer. Ámbito deliberadamente ESTRECHO (solo los 2 pares ya evidenciados) — no es contraste general, es cerrar una clase de bug específica y ya medida.
@@ -280,7 +409,8 @@ def _fix_denylist_color(h):
 +- [2026-06-11, consolidada 2026-06-19/2026-07-13/2026-07-14/2026-07-15] CSS/PARIDAD: las 3 hojas (styles.css=fuente no servida; min/hash=servidas) deben tener las MISMAS reglas — `check-css-paridad.py`. Un fix que solo vive en un `<style>` inline por-página REGRESA al perder esa página su copia local (breadcrumb #E36414→#C2410C reincidió 3 veces, la última 2026-07-14; `.breadcrumb-item.active` #6c757d sigue fallando AA hoy) — centralizar SIEMPRE en las 3 hojas + bump ?v=/sw.js. AUTO en `check-plantilla.py` check 19 (`check_denylist_color_css` + inline) + auto-fixer `denylist-color-inline`/`denylist-color-css`. Severidad: media.
 ```
 
-## [PENDIENTE] costo/cuota — `recolecta-señales.py` marca "PICO" usando `total_tokens` crudo, dominado por `cache_read` barato — la alarma de costo no mide costo real   (impacto M · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] costo/cuota — `recolecta-señales.py` marca "PICO" usando `total_tokens` crudo, dominado por `cache_read` barato — la alarma de costo no mide costo real   (impacto M · esfuerzo S · riesgo bajo)
+**Resuelta:** el PICO ahora se dispara por usd_equiv_api_ref, no por total_tokens.
 **Problema:** `sec_costos()` (línea 68) dispara "⚠️ PICO" cuando `total_tokens` de la última corrida supera 1.5× la mediana — pero `total_tokens` sale de sumar `input+output+cache_write+cache_read`, y `cache_read` (lectura de caché, ~10% del precio de un token normal) domina el total: en la corrida del 2026-07-14, de 148.1M tokens totales, 144.0M (97%) fueron `cache_read`. El propio `costos.jsonl` YA calcula `usd_equiv_api_ref` (el $ real, con precio por-modelo desde el 2026-07-09) en cada entrada, pero `sec_costos()` no lo usa para la alarma — así que el brief puede gritar "PICO" en una corrida barata (mucho cache, poco $ nuevo) y quedarse callado en una corrida cara con menos tokens pero de tipos caros. El propio brief de HOY lo confirma: marcó PICO en la corrida del 07-14 (148.1M tokens) mientras la corrida del 07-13 gastó MÁS $ real ($119.19 vs $77.23) con tokens totales similares (284.3M) y ni siquiera es la última.
 **Evidencia:** `.pipeline/costos.jsonl` línea del 2026-07-14: `"cache_read_tokens":144043570` de `"total_tokens":148072897` (97.2%) con `"usd_equiv_api_ref":77.23`. Línea del 2026-07-13: `"usd_equiv_api_ref":119.19` (54% más caro en $ real) pero NO fue la que disparó el PICO de hoy porque ya no es la última corrida. `.pipeline/recolecta-señales.py` línea 62-69: `tot = [x.get("total_tokens", 0) for x in c]` y la comparación en línea 68 usa `tot`, nunca `usd_equiv_api_ref`.
 **Propuesta:** Cambiar el disparador de PICO de `total_tokens` a `usd_equiv_api_ref` (el $ real que el propio pipeline ya calcula por-modelo desde 2026-07-09), y anotar cuando tokens-altos NO se traduce en $-alto (para no perder la señal de "corrida con mucho cache" como dato informativo, solo dejar de tratarla como alarma).
@@ -359,7 +489,8 @@ def sec_costos():
 +- Si necesitas estado de indexación/sitemap de páginas clave, puedes ejecutar `export PATH="/opt/homebrew/bin:$PATH" && node mcp-local-seo/gsc-index.mjs` (el `export PATH` es necesario: el shell de esta tarea a veces no hereda /opt/homebrew/bin — incidente 2026-07-10).
 ```
 
-## [PENDIENTE] contenido — Catálogo `Service` en JSON-LD con `description` duplicada entre servicios distintos — REGLAS.md lo marca ALTA y dice literalmente "Sin checker aún"   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] contenido — Catálogo `Service` en JSON-LD con `description` duplicada entre servicios distintos — REGLAS.md lo marca ALTA y dice literalmente "Sin checker aún"   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** check 23 en check-plantilla.py.
 **Problema:** REGLAS.md línea 51 (2026-07-08, CONTENIDO/SCHEMA, severidad ALTA) documenta un bug real: "un catálogo JSON-LD de varios `Service` embebido puede tener su `description` sobreescrita en bloque por error (todas las entidades con la del anfitrión)... Sin checker aún — revisar a mano el `@graph`." Es la única regla de severidad ALTA en todo REGLAS.md sin ningún checker anotado (todas sus vecinas dicen `AUTO en check-X.py`). Si una página nueva o un batch de edición vuelve a sobreescribir `description` en bloque (mismo patrón que ya pasó una vez), nada lo atrapa hasta revisión manual del `@graph`.
 **Evidencia:** `grep -n "^- \[" docs/REGLAS.md | grep -vi AUTO` → línea 51 es la única de severidad `alta` sin checker (comparado con líneas 38/39/44/53/54 que sí son alta y sí tienen `AUTO`/mecanismo). Verificado en vivo con el script del draft contra las páginas actuales: **0 hallazgos hoy** (no hay regresión activa) — el valor es CERRAR la puerta, igual que el proceso ya usado para `twitter:url` (propuesta de arriba, mismo patrón "regla ya escrita, checker cierra la puerta").
 **Propuesta:** Añadir un check GLOBAL a `check-plantilla.py` que, por cada bloque JSON-LD con `@graph`, agrupe las entidades `@type:"Service"` por su `description` exacta; si ≥2 servicios con `name` DISTINTO comparten la MISMA `description`, marca ALTA (coincide con la severidad ya asignada en REGLAS.md). Cero falsos positivos esperados: dos servicios reales nunca deberían tener el mismo texto de descripción palabra por palabra.
@@ -456,7 +587,8 @@ def check_twitter_url_canonical():
 +    check_twitter_url_canonical()
 ```
 
-## [PENDIENTE] seo — Coordenada GPS GENÉRICA del centro en páginas de zona/colonia — la regla existe desde 2026-06-11 pero JAMÁS se mecanizó (impacto A · esfuerzo M · riesgo bajo)
+## [HECHO 2026-09-04] seo — Coordenada GPS GENÉRICA del centro en páginas de zona/colonia — la regla existe desde 2026-06-11 pero JAMÁS se mecanizó (impacto A · esfuerzo M · riesgo bajo)
+**Resuelta:** check 24 en check-plantilla.py + 5 páginas de zona con coordenada real y única.
 **Problema:** REGLAS.md tiene la regla desde el 2026-06-11 ("cada página local debe tener coordenadas GPS reales y únicas, no la coordenada genérica del centro repetida — es señal de doorway"), pero es de las POCAS reglas de esa lista SIN `AUTO en check-X.py` anotado. Reincidió 3 veces (2026-06-30, 2026-07-07, 2026-07-08) y sigue sin arreglar HOY: verificado en vivo, las 4 páginas de zona (`plomero-zona-norte/sur/oriente/poniente-culiacan`) + `plomero-centro-culiacan` comparten LITERALMENTE la misma `geo.position`/`ICBM` (24.7903;-107.3878), y la colonia `barrio-estacion` tiene esa misma latitud/longitud genérica en su JSON-LD (mientras sus 24 colonias hermanas SÍ tienen coordenadas únicas: amorada=24.8352, barrancos=24.7544, centro=24.8093...).
 **Evidencia:** `grep -rl "24.7903" servicios/ | grep -E "zona-(norte|sur|oriente|poniente)|centro-culiacan|colonia"` → 6 páginas HOY (verificado con el script del draft, 0 falsos positivos: se acotó a páginas que EXPLÍCITAMENTE representan una zona/colonia, no a páginas de servicio city-wide como `destape-de-drenajes` donde un centro genérico es defendible).
 **Propuesta:** Añadir un check GLOBAL que, solo para páginas cuyo slug indica una zona/colonia específica (`zona-{norte,sur,oriente,poniente}-culiacan`, `centro-culiacan`, o bajo `/plomero-colonias-culiacan/`), marque MEDIA si `geo.position`/`ICBM`/JSON-LD `latitude`+`longitude` coinciden con el valor genérico conocido del centro (24.7903,-107.3878).
@@ -515,7 +647,8 @@ def check_geo_generica():
 +    check_geo_generica()
 ```
 
-## [PENDIENTE] contenido — Garantía contradictoria DENTRO de la misma página — la regla agrupa "garantía, precio o rating" pero el checker (check 15) solo cubre rating   (impacto M · esfuerzo S · riesgo medio — heurística, requiere revisión humana antes de tocar copy)
+## [HECHO 2026-09-04] contenido — Garantía contradictoria DENTRO de la misma página — la regla agrupa "garantía, precio o rating" pero el checker (check 15) solo cubre rating   (impacto M · esfuerzo S · riesgo medio — heurística, requiere revisión humana antes de tocar copy)
+**Resuelta:** check 25 en check-plantilla.py, agrupado POR SUJETO (0 falsos positivos).
 **Problema:** REGLAS.md (2026-07-07, ampliada 2026-07-09) dice explícitamente "garantía, **precio** o aggregateRating no puede contradecirse... AUTO en check-plantilla.py check 15 (rating, site-wide)" — pero el check 15 real (línea 653, `check_rating_consistency`) SOLO mira `ratingValue`/`reviewCount`. Garantía quedó fuera pese a estar nombrada en la misma regla, y reincidió 3 veces DESPUÉS de escrita la regla (2026-07-07, 07-08, 07-09).
 **Evidencia:** Corrida en vivo del regex del draft contra las 86 páginas: **5 páginas HOY** con dos duraciones de garantía DISTINTAS en el mismo `<body>` — `precios/index.html` (30 días vs 3 meses), `servicios/desazolve-de-drenajes/index.html` y `servicios/plomero-cerca-de-mi/index.html` (6 meses vs 1 año), y 2 posts de blog (3 vs 6 meses; 6 vs 24 meses). El regex EXCLUYE a propósito "garantía del fabricante"/marcas (Noritz, Rheem) para no confundir la garantía del PRODUCTO con la del SERVICIO — sin ese filtro salían 10 falsos positivos en vez de 5.
 **Propuesta:** Checker heurístico de severidad BAJA (no ALTA: puede haber garantías legítimamente distintas por línea de servicio) que solo AVISA — el `fix_sugerido` pide confirmar a mano antes de unificar, igual que ya hace la regla 2026-07-08 del catálogo JSON-LD ("revisar a mano").

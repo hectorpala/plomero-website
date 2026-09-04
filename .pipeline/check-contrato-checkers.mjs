@@ -12,7 +12,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 const dir = path.dirname(fileURLToPath(import.meta.url));
 const NOT_PAGE = new Set(["check-infra.mjs", "check-secretos.sh", "check-contrato-checkers.mjs"]);
-const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-e2e.mjs"]); // tocan red: omitir en pre-push
+const HEAVY = new Set(["check-produccion.mjs", "check-perf.mjs", "check-tracking.mjs", "check-tracking-deadline.py", "check-e2e.mjs"]); // tocan red: omitir en pre-push
 const esUtilidad = (f) => {
   try { return fs.readFileSync(`${dir}/${f}`, "utf8").slice(0, 800).includes("infra:utilidad-no-sensor"); }
   catch { return false; }

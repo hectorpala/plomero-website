@@ -87,14 +87,31 @@ def sec_costos():
     print("## COSTO/CUOTA — uso por corrida (%d corridas registradas)" % len(c))
     if not c:
         print("  (sin datos)\n"); return
+    # El PICO se mide en DINERO, no en tokens crudos. `total_tokens` suma
+    # input+output+cache_write+cache_read, y cache_read (~10% del precio de un token
+    # normal) domina el total: el 2026-07-14, 144.0M de 148.1M tokens (97%) fueron
+    # cache_read. Con el disparador viejo, una corrida barata con mucha caché daba
+    # ALARMA y una corrida 54% más cara en dólares pasaba callada. El propio
+    # costos.jsonl ya calcula `usd_equiv_api_ref` por-modelo desde 2026-07-09.
     tot = [x.get("total_tokens", 0) for x in c]
+    usd = [x.get("usd_equiv_api_ref", 0) for x in c]
     ult = c[-1]
-    mediana = sorted(tot)[len(tot) // 2]
-    print("  Últimas corridas (M tokens): " + " · ".join("%.1f" % (t / 1e6) for t in tot[-6:]))
-    print("  Mediana: %.1fM · última: %.1fM (%s)" % (
-        mediana / 1e6, ult.get("total_tokens", 0) / 1e6, ult.get("etiqueta", "")))
-    if ult.get("total_tokens", 0) > 1.5 * mediana and mediana > 0:
-        print("  ⚠️ PICO: la última corrida gastó >1.5× la mediana → ¿qué la disparó?")
+    mediana_tok = sorted(tot)[len(tot) // 2]
+    usd_validos = [u for u in usd if u]
+    mediana_usd = sorted(usd_validos)[len(usd_validos) // 2] if usd_validos else 0
+    ult_usd = ult.get("usd_equiv_api_ref", 0)
+    print("  Últimas corridas (USD ref): " + " · ".join("%.2f" % u for u in usd[-6:]))
+    print("  Mediana: $%.2f · última: $%.2f (%s)" % (mediana_usd, ult_usd, ult.get("etiqueta", "")))
+    print("  Tokens (informativo, M): " + " · ".join("%.1f" % (t / 1e6) for t in tot[-6:]))
+    if mediana_usd > 0 and ult_usd > 1.5 * mediana_usd:
+        print("  ⚠️ PICO DE COSTO: la última corrida gastó >1.5× la mediana en dólares → ¿qué la disparó?")
+    elif not usd_validos:
+        print("  ⚠️ sin `usd_equiv_api_ref` en el registro: no se puede medir el costo real")
+    # Tokens altos SIN costo alto sigue siendo dato útil (corrida con mucha caché),
+    # pero es informativo, no alarma.
+    if mediana_tok > 0 and ult.get("total_tokens", 0) > 1.5 * mediana_tok and not (
+            mediana_usd > 0 and ult_usd > 1.5 * mediana_usd):
+        print("  ℹ️ tokens por encima de la mediana pero SIN pico de costo (corrida dominada por cache_read)")
     print()
 
 

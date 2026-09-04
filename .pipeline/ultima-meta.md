@@ -1,11 +1,11 @@
-# Resumen del crítico del sistema — 2026-09-02
+# Resumen del crítico del sistema — 2026-09-04
 
-Dejé **3 propuestas nuevas**, todas con el cambio exacto ya redactado.
+Dejé **2 propuestas nuevas**, ambas con el cambio exacto ya redactado.
 
-Top 3 por impacto:
+Top 3 por impacto (incluye la deuda pendiente más importante que sigue vigente):
 
-1. **Tracking:** envolver el checker con un deadline externo para que siempre entregue JSON y no vuelva a bloquear a ciegas.
-2. **Ramas automáticas:** obligar al agente a inventariar y resolver las 3 ramas antiguas antes de abrir otra.
-3. **Rendimiento:** separar una regresión local no confirmada del incumplimiento real del presupuesto, sin rebaseline automático.
+1. **Observabilidad:** convertir el contador opaco de 39 regresiones en firmas accionables, separando 24 resueltas, 12 pendientes y 3 sin estado.
+2. **Ramas automáticas:** sigue siendo prioritario resolver las 2 ramas de julio que llevan 40 días sin fusionar antes de abrir trabajo nuevo.
+3. **Memoria/costo:** consolidar REGLAS desde la zona amarilla de 3,600 tokens; hoy quedan apenas ~19 tokens estimados antes del límite duro.
 
 Todas están listas para merge en `PROPUESTAS.md`.

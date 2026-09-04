@@ -52,6 +52,12 @@ Reglas mecanicas (todas ancladas en REGLAS.md):
                     exit-intent (media).                       (movil-menu-sin-mainjs-20260718)
  21. seo    (media) FAQPage JSON-LD con distinto numero de preguntas que el FAQ visible
                     (.faq-item) — pierde elegibilidad a rich-results.  (faq-mismatch-20260721)
+ 23. cont.  (alta)  Catalogo JSON-LD @graph con >=2 Service de nombre DISTINTO y la MISMA
+                    description (sobreescritura en bloque).       (REGLAS.md 2026-07-08)
+ 24. seo    (media) Pagina de zona/colonia con la coordenada GENERICA del centro
+                    (24.7903,-107.3878) = senal de doorway.       (REGLAS.md 2026-06-11)
+ 25. cont.  (baja)  Dos duraciones de garantia distintas para el MISMO sujeto en la misma
+                    pagina.        (cont-2026070701, garantia-tinaco-cross-pagina)
 """
 import os
 import re
@@ -964,6 +970,259 @@ def check_rating_consistency():
                 "Unificar al valor mayoritario ya existente (deriva, no inventes) salvo que el dueño confirme un cambio real de rating.")
 
 
+# ================================================================ CHECK 23 global: catalogo Service con description duplicada
+# Caso historico REGLAS.md 2026-07-08 (severidad ALTA, la UNICA regla alta que seguia
+# anotada "Sin checker aun -- revisar a mano el @graph"): un catalogo JSON-LD de varios
+# Service embebido en @graph tuvo su description sobreescrita EN BLOQUE por error y TODAS
+# las entidades quedaron con la descripcion del anfitrion en vez de la propia. Hoy da 0:
+# el valor es cerrar la puerta a que el patron vuelva por un batch de edicion.
+def check_service_catalog_description_dup():
+    for fpath in collect_pages():
+        t = read(fpath)
+        if is_stub(t):
+            continue
+        for m in re.finditer(
+                r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+                t, re.S | re.I):
+            try:
+                data = json.loads(m.group(1))
+            except Exception:
+                continue  # JSON-LD invalido: lo reporta otro checker, aqui no opinamos
+            graph = data.get("@graph") if isinstance(data, dict) else None
+            if not isinstance(graph, list):
+                continue
+            # dict ordenado por insercion -> recorrido determinista (no set, no listdir)
+            por_desc = {}
+            for item in graph:
+                if not isinstance(item, dict):
+                    continue
+                tipos = item.get("@type")
+                tipos = tipos if isinstance(tipos, list) else [tipos]
+                if "Service" not in tipos:
+                    continue
+                nombre, desc = item.get("name"), item.get("description")
+                if isinstance(nombre, str) and isinstance(desc, str) and nombre and desc:
+                    por_desc.setdefault(desc, [])
+                    if nombre not in por_desc[desc]:
+                        por_desc[desc].append(nombre)
+            for desc in sorted(por_desc):
+                nombres = sorted(por_desc[desc])
+                if len(nombres) < 2:
+                    continue
+                add("alta", rel(fpath), "contenido",
+                    "Catalogo Service en JSON-LD: %d servicios con nombre DISTINTO (%s) comparten "
+                    "la MISMA description ('%s...') -- patron de sobreescritura en bloque "
+                    "(REGLAS.md 2026-07-08)" % (len(nombres), ", ".join(nombres[:4]), desc[:60]),
+                    "Restaurar la description PROPIA de cada Service (revisar el @graph a mano o el "
+                    "generador que lo produjo); ninguna debe copiar la del anfitrion ni la de otro "
+                    "servicio, y su garantia/precio debe coincidir con su pagina dedicada.")
+
+
+# ================================================================ CHECK 24 global: coordenada GPS generica en pagina de zona/colonia
+# REGLAS.md 2026-06-11 (ampliada 07-13): una pagina LOCAL (zona o colonia) necesita GPS REAL
+# y UNICO; la coordenada generica del centro repetida es senal de doorway. Reincidio 3 veces
+# (20260630 / 20260707 / 20260708) y la regla nunca se mecanizo. OJO: la misma regla dice que
+# en una pagina de SERVICIO de toda la ciudad la coordenada del centro es LEGITIMA (mismo
+# negocio, una sola direccion), por eso el check se acota por slug a zona/colonia concreta.
+CENTRO_LAT = 24.7903
+CENTRO_LON = -107.3878
+GEO_TOL = 0.0005  # ~55 m: tolera reescrituras de formato/decimales, no una coordenada real distinta
+
+_RE_PAGINA_LOCAL = re.compile(
+    r'(?:^|/)servicios/plomero-(?:zona-(?:norte|sur|oriente|poniente)|centro)-culiacan/'
+    r'|(?:^|/)servicios/plomero-colonias-culiacan/[^/]+/')
+
+
+def _mismo_punto(lat, lon):
+    return abs(lat - CENTRO_LAT) <= GEO_TOL and abs(lon - CENTRO_LON) <= GEO_TOL
+
+
+def _pareja_coords(valor):
+    """'24.7903;-107.3878' / '24.7903, -107.3878' -> (lat, lon) o None."""
+    nums = re.findall(r'-?\d+(?:\.\d+)?', valor)
+    if len(nums) < 2:
+        return None
+    try:
+        return float(nums[0]), float(nums[1])
+    except ValueError:
+        return None
+
+
+def check_geo_generica():
+    for fpath in collect_pages():
+        r = rel(fpath)
+        if not _RE_PAGINA_LOCAL.search(r):
+            continue  # pagina de servicio city-wide: el centro generico es legitimo
+        t = read(fpath)
+        if is_stub(t) or has_noindex(t):
+            continue
+        fuentes = []  # orden fijo (meta, meta, json-ld) -> salida determinista
+        for nombre in ("geo.position", "ICBM"):
+            mm = re.search(r'<meta[^>]*name=["\']%s["\'][^>]*content=["\']([^"\']+)["\']'
+                           % re.escape(nombre), t, re.I)
+            if not mm:
+                continue
+            par = _pareja_coords(mm.group(1))
+            if par and _mismo_punto(*par):
+                fuentes.append("meta %s" % nombre)
+        mlat = re.search(r'"latitude"\s*:\s*"?(-?\d+(?:\.\d+)?)"?', t)
+        mlon = re.search(r'"longitude"\s*:\s*"?(-?\d+(?:\.\d+)?)"?', t)
+        if mlat and mlon and _mismo_punto(float(mlat.group(1)), float(mlon.group(1))):
+            fuentes.append("JSON-LD latitude/longitude")
+        if fuentes:
+            add("media", r, "seo",
+                "Coordenada GENERICA del centro de Culiacan (%s,%s) en %s -- esta pagina "
+                "representa una zona/colonia concreta y debe llevar su GPS REAL y UNICO "
+                "(generica repetida = senal de doorway, REGLAS.md 2026-06-11)"
+                % (CENTRO_LAT, CENTRO_LON, " + ".join(fuentes)),
+                "Poner la coordenada REAL del area que atiende esta pagina en meta "
+                "geo.position + meta ICBM + JSON-LD GeoCoordinates (las 3 con el mismo punto). "
+                "Las colonias hermanas ya tienen coordenadas propias: copiar ese criterio, no "
+                "la del centro.")
+
+
+# ================================================================ CHECK 25 global: garantia contradictoria DENTRO de la misma pagina
+# Casos historicos (data/HISTORIAL.jsonl): cont-2026070701-garantia-contradictoria (sanitarios
+# decia "6 meses" en el heading y "un ano completo" abajo; mantenimiento-de-boiler tenia
+# "3 meses" en el JSON-LD FAQ y 6 meses en el FAQ visible) y garantia-tinaco-cross-pagina
+# (tinaco "6 meses" en beneficios vs "1 ano" en title/hero/FAQ). check_rating_consistency ya
+# mecanizo el rating; la garantia seguia a ojo de revisor.
+#
+# HEURISTICA CONSERVADORA -- el regex ingenuo daba 10 falsos positivos verificados a mano y
+# CERO contradicciones reales, asi que solo se marca cuando la MISMA pagina promete dos
+# duraciones distintas PARA EL MISMO SUJETO. Lo que se descarta a proposito, con su motivo:
+#   a) Garantia del FABRICANTE de una refaccion o equipo (Noritz 5-10 anos, tinaco Rotoplas,
+#      refacciones 3-12 meses) junto a la nuestra de mano de obra: sujetos distintos.
+#   b) Estandar del mercado en un post de blog ("debe tener garantia minima de 3 meses",
+#      "lo normal es..."): no es una promesa nuestra.
+#   c) Escala explicita por linea de servicio (precios/: destape 30 dias, fugas 3 meses;
+#      o "Garantia: 24 meses" en la tarjeta del paquete premium): es coherente, no
+#      contradictorio -> por eso se agrupa POR SUJETO y no por pagina.
+#   d) Rangos ("3-12 meses"): nunca son una promesa unica.
+#   e) "Mas de 15 anos instalando sanitarios ... Garantia": antiguedad, no garantia (por eso
+#      la variante "N unidad de garantia" exige el "de garantia" pegado).
+# Severidad BAJA y sin auto-fix: el fix pide confirmacion humana antes de tocar copy.
+# NOTA: es un check INTRA-pagina. La deriva CROSS-pagina (destape 30 dias vs 6 meses del
+# resto del sitio) es legitima por linea de servicio y NO se marca aqui.
+_GAR_NUM_PALABRA = {"un": 1, "una": 1, "uno": 1, "dos": 2, "tres": 3, "seis": 6, "doce": 12}
+_GAR_UNIDAD_MESES = (("dia", 1.0 / 30), ("mes", 1.0), ("ano", 12.0))
+_GAR_NUM = r'\d{1,3}|un|una|uno|dos|tres|seis|doce'
+_GAR_UNI = r'd[ií]as?|mes(?:es)?|a[nñ]os?'
+# 1) "garantia ... N unidad"   2) "N unidad de garantia" (pegado: evita "15 anos ... Garantia")
+_RE_GARANTIA = re.compile(
+    r'garant[ií]a\w*[^.<>{}]{0,45}?(?P<n1>' + _GAR_NUM + r')\s*(?P<u1>' + _GAR_UNI + r')'
+    r'|(?P<n2>' + _GAR_NUM + r')\s*(?P<u2>' + _GAR_UNI + r')\s+(?:completos?\s+)?de\s+garant[ií]a',
+    re.I)
+# Terminos que sacan la mencion del juego (garantia ajena, estandar del mercado, vida util).
+_GAR_EXCLUYE = (
+    "fabricante", "marca", "noritz", "rheem", "bosch", "rotoplas", "eternit", "nacobre",
+    "truper", "helvex", "foset", "estandar", "estándar", "lo normal", "lo habitual",
+    "debe ", "deben ", "deberia", "debería", "minima", "mínima", "minimo", "mínimo",
+    "al menos", "extendida", "durabilidad", "vida util", "vida útil", "suele", "promedio",
+    "del equipo", "del producto", "del aparato",
+)
+# Sujeto de la garantia: el servicio/pieza mas cercano en la ventana. Sin ninguno -> general.
+_GAR_VENTANA_ANTES = 200
+_GAR_VENTANA_DESPUES = 140
+_GAR_SUJETOS = (
+    ("tinaco/cisterna", ("tinaco", "cisterna")),
+    ("boiler", ("boiler", "calentador")),
+    ("sanitario", ("sanitario", "inodoro", "taza de", "wc")),
+    ("fuga", ("fuga",)),
+    ("drenaje", ("destape", "drenaje", "azolve")),
+    ("gas", ("de gas", "gas ")),
+    ("presion/bomba", ("presion", "presión", "bomba", "hidroneumat")),
+    ("bano completo", ("baño completo", "remodelacion", "remodelación")),
+)
+
+
+def _gar_a_meses(num, unidad):
+    n = _GAR_NUM_PALABRA.get(num.lower()) if not num.isdigit() else int(num)
+    if not n:
+        return None
+    u = unidad.lower().replace("í", "i").replace("ñ", "n")
+    for clave, factor in _GAR_UNIDAD_MESES:
+        if u.startswith(clave):
+            return round(n * factor, 3)
+    return None
+
+
+def _gar_sujeto(ventana, ini, fin):
+    """Sujeto = servicio/pieza MAS CERCANA a la mencion (distancia al span, no la primera
+    de la ventana): en una enumeracion pegada ("Destape: 30 dias / Fugas: 3 meses") la
+    palabra de la izquierda no debe robarse el sujeto del renglon siguiente."""
+    v = ventana.lower()
+    mejor, mejor_d = "general", _GAR_VENTANA_ANTES + 1
+    for nombre, claves in _GAR_SUJETOS:  # tupla ordenada -> desempate determinista
+        for clave in claves:
+            desde = 0
+            while True:
+                i = v.find(clave, desde)
+                if i < 0:
+                    break
+                desde = i + 1
+                d = 0 if ini <= i <= fin else (ini - i if i < ini else i - fin)
+                if d < mejor_d:
+                    mejor, mejor_d = nombre, d
+    return mejor
+
+
+def _gar_zonas(t):
+    """Texto visible + cada bloque JSON-LD por separado: una contradiccion entre el FAQ
+    marcado y el FAQ visible es justo uno de los casos historicos."""
+    zonas = [re.sub(r'\s+', ' ', texto_visible(t))]
+    for m in re.finditer(r'<script[^>]*type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
+                         t, re.S | re.I):
+        zonas.append(re.sub(r'\s+', ' ', m.group(1)))
+    return zonas
+
+
+def check_garantia_intra_pagina():
+    for fpath in collect_pages():
+        t = read(fpath)
+        if is_stub(t):
+            continue
+        por_sujeto = {}
+        for zona in _gar_zonas(t):
+            for m in _RE_GARANTIA.finditer(zona):
+                frag = m.group(0).strip()
+                a = max(0, m.start() - _GAR_VENTANA_ANTES)
+                ventana = zona[a:m.end() + _GAR_VENTANA_DESPUES]
+                bajo = ventana.lower()
+                if any(x in bajo for x in _GAR_EXCLUYE):
+                    continue
+                if re.search(r'\d\s*[-–a]\s*\d{1,3}\s*(?:' + _GAR_UNI + r')', frag, re.I):
+                    continue  # rango, no una promesa unica
+                meses = _gar_a_meses(m.group("n1") or m.group("n2"),
+                                     m.group("u1") or m.group("u2"))
+                if meses is None:
+                    continue
+                sujeto = _gar_sujeto(ventana, m.start() - a, m.end() - a)
+                por_sujeto.setdefault(sujeto, {}).setdefault(meses, frag[:70])
+        for sujeto in sorted(por_sujeto):
+            valores = por_sujeto[sujeto]
+            if len(valores) < 2:
+                continue
+            detalle = "; ".join("'%s' (%s)" % (valores[v], _gar_humano(v))
+                                for v in sorted(valores))
+            add("baja", rel(fpath), "contenido",
+                "Garantia contradictoria en la MISMA pagina para el mismo sujeto (%s): %s -- "
+                "casos historicos cont-2026070701 y garantia-tinaco-cross-pagina"
+                % (sujeto, detalle),
+                "REVISAR A MANO antes de tocar copy: si es contradiccion real, unificar al valor "
+                "que ya predomina en la pagina y en su servicio (deriva, no inventes); si son dos "
+                "garantias legitimas distintas (mano de obra vs fabricante, o dos lineas de "
+                "servicio), redactarlas de modo que el sujeto quede explicito. NO autocorregir.")
+
+
+def _gar_humano(meses):
+    if meses < 1:
+        return "%d dias" % round(meses * 30)
+    if meses % 12 == 0 and meses >= 12:
+        return "%d ano(s)" % (meses / 12)
+    return "%g meses" % meses
+
+
 # ================================================================ MAIN
 def main():
     redirects = load_redirects()
@@ -975,6 +1234,9 @@ def main():
     check_css_parity()
     check_rating_consistency()
     check_denylist_color_css()
+    check_service_catalog_description_dup()
+    check_geo_generica()
+    check_garantia_intra_pagina()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}
