@@ -22,7 +22,13 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REGLAS = os.path.join(ROOT, "docs", "REGLAS.md")
 
-MAX_TOKENS = 4000        # presupuesto total (estimado)
+MAX_TOKENS = 4000        # candado DURO: por encima de aquí, exit 1
+OBJETIVO_TOKENS = 3600   # zona amarilla: exit 2. Reservar margen ANTES de tocar el techo.
+                         # Con solo el candado duro, un check verde hoy (3,981 de 4,000 =
+                         # 19 tokens de margen el 2026-09-04) autorizaba a la FASE 9 a
+                         # añadir una regla nueva que reventaba el presupuesto a media
+                         # corrida y obligaba a consolidar en caliente. El conocimiento no
+                         # se pierde al consolidar: el relato vive en HISTORIAL.jsonl.
 MAX_RULE_CHARS = 900     # una sola regla no debería pasar de ~1-2 líneas accionables
 
 
@@ -58,6 +64,14 @@ def main():
         print("\n→ CONSOLIDA: cada regla = qué hacer + el checker que lo caza. "
               "Cuando un error ya está mecanizado, la regla se reduce a «qué + checker».")
         sys.exit(1)
+    if est_tokens > OBJETIVO_TOKENS:
+        print("🟡 ZONA AMARILLA: ~%d tokens, %d sobre el objetivo operativo de %d "
+              "(quedan %d antes del candado duro de %d)."
+              % (est_tokens, est_tokens - OBJETIVO_TOKENS, OBJETIVO_TOKENS,
+                 MAX_TOKENS - est_tokens, MAX_TOKENS))
+        print("→ CONSOLIDA ANTES de añadir una regla nueva: si esperas al candado duro, "
+              "la consolidación te toca en caliente a media corrida.")
+        sys.exit(2)
     print("✅ REGLAS.md dentro de presupuesto.")
     sys.exit(0)
 

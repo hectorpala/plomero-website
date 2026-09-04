@@ -258,8 +258,15 @@ Inicia una pasada APRENDIZ cuyo único objetivo es que el MISMO error NO se repi
 próxima vez. Para cada error corregido este día —sobre todo REGRESIONES y errores humanos de contenido—:
   a. Añade o CONSOLIDA (no dupliques) una regla de PREVENCIÓN en REGLAS.md: qué pasó, por qué, y la regla dura para
      no repetirlo. Si varias reglas se solapan, fúndelas. PRESUPUESTO (REGLAS.md se inyecta en CADA corrida y lo lee
-     cada pasada especializada — el bloat cuesta tokens y diluye atención): corre `python3 .pipeline/check-reglas.py`; si excede,
-     CONSOLIDA hasta que pase — cada regla = 1-2 líneas accionables (qué hacer + el checker que lo caza) y el relato de
+     cada pasada especializada — el bloat cuesta tokens y diluye atención): corre `python3 .pipeline/check-reglas.py`
+     y MIRA SU CÓDIGO DE SALIDA, no solo si "pasó":
+        • exit 1 (rojo, sobre 4,000) → CONSOLIDA hasta que pase. Bloquea.
+        • exit 2 (🟡 amarillo, sobre 3,600) → CONSOLIDA ANTES de añadir la regla nueva. No esperes al rojo:
+          el 2026-09-04 quedaban 19 tokens de margen y un check "verde" autorizaba a seguir añadiendo, así que
+          la consolidación caía en caliente a media corrida. Consolidar no pierde nada: el relato ya vive en
+          HISTORIAL.jsonl.
+        • exit 0 → adelante.
+     Cada regla = 1-2 líneas accionables (qué hacer + el checker que lo caza) y el relato de
      cada incidente va a HISTORIAL.jsonl, NO a REGLAS.md. Cuando un error ya está mecanizado, la regla se reduce a «qué + checker».
   b. Si el error es mecanizable, propón el CHECK que lo cazaría solo y, si es de bajo riesgo, AÑÁDELO a
      .pipeline/check-plantilla.py (o el checker que corresponda) para que de ahora en más sea un hallazgo

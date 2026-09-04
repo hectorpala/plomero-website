@@ -1048,6 +1048,34 @@ def _pareja_coords(valor):
         return None
 
 
+def check_twitter_url_valor():
+    """26. twitter:url debe VALER lo mismo que el canonical, no solo existir. (media, seo)
+
+    El check 4f solo verificaba la PRESENCIA de <meta name="twitter:url"> en blog/colonia,
+    nunca su valor. check-indexabilidad.py sí compara og:url contra el canonical, pero
+    nadie lo hacía para twitter:url, así que la MISMA clase de bug reincidió 3 veces
+    DESPUÉS de existir el check de presencia: 2026-06-20, 2026-07-08 y 2026-07-09
+    (instalacion-de-boiler, emergencia-24-7 y reparacion-de-boiler apuntaban al HOME en
+    vez de a su propia página). Un twitter:url que apunta al home hace que al compartir
+    cualquier página se previsualice la portada.
+    """
+    for fpath in collect_pages():
+        t = read(fpath)
+        if is_stub(t) or has_noindex(t):
+            continue
+        mc = re.search(r'<link[^>]*rel=["\']canonical["\'][^>]*href=["\']([^"\']+)["\']', t, re.I)
+        mt = re.search(r'<meta[^>]*name=["\']twitter:url["\'][^>]*content=["\']([^"\']+)["\']', t, re.I)
+        if not mc or not mt:
+            continue  # la PRESENCIA ya la cubre el check 4f; aquí solo el VALOR
+        canon, tw = mc.group(1).strip(), mt.group(1).strip()
+        if canon.rstrip("/") == tw.rstrip("/"):
+            continue
+        add("media", rel(fpath), "seo",
+            "twitter:url (%s) NO coincide con el canonical (%s) — al compartir la página "
+            "se previsualiza otra URL" % (tw, canon),
+            "Poner twitter:url igual al canonical de ESA página (no el home)")
+
+
 def check_geo_generica():
     for fpath in collect_pages():
         r = rel(fpath)
@@ -1237,6 +1265,7 @@ def main():
     check_service_catalog_description_dup()
     check_geo_generica()
     check_garantia_intra_pagina()
+    check_twitter_url_valor()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}

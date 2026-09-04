@@ -18,7 +18,8 @@ Cuando apruebes una, cambia `[PENDIENTE]` → `[HECHO <fecha>]` (o bórrala).
 
 ---
 
-## [PENDIENTE] observabilidad — Agrupar regresiones accionables y separar resueltas, pendientes y ruido   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] observabilidad — Agrupar regresiones accionables y separar resueltas, pendientes y ruido   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** detecta solo en id/descripcion/hallazgo, normaliza la firma y separa resueltas/pendientes/sin estado, con las firmas reincidentes primero.
 **Problema:** El brief dice “39 regresiones”, pero ese total se obtiene buscando la subcadena `regres` en el JSON completo. Mezcla incidentes ya arreglados, pendientes reales y registros que solo mencionan la palabra en una regla o descripción; además no agrupa reincidencias por firma. Así el crítico recibe un número alarmante pero no puede saber qué clase sigue abierta ni cuántas veces reapareció.
 **Evidencia:** En las 39 filas contadas el 2026-09-04, **24 ya están arregladas**, **12 están pendientes** y **3 no tienen ninguno de esos estados**. Aun dentro de las pendientes hay firmas repetidas que el brief oculta: `tracking-verificacion-ciega-sin-stdout` aparece 3 veces y `perf-regresion-baseline` aparece 4 veces entre 2026-08-30 y 2026-09-02. El algoritmo actual es literalmente `"regres" in json.dumps(e).lower()`.
 **Propuesta:** Reemplazar el contador opaco por una clasificación explícita. Detectar regresión solo en `id`, `descripcion` o `hallazgo`; normalizar la firma quitando fecha/sufijo numérico; mostrar por separado resueltas, pendientes y sin estado; y listar primero las firmas pendientes recurrentes con fechas. Conservar el ranking general de categorías como contexto, pero sin insinuar que el acumulado histórico entero carece de checker.
@@ -85,7 +86,8 @@ def sec_historial():
 import re
 ```
 
-## [PENDIENTE] costo/memoria — Reservar margen en REGLAS antes de que el guard llegue al límite duro   (impacto M · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] costo/memoria — Reservar margen en REGLAS antes de que el guard llegue al límite duro   (impacto M · esfuerzo S · riesgo bajo)
+**Resuelta:** check-reglas.py devuelve exit 2 en zona amarilla (3,600) y la FASE 9 ahora consolida con código 2, no solo con el candado duro.
 **Problema:** `check-reglas.py` solo falla cuando la estimación supera 4,000 tokens. En FASE 9, una regla nueva puede consumir el escaso margen y obligar a una consolidación reactiva dentro de la misma corrida; el brief ya avisa desde 3,600, pero ese aviso no cambia el comportamiento del agente.
 **Evidencia:** El brief del 2026-09-04 estima ~3,996 tokens. La medición directa del guard da 15,924 caracteres / ~3,981 tokens contra un máximo de 4,000: quedan **19 tokens estimados de margen**. FASE 9 actualmente ordena consolidar únicamente “si excede”, por lo que un check verde hoy autoriza seguir añadiendo memoria.
 **Propuesta:** Mantener 4,000 como candado duro, añadir 3,600 como objetivo operativo y hacer que el guard devuelva código 2 en zona amarilla. FASE 9 debe consolidar también con código 2 antes de añadir una regla; no se pierde conocimiento porque el relato permanece en `HISTORIAL.jsonl`.
@@ -548,7 +550,8 @@ def check_service_catalog_description_dup():
 +    check_service_catalog_description_dup()
 ```
 
-## [PENDIENTE] seo — `twitter:url` se valida solo por PRESENCIA, no por VALOR (reincidió 3 veces con el HOME en vez del canonical)   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] seo — `twitter:url` se valida solo por PRESENCIA, no por VALOR (reincidió 3 veces con el HOME en vez del canonical)   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** check 26 en check-plantilla.py compara twitter:url contra el canonical; probado rompiendo una página a propósito.
 **Problema:** El check 4f de `check-plantilla.py` (línea 380) solo verifica que `<meta name="twitter:url">` EXISTA en páginas de blog/colonia — nunca compara su VALOR contra el canonical. `check-indexabilidad.py` sí hace esa comparación para `og:url`, pero nadie la hace para `twitter:url`. Resultado: la misma clase de bug (twitter:url apuntando al HOME en vez de la página) reincidió DESPUÉS de que el check de presencia ya existía.
 **Evidencia:** HISTORIAL.jsonl: 2026-06-20 "twitter:url apuntaba a la home... viola canon[ical]"; 2026-07-08 "twitter:url apuntaba a la home en vez del canonical de la página"; 2026-07-09 "instalacion-de-boiler: twitter:url apuntaba al home en vez del canonical. emergencia-24-7 y reparacion-de-boiler[igual]" — 3 recurrencias, la última DOS páginas a la vez, todas DESPUÉS del check de presencia (mecanizado 2026-06-27 por bk-546d0a06). Verificado en vivo con el script de abajo contra las 86 páginas actuales: 0 hallazgos ahora mismo (ya las arreglaron a mano) — el valor de este checker es CERRAR la puerta para que no sea necesaria una 4ª ronda manual.
 **Propuesta:** Añadir un check GLOBAL (paralelo a `check_rating_consistency`) que, para toda página indexable con `<link rel="canonical">`, compare el `content` de `<meta name="twitter:url">` (si existe) contra el canonical y marque MEDIA si difieren.
@@ -713,7 +716,8 @@ def check_garantia_intra_pagina():
 +    check_garantia_intra_pagina()
 ```
 
-## [PENDIENTE] proceso — Backlog `requiere_humano` con una tarea ZOMBIE: `bk-12b83ae9` (reauth GSC) sigue abierta pese a estar resuelta desde el 2026-06-26   (impacto B · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] proceso — Backlog `requiere_humano` con una tarea ZOMBIE: `bk-12b83ae9` (reauth GSC) sigue abierta pese a estar resuelta desde el 2026-06-26   (impacto B · esfuerzo S · riesgo bajo)
+**Resuelta:** YA ESTABA RESUELTA: bk-12b83ae9 quedó en estado hecho y cerrada el 2026-07-10.
 **Problema:** `bk-12b83ae9` ("Re-autenticar mcp-local-seo/gsc-token.json") sigue `estado: requiere_humano` en `data/BACKLOG.jsonl`, pero el problema real se resolvió hace 14 días SIN necesidad de re-autenticación: HISTORIAL.jsonl 2026-06-26 registra "GSC REVIVIO via MCP" copiando credenciales vivas de `~/gsc-mcp/` sobre `mcp-local-seo/{client_secret,gsc-token}.json" (sin re-login al cliente OAuth muerto). `check-infra.mjs` ya devuelve `{"hallazgos":[]}` para el sensor GSC. La tarea es ruido puro: cada corrida que lea el backlog (y el brief de `recolecta-señales.py`) sigue reportándola como pendiente de decisión humana cuando no hay decisión que tomar.
 **Evidencia:** `data/BACKLOG.jsonl` bk-12b83ae9 creada 2026-06-22, `cerrado: null` HOY (2026-07-10, 18 días abierta); HISTORIAL 2026-06-26 documenta la resolución real; memoria del propio pipeline (`mcp-local-seo-token.md`) confirma "Resuelto 2026-06-26 SIN re-login". Nota: la propuesta pendiente de este mismo archivo ("Mostrar la EDAD de las tareas requiere_humano") habría mostrado esta tarea con 18 días y ⚠️ ATASCADA — pero eso solo la haría más VISIBLE, no la cierra: sigue siendo ruido porque el objeto ya no aplica.
 **Propuesta:** Cerrar la tarea con el comando propio de `gestor-backlog.py` (no requiere código nuevo — el comando `close` ya existe, línea 167).
@@ -724,7 +728,8 @@ python3 .pipeline/gestor-backlog.py close --id bk-12b83ae9 --estado descartado -
 
 ---
 
-## [PENDIENTE] infra — Logs compartidos entre sitios: el catch-up y el sensor de frescura del cron pueden leer al ELECTRICISTA como si fuera el Plomero   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] infra — Logs compartidos entre sitios: el catch-up y el sensor de frescura del cron pueden leer al ELECTRICISTA como si fuera el Plomero   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** YA ESTABA RESUELTA: el log es auto-agente-plomero-* y catchup.sh y check-infra.mjs filtran por ese prefijo.
 **Problema:** Los dos sitios (Plomero y Electricista) escriben sus logs de corrida con el MISMO nombre (`auto-agente-<stamp>.log`) en el MISMO directorio (`~/Library/Logs/mantener-sitio/`). Dos sensores del Plomero eligen "el log más nuevo" SIN filtrar por sitio: (1) `catchup.sh` (decide si recuperar una corrida saltada) y (2) `check-infra.mjs` checkCron (el dead-man's switch de "el cron está vivo"). Escenario de fallo: el LaunchAgent del Plomero muere, pero el Electricista sigue corriendo a diario → el catch-up dice "última corrida hace 0h, OK → sin acción" y check-infra dice "cron fresco" — el Plomero queda MUERTO EN SILENCIO, que es exactamente lo que estos dos sensores existen para impedir.
 **Evidencia:** Verificado HOY (2026-07-06): `auto-agente-20260705-201428.log` en ese directorio es del ELECTRICISTA (lo escribió `/Users/openclaw/Sitios Web/Electricista Culiacán/.pipeline/crecer-diario.sh`, pid 78944; su `claude` reintentaba a las 11:13 con el prompt de electricistaculiacanpro.mx). El `crecer-diario.sh` del Electricista usa el MISMO `LOG_DIR="$HOME/Library/Logs/mantener-sitio"` (su línea 19) y el mismo patrón de nombre. Consumidores sin filtro en ESTE repo: `.pipeline/catchup.sh` línea 23 (`ls -t "$LOG_DIR"/auto-agente-2*.log …`) y `.pipeline/check-infra.mjs` línea 78 (`/^(run|auto-agente)-.*\.log$/`). El marcador `last-run-day` sí está namespaceado (`auto-agente-plomero-last-run-day`) — los logs no.
 **Propuesta:** Namespacear el log del Plomero (`auto-agente-plomero-<stamp>.log`) y que los dos consumidores filtren por ese prefijo (+ `run-*.log` legado, que era exclusivo de este sitio). Espejo recomendado en el repo del Electricista (su log → `auto-agente-electricista-*`), pero el fix de ESTE repo ya lo protege solo.
@@ -761,7 +766,8 @@ entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run|auto-agente)-.*\.log$/.te
 entries = fs.readdirSync(LOG_DIR).filter((f) => /^(run-|auto-agente-plomero-).*\.log$/.test(f));
 ```
 
-## [PENDIENTE] costo/visibilidad — `check-costos.py`: detectar el HUECO de días sin corrida y la CORRIDA ENANA que murió a medias   (impacto A · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] costo/visibilidad — `check-costos.py`: detectar el HUECO de días sin corrida y la CORRIDA ENANA que murió a medias   (impacto A · esfuerzo S · riesgo bajo)
+**Resuelta:** YA ESTABA RESUELTA: existen los detectores costo-continuidad (hueco) y costo-enana, y ambos funcionan.
 **Problema:** Hoy el sistema lleva 4 días sin una corrida diaria COMPLETADA y ningún sensor lo dice: el 07-04 no corrió NADA (no hay fila en costos.jsonl — la diaria se saltó en silencio) y el 07-05 la corrida agotó sus 3 intentos de API ("Connection closed mid-response") dejando una fila enana que ningún detector actual distingue de un "día tranquilo". `check-costos.py` ya caza el 0 exacto (costo-000) y la corrida desbocada, pero un DÍA AUSENTE o una corrida al 12% de la mediana pasan limpios. `ESTADO.md` sigue diciendo "ultima_corrida: 2026-07-02".
 **Evidencia:** `costos.jsonl`: existe `auto-agente 20260703-182515` y luego salta a `20260705-183943` — el 2026-07-04 no tiene fila. La del 07-05: output 25,861 tokens / 48 mensajes vs mediana 216,528 / ~300 (12% — su log `auto-agente-20260705-183943.log` muestra los 3 intentos fallidos), y dejó la rama `auto/diario-20260705-2032` con trabajo sin commitear. `catchup.log` no registra nada desde el 06-24 (solo dispara al boot; la Mac duerme, no se reinicia).
 **Propuesta:** Añadir a `check-costos.py` dos detectores: (1) HUECO — si entre las dos últimas corridas hay >1 día calendario, hallazgo (alta si faltan ≥2 días); (2) ENANA — si la última corrida tiene `output_tokens` > 0 pero < 25% de la mediana previa (calibrado: caza el 25.8k del 07-05 con mediana 216k, sin marcar la corta legítima de 102k del 07-02), hallazgo media con la instrucción de ADOPTAR el trabajo huérfano de su rama (patrón ya usado el 2026-07-02).
@@ -844,7 +850,8 @@ RETRY_DEADLINE=$((RUN_START + 3*3600))
   else
 ```
 
-## [PENDIENTE] proceso — Mostrar la EDAD de las tareas `requiere_humano` en el brief (2 llevan 14 y 17 días esperando)   (impacto M · esfuerzo S · riesgo bajo)
+## [HECHO 2026-09-04] proceso — Mostrar la EDAD de las tareas `requiere_humano` en el brief (2 llevan 14 y 17 días esperando)   (impacto M · esfuerzo S · riesgo bajo)
+**Resuelta:** el brief imprime la edad en días de cada tarea requiere_humano y marca las de más de 7 días.
 **Problema:** `recolecta-señales.py` imprime "⏳ esperando decisión humana: 2" pero NO cuánto llevan esperando. Una tarea humana de 2 días y una de 17 se ven igual, así que ni el meta-pase ni el parte diario escalan las que se pudren — y una de ellas mantiene un SENSOR ciego mientras espera.
 **Evidencia:** `data/BACKLOG.jsonl`: bk-218a5844 (doorway domicilio/cerca-de-mi, Jaccard 0.85) creada 2026-06-19 → **17 días**; bk-12b83ae9 (re-auth token GSC del CLI) creada 2026-06-22 → **14 días**, y mientras tanto `check-infra.mjs` sigue dando ALTA de "GSC ciego" en cada corrida. El bloque actual (sec_backlog, líneas 86-89) solo lista los objetivos.
 **Propuesta:** Que el brief imprima la edad en días de cada tarea `requiere_humano` y marque ⚠️ las >7 días, para que el parte al dueño las repita hasta que decida.
