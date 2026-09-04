@@ -20,6 +20,13 @@ de contexto, sitemaps con lastmod contradictorio, JSON-LD de /contacto/ sin addr
 
 # ESTADO del pipeline de agentes
 
+## 2026-09-03 — auto/diario-20260903-1826 — PUBLICADA
+
+- Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Piso determinista: infra, plantilla, indexabilidad, NAP (73), conversión (68), enlazado (68), E2E (3), rendimiento (2) y producción limpios; tracking midió 5 páginas y mantuvo 4 medias preexistentes por beacon ausente sin consentimiento. Secretos: árbol actual publicable; dos credenciales históricas siguen pendientes de rotación.
+- Lote rotativo: corrección de baja presión, detección de fugas, plomería comercial, zona centro y reparación de bombas. Se retiraron cifras visibles no respaldadas de las primeras cuatro; `check-contenido.py` bajó la deuda site-wide de 56 a 52 páginas. Cuatro gates OK (Jaccard 0.25–0.31) y Chrome local confirmó 4/4 HTTP 200, JSON-LD válido, canonical/og/twitter iguales, cero enlaces rotos, overflow o errores JS.
+- GSC vivo: 518 clics, 54,791 impresiones, CTR 0.95%, posición 6.7; sitemaps con 0 errores/advertencias. Toda oportunidad con demanda ya tiene destino; backlog `[]` dos veces y 0 páginas nuevas. Reporte `.pipeline/oportunidades-20260903.md`.
+- Verificador solo-lectura: `ok=true`, 0 problemas de la corrida; diff de 4 HTML + 1 reporte, 0 tests y 0 borrados. Publicado por `scripts/crecer.py publicar`: merge `aa408b47`, push seguro a `origin/main`, 4 URL enviadas a GSC. Producción devolvió HTTP/2 200 en las cuatro.
+
 ## 2026-09-02 — auto/diario-20260818-1825 retomada — NO PUBLICADA
 
 - Health local: `/`, `/contacto/`, `/servicios/` y `/blog/` respondieron 200. Piso: infra, plantilla, indexabilidad, NAP (73), conversión (68), enlazado (68), E2E (3) y producción limpios; secretos actuales publicables, con dos credenciales históricas pendientes de rotación.
