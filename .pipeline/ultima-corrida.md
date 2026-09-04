@@ -1,31 +1,27 @@
-# Auto Agente Plomero — parte del 2 de septiembre de 2026
-**Resultado:** encontré 10, arreglé 6, 4 pendientes · no publicado
+# Auto Agente Plomero — parte del 3 de septiembre de 2026
+**Resultado:** encontré 6, arreglé 4, 1 para ti y 1 pendiente · publicado
 
 Hola Héctor, esto es lo que hice hoy solo.
-Encontré 10 cosas: arreglé 6 · 1 necesitan tu decisión · 3 no pude arreglar solo.
+Encontré 6 cosas: arreglé 4 · 1 necesitan tu decisión · 1 no pude arreglar solo.
 
-## ✅ Arreglé (6)
-- La guía de baja presión mostraba tarifas y testimonios que no podía comprobar — ahora explica qué define una cotización y conserva solo orientación verificable → https://plomeroculiacanpro.mx/blog/baja-presion-agua-causas-soluciones/
-- La guía para detectar fugas prometía ahorros porcentuales y mostraba testimonios sin respaldo — ahora se centra en pruebas seguras y señales observables → https://plomeroculiacanpro.mx/blog/como-detectar-fugas-agua-casa/
-- La guía para elegir plomero publicaba rangos de precio como si fueran universales — ahora enseña a comparar alcance, materiales y garantía por escrito → https://plomeroculiacanpro.mx/blog/como-identificar-buen-plomero-culiacan/
-- La guía sobre cuándo llamar a un profesional usaba casos y costos no verificables — ahora explica riesgos reales sin inventar cifras ni clientes → https://plomeroculiacanpro.mx/blog/cuando-llamar-plomero-profesional/
-- La página sobre cuánto cobra un plomero daba tarifas como hechos — ahora responde qué cambia una cotización y qué pedir antes de autorizar → https://plomeroculiacanpro.mx/blog/cuanto-cobra-plomero-visita-culiacan/
-- La guía para destapar un WC mezclaba porcentajes de éxito y precios no respaldados — ahora responde mejor la búsqueda y marca cuándo detenerse para no desbordar o dañar → https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/
+## ✅ Arreglé (4)
+- La página de baja presión mostraba precios de bombas y un gasto de luz sin respaldo — ahora explica qué se mide para cotizar y elegir el equipo correcto → https://plomeroculiacanpro.mx/servicios/correccion-baja-presion/
+- La página de detección de fugas publicaba tarifas no confirmadas — ahora explica qué determina una cotización clara antes de revisar → https://plomeroculiacanpro.mx/servicios/deteccion-de-fugas/
+- La página para negocios mostraba una tarifa de visita y una mensualidad de póliza no confirmadas — ahora cotiza según instalaciones, horario, tamaño y sucursales → https://plomeroculiacanpro.mx/servicios/plomeria-comercial/
+- La página del Centro mostraba rangos de cobro no respaldados — ahora explica que el costo depende del acceso, material y tamaño del trabajo → https://plomeroculiacanpro.mx/servicios/plomero-centro-culiacan/
 
-## ⚠️ Encontré pero NO pude arreglar solo (3)
-- El control encontró precios visibles pendientes en 56 páginas; corregirlas juntas excedería el límite seguro y no permitiría revisar cada reescritura bien — quedaron identificadas para drenar por lotes → https://plomeroculiacanpro.mx/
-- La medición de visitas terminó sin entregar resultados — sin esa evidencia no puedo asegurar que Analytics mida bien → https://plomeroculiacanpro.mx/
-- La portada rindió peor que su punto de comparación; no cambié el código ni acepté una nueva referencia sin demostrar la causa → https://plomeroculiacanpro.mx/
+## ⚠️ Encontré pero NO pude arreglar solo (1)
+- El sistema de estadísticas carga, pero la prueba automática sin aceptar cookies no vio cuatro avisos de visita; hace falta confirmarlo con una sesión real que acepte el consentimiento → https://plomeroculiacanpro.mx/
 
-## 🌱 Mejoré / agregué (1)
-- MEJORÉ: la guía de WC muy tapado para responder mejor a la demanda real de búsqueda; no creé otra página porque esta ya cubre la intención → https://plomeroculiacanpro.mx/blog/desatascar-wc-metodos-profesionales/
+## 🌱 Mejoré / agregué (0)
+- Sin páginas nuevas hoy: tu sitio ya cubre lo que la gente busca; no inventé páginas porque eso dañaría tu posicionamiento.
 
 ## 🧠 Aprendí hoy (para no volver a fallar)
-- Si una medición termina sin resultados, cuenta como falla aunque las demás pruebas salgan bien; la regla y el control automático ya existían, así que no los dupliqué.
+- Confirmé que toda cifra de precio visible debe tener respaldo; el revisor automático ya la detecta y hoy permitió bajar la deuda de 56 a 52 páginas.
 (ya van 54 reglas aprendidas en total)
 
 ## ⏳ Necesito que tú decidas (1)
-- Rotar o revocar dos credenciales antiguas que siguen visibles en el historial de Git — solo el dueño de esas cuentas puede hacerlo con seguridad.
+- Rotar o revocar las dos credenciales antiguas que siguen expuestas en el historial de GitHub — solo tú puedes cambiarlas en las cuentas correspondientes.
 
 ## 📦 ¿Se publicó?
-No publiqué: faltó evidencia de la medición de visitas, la portada rindió peor que su referencia y siguen 56 páginas con precios visibles; lo dejé guardado para revisión.
+Sí, todo revisado y en vivo; le avisé a Google para que lo muestre.
