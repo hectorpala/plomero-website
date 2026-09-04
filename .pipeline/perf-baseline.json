@@ -1,15 +1,15 @@
 {
   "/": {
-    "lcp": 180,
+    "lcp": 260,
     "cls": 0,
-    "inp": 72,
+    "inp": 32,
     "inpSrc": "puppeteer:event(aprox)",
     "fuente": "puppeteer"
   },
   "/servicios/reparacion-de-fugas/": {
     "lcp": 184,
     "cls": 0,
-    "inp": 56,
+    "inp": 32,
     "inpSrc": "puppeteer:event(aprox)",
     "fuente": "puppeteer"
   }

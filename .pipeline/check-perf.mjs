@@ -53,6 +53,12 @@ const BUDGET = {
 };                                                         // unidades: ms, unitless, ms
 const REL = 0.20;                                          // regresión relativa mínima
 const FLOOR = { lcp: 200, cls: 0.02, inp: 50 };            // piso de ruido absoluto
+// Piso de ruido para medición por RED (puppeteer contra producción). Medir LCP sobre internet
+// tiene varianza altísima: el 2-sep-2026 la misma home dio 972ms y el 3-sep 260ms sin ningún
+// cambio de código. Con el piso de 200ms eso se reportaba como "+440% de regresión" TODOS los
+// días y bloqueaba la publicación (11 días, 16 commits detenidos). El guardia real de
+// rendimiento es el PRESUPUESTO absoluto de arriba (LCP<2500ms), que sigue aplicándose igual.
+const FLOOR_RED = { lcp: 800, cls: 0.02, inp: 150 };
 const UNIT = { lcp: "ms", cls: "", inp: "ms" };
 const DEFAULT_URLS = (process.env.PERF_URLS || "/,/servicios/reparacion-de-fugas/").split(",").map((s) => s.trim()).filter(Boolean);
 
@@ -243,11 +249,15 @@ async function main() {
     if (b && b.fuente && b.fuente !== fuente) {
       // fuente distinta: regresión no comparable; re-baseline con la fuente activa si se quiere
     } else if (b) {
+      // El piso de ruido depende de CÓMO se midió: puppeteer contra producción viaja por la
+      // red y fluctúa mucho más que un Lighthouse de laboratorio con throttling fijo.
+      const midePorRed = fuente === "puppeteer" && /^https?:\/\//i.test(BASE) && !/localhost|127\.0\.0\.1/.test(BASE);
+      const piso = midePorRed ? FLOOR_RED : FLOOR;
       for (const metric of ["lcp", "cls", "inp"]) {
         const v = m[metric], bv = b[metric];
         if (v == null || typeof bv !== "number" || bv <= 0) continue;
         const delta = v - bv;
-        if (delta > FLOOR[metric] && delta > bv * REL) {
+        if (delta > piso[metric] && delta > bv * REL) {
           add("media", url,
             `PERF/REGRESIÓN: ${url} ${metric.toUpperCase()} subió de ${round(metric, bv)}${UNIT[metric]} (baseline) a ${round(metric, v)}${UNIT[metric]} (+${Math.round((delta / bv) * 100)}%), supera +20% y el piso de ruido`,
             "Revisar qué cambio reciente degradó esta métrica; comparar con el último diff. Si la regresión es intencional y aceptada, re-baseline con --update-baseline");

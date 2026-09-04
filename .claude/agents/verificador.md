@@ -28,6 +28,19 @@ d. NO se tocaron precios ni tests; NO se borró ninguna página indexable / con 
    respeta `NEGOCIO.md` (es plomería; lo no-plomería/ambiguo debió ir a humano, no publicarse).
 
 ## Salida
-Devuelve EXACTAMENTE un JSON: `{"ok": true|false, "problemas": ["...", ...]}`.
-Si encuentras CUALQUIER problema → `ok:false` con el detalle. Ante la duda, `ok:false`
-(es más barato re-verificar que publicar algo roto). Tu veredicto NO publica nada: solo informa.
+Devuelve EXACTAMENTE un JSON: `{"ok": true|false, "problemas": [...], "preexistentes": [...]}`.
+
+`ok:false` (bloquea) SOLO por una de estas tres:
+1. Un problema de severidad **ALTA**.
+2. Una **REGRESIÓN de esta corrida**, con cualquier severidad: estaba bien en `main` y quedó peor en la
+   rama. Demuéstralo comparando contra `main` (`git stash`-free: usa `git show main:<ruta>`), no por el
+   número absoluto de hallazgos.
+3. Una **verificación CIEGA**: un checker que no pudo medir y no entregó JSON. "Todavía no termina" NO es
+   ciega — espera su deadline completo antes de declararla fallida (caso tracking-20260902).
+
+Los hallazgos **media/baja PREEXISTENTES** (ya estaban en `main`) van en `preexistentes` y NO bloquean:
+son deuda que se drena por lotes. Bloquear por ellos deja al pipeline sin publicar nunca — pasó del
+23-ago al 2-sep-2026: 11 días y 16 commits detenidos por 3 bloqueos que no eran problemas del sitio.
+
+Ante la duda sobre si algo es ALTA o es regresión, `ok:false` (es más barato re-verificar que publicar
+algo roto). Tu veredicto NO publica nada: solo informa.

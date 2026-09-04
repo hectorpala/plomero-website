@@ -201,8 +201,18 @@ NO publiques ni edites nada en esta pasada — solo lee, corre checkers y devuel
      entrantes / listada en el sitemap (los artefactos huérfanos que pasan `limpiar-huerfanos.py` SÍ se pueden
      borrar — son recuperables por git — y se registran); que el email no quedó contaminado (sin "electricista");
      que ninguna página nueva quedó huérfana (tiene enlace entrante).
-El verificador entrega un veredicto JSON {ok: true/false, problemas: [...]}. Si ok=false o encuentra CUALQUIER
-problema: NO se publica nada; deja la rama, escribe el motivo en ESTADO.md y salta a la FASE 9 (aprender) y email.
+El verificador entrega un veredicto JSON {ok: true/false, problemas: [...]}. Qué BLOQUEA la publicación:
+  • Cualquier problema de severidad ALTA. Siempre bloquea.
+  • Cualquier REGRESIÓN causada por esta corrida, sea cual sea su severidad: algo que estaba bien en `main`
+    y quedó peor en la rama. Se demuestra comparando contra `main`, no por el número absoluto de hallazgos.
+  • Una verificación CIEGA (un checker que no pudo medir y no entregó JSON). Ojo: "aún no terminó" NO es
+    ciega — espera su deadline completo antes de declararla fallida (caso tracking-20260902: se dio por
+    muerta a los pocos segundos y sí había entregado su JSON).
+NO bloquean, y se registran en el backlog para drenarse por lotes: los hallazgos de severidad MEDIA o BAJA
+PREEXISTENTES (los que ya estaban en `main` antes de esta corrida). Un sitio real siempre arrastra deuda; si
+cualquier media frena la publicación, el pipeline no publica NUNCA y el trabajo bueno se queda sin salir
+(caso 23-ago→2-sep-2026: 11 días y 16 commits sin publicar por 3 bloqueos que no eran problemas del sitio).
+Si algo bloquea: NO se publica nada; deja la rama, escribe el motivo en ESTADO.md y salta a la FASE 9 y email.
 
 ==================== FASE 8 — PUBLICAR (solo si la FASE 7 fue 100% verde) ====================
 Candados de publicación (TODOS deben cumplirse): el verificador dio ok=true; el diff toca como máximo 18 archivos
