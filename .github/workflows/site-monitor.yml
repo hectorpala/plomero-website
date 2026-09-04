@@ -1,10 +1,11 @@
 name: Monitor del Sitio
 
 on:
-  schedule:
-    # Corre cada 6 horas
-    - cron: '0 */6 * * *'
-  workflow_dispatch: # Permite correr manualmente
+  # PROGRAMACIÓN DESACTIVADA el 2026-09-04 por decisión de Héctor: ya no quiere que
+  # los agentes corran ni revisen solos. Para reactivar, descomenta el bloque schedule.
+  # schedule:
+  #   - cron: '0 */6 * * *'   # cada 6 horas
+  workflow_dispatch: # solo manual
 
 env:
   SITE_URL: https://plomeroculiacanpro.mx

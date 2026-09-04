@@ -1,8 +1,10 @@
 name: Weekly SEO Check
 
 on:
-  schedule:
-    - cron: "0 15 * * 1"   # Lunes 15:00 UTC (~10:00 MX)
+  # PROGRAMACIÓN DESACTIVADA el 2026-09-04 por decisión de Héctor: ya no quiere que
+  # los agentes corran ni revisen solos. Para reactivar, descomenta el bloque schedule.
+  # schedule:
+  #   - cron: "0 15 * * 1"   # Lunes 15:00 UTC (~10:00 MX)
   workflow_dispatch: {}
   # NOTA: se eliminó el trigger `push`. Corría el check contra producción al
   # instante del push, antes de que Netlify terminara de desplegar → falsos

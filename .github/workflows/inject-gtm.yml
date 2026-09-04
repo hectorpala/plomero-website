@@ -1,8 +1,11 @@
 name: Inject GTM partial
 
 on:
-  push:
-    branches: [ main, master ]
+  # DISPARADOR POR PUSH DESACTIVADO el 2026-09-04 por decisión de Héctor: ya no quiere
+  # que los agentes corran ni revisen solos. Este workflow abría un PR automático en
+  # cada push a main. Para reactivar, descomenta el bloque push.
+  # push:
+  #   branches: [ main, master ]
   workflow_dispatch: {}
 
 # Ya NO pushea a main: inyecta GTM en una rama y abre un PR (así main tiene un
