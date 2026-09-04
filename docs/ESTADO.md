@@ -1,3 +1,23 @@
+## 2026-09-03 — Auditoría externa: 3 ALTAS cerradas y pipeline desbloqueado
+
+Sesión de revisión pedida por Héctor (4 revisores + los checkers del pipeline). Publicado en
+main `d261dbad`, deploy Netlify `6a9a0f18`, guardia-deploy limpio.
+
+- **A1 (alta)** El commit `a5198bbd` (19-dic-2025) había borrado el CSS de validación del
+  formulario; en producción se veían los 8 mensajes a la vez en home, emergencia-24-7 y
+  plomero-colonias. Restaurado con paleta de marca (#C2410C / #075E54). Verificado headless.
+- **A2 (alta)** 11 días sin publicar (16 commits) por 3 bloqueos falsos. Arreglados: piso de
+  ruido por red en check-perf, baseline re-medida contra prod, el verificador ya solo bloquea
+  por ALTA / regresión / verificación ciega, y PUPPETEER_EXECUTABLE_PATH en el driver.
+- **A3 (alta)** 277 archivos internos se servían en el dominio. 14 reglas 404! + .bak fuera del repo.
+- **M1** WhatsApp post-envío ya no lo bloquea el navegador (pestaña abierta antes del await).
+- **M5/M6** og:url roto del post de la marcha y 61 tel: sin +52.
+- Hook pre-push reinstalado desde .pipeline/hooks/ (el vivo estaba desfasado).
+
+PENDIENTE HUMANO: rotar el client secret OAuth del proyecto odsappi (commit `3edd5afe`).
+Deuda conocida que NO bloquea: 56 páginas con precios visibles, ESTADO.md sobre presupuesto
+de contexto, sitemaps con lastmod contradictorio, JSON-LD de /contacto/ sin address.
+
 # ESTADO del pipeline de agentes
 
 ## 2026-09-02 — auto/diario-20260818-1825 retomada — NO PUBLICADA
