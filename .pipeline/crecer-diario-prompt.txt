@@ -38,27 +38,18 @@ en singular: el 2026-09-02 había TRES sin fusionar (`auto/crecer-20260727-18354
 de 38 días, más `auto/diario-20260818-1825`, de 10) y el flujo solo miraba `auto/diario-*`, así que las de julio
 quedaron invisibles más de un mes. Trabajo hecho que nadie vuelve a ver es trabajo perdido.
 
-  1. Inventario COMPLETO, sin excluir prefijos:
-       git status --short
-       git branch --no-merged main --list 'auto/*' 'codex/*'     # las que traen trabajo
-       git branch --merged   main --list 'auto/*' 'codex/*'      # ya integradas, se pueden borrar
-       git stash list ; git worktree list
-  2. **Cola: la MÁS ANTIGUA primero.** Está PROHIBIDO crear una rama nueva mientras exista una vieja sin
-     clasificar. Se procesa una por corrida, de la más vieja a la más nueva.
-  3. Clasifica CADA rama sin fusionar en exactamente una de tres, con evidencia:
-       • FUSIONABLE  → su trabajo sigue siendo válido. Trabaja SOBRE ella y trátala como trabajo de hoy: pasa
-                       por la FASE 7 y los candados igual que lo nuevo. Dilo en el parte ("retomé el trabajo
-                       del <fecha> que quedó sin publicar").
-       • SUPERSEDIDA → main ya tiene ese trabajo por otra vía, o fusionarla REVERTIRÍA algo posterior.
-                       Compruébalo, no lo supongas: compara los commits por ASUNTO contra main
-                       (`git log --format='%s' main` vs `git log main..<rama>`) y revisa si el diff
-                       reintroduce contenido ya corregido (`git diff main...<rama> -- '*.html'`).
-       • CONFLICTIVA → toca lo mismo que otra rama o que main y no se puede decidir con evidencia.
-  4. **NUNCA borres una rama automáticamente.** Una SUPERSEDIDA o CONFLICTIVA se reporta en el parte para
-     decisión humana, con el porqué y el sha. Antes de proponer su borrado, empújala a origin
-     (`git push origin <rama>`): varias vivían SOLO en esta Mac. Las ya fusionadas (`--merged`) sí se pueden
-     borrar con `git branch -d`, que se niega solo si quedara trabajo suelto.
-  5. Solo con la cola vacía → `git checkout -b auto/diario-$(date +%Y%m%d-%H%M)`.
+  1. Inventario COMPLETO, sin excluir prefijos: `git status --short`, `git branch --no-merged main --list
+     'auto/*' 'codex/*'`, `git branch --merged main --list 'auto/*' 'codex/*'`, `git stash list`, `git worktree list`.
+  2. **Cola: la MÁS ANTIGUA primero.** PROHIBIDO crear rama nueva mientras exista una vieja sin clasificar.
+  3. Clasifica cada rama sin fusionar, con evidencia:
+       • FUSIONABLE  → trabaja SOBRE ella y trátala como trabajo de hoy (FASE 7 y candados igual). Dilo en el parte.
+       • SUPERSEDIDA → main ya la tiene por otra vía, o fusionarla revertiría algo posterior. COMPRUÉBALO:
+                       commits por asunto contra main + `git diff main...<rama>` (¿reintroduce algo ya corregido?).
+       • CONFLICTIVA → no se puede decidir con evidencia.
+  4. **NUNCA borres una rama automáticamente.** Supersedida o conflictiva → al parte, para decisión humana.
+     Antes de proponer su borrado, `git push origin <rama>` (varias vivían SOLO en esta Mac). Las `--merged`
+     sí se borran con `git branch -d`.
+  5. Con la cola vacía → `git checkout -b auto/diario-$(date +%Y%m%d-%H%M)`.
 
 CHECKPOINT OBLIGATORIO (regla dura desde 2026-07-26): commitea EN LA RAMA conforme avanzas — tras cada arreglo
 verificado de la FASE 5 y tras cada tarea cerrada de la FASE 6. Un commit por cambio lógico, mensaje descriptivo.
@@ -225,14 +216,18 @@ El verificador entrega un veredicto JSON {ok: true/false, problemas: [...]}. Qu�
   • Cualquier problema de severidad ALTA. Siempre bloquea.
   • Cualquier REGRESIÓN causada por esta corrida, sea cual sea su severidad: algo que estaba bien en `main`
     y quedó peor en la rama. Se demuestra comparando contra `main`, no por el número absoluto de hallazgos.
-  • Una verificación CIEGA (un checker que no pudo medir y no entregó JSON). Ojo: "aún no terminó" NO es
-    ciega — espera su deadline completo antes de declararla fallida (caso tracking-20260902: se dio por
-    muerta a los pocos segundos y sí había entregado su JSON).
-NO bloquean, y se registran en el backlog para drenarse por lotes: los hallazgos de severidad MEDIA o BAJA
-PREEXISTENTES (los que ya estaban en `main` antes de esta corrida). Un sitio real siempre arrastra deuda; si
-cualquier media frena la publicación, el pipeline no publica NUNCA y el trabajo bueno se queda sin salir
-(caso 23-ago→2-sep-2026: 11 días y 16 commits sin publicar por 3 bloqueos que no eran problemas del sitio).
-Si algo bloquea: NO se publica nada; deja la rama, escribe el motivo en ESTADO.md y salta a la FASE 9 y email.
+  • Una verificación CIEGA (checker que no pudo medir y no entregó JSON). "Aún no terminó" NO es ciega:
+    espera su deadline completo (caso tracking-20260902: se dio por muerta y sí había entregado su JSON).
+
+CALIBRA ANTES DE CREERLE A UNA MEDICIÓN (rendimiento, tracking, visual y todo checker que dé un NÚMERO):
+  1. Una sola lectura no bloquea: repítela en el MISMO entorno. Si la segunda no confirma, es ruido.
+  2. Compara solo contra baseline de la MISMA fuente y entorno (lab con lab, red con red).
+  3. Si el valor ABSOLUTO cumple el presupuesto, una variación relativa se anota, no bloquea.
+  4. Sin causa atribuida a un cambio del diff, no hay regresión.
+Del 23-ago al 2-sep, 4 falsos positivos de medición dejaron 11 días y 16 commits buenos sin publicar.
+NO bloquean (van al backlog, se drenan por lotes): los hallazgos MEDIA/BAJA PREEXISTENTES, los que ya estaban
+en `main`. Un sitio real arrastra deuda; si cualquier media frena la publicación, el pipeline no publica NUNCA.
+Si algo bloquea: no publiques, deja la rama, motivo en ESTADO.md y salta a la FASE 9 y email.
 
 ==================== FASE 8 — PUBLICAR (solo si la FASE 7 fue 100% verde) ====================
 Candados de publicación (TODOS deben cumplirse): el verificador dio ok=true; el diff toca como máximo 18 archivos
