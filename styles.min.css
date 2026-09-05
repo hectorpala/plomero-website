@@ -2737,3 +2737,12 @@ section[aria-label="Servicios de Plomería en Culiacán"] a{display:inline-block
 .success-message{display:none;color:#075E54;font-size:.875rem;margin-top:.375rem;font-weight:500}
 .form-field.valid .success-message{display:block}
 #contact-form button[type="submit"]:disabled{opacity:.6;cursor:not-allowed}
+
+/* Etiqueta visible de los campos del formulario — añadida 2026-09-04.
+   Antes los 4 campos solo tenían placeholder + aria-label: al escribir, el texto de
+   ejemplo desaparece y el usuario pierde la referencia de qué va en cada campo (y en
+   un formulario largo eso provoca errores). La etiqueta se queda visible siempre.
+   El aria-label se retira de los inputs: con <label for> el nombre accesible ya viene
+   de la etiqueta, y tener los dos hace que algunos lectores anuncien uno y muestren otro. */
+.form-field label{display:block;margin-bottom:.35rem;font-size:.9rem;font-weight:600;color:var(--text)}
+.form-field label .opcional{font-weight:400;color:var(--text-light)}
