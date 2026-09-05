@@ -65,28 +65,10 @@
             h1{font-size:2rem}
         }
     </style><style>
-        /* Real-time validation states */
-        .form-field {
-            position: relative;
-            margin-bottom: 1.25rem;
-        }
-
-        .form-field input,
-        .form-field textarea {
-            width: 100%;
-            padding: 0.875rem;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .form-field input:focus,
-        .form-field textarea:focus {
-            outline: none;
-            border-color: #E36414;
-            box-shadow: 0 0 0 3px rgba(227, 100, 20, 0.25);
-        }
+    /* Validación del formulario: vive en styles.min.css (hoja única).
+       La copia inline se retiró el 2026-09-04: el <link> del CSS compartido va
+       DESPUÉS en el <head>, así que sus reglas ya ganaban y esta copia era
+       código muerto que solo pesaba en cada carga. */
 
         /* Valid state (green) */
         .form-field.valid input,

@@ -1,0 +1,13 @@
+import puppeteer from 'puppeteer';
+const b=await puppeteer.launch({headless:'new',executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
+const p=await b.newPage();
+await p.emulate({viewport:{width:390,height:844,isMobile:true,hasTouch:true,deviceScaleFactor:2}});
+await p.goto('http://127.0.0.1:8950/servicios/plomero-economico/',{waitUntil:'networkidle2'});
+await p.type('#nombre','Hector Palazuelos',{delay:5}); await p.click('#telefono');
+await p.type('#telefono','123',{delay:5}); await p.click('#nombre');
+const el=await p.$('#contact-form'); await el.scrollIntoView(); await new Promise(r=>setTimeout(r,400));
+await el.screenshot({path:process.argv[2]});
+const c=await p.evaluate(()=>{const f=document.querySelector('#nombre').closest('.form-field');
+  return {clase:f.className, borde:getComputedStyle(document.querySelector('#nombre')).borderColor};});
+console.log('  estado válido →', JSON.stringify(c));
+await b.close();
