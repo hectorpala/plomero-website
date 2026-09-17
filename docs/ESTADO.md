@@ -1,3 +1,7 @@
+## 2026-09-17 — Curso y teleprompter: sincronización en la URL existente
+
+Actualización acotada a `/estudio/`, pedida por Héctor. QR permanente por guion, comprobación de versiones nuevas y protección de tomas sin guardar. Guion comercial vigente sincronizado. Catorce pruebas de navegador con cámara simulada y seis del paquete aprobadas; el iPhone físico sigue pendiente. La constancia de publicación HTTP se guarda en `curso-flipping/edicion/venta/ULTIMA-PUBLICACION.json`. Sin cambios en las páginas comerciales de plomería, caché global ni sitemap.
+
 ## 2026-09-03 — Auditoría externa: 3 ALTAS cerradas y pipeline desbloqueado
 
 Sesión de revisión pedida por Héctor (4 revisores + los checkers del pipeline). Publicado en

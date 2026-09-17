@@ -3,13 +3,13 @@ ANUNCIOS Y TEXTOS DE VENTA — PASO 2
 Tu Primer Flip · 8 capítulos · 40 clases · $4,999 MXN.
 Usar estas piezas cuando la inscripción esté abierta y las condiciones de acceso estén completas.
 
-ANUNCIO A — CASA, NÚMEROS E INVERSIONISTA
+ANUNCIO A — POTENCIAL DE GANANCIA Y MÉTODO
 
-Video principal: Héctor a cámara con tomas de sus casas y remodelaciones. Duración orientativa de 90–110 segundos; ajustar al ensayar.
+Video principal: Héctor a cámara con tomas de sus casas y remodelaciones. Duración orientativa de 120–140 segundos; ajustar al ensayar.
 
-Guion hablado único: 02-VIDEO-DE-VENTA.txt. También se lee en Venta → Video de venta. Usarlo completo con su apertura original: «¿Dónde encuentras una casa para hacer negocio? ¿Y cómo consigues un inversionista para trabajarla?».
+Guion hablado único: 02-VIDEO-DE-VENTA.txt. También se lee en Venta → Video de venta. Usarlo completo con su apertura original: «Mira, cuando yo analizo una casa, busco una ganancia del cuarenta al cuarenta y cinco por ciento sobre todo lo invertido. ¿Cómo encuentro esas oportunidades y cómo hago la cuenta?».
 
-Texto del anuncio: Aprende cómo buscar casas, revisar si los números funcionan y presentar una oportunidad a un inversionista. Soy Héctor Palazuelos; he realizado más de 100 remodelaciones. En Tu Primer Flip comparto mi método en 8 capítulos y 40 clases, con ejemplos y guías. Empieza con el capítulo 1 y recibe un capítulo nuevo cada semana. Precio: $4,999 MXN. Consulta el programa, las entregas y las condiciones.
+Texto del anuncio: Antes de poner dinero en una casa, aprende a revisar cuánto podría dejar. Soy Héctor Palazuelos: vivo de comprar, remodelar y vender casas y he realizado más de 100 remodelaciones. En Tu Primer Flip te enseño cómo consigo oportunidades por Facebook, hago los números y organizo el proceso. También aprenderás dónde buscar inversionistas y qué propuesta presentarles. Son 8 capítulos y 40 clases, con ejemplos y guías, por $4,999 MXN. Empiezas con el capítulo 1 y recibes uno nuevo cada semana. Conoce el programa, las fechas y las condiciones.
 Título: Tu Primer Flip · Método paso a paso.
 Botón: Más información.
 Destino: página del curso en Hotmart, con oferta y calendario completos.
@@ -19,9 +19,9 @@ ANUNCIO B — QUÉ PRESENTARLE A UN INVERSIONISTA
 
 Usar el mismo cuerpo, las mismas tomas posteriores, el precio, el texto del anuncio, el título y el destino del anuncio A. Cambiar solo el primer párrafo hablado por:
 
-«Antes de buscar a alguien que ponga dinero en un flip, aprende a mostrarle dónde está el negocio».
+«Antes de pedirle a alguien que invierta en una casa, tienes que mostrarle qué podría ganar y de dónde sale esa cuenta. En mis análisis busco entre un cuarenta y un cuarenta y cinco por ciento sobre todo lo invertido.».
 
-Después continuar desde «Soy Héctor Palazuelos» con 02-VIDEO-DE-VENTA.txt. El nuevo inicio se graba con el mismo encuadre y ritmo del original.
+Después continuar desde «Esa es mi meta al analizar una oportunidad» con 02-VIDEO-DE-VENTA.txt. El nuevo inicio se graba con el mismo encuadre y ritmo del original.
 Identificador para el registro: B-propuesta-inversionista.
 
 La prueba compara dos aperturas propuestas. Ninguna se presenta como anuncio ganador antes de medir. Si Meta distribuye el gasto de forma desigual, interpretar las diferencias con esa limitación; una comparación causal requiere la herramienta de prueba correspondiente y presupuesto suficiente.
@@ -32,7 +32,7 @@ Texto orgánico preparado, todavía no publicado:
 
 Estoy preparando Tu Primer Flip: mi forma de conseguir casas, revisar los números, buscar inversionistas, organizar la remodelación y vender. Son 8 capítulos y 40 clases, con explicaciones directas y ejercicios. Si te interesa conocer el programa, escríbeme «FLIP». Las inscripciones todavía no están abiertas.
 
-Para el video de avance, conservar el guion hasta «Explicado sencillo, directo y práctico» y sustituir los dos últimos párrafos, precio e inscripción, por el cierre de avance que aparece en Venta → Video de venta. Así la llamada a la acción coincide con el estado del lanzamiento.
+Para el video de avance, conservar el guion hasta «Si vas a poner dinero y trabajo en una casa, aprende primero a revisar si los números tienen sentido» y sustituir los dos últimos párrafos, precio e inscripción, por el cierre de avance que aparece en Venta → Video de venta. Así la llamada a la acción coincide con el estado del lanzamiento.
 
 Respuesta preparada para quien pida información del avance: «Gracias por tu interés. Tu Primer Flip explica mi método en 8 capítulos y 40 clases. El precio previsto es $4,999 MXN. Estamos preparando las clases y el calendario; todavía no están abiertas las inscripciones. ¿Qué parte te interesa más: encontrar casas, revisar los números o trabajar con inversionistas?».
 
