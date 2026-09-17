@@ -20,6 +20,15 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
 
+# /estudio/: teleprompter privado de Héctor (no indexable). Necesita cámara y micrófono
+# en el propio origen: esta regla más específica lo permite solo en esa ruta.
+[[headers]]
+  for = "/estudio/*"
+  [headers.values]
+    Permissions-Policy = "camera=(self), microphone=(self)"
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 # HTML - no cache (siempre fresco)
 [[headers]]
   for = "/*.html"
