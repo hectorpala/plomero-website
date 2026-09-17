@@ -1,0 +1,119 @@
+PASO 2 — PREPARAR LA VENTA DEL CURSO ACTUAL
+
+Tu Primer Flip · Héctor Palazuelos · $4,999 MXN · 8 capítulos y 40 clases.
+
+PRIORIDAD ACTUAL — VENDER LA PRÓXIMA SEMANA CON ENTREGAS SEMANALES
+
+Héctor pidió empezar a vender la semana del 21 al 27 de septiembre de 2026. Modalidad confirmada: cargar el capítulo 1, disponible al comprar, y liberar un capítulo adicional por semana con sus clases y guías. Los días exactos siguen como propuesta hasta comprobar la preparación.
+
+Hay 17 guiones: cuatro del capítulo 1, seis del capítulo 2 y siete del capítulo 4, con distintos niveles de revisión. Faltan 23 clases por desarrollar. No hay grabaciones verificadas. Para cobrar con acceso al capítulo 1, primero debemos grabar, cargar y revisar sus cuatro clases y guías.
+
+La propuesta de calendario y los textos de oferta se consultan en Venta → Página y oferta. Apertura sugerida: lunes 21 de septiembre; fin del precio de lanzamiento: domingo 27, 23:59, hora de Culiacán. El curso continúa a la venta después. Capítulos 2–8: cada lunes del 28 de septiembre al 9 de noviembre. El comprador debe ver todo el calendario antes de pagar.
+
+Precio vigente: $4,999 MXN por el curso completo. Se propone $6,999 como precio regular desde el 28 de septiembre, pendiente de confirmación: no anunciarlo como precio anterior ni como descuento ya aprobado.
+
+ORDEN DE TRABAJO PARA LLEGAR A LA APERTURA
+
+1. Cerrar datos personales pendientes y grabar las cuatro clases del capítulo 1, con su ejemplo, tarea y guía.
+2. Grabar a Héctor a cámara para el video comercial y seleccionar tomas de sus casas. El plan está en Venta → Video de venta.
+3. Cargar el capítulo 1, informar el calendario completo y reservar bloques de trabajo para cada entrega semanal.
+4. Definir plazo de acceso, soporte y garantía. Configurar y comprobar en Hotmart el total al contado de $4,999, el pago, el correo y el acceso a las clases.
+5. Revisar el domingo 20. Abrir el lunes 21 únicamente con el capítulo inicial y el recorrido de compra funcionando. Si falta, reprogramar la apertura dentro de la semana sin prometer acceso inmediato a contenido sin grabar.
+6. Comunicar la apertura en las redes de Héctor. Meta Ads requiere presupuesto elegido, configuración y medición comprobadas; no hay gasto autorizado ni campañas activadas.
+
+Mensaje: el alumno aprende a captar casas, evaluar números, buscar inversionistas, preparar acuerdos, organizar la obra, vender y cerrar las cuentas. La experiencia confirmada es de más de 100 remodelaciones. No prometer ganancias.
+
+La página comercial se abre desde Venta → Página y oferta. Hay una muestra escrita real de la clase 1.1 y las cuarenta clases del programa. Esta vista local todavía no está publicada ni conectada a un pago.
+
+1. LA BASE DE TODA LA INFORMACIÓN
+
+El curso enseña el método de Héctor: conseguir oportunidades, revisar una casa, hacer números, preparar el trato, organizar la remodelación, vender y cerrar las cuentas. Cada clase sigue la explicación, el ejemplo y la práctica del capítulo 1 aprobado.
+
+El temario único está en materiales/curso/TEMARIO.txt y se muestra en la pestaña Temario del curso. Distribución: capítulo 1, cuatro clases; capítulo 2, seis; capítulo 3, seis; capítulo 4, siete; capítulo 5, cinco; capítulo 6, cinco; capítulo 7, cuatro; capítulo 8, tres. Total: cuarenta.
+
+El capítulo 8 aplica lo aprendido al flip que Héctor elija. El resto enseña cómo trabajar cada parte del método.
+
+2. LO QUE YA TENEMOS Y LO QUE FALTA PRODUCIR
+
+Capítulo 1: cuatro guiones desarrollados, guías, tareas y trece láminas; formato aprobado. Ya se incorporó la distribución entre Héctor y su arquitecto. Quedan los acuerdos de aportaciones y reparto para cerrar esas partes de la grabación.
+
+Capítulo 2: seis guiones en borrador y guía. Capítulo 4: siete guiones en borrador sobre cómo encontrar inversionistas y armar el trato; incluye mensajes, propuesta y seguimiento para practicar, pendientes de personalizar con Héctor. Capítulos 3 y 5–8: veintitrés clases por desarrollar. Las grabaciones siguen pendientes.
+
+La oferta comprende el programa y las guías de trabajo que se desarrollan con cada capítulo. Fecha de acceso, entregas, plazo de acceso, garantía y soporte se completan antes de abrir la venta. Cualquier sesión, grupo o acompañamiento adicional se incorpora cuando Héctor lo defina para este curso.
+
+3. PREPARAR HOTMART
+
+Nombre: Tu Primer Flip.
+Formato: curso en línea.
+Idioma: español.
+Moneda: MXN.
+Precio anunciado: $4,999 MXN.
+Descripción: copiar 01-DESCRIPCION-HOTMART.txt.
+Contenido: ocho capítulos con los cuarenta títulos del temario vigente.
+
+Definir el calendario conforme a la producción real. Si se vende mientras faltan entregas, comunicar que es preventa y cuándo recibe cada parte el alumno. La modalidad confirmada es acceso inicial al capítulo 1 y entregas semanales; especificar claramente qué está disponible y qué falta por entregarse.
+
+Hotmart permite registrar contenido pendiente con su cronograma. Si se declara contenido disponible, pide cargar al menos un módulo no gratuito. Seleccionar la opción que corresponda y comprobar el estado en la cuenta.
+Fuente: https://help.hotmart.com/es/article/215828518/-como-registrar-mi-producto-en-hotmart-
+
+Comprobar que el total al contado para el comprador en México coincida con los $4,999 anunciados. Hotmart puede sumar impuestos al precio configurado; revisar base, impuestos y redondeos en el checkout antes de publicar el precio.
+Fuentes: https://help.hotmart.com/es/article/4423635238413/-que-es-vat-
+https://help.hotmart.com/es/article/360051146712/-que-impuestos-pueden-aplicarse-a-una-compra-
+
+4. PÁGINA Y VIDEO DE VENTA
+
+Recorrido propuesto: ANUNCIO EN META → PÁGINA DEL CURSO CON VIDEO → COMPRA EN HOTMART → ACCESO SEGÚN EL CALENDARIO.
+
+La vista local conserva el estilo del panel y sirve para revisar la página comercial. Para cobrar la próxima semana se puede usar la Página de Producto de Hotmart, evitando depender de un despliegue externo pendiente. Permite presentar el curso, integrar un video de YouTube o Vimeo, responder preguntas y mostrar el pago.
+Fuente: https://help.hotmart.com/es/article/360031150472/como-configurar-tu-nueva-pagina-de-producto
+
+En Productos → Mis productos → elegir el curso → Página de producto, preparar descripción, video, temario, guías, precio y condiciones. Revisar el borrador y los nombres que aparezcan en la cuenta.
+
+El video se graba con 02-VIDEO-DE-VENTA.txt. En la misma vista Video de venta están el orden de tomas, la apertura alternativa y las indicaciones de montaje. Una sola pieza principal puede presentar el curso en redes y en la página. Los beneficios, anuncios y preguntas están en 03-ANUNCIOS-Y-PUBLICACIONES.txt. Completar las respuestas pendientes de fecha, acceso y garantía antes de publicar.
+
+5. ANUNCIOS EN META ADS
+
+Esta campaña vende el curso. La campaña que se enseña dentro del capítulo 2 sirve para captar casas de propietarios; tiene otro mensaje y otro objetivo.
+
+Propuesta para la etapa de inscripciones abiertas: una campaña orientada a ventas en web, un conjunto y los anuncios A y B, que comparten cuerpo y cambian únicamente la apertura. Usar el evento de compra cuando el seguimiento esté comprobado. Verificar categoría y opciones de la cuenta para este anuncio.
+
+Público inicial propuesto: adultos en México dentro de la cobertura que se decida atender. Evaluar audiencia amplia; si se prueban intereses, registrar únicamente los que permita seleccionar el panel. «Bienes raíces» y «emprendimiento» son términos para buscar, no opciones verificadas en la cuenta.
+
+Alinear objetivo de campaña, ubicación de conversión y meta de rendimiento. Elegir presupuesto total y fechas antes de activar; todavía no hay gasto autorizado.
+Fuente: https://www.facebookblueprint.com/student/path/219699-selecting-objectives-course
+
+Los dos anuncios llevan a la página del curso. Revisar precio, texto, subtítulos y botón de Más información en las vistas previas de Facebook e Instagram.
+
+6. COMPROBAR ANTES DE ABRIR INSCRIPCIONES
+
+Obtener el enlace real del producto y el del pago. Revisar en teléfono el programa de 40 clases, los $4,999, las entregas y las condiciones. Comprobar el acceso del alumno conforme a lo configurado.
+
+Conectar la medición de Meta desde Hotmart. Verificar visitas, inicios de pago y compras; distinguir órdenes pendientes de pagos aprobados. Revisar qué importe envía el evento y que una compra no se duplique al usar navegador y API.
+Fuente: https://help.hotmart.com/es/article/6565866201741/-como-configuro-las-opciones-avanzadas-del-pixel-de-seguimiento-en-mi-producto-
+
+Identificar cada anuncio con UTM o SCK cuando corresponda, conservando los identificadores originales del enlace. Comprobar el origen en los reportes.
+Fuente: https://help.hotmart.com/es/article/216441797/-como-identificar-el-origen-de-mis-ventas-en-hotmart-
+
+Revisar gasto, visitas, compras aprobadas, reembolsos y dudas. El costo de conseguir un alumno debe evaluarse junto con el ingreso neto de cada compra. No se presupone una cantidad de ventas.
+
+Esta carpeta contiene la versión vigente del paso 2. La publicación y la campaña todavía requieren configuración y comprobación en las cuentas reales.
+
+7. CÓMO DECIDIMOS QUÉ MEJORAR
+
+Registrar cada apertura por separado: gasto, reproducciones, tiempo visto si está disponible, clics, visitas reales a la página, inicios de pago, compras aprobadas y reembolsos. Las métricas de reproducción ayudan a revisar la atención; las compras y el ingreso neto permiten evaluar la venta.
+
+Si la gente abandona al principio, revisar la apertura y el primer plano. Si ve el video pero no visita la página, revisar que entienda el curso y la acción siguiente. Si visita y no empieza el pago, revisar las preguntas sobre contenido, entregas y oferta. Si inicia el pago pero no compra, comprobar el proceso de compra y los pagos pendientes. Son hipótesis para investigar, no conclusiones automáticas.
+
+Cambiar una parte identificable por revisión y registrar qué se cambió. No aumentar el gasto solo por vistas o comentarios. Si no hay compras aprobadas, anotarlo así y no dividir entre cero ni presentar el resultado como rentabilidad.
+
+Presupuesto, duración de prueba y límite de gasto quedan pendientes de decisión. No se han activado anuncios ni cobros.
+
+8. SEGUIR VENDIENDO CON LOS PREGRABADOS
+
+Héctor confirmó que quiere continuar vendiendo semanas después del lanzamiento. Termina el precio promocional, no las inscripciones del curso. Si se aprueba $6,999 como precio regular, el 28 de septiembre cambia la oferta y continúa la misma venta. No anunciar un vencimiento hasta aceptar y configurar ese cambio real.
+
+Mientras se produce: quien compre recibe los capítulos publicados y el calendario común de las entregas pendientes. Al completar los ocho capítulos, vender el curso completo pregrabado. Revisar el video y la página para que no sigan anunciando entregas futuras que ya ocurrieron.
+
+Al terminar la oferta, retirar los enlaces y anuncios con $4,999 y activar el precio regular confirmado; no reiniciar contadores ni repetir la misma fecha cada semana. Campañas posteriores pueden usar promociones nuevas con condiciones reales y un periodo definido.
+
+La estimación y comparación de valor están en Venta → Página y oferta. El diplomado de CENTRO anuncia $48,000 con 80 horas en vivo: es otro formato. La estimación comercial de Tu Primer Flip terminado es $7,000–$10,000 y el precio regular recomendado para probar es $6,999. No equivale a una tasación, un precio histórico ni la garantía de que el mercado pagará esa cantidad.

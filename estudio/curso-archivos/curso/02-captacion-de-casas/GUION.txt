@@ -1,0 +1,144 @@
+TU PRIMER FLIP
+CAPÍTULO 2 — Cómo capto casas con anuncios y elijo cuáles revisar
+
+Estado: Borrador para trabajar después.
+
+Este archivo reúne lo que se dice en las clases. Las guías y los pendientes están en la entrada del curso.
+
+
+═════════════════════════════════════════════════════════════════
+CLASE 2.1 — Qué casas busco y qué tiene que dejarme la operación
+═════════════════════════════════════════════════════════════════
+
+
+Antes de hacer el anuncio quiero que tengas claro qué tipo de casa estás buscando. Si no defines eso, te pueden llegar muchos mensajes y vas a terminar revisando propiedades que no son para tu forma de trabajar.
+
+Yo me enfoco en casas del segmento medio y social. Busco casas donde pueda hacer una remodelación leve. Eso forma parte de cómo elijo mis operaciones: qué trabajo necesita la casa y cuánto espacio dejan los números después de hacerlo.
+
+Una casa puede verse descuidada y necesitar cambios relativamente sencillos; otra puede traer trabajos mucho más grandes de lo que se ve en una foto. Por eso vamos a anotar qué sabemos y qué falta revisar. En esta primera parte identificamos candidatas. Después hacemos la revisión y la cuenta completa.
+
+En mi mente busco una utilidad de alrededor de 40 a 45 por ciento sobre todo lo invertido. Vamos a ponerle números para que se entienda qué significa.
+
+Imagina una operación cuyo costo total termina en un millón de pesos. Si después de vender queda una utilidad de cuatrocientos mil pesos, esa utilidad equivale a cuarenta por ciento del costo. Si quedan cuatrocientos cincuenta mil, equivale a cuarenta y cinco por ciento.
+
+Ese es el criterio que quiero que entiendas: comparo lo que puede quedar con todo lo que necesita la operación. El precio de compra por sí solo no me da la respuesta. Tengo que considerar los demás costos.
+
+En el siguiente módulo vamos a abrir esa cuenta y ver de dónde sale cada cantidad. Aquí quiero que te quedes con tres filtros: el tipo de vivienda, una remodelación que corresponda a mi forma de trabajar y espacio suficiente en los números para la utilidad que busco.
+
+El porcentaje es mi objetivo al buscar. El resultado final se conoce con las cuentas de la operación. Además, después debemos ver cómo se reparte según el acuerdo con el inversionista; eso tiene su propia explicación.
+
+Abre tu guía y escribe el perfil de casa que vas a buscar. Al lado anota qué información tendrías que pedir para saber si una propiedad se parece a ese perfil.
+
+
+═════════════════════════════════════════════════════════════════
+CLASE 2.2 — El video con el que empiezo a captar
+═════════════════════════════════════════════════════════════════
+
+
+La forma que más me funciona para captar casas es Facebook, usando anuncios con video. Esa va a ser la ruta que te voy a enseñar primero.
+
+Vamos a preparar un video que una persona pueda entender rápido: quién está hablando, en qué zona trabaja y para qué puede escribirle. El anuncio abre una conversación. En esa conversación vamos a conocer la casa y la situación del propietario.
+
+Para este ejercicio lo armamos en tres partes. Primero presento el servicio y la ciudad. Después explico qué información necesito para empezar a revisar la propiedad. Al final doy una instrucción clara para que la persona sepa qué hacer.
+
+Te voy a mostrar un texto de práctica. Lo ajustas a tu ciudad y a lo que de verdad puedes ofrecer. Si todavía estás empezando, tu presentación debe corresponder con eso. Tu experiencia se va construyendo con el trabajo que realizas.
+
+Grábalo con el celular, con la voz entendible y el mensaje escrito de forma legible. Si lo vas a usar en Reels, prepara una versión vertical y revisa que los controles de la aplicación no tapen las palabras importantes.
+
+Antes de subirlo, enséñaselo a alguien y pídele que te diga qué entendió. Debería poder explicar qué servicio ofreces y cómo contactarte. Si tiene que preguntarte para qué era el video, ajusta el mensaje.
+
+Luego puedes preparar una segunda versión con otro comienzo y conservar el resto. Así tienes una diferencia concreta para observar. No necesitamos cambiar a la vez toda la campaña para aprender qué mensaje genera conversaciones útiles.
+
+Ejemplo de anuncio para practicar
+
+Soy Héctor Palazuelos. Trabajo comprando, remodelando y vendiendo casas. Estoy revisando propiedades en [ciudad] de dueños que estén pensando en vender, incluidas casas que necesitan algunos arreglos. Podemos empezar revisando la colonia, unas fotos y el precio que tienes en mente. Escríbeme por [canal elegido] y platicamos sobre tu casa y los pasos para evaluar una posible operación.
+
+Versión para quien comienza: sustituir la presentación por «Soy [nombre] y estoy buscando una oportunidad para mi primera operación de compra, remodelación y venta en [ciudad]». No copiar la trayectoria de Héctor.
+
+Adaptación sobre crédito, si corresponde al servicio real: «También revisamos opciones de venta para casas con crédito vigente; cada caso requiere revisar su documentación». No presentar el anuncio como comunicación oficial de Infonavit.
+
+
+═════════════════════════════════════════════════════════════════
+CLASE 2.3 — Cómo preparo el anuncio en Meta Ads, incluida la segmentación
+═════════════════════════════════════════════════════════════════
+
+
+Ya tenemos el video. Ahora vamos a preparar dónde se muestra y cómo vamos a recibir a las personas interesadas.
+
+Lo primero es definir qué queremos que suceda después de que alguien lo vea. En esta demostración queremos una conversación sobre una casa. Usaremos la ruta a WhatsApp como ejemplo y comprobaremos que el número elegido es el que vamos a atender.
+
+En el administrador vas a encontrar tres niveles: campaña, conjunto y anuncio. Para seguir la clase, piensa en tres preguntas: qué resultado buscamos, a qué público podemos llegar y qué mensaje va a ver ese público.
+
+Voy a revisar primero las condiciones que corresponden al anuncio de vivienda en esta cuenta y su país. Eso determina las opciones que podemos usar. Vamos a trabajar con lo que el panel permita bajo esa clasificación.
+
+Después elegimos la zona que podemos atender. Aquí importa la ubicación de las casas que buscamos. Cuando llegue el contacto, vamos a preguntarle dónde está el inmueble: la ubicación que seleccionas para mostrar publicidad no sustituye esa verificación.
+
+Ahora llegamos a los intereses. Lo primero que quiero que entiendas es que una afinidad con vivienda o bienes raíces no nos dice que esa persona quiera vender una casa. Esa información aparece cuando conversa con nosotros.
+
+Vamos a revisar dos posibilidades: un público de la zona sin añadir intereses y, si la configuración lo permite, otro con una selección temática. Son dos ideas para probar. Tenemos que observar cuál genera información útil de propietarios.
+
+En el campo que muestre la cuenta, podemos buscar términos relacionados con vivienda. Aquí reviso lo que realmente aparece y cómo lo describe Meta. Si un término no está disponible, seguimos con una configuración que sí lo esté. Si el panel dice que lo que elegimos es una sugerencia, lo explicamos como una sugerencia; no le atribuimos un límite que la pantalla no establece.
+
+Anota la configuración que usaste. Si después cambia el resultado, necesitas saber qué habías elegido: zona, público, video, presupuesto y fechas.
+
+El presupuesto lo fijamos como una prueba con un monto que podamos controlar. Antes de gastar, dejamos definido cuánto estamos dispuestos a usar y quién va a responder. Una campaña puede traer mensajes y aun así no producir una oportunidad que convenga. Por eso al final vamos a revisar la calidad de las casas que llegaron.
+
+Para terminar, compruebo el video, el texto, el contacto y las vistas previas. Abro el mensaje inicial y leo qué va a recibir la persona. Todo debe ayudarla a dar el siguiente paso que le estamos pidiendo.
+
+
+═════════════════════════════════════════════════════════════════
+CLASE 2.4 — Qué información pido cuando llega un contacto
+═════════════════════════════════════════════════════════════════
+
+
+El siguiente trabajo comienza cuando responde una persona. Para poder revisar su casa necesitamos información concreta.
+
+En este ejercicio vamos a empezar por cinco cosas: dónde está la casa, cuál es su relación con la propiedad, qué quiere hacer, cómo está el inmueble y qué precio tiene en mente. Después registramos los datos que falten sobre documentación, ocupación y adeudos, según avance la conversación.
+
+Una respuesta por mensaje es un primer dato. Si alguien nos dice cuánto debe o cuánto mide la casa, lo anotamos con esa fuente. Más adelante lo vamos a contrastar con los documentos que correspondan.
+
+El objetivo de esta conversación es decidir cuál es el siguiente paso útil. Puede ser pedir fotos, aclarar la ubicación, entender mejor la situación o agendar una visita. También puede ser reconocer que la propiedad queda fuera de lo que estamos buscando.
+
+No hace falta resolver toda la operación en un chat. Sí hace falta que al terminar sepas qué información tienes y qué falta conseguir.
+
+Mensaje para practicar
+
+Gracias por escribir. Para empezar a revisar la casa, ¿me compartes la ciudad y colonia, unas fotos y el precio que tienes en mente? También cuéntame si eres el propietario y qué te gustaría resolver con la venta.
+
+Preguntas de seguimiento propuestas: ocupación actual; trabajos que cree que necesita; si hay crédito o adeudos; disponibilidad de documentos; fecha y motivo de venta que quiera compartir.
+
+
+═════════════════════════════════════════════════════════════════
+CLASE 2.5 — Cómo preparo la visita y la revisión de una casa
+═════════════════════════════════════════════════════════════════
+
+
+La visita nos sirve para contrastar lo que entendimos por mensaje con lo que podemos observar y preguntar en la casa.
+
+Lleva la ficha del contacto. Revisa ubicación, espacios y trabajos aparentes. Anota qué observas y qué necesita una evaluación o cotización. Una fotografía puede ayudar a explicar un hallazgo, pero no resuelve por sí sola si el trabajo será leve o costoso.
+
+Para la forma de trabajar que estamos enseñando, nos interesa saber si la intervención encaja con una remodelación leve. Si aparece un trabajo de mayor alcance, necesitamos incorporarlo a la evaluación antes de decidir.
+
+La conversación con el dueño también importa: qué quiere vender, qué espera recibir, en qué plazo y qué información falta. Escucha las condiciones y regístralas. En el módulo del trato vamos a desarrollar cómo se negocian.
+
+Al terminar, elige una de tres acciones: seguir con el análisis, pedir información adicional o dejar pasar la oportunidad. Escribe por qué. Esa explicación es la que después te permite revisar tu criterio y mejorar.
+
+
+═════════════════════════════════════════════════════════════════
+CLASE 2.6 — Cómo sé si la captación está funcionando
+═════════════════════════════════════════════════════════════════
+
+
+Vamos a juntar el anuncio con lo que ocurrió después. Quiero saber cuánto se gastó, cuántos contactos llegaron y cuántas casas merecen una revisión más completa.
+
+Imagina dos pruebas. En cada una gastamos mil pesos. La primera trae cincuenta contactos y dos casas que pasan el filtro inicial. La segunda trae veinte contactos y cuatro casas que pasan ese filtro.
+
+La primera costó veinte pesos por contacto. La segunda, cincuenta pesos por contacto. Si solo miras ese número, parece más conveniente la primera.
+
+Ahora divide el gasto entre las casas que pasan el filtro: quinientos pesos en la primera prueba y doscientos cincuenta en la segunda. Ese dato cambia la lectura. Todavía necesitamos saber qué pasa en las visitas y en los números de cada casa, pero ya tenemos una medida más cercana al trabajo que queremos realizar.
+
+Por eso tu registro debe conectar cada contacto con su anuncio y con el siguiente paso. Si una casa no conviene, anota el motivo. Si falta una respuesta, deja pendiente y fecha de seguimiento. Si todavía no hay una casa viable, lo registramos así.
+
+Con suficiente seguimiento podrás ver qué mensaje trae el tipo de propiedades que buscas, qué información suele faltar y en qué parte del proceso se detienen los contactos. Eso te ayuda a decidir qué ajustar.
+
+Al cerrar este módulo tendrás el perfil que buscas, un video preparado, la ficha de campaña y un registro para atender las respuestas. En el siguiente abrimos los números y los documentos de la casa candidata para decidir si tiene sentido avanzar.
