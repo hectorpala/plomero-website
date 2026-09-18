@@ -83,7 +83,7 @@ SKIP_DIRS = ("/node_modules/", "/.git/", "/partials/", "/docs/", "/.netlify/",
 # Extensiones que son RECURSOS en disco (un href/src a esto debe existir tal cual).
 RESOURCE_EXT = (".css", ".js", ".mjs", ".webp", ".png", ".jpg", ".jpeg", ".gif",
                 ".svg", ".ico", ".webmanifest", ".json", ".xml", ".pdf", ".txt",
-                ".woff", ".woff2", ".ttf", ".otf", ".mp4", ".webm", ".avif")
+                ".woff", ".woff2", ".ttf", ".otf", ".mp4", ".webm", ".avif", ".zip")
 
 # ---------------------------------------------------------------- hallazgos
 _findings = []  # se ordenan y se les asigna id al final (determinismo)
