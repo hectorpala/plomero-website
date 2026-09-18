@@ -1,3 +1,7 @@
+## 2026-09-17 — Teleprompter: encuadre y guardado en iPhone
+
+Corrección solicitada por Héctor, limitada al estudio del curso. Vista y archivo sin diferencias de espejo, cuadro completo separado de los controles y selector de cámaras disponibles. Guardar en Fotos y Descargar permanecen visibles en vertical y horizontal. Veinticinco pruebas con cámara y compartir simulados aprobadas; falta confirmación en el iPhone físico. Se conservan los TXT del curso, la URL y el QR.
+
 ## 2026-09-17 — Curso y teleprompter: sincronización en la URL existente
 
 Actualización acotada a `/estudio/`, pedida por Héctor. QR permanente por guion, comprobación de versiones nuevas y protección de tomas sin guardar. Guion comercial vigente sincronizado. Catorce pruebas de navegador con cámara simulada y seis del paquete aprobadas; el iPhone físico sigue pendiente. La constancia de publicación HTTP se guarda en `curso-flipping/edicion/venta/ULTIMA-PUBLICACION.json`. Sin cambios en las páginas comerciales de plomería, caché global ni sitemap.
