@@ -1,3 +1,7 @@
+## 2026-09-17 — Diálogos editables para grabar
+
+Editar mi guion lleva al editor de Grabar desde venta y clases. Permite escribir, borrar y pegar; guarda en ese navegador y comparte el texto con su teleprompter. Incluye descarga, restauración confirmada y recuperación de una edición anterior. El QR conserva el guion publicado; las ediciones entre dispositivos se trasladan copiando/pegando. 23 comprobaciones de edición, 19 de actualización y 47 de apoyos aprobadas. Sin cambios en fuentes, láminas ni captura de cámara.
+
 ## 2026-09-17 — Introducción comercial y láminas por video
 
 Guion reforzado para explicar captación, evaluación y propuesta al inversionista. 46 láminas descargables para el video de venta y las 17 clases escritas, con PNG vertical/horizontal, SVG editables y guía por guion. Paquete público limitado a 146 archivos del estudio. El verificador ahora reconoce .zip como archivo descargable; sigue comprobando su existencia. Verificados 47 puntos de navegador local y 19 de actualización; descargas cotejadas con los originales. Mismas URL/QR, sin cambios en captura ni en el sitio comercial de plomería. Grabación y montaje de Héctor pendientes.

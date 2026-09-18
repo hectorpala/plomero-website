@@ -109,19 +109,19 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 @media(max-height:450px) and (orientation:landscape){#zoom-camara{bottom:8px;left:calc(50% - 45px)}.chip{right:110px;top:auto;bottom:10px}}
 #estado-guardar{font-size:13px;margin:6px 0 0;max-height:60px;overflow:auto}
 #estado-guardar:empty{display:none}
-</style><meta name="curso-version" content="11f25872b2b7053cb0ecbe4bb9ae0db566e0ab5ce882ac746949f132f20790fd"></head><body><main id="lobby">
+</style><meta name="curso-version" content="43573b54887e5afd0a5beaa9d687d92d476ef16d01b415b999e253f4a1ae55cc"></head><body><main id="lobby">
 <div class="sincronizacion"><button id="btn-actualizar" type="button" title="Comprobar y abrir la última versión del teleprompter">Actualizar</button><p id="sync-status" class="muted" role="status" aria-live="polite">Comprobando la versión publicada…</p></div>
 <header><div class="eyebrow">Tu Primer Flip</div><h1>Teleprompter</h1><p class="muted">Elige el guion, abre la cámara y lee mientras grabas. Sirve en esta Mac y en el celular.</p></header>
 <div id="aviso" hidden><p id="aviso-texto" style="margin:0"></p><div class="fila" style="margin-top:10px"><a id="aviso-abrir" class="primario" style="display:none;padding:12px 16px;border-radius:14px;text-decoration:none;color:#fff" target="_blank" rel="noopener">Abrir en pantalla completa</a><button id="aviso-diag" type="button" style="display:none">Ver diagnóstico</button></div><pre id="diag" hidden style="white-space:pre-wrap;font-size:12px;margin:10px 0 0;color:#FFE1A8"></pre></div>
 <div class="campo"><label for="guion">Guion para esta grabación</label><select id="guion"></select><p id="meta" class="muted" style="margin:0"></p></div>
-<div class="campo"><label for="texto-editable">Texto que vas a leer. Puedes corregirlo aquí; se guarda en este dispositivo.</label><textarea id="texto-editable" spellcheck="false"></textarea><div class="fila"><button id="btn-restablecer" type="button">Volver al texto original</button></div></div>
+<div class="campo"><label for="texto-editable">Edita lo que vas a decir</label><p id="edicion-ayuda" class="muted">Toca el texto para escribir, agregar palabras o borrar. Tus cambios se guardan en este navegador. Puedes copiar y pegar aquí un guion que hayas corregido en otro dispositivo.</p><textarea id="texto-editable" spellcheck="true" aria-describedby="edicion-ayuda edicion-estado"></textarea><p id="edicion-estado" class="muted" role="status" aria-live="polite"></p><div class="fila"><button id="btn-descargar-texto" type="button">Descargar mi texto</button><button id="btn-restablecer" type="button">Volver al texto del curso</button><button id="btn-recuperar-texto" type="button" hidden>Recuperar mi edición anterior</button></div></div>
 <div class="ajustes">
 <div class="ajuste"><span>Tamaño de letra</span><button type="button" data-letra="-2" aria-label="Letra más chica">−</button><strong id="letra-valor">32</strong><button type="button" data-letra="2" aria-label="Letra más grande">+</button></div>
 <div class="ajuste"><span>Velocidad del texto</span><button type="button" data-vel="-4" aria-label="Más lento">−</button><strong id="vel-valor">1.0×</strong><button type="button" data-vel="4" aria-label="Más rápido">+</button></div>
 </div>
 <div class="fila"><button id="btn-abrir" class="primario estira" type="button">Abrir cámara y leer</button><button id="btn-qr" type="button">Abrir en mi celular</button></div>
 <button id="btn-ultima" type="button" hidden>Ver la última toma (sin guardar)</button>
-<div id="panel-qr" class="panel-qr" hidden><div id="qr" aria-label="QR para abrir este guion en el celular"></div><div><strong>Escanea con la cámara del celular.</strong><p class="muted" style="margin:6px 0 10px">Abre este mismo guion en el teléfono. La dirección no vence.</p><div class="fila"><button id="btn-copiar-enlace" type="button">Copiar enlace</button></div><p id="estado-qr" class="muted" aria-live="polite" style="margin:8px 0 0"></p></div></div>
+<div id="panel-qr" class="panel-qr" hidden><div id="qr" aria-label="QR para abrir este guion en el celular"></div><div><strong>Escanea con la cámara del celular.</strong><p class="muted" style="margin:6px 0 10px">Abre el guion publicado en el teléfono. Para llevar tus correcciones, copia el texto y pégalo allí. La dirección no vence.</p><div class="fila"><button id="btn-copiar-enlace" type="button">Copiar enlace</button></div><p id="estado-qr" class="muted" aria-live="polite" style="margin:8px 0 0"></p></div></div>
 <details class="ayuda"><summary>Si es la primera vez en este dispositivo</summary><ol><li>Al tocar <strong>Abrir cámara y leer</strong>, permite cámara y micrófono.</li><li>Pulsa <strong>Probar texto</strong> para ajustar velocidad y letra antes de grabar.</li><li>Antes de grabar, toca <strong>Ver sin texto</strong>: ves el cuadro completo que se guardará, sin espejo.</li><li>Pulsa <strong>DETENER</strong> al terminar. En la siguiente pantalla, <strong>Guardar video en Fotos</strong> abre el menú del iPhone: elige <strong>Guardar video</strong>. También tienes <strong>Descargar archivo</strong>.</li></ol></details>
 </main>
 
@@ -232,6 +232,55 @@ function iniciarSincronizacion({boton, estado, urlPublica, puedeActualizar = () 
   }
 }
 </script>
+<script>// Ediciones por guion y versión. Curso y teleprompter comparten el mismo origen.
+// La memoria conserva el texto durante esta visita si el navegador bloquea el guardado.
+const textosPersonales = (() => {
+  const memoria = new Map();
+  const sinGuardar = new Set();
+  const clave = g => 'texto-' + g.id + '-' + g.sha256;
+  const respaldo = g => 'tu-primer-flip-edicion-' + g.id;
+  function leer(g) {
+    if (memoria.has(clave(g))) return memoria.get(clave(g));
+    try { return localStorage.getItem(clave(g)) ?? g.texto; }
+    catch { return g.texto; }
+  }
+  function guardar(g, texto) {
+    memoria.set(clave(g), texto);
+    try {
+      localStorage.setItem(clave(g), texto);
+      localStorage.setItem(respaldo(g), JSON.stringify({version: g.sha256, texto}));
+      sinGuardar.delete(clave(g));
+      return true;
+    } catch { sinGuardar.add(clave(g)); return false; }
+  }
+  function restablecer(g) {
+    memoria.set(clave(g), g.texto);
+    try {
+      localStorage.removeItem(clave(g));
+      localStorage.removeItem(respaldo(g));
+      sinGuardar.delete(clave(g));
+      return true;
+    } catch { sinGuardar.add(clave(g)); return false; }
+  }
+  function anterior(g) {
+    try {
+      const v = JSON.parse(localStorage.getItem(respaldo(g)));
+      return v && v.version !== g.sha256 && typeof v.texto === 'string' ? v.texto : null;
+    } catch { return null; }
+  }
+  function descargar(g, texto) {
+    const url = URL.createObjectURL(new Blob([texto], {type: 'text/plain;charset=utf-8'}));
+    const a = document.createElement('a');
+    a.href = url; a.download = g.id + '-mi-guion.txt'; document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  }
+  addEventListener('storage', e => {
+    if (e.key === null) { memoria.clear(); sinGuardar.clear(); }
+    else { memoria.delete(e.key); sinGuardar.delete(e.key); }
+  });
+  return {leer, guardar, restablecer, anterior, descargar, pendiente: g => sinGuardar.has(clave(g))};
+})();
+</script>
 <script>
 const $=id=>document.getElementById(id);
 const catalogo=JSON.parse($('catalogo').textContent);
@@ -251,27 +300,45 @@ function llenarSelector(){
     const o=document.createElement('option');o.value=g.id;o.textContent=g.titulo;og.append(o);
   }
 }
-function textoDe(g){return guardado.get('texto-'+g.id+'-'+g.sha256)??g.texto;}
+function textoDe(g){return textosPersonales.leer(g);}
 function elegir(id,desdeHash){
   const g=catalogo.find(x=>x.id===id)||catalogo[0];
   actual=g;$('guion').value=g.id;
   $('texto-editable').value=textoDe(g);
+  $('edicion-estado').textContent='';
   actualizarMeta();
   if(!desdeHash&&location.hash!=='#'+g.id)history.replaceState(null,'',location.pathname+location.search+'#'+g.id);
 }
 function actualizarMeta(){
   const t=$('texto-editable').value.trim(),palabras=t?t.split(/\s+/).length:0;
   const min=Math.max(1,Math.round(palabras/130));
-  const editado=t!==actual.texto.trim();
+  const editado=$('texto-editable').value!==actual.texto;
   $('meta').textContent=actual.estado+' · '+palabras+' palabras · unos '+min+' min hablando'+(editado?' · texto corregido en este dispositivo':'');
   $('btn-restablecer').hidden=!editado;
+  $('btn-recuperar-texto').hidden=textosPersonales.anterior(actual)===null;
+  if(textosPersonales.pendiente(actual))$('edicion-estado').textContent='No se pudo guardar en el navegador. Descarga tu texto antes de salir.';
 }
 $('texto-editable').addEventListener('input',()=>{
   const v=$('texto-editable').value;
-  if(v.trim()===actual.texto.trim())guardado.del('texto-'+actual.id+'-'+actual.sha256);else guardado.set('texto-'+actual.id+'-'+actual.sha256,v);
+  const ok=textosPersonales.guardar(actual,v);
+  $('edicion-estado').textContent=ok?'Guardado en este navegador.':'No se pudo guardar en el navegador. Descarga tu texto antes de salir.';
   actualizarMeta();
 });
-$('btn-restablecer').addEventListener('click',()=>{$('texto-editable').value=actual.texto;guardado.del('texto-'+actual.id+'-'+actual.sha256);actualizarMeta();});
+$('btn-restablecer').addEventListener('click',()=>{
+  if(!confirm('¿Volver al texto del curso y quitar tus cambios de esta versión?'))return;
+  const ok=textosPersonales.restablecer(actual);$('texto-editable').value=actual.texto;actualizarMeta();
+  $('edicion-estado').textContent=ok?'Texto del curso restaurado.':'Texto restaurado en pantalla; el navegador no pudo guardar el cambio. Descárgalo antes de salir.';
+});
+$('btn-descargar-texto').addEventListener('click',()=>textosPersonales.descargar(actual,$('texto-editable').value));
+$('btn-recuperar-texto').addEventListener('click',()=>{
+  const old=textosPersonales.anterior(actual);
+  if(old===null||!confirm('¿Usar tu edición anterior en lugar del texto que aparece ahora?'))return;
+  $('texto-editable').value=old;$('texto-editable').dispatchEvent(new Event('input'));
+});
+addEventListener('storage',()=>{
+  if(!actual||stream||$('lobby').hidden||document.activeElement===$('texto-editable'))return;
+  $('texto-editable').value=textoDe(actual);actualizarMeta();
+});
 $('guion').addEventListener('change',()=>elegir($('guion').value));
 addEventListener('hashchange',()=>elegir(decodeURIComponent(location.hash.slice(1)),true));
 
