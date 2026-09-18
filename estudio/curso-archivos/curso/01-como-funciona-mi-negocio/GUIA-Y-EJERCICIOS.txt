@@ -60,12 +60,14 @@ Qué hace en la operación: ____________________
 
 4. Decide el siguiente paso
 
-Ejercicio inventado. Te llega un mensaje de un dueño que quiere vender. Solo tienes una foto de la fachada.
+Ejercicio inventado. Te llega un mensaje de un dueño que quiere vender. Solo tienes una foto de la fachada y dice: «Está barata, hay que decidir hoy».
 
 - Etapa en la que estás: ____________________
 - Tres datos que pedirías: ____________________
 - Un costo que todavía no puedes dar por confirmado: ____________________
 - Cómo buscarías ese dato: ____________________
+
+Revisa tu decisión: si solo tienes la foto y el mensaje, aún estás reuniendo información. Explica qué falta antes de ofrecer dinero.
 
 5. Explícalo en un minuto
 
@@ -87,7 +89,7 @@ Revísalo tú
 
 - ☐ Nombras las seis etapas y lo que se hace en cada una.
 - ☐ Distingues propietario, operador, inversionista y comprador.
-- ☐ Pides información antes de tratar un contacto como una compra decidida.
+- ☐ Pides información antes de tratar un contacto como una compra decidida, aunque el dueño pida decidir hoy.
 - ☐ Reconoces que algunas actividades pueden avanzar al mismo tiempo.
 
 Si te atoras
@@ -435,7 +437,7 @@ Dato o entrega que ayuda a avanzar: Cuenta completa y acuerdo aplicable al resul
 
 El dueño ofrece la casa; el operador organiza; el inversionista aporta el capital acordado; el comprador la adquiere al final. Son funciones que pueden combinarse según la operación.
 
-Mensaje con una foto: estás en captación. Puedes pedir ubicación, precio pretendido y más información de la casa y sus documentos. Todavía falta revisar el alcance y costo de la obra. Una foto no confirma que la remodelación sea leve.
+Mensaje con una foto: estás en captación. Puedes pedir ubicación, precio pretendido y más información de la casa y sus documentos. Todavía falta revisar el alcance y costo de la obra. Una foto no confirma que la remodelación sea leve. La presión «hay que decidir hoy» no sustituye esos datos ni permite dar por revisada la oportunidad.
 
 Clase 1.2 — Las cuentas
 
