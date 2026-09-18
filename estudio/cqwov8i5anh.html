@@ -48,6 +48,17 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #estudio{background:#000;display:block;overflow:hidden;touch-action:none;overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #cabecera-camara{position:absolute;top:0;left:0;right:0;z-index:3;padding:calc(4px + env(safe-area-inset-top,0px)) 10px 4px;background:linear-gradient(rgba(0,0,0,.65),transparent);display:flex;align-items:center;justify-content:space-between;gap:6px}
 #cabecera-camara button{padding:8px 12px;font-size:13px;min-height:44px}
+#cabecera-camara #btn-ajustes{display:grid;align-content:center;gap:0;padding:4px 8px;line-height:16px;font-size:12px}
+#btn-ajustes small{font-size:10px;line-height:16px;white-space:nowrap}
+#velocidad-panel{margin-top:0!important}
+#velocidad-panel .ajuste{padding:6px;grid-template-columns:1fr auto 1fr;gap:8px}
+#velocidad-panel button{font-size:13px;padding:8px;min-width:0}
+#vel-camara{min-width:50px;text-align:center;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+#velocidad-rango{box-sizing:border-box;width:100%;min-height:44px;margin:0;accent-color:var(--marca);touch-action:pan-x}
+#velocidad-rango:focus-visible{outline:3px solid var(--amarillo);outline-offset:2px}
+#velocidades-rapidas{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+#velocidades-rapidas button[aria-pressed="true"]{background:var(--marca);color:#fff}
+#velocidad-ayuda{margin:0;font-size:12px}
 #ajustes-camara{box-sizing:border-box;width:calc(100% - 20px);max-width:480px;max-height:75%;margin:auto auto 10px;border:1px solid var(--linea);border-radius:20px;padding:18px;background:var(--panel);color:var(--texto);overflow:auto;touch-action:pan-y;overscroll-behavior:contain}
 #ajustes-camara::backdrop{background:rgba(0,0,0,.65)}
 #ajustes-camara header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
@@ -55,6 +66,7 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #ajustes-camara .campo{margin:14px 0}
 #ajustes-camara button{min-height:44px}
 #ajustes-camara .fila button{flex:1 1 80px;font-size:14px;padding:10px}
+@media(max-height:450px) and (orientation:landscape){#ajustes-camara{max-height:calc(100% - 20px);padding:12px}#ajustes-camara header{margin-bottom:8px}}
 #opciones-camara{margin-top:14px;font-size:14px}
 #opciones-camara summary{cursor:pointer;min-height:44px;align-content:center}
 #opciones-camara select{min-height:44px;font-size:14px;padding:8px;margin-top:6px}
@@ -119,7 +131,7 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #decision-toma .acciones{display:grid;gap:8px}
 @media(max-height:450px) and (orientation:landscape){#ventana,#estudio.con-zoom #ventana{right:112px;top:82px;bottom:12px}#estudio.con-zoom #ventana{bottom:98px}#guardar-panel{max-height:100%;overflow-y:auto}#revision-titulo{font-size:18px}#guardar-instruccion{font-size:11px}#estado-guardar{max-height:38px;font-size:11px}}
 
-</style><meta name="curso-version" content="87827b00ed7115d78520d33e69b9ba64ffac31141761d5338abf8411d11970b2"></head><body><main id="lobby">
+</style><meta name="curso-version" content="756ec7839ee44267d0ee6b61b7dfeb78876547bcc5231df67125bd704498098b"></head><body><main id="lobby">
 <div class="sincronizacion"><button id="btn-actualizar" type="button" title="Comprobar y abrir la última versión del teleprompter">Actualizar</button><p id="sync-status" class="muted" role="status" aria-live="polite">Comprobando la versión publicada…</p></div>
 <header><div class="eyebrow">Tu Primer Flip</div><h1>Teleprompter</h1><p class="muted">Elige el guion, abre la cámara y lee mientras grabas. Sirve en esta Mac y en el celular.</p></header>
 <div id="aviso" hidden><p id="aviso-texto" style="margin:0"></p><div class="fila" style="margin-top:10px"><a id="aviso-abrir" class="primario" style="display:none;padding:12px 16px;border-radius:14px;text-decoration:none;color:#fff" target="_blank" rel="noopener">Abrir en pantalla completa</a><button id="aviso-diag" type="button" style="display:none">Ver diagnóstico</button></div><pre id="diag" hidden style="white-space:pre-wrap;font-size:12px;margin:10px 0 0;color:#FFE1A8"></pre></div>
@@ -132,12 +144,12 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 <div class="fila"><button id="btn-abrir" class="primario estira" type="button">Abrir cámara y leer</button><button id="btn-qr" type="button">Abrir en mi celular</button></div>
 <button id="btn-ultima" type="button" hidden>Ver la última toma (sin guardar)</button>
 <div id="panel-qr" class="panel-qr" hidden><div id="qr" aria-label="QR para abrir este guion en el celular"></div><div><strong>Escanea con la cámara del celular.</strong><p class="muted" style="margin:6px 0 10px">Abre el guion publicado en el teléfono. Para llevar tus correcciones, copia el texto y pégalo allí. La dirección no vence.</p><div class="fila"><button id="btn-copiar-enlace" type="button">Copiar enlace</button></div><p id="estado-qr" class="muted" aria-live="polite" style="margin:8px 0 0"></p></div></div>
-<details class="ayuda"><summary>Si es la primera vez en este dispositivo</summary><ol><li>Al tocar <strong>Abrir cámara y leer</strong>, permite cámara y micrófono.</li><li>Pulsa <strong>Probar texto</strong> para ajustar velocidad y letra antes de grabar.</li><li>Antes de grabar, toca <strong>Ver sin texto</strong>: ves el cuadro completo que se guardará, sin espejo.</li><li>Pulsa <strong>DETENER</strong> al terminar. En la siguiente pantalla, <strong>Guardar video en Fotos</strong> abre el menú del iPhone: elige <strong>Guardar video</strong>. También tienes <strong>Descargar archivo</strong>.</li></ol></details>
+<details class="ayuda"><summary>Si es la primera vez en este dispositivo</summary><ol><li>Al tocar <strong>Abrir cámara y leer</strong>, permite cámara y micrófono.</li><li>Pulsa <strong>Probar texto</strong> para ensayar. Arriba a la derecha, <strong>Velocidad</strong> permite acelerar las letras; ahí también puedes ajustar su tamaño.</li><li>Antes de grabar, toca <strong>Ver sin texto</strong>: ves el cuadro completo que se guardará, sin espejo.</li><li>Pulsa <strong>DETENER</strong> al terminar. En la siguiente pantalla, <strong>Guardar video en Fotos</strong> abre el menú del iPhone: elige <strong>Guardar video</strong>. También tienes <strong>Descargar archivo</strong>.</li></ol></details>
 </main>
 
 <section id="estudio" hidden aria-label="Cámara y teleprompter">
-<header id="cabecera-camara"><button id="btn-cerrar" type="button">Cerrar</button><button id="btn-encuadre" type="button" aria-pressed="false">Ver sin texto</button><button id="btn-ajustes" type="button" aria-haspopup="dialog">Ajustes</button></header>
-<dialog id="ajustes-camara" aria-labelledby="ajustes-titulo"><header><h2 id="ajustes-titulo">Lectura y cámara</h2><button id="btn-cerrar-ajustes" type="button">Listo</button></header><p class="muted">El cuadro completo se guarda sin espejo. El texto y los botones no salen en tu video.</p><div class="campo"><label>Tamaño del texto</label><div class="fila"><button type="button" data-letra="-2">A− Más chica</button><button type="button" data-letra="2">A+ Más grande</button></div></div><div class="campo"><label>Velocidad de lectura</label><div class="fila"><button type="button" data-vel="-4">Más lento</button><button type="button" data-vel="4">Más rápido</button></div></div><button id="btn-reiniciar" type="button">Reiniciar texto</button><details id="opciones-camara"><summary>Elegir cámara</summary><label for="camara-dispositivo" class="muted">Cámaras disponibles en este dispositivo</label><select id="camara-dispositivo" aria-label="Cámara para grabar"></select></details><p id="zoom-ayuda" class="muted">Comprobando el acercamiento disponible…</p><details><summary>Datos de la cámara</summary><pre id="datos-camara"></pre><button id="btn-copiar-camara" type="button">Copiar datos de la cámara</button><p id="estado-copiar-camara" class="muted" role="status"></p></details></dialog>
+<header id="cabecera-camara"><button id="btn-cerrar" type="button">Cerrar</button><button id="btn-encuadre" type="button" aria-pressed="false">Ver sin texto</button><button id="btn-ajustes" type="button" aria-haspopup="dialog" aria-label="Velocidad del texto y ajustes"><span>Velocidad</span><small><span id="vel-acceso">1.0×</span> · Ajustes</small></button></header>
+<dialog id="ajustes-camara" aria-labelledby="ajustes-titulo"><header><h2 id="ajustes-titulo">Lectura y cámara</h2><button id="btn-cerrar-ajustes" type="button">Listo</button></header><div class="campo" id="velocidad-panel"><label for="velocidad-rango">Velocidad del texto</label><div class="ajuste"><button type="button" data-vel="-4" aria-label="Reducir velocidad del texto">− Más lento</button><output id="vel-camara" for="velocidad-rango" aria-live="polite">1.0×</output><button type="button" data-vel="4" aria-label="Aumentar velocidad del texto">+ Más rápido</button></div><input id="velocidad-rango" type="range" min="8" max="112" step="2" value="28" aria-describedby="velocidad-ayuda"><div id="velocidades-rapidas" role="group" aria-label="Elegir velocidad del texto"><button type="button" data-vel-fija="28" aria-pressed="true">1×</button><button type="button" data-vel-fija="42" aria-pressed="false">1.5×</button><button type="button" data-vel-fija="56" aria-pressed="false">2×</button><button type="button" data-vel-fija="84" aria-pressed="false">3×</button></div><p id="velocidad-ayuda" class="muted">Desliza a la derecha para ir más rápido. Se aplica al momento, también mientras grabas.</p></div><p class="muted">El cuadro completo se guarda sin espejo. El texto y los botones no salen en tu video.</p><div class="campo"><label>Tamaño del texto</label><div class="fila"><button type="button" data-letra="-2">A− Más chica</button><button type="button" data-letra="2">A+ Más grande</button></div></div><button id="btn-reiniciar" type="button">Reiniciar texto</button><details id="opciones-camara"><summary>Elegir cámara</summary><label for="camara-dispositivo" class="muted">Cámaras disponibles en este dispositivo</label><select id="camara-dispositivo" aria-label="Cámara para grabar"></select></details><p id="zoom-ayuda" class="muted">Comprobando el acercamiento disponible…</p><details><summary>Datos de la cámara</summary><pre id="datos-camara"></pre><button id="btn-copiar-camara" type="button">Copiar datos de la cámara</button><p id="estado-copiar-camara" class="muted" role="status"></p></details></dialog>
 <div id="formato-camara" role="status">Comprobando cámara…</div><div id="formato-aviso" hidden><p>La cámara sigue entregando video horizontal. Mantén el teléfono vertical y vuelve a intentarlo.</p><button id="btn-reintentar-formato" type="button">Volver a comprobar cámara</button></div>
 <div id="visor"><div id="encuadre">
 <video id="camara" autoplay playsinline muted></video>
@@ -298,7 +310,8 @@ const $=id=>document.getElementById(id);
 const catalogo=JSON.parse($('catalogo').textContent);
 const guardado={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
 let actual=null,stream=null,cara='user',wakeLock=null,dispositivo='',preparando=false,tituloToma='',idToma='';
-let tpPx=Number(guardado.get('tp-letra'))||32,tpVel=Number(guardado.get('tp-vel'))||28;
+const velocidadGuardada=Number(guardado.get('tp-vel'));
+let tpPx=Number(guardado.get('tp-letra'))||32,tpVel=Number.isFinite(velocidadGuardada)&&velocidadGuardada>0?Math.max(8,Math.min(112,velocidadGuardada)):28;
 let tpPos=0,tpCorriendo=false,animacion=null,ultimoFrame=0;
 let grabador=null,trozos=[],grabando=false,inicio=0,relojId=null,archivo=null,urlToma=null;
 let comprobacionFormato=null,finalizando=false,abriendoCamara=false,guardandoToma=false;
@@ -357,15 +370,28 @@ $('guion').addEventListener('change',()=>elegir($('guion').value));
 addEventListener('hashchange',()=>elegir(decodeURIComponent(location.hash.slice(1)),true));
 
 function pintarAjustes(){
-  $('letra-valor').textContent=tpPx;$('vel-valor').textContent=(tpVel/28).toFixed(1)+'×';
+  $('letra-valor').textContent=tpPx;
+  const velocidad=(tpVel/28).toFixed(1)+'×';
+  for(const id of ['vel-valor','vel-camara','vel-acceso'])$(id).textContent=velocidad;
+  $('velocidad-rango').value=tpVel;$('velocidad-rango').setAttribute('aria-valuetext',velocidad);
+  document.querySelectorAll('[data-vel]').forEach(b=>{b.disabled=Number(b.dataset.vel)<0?tpVel<=8:tpVel>=112;});
+  document.querySelectorAll('[data-vel-fija]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.velFija)===tpVel)));
   $('texto').style.fontSize=tpPx+'px';$('texto-editable').style.fontSize=Math.min(22,Math.max(16,tpPx-12))+'px';
   guardado.set('tp-letra',tpPx);guardado.set('tp-vel',tpVel);ajustarLectura();
 }
 document.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   if(b.dataset.letra){tpPx=Math.max(20,Math.min(60,tpPx+Number(b.dataset.letra)));pintarAjustes();estadoTp('Letra '+tpPx+' px');}
-  if(b.dataset.vel){tpVel=Math.max(8,Math.min(80,tpVel+Number(b.dataset.vel)));pintarAjustes();estadoTp('Velocidad '+(tpVel/28).toFixed(1)+'×');}
+  if(b.dataset.vel)cambiarVelocidad(tpVel+Number(b.dataset.vel));
+  if(b.dataset.velFija)cambiarVelocidad(Number(b.dataset.velFija));
 });
+
+function cambiarVelocidad(valor){
+  if(!Number.isFinite(valor))return;
+  tpVel=Math.max(8,Math.min(112,valor));pintarAjustes();
+  estadoTp((tpCorriendo?'Avanzando · ':'Velocidad ')+(tpVel/28).toFixed(1)+'×');
+}
+$('velocidad-rango').addEventListener('input',e=>cambiarVelocidad(Number(e.target.value)));
 
 const enmarcada=(()=>{try{return window.top!==window.self;}catch(e){return true;}})();
 function politicaCamara(){
@@ -410,7 +436,7 @@ window.visualViewport?.addEventListener('resize',ajustarPantalla);
 $('camara').addEventListener('resize',ajustarEncuadre);
 $('camara').addEventListener('loadedmetadata',ajustarEncuadre);
 if(window.ResizeObserver){new ResizeObserver(ajustarEncuadre).observe($('visor'));new ResizeObserver(ajustarLectura).observe($('rollo'));}
-$('btn-ajustes').addEventListener('click',()=>{$('ajustes-camara').showModal();});
+$('btn-ajustes').addEventListener('click',()=>{$('ajustes-camara').showModal();$('ajustes-camara').scrollTop=0;});
 $('btn-cerrar-ajustes').addEventListener('click',()=>{$('ajustes-camara').close();});
 $('btn-encuadre').addEventListener('click',()=>{
   const oculto=!$('ventana').hidden;$('ventana').hidden=oculto;
