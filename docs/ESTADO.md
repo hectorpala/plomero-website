@@ -1,3 +1,7 @@
+## 2026-09-17 — Encuadre con dos dedos e icono Actualizar
+
+Dos dedos ajustan el zoom disponible antes de grabar; un dedo conserva el desplazamiento del guion. La captura guarda el mismo encuadre. Icono ↻ Actualizar visible arriba, con comprobación y aplicación en un toque. Protege cámara abierta y tomas sin guardar; no recarga por su cuenta. 78 comprobaciones simuladas aprobadas. Pendiente iPhone físico. Misma URL, QR, guiones y precio.
+
 ## 2026-09-17 — Acercamiento frontal del curso
 
 Héctor aprobó la mejoría del tamaño; falta igualar la distancia aparente a Cámara de Apple. Añadido control +/− del zoom del track cuando existe soporte, verificación del valor aplicado y memoria por cámara. Mantiene la imagen grande y el mismo encuadre en la grabación. Sin soporte, informa y ofrece diagnóstico copiable. 56 comprobaciones simuladas aprobadas. Pendiente modelo de iPhone y prueba física. URL, QR y guiones sin cambios.
