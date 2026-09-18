@@ -24,8 +24,8 @@ APOYO: «Está barata, hay que decidir hoy». Solo tienes una foto.
 CONSERVAR VISIBLE: Ejercicio inventado · ¿Qué dato me falta para tomar la siguiente decisión?
 
 04. De la compra a la venta
-CUÁNDO: En la apertura, junto con la aclaración de gastos y reparto. No separar las cifras de esa explicación.
-APOYO: Casa de Díaz Ordaz · Dos precios no son la ganancia.
+CUÁNDO: En la apertura, al mostrar los precios de compra y venta y explicar qué aprenderá a calcular antes de comprar, incluidos remodelación y gastos.
+APOYO: Casa de Díaz Ordaz · Compra, remodelación y venta.
 CONSERVAR VISIBLE: Las cifras de compra y venta no indican utilidad neta ni lo que recibió Héctor.
 
 05. Aprende a evaluar tu primer flip
