@@ -13,17 +13,22 @@ CUÁNDO: Al decir la primera frase del video. Mostrar los precios de compra y ve
 APOYO: Casa de Díaz Ordaz · Caso de Héctor.
 CONSERVAR VISIBLE: Precios de compra y venta. Para calcular la utilidad se descuentan la remodelación y los demás gastos.
 
-02. Qué reviso antes de ofrecer
+02. Conoce mi trabajo en redes
+CUÁNDO: Después de la presentación de Héctor, cuando menciona los seguidores y los videos de sus proyectos. Alternar con clips reales autorizados; conservar los usuarios visibles.
+APOYO: Héctor Palazuelos · Flips, remodelaciones y antes/después.
+CONSERVAR VISIBLE: Hitos de seguidores según registro del 14-sep-2026. Cifras redondeadas.
+
+03. Qué reviso antes de ofrecer
 CUÁNDO: Al explicar qué revisa de la casa y sus números: precio de compra, remodelación, gastos y posible venta.
 APOYO: Los primeros filtros de Héctor.
 CONSERVAR VISIBLE: El filtro inicial orienta la revisión; todavía hay datos por comprobar.
 
-03. Una propuesta empieza escuchando
+04. Una propuesta empieza escuchando
 CUÁNDO: Desde cómo escuchar al dueño hasta preparar una propuesta que le interese considerar.
 APOYO: Entender al dueño antes de poner una oferta sobre la mesa.
 CONSERVAR VISIBLE: La decisión de aceptar depende del vendedor y de las condiciones de la operación.
 
-04. Aprende el método de Héctor
+05. Aprende el método de Héctor
 CUÁNDO: Al presentar el programa, precio y mensaje FLIP del cierre.
 APOYO: Tu Primer Flip · De captar la oportunidad a cerrar las cuentas.
 CONSERVAR VISIBLE: Solicita el programa y la información de inscripción.
