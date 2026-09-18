@@ -1,3 +1,7 @@
+## 2026-09-17 — Revisión de Video vertical
+
+El rótulo de orientación está superpuesto en la vista, sin reducir el cuadro ni aparecer en la grabación. Revisión anotada en Avances. Teleprompter conservado sin cambios.
+
 ## 2026-09-17 — Acercamiento con letras y controles fijos
 
 Corregido salto de 21 píxeles en controles durante el ajuste. Guion/reloj separados del cuadro de cámara y gestos protegidos también sobre botones y cabecera. Un dedo conserva el desplazamiento del texto. 87 comprobaciones simuladas aprobadas; falta confirmar el resultado en el iPhone de Héctor. Se conservan URL, QR, guiones y el mismo encuadre en vista y archivo.
