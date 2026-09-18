@@ -1,3 +1,7 @@
+## 2026-09-17 — Acercamiento con letras y controles fijos
+
+Corregido salto de 21 píxeles en controles durante el ajuste. Guion/reloj separados del cuadro de cámara y gestos protegidos también sobre botones y cabecera. Un dedo conserva el desplazamiento del texto. 87 comprobaciones simuladas aprobadas; falta confirmar el resultado en el iPhone de Héctor. Se conservan URL, QR, guiones y el mismo encuadre en vista y archivo.
+
 ## 2026-09-17 — Encuadre con dos dedos e icono Actualizar
 
 Dos dedos ajustan el zoom disponible antes de grabar; un dedo conserva el desplazamiento del guion. La captura guarda el mismo encuadre. Icono ↻ Actualizar visible arriba, con comprobación y aplicación en un toque. Protege cámara abierta y tomas sin guardar; no recarga por su cuenta. 78 comprobaciones simuladas aprobadas. Pendiente iPhone físico. Misma URL, QR, guiones y precio.

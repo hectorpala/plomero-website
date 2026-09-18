@@ -45,10 +45,10 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 .ayuda summary{cursor:pointer;font-weight:600}
 .ayuda ol{margin:8px 0 0;padding-left:20px;color:var(--suave)}
 #estudio,#revision{box-sizing:border-box;position:fixed;top:0;left:0;right:0;height:100vh;height:var(--alto-visible,100dvh);z-index:10}
-#estudio{background:#000;display:block;overflow:hidden}
+#estudio{background:#000;display:block;overflow:hidden;touch-action:none;overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #cabecera-camara{position:absolute;top:0;left:0;right:0;z-index:3;padding:calc(4px + env(safe-area-inset-top,0px)) 10px 4px;background:linear-gradient(rgba(0,0,0,.65),transparent);display:flex;align-items:center;justify-content:space-between;gap:6px}
 #cabecera-camara button{padding:8px 12px;font-size:13px;min-height:44px}
-#ajustes-camara{box-sizing:border-box;width:calc(100% - 20px);max-width:480px;max-height:75%;margin:auto auto 10px;border:1px solid var(--linea);border-radius:20px;padding:18px;background:var(--panel);color:var(--texto);overflow:auto}
+#ajustes-camara{box-sizing:border-box;width:calc(100% - 20px);max-width:480px;max-height:75%;margin:auto auto 10px;border:1px solid var(--linea);border-radius:20px;padding:18px;background:var(--panel);color:var(--texto);overflow:auto;touch-action:pan-y;overscroll-behavior:contain}
 #ajustes-camara::backdrop{background:rgba(0,0,0,.65)}
 #ajustes-camara header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
 #ajustes-camara h2{font-size:20px;margin:0}
@@ -58,15 +58,15 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #opciones-camara{margin-top:14px;font-size:14px}
 #opciones-camara summary{cursor:pointer;min-height:44px;align-content:center}
 #opciones-camara select{min-height:44px;font-size:14px;padding:8px;margin-top:6px}
-#visor{position:absolute;inset:0;min-height:0;min-width:0;display:grid;place-items:center;overflow:hidden;touch-action:pan-y}
+#visor{position:absolute;inset:0;min-height:0;min-width:0;display:grid;place-items:center;overflow:hidden}
 #encuadre{position:relative;overflow:hidden;flex:none;background:#000}
 #estudio[hidden]{display:none}
 #estudio.verificando #visor{visibility:hidden}
 #camara{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 
-#ventana{position:absolute;left:0;right:0;top:calc(78px + env(safe-area-inset-top,0px));height:42%;overflow:hidden;background:linear-gradient(180deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.72) 70%,rgba(0,0,0,0) 100%);padding-top:0;box-sizing:border-box}
+#ventana{position:absolute;left:0;right:0;top:calc(78px + env(safe-area-inset-top,0px));height:42%;z-index:1;overflow:hidden;background:linear-gradient(180deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.72) 70%,rgba(0,0,0,0) 100%);padding-top:0;box-sizing:border-box}
 #ventana::after{content:"";position:absolute;left:12px;right:12px;top:34%;height:2px;background:var(--marca);opacity:.85;pointer-events:none}
-#rollo{height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#rollo{height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior-y:contain}
 #rollo::-webkit-scrollbar{display:none}
 #texto{margin:0;padding:0 18px 70vh;font-weight:600;line-height:1.35;text-shadow:0 2px 6px rgba(0,0,0,.9);white-space:pre-wrap;word-wrap:break-word}
 #texto.espejo-texto{transform:scaleX(-1)}
@@ -97,19 +97,19 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #formato-camara{position:absolute;top:calc(54px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:3;border-radius:20px;padding:3px 10px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;white-space:nowrap}
 #formato-aviso{position:absolute;top:26%;left:16px;right:16px;z-index:3;padding:16px;background:#2c2115;border:1px solid var(--marca);border-radius:14px}
 #formato-aviso p{margin:0 0 10px}
-#zoom-camara{position:absolute;bottom:calc(90px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:3;max-width:calc(100% - 20px);padding:5px 8px;border-radius:16px;background:rgba(0,0,0,.68);text-align:center}
+#zoom-camara{box-sizing:border-box;position:absolute;bottom:calc(90px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:3;width:244px;max-width:calc(100% - 20px);padding:5px 8px;border-radius:16px;background:rgba(0,0,0,.68);text-align:center}
 #zoom-camara .fila{flex-wrap:nowrap;justify-content:center;gap:8px}
 #zoom-camara button{min-width:44px;min-height:44px;padding:6px;font-size:18px}
 #zoom-valor{min-width:56px;font-size:14px;font-variant-numeric:tabular-nums}
 #zoom-camara .zoom-etiqueta{display:block;font-size:11px}
 #zoom-gesto{font-size:10px;display:block;margin-top:2px;color:var(--suave)}
-#zoom-estado{font-size:12px;margin:3px 0 0;max-width:290px}
+#zoom-estado{box-sizing:border-box;position:absolute;bottom:calc(100% + 4px);left:0;width:100%;font-size:12px;line-height:1.4;margin:0;padding:6px 8px;border-radius:10px;background:rgba(0,0,0,.8);pointer-events:none}
 #zoom-estado:empty{display:none}
 #datos-camara{font:12px/1.6 monospace;white-space:pre-wrap;overflow-wrap:anywhere}
 @media(max-height:450px) and (orientation:landscape){#zoom-camara{bottom:8px;left:calc(50% - 45px)}.chip{right:110px;top:auto;bottom:10px}}
 #estado-guardar{font-size:13px;margin:6px 0 0;max-height:60px;overflow:auto}
 #estado-guardar:empty{display:none}
-</style><meta name="curso-version" content="bc79965b010bb44039580fefc67d2289851623acff11392a1e5cb5a0755f0cd5"></head><body><main id="lobby">
+</style><meta name="curso-version" content="c1932d4e085ff4e48cd6635ae98f993868b0367f9793b397655d5ca988a4b1c4"></head><body><main id="lobby">
 <div class="sincronizacion"><button id="btn-actualizar" type="button" title="Comprobar y abrir la última versión del teleprompter">Actualizar</button><p id="sync-status" class="muted" role="status" aria-live="polite">Comprobando la versión publicada…</p></div>
 <header><div class="eyebrow">Tu Primer Flip</div><h1>Teleprompter</h1><p class="muted">Elige el guion, abre la cámara y lee mientras grabas. Sirve en esta Mac y en el celular.</p></header>
 <div id="aviso" hidden><p id="aviso-texto" style="margin:0"></p><div class="fila" style="margin-top:10px"><a id="aviso-abrir" class="primario" style="display:none;padding:12px 16px;border-radius:14px;text-decoration:none;color:#fff" target="_blank" rel="noopener">Abrir en pantalla completa</a><button id="aviso-diag" type="button" style="display:none">Ver diagnóstico</button></div><pre id="diag" hidden style="white-space:pre-wrap;font-size:12px;margin:10px 0 0;color:#FFE1A8"></pre></div>
@@ -131,9 +131,9 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 <div id="formato-camara" role="status">Comprobando cámara…</div><div id="formato-aviso" hidden><p>La cámara sigue entregando video horizontal. Mantén el teléfono vertical y vuelve a intentarlo.</p><button id="btn-reintentar-formato" type="button">Volver a comprobar cámara</button></div>
 <div id="visor"><div id="encuadre">
 <video id="camara" autoplay playsinline muted></video>
+</div></div>
 <div id="ventana"><div id="rollo"><p id="texto"></p></div></div>
 <div class="chip"><span id="reloj">00:00</span></div>
-</div></div>
 <div id="cuenta" aria-live="assertive"></div>
 <div id="zoom-camara" hidden><span class="zoom-etiqueta">Acercamiento</span><div class="fila"><button id="btn-zoom-menos" type="button" aria-label="Alejar imagen">−</button><output id="zoom-valor" aria-live="polite">1.00×</output><button id="btn-zoom-mas" type="button" aria-label="Acercar imagen">+</button><button id="btn-zoom-original" type="button" aria-label="Volver al encuadre inicial" title="Volver al encuadre inicial">↺</button></div><span id="zoom-gesto">También con dos dedos sobre la imagen</span><p id="zoom-estado" role="status"></p></div>
 <div id="controles">
@@ -242,7 +242,7 @@ let tpPos=0,tpCorriendo=false,animacion=null,ultimoFrame=0;
 let grabador=null,trozos=[],grabando=false,inicio=0,relojId=null,archivo=null,urlToma=null;
 let comprobacionFormato=null;
 let zoomCamara=null,ajustandoZoom=false;
-let pellizco=null,zoomPendiente=null,procesandoPellizco=false;
+let pellizco=null,zoomPendiente=null,procesandoPellizco=false,gestoCamara=false;
 
 function llenarSelector(){
   let grupo=null,og=null;
@@ -304,7 +304,9 @@ async function diagnostico(){
 }
 $('aviso-diag').addEventListener('click',diagnostico);
 function ajustarPantalla(){
-  document.documentElement.style.setProperty('--alto-visible',(window.visualViewport?.height||innerHeight)+'px');
+  // Un pellizco o una magnificación del navegador no son un cambio de tamaño de la interfaz.
+  const vp=window.visualViewport;
+  if(!gestoCamara&&(!vp||Math.abs(vp.scale-1)<.01))document.documentElement.style.setProperty('--alto-visible',(vp?.height||innerHeight)+'px');
   ajustarEncuadre();
 }
 function ajustarEncuadre(){
@@ -443,34 +445,37 @@ function terminarPellizco(cancelar=false){
   actualizarTrasGesto();
 }
 function distanciaDedos(a,b){return Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);}
-$('visor').addEventListener('touchstart',e=>{
-  if(e.touches.length!==2){if(pellizco)terminarPellizco(true);return;}
-  const dedos=Array.from(e.touches);
-  if(!dedos.every(t=>$('visor').contains(t.target)))return;
+$('estudio').addEventListener('touchstart',e=>{
+  if(e.touches.length<2){if(gestoCamara&&e.cancelable)e.preventDefault();return;}
+  // Capturar también dedos que empiezan sobre cabecera, botones o barras inferiores.
+  gestoCamara=true;
   if(e.cancelable)e.preventDefault();
+  if(e.touches.length!==2){terminarPellizco(true);return;}
+  const dedos=Array.from(e.touches);
+  if(!dedos.every(t=>$('estudio').contains(t.target))||$('ajustes-camara').open)return;
   if(!zoomCamara){estadoTp('Acercamiento no disponible. Consulta Ajustes.');return;}
-  if(grabando||preparando||comprobacionFormato||ajustandoZoom||procesandoPellizco||$('ajustes-camara').open)return;
+  if(pellizco||grabando||preparando||comprobacionFormato||ajustandoZoom||procesandoPellizco)return;
   const distancia=distanciaDedos(...dedos);if(distancia<12)return;
   pellizco={ids:dedos.map(t=>t.identifier),distancia,valor:zoomCamara.valor,camara:zoomCamara};
   actualizarTrasGesto();
-},{passive:false});
-$('visor').addEventListener('touchmove',e=>{
+},{passive:false,capture:true});
+$('estudio').addEventListener('touchmove',e=>{
+  if((gestoCamara||e.touches.length>1)&&e.cancelable)e.preventDefault();
   if(!pellizco)return;
-  if(e.cancelable)e.preventDefault();
   const dedos=pellizco.ids.map(id=>Array.from(e.touches).find(t=>t.identifier===id));
   if(e.touches.length!==2||dedos.some(t=>!t)||pellizco.camara!==zoomCamara){terminarPellizco(true);return;}
   const valor=pellizco.valor*distanciaDedos(...dedos)/pellizco.distancia;
   zoomPendiente={camara:pellizco.camara,valor};
   void procesarZoomGesto();
-},{passive:false});
-$('visor').addEventListener('touchend',e=>{
-  if(!pellizco)return;
-  if(e.cancelable)e.preventDefault();
-  if(e.touches.length<2)terminarPellizco();
-},{passive:false});
-$('visor').addEventListener('touchcancel',()=>terminarPellizco(true),{passive:true});
+},{passive:false,capture:true});
+$('estudio').addEventListener('touchend',e=>{
+  if(gestoCamara&&e.cancelable)e.preventDefault();
+  if(pellizco&&e.touches.length<2)terminarPellizco();
+  if(!e.touches.length){gestoCamara=false;ajustarPantalla();}
+},{passive:false,capture:true});
+$('estudio').addEventListener('touchcancel',()=>{gestoCamara=false;terminarPellizco(true);ajustarPantalla();},{passive:true,capture:true});
 // Safari puede emitir además GestureEvent; el gesto debe cambiar la cámara, no ampliar la página.
-for(const tipo of ['gesturestart','gesturechange','gestureend'])$('visor').addEventListener(tipo,e=>{if(e.cancelable)e.preventDefault();},{passive:false});
+for(const tipo of ['gesturestart','gesturechange','gestureend'])$('estudio').addEventListener(tipo,e=>{if(e.cancelable)e.preventDefault();},{passive:false,capture:true});
 $('btn-copiar-camara').addEventListener('click',async()=>{
   const texto=datosCamara();$('datos-camara').textContent=texto;
   try{await navigator.clipboard.writeText(texto);$('estado-copiar-camara').textContent='Datos copiados. Puedes pegarlos en el chat.';}
@@ -566,7 +571,7 @@ async function abrirEstudio(){
   $('btn-abrir').disabled=false;$('btn-abrir').textContent='Abrir cámara y leer';
   $('btn-grabar').focus({preventScroll:true});
 }
-function detenerCamara(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('camara').srcObject=null;pellizco=null;zoomPendiente=null;zoomCamara=null;pintarZoom();if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;}}
+function detenerCamara(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('camara').srcObject=null;pellizco=null;gestoCamara=false;zoomPendiente=null;zoomCamara=null;pintarZoom();if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;}}
 function cerrarEstudio(){
   if(preparando||ajustandoZoom||pellizco||procesandoPellizco)return;
   if(grabando){detenerGrabacion();return;}
