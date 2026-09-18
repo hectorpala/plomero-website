@@ -1,6 +1,6 @@
 Promoción de video para compra del curso Flip
 
-GUÍA DE EDICIÓN · Guion promocional de 45 segundos · Pendiente de ensayar y grabar
+GUÍA DE EDICIÓN · Comercial revisado para publicidad · Pendiente de ensayar y grabar
 
 Las láminas se agregan después de grabar. No se incrustan desde el teleprompter. Elige PNG vertical (1080 × 1920) o PNG horizontal (1920 × 1080) según tu proyecto. El ZIP contiene ambos tamaños, sus SVG editables y esta guía. Los PNG se importan como imágenes en tu editor; los SVG requieren un editor compatible.
 
@@ -9,26 +9,26 @@ Mantén la voz de la toma al mostrar una lámina. Déjala el tiempo necesario pa
 Usa las cifras y las aclaraciones juntas. En los ejemplos, conserva visible que son ejercicios. Los materiales de clases en borrador requieren la misma revisión que su guion.
 
 01. De la compra a la venta
-CUÁNDO: 0–7 s, al decir los precios de compra y venta. Usar imágenes autorizadas del mismo caso y volver a Héctor con «¿Cómo sabes qué casa sí conviene comprar?». Los tiempos son una pauta para el ensayo de 45 segundos.
+CUÁNDO: 0–10 s: decir compra y venta, seguido de «De esa diferencia se descuentan remodelación y gastos». Mantener la aclaración legible. Usar imágenes autorizadas del caso, sin representar la diferencia como ganancia.
 APOYO: Casa de Díaz Ordaz · Caso de Héctor.
 CONSERVAR VISIBLE: Precios de compra y venta. Para calcular la utilidad se descuentan la remodelación y los demás gastos.
 
 02. Conoce mi trabajo en redes
-CUÁNDO: 11–19 s, al presentarte y decir «puedes ver videos de mis flips en redes». Mostrar usuarios e hitos fechados sobre clips autorizados, sin leer las cifras en voz alta; se añaden durante el montaje.
-APOYO: Héctor Palazuelos · Flips, remodelaciones y antes/después.
+CUÁNDO: 10–14 s, durante la presentación y las más de cien remodelaciones. Usuarios e hitos fechados pueden mostrarse sobre clips autorizados; no añadir lectura de las cifras.
+APOYO: Héctor Palazuelos · Más de 100 remodelaciones.
 CONSERVAR VISIBLE: Hitos de seguidores según registro del 14-sep-2026. Cifras redondeadas.
 
-03. Qué reviso antes de ofrecer
-CUÁNDO: 19–32 s, durante «captar y filtrar casas, hacer números». Usar sus rótulos como apoyo breve de edición, sin detener el guion a leer la lámina.
+03. Mi método empieza con los números
+CUÁNDO: 14–27 s: elegir casas y hacer los números antes de remodelar y vender. Apoyo breve, sin leer la lámina completa ni añadir promesas económicas.
 APOYO: Los primeros filtros de Héctor.
 CONSERVAR VISIBLE: El filtro inicial orienta la revisión; todavía hay datos por comprobar.
 
-04. Una propuesta empieza escuchando
-CUÁNDO: 19–32 s, durante «escuchar al dueño y preparar propuestas». Respirar después de «propuestas». Usar los rótulos como apoyo breve; no añadir una explicación que alargue la toma.
-APOYO: Entender al dueño antes de poner una oferta sobre la mesa.
-CONSERVAR VISIBLE: La decisión de aceptar depende del vendedor y de las condiciones de la operación.
+04. Te enseño y te asesoro
+CUÁNDO: 14–30 s, durante la negociación con el dueño y «Yo te asesoro para aplicarlo». La asesoría corresponde al método del curso; no anunciar sesiones individuales, gestión de inversiones ni asesoría ilimitada.
+APOYO: Criterio para escuchar al dueño y preparar tu propuesta.
+CONSERVAR VISIBLE: La propuesta reúne los números del negocio y las condiciones del vendedor.
 
-05. Empieza con Tu Primer Flip
-CUÁNDO: 32–45 s, al presentar el programa y precio y durante el cierre. Mantener $4,999 MXN y «Escríbeme FLIP» visibles hasta terminar; los tiempos se confirman al ensayar.
-APOYO: Aprende a elegir, evaluar y llevar una operación.
-CONSERVAR VISIBLE: Solicita el programa y la información de inscripción.
+05. Solo 10 lugares
+CUÁNDO: 30–45 s: desde «Solo aceptaremos a diez personas» hasta el cierre. Mostrar juntos cupo, total, apartado y saldo. No inventar lugares ocupados ni un plazo de cierre. Tiempos sujetos al ensayo.
+APOYO: Tu Primer Flip · 8 capítulos, 40 clases y asesoría de Héctor.
+CONSERVAR VISIBLE: El apartado es parte del total: $999 + $4,000 = $4,999 MXN.
