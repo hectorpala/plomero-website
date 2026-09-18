@@ -1,3 +1,7 @@
+## 2026-09-17 — Cámara del curso ampliada, sin recorte
+
+Vista simplificada a petición de Héctor: Ajustes se abre en un panel y la escena conserva sus bordes. En 390×664 simulados, el cuadro creció de 204×363 a 297×528. Veintinueve pruebas con cámara y compartir simulados aprobadas. Guardado, URL, QR y TXT conservados. Falta prueba en el iPhone físico.
+
 ## 2026-09-17 — Teleprompter: encuadre y guardado en iPhone
 
 Corrección solicitada por Héctor, limitada al estudio del curso. Vista y archivo sin diferencias de espejo, cuadro completo separado de los controles y selector de cámaras disponibles. Guardar en Fotos y Descargar permanecen visibles en vertical y horizontal. Veinticinco pruebas con cámara y compartir simulados aprobadas; falta confirmación en el iPhone físico. Se conservan los TXT del curso, la URL y el QR.

@@ -41,16 +41,20 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 .ayuda ol{margin:8px 0 0;padding-left:20px;color:var(--suave)}
 #estudio,#revision{box-sizing:border-box;position:fixed;top:0;left:0;right:0;height:100vh;height:var(--alto-visible,100dvh);z-index:10}
 #estudio{background:#000;display:grid;grid-template-rows:auto minmax(0,1fr) auto}
-#cabecera-camara{padding:calc(8px + env(safe-area-inset-top,0px)) 12px 8px;background:var(--fondo)}
-#cabecera-camara .fila{justify-content:space-between;gap:6px}
-#cabecera-camara p{margin:0;font-size:12px}
+#cabecera-camara{padding:calc(4px + env(safe-area-inset-top,0px)) 10px 4px;background:var(--fondo);display:flex;align-items:center;justify-content:space-between;gap:6px}
 #cabecera-camara button{padding:8px 12px;font-size:13px;min-height:44px}
-#opciones-camara{margin-top:6px;font-size:13px}
-#opciones-camara summary{cursor:pointer}
+#ajustes-camara{box-sizing:border-box;width:calc(100% - 20px);max-width:480px;max-height:75%;margin:auto auto 10px;border:1px solid var(--linea);border-radius:20px;padding:18px;background:var(--panel);color:var(--texto);overflow:auto}
+#ajustes-camara::backdrop{background:rgba(0,0,0,.65)}
+#ajustes-camara header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+#ajustes-camara h2{font-size:20px;margin:0}
+#ajustes-camara .campo{margin:14px 0}
+#ajustes-camara button{min-height:44px}
+#ajustes-camara .fila button{flex:1 1 80px;font-size:14px;padding:10px}
+#opciones-camara{margin-top:14px;font-size:14px}
+#opciones-camara summary{cursor:pointer;min-height:44px;align-content:center}
 #opciones-camara select{min-height:44px;font-size:14px;padding:8px;margin-top:6px}
 #visor{position:relative;min-height:0;min-width:0;display:grid;place-items:center;overflow:hidden}
 #encuadre{position:relative;overflow:hidden;flex:none;background:#000}
-#nota-encuadre{font-size:12px;color:var(--suave)}
 #estudio[hidden]{display:none}
 #camara{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
 
@@ -66,12 +70,12 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 @keyframes latir{50%{opacity:.35}}
 @media (prefers-reduced-motion:reduce){.chip::before{animation:none}}
 #cuenta{position:absolute;inset:0;display:none;place-items:center;font-family:Staatliches,Impact,sans-serif;font-size:160px;color:#fff;background:rgba(0,0,0,.45);z-index:4}
-#controles{position:relative;z-index:2;grid-row:3;background:rgba(10,11,14,.92);backdrop-filter:blur(6px);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));display:grid;gap:8px}
-#controles .fila{gap:6px}
-#controles button{padding:10px 12px;min-height:46px;font-size:14px;flex:1 1 auto}
-#controles .principal{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
-#btn-grabar{min-height:58px;font-size:17px;border-radius:999px;padding:0 26px}
-#estado-tp{text-align:center;font-size:13px;color:var(--suave);min-height:18px}
+#controles{position:relative;z-index:2;grid-row:3;background:var(--fondo);padding:4px 10px calc(4px + env(safe-area-inset-bottom,0px));display:grid;gap:2px}
+#controles .principal{display:grid;grid-template-columns:minmax(0,1fr) auto 48px;gap:8px;align-items:center}
+#controles button{padding:10px 8px;min-height:48px;font-size:13px;min-width:0}
+#controles #btn-grabar{min-height:58px;font-size:15px;border-radius:999px;padding:0 20px}
+#btn-voltear{font-size:25px!important}
+#estado-tp{text-align:center;font-size:11px;line-height:16px;color:var(--suave);min-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #revision{background:var(--fondo);display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:calc(10px + env(safe-area-inset-top,0px)) 12px calc(10px + env(safe-area-inset-bottom,0px));gap:8px;overflow:hidden}
 #revision[hidden]{display:none}
 #revision video{display:block;width:100%;height:100%;min-height:0;min-width:0;background:#000;border-radius:var(--radio);object-fit:contain}
@@ -82,11 +86,11 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #guardar-panel .secundarias{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:8px}
 #guardar-panel .secundarias button{font-size:12px;padding:8px 4px;min-height:44px}
 #guardar-instruccion{font-size:13px;margin:6px 0 0}
-@media(max-height:450px) and (orientation:landscape){#revision{grid-template-columns:minmax(0,1fr) minmax(250px,1fr);grid-template-rows:auto minmax(0,1fr)}#revision header{grid-column:1/-1}#guardar-panel{align-self:center}#cabecera-camara{padding-top:4px}#controles{gap:3px;padding-top:4px}#controles button{min-height:40px}#btn-grabar{min-height:44px}}
+@media(max-height:450px) and (orientation:landscape){#revision{grid-template-columns:minmax(0,1fr) minmax(250px,1fr);grid-template-rows:auto minmax(0,1fr)}#revision header{grid-column:1/-1}#guardar-panel{align-self:center}#estudio{grid-template-columns:minmax(0,1fr) 100px;grid-template-rows:48px minmax(0,1fr)}#cabecera-camara{grid-column:1/-1;padding-top:2px;padding-bottom:2px}#visor{grid-column:1;grid-row:2}#controles{grid-column:2;grid-row:2;padding:6px;align-content:center}#controles .principal{grid-template-columns:1fr}#controles #btn-grabar{padding:0 8px;min-height:48px}#estado-tp{white-space:normal;line-height:14px}}
 #revision .fila button{flex:1 1 140px}
 #estado-guardar{font-size:13px;margin:6px 0 0;max-height:60px;overflow:auto}
 #estado-guardar:empty{display:none}
-</style><meta name="curso-version" content="7ad0466cf0ee06f1e83c0f6df6e928ca665b2c77d61222ac2cff0c0db49f4c16"></head><body><main id="lobby">
+</style><meta name="curso-version" content="6e78c6068cc8e997289daaadb065663f47453fcc7d0b25d317a775f053f58995"></head><body><main id="lobby">
 <header><div class="eyebrow">Tu Primer Flip</div><h1>Teleprompter</h1><p class="muted">Elige el guion, abre la cámara y lee mientras grabas. Sirve en esta Mac y en el celular.</p></header>
 <div id="aviso" hidden><p id="aviso-texto" style="margin:0"></p><div class="fila" style="margin-top:10px"><a id="aviso-abrir" class="primario" style="display:none;padding:12px 16px;border-radius:14px;text-decoration:none;color:#fff" target="_blank" rel="noopener">Abrir en pantalla completa</a><button id="aviso-diag" type="button" style="display:none">Ver diagnóstico</button></div><pre id="diag" hidden style="white-space:pre-wrap;font-size:12px;margin:10px 0 0;color:#FFE1A8"></pre></div>
 <div class="fila"><button id="btn-actualizar" type="button">Buscar actualizaciones</button><p id="sync-status" class="muted" role="status" aria-live="polite" style="margin:0"></p></div>
@@ -103,7 +107,8 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 </main>
 
 <section id="estudio" hidden aria-label="Cámara y teleprompter">
-<header id="cabecera-camara"><div class="fila"><div><strong>Así queda tu video</strong><p id="nota-encuadre">Cuadro completo · el texto no se graba</p></div><button id="btn-encuadre" type="button" aria-pressed="false">Ver sin texto</button></div><details id="opciones-camara"><summary>Elegir cámara</summary><label for="camara-dispositivo" class="muted">Cámaras disponibles en este dispositivo</label><select id="camara-dispositivo" aria-label="Cámara para grabar"></select></details></header>
+<header id="cabecera-camara"><button id="btn-cerrar" type="button">Cerrar</button><button id="btn-encuadre" type="button" aria-pressed="false">Ver sin texto</button><button id="btn-ajustes" type="button" aria-haspopup="dialog">Ajustes</button></header>
+<dialog id="ajustes-camara" aria-labelledby="ajustes-titulo"><header><h2 id="ajustes-titulo">Lectura y cámara</h2><button id="btn-cerrar-ajustes" type="button">Listo</button></header><p class="muted">El cuadro completo se guarda sin espejo. El texto y los botones no salen en tu video.</p><div class="campo"><label>Tamaño del texto</label><div class="fila"><button type="button" data-letra="-2">A− Más chica</button><button type="button" data-letra="2">A+ Más grande</button></div></div><div class="campo"><label>Velocidad de lectura</label><div class="fila"><button type="button" data-vel="-4">Más lento</button><button type="button" data-vel="4">Más rápido</button></div></div><button id="btn-reiniciar" type="button">Reiniciar texto</button><details id="opciones-camara"><summary>Elegir cámara</summary><label for="camara-dispositivo" class="muted">Cámaras disponibles en este dispositivo</label><select id="camara-dispositivo" aria-label="Cámara para grabar"></select></details></dialog>
 <div id="visor"><div id="encuadre">
 <video id="camara" autoplay playsinline muted></video>
 <div id="ventana"><div id="rollo"><p id="texto"></p></div></div>
@@ -111,8 +116,7 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 </div></div>
 <div id="cuenta" aria-live="assertive"></div>
 <div id="controles">
-<div class="fila"><button id="btn-tp" type="button">▶ Probar texto</button><button id="btn-reiniciar" type="button">Reiniciar</button><button type="button" data-letra="-2">A−</button><button type="button" data-letra="2">A+</button><button type="button" data-vel="-4">Lento</button><button type="button" data-vel="4">Rápido</button></div>
-<div class="principal"><button id="btn-cerrar" type="button">Cerrar cámara</button><button id="btn-grabar" class="peligro" type="button">● GRABAR</button><button id="btn-voltear" type="button">Voltear cámara</button></div>
+<div class="principal"><button id="btn-tp" type="button">▶ Probar texto</button><button id="btn-grabar" class="peligro" type="button">● GRABAR</button><button id="btn-voltear" type="button" aria-label="Cambiar entre cámara frontal y trasera" title="Voltear cámara">↺</button></div>
 <div id="estado-tp" aria-live="polite"></div>
 </div>
 </section>
@@ -278,6 +282,8 @@ window.visualViewport?.addEventListener('resize',ajustarPantalla);
 $('camara').addEventListener('resize',ajustarEncuadre);
 $('camara').addEventListener('loadedmetadata',ajustarEncuadre);
 if(window.ResizeObserver)new ResizeObserver(ajustarEncuadre).observe($('visor'));
+$('btn-ajustes').addEventListener('click',()=>{$('ajustes-camara').showModal();});
+$('btn-cerrar-ajustes').addEventListener('click',()=>{$('ajustes-camara').close();});
 $('btn-encuadre').addEventListener('click',()=>{
   const oculto=!$('ventana').hidden;$('ventana').hidden=oculto;
   $('btn-encuadre').textContent=oculto?'Mostrar guion':'Ver sin texto';
@@ -295,7 +301,7 @@ async function listarCamaras(){
 }
 $('camara-dispositivo').addEventListener('change',async()=>{
   if(grabando||preparando)return;
-  dispositivo=$('camara-dispositivo').value;$('opciones-camara').open=false;
+  dispositivo=$('camara-dispositivo').value;$('opciones-camara').open=false;$('ajustes-camara').close();
   controlesGrabacion(false);detenerCamara();$('estudio').hidden=true;await abrirEstudio();
 });
 function controlesGrabacion(ocupado){
@@ -378,7 +384,7 @@ $('btn-cerrar').addEventListener('click',cerrarEstudio);
 $('btn-voltear').addEventListener('click',voltear);
 $('btn-abrir').addEventListener('click',abrirEstudio);
 document.addEventListener('keydown',e=>{
-  if($('estudio').hidden||e.target.tagName==='TEXTAREA')return;
+  if($('estudio').hidden||$('ajustes-camara').open||e.target.tagName==='TEXTAREA')return;
   if(e.code==='Space'){e.preventDefault();tpCorriendo?cancelarScroll():iniciarScroll();}
   if(e.key==='r'||e.key==='R'){e.preventDefault();grabando?detenerGrabacion():iniciarGrabacion();}
   if(e.key==='Escape')cerrarEstudio();
@@ -397,7 +403,7 @@ async function iniciarGrabacion(){
   if(!stream||grabando||preparando)return;
   if(archivo&&!tomaGuardada&&!confirm('Primero guarda tu última toma. ¿Quieres reemplazarla por otra grabación?')){detenerCamara();$('estudio').hidden=true;mostrarRevision();return;}
   if(!window.MediaRecorder){estadoTp('Este navegador no puede grabar video. En iPhone usa Safari.');return;}
-  preparando=true;controlesGrabacion(true);
+  $('ajustes-camara').close();preparando=true;controlesGrabacion(true);
   reiniciarTp();$('btn-grabar').disabled=true;await cuentaRegresiva();
   tituloToma=actual.titulo;idToma=actual.id;
   const mime=mimeGrabacion(),opciones={videoBitsPerSecond:8000000,audioBitsPerSecond:192000};
