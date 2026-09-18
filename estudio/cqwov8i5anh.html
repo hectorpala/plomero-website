@@ -65,7 +65,7 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #rollo::-webkit-scrollbar{display:none}
 #texto{margin:0;padding:0 18px 70vh;font-weight:600;line-height:1.35;text-shadow:0 2px 6px rgba(0,0,0,.9);white-space:pre-wrap;word-wrap:break-word}
 #texto.espejo-texto{transform:scaleX(-1)}
-.chip{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 92px);right:12px;display:none;align-items:center;gap:8px;background:rgba(0,0,0,.65);color:#fff;border-radius:999px;padding:6px 12px;font-variant-numeric:tabular-nums;font-weight:600;z-index:3}
+.chip{position:absolute;top:calc(env(safe-area-inset-top,0px) + 54px);right:12px;display:none;align-items:center;gap:8px;background:rgba(0,0,0,.65);color:#fff;border-radius:999px;padding:6px 12px;font-variant-numeric:tabular-nums;font-weight:600;z-index:3}
 #estudio.grabando .chip{display:flex}
 .chip::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--rojo);animation:latir 1s infinite}
 @keyframes latir{50%{opacity:.35}}
@@ -92,9 +92,18 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 #formato-camara{position:absolute;top:calc(54px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:3;border-radius:20px;padding:3px 10px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;white-space:nowrap}
 #formato-aviso{position:absolute;top:26%;left:16px;right:16px;z-index:3;padding:16px;background:#2c2115;border:1px solid var(--marca);border-radius:14px}
 #formato-aviso p{margin:0 0 10px}
+#zoom-camara{position:absolute;bottom:calc(90px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:3;max-width:calc(100% - 20px);padding:5px 8px;border-radius:16px;background:rgba(0,0,0,.68);text-align:center}
+#zoom-camara .fila{flex-wrap:nowrap;justify-content:center;gap:8px}
+#zoom-camara button{min-width:44px;min-height:44px;padding:6px;font-size:18px}
+#zoom-valor{min-width:56px;font-size:14px;font-variant-numeric:tabular-nums}
+#zoom-camara .zoom-etiqueta{display:block;font-size:11px}
+#zoom-estado{font-size:12px;margin:3px 0 0;max-width:290px}
+#zoom-estado:empty{display:none}
+#datos-camara{font:12px/1.6 monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-height:450px) and (orientation:landscape){#zoom-camara{bottom:8px;left:calc(50% - 45px)}.chip{right:110px;top:auto;bottom:10px}}
 #estado-guardar{font-size:13px;margin:6px 0 0;max-height:60px;overflow:auto}
 #estado-guardar:empty{display:none}
-</style><meta name="curso-version" content="a1913903c146aa0bf8a66cfd0cf647c4eeabcef9329394c7ebb7e843ea1ab996"></head><body><main id="lobby">
+</style><meta name="curso-version" content="c4c1db3a4ed2d5b43903fc0d89eeceaa3445ba0920ff1007269f199bddb7b280"></head><body><main id="lobby">
 <header><div class="eyebrow">Tu Primer Flip</div><h1>Teleprompter</h1><p class="muted">Elige el guion, abre la cámara y lee mientras grabas. Sirve en esta Mac y en el celular.</p></header>
 <div id="aviso" hidden><p id="aviso-texto" style="margin:0"></p><div class="fila" style="margin-top:10px"><a id="aviso-abrir" class="primario" style="display:none;padding:12px 16px;border-radius:14px;text-decoration:none;color:#fff" target="_blank" rel="noopener">Abrir en pantalla completa</a><button id="aviso-diag" type="button" style="display:none">Ver diagnóstico</button></div><pre id="diag" hidden style="white-space:pre-wrap;font-size:12px;margin:10px 0 0;color:#FFE1A8"></pre></div>
 <div class="fila"><button id="btn-actualizar" type="button">Buscar actualizaciones</button><p id="sync-status" class="muted" role="status" aria-live="polite" style="margin:0"></p></div>
@@ -112,7 +121,7 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 
 <section id="estudio" hidden aria-label="Cámara y teleprompter">
 <header id="cabecera-camara"><button id="btn-cerrar" type="button">Cerrar</button><button id="btn-encuadre" type="button" aria-pressed="false">Ver sin texto</button><button id="btn-ajustes" type="button" aria-haspopup="dialog">Ajustes</button></header>
-<dialog id="ajustes-camara" aria-labelledby="ajustes-titulo"><header><h2 id="ajustes-titulo">Lectura y cámara</h2><button id="btn-cerrar-ajustes" type="button">Listo</button></header><p class="muted">El cuadro completo se guarda sin espejo. El texto y los botones no salen en tu video.</p><div class="campo"><label>Tamaño del texto</label><div class="fila"><button type="button" data-letra="-2">A− Más chica</button><button type="button" data-letra="2">A+ Más grande</button></div></div><div class="campo"><label>Velocidad de lectura</label><div class="fila"><button type="button" data-vel="-4">Más lento</button><button type="button" data-vel="4">Más rápido</button></div></div><button id="btn-reiniciar" type="button">Reiniciar texto</button><details id="opciones-camara"><summary>Elegir cámara</summary><label for="camara-dispositivo" class="muted">Cámaras disponibles en este dispositivo</label><select id="camara-dispositivo" aria-label="Cámara para grabar"></select></details></dialog>
+<dialog id="ajustes-camara" aria-labelledby="ajustes-titulo"><header><h2 id="ajustes-titulo">Lectura y cámara</h2><button id="btn-cerrar-ajustes" type="button">Listo</button></header><p class="muted">El cuadro completo se guarda sin espejo. El texto y los botones no salen en tu video.</p><div class="campo"><label>Tamaño del texto</label><div class="fila"><button type="button" data-letra="-2">A− Más chica</button><button type="button" data-letra="2">A+ Más grande</button></div></div><div class="campo"><label>Velocidad de lectura</label><div class="fila"><button type="button" data-vel="-4">Más lento</button><button type="button" data-vel="4">Más rápido</button></div></div><button id="btn-reiniciar" type="button">Reiniciar texto</button><details id="opciones-camara"><summary>Elegir cámara</summary><label for="camara-dispositivo" class="muted">Cámaras disponibles en este dispositivo</label><select id="camara-dispositivo" aria-label="Cámara para grabar"></select></details><p id="zoom-ayuda" class="muted">Comprobando el acercamiento disponible…</p><details><summary>Datos de la cámara</summary><pre id="datos-camara"></pre><button id="btn-copiar-camara" type="button">Copiar datos de la cámara</button><p id="estado-copiar-camara" class="muted" role="status"></p></details></dialog>
 <div id="formato-camara" role="status">Comprobando cámara…</div><div id="formato-aviso" hidden><p>La cámara sigue entregando video horizontal. Mantén el teléfono vertical y vuelve a intentarlo.</p><button id="btn-reintentar-formato" type="button">Volver a comprobar cámara</button></div>
 <div id="visor"><div id="encuadre">
 <video id="camara" autoplay playsinline muted></video>
@@ -120,6 +129,7 @@ textarea{padding:16px;font-size:18px;line-height:1.6;min-height:220px;resize:ver
 <div class="chip"><span id="reloj">00:00</span></div>
 </div></div>
 <div id="cuenta" aria-live="assertive"></div>
+<div id="zoom-camara" hidden><span class="zoom-etiqueta">Acercamiento</span><div class="fila"><button id="btn-zoom-menos" type="button" aria-label="Alejar imagen">−</button><output id="zoom-valor" aria-live="polite">1.00×</output><button id="btn-zoom-mas" type="button" aria-label="Acercar imagen">+</button><button id="btn-zoom-original" type="button" aria-label="Volver al encuadre inicial" title="Volver al encuadre inicial">↺</button></div><p id="zoom-estado" role="status"></p></div>
 <div id="controles">
 <div class="principal"><button id="btn-tp" type="button">▶ Probar texto</button><button id="btn-grabar" class="peligro" type="button">● GRABAR</button><button id="btn-voltear" type="button" aria-label="Cambiar entre cámara frontal y trasera" title="Voltear cámara">↺</button></div>
 <div id="estado-tp" aria-live="polite"></div>
@@ -212,6 +222,7 @@ let tpPx=Number(guardado.get('tp-letra'))||32,tpVel=Number(guardado.get('tp-vel'
 let tpPos=0,tpCorriendo=false,animacion=null,ultimoFrame=0;
 let grabador=null,trozos=[],grabando=false,inicio=0,relojId=null,archivo=null,urlToma=null;
 let comprobacionFormato=null;
+let zoomCamara=null,ajustandoZoom=false;
 
 function llenarSelector(){
   let grupo=null,og=null;
@@ -311,9 +322,89 @@ $('camara-dispositivo').addEventListener('change',async()=>{
   controlesGrabacion(false);detenerCamara();$('estudio').hidden=true;await abrirEstudio();
 });
 function controlesGrabacion(ocupado){
-  $('btn-voltear').disabled=ocupado;$('camara-dispositivo').disabled=ocupado;
-  $('btn-cerrar').disabled=preparando;
+  $('btn-voltear').disabled=ocupado||ajustandoZoom;$('camara-dispositivo').disabled=ocupado||ajustandoZoom;
+  $('btn-cerrar').disabled=preparando||ajustandoZoom;
+  pintarZoom();
 }
+function datosCamara(){
+  const track=stream?.getVideoTracks()[0];if(!track)return 'Abre la cámara para consultar sus datos.';
+  const s=track.getSettings(),v=$('camara');
+  let z;try{z=track.getCapabilities?.().zoom;}catch(e){}
+  return ['Cámara: '+(track.label||'Sin nombre'),
+    'Orientación: '+(s.facingMode==='user'?'frontal':s.facingMode==='environment'?'trasera':'no informada'),
+    'Video recibido: '+v.videoWidth+' × '+v.videoHeight,
+    'Zoom informado: '+(Number.isFinite(s.zoom)?s.zoom:'no disponible'),
+    'Rango de zoom: '+(z&&Number.isFinite(z.min)&&Number.isFinite(z.max)?z.min+' a '+z.max:'no disponible'),
+    'Navegador: '+navigator.userAgent].join('\n');
+}
+function pintarZoom(){
+  const z=zoomCamara;
+  $('zoom-camara').hidden=!z;
+  $('datos-camara').textContent=datosCamara();
+  if(!z)return;
+  const ocupado=grabando||preparando||ajustandoZoom||!!comprobacionFormato;
+  $('zoom-valor').textContent=(z.valor/z.origen).toFixed(2)+'×';
+  $('btn-zoom-menos').disabled=ocupado||z.valor<=z.min+z.paso/2;
+  $('btn-zoom-mas').disabled=ocupado||z.valor>=z.max-z.paso/2;
+  $('btn-zoom-original').disabled=ocupado||Math.abs(z.valor-z.origen)<z.paso/2;
+}
+async function prepararZoom(){
+  zoomCamara=null;$('zoom-estado').textContent='';
+  const track=stream?.getVideoTracks()[0];if(!track){pintarZoom();return;}
+  let r;try{r=track.getCapabilities?.().zoom;}catch(e){}
+  const s=track.getSettings();
+  if(!r||!Number.isFinite(r.min)||!Number.isFinite(r.max)||r.max<=r.min||!Number.isFinite(s.zoom)||s.zoom<=0){
+    $('zoom-ayuda').textContent='Esta cámara no permite ajustar el acercamiento desde este navegador. En Datos de la cámara puedes copiar la información para revisar el caso.';
+    pintarZoom();return;
+  }
+  const clave=s.deviceId?'encuadre-zoom-'+s.deviceId:null;
+  let anterior;try{anterior=JSON.parse(clave&&guardado.get(clave));}catch(e){}
+  const valido=n=>Number.isFinite(n)&&n>0&&n>=r.min&&n<=r.max;
+  const origen=valido(anterior?.origen)?anterior.origen:s.zoom;
+  zoomCamara={track,min:r.min,max:r.max,paso:Number.isFinite(r.step)&&r.step>0?r.step:0.01,valor:s.zoom,origen,clave};
+  $('zoom-ayuda').textContent='Usa + para verte más cerca y − para alejarte. 1× es el encuadre inicial de esta cámara; puede diferir del 1× de la app Cámara. El ajuste también se graba y se recuerda para esta cámara en este dispositivo.';
+  pintarZoom();
+  if(valido(anterior?.valor)&&Math.abs(anterior.valor-s.zoom)>=zoomCamara.paso/2)await aplicarZoom(anterior.valor,false);
+}
+async function aplicarZoom(valor,guardar=true){
+  const z=zoomCamara;
+  if(!z||grabando||preparando||ajustandoZoom||comprobacionFormato||stream?.getVideoTracks()[0]!==z.track)return;
+  const objetivo=Math.max(z.min,Math.min(z.max,z.min+Math.round((valor-z.min)/z.paso)*z.paso));
+  ajustandoZoom=true;controlesGrabacion(false);$('btn-grabar').disabled=true;$('zoom-estado').textContent='Ajustando…';
+  try{
+    // Conservar la selección y formato del track. El zoom se aplica a la fuente que también graba MediaRecorder.
+    const c=z.track.getConstraints();
+    const advanced=(c.advanced||[]).map(({zoom,...resto})=>resto).filter(x=>Object.keys(x).length);
+    await z.track.applyConstraints({...c,zoom:{exact:objetivo},advanced:[...advanced,{zoom:objetivo}]});
+    for(let i=0;i<12&&stream?.getVideoTracks()[0]===z.track;i++){
+      const actual=z.track.getSettings().zoom;
+      if(Number.isFinite(actual)&&Math.abs(actual-objetivo)<=Math.max(z.paso/2,.001))break;
+      await new Promise(r=>setTimeout(r,60));
+    }
+    if(stream?.getVideoTracks()[0]!==z.track)return;
+    const recibido=z.track.getSettings().zoom;
+    if(!Number.isFinite(recibido)||Math.abs(recibido-objetivo)>Math.max(z.paso/2,.001))throw new Error('Zoom no aplicado');
+    z.valor=recibido;
+    if(guardar&&z.clave)guardado.set(z.clave,JSON.stringify({origen:z.origen,valor:z.valor}));
+    $('zoom-estado').textContent='';
+  }catch(e){
+    if(stream?.getVideoTracks()[0]===z.track){
+      const recibido=z.track.getSettings().zoom;if(Number.isFinite(recibido))z.valor=recibido;
+      $('zoom-estado').textContent='La cámara no confirmó ese ajuste. Se muestra el valor que sí está aplicando.';
+    }
+  }finally{
+    ajustandoZoom=false;controlesGrabacion(grabando||preparando);pintarZoom();
+    if(stream&&!grabando&&!preparando)$('btn-grabar').disabled=!!comprobacionFormato||!formatoCoincide(innerHeight>innerWidth);
+  }
+}
+$('btn-zoom-menos').addEventListener('click',()=>{if(zoomCamara)aplicarZoom(zoomCamara.valor-Math.max(zoomCamara.paso,zoomCamara.origen*.1));});
+$('btn-zoom-mas').addEventListener('click',()=>{if(zoomCamara)aplicarZoom(zoomCamara.valor+Math.max(zoomCamara.paso,zoomCamara.origen*.1));});
+$('btn-zoom-original').addEventListener('click',()=>{if(zoomCamara)aplicarZoom(zoomCamara.origen);});
+$('btn-copiar-camara').addEventListener('click',async()=>{
+  const texto=datosCamara();$('datos-camara').textContent=texto;
+  try{await navigator.clipboard.writeText(texto);$('estado-copiar-camara').textContent='Datos copiados. Puedes pegarlos en el chat.';}
+  catch(e){$('estado-copiar-camara').textContent='No se pudo copiar. Los datos están visibles arriba.';}
+});
 function formatoCoincide(vertical){
   const v=$('camara');
   return v.videoWidth>0&&v.videoHeight>0&&(vertical?v.videoHeight>v.videoWidth:v.videoWidth>=v.videoHeight);
@@ -356,12 +447,12 @@ function comprobarFormatoCamara(){
   })().catch(()=>{
     if(stream){$('formato-aviso').hidden=false;$('formato-camara').textContent='Revisar cámara';$('btn-grabar').disabled=true;}
     return false;
-  }).finally(()=>{comprobacionFormato=null;$('estudio').classList.remove('verificando');if(!grabando&&!preparando){$('btn-voltear').disabled=false;$('camara-dispositivo').disabled=false;}});
+  }).finally(()=>{comprobacionFormato=null;$('estudio').classList.remove('verificando');controlesGrabacion(grabando||preparando);});
   return comprobacionFormato;
 }
 $('btn-reintentar-formato').addEventListener('click',async()=>{
   $('btn-reintentar-formato').disabled=true;
-  await comprobarFormatoCamara();$('btn-reintentar-formato').disabled=false;
+  await comprobarFormatoCamara();await prepararZoom();$('btn-reintentar-formato').disabled=false;
 });
 async function abrirEstudio(){
   if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
@@ -398,19 +489,19 @@ async function abrirEstudio(){
   $('ventana').hidden=false;$('btn-encuadre').textContent='Ver sin texto';$('btn-encuadre').setAttribute('aria-pressed','false');
   $('estudio').hidden=false;reiniciarTp();
   try{await $('camara').play();}catch(e){}
-  ajustarPantalla();await comprobarFormatoCamara();await listarCamaras();
+  ajustarPantalla();await comprobarFormatoCamara();await listarCamaras();await prepararZoom();
   if(!stream||$('estudio').hidden){$('btn-abrir').disabled=false;$('btn-abrir').textContent='Abrir cámara y leer';return;}
   try{wakeLock=await navigator.wakeLock.request('screen');}catch(e){}
   $('btn-abrir').disabled=false;$('btn-abrir').textContent='Abrir cámara y leer';
   $('btn-grabar').focus({preventScroll:true});
 }
-function detenerCamara(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('camara').srcObject=null;if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;}}
+function detenerCamara(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('camara').srcObject=null;zoomCamara=null;pintarZoom();if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;}}
 function cerrarEstudio(){
-  if(preparando)return;
+  if(preparando||ajustandoZoom)return;
   if(grabando){detenerGrabacion();return;}
   cancelarScroll();detenerCamara();$('estudio').hidden=true;$('btn-abrir').focus({preventScroll:true});
 }
-async function voltear(){if(grabando||preparando)return;dispositivo='';cara=cara==='user'?'environment':'user';detenerCamara();$('estudio').hidden=true;await abrirEstudio();}
+async function voltear(){if(grabando||preparando||ajustandoZoom)return;dispositivo='';cara=cara==='user'?'environment':'user';detenerCamara();$('estudio').hidden=true;await abrirEstudio();}
 
 function estadoTp(t){$('estado-tp').textContent=t;}
 function cancelarScroll(estado='Pausado'){if(animacion)cancelAnimationFrame(animacion);animacion=null;ultimoFrame=0;tpCorriendo=false;$('btn-tp').textContent='▶ Continuar';estadoTp(estado);}
@@ -455,7 +546,7 @@ async function cuentaRegresiva(){
   c.textContent='YA';await new Promise(r=>setTimeout(r,350));c.style.display='none';
 }
 async function iniciarGrabacion(){
-  if(!stream||grabando||preparando||comprobacionFormato)return;
+  if(!stream||grabando||preparando||comprobacionFormato||ajustandoZoom)return;
   if(!formatoCoincide(innerHeight>innerWidth)){await comprobarFormatoCamara();return;}
   if(archivo&&!tomaGuardada&&!confirm('Primero guarda tu última toma. ¿Quieres reemplazarla por otra grabación?')){detenerCamara();$('estudio').hidden=true;mostrarRevision();return;}
   if(!window.MediaRecorder){estadoTp('Este navegador no puede grabar video. En iPhone usa Safari.');return;}

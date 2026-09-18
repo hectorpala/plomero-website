@@ -1,3 +1,7 @@
+## 2026-09-17 — Acercamiento frontal del curso
+
+Héctor aprobó la mejoría del tamaño; falta igualar la distancia aparente a Cámara de Apple. Añadido control +/− del zoom del track cuando existe soporte, verificación del valor aplicado y memoria por cámara. Mantiene la imagen grande y el mismo encuadre en la grabación. Sin soporte, informa y ofrece diagnóstico copiable. 56 comprobaciones simuladas aprobadas. Pendiente modelo de iPhone y prueba física. URL, QR y guiones sin cambios.
+
 ## 2026-09-17 — Cámara del curso: encuadre original y controles encima
 
 Héctor confirmó una franja horizontal y priorizó el encuadre frontal original. Corregida la solicitud al sensor y comprobado el formato devuelto, sin recortar lados para forzar vertical. Vista al máximo tamaño con letras y botones encima. 52 comprobaciones con dispositivos simulados aprobadas; vista y archivo conservan el cuadro completo. Pendiente confirmar el iPhone físico. Mismos URL, QR y textos del curso.
