@@ -1,3 +1,7 @@
+## 2026-09-17 — Cámara del curso: encuadre original y controles encima
+
+Héctor confirmó una franja horizontal y priorizó el encuadre frontal original. Corregida la solicitud al sensor y comprobado el formato devuelto, sin recortar lados para forzar vertical. Vista al máximo tamaño con letras y botones encima. 52 comprobaciones con dispositivos simulados aprobadas; vista y archivo conservan el cuadro completo. Pendiente confirmar el iPhone físico. Mismos URL, QR y textos del curso.
+
 ## 2026-09-17 — Cámara del curso ampliada, sin recorte
 
 Vista simplificada a petición de Héctor: Ajustes se abre en un panel y la escena conserva sus bordes. En 390×664 simulados, el cuadro creció de 204×363 a 297×528. Veintinueve pruebas con cámara y compartir simulados aprobadas. Guardado, URL, QR y TXT conservados. Falta prueba en el iPhone físico.
