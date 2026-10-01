@@ -31,7 +31,7 @@ const URLS = (process.env.TRACK_URLS || "/,/precios/,/contacto/,/servicios/repar
   .split(",").map((s) => s.trim()).filter(Boolean);
 const UA = "Mozilla/5.0 (revisor-tracking; +pipeline-mantenimiento)";
 // El sitio DIFIERE GTM a propósito (protege el LCP): lo carga en la primera
-// interacción ['scroll','click','touchstart','keydown'] o, como fallback, a los 12s
+// interacción ['scroll','click','touchstart','keydown'] o, como fallback, 1.5 s después del load
 // (ver index.html). Por eso el checker SIMULA una interacción y luego espera el
 // beacon, en vez de asumir que GTM carga solo al cargar la página (eso daría falsos
 // positivos: un visitante real interactúa).
@@ -159,9 +159,9 @@ async function main() {
               `TRACKING: ${BASE}${path} carga GTM pero NO hay GA4 configurado (no se cargó gtag/js ni hay measurement id G-… en el contenedor); no se está midiendo nada`,
               "Configurar la etiqueta de GA4 dentro del contenedor GTM-W75CRTX5 (sin ella el tráfico no llega a Analytics)");
           } else if (!gaFired) {
-            add("media", path,
-              `TRACKING: ${BASE}${path} carga GTM y GA4 (${(st.gaIds || []).join(",") || "gtag/js"}) pero NO se observó beacon …/g/collect tras ${POLL_MS}ms + simular interacción; causa probable: Consent Mode denegado por defecto (un visitante real que ACEPTA sí lo dispararía) o trigger page_view condicionado`,
-              "Verificar en GA4 Realtime con un navegador real/consentido si llegan hits; si el Consent Mode bloquea por defecto es ESPERADO. Si no, revisar el trigger page_view de la etiqueta GA4 en GTM. (No es necesariamente un bug: headless no acepta consentimiento)");
+            add("alta", path,
+              `TRACKING: ${BASE}${path} carga GTM y GA4 (${(st.gaIds || []).join(",") || "gtag/js"}) pero NO se observó beacon …/g/collect tras ${POLL_MS}ms + simular interacción; causa probable: el cargador no empuja {'gtm.start', event:'gtm.js'} (bug real 2026-10-01: así se perdían ~14 de cada 15 visitas) o trigger condicionado. El contenedor NO usa Consent Mode, así que no es "esperado"`,
+              "Usar el cargador canónico de partials/gtm.html (check-plantilla.py check 27) y revisar el activador de la etiqueta de Google en GTM; confirmar en GA4 Tiempo real");
           }
         }
       }

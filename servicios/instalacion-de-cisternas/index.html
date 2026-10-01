@@ -134,51 +134,28 @@
     </script>
 
     <script>
-window.dataLayer = window.dataLayer || [];
-(function() {
-  var gtmLoaded = false;
-  var clarityLoaded = false;
-
-  var loadGTM = function() {
-    if (gtmLoaded) return;
-    gtmLoaded = true;
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
-    document.head.appendChild(script);
-  };
-
-  var loadClarity = function() {
-    if (clarityLoaded) return;
-    clarityLoaded = true;
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ukonwm7t1p");
-  };
-
-  // Cargar GTM en primera interacción (captura sesiones cortas)
-  var interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
-  var onInteraction = function() {
-    loadGTM();
-    interactionEvents.forEach(function(e) {
-      window.removeEventListener(e, onInteraction, {passive: true, capture: true});
-    });
-  };
-  interactionEvents.forEach(function(e) {
-    window.addEventListener(e, onInteraction, {passive: true, capture: true});
-  });
-
-  // Fallback: cargar GTM solo después de 12s (prioriza LCP)
-  setTimeout(loadGTM, 12000);
-
-  // Clarity: cargar 7s después del load (no afecta LCP)
-  window.addEventListener('load', function() {
-    setTimeout(loadClarity, 7000);
-  });
-})();
-</script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+    (function() {
+      // GTM diferido (protege el LCP): carga en la primera interacción o 1.5 s después del load.
+      // El push de 'gtm.js' de arriba es OBLIGATORIO: sin él GA4 no registra la visita.
+      // Sin requestIdleCallback: Safari/iPhone no lo tiene. Clarity lo carga GTM.
+      var loaded = false;
+      var events = ['scroll', 'click', 'touchstart', 'keydown'];
+      var loadGTM = function() {
+        if (loaded) return;
+        loaded = true;
+        events.forEach(function(e) { window.removeEventListener(e, loadGTM, true); });
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+        document.head.appendChild(s);
+      };
+      events.forEach(function(e) { window.addEventListener(e, loadGTM, {passive: true, capture: true}); });
+      var later = function() { setTimeout(loadGTM, 1500); };
+      if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
+    })();
+    </script>
 
     <style>
 .breadcrumb {

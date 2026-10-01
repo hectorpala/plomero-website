@@ -1076,6 +1076,44 @@ def check_twitter_url_valor():
             "Poner twitter:url igual al canonical de ESA página (no el home)")
 
 
+def check_gtm_cargador():
+    """27. El cargador diferido de GTM debe empujar el evento 'gtm.js'. (alta, tracking)
+
+    Hasta el 2026-10-01, 72 de 73 páginas cargaban gtm.js a mano SIN el push
+    {'gtm.start', event:'gtm.js'} del snippet oficial: la etiqueta de GA4 no arrancaba y
+    GA4 registraba ~1 de cada 15 visitas (solo /precios/, que tenía el snippet oficial).
+    Además 38 páginas cargaban GTM SOLO dentro de requestIdleCallback, que Safari/iPhone
+    no tiene → en iPhone nunca había tracking. Y Clarity se cargaba a mano además de la
+    etiqueta de Clarity que ya trae el contenedor (doble carga).
+    Cargador canónico: partials/gtm.html.
+    """
+    for fpath in collect_pages():
+        t = read(fpath)
+        if "GTM-W75CRTX5" not in t or is_stub(t):
+            continue
+        # solo el <script> inline que carga gtm.js (otros scripts no cuentan)
+        i = t.find("googletagmanager.com/gtm.js")
+        if i < 0:
+            i = t.find("'GTM-W75CRTX5')")
+        bloque = t[t.rfind("<script", 0, i):t.find("</script>", i)] if i >= 0 else ""
+        sin_comentarios = re.sub(r"^\s*//.*$", "", bloque, flags=re.M)
+        if not re.search(r"""event\s*:\s*['"]gtm\.js['"]""", sin_comentarios):
+            add("alta", rel(fpath), "tracking",
+                "El cargador de GTM no empuja {'gtm.start', event:'gtm.js'} al dataLayer — "
+                "GA4 no registra la visita (bug 2026-10-01: 72 páginas así)",
+                "Usar el cargador canónico de partials/gtm.html")
+        if "requestIdleCallback" in sin_comentarios:
+            add("alta", rel(fpath), "tracking",
+                "El cargador de GTM usa requestIdleCallback — Safari/iPhone no lo tiene y "
+                "GTM nunca carga ahí",
+                "Usar el cargador canónico de partials/gtm.html (interacción o load+1.5s)")
+        if "clarity.ms/tag" in sin_comentarios:
+            add("media", rel(fpath), "tracking",
+                "Clarity se carga a mano además de la etiqueta de Clarity del contenedor GTM "
+                "(doble carga)",
+                "Quitar el cargador manual; Clarity lo dispara GTM")
+
+
 def check_geo_generica():
     for fpath in collect_pages():
         r = rel(fpath)
@@ -1266,6 +1304,7 @@ def main():
     check_geo_generica()
     check_garantia_intra_pagina()
     check_twitter_url_valor()
+    check_gtm_cargador()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}

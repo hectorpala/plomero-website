@@ -65,51 +65,28 @@
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://plomeroculiacanpro.mx/servicios/plomero-zona-sur-culiacan/#service","name":"Plomero en la Zona Sur de Culiacán","serviceType":"Servicio de Plomería a Domicilio","provider":{"@type":"LocalBusiness","@id":"https://plomeroculiacanpro.mx/#organization","name":"Plomero Culiacán Pro","telephone":"+526673922273","url":"https://plomeroculiacanpro.mx/","image":"https://plomeroculiacanpro.mx/assets/images/hero-plomero-visita-800w.webp","priceRange":"$500-$8,000 MXN","address":{"@type":"PostalAddress","addressLocality":"Culiacán","addressRegion":"Sinaloa","postalCode":"80000","addressCountry":"MX"}},"areaServed":[{"@type":"Place","name":"Barrancos, Culiacán"},{"@type":"Place","name":"Infonavit Barrancos, Culiacán"},{"@type":"Place","name":"La Primavera, Culiacán"},{"@type":"Place","name":"Stanza Toscana, Culiacán"},{"@type":"Place","name":"Alturas del Sur, Culiacán"},{"@type":"Place","name":"Valle Alto, Culiacán"},{"@type":"Place","name":"Bachigualato, Culiacán"},{"@type":"Place","name":"Santa Fe, Culiacán"},{"@type":"Place","name":"Real del Valle, Culiacán"},{"@type":"Place","name":"Montebello, Culiacán"}],"description":"Plomero a domicilio en la zona sur de Culiacán: Barrancos, La Primavera, Infonavit Barrancos, Stanza Toscana, Alturas del Sur y rumbo al aeropuerto. Reparación de fugas, destape de drenajes, cambio de tuberías y emergencias 24/7.","offers":{"@type":"AggregateOffer","lowPrice":"500","highPrice":"8000","priceCurrency":"MXN","offerCount":"6"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto tardan en llegar a la zona sur de Culiacán?","acceptedAnswer":{"@type":"Answer","text":"Llegamos en 30-60 minutos a la mayoría de colonias del sur: Barrancos, La Primavera, Stanza Toscana, Alturas del Sur y Bachigualato. Atendemos 24/7 todos los días del año."}},{"@type":"Question","name":"¿Atienden en Barrancos y La Primavera?","acceptedAnswer":{"@type":"Answer","text":"Sí, son de las colonias que más atendemos. En Barrancos es común el cambio de tubería galvanizada y los drenajes con raíces; en La Primavera, fugas de origen y muebles de baño."}},{"@type":"Question","name":"¿Cuánto cuesta un plomero en la zona sur?","acceptedAnswer":{"@type":"Answer","text":"La tarifa es la misma que en toda la ciudad: no cobramos extra por ir al sur ni al rumbo del aeropuerto. El costo lo define el trabajo: un destape de mueble es lo más sencillo y una línea principal con raíces es lo más pesado, porque lleva máquina y cámara; en fugas cuenta si está a la vista o hay que abrir; y en cambio de tubería, los metros y el material. Te damos la cotización sin costo antes de empezar."}},{"@type":"Question","name":"¿Por qué se tapan tanto los drenajes en la zona sur cuando llueve?","acceptedAnswer":{"@type":"Answer","text":"Las lluvias arrastran tierra, hojas y sedimento hacia líneas ya reducidas por grasa, sarro o raíces, y el agua se regresa. La solución es destape con sonda o hidrojeteado y, si es recurrente, inspección con cámara."}},{"@type":"Question","name":"¿Cambian tubería galvanizada vieja en Infonavit Barrancos?","acceptedAnswer":{"@type":"Answer","text":"Sí, es uno de los trabajos más solicitados en fraccionamientos de 20-40 años. La galvanizada acumula sarro, baja la presión y termina picándose. Cotizamos por tramo o casa completa."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://plomeroculiacanpro.mx/"},{"@type":"ListItem","position":2,"name":"Servicios","item":"https://plomeroculiacanpro.mx/servicios/"},{"@type":"ListItem","position":3,"name":"Plomero Zona Sur de Culiacán","item":"https://plomeroculiacanpro.mx/servicios/plomero-zona-sur-culiacan/"}]}]}</script>
 
     <script>
-window.dataLayer = window.dataLayer || [];
-(function() {
-  var gtmLoaded = false;
-  var clarityLoaded = false;
-
-  var loadGTM = function() {
-    if (gtmLoaded) return;
-    gtmLoaded = true;
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
-    document.head.appendChild(script);
-  };
-
-  var loadClarity = function() {
-    if (clarityLoaded) return;
-    clarityLoaded = true;
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ukonwm7t1p");
-  };
-
-  // Cargar GTM en primera interacción (captura sesiones cortas)
-  var interactionEvents = ['scroll', 'click', 'touchstart', 'keydown'];
-  var onInteraction = function() {
-    loadGTM();
-    interactionEvents.forEach(function(e) {
-      window.removeEventListener(e, onInteraction, {passive: true, capture: true});
-    });
-  };
-  interactionEvents.forEach(function(e) {
-    window.addEventListener(e, onInteraction, {passive: true, capture: true});
-  });
-
-  // Fallback: cargar GTM solo después de 12s (prioriza LCP)
-  setTimeout(loadGTM, 12000);
-
-  // Clarity: cargar 7s después del load (no afecta LCP)
-  window.addEventListener('load', function() {
-    setTimeout(loadClarity, 7000);
-  });
-})();
-</script>
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+    (function() {
+      // GTM diferido (protege el LCP): carga en la primera interacción o 1.5 s después del load.
+      // El push de 'gtm.js' de arriba es OBLIGATORIO: sin él GA4 no registra la visita.
+      // Sin requestIdleCallback: Safari/iPhone no lo tiene. Clarity lo carga GTM.
+      var loaded = false;
+      var events = ['scroll', 'click', 'touchstart', 'keydown'];
+      var loadGTM = function() {
+        if (loaded) return;
+        loaded = true;
+        events.forEach(function(e) { window.removeEventListener(e, loadGTM, true); });
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-W75CRTX5';
+        document.head.appendChild(s);
+      };
+      events.forEach(function(e) { window.addEventListener(e, loadGTM, {passive: true, capture: true}); });
+      var later = function() { setTimeout(loadGTM, 1500); };
+      if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
+    })();
+    </script>
 
     <style>
 .breadcrumb {
