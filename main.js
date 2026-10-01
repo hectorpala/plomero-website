@@ -147,15 +147,6 @@ mensaje: mensaje,
 source: 'homepage_form',
 url: window.location.href
 };
-if (window.dataLayer) {
-window.dataLayer.push({
-'event': 'generate_lead',
-'form_name': 'contact_form_homepage',
-'method': 'netlify_forms',
-'value': 1,
-'currency': 'MXN'
-});
-}
 try {
 const leads = JSON.parse(localStorage.getItem('plomero_leads') || '[]');
 leads.push(leadData);
@@ -429,7 +420,7 @@ var link = e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
 if (!link) return;
 var href = link.getAttribute('href');
 var tipo = href.startsWith('tel:') ? 'phone' : 'whatsapp';
-var numero = href.replace(/[^\d]/g, '');
+var numero = href.split('?')[0].replace(/[^\d]/g, ''); // sin ?text= (antes metía sus dígitos)
 try {
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -534,6 +525,25 @@ window.dataLayer.push({
    (hero, flotantes, inline, paginas de servicio). Empuja generate_lead a dataLayer en el
    momento del clic (queda en la cola aunque GTM cargue diferido). Listener delegado en captura. */
 (function() {
+  // Dónde está el botón: permite comparar qué CTA convierte (flotante vs hero vs cuerpo...).
+  function ubicacion(el) {
+    if (el.closest('.floating-btn, .floating-whatsapp, .floating-call')) return 'flotante';
+    if (el.closest('[class*="exit-intent"], [id*="exit-intent"]')) return 'exit_intent';
+    if (el.closest('nav')) return 'menu';
+    if (el.closest('header, .hero, #inicio')) return 'hero';
+    if (el.closest('footer')) return 'footer';
+    if (el.closest('article')) return 'articulo';
+    var sec = el.closest('section[id]');
+    return sec ? sec.id : 'cuerpo';
+  }
+  function lead(datos) {
+    try {
+      window.dataLayer = window.dataLayer || [];
+      datos.event = 'generate_lead';
+      datos.page = location.pathname;
+      window.dataLayer.push(datos);
+    } catch (err) {}
+  }
   document.addEventListener('click', function(e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if (!a) return;
@@ -541,9 +551,60 @@ window.dataLayer.push({
     var metodo = (href.indexOf('wa.me') !== -1 || href.indexOf('api.whatsapp') !== -1) ? 'whatsapp'
                : (href.indexOf('tel:') === 0) ? 'llamada' : null;
     if (!metodo) return;
+    lead({ metodo: metodo, ubicacion: ubicacion(a) });
+  }, true);
+  // Formularios: el evento submit solo llega si pasó la validación del navegador.
+  document.addEventListener('submit', function(e) {
+    var f = e.target;
+    if (!f || f.tagName !== 'FORM') return;
+    lead({ metodo: 'formulario', ubicacion: ubicacion(f),
+           form_name: f.getAttribute('name') || f.id || 'sin_nombre' });
+  }, true);
+})();
+/* FAQ: qué preguntas abre la gente (= dudas reales que conviene responder arriba). */
+(function() {
+  function push(texto) {
     try {
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'generate_lead', metodo: metodo, page: location.pathname });
+      window.dataLayer.push({ event: 'faq_open', pregunta: (texto || '').trim().slice(0, 100) });
     } catch (err) {}
+  }
+  document.addEventListener('toggle', function(e) {
+    var d = e.target;
+    if (!d || d.tagName !== 'DETAILS' || !d.open) return;
+    var s = d.querySelector('summary');
+    push(s && s.textContent);
   }, true);
+  document.addEventListener('click', function(e) {
+    var b = e.target && e.target.closest ? e.target.closest('.faq-question') : null;
+    if (!b || b.tagName === 'SUMMARY' || b.getAttribute('aria-expanded') === 'true') return;
+    push(b.textContent);
+  }, true);
+})();
+/* Core Web Vitals de visitantes REALES (LCP, CLS, INP), enviados una vez al ocultar la página. */
+(function() {
+  if (!('PerformanceObserver' in window)) return;
+  var lcp = 0, cls = 0, inp = 0, enviado = false;
+  function obs(tipo, fn, extra) {
+    try {
+      var o = { type: tipo, buffered: true };
+      for (var k in extra) o[k] = extra[k];
+      new PerformanceObserver(function(l) { l.getEntries().forEach(fn); }).observe(o);
+    } catch (err) {}
+  }
+  obs('largest-contentful-paint', function(en) { lcp = en.startTime; });
+  obs('layout-shift', function(en) { if (!en.hadRecentInput) cls += en.value; });
+  obs('event', function(en) { if (en.interactionId && en.duration > inp) inp = en.duration; },
+      { durationThreshold: 40 });
+  function nota(v, bueno, malo) { return v <= bueno ? 'bueno' : v <= malo ? 'mejorable' : 'malo'; }
+  function enviar(forzar) {
+    if (enviado || (!forzar && document.visibilityState !== 'hidden')) return;
+    enviado = true;
+    var dl = window.dataLayer = window.dataLayer || [];
+    if (lcp) dl.push({ event: 'web_vital', metrica: 'LCP', valor: Math.round(lcp), rating: nota(lcp, 2500, 4000) });
+    dl.push({ event: 'web_vital', metrica: 'CLS', valor: Math.round(cls * 1000) / 1000, rating: nota(cls, 0.1, 0.25) });
+    if (inp) dl.push({ event: 'web_vital', metrica: 'INP', valor: Math.round(inp), rating: nota(inp, 200, 500) });
+  }
+  document.addEventListener('visibilitychange', enviar);
+  window.addEventListener('pagehide', function() { enviar(true); });
 })();
