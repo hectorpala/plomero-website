@@ -585,6 +585,7 @@ window.dataLayer.push({
 (function() {
   if (!('PerformanceObserver' in window)) return;
   var lcp = 0, cls = 0, inp = 0, enviado = false;
+  var ventana = 0, ini = 0, ult = 0; // CLS = peor ventana (≤5 s, huecos <1 s), como Google
   function obs(tipo, fn, extra) {
     try {
       var o = { type: tipo, buffered: true };
@@ -593,7 +594,13 @@ window.dataLayer.push({
     } catch (err) {}
   }
   obs('largest-contentful-paint', function(en) { lcp = en.startTime; });
-  obs('layout-shift', function(en) { if (!en.hadRecentInput) cls += en.value; });
+  obs('layout-shift', function(en) {
+    if (en.hadRecentInput) return;
+    if (ventana && en.startTime - ult < 1000 && en.startTime - ini < 5000) ventana += en.value;
+    else { ventana = en.value; ini = en.startTime; }
+    ult = en.startTime;
+    if (ventana > cls) cls = ventana;
+  });
   obs('event', function(en) { if (en.interactionId && en.duration > inp) inp = en.duration; },
       { durationThreshold: 40 });
   function nota(v, bueno, malo) { return v <= bueno ? 'bueno' : v <= malo ? 'mejorable' : 'malo'; }

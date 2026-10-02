@@ -729,31 +729,6 @@
     </script>
 
     <!-- Scroll Depth Tracking -->
-    <script>
-    (function() {
-      var scrollDepths = [25, 50, 75, 90];
-      var scrollTracked = {};
-
-      window.addEventListener('scroll', function() {
-        var scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
-
-        scrollDepths.forEach(function(depth) {
-          if (scrollPercent >= depth && !scrollTracked[depth]) {
-            scrollTracked[depth] = true;
-            try {
-              window.dataLayer = window.dataLayer || [];
-              window.dataLayer.push({
-                'event': 'scroll_depth',
-                'scroll_percentage': depth,
-                'page_location': window.location.pathname
-              });
-            } catch(e) {}
-          }
-        });
-      });
-    })();
-    </script>
-
     <!-- Form Tracking -->
     <script>
     (function() {
@@ -773,6 +748,6 @@
       }
     })();
     </script>
-<script src="../../main.js?v=20261001" defer></script>
+<script src="../../main.js?v=202610012" defer></script>
 </body>
 </html>
