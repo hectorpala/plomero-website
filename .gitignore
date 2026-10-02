@@ -85,3 +85,6 @@ plomero-settings.local.json.bak-*
 # de / cambia seguido; commitearlas metería ~2.8 MB de blobs al historial cada vez.
 # Un clon nuevo simplemente las establece en su primera corrida (hallazgo "baja").
 .pipeline/visual-baseline/
+
+# Reportes de "chécame la página" con datos del negocio: el repo es público
+reportes-privados/

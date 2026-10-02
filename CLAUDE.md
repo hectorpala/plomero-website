@@ -40,5 +40,6 @@
 - Reemplaza al viejo job de solo-mantenimiento (comparten el lock `/tmp/plomero-mantener-sitio.lock` para no correr ambos). El `catchup.sh` recupera la corrida si la Mac estaba apagada a la hora.
 
 ## Comandos útiles
+- **Reporte "chécame la página cómo va"** → skill `.claude/skills/checa-pagina/` (GSC + GA4 + contactos + velocidad + salud). Solo lectura; guarda en `reportes-privados/` (ignorado por git: el repo es público).
 - git log --oneline -30  (ver historia reciente)
 - Servidor local para probar: (usar el que ya use el proyecto)
