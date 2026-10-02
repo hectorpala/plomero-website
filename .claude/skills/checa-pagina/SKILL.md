@@ -24,7 +24,9 @@ Periodo por defecto: **últimos 28 días** comparado con los 28 anteriores. Si H
   `plomero cerca de mi`, `plomeros a domicilio culiacán`, `plomero` (sácalas de gsc_keywords;
   si no salen en el top, dilo).
 
-**Analytics** (propiedad buena **503992062**, `G-NSV2K9N2ZD`):
+**Analytics** (propiedad buena **503992062**, `G-NSV2K9N2ZD`) — pasa SIEMPRE `dominio: "plomeroculiacanpro.mx"`
+en `ga4_report` y `ga4_eventos`: hasta el 1-oct-2026 el sitio de Mazatlán mandaba sus visitas a esta
+misma propiedad (usaba el contenedor GTM-W75CRTX5).
 - `ga4_report` con dimension `sessionDefaultChannelGroup`, `pagePath`, `deviceCategory`,
   `country`, `sessionSource`.
 - `ga4_eventos`:
