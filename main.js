@@ -58,7 +58,7 @@ var el = document.getElementById('urgency-text');
 if (!el) return;
 var h = new Date().getHours();
 if (h >= 7 && h < 22) {
-el.textContent = 'Disponible ahora \u2013 respuesta en ~5 min';
+el.textContent = 'Disponible ahora \u2013 respuesta r\u00e1pida por WhatsApp';
 } else {
 el.textContent = 'Servicio nocturno activo';
 }
