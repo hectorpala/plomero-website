@@ -1114,6 +1114,37 @@ def check_gtm_cargador():
                 "Quitar el cargador manual; Clarity lo dispara GTM")
 
 
+def check_resenas_inventadas():
+    """28. Prohibidas calificaciones/testimonios inventados. (alta, confianza)
+
+    El 2026-10-01 Héctor confirmó que NO hay ficha de Google y que los testimonios del
+    sitio no eran reales; se quitaron "★★★★★ 4.8/5 · 150+ reseñas" (43 págs), testimonios
+    "Reseña de Google", capturas IA "Verificado en Google" y "4.8★" en metas. Los scripts
+    viejos de scripts/ (agregar-rating-colonias.py, add_*schemas*.py) meten aggregateRating
+    4.8 si se corren: este check los frena. Si algún día hay reseñas REALES, se cambia aquí.
+    """
+    pats = [
+        (r'aggregateRating', "aggregateRating en JSON-LD"),
+        (r'"@type"\s*:\s*"Review"', "Review en JSON-LD"),
+        (r'Rese[ñn]a de Google|Verificado en Google|Calificaci[oó]n Google', "atribución a Google"),
+        (r'class="hero-rating', "insignia de calificación"),
+        (r'4[.,]8\s*(/\s*5|★|estrellas)', "calificación 4.8"),
+        (r'class="(testimonials|testimonial|testimonial-card|testimonial-grid|testimonio|google-review-card)"',
+         "bloque de testimonios"),
+    ]
+    for fpath in collect_pages():
+        t = read(fpath)
+        if rel(fpath).startswith("estudio/"):
+            continue
+        sin_css = re.sub(r"<style\b.*?</style>", "", t, flags=re.S)
+        for pat, que in pats:
+            if re.search(pat, sin_css):
+                add("alta", rel(fpath), "confianza",
+                    "Reseñas/calificación INVENTADA (%s): no hay ficha de Google y los "
+                    "testimonios no son reales (decisión de Héctor 2026-10-01)" % que,
+                    "Quitar el bloque; solo publicar reseñas reales y verificables")
+
+
 def check_geo_generica():
     for fpath in collect_pages():
         r = rel(fpath)
@@ -1305,6 +1336,7 @@ def main():
     check_garantia_intra_pagina()
     check_twitter_url_valor()
     check_gtm_cargador()
+    check_resenas_inventadas()
 
     # orden estable + asignacion de ids deterministas
     sev_rank = {"alta": 0, "media": 1, "baja": 2}
