@@ -1,3 +1,16 @@
+/* Visitas del dueño fuera de GA4: abrir una vez cualquier página con ?interno=1 marca ESTE
+   navegador (?interno=0 lo desmarca). ga-disable-<ID> es el apagador oficial de Google y GTM lo
+   respeta. Va primero porque GTM carga hasta la interacción o 1.5 s después del load. */
+(function() {
+try {
+var q = location.search.match(/[?&]interno=([01])(?:&|$)/);
+if (q) { if (q[1] === '1') localStorage.setItem('pcp_interno', '1'); else localStorage.removeItem('pcp_interno'); }
+if (localStorage.getItem('pcp_interno') === '1') {
+window['ga-disable-G-NSV2K9N2ZD'] = true;
+window['ga-disable-G-4RMP5VDR67'] = true;
+}
+} catch (e) {}
+})();
 (function() {
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navMenu = document.querySelector('.nav-menu');
@@ -414,26 +427,6 @@ criticalSections.forEach(function(section) {
 observer.observe(section);
 });
 });
-(function() {
-document.addEventListener('click', function(e) {
-var link = e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
-if (!link) return;
-var href = link.getAttribute('href');
-var tipo = href.startsWith('tel:') ? 'phone' : 'whatsapp';
-var numero = href.split('?')[0].replace(/[^\d]/g, ''); // sin ?text= (antes metía sus dígitos)
-try {
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-'event': 'contact_link_click',
-'contact_type': tipo,
-'phone_number': numero,
-'page_location': window.location.pathname,
-'link_text': link.textContent.trim().substring(0, 50),
-'link_location': link.getBoundingClientRect().y > window.innerHeight/2 ? 'below_fold' : 'above_fold'
-});
-} catch(e) {}
-}, true);
-})();
 (function() {
 var timeOnPageSegments = [30, 60, 120, 300];
 var timeTracked = {};
