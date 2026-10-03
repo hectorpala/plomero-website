@@ -28,6 +28,7 @@
 // +0.02, INP +50ms). Debe superar AMBOS para contar (evita falsos positivos de ruido).
 
 import fs from "fs";
+import { sinAnalitica } from "./sin-analitica.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -147,6 +148,7 @@ async function puppeteerMeasure() {
       for (let i = 0; i < 3; i++) {
         const page = await browser.newPage();
         try {
+          await sinAnalitica(page); // que GA4 no cuente esta medición como visita
           await page.evaluateOnNewDocument(() => {
             window.__cls = 0; window.__lcp = 0; window.__inp = 0;
             new PerformanceObserver((l) => { for (const en of l.getEntries())

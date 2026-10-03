@@ -72,6 +72,7 @@
 // VISUAL_BASELINE_DIR.
 
 import fs from "fs";
+import { sinAnalitica } from "./sin-analitica.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -228,6 +229,7 @@ async function capturar(browser, lienzo, ruta) {
   try {
     await page.setUserAgent(UA);
     await page.setViewport(VIEWPORT);
+    await sinAnalitica(page); // que GA4 no cuente esta revisión como visita
     // El sitio es PWA: el service worker puede servir una versión cacheada y hacer que
     // la captura no refleje el CSS/HTML del deploy actual.
     try {

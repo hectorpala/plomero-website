@@ -25,6 +25,7 @@
 
 import puppeteer from "puppeteer";
 import fs from "fs";
+import { sinAnalitica } from "./sin-analitica.mjs";
 
 const BASE = process.env.TRACK_BASE || "https://plomeroculiacanpro.mx";
 const URLS = (process.env.TRACK_URLS || "/,/precios/,/contacto/,/servicios/reparacion-de-fugas/,/blog/")
@@ -87,6 +88,9 @@ async function main() {
     for (const path of URLS) {
       const page = await browser.newPage();
       await page.setUserAgent(UA);
+      // GTM y GA4 cargan y disparan (eso es lo que se verifica), pero el envío /collect se
+      // responde vacío: sin esto cada corrida contaba como visitas reales en GA4.
+      await sinAnalitica(page, { soloEnvios: true });
       let gtmJs = false, gaFired = false, gtagJs = false;
       page.on("request", (r) => {
         const u = r.url();

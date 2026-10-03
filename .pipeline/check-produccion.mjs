@@ -17,6 +17,7 @@
 
 import puppeteer from "puppeteer";
 import fs from "fs";
+import { sinAnalitica } from "./sin-analitica.mjs";
 
 const BASE = "https://plomeroculiacanpro.mx";
 const WA_NUMBER = "526673922273";
@@ -115,6 +116,7 @@ async function main() {
     for (const path of CONSOLE_PAGES) {
       const page = await browser.newPage();
       await page.setUserAgent(UA);
+      await sinAnalitica(page); // que GA4 no cuente esta revisión como visita
       const pageErrors = [];
       const consoleErrors = [];
       page.on("pageerror", (err) => pageErrors.push(err));
