@@ -28,6 +28,7 @@ import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { sinAnalitica } from "./sin-analitica.mjs";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const BASE = process.env.E2E_BASE || "https://plomeroculiacanpro.mx";
@@ -59,6 +60,8 @@ async function bypassSW(page) {
     const c = await page.target().createCDPSession();
     await c.send("Network.setBypassServiceWorker", { bypass: true });
   } catch (_) {}
+  // Corre contra PRODUCCIÓN y toca botones de WhatsApp: sin esto metía visitas y leads falsos a GA4.
+  await sinAnalitica(page);
 }
 
 function resolveChrome() {
