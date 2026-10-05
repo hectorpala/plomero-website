@@ -1,3 +1,6 @@
+# 2026-10-05: "cerca de mí" se juntó en "a domicilio" (66% iguales; Google ya prefería a domicilio)
+/servicios/plomero-cerca-de-mi/*  /servicios/plomero-a-domicilio/  301!
+/servicios/plomero-cerca-de-mi  /servicios/plomero-a-domicilio/  301!
 # 404 forzado: obsidian-vault/ es bitácora interna del proyecto, se coló trackeada en git
 # (commit a3cb5ef9) y Netlify la sirve porque publish="." sirve todo el repo. Bloqueo duro
 # hasta que se saque del repo publicado. Hallazgo del verificador FASE 7, 2026-07-09.
@@ -623,7 +626,7 @@
 # Stubs meta-refresh convertidos a 301 reales (19-ago-2026) — específicos primero, catch-all al final
 /servicios/plomero/24-7/* /servicios/emergencia-24-7/ 301
 /servicios/plomero/a-domicilio/* /servicios/plomero-a-domicilio/ 301
-/servicios/plomero/cerca-de-mi/* /servicios/plomero-cerca-de-mi/ 301
+/servicios/plomero/cerca-de-mi/* /servicios/plomero-a-domicilio/ 301
 /servicios/plomero/colonias/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero/precios/* /precios/ 301
 /servicios/plomero/* /servicios/ 301
