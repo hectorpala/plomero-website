@@ -529,11 +529,56 @@ window.dataLayer.push({
     var sec = el.closest('section[id]');
     return sec ? sec.id : 'cuerpo';
   }
+  // BUZÓN (4-oct-2026): si el cliente toca WhatsApp/Llamar antes de que GA4 termine de cargar
+  // (~2 s en 4G), el celular se cambia de app y el aviso por GTM se pierde. En ese caso el aviso
+  // va DIRECTO a GA4 con sendBeacon, que el navegador entrega aunque la página quede pausada.
+  // Si GA4 ya cargó, va por dataLayer → GTM como siempre. Nunca por los dos: no se cuenta doble.
+  // Los avisos del buzón llevan ubicacion '<lugar>_rapido' para saber cuántos se rescatan.
+  var GA4 = 'G-NSV2K9N2ZD';
+  function ga4Listo() {
+    var g = window.google_tag_manager;
+    return !!(g && g[GA4]);
+  }
+  function galleta(nombre) {
+    var m = document.cookie.match('(?:^|; )' + nombre + '=([^;]*)');
+    return m ? m[1] : '';
+  }
+  function buzon(datos) {
+    try {
+      if (window['ga-disable-' + GA4] || !navigator.sendBeacon) return false;
+      var ga = galleta('_ga').split('.');
+      var cid = ga.length >= 4 ? ga[2] + '.' + ga[3] : '';
+      var nuevo = !cid;
+      var ahora = Math.floor(Date.now() / 1000);
+      if (nuevo) {
+        cid = Math.floor(Math.random() * 2147483647) + '.' + ahora;
+        // Misma galleta que usa GA4: si la página sigue viva y GA4 carga, reconoce al visitante.
+        document.cookie = '_ga=GA1.1.' + cid + '; max-age=63072000; path=/; domain=' +
+          location.hostname.replace(/^www\./, '') + '; SameSite=Lax';
+      }
+      var ses = galleta('_ga_' + GA4.slice(2)).match(/^GS\d\.\d\.s?(\d+)/);
+      var q = {
+        v: '2', tid: GA4, cid: cid, sid: ses ? ses[1] : String(ahora), sct: '1', seg: '1',
+        _p: String(Math.floor(Math.random() * 1e9)), en: 'generate_lead',
+        dl: location.href, dr: document.referrer, dt: document.title,
+        ul: (navigator.language || '').toLowerCase(),
+        'ep.metodo': datos.metodo, 'ep.ubicacion': datos.ubicacion + '_rapido', 'ep.page': datos.page
+      };
+      if (datos.form_name) q['ep.form_name'] = datos.form_name;
+      if (!ses) { q._ss = '1'; q._nsi = '1'; }
+      if (nuevo) q._fv = '1';
+      var url = 'https://www.google-analytics.com/g/collect?' + Object.keys(q).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(q[k] == null ? '' : q[k]);
+      }).join('&');
+      return navigator.sendBeacon(url);
+    } catch (err) { return false; }
+  }
   function lead(datos) {
     try {
+      datos.page = location.pathname;
+      if (!ga4Listo() && buzon(datos)) return;
       window.dataLayer = window.dataLayer || [];
       datos.event = 'generate_lead';
-      datos.page = location.pathname;
       window.dataLayer.push(datos);
     } catch (err) {}
   }
