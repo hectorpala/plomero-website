@@ -34,12 +34,10 @@
 /servicios/plomero-colonias-culiacan/16-de-septiembre/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/18-de-marzo/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/20-de-noviembre/* /servicios/plomero-colonias-culiacan/ 301
-/servicios/plomero-colonias-culiacan/21-de-marzo/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/22-de-diciembre/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/4-de-marzo/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/5-de-febrero/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/5-de-mayo/* /servicios/plomero-zona-oriente-culiacan/ 301
-/servicios/plomero-colonias-culiacan/6-de-enero/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/7-gotas/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/8-de-febrero/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/9-de-marzo/* /servicios/plomero-zona-oriente-culiacan/ 301
@@ -70,7 +68,6 @@
 /servicios/plomero-colonias-culiacan/ampliacion-union-nueva/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/antonio-nakayama/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/antonio-rosales/* /servicios/plomero-centro-culiacan/ 301
-/servicios/plomero-colonias-culiacan/antonio-toledo-corro/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/aquiles-serdan/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/arboledas/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/arcadia-residencial/* /servicios/plomero-colonias-culiacan/ 301
@@ -206,7 +203,6 @@
 /servicios/plomero-colonias-culiacan/francisco-villa/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/fresnos/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/fuentes-del-valle/* /servicios/plomero-zona-poniente-culiacan/ 301
-/servicios/plomero-colonias-culiacan/gabriel-leyva/* /servicios/plomero-centro-culiacan/ 301
 /servicios/plomero-colonias-culiacan/genaro-estrada/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/general-zapata/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/girasoles/* /servicios/plomero-zona-norte-culiacan/ 301
@@ -235,7 +231,6 @@
 /servicios/plomero-colonias-culiacan/industrial-el-palmito/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/infonavit-88/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/infonavit-alondras/* /servicios/plomero-colonias-culiacan/ 301
-/servicios/plomero-colonias-culiacan/infonavit-barrancos-ii/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/infonavit-barrancos-iii/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/infonavit-barrancos-iv/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/infonavit-el-barrio/* /servicios/plomero-zona-oriente-culiacan/ 301
@@ -315,14 +310,11 @@
 /servicios/plomero-colonias-culiacan/lirios-del-rio/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/loma-bonita/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-de-guadalupe/* /servicios/plomero-zona-sur-culiacan/ 301
-/servicios/plomero-colonias-culiacan/lomas-de-san-isidro-seccion-cumbres-del-sur/* /servicios/plomero-colonias-culiacan/ 301
-/servicios/plomero-colonias-culiacan/lomas-de-san-isidro-seccion-paseo-azteca/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-de-san-jeronimo/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-de-tamazula/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-del-bosque/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-del-magisterio/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-del-pedregal/* /servicios/plomero-zona-norte-culiacan/ 301
-/servicios/plomero-colonias-culiacan/lomas-del-sol/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-del-sol-duplex/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-paraiso/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/lomas-verdes/* /servicios/plomero-zona-norte-culiacan/ 301
@@ -411,7 +403,6 @@
 /servicios/plomero-colonias-culiacan/portales-del-country/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/portanova/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/portareal/* /servicios/plomero-colonias-culiacan/ 301
-/servicios/plomero-colonias-culiacan/pradera-dorada/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/pradera-dorada-ii/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/praderas-del-rey/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/prados-de-occidente/* /servicios/plomero-zona-poniente-culiacan/ 301
@@ -523,7 +514,6 @@
 /servicios/plomero-colonias-culiacan/todas/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/torralba/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/torre-dorada/* /servicios/plomero-colonias-culiacan/ 301
-/servicios/plomero-colonias-culiacan/torres-aeropuerto/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/tulipanes/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/umbrales/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/union/* /servicios/plomero-zona-poniente-culiacan/ 301
@@ -551,7 +541,6 @@
 /servicios/plomero-colonias-culiacan/victoria/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-andalucia/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-arredondo/* /servicios/plomero-colonias-culiacan/ 301
-/servicios/plomero-colonias-culiacan/villa-bonita/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-colonial/* /servicios/plomero-zona-sur-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-contenta/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-del-pedregal/* /servicios/plomero-colonias-culiacan/ 301
@@ -563,7 +552,6 @@
 /servicios/plomero-colonias-culiacan/villa-dorada/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-fontana/* /servicios/plomero-zona-norte-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-rica/* /servicios/plomero-colonias-culiacan/ 301
-/servicios/plomero-colonias-culiacan/villa-satelite/* /servicios/plomero-zona-oriente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-serena/* /servicios/plomero-zona-poniente-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villa-verde/* /servicios/plomero-colonias-culiacan/ 301
 /servicios/plomero-colonias-culiacan/villarreal-las-coloradas/* /servicios/plomero-colonias-culiacan/ 301
