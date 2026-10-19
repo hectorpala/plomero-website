@@ -320,7 +320,7 @@ Todos los pares de colores cumplen con **WCAG 2.1 AA**:
         <div class="hero-content">
             <h1 class="fade-in">Plomero Profesional en Culiacán, Sinaloa</h1>
             <p class="hero-subtitle fade-in">Soluciones rápidas y confiables...</p>
-            <p class="hero-contact">WhatsApp: 52 667 478 7021 · Llamadas: 667 392 2273</p>
+            <p class="hero-contact">WhatsApp: 52 667 478 7021 · Llamadas: 667 478 7021</p>
             <a href="#contacto" class="btn-primary hover-lift">Solicitar Cotización</a>
         </div>
     </div>
@@ -518,7 +518,7 @@ Todos los pares de colores cumplen con **WCAG 2.1 AA**:
   "@type": "HomeAndConstructionBusiness",
   "name": "Plomero Culiacán Pro",
   "url": "https://plomeroculiacanpro.mx/",
-  "telephone": "+52 667 392 2273",
+  "telephone": "+52 667 478 7021",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Culiacán",
@@ -690,7 +690,7 @@ Editar variables en `styles.css`:
 ### Actualizar Información de Contacto
 
 Buscar y reemplazar en todos los archivos:
-- Teléfono (llamadas): `667 392 2273`
+- Teléfono (llamadas): `667 478 7021`
 - WhatsApp: `526674787021` (cambió 19-oct-2026)
 - Email: `info@plomeropro.com`
 

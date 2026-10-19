@@ -226,7 +226,7 @@ Para cada schema encontrado:
   2. HomeAndConstructionBusiness ✓
      • name: ✓
      • address: ✓ (Culiacán, Sinaloa)
-     • telephone: ✓ +52 667 392 2273
+     • telephone: ✓ +52 667 478 7021
      • geo: ✓ (24.8093, -107.3940) ← EXCELENTE para SEO local
      • aggregateRating: ✓ 4.8/5 (150 reviews)
      • openingHours: ✓ 24/7

@@ -8,7 +8,7 @@ Business Profile). Solo lee disco + parsea HTML local. Solo REPORTA. Salida esta
 
 NAP canónico:
   NAME  = "Plomero Culiacán Pro"          (con acento)
-  PHONE = 667 392 2273 / 526673922273
+  PHONE = 667 478 7021 / 526674787021
   EMAIL = info@plomeroculiacanpro.mx       (REGLAS f8c72299: el malo es @plomeropro.com)
 
 Chequeos (sobre cada .html servido):
@@ -35,7 +35,7 @@ SKIP_DIRS = ("/node_modules/", "/.git/", "/partials/", "/docs/", "/.netlify/",
 
 NAME_OK = "Plomero Culiacán Pro"
 NAME_NOACCENT = "Plomero Culiacan Pro"
-PHONE_OK = ("526673922273", "6673922273")
+PHONE_OK = ("526674787021", "6674787021")
 BIZ_TYPES = {"Organization", "LocalBusiness", "PlumbingBusiness", "Plumber",
              "ProfessionalService", "HomeAndConstructionBusiness", "Corporation",
              "Store", "GeneralContractor"}
@@ -135,7 +135,7 @@ def main():
             tel = node.get("telephone")
             if isinstance(tel, str) and tel.strip():
                 d = re.sub(r"\D", "", tel)
-                if d not in PHONE_OK and not (d.endswith("6673922273") and (len(d) == 10 or d.startswith("52"))):
+                if d not in PHONE_OK and not (d.endswith("6674787021") and (len(d) == 10 or d.startswith("52"))):
                     tel_vars.add(tel.strip())
         for nm in sorted(name_vars):
             if nm.startswith(NAME_OK):
@@ -148,8 +148,8 @@ def main():
                     "Unificar el name del schema de negocio a %r" % NAME_OK)
         for tel in sorted(tel_vars):
             add("alta", r,
-                "NAP: teléfono VARIANTE en JSON-LD de %s: %r (el correcto es +52 667 392 2273)" % (r, tel),
-                "Corregir telephone del schema al número correcto (526673922273)")
+                "NAP: teléfono VARIANTE en JSON-LD de %s: %r (el correcto es +52 667 478 7021)" % (r, tel),
+                "Corregir telephone del schema al número correcto (526674787021)")
 
         # 4. nombre sin acento en el texto (case-insensitive: "PLOMERO CULIACAN PRO"
         #    en mayúsculas también es la variante sin acento y antes no se cazaba)

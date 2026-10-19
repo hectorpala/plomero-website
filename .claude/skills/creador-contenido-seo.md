@@ -19,12 +19,11 @@ Generar landing pages o artículos de blog listos para publicar con el mismo for
 
 ```
 Nombre: Plomero Culiacán Pro
-Teléfono texto: 667 392 2273
-Teléfono internacional: +52 667 392 2273
+Teléfono texto: 667 478 7021
+Teléfono internacional: +52 667 478 7021
 WhatsApp URL: https://wa.me/526674787021
-Tel URL: tel:+526673922273
-Número limpio (llamadas): 6673922273
-Número limpio WhatsApp: 6674787021 (cambió 19-oct-2026; el 392 2273 quedó bloqueado en WhatsApp)
+Tel URL: tel:+526674787021
+Número limpio (llamadas y WhatsApp): 6674787021 (19-oct-2026: un solo número; el 392 2273 deja de usarse)
 Ciudad: Culiacán, Sinaloa
 País: México
 ```
@@ -42,7 +41,7 @@ País: México
 
 ### 1. NAP Consistente - USO DEL NÚMERO
 
-**SIEMPRE usar: 6673922273 para llamadas (tel:) y 6674787021 (wa.me/526674787021) para WhatsApp**
+**SIEMPRE usar: 6674787021 para llamadas (tel:) y 6674787021 (wa.me/526674787021) para WhatsApp**
 
 #### En CTAs y botones:
 ```html
@@ -50,16 +49,16 @@ País: México
 <a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20un%20plomero%20en%20Culiacán">
 
 <!-- Teléfono -->
-<a href="tel:+526673922273">
+<a href="tel:+526674787021">
 
 <!-- Texto visible -->
 <p>WhatsApp: 52 667 478 7021</p>
-<p>Teléfono: 667 392 2273</p>
+<p>Teléfono: 667 478 7021</p>
 ```
 
 #### En schemas JSON-LD:
 ```json
-"telephone": "+52 667 392 2273"
+"telephone": "+52 667 478 7021"
 ```
 
 ### 2. Meta Tags SEO
@@ -81,7 +80,7 @@ País: México
 
 **Ejemplos:**
 - "Plomero 24 horas en Culiacán ✓ Emergencia inmediata ✓ Llegada 30-60 min ✓ Las Quintas, Tres Ríos ✓ Garantía escrita ✓ WhatsApp: 667-478-7021"
-- "Reparación de fugas en Culiacán ✓ Detección con equipo profesional ✓ Presupuesto gratis ✓ Trabajo garantizado ✓ Tel: 667-392-2273"
+- "Reparación de fugas en Culiacán ✓ Detección con equipo profesional ✓ Presupuesto gratis ✓ Trabajo garantizado ✓ Tel: 667-478-7021"
 
 #### Canonical URL
 ```html
@@ -161,8 +160,8 @@ País: México
    class="btn-primary btn-whatsapp">
    WhatsApp 24/7
 </a>
-<a href="tel:+526673922273" class="btn-secondary">
-   Llamar: 667-392-2273
+<a href="tel:+526674787021" class="btn-secondary">
+   Llamar: 667-478-7021
 </a>
 ```
 
@@ -176,7 +175,7 @@ País: México
        aria-label="WhatsApp">
         [SVG WhatsApp icon]
     </a>
-    <a href="tel:+526673922273" class="cta-btn cta-tel" aria-label="Llamar">
+    <a href="tel:+526674787021" class="cta-btn cta-tel" aria-label="Llamar">
         [SVG Phone icon]
     </a>
 </div>
@@ -252,7 +251,7 @@ País: México
       "provider": {
         "@type": "LocalBusiness",
         "name": "Plomero Culiacán Pro",
-        "telephone": "+52 667 392 2273",
+        "telephone": "+52 667 478 7021",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Culiacán",
@@ -270,7 +269,7 @@ País: México
         "serviceUrl": "https://plomeroculiacanpro.mx/[slug]/",
         "servicePhone": {
           "@type": "ContactPoint",
-          "telephone": "+52 667 392 2273",
+          "telephone": "+52 667 478 7021",
           "contactType": "customer service",
           "availableLanguage": "es"
         }
@@ -482,7 +481,7 @@ Domingos y festivos: Emergencias únicamente
    rg -i "keyword principal" [ruta]/index.html
 
    # Verificar número teléfono correcto
-   rg "6673922273" [ruta]/index.html
+   rg "6674787021" [ruta]/index.html
 
    # Verificar canonical
    rg "canonical" [ruta]/index.html
@@ -519,7 +518,7 @@ Tipo: landing
 
 Antes de entregar el contenido, verificar:
 
-- [ ] Número teléfono: 6673922273 en todos los CTAs
+- [ ] Número teléfono: 6674787021 en todos los CTAs
 - [ ] Meta title ≤60 caracteres
 - [ ] Meta description 120-155 caracteres
 - [ ] Canonical URL correcto

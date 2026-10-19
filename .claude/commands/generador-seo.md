@@ -22,9 +22,9 @@ Debes generar contenido optimizado para SEO específico para servicios de plomer
 - Emoji inicial 🔧
 - Descripción del servicio
 - Beneficio principal
-- Call to action con teléfono 667 392 2273
+- Call to action con teléfono 667 478 7021
 - Entre 120-155 caracteres EXACTOS
-- Ejemplo: `🔧 Reparación de fugas en Culiacán. Detección y reparación en el día. Garantía por escrito. ¡Llama: 667 392 2273!`
+- Ejemplo: `🔧 Reparación de fugas en Culiacán. Detección y reparación en el día. Garantía por escrito. ¡Llama: 667 478 7021!`
 
 ### 3. **Keywords** (6-8 keywords separadas por comas)
 - Formato: keyword1 culiacan, keyword2 culiacan, plomero culiacan...
@@ -139,7 +139,7 @@ Debes responder EXACTAMENTE en este formato JSON:
 **Negocio**: Plomero Culiacán Pro
 **Ubicación**: Culiacán, Sinaloa, México
 **Zonas de servicio**: Las Quintas, Tres Ríos, Chapultepec, Montebello, Centro
-**Teléfono**: 667 392 2273
+**Teléfono**: 667 478 7021
 **Rating**: 4.9★ en Google
 **Clientes**: 200+ clientes satisfechos
 
@@ -155,7 +155,7 @@ Debes responder EXACTAMENTE en este formato JSON:
 ## Reglas importantes
 
 1. **SIEMPRE incluir "Culiacán"** en title, description, h1, keywords
-2. **Teléfono siempre es 667 392 2273**
+2. **Teléfono siempre es 667 478 7021**
 3. **No usar emojis** excepto 🔧 en la meta description
 4. **Benefits deben ser únicos** para cada servicio (no genéricos)
 5. **Contar caracteres exactos** en title (50-60) y description (120-155)

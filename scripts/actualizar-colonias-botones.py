@@ -36,7 +36,7 @@ def create_new_buttons(colonia_name):
 
     wa_button = f'<a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20un%20plomero%20en%20{wa_name}" class="floating-btn floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">{WHATSAPP_SVG}</a>'
 
-    phone_button = f'<a href="tel:+526673922273" class="floating-btn floating-call" aria-label="Llamar ahora">{PHONE_SVG}</a>'
+    phone_button = f'<a href="tel:+526674787021" class="floating-btn floating-call" aria-label="Llamar ahora">{PHONE_SVG}</a>'
 
     return f'{NEW_STYLES}\n{wa_button}\n{phone_button}'
 

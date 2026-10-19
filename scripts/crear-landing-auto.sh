@@ -106,7 +106,7 @@ cat > "servicios/${SLUG}/config.json" <<EOF
   "service_name": "${SERVICE_NAME}",
   "seo": {
     "title": "${SERVICE_NAME} Culiacán | Servicio Profesional",
-    "description": "🔧 ${SERVICE_NAME} en Culiacán. Servicio profesional certificado. Cotización gratis. ¡Llama: 667 392 2273!",
+    "description": "🔧 ${SERVICE_NAME} en Culiacán. Servicio profesional certificado. Cotización gratis. ¡Llama: 667 478 7021!",
     "keywords": "${SLUG} culiacan, plomero culiacan, servicio plomeria"
   },
   "content": {
