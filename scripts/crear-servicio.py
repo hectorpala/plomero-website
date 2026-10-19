@@ -36,7 +36,7 @@ SITE = "https://plomeroculiacanpro.mx"
 # esqueleto cambia, gen-landing aborta y avisa qué ancla no calzó).
 SK_SLUG   = "plomero-zona-oriente-culiacan"
 SK_TITLE  = "Plomero Zona Oriente de Culiacán | La Campiña · 24/7"
-SK_DESC   = "Plomero en la zona oriente de Culiacán: La Campiña, Las Coloradas, Díaz Ordaz y El Barrio. Tinacos, cisternas, fugas y drenajes 24/7. Tel 667 392 2273."
+SK_DESC   = "Plomero en la zona oriente de Culiacán: La Campiña, Las Coloradas, Díaz Ordaz y El Barrio. Tinacos, cisternas, fugas y drenajes 24/7. Tel 667 478 7021."
 SK_KW     = "plomero zona oriente culiacán, plomero la campiña, plomero las coloradas, plomero díaz ordaz, plomero el barrio culiacan, plomero oriente culiacan, fontanero zona oriente culiacan, plomero salida a sanalona, plomero salida a imala"
 SK_OGD    = "Plomero a domicilio en el oriente de Culiacán: La Campiña, El Barrio, Díaz Ordaz y Las Coloradas. Tinacos, cisternas, fugas y drenajes con garantía escrita."
 SK_TWD    = "Plomero en La Campiña, El Barrio, Díaz Ordaz y Las Coloradas. Tinacos, cisternas y drenajes 24/7."
@@ -98,7 +98,7 @@ def build_jsonld(z):
         '"description":"Servicio profesional de plomería en Culiacán, Sinaloa","publisher":{"@id":"%(site)s/#organization"}},'
         '{"@type":"LocalBusiness","@id":"%(site)s/#organization","name":"Plomero Culiacán Pro",'
         '"image":"%(site)s/assets/images/instalacion-tinaco-hero-800w.webp","url":"%(site)s/",'
-        '"telephone":"+526673922273","priceRange":"$500-$8,000 MXN",'
+        '"telephone":"+526674787021","priceRange":"$500-$8,000 MXN",'
         '"address":{"@type":"PostalAddress","streetAddress":"Culiacán","addressLocality":"Culiacán","addressRegion":"Sinaloa","postalCode":"80000","addressCountry":"MX"},'
         '"geo":{"@type":"GeoCoordinates","latitude":24.8090556,"longitude":-107.3940556},'
         '"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"},'

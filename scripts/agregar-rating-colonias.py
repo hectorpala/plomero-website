@@ -32,7 +32,7 @@ def create_local_business_schema(nombre, url, slug):
         "name": f"Plomero Culiacán Pro - {nombre}",
         "description": f"Servicio profesional de plomería en {nombre}, Culiacán. Reparación de fugas, destape de drenajes, instalación de tinacos y boilers.",
         "url": url,
-        "telephone": "+52 667 392 2273",
+        "telephone": "+52 667 478 7021",
         "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",

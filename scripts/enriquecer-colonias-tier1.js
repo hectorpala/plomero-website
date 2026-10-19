@@ -20,7 +20,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta reparar una fuga oculta en un departamento de Tres Ríos?',
-        a: 'El diagnóstico con geófono es gratuito. La reparación de una fuga en losa o muro varía entre $800 y $2,500 MXN dependiendo de la accesibilidad y el tipo de tubería. Trabajamos con mínima demolición y dejamos el acabado lo más cercano al original. Llama al 667 392 2273 para cotización exacta.'
+        a: 'El diagnóstico con geófono es gratuito. La reparación de una fuga en losa o muro varía entre $800 y $2,500 MXN dependiendo de la accesibilidad y el tipo de tubería. Trabajamos con mínima demolición y dejamos el acabado lo más cercano al original. Llama al 667 478 7021 para cotización exacta.'
       },
       {
         q: '¿Atienden emergencias en el Forum Culiacán y edificios corporativos de Tres Ríos?',
@@ -36,11 +36,11 @@ const colonias = {
       },
       {
         q: '¿El agua con olor o color en mi casa de Chapultepec es peligrosa?',
-        a: 'El agua herrumbrosa en Chapultepec es señal de corrosión interna avanzada en la tubería galvanizada. El óxido en sí no es acutamente tóxico, pero indica que la tubería está fallando y las fugas son inminentes. Recomendamos no usar esa agua para cocinar o beber hasta reemplazar la tubería. Llama al 667 392 2273 para diagnóstico urgente.'
+        a: 'El agua herrumbrosa en Chapultepec es señal de corrosión interna avanzada en la tubería galvanizada. El óxido en sí no es acutamente tóxico, pero indica que la tubería está fallando y las fugas son inminentes. Recomendamos no usar esa agua para cocinar o beber hasta reemplazar la tubería. Llama al 667 478 7021 para diagnóstico urgente.'
       },
       {
         q: '¿Cuánto cuesta renovar la tubería en una casa de Chapultepec?',
-        a: 'El cambio de un baño completo (regadera, lavabo, WC) a tubería CPVC está entre $3,500 y $6,000 MXN. Una casa mediana de Chapultepec (2 baños + cocina) varía entre $12,000 y $22,000 MXN con mano de obra incluida. Damos presupuesto detallado sin costo antes de iniciar al 667 392 2273.'
+        a: 'El cambio de un baño completo (regadera, lavabo, WC) a tubería CPVC está entre $3,500 y $6,000 MXN. Una casa mediana de Chapultepec (2 baños + cocina) varía entre $12,000 y $22,000 MXN con mano de obra incluida. Damos presupuesto detallado sin costo antes de iniciar al 667 478 7021.'
       },
       {
         q: '¿Cuánto tiempo tardan en llegar a Chapultepec en una emergencia?',
@@ -72,7 +72,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta modernizar completamente la plomería de una casa del Centro?',
-        a: 'Depende del tamaño y la complejidad de la instalación existente. Como referencia: reemplazar una red hidráulica completa en una casa mediana del Centro (2 baños + cocina) con tubería CPVC nueva está entre $15,000 y $30,000 MXN, incluyendo mano de obra y materiales. Antes de cualquier trabajo, damos diagnóstico gratuito y presupuesto detallado al 667 392 2273.'
+        a: 'Depende del tamaño y la complejidad de la instalación existente. Como referencia: reemplazar una red hidráulica completa en una casa mediana del Centro (2 baños + cocina) con tubería CPVC nueva está entre $15,000 y $30,000 MXN, incluyendo mano de obra y materiales. Antes de cualquier trabajo, damos diagnóstico gratuito y presupuesto detallado al 667 478 7021.'
       }
     ]
   },
@@ -88,7 +88,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta renovar completamente la plomería en una casa de Guadalupe?',
-        a: 'Para las casas antiguas de Guadalupe, el rango es de $15,000 a $35,000 MXN para una renovación completa (red hidráulica + drenajes) dependiendo del tamaño. Si solo se renueva la red hidráulica (sin drenajes), el costo baja a $10,000-$22,000 MXN. Damos presupuesto gratuito con visita al 667 392 2273.'
+        a: 'Para las casas antiguas de Guadalupe, el rango es de $15,000 a $35,000 MXN para una renovación completa (red hidráulica + drenajes) dependiendo del tamaño. Si solo se renueva la red hidráulica (sin drenajes), el costo baja a $10,000-$22,000 MXN. Damos presupuesto gratuito con visita al 667 478 7021.'
       },
       {
         q: '¿Cuánto tardan en llegar a Guadalupe desde que llamo?',
@@ -96,7 +96,7 @@ const colonias = {
       },
       {
         q: '¿Hay riesgo de daño estructural si no arreglo las fugas en una casa de 70 años en Guadalupe?',
-        a: 'Sí. Las fugas ocultas en muros y losas de casas de 70+ años humedecen el tabique y el concreto durante meses o años antes de hacerse visibles. Esa humedad sostenida debilita la estructura, genera hongos y, en casos extremos, puede comprometer la integridad de muros y cimientos. Si detectas manchas de humedad o el agua sube en las paredes, llama de inmediato al 667 392 2273.'
+        a: 'Sí. Las fugas ocultas en muros y losas de casas de 70+ años humedecen el tabique y el concreto durante meses o años antes de hacerse visibles. Esa humedad sostenida debilita la estructura, genera hongos y, en casos extremos, puede comprometer la integridad de muros y cimientos. Si detectas manchas de humedad o el agua sube en las paredes, llama de inmediato al 667 478 7021.'
       }
     ]
   },
@@ -136,7 +136,7 @@ const colonias = {
       },
       {
         q: '¿Qué indica el agua con color oxidado en una casa de Humaya?',
-        a: 'El agua herrumbrosa indica corrosión interna avanzada en la tubería galvanizada. Es una señal de que la tubería está desprendiéndose internamente y las fugas son inminentes. Además de ser un problema estético, ese óxido en suspensión puede dañar electrodomésticos como lavadoras y lavavajillas. Recomendamos diagnóstico urgente — llama al 667 392 2273.'
+        a: 'El agua herrumbrosa indica corrosión interna avanzada en la tubería galvanizada. Es una señal de que la tubería está desprendiéndose internamente y las fugas son inminentes. Además de ser un problema estético, ese óxido en suspensión puede dañar electrodomésticos como lavadoras y lavavajillas. Recomendamos diagnóstico urgente — llama al 667 478 7021.'
       },
       {
         q: '¿Cuánto tardan en llegar a Humaya en una emergencia?',
@@ -144,7 +144,7 @@ const colonias = {
       },
       {
         q: '¿Puedo usar agua herrumbrosa para bañarme mientras espero al plomero?',
-        a: 'Bañarse con agua herrumbrosa no es peligroso en el corto plazo, pero puede manchar ropa y azulejos. Para cocinar y beber, usa agua embotellada hasta que se resuelva el problema. Si el agua tiene olor a tierra o sulfuro además del color, puede haber contaminación más seria — llama de inmediato al 667 392 2273.'
+        a: 'Bañarse con agua herrumbrosa no es peligroso en el corto plazo, pero puede manchar ropa y azulejos. Para cocinar y beber, usa agua embotellada hasta que se resuelva el problema. Si el agua tiene olor a tierra o sulfuro además del color, puede haber contaminación más seria — llama de inmediato al 667 478 7021.'
       }
     ]
   },
@@ -156,7 +156,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta reemplazar un sistema hidroneumático en Campestre?',
-        a: 'El reemplazo de un hidroneumático residencial en Campestre varía entre $8,000 y $18,000 MXN dependiendo de la capacidad del tanque y la potencia de la bomba requerida. Incluimos instalación, pruebas de presión y calibración. Para casas grandes con demanda alta, recomendamos sistemas de doble bomba con arranque alternado. Damos presupuesto sin costo previo al 667 392 2273.'
+        a: 'El reemplazo de un hidroneumático residencial en Campestre varía entre $8,000 y $18,000 MXN dependiendo de la capacidad del tanque y la potencia de la bomba requerida. Incluimos instalación, pruebas de presión y calibración. Para casas grandes con demanda alta, recomendamos sistemas de doble bomba con arranque alternado. Damos presupuesto sin costo previo al 667 478 7021.'
       },
       {
         q: '¿Por qué hay sarro en mi calentador si la casa de Campestre es relativamente nueva?',
@@ -180,7 +180,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta detectar y reparar una fuga oculta en Montebello?',
-        a: 'El diagnóstico con geófono es gratuito. La reparación de una fuga en muro varía entre $600 y $2,000 MXN dependiendo de la accesibilidad y el tipo de acabado afectado. Si la fuga está en losa de entrepiso, el costo sube a $1,500-$3,500 MXN. Damos presupuesto exacto antes de iniciar — llama al 667 392 2273.'
+        a: 'El diagnóstico con geófono es gratuito. La reparación de una fuga en muro varía entre $600 y $2,000 MXN dependiendo de la accesibilidad y el tipo de acabado afectado. Si la fuga está en losa de entrepiso, el costo sube a $1,500-$3,500 MXN. Damos presupuesto exacto antes de iniciar — llama al 667 478 7021.'
       },
       {
         q: '¿Por qué baja la presión del agua en horas pico en Montebello?',
@@ -208,7 +208,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta cambiar la tubería galvanizada en Valle Alto?',
-        a: 'Un baño completo (regadera, lavabo, WC) en tubería CPVC cuesta entre $3,500 y $6,000 MXN con mano de obra incluida. Una casa mediana de Valle Alto (2 baños + cocina) varía entre $12,000 y $22,000 MXN. Damos presupuesto gratuito con diagnóstico previo — llama al 667 392 2273.'
+        a: 'Un baño completo (regadera, lavabo, WC) en tubería CPVC cuesta entre $3,500 y $6,000 MXN con mano de obra incluida. Una casa mediana de Valle Alto (2 baños + cocina) varía entre $12,000 y $22,000 MXN. Damos presupuesto gratuito con diagnóstico previo — llama al 667 478 7021.'
       },
       {
         q: '¿Cuánto tardan en llegar a Valle Alto?',
@@ -216,7 +216,7 @@ const colonias = {
       },
       {
         q: '¿Puedo reparar solo el tramo con fuga o debo cambiar toda la tubería de Valle Alto?',
-        a: 'Depende del estado general. Si la tubería tiene 40+ años, reparar el tramo con fuga es un parche: en 6-18 meses fallará otro punto. Lo más rentable a largo plazo es el cambio completo, que evita pagar varias reparaciones parciales. Te damos un diagnóstico honesto con evaluación del estado completo antes de recomendar — llama al 667 392 2273.'
+        a: 'Depende del estado general. Si la tubería tiene 40+ años, reparar el tramo con fuga es un parche: en 6-18 meses fallará otro punto. Lo más rentable a largo plazo es el cambio completo, que evita pagar varias reparaciones parciales. Te damos un diagnóstico honesto con evaluación del estado completo antes de recomendar — llama al 667 478 7021.'
       }
     ]
   },
@@ -228,7 +228,7 @@ const colonias = {
       },
       {
         q: '¿Qué daños pudo causar el megacorte de JAPAC del 7 de abril de 2026 en Zona Dorada?',
-        a: 'El megacorte que afectó Zona Dorada 1 y Zona Dorada 2 en abril de 2026 pudo generar: golpes de ariete al restaurarse la presión (que dañan válvulas de paso y uniones de PVC), aire atrapado en tinacos y cisternas (que causa presión irregular), y sedimento que llega a los filtros de los calentadores. Si después del corte notas presión irregular, ruidos en tuberías o agua con turbiedad, llama al 667 392 2273 para revisión.'
+        a: 'El megacorte que afectó Zona Dorada 1 y Zona Dorada 2 en abril de 2026 pudo generar: golpes de ariete al restaurarse la presión (que dañan válvulas de paso y uniones de PVC), aire atrapado en tinacos y cisternas (que causa presión irregular), y sedimento que llega a los filtros de los calentadores. Si después del corte notas presión irregular, ruidos en tuberías o agua con turbiedad, llama al 667 478 7021 para revisión.'
       },
       {
         q: '¿Cómo sé si mi válvula de paso se dañó por un golpe de ariete en Zona Dorada?',
@@ -256,11 +256,11 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta el mantenimiento preventivo anual en Country Tres Ríos?',
-        a: 'Una revisión preventiva completa en Country Tres Ríos incluye: limpieza de sarro en calentador, revisión de válvulas, revisión de flotador de tinaco, prueba de presión y revisión de drenajes. El costo total está entre $1,200 y $2,000 MXN dependiendo del tamaño de la propiedad. Puede contratarse como servicio anual. Llama al 667 392 2273.'
+        a: 'Una revisión preventiva completa en Country Tres Ríos incluye: limpieza de sarro en calentador, revisión de válvulas, revisión de flotador de tinaco, prueba de presión y revisión de drenajes. El costo total está entre $1,200 y $2,000 MXN dependiendo del tamaño de la propiedad. Puede contratarse como servicio anual. Llama al 667 478 7021.'
       },
       {
         q: '¿Cómo acceden a fraccionamientos cerrados de Country Tres Ríos?',
-        a: 'El residente debe indicar el acceso y confirmar nuestra llegada con la caseta de seguridad. Para emergencias nocturnas, coordinamos con el residente por WhatsApp para que autorice el acceso antes de que lleguemos. También emitimos carta de presentación digital si el fraccionamiento la requiere para contratistas. Llama al 667 392 2273 para coordinar.'
+        a: 'El residente debe indicar el acceso y confirmar nuestra llegada con la caseta de seguridad. Para emergencias nocturnas, coordinamos con el residente por WhatsApp para que autorice el acceso antes de que lleguemos. También emitimos carta de presentación digital si el fraccionamiento la requiere para contratistas. Llama al 667 478 7021 para coordinar.'
       },
       {
         q: '¿Cuánto tardan en llegar a Country Tres Ríos?',
@@ -304,7 +304,7 @@ const colonias = {
       },
       {
         q: '¿Cómo acceden a Cumbres Tres Ríos siendo un fraccionamiento privado?',
-        a: 'El residente coordina el acceso con la caseta de seguridad antes de nuestra llegada. Para emergencias, enviamos al residente los datos del técnico por WhatsApp para que autorice el ingreso. También gestionamos carta de presentación digital cuando el fraccionamiento la requiere. Llama al 667 392 2273 para coordinar.'
+        a: 'El residente coordina el acceso con la caseta de seguridad antes de nuestra llegada. Para emergencias, enviamos al residente los datos del técnico por WhatsApp para que autorice el ingreso. También gestionamos carta de presentación digital cuando el fraccionamiento la requiere. Llama al 667 478 7021 para coordinar.'
       },
       {
         q: '¿Cuánto tardan en llegar a Cumbres Tres Ríos por Blvd. Pedro Infante?',
@@ -312,7 +312,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta una revisión completa del sistema hidráulico en Cumbres Tres Ríos?',
-        a: 'Una revisión preventiva completa (calentador, tinaco, válvulas, drenajes y presión general) en una casa de Cumbres Tres Ríos está entre $1,200 y $2,000 MXN. Si se detectan piezas que requieren reemplazo, damos presupuesto separado antes de proceder. El diagnóstico inicial es gratuito — llama al 667 392 2273.'
+        a: 'Una revisión preventiva completa (calentador, tinaco, válvulas, drenajes y presión general) en una casa de Cumbres Tres Ríos está entre $1,200 y $2,000 MXN. Si se detectan piezas que requieren reemplazo, damos presupuesto separado antes de proceder. El diagnóstico inicial es gratuito — llama al 667 478 7021.'
       }
     ]
   },
@@ -378,7 +378,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta cambiar tubería galvanizada en La Campiña?',
-        a: 'El cambio de un baño completo (regadera, lavabo, WC) a tubería CPVC está entre $3,500 y $6,000 MXN con mano de obra. Para una casa mediana (2 baños + cocina), el rango es de $12,000 a $22,000 MXN. Damos presupuesto gratuito con diagnóstico previo al 667 392 2273.'
+        a: 'El cambio de un baño completo (regadera, lavabo, WC) a tubería CPVC está entre $3,500 y $6,000 MXN con mano de obra. Para una casa mediana (2 baños + cocina), el rango es de $12,000 a $22,000 MXN. Damos presupuesto gratuito con diagnóstico previo al 667 478 7021.'
       },
       {
         q: '¿Qué señales me indican que la plomería de mi casa en La Campiña necesita revisión?',
@@ -407,7 +407,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta la revisión preventiva en Lomas del Boulevard?',
-        a: 'Una revisión preventiva completa (calentador, tinaco, válvulas, drenajes y presión general) está entre $1,000 y $1,800 MXN. Si se detectan piezas que requieren reemplazo, damos presupuesto separado antes de proceder. El diagnóstico es gratuito — llama al 667 392 2273.'
+        a: 'Una revisión preventiva completa (calentador, tinaco, válvulas, drenajes y presión general) está entre $1,000 y $1,800 MXN. Si se detectan piezas que requieren reemplazo, damos presupuesto separado antes de proceder. El diagnóstico es gratuito — llama al 667 478 7021.'
       },
       {
         q: '¿Atienden colonias cercanas a Lomas del Boulevard?',
@@ -428,7 +428,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto cuesta revisar y dar mantenimiento en Real del Valle?',
-        a: 'Una revisión preventiva completa (calentador, tinaco, válvulas y drenajes) está entre $1,000 y $1,800 MXN. El diagnóstico inicial es gratuito. Si necesitas solo limpieza de sarro en calentador, el costo es de $400 a $700 MXN. Llama al 667 392 2273.'
+        a: 'Una revisión preventiva completa (calentador, tinaco, válvulas y drenajes) está entre $1,000 y $1,800 MXN. El diagnóstico inicial es gratuito. Si necesitas solo limpieza de sarro en calentador, el costo es de $400 a $700 MXN. Llama al 667 478 7021.'
       },
       {
         q: '¿Atienden fraccionamientos cerrados como Real del Valle?',
@@ -436,7 +436,7 @@ const colonias = {
       },
       {
         q: '¿Qué hago si hay una fuga y necesito cerrar el paso del agua en Real del Valle?',
-        a: 'La válvula de paso principal de tu casa generalmente está en el medidor de agua, cerca de la banqueta. Para una fuga interna urgente, cierra esa válvula para detener el flujo mientras llega el plomero. Si la válvula no cierra completamente (problema común en casas de 15+ años), llama de inmediato al 667 392 2273 para atención prioritaria.'
+        a: 'La válvula de paso principal de tu casa generalmente está en el medidor de agua, cerca de la banqueta. Para una fuga interna urgente, cierra esa válvula para detener el flujo mientras llega el plomero. Si la válvula no cierra completamente (problema común en casas de 15+ años), llama de inmediato al 667 478 7021 para atención prioritaria.'
       }
     ]
   },
@@ -457,11 +457,11 @@ const colonias = {
       },
       {
         q: '¿Cuánto tardan en llegar a Hacienda Los Huertos?',
-        a: 'Para emergencias en Hacienda Los Huertos llegamos en 25-35 minutos. Para acceso al fraccionamiento, el residente coordina con la caseta antes de nuestra llegada o nos autoriza por WhatsApp para que seguridad nos permita el ingreso. Atendemos 24/7 los 365 días al 667 392 2273.'
+        a: 'Para emergencias en Hacienda Los Huertos llegamos en 25-35 minutos. Para acceso al fraccionamiento, el residente coordina con la caseta antes de nuestra llegada o nos autoriza por WhatsApp para que seguridad nos permita el ingreso. Atendemos 24/7 los 365 días al 667 478 7021.'
       },
       {
         q: '¿Ofrecen contrato de mantenimiento anual para residencias de Hacienda Los Huertos?',
-        a: 'Sí, ofrecemos contratos de mantenimiento preventivo anual con 2 visitas programadas al año. El contrato incluye: revisión completa del sistema hidráulico, limpieza de sarro en calentadores, revisión de cisternas, pruebas de presión y un descuento del 15% en servicios de emergencia durante la vigencia del contrato. Consulta condiciones al 667 392 2273.'
+        a: 'Sí, ofrecemos contratos de mantenimiento preventivo anual con 2 visitas programadas al año. El contrato incluye: revisión completa del sistema hidráulico, limpieza de sarro en calentadores, revisión de cisternas, pruebas de presión y un descuento del 15% en servicios de emergencia durante la vigencia del contrato. Consulta condiciones al 667 478 7021.'
       }
     ]
   }

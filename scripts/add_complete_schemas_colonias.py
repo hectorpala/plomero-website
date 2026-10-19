@@ -70,7 +70,7 @@ def create_complete_schema_graph(colonia_slug, colonia_gps):
                 "@id": f"https://plomeroculiacanpro.mx/#business-{colonia_slug}",
                 "name": f"Plomero Culiacán Pro - {colonia_name}",
                 "url": url,
-                "telephone": "+52 667 392 2273",
+                "telephone": "+52 667 478 7021",
                 "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Culiacán",
@@ -133,7 +133,7 @@ def create_complete_schema_graph(colonia_slug, colonia_gps):
                 "name": f"Plomero Culiacán Pro - {colonia_name}",
                 "description": f"Servicio profesional de plomería en {colonia_name}, Culiacán. Atención 24/7 con llegada rápida.",
                 "url": url,
-                "telephone": "+526673922273",
+                "telephone": "+526674787021",
                 "email": "contacto@plomeroculiacanpro.mx",
                 "address": {
                     "@type": "PostalAddress",

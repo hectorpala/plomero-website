@@ -24,7 +24,7 @@ PROJECT_ROOT = Path(__file__).parent
 COLONIAS_DIR = PROJECT_ROOT / "servicios" / "plomero-colonias-culiacan"
 COLONIAS_JSON = PROJECT_ROOT / "data/colonias-completas-culiacan.json"
 
-PHONE = "+52 667 392 2273"
+PHONE = "+52 667 478 7021"
 FALLBACK_LAT = 24.7903
 FALLBACK_LNG = -107.3878
 

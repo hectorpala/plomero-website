@@ -6,7 +6,7 @@ Solo lee disco + parsea HTML local (sin red). Solo REPORTA. Salida estable.
 
 Por cada página INDEXABLE (canonical + title, sin noindex; mismo criterio que
 check-indexabilidad.py) asegura que existan los caminos de conversión:
-  1. >=1 enlace `tel:` con el número correcto (667 392 2273 / 526673922273).   (alta)
+  1. >=1 enlace `tel:` con el número correcto (667 478 7021 / 526674787021).   (alta)
   2. >=1 enlace `wa.me` (o api.whatsapp.com) con el número correcto 526674787021.(alta)
   3. un CTA "antes del fold" (CTA en el hero/header o botón flotante tel/wa).    (media)
   4. formulario de captación en las PÁGINAS CLAVE (/ y /contacto/, acordado con
@@ -76,10 +76,10 @@ def url_path_of(canonical):
 # ------------------------------------------------- validación de números
 def tel_digits_ok(href):
     d = re.sub(r"\D", "", href.split("?")[0])
-    if d in ("6673922273", "526673922273"):
+    if d in ("6674787021", "526674787021"):
         return True
     # tolera prefijo 52/521 + el nacional de 10 dígitos
-    return d.endswith("6673922273") and (len(d) == 10 or d.startswith("52"))
+    return d.endswith("6674787021") and (len(d) == 10 or d.startswith("52"))
 
 def wa_number_ok(href):
     m = re.search(r'(?:wa\.me/|api\.whatsapp\.com/send\?[^"\']*phone=)(\d+)', href, re.I)
@@ -148,11 +148,11 @@ def main():
         # 1. tel:
         if not tels:
             add("alta", r, "CONVERSIÓN: %s no tiene ningún enlace tel: (sin CTA de llamada)" % canonical,
-                "Añadir un enlace <a href=\"tel:+526673922273\"> visible (botón de llamada)")
+                "Añadir un enlace <a href=\"tel:+526674787021\"> visible (botón de llamada)")
         elif not any(tel_digits_ok(h) for h in tels):
             add("alta", r,
-                "CONVERSIÓN: %s tiene enlaces tel: pero NINGUNO con el número correcto (667 392 2273 / 526673922273): %s" % (canonical, ", ".join(sorted(set(tels))[:3])),
-                "Corregir el href tel: al número correcto +526673922273")
+                "CONVERSIÓN: %s tiene enlaces tel: pero NINGUNO con el número correcto (667 478 7021 / 526674787021): %s" % (canonical, ", ".join(sorted(set(tels))[:3])),
+                "Corregir el href tel: al número correcto +526674787021")
 
         # 2. wa.me
         if not was:

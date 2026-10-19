@@ -55,7 +55,7 @@ Plomería **residencial y comercial** en Culiacán, Sinaloa. Todo lo que sea PLO
   consistente con la última edición real y NO insinúes precios nuevos.
 
 ## Datos fijos (derivados, no inventar)
-- Contacto: WhatsApp **667 478 7021** · llamadas **667 392 2273** · email **info@plomeroculiacanpro.mx**.
-- WhatsApp cambió a 667 478 7021 el 19-oct-2026 (el 392 2273 quedó bloqueado en WhatsApp; llamadas siguen en 392 2273).
+- Contacto: WhatsApp y llamadas **667 478 7021** (un solo número) · email **info@plomeroculiacanpro.mx**.
+- 19-oct-2026: llamadas también pasan a 667 478 7021 (el 392 2273 deja de usarse en el sitio). Un SOLO número para WhatsApp y llamadas.
 - Anti-doorway: Jaccard < 0.80 (lo bloquea `gate-pagina.py`).
 - Cobertura: Culiacán y colonias (ver `servicios/plomero-colonias-culiacan/`).

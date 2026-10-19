@@ -22,8 +22,8 @@ y Google enseña primero el mapa con fichas. Todo lo de abajo sale de
 | Nombre | `Plomero Culiacán Pro` (exacto, sin agregar palabras: Google suspende fichas con nombres rellenos) |
 | Categoría principal | `Plomero` |
 | Categorías extra | `Servicio de destape de cañerías` · `Servicio de reparación de calentadores de agua` · `Servicio de detección de fugas de agua` · `Contratista de gas` |
-| Teléfono | `667 392 2273` |
-| WhatsApp (chat) | `+52 667 478 7021` (desde 19-oct-2026; el 392 2273 quedó bloqueado en WhatsApp; llamadas siguen en 392 2273) |
+| Teléfono | `667 478 7021` |
+| WhatsApp (chat) | `+52 667 478 7021` (mismo número para llamadas; llamadas también pasan a 667 478 7021 (el 392 2273 deja de usarse en el sitio).) |
 | Sitio web | `https://plomeroculiacanpro.mx/?utm_source=google&utm_medium=organic&utm_campaign=ficha-google` (con esto Analytics separa las visitas que vienen de la ficha) |
 | Horario | Abierto 24 horas, los 7 días (solo si de verdad contestas de noche) |
 | Área de servicio | Culiacán, Sinaloa · Costa Rica (Sinaloa) · Eldorado (solo si de verdad vas) |

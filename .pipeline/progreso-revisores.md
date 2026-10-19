@@ -10,7 +10,7 @@ JSON común: `{"hallazgos":[{id,archivo,linea,severidad,categoria,descripcion,fi
 
 Umbrales acordados con Héctor (2026-06-14):
 - "Página clave" con formulario obligatorio (ALTA): **/contacto/ y home** únicamente (hoy ambas
-  tienen `<form>` → 0 falsos positivos). `tel:` (667 392 2273 / 526673922273) + `wa.me` + CTA
+  tienen `<form>` → 0 falsos positivos). `tel:` (667 478 7021 / 526674787021) + `wa.me` + CTA
   antes del fold se exigen en TODA página indexable. "Form en cada servicio" queda como posible
   mejora futura, NO hallazgo ALTA.
 - Core Web Vitals: Google "good" → LCP<2.5s, CLS<0.1, INP<200ms + regresión vs baseline
@@ -152,15 +152,15 @@ medición contra prod es no-determinista por naturaleza (red/headless), igual qu
 
 ### #5 revisor-conversion — ✅ HECHO (commit en esta rama)
 **Qué valida:** que cada página INDEXABLE tenga los caminos de conversión. (1) >=1 `tel:` con el
-número correcto (667 392 2273 / 526673922273) → alta; (2) >=1 `wa.me`/api.whatsapp.com con
-526673922273 → alta; (3) un CTA antes del fold (tel/wa o botón con clase btn-primary/cta/
+número correcto (667 478 7021 / 526674787021) → alta; (2) >=1 `wa.me`/api.whatsapp.com con
+526674787021 → alta; (3) un CTA antes del fold (tel/wa o botón con clase btn-primary/cta/
 floating-btn/emergency/whatsapp en hero/header/flotante) → media (heurístico); (4) formulario en
 las páginas clave (/ y /contacto/) → alta.
 **Decisión (acordada con Héctor):** "página clave con formulario" = solo / y /contacto/ (ambas ya
 lo tienen → 0 falsos positivos). tel/wa/CTA se exigen en TODAS las indexables. "Form en cada
 servicio" queda como posible mejora futura, no hallazgo.
-**Validación de números:** tel: tolera `+526673922273`, `6673922273`, prefijo 52/521; wa.me exige
-empezar con 526673922273. Calibrado sobre el markup real (btn-primary, floating-btn, etc.).
+**Validación de números:** tel: tolera `+526674787021`, `6674787021`, prefijo 52/521; wa.me exige
+empezar con 526674787021. Calibrado sobre el markup real (btn-primary, floating-btn, etc.).
 **Determinista:** SÍ, solo lee disco, orden estable (md5 idéntico df04ed...).
 **Prueba negativa (fixtures scratch, todas detectan; repo restaurado):**
 - sin tel/wa/CTA → 2 alta (sin tel, sin wa) + 1 media (sin CTA).

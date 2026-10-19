@@ -367,7 +367,7 @@ def build_main_section(colonia: dict, era_data: dict) -> str:
   <span>— Cliente en {nombre}, Culiacán</span>
 </div>
 </div></div></section>
-<section id="contacto" class="section section-alt"><div class="container"><div class="final-cta"><h2>¿Necesitas Plomero?</h2><p>WhatsApp: <strong>667 478 7021</strong></p><div class="cta-buttons"><a href="https://wa.me/526674787021?text=Hola,%20necesito%20plomero%20en%20{wa_nombre}" class="btn-primary" target="_blank">WhatsApp</a><a href="tel:6673922273" class="btn-secondary">Llamar</a></div></div></div></section>
+<section id="contacto" class="section section-alt"><div class="container"><div class="final-cta"><h2>¿Necesitas Plomero?</h2><p>WhatsApp: <strong>667 478 7021</strong></p><div class="cta-buttons"><a href="https://wa.me/526674787021?text=Hola,%20necesito%20plomero%20en%20{wa_nombre}" class="btn-primary" target="_blank">WhatsApp</a><a href="tel:6674787021" class="btn-secondary">Llamar</a></div></div></div></section>
 </main>"""
 
 
@@ -378,7 +378,7 @@ def build_meta_description(colonia: dict, era_data: dict) -> str:
     problema = era_data["problema_central"][:60]
     return (
         f'Plomero en {nombre}, Culiacán · Casas de {antiguedad} · '
-        f'{problema} · Llegada 25-35 min · 667 392 2273'
+        f'{problema} · Llegada 25-35 min · 667 478 7021'
     )
 
 
