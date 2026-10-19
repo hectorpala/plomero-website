@@ -21,9 +21,10 @@ Generar landing pages o artículos de blog listos para publicar con el mismo for
 Nombre: Plomero Culiacán Pro
 Teléfono texto: 667 392 2273
 Teléfono internacional: +52 667 392 2273
-WhatsApp URL: https://wa.me/526673922273
+WhatsApp URL: https://wa.me/526674787021
 Tel URL: tel:+526673922273
-Número limpio: 6673922273
+Número limpio (llamadas): 6673922273
+Número limpio WhatsApp: 6674787021 (cambió 19-oct-2026; el 392 2273 quedó bloqueado en WhatsApp)
 Ciudad: Culiacán, Sinaloa
 País: México
 ```
@@ -41,18 +42,18 @@ País: México
 
 ### 1. NAP Consistente - USO DEL NÚMERO
 
-**SIEMPRE usar: 6673922273**
+**SIEMPRE usar: 6673922273 para llamadas (tel:) y 6674787021 (wa.me/526674787021) para WhatsApp**
 
 #### En CTAs y botones:
 ```html
 <!-- WhatsApp -->
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20en%20Culiacán">
+<a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20un%20plomero%20en%20Culiacán">
 
 <!-- Teléfono -->
 <a href="tel:+526673922273">
 
 <!-- Texto visible -->
-<p>WhatsApp: 52 667 392 2273</p>
+<p>WhatsApp: 52 667 478 7021</p>
 <p>Teléfono: 667 392 2273</p>
 ```
 
@@ -79,7 +80,7 @@ País: México
 ```
 
 **Ejemplos:**
-- "Plomero 24 horas en Culiacán ✓ Emergencia inmediata ✓ Llegada 30-60 min ✓ Las Quintas, Tres Ríos ✓ Garantía escrita ✓ WhatsApp: 667-392-2273"
+- "Plomero 24 horas en Culiacán ✓ Emergencia inmediata ✓ Llegada 30-60 min ✓ Las Quintas, Tres Ríos ✓ Garantía escrita ✓ WhatsApp: 667-478-7021"
 - "Reparación de fugas en Culiacán ✓ Detección con equipo profesional ✓ Presupuesto gratis ✓ Trabajo garantizado ✓ Tel: 667-392-2273"
 
 #### Canonical URL
@@ -154,7 +155,7 @@ País: México
 
 **En hero:**
 ```html
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20[servicio]%20en%20Culiacán"
+<a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20[servicio]%20en%20Culiacán"
    target="_blank"
    rel="noopener"
    class="btn-primary btn-whatsapp">
@@ -168,7 +169,7 @@ País: México
 **Botones flotantes:**
 ```html
 <div class="cta-bar">
-    <a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20[servicio]%20en%20Culiacán"
+    <a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20[servicio]%20en%20Culiacán"
        target="_blank"
        rel="noopener"
        class="cta-btn cta-wa"

@@ -336,7 +336,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto tardan en llegar a Infonavit Barrancos?',
-        a: 'Para emergencias en Infonavit Barrancos llegamos en 25-35 minutos con referencia en Calle General Pablo Macías Valenzuela. Cubrimos toda la colonia Barrancos y sus secciones (Barrancos II, III, IV). Atendemos 24/7 los 365 días. Para presupuesto sin visita, puedes enviarnos fotos del problema por WhatsApp al 667 392 2273.'
+        a: 'Para emergencias en Infonavit Barrancos llegamos en 25-35 minutos con referencia en Calle General Pablo Macías Valenzuela. Cubrimos toda la colonia Barrancos y sus secciones (Barrancos II, III, IV). Atendemos 24/7 los 365 días. Para presupuesto sin visita, puedes enviarnos fotos del problema por WhatsApp al 667 478 7021.'
       }
     ]
   },
@@ -349,7 +349,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto tarda el plomero en llegar a Mónaco?',
-        a: 'Para emergencias en Mónaco llegamos en 20-30 minutos. Atendemos toda la colonia 24/7 los 365 días, incluyendo madrugadas y fines de semana. Llama o escríbenos al WhatsApp 667 392 2273.'
+        a: 'Para emergencias en Mónaco llegamos en 20-30 minutos. Atendemos toda la colonia 24/7 los 365 días, incluyendo madrugadas y fines de semana. Llama o escríbenos al WhatsApp 667 478 7021.'
       },
       {
         q: '¿Cuánto cuesta destapar un drenaje en Mónaco?',
@@ -374,7 +374,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto tiempo tarda el plomero en llegar a La Campiña?',
-        a: 'Para emergencias en La Campiña llegamos en 25-35 minutos. Cubrimos toda la colonia y las zonas aledañas. Atendemos 24/7 los 365 días — llama o escríbenos al WhatsApp 667 392 2273.'
+        a: 'Para emergencias en La Campiña llegamos en 25-35 minutos. Cubrimos toda la colonia y las zonas aledañas. Atendemos 24/7 los 365 días — llama o escríbenos al WhatsApp 667 478 7021.'
       },
       {
         q: '¿Cuánto cuesta cambiar tubería galvanizada en La Campiña?',
@@ -399,7 +399,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto tardan en llegar a Lomas del Boulevard?',
-        a: 'Para emergencias en Lomas del Boulevard llegamos en 25-35 minutos por Blvd. Universitarios. Atendemos 24/7 los 365 días. Llama o escríbenos al WhatsApp 667 392 2273.'
+        a: 'Para emergencias en Lomas del Boulevard llegamos en 25-35 minutos por Blvd. Universitarios. Atendemos 24/7 los 365 días. Llama o escríbenos al WhatsApp 667 478 7021.'
       },
       {
         q: '¿Cómo afectan los cortes de JAPAC a las instalaciones en Lomas del Boulevard?',
@@ -424,7 +424,7 @@ const colonias = {
       },
       {
         q: '¿Cuánto tardan en llegar a Real del Valle?',
-        a: 'Para emergencias en Real del Valle llegamos en 25-35 minutos. Atendemos toda la colonia y el fraccionamiento 24/7 los 365 días. Llama o escríbenos al WhatsApp 667 392 2273.'
+        a: 'Para emergencias en Real del Valle llegamos en 25-35 minutos. Atendemos toda la colonia y el fraccionamiento 24/7 los 365 días. Llama o escríbenos al WhatsApp 667 478 7021.'
       },
       {
         q: '¿Cuánto cuesta revisar y dar mantenimiento en Real del Valle?',

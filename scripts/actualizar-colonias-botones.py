@@ -34,7 +34,7 @@ def create_new_buttons(colonia_name):
     # URL encode el nombre para WhatsApp
     wa_name = colonia_name.replace(' ', '%20')
 
-    wa_button = f'<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20en%20{wa_name}" class="floating-btn floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">{WHATSAPP_SVG}</a>'
+    wa_button = f'<a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20un%20plomero%20en%20{wa_name}" class="floating-btn floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">{WHATSAPP_SVG}</a>'
 
     phone_button = f'<a href="tel:+526673922273" class="floating-btn floating-call" aria-label="Llamar ahora">{PHONE_SVG}</a>'
 

@@ -4,7 +4,7 @@
 //  1. MENÚ HAMBURGUESA (viewport móvil): clic en .mobile-menu-btn -> #nav-menu visible.
 //  2. FORMULARIO (/contacto/): rellena y envía, pero ABORTA el POST (NO se manda lead
 //     real a Netlify) y confirma que el envío SÍ se disparó al endpoint correcto.
-//  3. WhatsApp: el enlace wa.me del DOM renderizado tiene el número correcto 526673922273.
+//  3. WhatsApp: el enlace wa.me del DOM renderizado tiene el número correcto 526674787021.
 //  4. FORMULARIO #contact-form en TODAS las páginas donde vive (descubiertas recorriendo el
 //     repo, NO hardcodeadas): cero mensajes visibles al cargar, 4 campos visibles con ancho
 //     razonable, VALIDACIÓN VIVA (clase .valid/.invalid + el mensaje correcto visible) y el
@@ -32,7 +32,7 @@ import { sinAnalitica } from "./sin-analitica.mjs";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const BASE = process.env.E2E_BASE || "https://plomeroculiacanpro.mx";
-const WA_NUMBER = "526673922273";
+const WA_NUMBER = "526674787021";
 const UA = "Mozilla/5.0 (revisor-e2e; +pipeline-mantenimiento)";
 
 const hallazgos = [];

@@ -178,7 +178,7 @@ const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n
 `Teléfono: ${telefono}\n` +
 `Email: ${email}\n` +
 `Mensaje: ${mensaje}`;
-const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappURL = `https://wa.me/526674787021?text=${encodeURIComponent(whatsappMessage)}`;
 if (waTab && !waTab.closed) {
 waTab.location.href = whatsappURL;
 } else {
@@ -195,7 +195,7 @@ const whatsappMessage = `Hola! Solicito cotización de servicios de plomería:\n
 `Teléfono: ${telefono}\n` +
 `Email: ${email}\n` +
 `Mensaje: ${mensaje}`;
-const whatsappURL = `https://wa.me/526673922273?text=${encodeURIComponent(whatsappMessage)}`;
+const whatsappURL = `https://wa.me/526674787021?text=${encodeURIComponent(whatsappMessage)}`;
 if (waTab && !waTab.closed) {
 waTab.location.href = whatsappURL;
 } else {

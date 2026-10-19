@@ -91,7 +91,7 @@ El hero DEBE usar EXACTAMENTE esta estructura (index.html línea 1145):
 Los botones flotantes (WhatsApp + Llamar) DEBEN usar EXACTAMENTE esta estructura (index.html línea 1356-1373):
 
 ```html
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20urgente"
+<a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20un%20plomero%20urgente"
    id="cta-whatsapp"
    class="floating-btn floating-whatsapp"
    target="_blank"
@@ -729,9 +729,9 @@ Generar archivo `<slug>/index.html` con:
   <div class="container">
     <h2>Contacta con Nosotros</h2>
     <div class="final-cta">
-      <p class="cta-text">WhatsApp: 52 667 392 2273 · Llamadas: 667 392 2273</p>
+      <p class="cta-text">WhatsApp: 52 667 478 7021 · Llamadas: 667 392 2273</p>
       <div class="cta-buttons">
-        <a href="https://wa.me/526673922273" target="_blank" class="btn-primary btn-whatsapp">WhatsApp</a>
+        <a href="https://wa.me/526674787021" target="_blank" class="btn-primary btn-whatsapp">WhatsApp</a>
         <a href="tel:6673922273" class="btn-secondary">Llamar</a>
       </div>
     </div>
@@ -755,7 +755,7 @@ Generar archivo `<slug>/index.html` con:
 </footer>
 
 <!-- COPIAR Botones Flotantes EXACTO de index.html -->
-<a href="https://wa.me/526673922273?text=Hola%2C%20necesito%20un%20plomero%20urgente"
+<a href="https://wa.me/526674787021?text=Hola%2C%20necesito%20un%20plomero%20urgente"
    id="cta-whatsapp"
    class="floating-btn floating-whatsapp"
    target="_blank"
@@ -942,7 +942,7 @@ Claude:
 
 4️⃣ ¿Meta description?
 
-Usuario: Plomero urgente en Culiacán con llegada en 15-30 minutos. Atención 24/7 para emergencias. Técnicos certificados. WhatsApp 667-392-2273
+Usuario: Plomero urgente en Culiacán con llegada en 15-30 minutos. Atención 24/7 para emergencias. Técnicos certificados. WhatsApp 667-478-7021
 
 Claude:
 ✅ Meta description (142 caracteres - perfecto)

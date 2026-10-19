@@ -16,7 +16,7 @@ PASO 2 — devuelve EXACTAMENTE el JSON que imprimió por stdout (formato común
 Qué comprueba el checker (para que entiendas lo que reportas, no para rehacerlo a mano):
 1. MENÚ HAMBURGUESA (viewport móvil): clic en `.mobile-menu-btn` y verifica que `#nav-menu`/`.nav-menu` queda VISIBLE. Si no aparece el botón o el panel no se abre → **alta** (la navegación móvil estaría rota).
 2. FORMULARIO (/contacto/): rellena los campos requeridos con datos de prueba válidos y lo envía, pero INTERCEPTA y ABORTA el POST de mismo origen → NO se manda un lead real a Netlify. Si el envío NO se dispara (submit roto, validación o JS) → **alta**.
-3. WHATSAPP: el/los enlace(s) `wa.me` del DOM renderizado de la home deben tener el número completo 526673922273. Sin enlace o número truncado/incorrecto → **alta**.
+3. WHATSAPP: el/los enlace(s) `wa.me` del DOM renderizado de la home deben tener el número completo 526674787021. Sin enlace o número truncado/incorrecto → **alta**.
 DETALLE TÉCNICO: cada flujo corre en su propio contexto de navegador (incognito) para que el service worker / cookies / caché de uno no contaminen a otro (esto causaba falsos negativos del formulario), y se bypassa el service worker para medir el cableado real.
 
 Sobre auto-arreglo: una URL wa.me truncada en el HTML fuente es mecánica (pasa por los candados). Un menú o formulario roto suele ser JS → PENDIENTE HUMANO (no auto-arreglable a ciegas; el JS afecta a todo el sitio). Severidades como las da el checker.

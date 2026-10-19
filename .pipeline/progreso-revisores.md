@@ -228,7 +228,7 @@ Ver cola humana.
 **Qué valida:** flujos de usuario REALES con Chrome headless (puppeteer). (1) MENÚ HAMBURGUESA
 (viewport móvil): clic en `.mobile-menu-btn` → `#nav-menu` visible; (2) FORMULARIO (/contacto/):
 rellena y envía, pero INTERCEPTA y ABORTA el POST de mismo origen → NO manda lead real; confirma
-que el envío se dispara; (3) WhatsApp: el `wa.me` del DOM tiene 526673922273. Todo ALTA si falla.
+que el envío se dispara; (3) WhatsApp: el `wa.me` del DOM tiene 526674787021. Todo ALTA si falla.
 **Descubrimientos clave (depuración profunda, evitaron falsos positivos):**
 - El submit "no disparaba POST" SOLO cuando el check de menú corría antes: el **service worker**
   (PWA) se activaba con la home y luego controlaba /contacto/, ocultando el POST del formulario a
