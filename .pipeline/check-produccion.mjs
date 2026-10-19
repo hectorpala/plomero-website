@@ -10,7 +10,7 @@
 //
 // Chequeos:
 //  1. Errores de consola JS en producción (pageerror = ALTA; console.error = media)
-//     en /, /precios/, /contacto/ + wa.me del DOM con número completo 526673922273.
+//     en /, /precios/, /contacto/ + wa.me del DOM con número completo 526674787021.
 //  2. Uptime: cada URL clave debe dar 200 (no 3xx/4xx/5xx) en producción.
 //  3. Headers de seguridad (HSTS, X-Content-Type-Options, Referrer-Policy) + mixed content (http://).
 //  4. Formulario de /contacto/: action válido + endpoint 2xx (sin enviar lead real).
@@ -20,7 +20,7 @@ import fs from "fs";
 import { sinAnalitica } from "./sin-analitica.mjs";
 
 const BASE = "https://plomeroculiacanpro.mx";
-const WA_NUMBER = "526673922273";
+const WA_NUMBER = "526674787021";
 const UA = "Mozilla/5.0 (revisor-produccion; +pipeline-mantenimiento)";
 
 const CONSOLE_PAGES = ["/", "/precios/", "/contacto/"];

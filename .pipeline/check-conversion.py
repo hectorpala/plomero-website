@@ -7,7 +7,7 @@ Solo lee disco + parsea HTML local (sin red). Solo REPORTA. Salida estable.
 Por cada página INDEXABLE (canonical + title, sin noindex; mismo criterio que
 check-indexabilidad.py) asegura que existan los caminos de conversión:
   1. >=1 enlace `tel:` con el número correcto (667 392 2273 / 526673922273).   (alta)
-  2. >=1 enlace `wa.me` (o api.whatsapp.com) con el número correcto 526673922273.(alta)
+  2. >=1 enlace `wa.me` (o api.whatsapp.com) con el número correcto 526674787021.(alta)
   3. un CTA "antes del fold" (CTA en el hero/header o botón flotante tel/wa).    (media)
   4. formulario de captación en las PÁGINAS CLAVE (/ y /contacto/, acordado con
      Héctor: hoy ambas tienen <form>; el resto convierte por tel/wa/CTA).       (alta)
@@ -85,7 +85,7 @@ def wa_number_ok(href):
     m = re.search(r'(?:wa\.me/|api\.whatsapp\.com/send\?[^"\']*phone=)(\d+)', href, re.I)
     if not m:
         return False
-    return m.group(1).startswith("526673922273")
+    return m.group(1).startswith("526674787021")
 
 def anchors(t):
     """Lista de href de <a ...>."""
@@ -157,11 +157,11 @@ def main():
         # 2. wa.me
         if not was:
             add("alta", r, "CONVERSIÓN: %s no tiene ningún enlace wa.me/WhatsApp (sin CTA de WhatsApp)" % canonical,
-                "Añadir un enlace <a href=\"https://wa.me/526673922273\"> visible")
+                "Añadir un enlace <a href=\"https://wa.me/526674787021\"> visible")
         elif not any(wa_number_ok(h) for h in was):
             add("alta", r,
-                "CONVERSIÓN: %s tiene enlaces wa.me pero NINGUNO con el número correcto 526673922273: %s" % (canonical, ", ".join(sorted(set(w[:60] for w in was))[:3])),
-                "Corregir el enlace a https://wa.me/526673922273 (ver REGLAS.md: una URL wa.me truncada rompe el sitio)")
+                "CONVERSIÓN: %s tiene enlaces wa.me pero NINGUNO con el número correcto 526674787021: %s" % (canonical, ", ".join(sorted(set(w[:60] for w in was))[:3])),
+                "Corregir el enlace a https://wa.me/526674787021 (ver REGLAS.md: una URL wa.me truncada rompe el sitio)")
 
         # 3. CTA antes del fold (heurístico -> media)
         if not has_above_fold_cta(t):

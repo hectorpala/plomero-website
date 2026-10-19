@@ -164,7 +164,7 @@ def create_complete_schema_graph(colonia_slug, colonia_gps):
                 },
                 "sameAs": [
                     "https://www.facebook.com/plomeroCuliacanPro",
-                    "https://wa.me/526673922273"
+                    "https://wa.me/526674787021"
                 ],
                 "areaServed": {
                     "@type": "Place",

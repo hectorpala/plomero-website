@@ -16,7 +16,7 @@ PASO 2 — devuelve EXACTAMENTE el JSON que imprimió por stdout (formato común
 Qué comprueba el checker (para que entiendas lo que reportas, no para rehacerlo a mano):
 Por cada página INDEXABLE (canonical + title, sin noindex; mismo criterio que check-indexabilidad):
 1. >=1 enlace `tel:` con el número correcto (667 392 2273 / 526673922273) — sin tel o con número equivocado → **alta**.
-2. >=1 enlace `wa.me`/api.whatsapp.com con el número correcto 526673922273 — sin wa o número equivocado → **alta**.
+2. >=1 enlace `wa.me`/api.whatsapp.com con el número correcto 526674787021 — sin wa o número equivocado → **alta**.
 3. un CTA "antes del fold" — CTA (tel/wa o botón con clase btn-primary/cta/floating-btn/emergency/whatsapp) en el hero/header o flotante; si no se detecta → **media** (heurístico).
 4. formulario de captación en las PÁGINAS CLAVE (/ y /contacto/, acordado con Héctor: hoy ambas tienen `<form>`; el resto convierte por tel/wa/CTA) — clave sin `<form>` → **alta**.
 

@@ -90,7 +90,7 @@ def create_local_business_schema(colonia_slug, colonia_gps):
         },
         "sameAs": [
             "https://www.facebook.com/plomeroCuliacanPro",
-            "https://wa.me/526673922273"
+            "https://wa.me/526674787021"
         ],
         "areaServed": {
             "@type": "Place",
