@@ -120,7 +120,7 @@ function slugDe(u) {
 function resolveChrome() {
   const cands = [
     process.env.PUPPETEER_EXECUTABLE_PATH,
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Users/openclaw/.local/bin/chrome-pruebas",
     "/Applications/Chromium.app/Contents/MacOS/Chromium",
     "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary",
   ];

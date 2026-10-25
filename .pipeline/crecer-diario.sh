@@ -17,8 +17,8 @@ export PATH="/Users/openclaw/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 # Chrome 121 y su caché local tiene otra versión, así que sin esta ruta explícita el lanzamiento
 # falla ("Failed to launch the browser process") y el checker se reporta como verificación
 # CIEGA. Se exporta aquí para que la hereden todos los pasos de la corrida.
-if [ -x "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
-  export PUPPETEER_EXECUTABLE_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+if [ -x "/Users/openclaw/.local/bin/chrome-pruebas" ]; then
+  export PUPPETEER_EXECUTABLE_PATH="/Users/openclaw/.local/bin/chrome-pruebas"
 fi
 
 cd "/Users/openclaw/Sitios Web/Plomero Culiacán" || exit 1

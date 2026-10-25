@@ -132,7 +132,7 @@ async function puppeteerMeasure() {
   try { puppeteer = (await import("puppeteer")).default; } catch (_) { return null; }
   const cands = [
     process.env.PUPPETEER_EXECUTABLE_PATH,
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "/Users/openclaw/.local/bin/chrome-pruebas",
     "/Applications/Chromium.app/Contents/MacOS/Chromium",
   ].filter((c) => c && fs.existsSync(c));
   let browser;

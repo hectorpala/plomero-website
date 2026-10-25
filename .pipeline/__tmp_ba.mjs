@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-const b=await puppeteer.launch({headless:'new',executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',args:['--no-sandbox']});
+const b=await puppeteer.launch({headless:'new',executablePath:'/Users/openclaw/.local/bin/chrome-pruebas',args:['--no-sandbox']});
 const p=await b.newPage();
 await p.emulate({viewport:{width:390,height:844,isMobile:true,hasTouch:true,deviceScaleFactor:2}});
 await p.goto('http://127.0.0.1:8950/servicios/plomero-economico/',{waitUntil:'networkidle2'});
